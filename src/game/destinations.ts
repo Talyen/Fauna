@@ -5,6 +5,9 @@ export function merchantPriceRange(state: Pick<GameState, "boons">) {
   const discount = state.boons.includes("merchants-favor") ? boonRule("merchants-favor").discount : 0;
   return { min: 20 - discount, max: 40 - discount };
 }
+export function merchantOfferCount(state: Pick<GameState, "boons">) {
+  return 3 + (state.boons.includes("bargain-scales") ? boonRule("bargain-scales").offers : 0);
+}
 const CAMPFIRE_RECOVERY_PERCENT = 30;
 
 export function campfireRecovery(creature: GameState["team"][number]) {

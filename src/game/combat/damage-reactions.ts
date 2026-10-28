@@ -12,7 +12,7 @@ import {
   combatantById,
 } from "../battlefield";
 import { roll } from "../random";
-import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
+import { draw, drawKeyword, recoverBrokenGuard, returnSlipperCard } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
@@ -62,6 +62,7 @@ export function* dodgeResponse(
   emitStatus(events, target.id, "dodge", "dodge", { text: `${unitName(target)} Dodges.` });
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
+  if (alliedTarget) returnSlipperCard(state, target.id, events);
   if (alliedTarget && state.boons.includes("echo-ocarina")) {
     const allies = battlefieldView(state, "player");
     if (allies.some((ally) => ally.id === target.id))

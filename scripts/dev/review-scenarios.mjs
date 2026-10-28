@@ -94,6 +94,13 @@ export const SCENARIOS = [
   "recruit-replacement",
   "recruit-team-preview",
   "battle-rewards",
+  "enchanted-boons-1",
+  "enchanted-boons-2",
+  "enchanted-boons-3",
+  "enchanted-boons-4",
+  "enchanted-ready",
+  "merchant-bargain",
+  "merchant-bargain-unavailable",
   "merchant",
   "merchant-unavailable",
   "glossary",
@@ -128,7 +135,7 @@ export async function reviewScenario(server, name) {
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
   let game = name.startsWith("merchant")
-    ? merchantDestination()
+    ? merchantDestination(name.startsWith("merchant-bargain") ? ["bargain-scales"] : [])
     : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
       ? winBattle()
       : run();
@@ -136,7 +143,8 @@ export async function reviewScenario(server, name) {
     game = fullRosterReward();
   }
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
-  if (name === "merchant-unavailable") game = { ...game, currency: 0 };
+  if (name === "merchant-unavailable" || name === "merchant-bargain-unavailable")
+    game = { ...game, currency: 0 };
   if (name === "boon") game = bossReward();
   if (name === "team-selection-pause") {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
@@ -144,6 +152,28 @@ export async function reviewScenario(server, name) {
     const initial = createGame(7);
     game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0] }), { type: "start" });
     game = { ...game, boons: [BOONS[0].id] };
+  }
+  if (name.startsWith("enchanted-boons-")) {
+    const groups = [
+      ["sandfold-parasol", "ribbon-spool", "dawn-key"],
+      ["crystal-slipper", "moonseed", "bargain-scales"],
+      ["dragons-toothpick", "sleepy-acorn", "cuckoo-whistle"],
+      ["nightbloom-bell"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name === "enchanted-ready") {
+    game = structuredClone(game);
+    game.boons = ["ribbon-spool", "moonseed", "dragons-toothpick", "sleepy-acorn"];
+    game.team[0].combat.moonseedReady = true;
+    game.team[0].combat.toothpickReady = true;
+    game.team[1].combat.cooldown = 2;
+    game.team[0].combat.controlled = "freeze";
+    game.team[0].combat.controlTurns = 1;
+    const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
+    setHand(game, ["mossguard-heal", "mossguard-attack"]);
+    game.team[0].health -= 4;
   }
   if (name === "acrobat-ready") {
     game = structuredClone(game);

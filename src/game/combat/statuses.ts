@@ -16,13 +16,14 @@ import {
   combatantById,
 } from "../battlefield";
 import { roll } from "../random";
-import { draw } from "../card-zones";
+import { draw, controlRecoveryDraw } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
   ensureCombat,
+  sharedControlImmunity,
   maximumHealth,
   mostInjured,
   unitName,
@@ -392,6 +393,7 @@ export function* removeEffects(
     remember(stats.controlled, stats.controlTurns);
     removedStatuses.push(stats.controlled);
     cleanseControl(stats);
+    if (state) controlRecoveryDraw(state, unit.id, events);
     cleansed++;
     count--;
   }
@@ -747,6 +749,7 @@ export function* applyHarmfulStatus(
     (stats.controlled ||
       stats.skipped ||
       (stats.cooldown > 0 && !storesControl) ||
+      sharedControlImmunity(state, target) > 0 ||
       (type === "freeze" && alliedTarget && stats.armor > 0 && state.boons.includes("folded-mountain")) ||
       (type === "stun" &&
         alliedTarget &&

@@ -84,6 +84,9 @@ export function executeAbility(
       emitSupport(events, actor.id, {
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
+    const toothpickPurge =
+      def.effect === "attack" && !enemy && state.boons.includes("dragons-toothpick") && stats.toothpickReady;
+    if (toothpickPurge) stats.toothpickReady = false;
     const oasisLeech = def.effect === "attack" && !enemy && stats[boonRule("oasis-seed").state];
     if (oasisLeech) stats[boonRule("oasis-seed").state] = false;
     const criticalBonus =
@@ -125,6 +128,7 @@ export function executeAbility(
       criticalBonus,
       oasisLeech,
       additionalTarget,
+      toothpickPurge,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,

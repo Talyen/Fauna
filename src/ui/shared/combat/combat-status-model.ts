@@ -6,6 +6,7 @@ export const statusOrder: readonly string[] = [
   ...stats,
   "controlled",
   "cooldown",
+  "ribbonSpool",
   "grace",
   "rhythm",
   "nextPhysical",
@@ -16,6 +17,8 @@ export const statusOrder: readonly string[] = [
   "freeCard",
   "oasisLeech",
   "acrobatReady",
+  "moonseedReady",
+  "toothpickReady",
   "reflect",
   "reflectBurn",
   "nullify",
@@ -31,7 +34,7 @@ export type Status = {
   temporaryDodge?: number;
   sharedDodge?: number;
 };
-export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
+export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmunity = 0): Status[] {
   if (!combat) return [];
   const dodge = Number(((combat.dodge ?? 0) + (combat.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
   const entries: Status[] = combat
@@ -52,8 +55,14 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
         ? `${combat.controlled === "freeze" ? "Frozen" : "Stunned"}: ${combat.controlTurns || 1} turn${combat.controlTurns > 1 ? "s" : ""}`
         : "Turn skipped",
     });
-  if (combat?.cooldown)
+  if (combat.cooldown && combat.cooldown >= sharedImmunity)
     entries.push({ id: "cooldown", count: combat.cooldown, text: `Control immunity ${combat.cooldown}` });
+  else if (sharedImmunity)
+    entries.push({
+      id: "ribbonSpool",
+      count: sharedImmunity,
+      text: "Ribbon Spool: immune to Stun and Freeze",
+    });
   if (combat?.grace) entries.push({ id: "grace", count: combat.grace, text: `Death's Door ${combat.grace}` });
   if (combat) {
     const pending = [
@@ -74,6 +83,12 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
       ["oasisLeech", Number(combat.oasisLeech), "Oasis Seed: next attack has Leech"],
       ["acrobatReady", Number(combat.acrobatReady), "Acrobat Top: next attack cannot be Dodged"],
+      [
+        "moonseedReady",
+        Number(combat.moonseedReady),
+        "Moonseed: next Thorns retaliation deals double damage",
+      ],
+      ["toothpickReady", Number(combat.toothpickReady), "Dragon’s Toothpick: next attack also Purges"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
       [
         "nullifyFreeze",

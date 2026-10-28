@@ -28,6 +28,9 @@ const combatStateSchema = z
     freeCard: z.boolean(),
     oasisLeech: z.boolean(),
     acrobatReady: z.boolean(),
+    moonseedReady: z.boolean(),
+    toothpickReady: z.boolean(),
+    slipperCard: id.nullable(),
     reflect: z.boolean(),
     reflectBurn: z.boolean(),
     nullify: z.boolean(),
@@ -171,7 +174,7 @@ const support = z
     purchased: boonId.nullable(),
     stock: z
       .array(z.object({ slot: id, boon: boonId, price: z.number().int().min(1).max(1_000_000) }))
-      .max(3),
+      .max(4),
   })
   .nullable();
 const receipt = z.object({

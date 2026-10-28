@@ -40,5 +40,6 @@ export interface PrimaryContext {
   cannotDodge: boolean;
   criticalBonus: number;
   oasisLeech: boolean;
+  toothpickPurge: boolean;
   additionalTarget?: Combatant;
 }

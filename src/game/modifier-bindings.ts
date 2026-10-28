@@ -214,6 +214,16 @@ export const modifierImplementations = freeze(
       "water.riptide": ["./combat/damage-reactions#waterFollowups"],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "sandfold-parasol": ["./combat/damage#shareDodge", "./combat/ability-handlers#executePrimary"],
+      "ribbon-spool": ["./combat/state#sharedControlImmunity"],
+      "dawn-key": ["./combat/damage#negateAttack"],
+      "crystal-slipper": ["./card-zones#rememberSlipperCard", "./card-zones#returnSlipperCard"],
+      moonseed: ["./combat/damage#resolveHit"],
+      "bargain-scales": ["./destinations#merchantOfferCount"],
+      "dragons-toothpick": ["./combat/food#useFood", "./combat/abilities#executeAbility"],
+      "sleepy-acorn": ["./combat/state#controlled"],
+      "cuckoo-whistle": ["./card-zones#controlRecoveryDraw"],
+      "nightbloom-bell": ["./combat/turns#finishTurn"],
       "orchard-ladder-charm": ["./combat/food#useFood"],
       "spore-trivet": ["./combat/food#useFood"],
       "victory-laurel": ["./combat/damage-reactions#damageRewards"],
@@ -472,6 +482,8 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": ["./ability-rules#cardCost"],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "dawn-key": ["./ability-facts#ordinaryAttackFacts"],
+      "sleepy-acorn": ["./combat/state#controlled"],
       "overflow-cup": ["./ability-facts#healingBenefit"],
       "crown-waffle-iron": ["./ability-facts#foodWaffleBenefit"],
       "nectar-dipper": ["./ability-facts#foodWaffleBenefit"],
@@ -487,7 +499,6 @@ export const modifierQueries = freeze(
       rainkeeper: ["./ability-rules#manaCapacity"],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
-      wellRead: ["./card-zones#drawHasAnotherCard"],
       cardBonus: ["./boon-offers#rosterBoonKeywords"],
       battleStart: ["./boon-offers#rosterBoonKeywords"],
       bounce: ["./boon-offers#rosterBoonKeywords"],

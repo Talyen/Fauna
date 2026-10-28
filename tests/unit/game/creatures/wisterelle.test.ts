@@ -4,7 +4,7 @@ import { definition, FIRST_RUN_STARTERS, speciesCards } from "../../../../src/ga
 import { cardText, enemyCard, enemyCanUse } from "../../../../src/game/card-rules";
 import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { draw, drawDiscard, receiveCard } from "../../../../src/game/card-zones";
+import { drawAtTurnStart, drawDiscard, receiveCard } from "../../../../src/game/card-zones";
 import { availablePlays, chosenRecipients } from "../../../../src/game/play-queries";
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { freshCombat } from "../../../../src/game/combat/index";
@@ -154,7 +154,7 @@ describe("Wisterelle", () => {
       draft.battle.discard = draft.cards
         .filter((card) => !draft.battle.hand.includes(card.id))
         .map((card) => card.id);
-      draw(draft, 3, events);
+      expect(drawAtTurnStart(draft, 3, events)).toBeGreaterThan(0);
     });
     expect(result.team.map((unit) => unit.health)).toEqual(game.team.map((unit) => unit.health));
     expect(events.some((event) => event.kind === "heal")).toBe(false);

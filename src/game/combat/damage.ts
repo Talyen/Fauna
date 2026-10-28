@@ -46,6 +46,29 @@ import {
   type HitPayment,
 } from "./damage-reactions";
 
+/** Resolve the shelter before any recipient takes damage, so lineup order cannot change it. */
+export function shareDodge(
+  state: GameState,
+  source: Combatant,
+  targets: Combatant[],
+  events: GameEvent[],
+  blindMiss: boolean,
+  sharedNegate?: SharedNegate,
+): boolean | undefined {
+  if (!isEnemy(source) || targets.length < 2 || !state.boons.includes("sandfold-parasol")) return;
+  if (blindMiss) return true;
+  const checked = new Set<string>();
+  for (const target of targets) {
+    if (checked.has(target.id)) continue;
+    checked.add(target.id);
+    const stats = ensureCombat(target);
+    if (stats.negate || stats.attackReflection || target.id === sharedNegate?.recipientId) continue;
+    const dodge = dodgeChance(state, target);
+    if (dodge > 0 && succeeds(state, dodge / 100, false, events)) return true;
+  }
+  return false;
+}
+
 /** A transient pair belongs to this attack only, independent of recipient delivery order. */
 export function shareNegate(
   state: GameState,
@@ -84,6 +107,11 @@ export function* negateAttack(
       : undefined;
   const bearer = pair?.bearer ?? target;
   if (!pair?.spent && !ensureCombat(bearer).negate) return false;
+  if (!isEnemy(source) && isEnemy(target) && attackType === "light" && state.boons.includes("dawn-key")) {
+    ensureCombat(target).negate = false;
+    emitStatus(events, target.id, "negate", "remove", { actorId: source.id, text: "Dawn Key breaks Negate" });
+    return false;
+  }
   const consumed = !pair?.spent;
   ensureCombat(bearer).negate = false;
   if (pair) pair.spent = true;
@@ -228,7 +256,7 @@ export function* hit(
       target = interceptAttack(state, source, target, events);
   }
   const negation =
-    value > 0 && options.origin === "ability" && !options.blindMiss
+    value > 0 && options.origin === "ability" && !options.blindMiss && !options.sharedDodge
       ? yield* reaction(
           "negateAttack",
           state,
@@ -245,6 +273,7 @@ export function* hit(
     value > 0 &&
     options.origin === "ability" &&
     !options.blindMiss &&
+    !options.sharedDodge &&
     options.delivery !== "reflection" &&
     (negation === "reflected" || takeAttackReflection(source, target, events))
   ) {
@@ -346,6 +375,15 @@ export function* resolveHit(
   const leech = "leech" in options && options.leech;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
+  if (
+    options.origin === "retaliation" &&
+    options.thorns &&
+    !isEnemy(source) &&
+    ensureCombat(source).moonseedReady
+  ) {
+    ensureCombat(source).moonseedReady = false;
+    value *= boonRule("moonseed").multiplier;
+  }
   const playerHit = alliedSource && !alliedTarget;
   const playerAttack = attack && playerHit;
   const playerDirect = direct && playerHit;
@@ -375,7 +413,9 @@ export function* resolveHit(
   if (
     (direct || thornDodge) &&
     (blindMiss ||
-      (!("cannotDodge" in options && options.cannotDodge) &&
+      (options.origin === "ability" && options.sharedDodge === true) ||
+      (!(options.origin === "ability" && options.sharedDodge === false) &&
+        !("cannotDodge" in options && options.cannotDodge) &&
         !(
           playerDirect &&
           type === "freeze" &&
@@ -424,6 +464,8 @@ export function* resolveHit(
     yield* dodgeResponse(context, !thornDodge);
     return { outcome: "miss" };
   }
+  if (attack && alliedSource && !alliedTarget && type === "light" && state.boons.includes("moonseed"))
+    ensureCombat(source).moonseedReady = true;
   if (type === "freeze" && stats.nullifyFreeze) {
     stats.nullifyFreeze = false;
     emitStatus(events, target.id, "nullify", "immune", {

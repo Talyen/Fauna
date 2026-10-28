@@ -91,7 +91,7 @@ export const GLOSSARY = [
     id: "draw-discard",
     term: "Draw / discard",
     definition:
-      "Your team shares a deck, hand and discard pile; Played cards go to discard unless Consumed, as do cards left in hand at turn end; Whenever the draw pile empties, shuffle discard into it",
+      "Your team shares a deck, hand and discard pile; Played cards go to discard unless Consumed, as do cards left in hand at turn end; Only turn-start draws refill the draw pile from discard",
   },
   {
     id: "copy",

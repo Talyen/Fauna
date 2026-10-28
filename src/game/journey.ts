@@ -9,7 +9,7 @@ import { battlefieldView } from "./battlefield";
 import { wellProvisioned } from "./combat/food";
 import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
-import { merchantPriceRange } from "./destinations";
+import { merchantPriceRange, merchantOfferCount } from "./destinations";
 import { starterCount, starterOfferPool, STARTER_OFFER_COUNT, KEYWORDS } from "./progression";
 import { SPECIES } from "./content";
 import { offerBoons } from "./boon-offers";
@@ -45,7 +45,7 @@ function prepareEncounter(state: GameState) {
       : null;
   const stock =
     kind === "merchant"
-      ? offerBoons(state).map((boon, i) => ({
+      ? offerBoons(state, merchantOfferCount(state)).map((boon, i) => ({
           slot: `slot-${i}`,
           boon,
           price: prices!.min + Math.floor(roll(state) * (prices!.max - prices!.min + 1)),

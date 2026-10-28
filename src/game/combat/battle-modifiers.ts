@@ -2,7 +2,7 @@ import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { healingAllies } from "../battlefield";
 import { creaturePassiveTier, hasTalent, cardHasKeyword } from "../progression";
-import { draw, drawKeyword, expressDelivery } from "../card-zones";
+import { drawAtTurnStart, drawKeyword, expressDelivery } from "../card-zones";
 import { grantArmor, grantStatus, grantBlock, restoreHealth, TURN_MANA, TURN_DRAW } from "./index";
 import type { BattleState, Enemy, Creature, GameState, GameEvent } from "../types";
 
@@ -25,7 +25,7 @@ export function enemyBattleStart(enemy: Enemy) {
 
 /** Draws precede allied grants, retaining their existing chance and reaction order. */
 export function playerBattleStart(state: BattleState, events: GameEvent[]) {
-  draw(
+  drawAtTurnStart(
     state,
     TURN_DRAW + (state.boons.includes("tattered-pages") ? boonRule("tattered-pages").draw : 0),
     events,

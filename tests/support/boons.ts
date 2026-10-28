@@ -1,5 +1,16 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "sandfold-parasol": "When an ally Dodges, other allies Dodge the same attack",
+  "ribbon-spool": "An ally’s immunity to Stun and Freeze protects all allies",
+  "dawn-key": "Light attacks break through Negate",
+  "crystal-slipper": "Dodging returns the ally’s last played card to hand",
+  moonseed: "Light hits double the attacker’s next Thorns retaliation",
+  "bargain-scales": "Boon Merchants offer an additional Boon",
+  "dragons-toothpick": "After receiving Food, an ally’s next attack also Purges",
+  "sleepy-acorn": "Healing cards can be played through Stun and Freeze",
+  "cuckoo-whistle": "When an ally recovers from Stun or Freeze, draw one of their cards",
+  "nightbloom-bell": "Blind fades from allies when their turn ends",
+
   "orchard-ladder-charm": "Food restores 3 Health to backup allies",
   "spore-trivet": "Food Cleanses Burn from all allies",
   "victory-laurel": "Defeating an enemy restores 1 Mana",

@@ -5,7 +5,7 @@ import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorV
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefieldView } from "./battlefield";
-import { needsCampfire, merchantPriceRange } from "./destinations";
+import { needsCampfire, merchantPriceRange, merchantOfferCount } from "./destinations";
 import { freeze } from "immer";
 import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, handCapacity } from "./card-zones";
 import {
@@ -264,6 +264,7 @@ function validateSupport(state: GameState) {
       visit.encounter !== state.encounter ||
         visit.id !== `support-${visit.encounter}` ||
         !visit.stock.length ||
+        visit.stock.length > merchantOfferCount(state) ||
         !uniqueBy(visit.stock, (r) => r.slot) ||
         !uniqueBy(visit.stock, (r) => r.boon) ||
         visit.stock.some(
@@ -350,6 +351,9 @@ function validateBattle(state: BattleState) {
           )) ||
         enemy.combat.oasisLeech ||
         enemy.combat.acrobatReady ||
+        enemy.combat.moonseedReady ||
+        enemy.combat.toothpickReady ||
+        enemy.combat.slipperCard !== null ||
         enemy.combat.deathDoorUsed ||
         enemy.combat.grace > 0 ||
         !playerField.some((c) => c.id === enemy.targetId),
@@ -434,7 +438,12 @@ function validateMinions(state: BattleState) {
         unit.health > unit.maxHealth ||
         !echoHealthValues.includes(unit.maxHealth) ||
         (unit.id !== `echo-${unit.minion.ownerId}-0` && unit.id !== `echo-${unit.minion.ownerId}-1`) ||
-        (unit.minion.side === "enemy" && (unit.combat.oasisLeech || unit.combat.acrobatReady)) ||
+        (unit.minion.side === "enemy" &&
+          (unit.combat.oasisLeech ||
+            unit.combat.acrobatReady ||
+            unit.combat.moonseedReady ||
+            unit.combat.toothpickReady ||
+            unit.combat.slipperCard !== null)) ||
         unit.combat.deathDoorUsed ||
         unit.combat.grace > 0,
     );

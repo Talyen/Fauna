@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "sandfold-parasol": boon({}, () => "When an ally Dodges, other allies Dodge the same attack"),
+    "ribbon-spool": boon({}, () => "An ally’s immunity to Stun and Freeze protects all allies"),
+    "dawn-key": boon({}, () => "Light attacks break through Negate"),
+    "crystal-slipper": boon({}, () => "Dodging returns the ally’s last played card to hand"),
+    moonseed: boon({ multiplier: 2 }, () => "Light hits double the attacker’s next Thorns retaliation"),
+    "bargain-scales": boon({ offers: 1 }, () => "Boon Merchants offer an additional Boon"),
+    "dragons-toothpick": boon({ purge: 1 }, () => "After receiving Food, an ally’s next attack also Purges"),
+    "sleepy-acorn": boon({}, () => "Healing cards can be played through Stun and Freeze"),
+    "cuckoo-whistle": boon({}, () => "When an ally recovers from Stun or Freeze, draw one of their cards"),
+    "nightbloom-bell": boon({}, () => "Blind fades from allies when their turn ends"),
     "orchard-ladder-charm": boon({ healing: 3 }, (p) => `Food restores ${p.healing} Health to backup allies`),
     "spore-trivet": boon({}, () => "Food Cleanses Burn from all allies"),
     "victory-laurel": boon({ mana: 1 }, (p) => `Defeating an enemy restores ${p.mana} Mana`),
@@ -241,7 +251,10 @@ const rules = freeze(
       { effects: 3, purge: 1 },
       () => "Applying three different harmful effects Purges the last enemy affected",
     ),
-    "mineral-bookend": boon({ mana: 1 }, () => "Drawing the last card in your draw pile restores 1 Mana"),
+    "mineral-bookend": boon(
+      { block: 2 },
+      (p) => `Drawing the last card in your draw pile grants ${p.block} Block to all allies`,
+    ),
     "briar-racquet": boon({ divisor: 2 }, () => "Thorns retaliates at half strength when you Dodge"),
     "lovers-knot": boon({}, () => "Healing an ally also heals yourself"),
     "thaw-spoon": boon({}, () => "Healing removes an equal amount of Freeze buildup"),

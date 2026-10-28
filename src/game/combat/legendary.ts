@@ -31,14 +31,13 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
     pearls: 0,
   };
 }
-export function drawBossCards(state: GameState, deck: EnemyDeck, count: number) {
+export function drawBossCards(state: GameState, deck: EnemyDeck, count: number, turnStart = false) {
   promoteBufferedCards(deck, MAX_HAND_SIZE);
-  recycleDiscard(state, deck);
   for (let i = 0; i < count; i++) {
+    if (turnStart) recycleDiscard(state, deck);
     const id = deck.draw.pop();
     if (!id) break;
     queueCard(deck, MAX_HAND_SIZE, id);
-    recycleDiscard(state, deck);
   }
 }
 export function createPearls(

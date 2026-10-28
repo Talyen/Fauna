@@ -1,7 +1,7 @@
 import { useMessages } from "../shared/localization/message-context";
 import { measurePerformance } from "../../lib/performance";
 import { useBattleArtworkSize } from "./use-battle-artwork-size";
-import { sharedDodgeChance } from "../../game/combat/index";
+import { sharedDodgeChance, sharedControlImmunity } from "../../game/combat/index";
 import { Screen } from "../shared/navigation/screen";
 import { HandMotion } from "./hand-motion";
 import { ActionDetails } from "../shared/cards/card-details";
@@ -217,6 +217,7 @@ export function BattleScreen({
               key={creature.id}
               creature={creature}
               sharedDodge={sharedDodgeChance(game, creature)}
+              sharedImmunity={sharedControlImmunity(game, creature)}
               tooltips={!selected}
               acting={acting?.id === creature.id}
               validTarget={!!selected && legalTargets.has(creature.id) && allyTarget}

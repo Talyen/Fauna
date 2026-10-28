@@ -251,7 +251,7 @@ it("retains discard order, eligible owners and recovery events", () => {
     livingCards[1]!.id,
     livingCards[0]!.id,
   ]);
-  expect(drawHasAnotherCard(state, fallenCard, { kind: "draw", amount: 1 })).toBe(true);
+  expect(drawHasAnotherCard(state, fallenCard, { kind: "draw", amount: 1 })).toBe(false);
   observeDecisions(state, () => 0.99);
   const events: Parameters<typeof recoverBrokenGuard>[2] = [];
   recoverBrokenGuard(state, living!.id, events);
@@ -350,14 +350,14 @@ it("preserves saved encounter order and only rolls for roster conflicts", () => 
   expect(decisions).toEqual([undefined, undefined]);
 });
 
-it("keeps the copy draw fallback when both draw piles are empty", () => {
+it("does not invent copy draws when the draw pile is empty", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["rookhaven", "mossguard"])));
   const card = state.cards.find((entry) => entry.ownerId === state.team[1]!.id)!;
   state.battle.draw = [];
   state.battle.discard = [];
   state.boons = ["journey-loom"];
   expect(journeyReturnHasDraw(state, card.ownerId)).toBe(false);
-  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(true);
+  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
   state.team[0]!.health = 0;
   expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
 });
@@ -817,7 +817,7 @@ it("handles a single discarded card consistently for recovery and draw previews"
   state.battle.draw = [];
   state.battle.discard = [other.id];
   expect(discardDrawCards(state, owner!.id)).toEqual([other]);
-  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(true);
+  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
   ally!.health = 0;
   expect(discardDrawCards(state, owner!.id)).toEqual([]);
   expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
@@ -840,13 +840,13 @@ it("draws an eligible single card without changing decisions or buffer promotion
         return 0;
       });
       const events: Parameters<typeof draw>[2] = [];
-      if (method === "owner") expect(drawOwner(state, card.ownerId!, events)).toBe(true);
+      if (method === "owner") expect(drawOwner(state, card.ownerId!, events)).toBe(pile === "draw");
       else drawKeyword(state, "burn", events);
-      expect(state.battle.hand).toEqual([buffered, card.id]);
+      expect(state.battle.hand).toEqual(pile === "draw" ? [buffered, card.id] : [buffered]);
       expect(state.battle.buffer).toEqual([]);
       expect(state.battle.draw).toEqual([]);
-      expect(state.battle.discard).toEqual([]);
-      expect(decisions).toEqual([undefined]);
+      expect(state.battle.discard).toEqual(pile === "draw" ? [] : [card.id]);
+      expect(decisions).toEqual(pile === "draw" ? [undefined] : []);
     }
   }
 });
@@ -897,7 +897,7 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
 });
 
 it("keeps Journey Loom's single-card eligibility, draw order and decisions", () => {
-  for (const pile of ["draw", "discard"] as const) {
+  for (const pile of ["draw"] as const) {
     const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
     const [owner, other] = state.team;
     const card = state.cards.find((entry) => entry.ownerId === other!.id)!;

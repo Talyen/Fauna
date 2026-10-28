@@ -10,6 +10,7 @@ import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
 import {
+  ensureCombat,
   gainMana,
   grantArmor,
   grantBlock,
@@ -104,6 +105,7 @@ export function useFood(
           : [];
       for (const target of recipients) {
         if (target.health <= 0 || isDepartedMinion(state, target)) continue;
+        if (state.boons.includes("dragons-toothpick")) ensureCombat(target).toothpickReady = true;
         if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
         else if (def.effect === "guard") grantBlock(state, target, value, events);
         if (state.boons.includes("crown-waffle-iron") && target.block > 0)

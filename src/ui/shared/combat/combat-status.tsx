@@ -17,14 +17,16 @@ type AnimatedStatus = Status & { exit?: boolean; changed?: boolean };
 export function CombatStatus({
   combat,
   sharedDodge = 0,
+  sharedImmunity = 0,
   details = false,
 }: {
   combat?: CombatState;
   sharedDodge?: number;
+  sharedImmunity?: number;
   details?: boolean;
 }) {
   const i18n = useMessages();
-  const entries = combatStatuses(combat, sharedDodge);
+  const entries = combatStatuses(combat, sharedDodge, sharedImmunity);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState<AnimatedStatus[]>(entries);
@@ -107,7 +109,7 @@ function StatusDetail({ status }: { status: Status }) {
 
 function StatusTile({ status: s, combat }: { status: AnimatedStatus; combat?: CombatState }) {
   const presentation = useStatusPresentation(s);
-  const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
+  const Icon = s.id === "grace" ? Skull : s.id === "cooldown" || s.id === "ribbonSpool" ? Timer : Hourglass;
   return (
     <Tooltip key={s.id}>
       <TooltipTrigger asChild>
@@ -135,7 +137,11 @@ function StatusTile({ status: s, combat }: { status: AnimatedStatus; combat?: Co
             key={s.count}
             className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
           >
-            {s.id === "acrobatReady" ? (
+            {s.id === "moonseedReady" ? (
+              <KeywordIcon id="thorns" />
+            ) : s.id === "toothpickReady" ? (
+              <KeywordIcon id="purge" />
+            ) : s.id === "acrobatReady" ? (
               <KeywordIcon id="dodge" />
             ) : s.id === "oasisLeech" ? (
               <KeywordIcon id="leech" />
