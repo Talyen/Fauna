@@ -1,8 +1,8 @@
 import { pairedStats, validateBalanceMetrics } from "./paired-balance.mjs";
 
 const MIN_SAMPLES = 5;
-const nonempty = (value) => typeof value === "string" && value.trim().length > 0;
-const confirmedStarter = (row) => nonempty(row.actualStarter) && row.actualStarter === row.starter;
+const confirmedStarter = (row) =>
+  typeof row.actualStarter === "string" && !!row.actualStarter.trim() && row.actualStarter === row.starter;
 const SEVERITY = { critical: 0, review: 1, watch: 2 };
 export function rankBalanceFindings(report) {
   if (!report || report.format !== 1 || !["career", "experiment", "comparison"].includes(report.kind))
@@ -11,12 +11,9 @@ export function rankBalanceFindings(report) {
   const add = (severity, id, title, detail, evidence, magnitude = 0) =>
     findings.push({ severity, id, title, detail, evidence, magnitude });
   if (report.kind === "comparison") {
-    if (
-      !Array.isArray(report.pairs) ||
-      !report.pairs.length ||
-      report.pairs.some((pair) => !pair || !nonempty(pair.key))
-    )
-      throw new Error("Missing paired evidence or case identity.");
+    if (!Array.isArray(report.pairs) || !report.pairs.length) throw new Error("Missing paired evidence.");
+    if (report.pairs.some((pair) => !pair || typeof pair.key !== "string" || !pair.key.trim()))
+      throw new Error("Invalid paired evidence identity.");
     if (new Set(report.pairs.map((pair) => pair.key)).size !== report.pairs.length)
       throw new Error("Duplicate paired evidence.");
     for (const pair of report.pairs) {
@@ -52,7 +49,7 @@ export function rankBalanceFindings(report) {
       !Array.isArray(report.cases) ||
       !Array.isArray(report.failures) ||
       report.failures.some((failure) => !failure || typeof failure !== "object" || Array.isArray(failure)) ||
-      report.cases.some((row) => !row || !nonempty(row.key) || typeof row.complete !== "boolean")
+      report.cases.some((row) => !row || typeof row.complete !== "boolean")
     )
       throw new Error("Invalid balance cases or completion status.");
     if (!report.complete)
@@ -69,7 +66,9 @@ export function rankBalanceFindings(report) {
       (!report.cases.length || report.failures.length || report.cases.some((row) => !row.complete))
     )
       throw new Error("Contradictory completion evidence.");
-    const keys = report.cases.map((row) => `${row.arm ?? ""}:${row.key}`);
+    if (report.cases.some((row) => typeof row.key !== "string" || !row.key.trim()))
+      throw new Error("Invalid balance case identity.");
+    const keys = report.cases.map((row) => JSON.stringify([row.arm ?? "", row.key]));
     if (new Set(keys).size !== keys.length) throw new Error("Duplicate balance cases.");
     const groups = new Map();
     if (report.kind === "career") {
@@ -148,8 +147,8 @@ export function rankBalanceFindings(report) {
     // Extreme rates remain watch findings because a zero sample variance is not certainty.
     for (let i = 0; i < summaries.length; i++)
       for (let j = i + 1; j < summaries.length; j++) {
-        const left = summaries[i],
-          right = summaries[j];
+        const left = summaries[i];
+        const right = summaries[j];
         if (left.seedSignature !== right.seedSignature) continue;
         const delta = left.wins.mean - right.wins.mean;
         if (left.wins.n < MIN_SAMPLES || right.wins.n < MIN_SAMPLES || Math.abs(delta) < 0.25) continue;
@@ -187,7 +186,10 @@ export function findingsMarkdown(result) {
         const files = entry.files ?? [entry.evidence, entry.config, entry.journal].filter(Boolean);
         const links = files
           .filter((file) => typeof file === "string")
-          .map((file, i) => `[evidence ${i + 1}](<${file.split("/").map(encodeURIComponent).join("/")}>)`)
+          .map(
+            (file, i) =>
+              `[evidence ${i + 1}](<${encodeURI(file).replaceAll("#", "%23").replaceAll("?", "%3F").replaceAll("<", "%3C").replaceAll(">", "%3E")}>)`,
+          )
           .join(", ");
         return `- ${entry.key ?? "case"}${entry.reason ? `: ${entry.reason}` : ""}${links ? ` — ${links}` : ""}`;
       })

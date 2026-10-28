@@ -8,6 +8,7 @@ import type { AbilityKind } from "./rules/ability-types";
 import { roll } from "./random";
 import type { GameState } from "./types";
 
+const noKeywords: readonly KeywordId[] = [];
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   courtRemembers: ["water"],
@@ -63,7 +64,7 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
   for (const row of [state.team, state.reserves])
     for (const creature of row) {
       for (const effect of creaturePassiveTier(state, creature.species).effects) {
-        for (const keyword of passiveKeywords[effect.kind] ?? []) keywords.add(keyword);
+        for (const keyword of passiveKeywords[effect.kind] ?? noKeywords) keywords.add(keyword);
         if (effect.kind === "battleStart") keywords.add(effect.effect);
         if (effect.kind === "bounce") keywords.add(effect.effect === "heal" ? "health" : "light");
         if (effect.kind === "cardBonus") {
@@ -86,42 +87,43 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
             keywords.add(keyword);
         }
         if (card.leech) keywords.add("leech");
-        for (const effect of card.effects ?? []) {
-          switch (effect.kind) {
-            case "status":
-              keywords.add(effect.status);
-              break;
-            case "damage":
-              keywords.add(effect.damageType);
-              if (effect.leech) keywords.add("leech");
-              break;
-            case "heal":
-              keywords.add("health");
-              break;
-            case "mana":
-              keywords.add("mana");
-              break;
-            case "drawKeyword":
-              keywords.add(effect.keyword);
-              break;
-            case "cleanse":
-            case "purge":
-            case "blind":
-              keywords.add(effect.kind);
-              break;
-            case "reflect":
-              keywords.add("reflect");
-              if (effect.status) keywords.add(effect.status);
-              break;
-            case "nullifyFreeze":
-              keywords.add("nullify");
-              keywords.add("freeze");
-              break;
-            case "meltArmor":
-              keywords.add("armor");
-              break;
+        if (card.effects)
+          for (const effect of card.effects) {
+            switch (effect.kind) {
+              case "status":
+                keywords.add(effect.status);
+                break;
+              case "damage":
+                keywords.add(effect.damageType);
+                if (effect.leech) keywords.add("leech");
+                break;
+              case "heal":
+                keywords.add("health");
+                break;
+              case "mana":
+                keywords.add("mana");
+                break;
+              case "drawKeyword":
+                keywords.add(effect.keyword);
+                break;
+              case "cleanse":
+              case "purge":
+              case "blind":
+                keywords.add(effect.kind);
+                break;
+              case "reflect":
+                keywords.add("reflect");
+                if (effect.status) keywords.add(effect.status);
+                break;
+              case "nullifyFreeze":
+                keywords.add("nullify");
+                keywords.add("freeze");
+                break;
+              case "meltArmor":
+                keywords.add("armor");
+                break;
+            }
           }
-        }
       }
     }
   return keywords;
@@ -144,9 +146,9 @@ export function offerBoons(state: GameState): BoonId[] {
     let choice = roll(state) * total;
     let index = 0;
     while (index < pool.length - 1 && choice >= pool[index]!.weight) choice -= pool[index++]!.weight;
-    const chosen = pool.splice(index, 1)[0]!;
-    offered.push(chosen.id);
-    total -= chosen.weight;
+    const selected = pool.splice(index, 1)[0]!;
+    offered.push(selected.id);
+    total -= selected.weight;
   }
   return offered;
 }

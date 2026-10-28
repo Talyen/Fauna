@@ -23,7 +23,7 @@ export function pairedStats(deltas) {
   const standardError =
     n > 1 ? Math.sqrt(deltas.reduce((sum, d) => sum + (d - mean) ** 2, 0) / (n - 1) / n) : null;
   if (!Number.isFinite(mean) || (standardError !== null && !Number.isFinite(standardError)))
-    throw new Error("Paired statistics exceed the finite numeric range.");
+    throw new Error("Paired statistics exceed the supported numeric range.");
   return { n, mean, standardError, noisy: standardError === null || Math.abs(mean) <= 2 * standardError };
 }
 export function compareBalance(baseline, treatment) {

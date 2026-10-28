@@ -7,6 +7,7 @@ import {
   comparePerformance,
   compareRecorderOverhead,
   hitchMarkdown,
+  hitchInventory,
   summarizeSample,
 } from "../../../scripts/performance/metrics.mjs";
 import { installSampler } from "../../../scripts/performance/sampler.mjs";
@@ -418,4 +419,25 @@ it("orders CI timestamps by instant even when their timezone offsets differ", ()
   expect(result.initialQueueSeconds).toBe(3600);
   expect(result.activeElapsedSeconds).toBe(5400);
   expect(result.elapsedSeconds).toBe(9000);
+});
+
+it("retains exactly the twenty largest hitches in stable order without changing the timeline", () => {
+  const input = sample();
+  let end = 0;
+  input.frames = Array.from({ length: 80 }, (_, index) => {
+    const start = end;
+    const duration = 16 + (index % 27);
+    end += duration;
+    return { start, end, duration };
+  });
+  const original = structuredClone(input.frames);
+  const expected = input.frames
+    .filter((frame) => frame.duration > 20)
+    .sort((a, b) => b.duration - a.duration)
+    .slice(0, 20);
+  expect(hitchInventory(input).map(({ start, end, duration }) => ({ start, end, duration }))).toEqual(
+    expected,
+  );
+  expect(input.frames).toEqual(original);
+  expect(hitchInventory(sample())).toEqual([]);
 });

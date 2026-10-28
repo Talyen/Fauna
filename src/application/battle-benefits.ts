@@ -356,18 +356,19 @@ export function battleBenefits(
       const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
-      const foodHealing =
-        def.id === "food-mana-berries" && cornucopiaHealing(state) > 0
-          ? facts
-              .healingAllies()
-              .map((ally) => healingBenefit(state, ally, cornucopiaHealing(state), undefined))
-          : [];
-      const foodRestored = foodHealing.reduce((sum, benefit) => sum + benefit.restored, 0);
-      const foodUtility = foodHealing.reduce((sum, benefit) => sum + benefit.utility, 0);
-      const foodDodge =
-        def.id === "food-mana-berries" &&
-        cornucopiaHealing(state) > 0 &&
-        healingAllies(state).some((ally) => foodDodgeBenefit(state, def, ally) > 0);
+      const foodHealing = def.id === "food-mana-berries" ? cornucopiaHealing(state) : 0;
+      let foodRestored = 0;
+      let foodUtility = 0;
+      let foodDodge = false;
+      if (foodHealing > 0) {
+        const recipients = facts.healingAllies();
+        for (const ally of recipients) {
+          const benefit = healingBenefit(state, ally, foodHealing, undefined);
+          foodRestored += benefit.restored;
+          foodUtility += benefit.utility;
+        }
+        foodDodge = recipients.some((ally) => foodDodgeBenefit(state, def, ally) > 0);
+      }
       return support(
         net > 0
           ? "resource"

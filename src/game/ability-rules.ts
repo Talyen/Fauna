@@ -69,8 +69,9 @@ function intrinsicAbilityValue(
 }
 
 export function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: boolean) {
-  return passive.effects.reduce((total, effect) => {
-    if (effect.kind !== "cardBonus") return total;
+  let total = 0;
+  for (const effect of passive.effects) {
+    if (effect.kind !== "cardBonus") continue;
     const applies =
       effect.trigger === "firstAttack"
         ? def.effect === "attack" && !attacked
@@ -79,8 +80,9 @@ export function passiveCardBonus(def: CardDefinition, passive: PassiveTier, atta
           : effect.trigger === "heal"
             ? def.effect === "heal"
             : def.effect === "guard" || def.effect === "redistributeBlock" || def.effect === "teamProtection";
-    return total + (applies ? effect.amount : 0);
-  }, 0);
+    total += applies ? effect.amount : 0;
+  }
+  return total;
 }
 export function cardCost(
   card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
