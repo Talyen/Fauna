@@ -123,7 +123,7 @@ export function* dodgeResponse(
         target,
       );
     if (target.health <= 0) return;
-    if (retaliate && state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
+    if (retaliate && stats.thorns > 0 && target.health > 0 && state.boons.includes("briar-racquet")) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
       if (
         !(source.combat?.bleed && state.boons.includes("thornheart-ring")) &&
@@ -151,7 +151,7 @@ export function* dodgeResponse(
     }
     if (target.health <= 0) return;
     if (hasTalent(state, "dodge.tailwind")) draw(state, 1, events);
-    if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)
+    if (stats.armor === 0 && hasTalent(state, "dodge.perfect-timing"))
       yield* reaction("grantArmor", state, target, talentRule("dodge.perfect-timing").amount, events);
     if (target.health <= 0) return;
     if (hasTalent(state, "block.footwork"))

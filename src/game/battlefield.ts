@@ -23,7 +23,8 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
 function battlefieldSnapshot(state: GameState, side: "player" | "enemy", livingOnly: boolean) {
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
   const result: (Creature | Enemy)[] = livingOnly ? row.filter((unit) => unit.health > 0) : [...row];
-  const minions = state.battle?.minions ?? [];
+  const minions = state.battle?.minions;
+  if (!minions?.length) return result;
   let owners: Set<string> | undefined;
   let checkedMinion = false;
   for (const unit of minions) {

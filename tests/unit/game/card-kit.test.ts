@@ -46,9 +46,17 @@ it("resumes intact kits but rejects substituted or missing permanent cards on ei
     state.cards[0]!.definitionId = state.cards[2]!.definitionId;
   });
   expect(() => decodeSave(encodeSave(playerCorrupt))).toThrow();
+  const foreignCard = produce(player, (state) => {
+    state.cards[0]!.definitionId = speciesCards("emberback")[0]!.id;
+  });
+  expect(() => decodeSave(encodeSave(foreignCard))).toThrow();
 
   const boss = bossBattle();
   expect(decodeSave(encodeSave(boss))).toEqual(boss);
+  const foreignAbility = produce(boss, (state) => {
+    state.battle.enemies[0]!.lastAbility = speciesCards("emberback")[0]!.id;
+  });
+  expect(() => decodeSave(encodeSave(foreignAbility))).toThrow();
   const corrupted = produce(boss, (state) => {
     const deck = state.battle.enemies[0]!.deck!;
     deck.draw[0] = "memento-pearl";

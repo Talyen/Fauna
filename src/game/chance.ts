@@ -6,9 +6,9 @@ import { roll } from "./random";
 import type { GameEvent, GameState } from "./types";
 
 function succeeds(state: GameState, probability: number, above: boolean) {
-  return above
-    ? roll(state, { kind: "chance", threshold: 1 - probability }) >= 1 - probability
-    : roll(state, { kind: "chance", threshold: probability }) < probability;
+  const threshold = above ? 1 - probability : probability;
+  const value = roll(state, { kind: "chance", threshold });
+  return above ? value >= threshold : value < threshold;
 }
 
 /** A favorable chance, never a random selection; one gate can admit one original-probability retry. */

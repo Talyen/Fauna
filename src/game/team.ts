@@ -181,12 +181,13 @@ function prepareLineup(state: GameState, ids: string[]) {
 export function rebuildCards(state: GameState) {
   const previous = state.cards;
   let previousById: Map<string, Card[]> | undefined;
-  for (const card of previous) {
-    previousById ??= new Map();
-    const matching = previousById.get(card.id);
-    if (matching) matching.push(card);
-    else previousById.set(card.id, [card]);
-  }
+  if (state.team.length)
+    for (const card of previous) {
+      previousById ??= new Map();
+      const matching = previousById.get(card.id);
+      if (matching) matching.push(card);
+      else previousById.set(card.id, [card]);
+    }
   const cards: Card[] = [];
   for (const creature of state.team)
     forEachPermanentCard(creature.species, (definition, copy) => {

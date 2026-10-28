@@ -153,6 +153,7 @@ export function removeDepartedMinions(state: GameState) {
     // Retain inert records for status-source receipts until combat ends; they never act or render.
     for (const unit of state.battle.minions) if (!present.has(unit.minion.ownerId)) unit.health = 0;
   }
+  if (!state.battle.enemies.length) return;
   if (state.battle.enemies.length === 1) {
     const enemy = state.battle.enemies[0]!;
     if (!battlefieldHasId(state, "player", enemy.targetId)) enemy.targetId = state.team[0]!.id;
