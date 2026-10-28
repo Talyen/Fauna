@@ -10,10 +10,10 @@ export function structuredCardRule(
   power: number,
   text: string,
 ) {
-  if (card.id !== "ravelland-rainward" || card.effect !== "guard" || card.target !== "self") return undefined;
+  if (card.id !== "mossguard-guard" || card.effect !== "guard" || card.target !== "self") return undefined;
   const amount =
     value ?? primaryAbilityValue(card, card.value + level * 2, power, abilityRule(card.effect).scaling);
   const message = guardSelfRule(amount);
   if (message.source !== text) return undefined;
-  return { id: "content.card.ravelland-rainward.vadb3e758e4125447.rule", message };
+  return { id: "content.card.mossguard-guard.vadb3e758e4125447.rule", message };
 }

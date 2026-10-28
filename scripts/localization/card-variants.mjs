@@ -155,7 +155,7 @@ export function extractCardVariants(files, sources, keywordSource) {
           let template = templateFor(text, pattern);
           let id = cardRuleVariantId(card.id, template);
           if (
-            card.id === "ravelland-rainward" &&
+            card.id === "mossguard-guard" &&
             model.effect === "guard" &&
             model.target === "self" &&
             !model.effects?.length &&
@@ -167,7 +167,7 @@ export function extractCardVariants(files, sources, keywordSource) {
             if (message.source !== text || message.template !== template)
               throw new Error("Structured guard rule differs from the complete authored rule");
             template = message.template;
-            id = "content.card.ravelland-rainward.vadb3e758e4125447.rule";
+            id = "content.card.mossguard-guard.vadb3e758e4125447.rule";
           }
           if (result[id] && result[id].text !== template) throw new Error(`Card rule hash collision: ${id}`);
           result[id] ??= { text: template, reference: text, contextHash };

@@ -3497,42 +3497,6 @@
     "sourceHash": "a179e50dbc5f4dfdf6694285c381974591c8d8a30cae2821e94ca12160406c78",
     "text": "Wende {{value0}} <keyword0>Brand</keyword0> auf alle Gegner an / Erhalte <keyword1>Abwehren</keyword1>"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "b0dc2d7178675386f8ed9f73ba870be099513140c0ad2ff32046f8b88799160f",
-    "text": "Geweihpass"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "dec7ab1ed4d16fd180a87e7d5ecb48d6acded2255e794b8b12bf73ebec28b30d",
-    "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "7128a4bb7d7948c9c7320e70f25651a975b6b3520b7da4227472f90c4309175b",
-    "text": "Tadel der Schlucht"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "1a27f84c0f5eaa526ac49055bb8af90b96bfcc7efa4c8772607fafff026722d3",
-    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Physisch</keyword0> bei allen Gegnern"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "770e27f55b5ade3658b80fffbb27504799b0af8825ce5cf044d23b9a758d9127",
-    "text": "Regenwehr"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "b04d2263c9b94d26c9abdee55bc27215417280c907e33252c5610d772c6d6c72",
-    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -5968,60 +5932,6 @@
     "source": "Passing Flame",
     "sourceHash": "90677f1a1f48b553ce9e0ac0b96da89b3c22dd1f09566cd92a972fd306455b4f",
     "text": "Weitergegebene Flamme"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "1b872c3b71e52eeb765bfa4eb4fbbb191a5a4a0e9ab063f6673dc5615f3c48fc",
-    "text": "Ravelland"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "67a2abbdbaa279587503bd59e18227cf8eb9d36bbb41921197b48662bc3b06d5",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "99b27fadf5ec229b5bf77adc5e025aa9aa681d58cfb8cf09c16d5206162f95b2",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "4285522a2db680baa397df4aa5abf118531d7433de0a64c865c3d8710b53df03",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "fdc78e0c8306fb4e5eb72775bf60467f1d5e11c2030c4585b2fcabb2ed65ab13",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "f7ea38aca8e89d9570eb9602658319f88a8391bf69c38c2142dc3f2de7c20bad",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "5f6f9ab66ebbea70daa855394a5ab620c5b4c18c22f922acfd15e007fe472cad",
-    "text": "Erhalte {{value0}} <keyword0>Rüstung</keyword0>, wenn Schaden deinen <keyword1>Block</keyword1> bricht"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "23c069e33535889ec3c93a45da75a503067000a3ef1588b70c69ea38f681b7d1",
-    "text": "Die wandelnde Schlucht"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "acf447b0d7ad2b758c627f5cbe07d71ab8403cce6b229316270ca33c56063375",
-    "text": "Bruchlinie"
   },
   "content.species.reedstag.name": {
     "reviewed": true,

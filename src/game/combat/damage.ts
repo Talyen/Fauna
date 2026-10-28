@@ -27,7 +27,6 @@ import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorAppl
 import {
   dodgeResponse,
   blockDepletionRewards,
-  faultline,
   publishHit,
   damageRewards,
   poisonStun,
@@ -426,7 +425,6 @@ export function* resolveHit(
           },
           false,
         );
-        yield* faultline(context, depletedBlock);
       }
     }
     yield* dodgeResponse(context, !thornDodge);
@@ -565,7 +563,6 @@ export function* resolveHit(
   };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
-  yield* faultline(context, depletedBlock);
   yield* damageRewards(context, facts, policy);
   if (
     dealt > 0 &&

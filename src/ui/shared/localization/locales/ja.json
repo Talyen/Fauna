@@ -3497,42 +3497,6 @@
     "sourceHash": "a2041ced86a8b7015c922e81d22d7a974a5f63d82697026dfdfdd551458b3cdf",
     "text": "すべての敵に<keyword0>炎上</keyword0>を{{value0}}付与 / <keyword1>防止</keyword1>を獲得"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "f020a6860a8083de4ad309999d08a65143aff4844d6cc8d56dca7091616cf301",
-    "text": "枝角の峠"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "e0d118aec0f4596585b470fc40a39d9783a0d510574ac815b5546b7bd3b4c437",
-    "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "301b88543612d51ac467c97c707230e55452aa7c9eeb4e22e6b73aa97a7b9021",
-    "text": "峡谷の叱責"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "d60b4499b93e7bb875c0e64c4512c17b1ce3dd3ab7df9ff5044fbd970f6993a3",
-    "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "83572501f4d28a554872ab5490477174d6f7b52400bc04a883f5e10858621cdb",
-    "text": "雨守り"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "77e921d0f36a69c39e2615e5e1ab89ca7acdc724851757417473d1a9292a3f6f",
-    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -5968,60 +5932,6 @@
     "source": "Passing Flame",
     "sourceHash": "6e8870973cee7ff9fb739e01afc8980574629eaf702089aeb0ce03868cf8eafa",
     "text": "巡る炎"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "8a0bff31667d48f90066bc37a237c0072f3aadd948d51cdae17553d83eee9db4",
-    "text": "ラヴェランド"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "508dde7568c4339644d95aebb3516ddd6d10f955a49227844bfc184f57255759",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "ccb7d4b02ce059710f3936717bc41fb44e9bd4fccfcb3e35acb9512765ac9d5e",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "7158bfd6cbe2a7e4e4f9d4ede25cab630d4e4cea2ec89ab5010dfd6fad0f4a44",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "0f3dfd99356339551c9a20d99e2d3e35c8c38de8812e967c0dc66366c5572973",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "2d1ea05f937af58743dd59ee3ba5be4f536bc991bf8444dac99d41475c77661e",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "13ece09395857ba1ff1c6e7a55c752e2ff2b3b3a014dc08e0732a3cb349cdb90",
-    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "0f123b61e2c5189481b7c0a8ea4920057ebf0d6071b6ee3b37187c0c013ca50c",
-    "text": "歩く峡谷"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "05aa7911ad061c36c904cd92f025ad57e9cc6c1c00c89acd58e6e68160682a13",
-    "text": "断層線"
   },
   "content.species.reedstag.name": {
     "reviewed": true,

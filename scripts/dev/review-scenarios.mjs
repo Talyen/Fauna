@@ -1,9 +1,6 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
-  "ravelland-battle",
-  "ravelland-collection",
-  "ravelland-rank-five",
   "wisterelle-battle",
   "wisterelle-collection",
   "wisterelle-rank-five",
@@ -106,7 +103,6 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
-  "ravelland",
   "wisterelle",
   "alpenglen",
   "aerostat",

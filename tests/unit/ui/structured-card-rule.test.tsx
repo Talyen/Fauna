@@ -16,7 +16,7 @@ import { run } from "../../support/game";
 import { ruleMessage, renderRuleMessage } from "../../../src/ui/shared/localization/rule-message";
 
 it("uses the structured guard rule for scaled player and enemy text, with safe translation fallback", () => {
-  const card = definition("ravelland-rainward")!;
+  const card = definition("mossguard-guard")!;
   const text = cardText(card, 1, undefined, 1.5);
   const result = structuredCardRule(card, 1, undefined, 1.5, text)!;
   expect(text).toBe("Gain 12 Block");
@@ -53,8 +53,7 @@ it("uses the structured guard rule for scaled player and enemy text, with safe t
 });
 
 it("uses the same structured translation in the action card's accessible name", () => {
-  const existing = run().cards.find((card) => card.definitionId === "mossguard-guard")!;
-  const card = { ...existing, definitionId: "ravelland-rainward" };
+  const card = run().cards.find((card) => card.definitionId === "mossguard-guard")!;
   const message = structuredCardRule(
     definition(card.definitionId)!,
     card.level,
@@ -69,7 +68,7 @@ it("uses the same structured translation in the action card's accessible name", 
       }}
     >
       <TooltipProvider>
-        <ActionCard card={card} ownerName="Ravelland" onClick={() => {}} />
+        <ActionCard card={card} ownerName="Mossguard" onClick={() => {}} />
       </TooltipProvider>
     </RuleCatalogProvider>,
   );

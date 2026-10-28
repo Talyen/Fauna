@@ -231,13 +231,6 @@ export function* blockDepletionRewards(
   if (alliedTarget && depletedBlock && hasTalent(state, "block.second-wind"))
     yield* reaction("restoreHealth", target, talentRule("block.second-wind").amount, events, false, state);
 }
-export function* faultline({ state, target, events }: HitContext, depletedBlock: boolean): Resolution<void> {
-  const allied = !isEnemy(target);
-  if (!depletedBlock || target.health <= 0) return;
-  const armor = passiveAmount(allied ? state : undefined, target.species, "faultline");
-  if (armor && battlefieldHasId(state, allied ? "player" : "enemy", target.id))
-    yield* reaction("grantArmor", state, target, armor, events);
-}
 export function publishHit(
   { source, target, type, events }: HitContext,
   { blocked, lost, critical }: HitPayment,
