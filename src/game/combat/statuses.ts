@@ -433,9 +433,9 @@ export function* removeEffects(
     kind === "cleanse" &&
     state &&
     !isEnemy(unit) &&
-    state.boons.includes("soot-brush") &&
+    stats.blind &&
     removedStatuses.includes("burn") &&
-    stats.blind
+    state.boons.includes("soot-brush")
   ) {
     remember("blind");
     clearSelectedStatus(unit, "blind");
@@ -653,8 +653,8 @@ export function* cleanseRewards(
     cleansed > 0 &&
     unit.health > 0 &&
     !isEnemy(unit) &&
-    state.boons.includes("calendula-soap") &&
     !stats.controlled &&
+    state.boons.includes("calendula-soap") &&
     !harmfulStatuses.some((status) => Number(stats[status]) > 0)
   ) {
     stats.nullify = true;
@@ -891,11 +891,11 @@ export function* applyHarmfulStatus(
         if (type === "stun" && hasTalent(state, "stun.free-follow-up"))
           ensureCombat(source)[talentRule("stun.free-follow-up").state] = true;
         if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1, events);
-        if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
+        if (type === "stun" && state.battle?.mana === 0 && hasTalent(state, "stun.stun-surge"))
           yield* reaction("gainMana", state, talentRule("stun.stun-surge").amount, events);
         if (type === "freeze" && hasTalent(state, "freeze.glacial-barrier"))
           yield* reaction("grantBlock", state, source, talentRule("freeze.glacial-barrier").amount, events);
-        if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
+        if (type === "stun" && source.block === 0 && hasTalent(state, "stun.guarded-counter"))
           yield* reaction("grantBlock", state, source, talentRule("stun.guarded-counter").amount, events);
         if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
           const { depletion } = removeArmor(target, stats.armor);

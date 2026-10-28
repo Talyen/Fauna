@@ -22,6 +22,9 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
   const outcomes: CommandResult[] = [];
   let replays = 0;
   let steps = 0;
+  const step = () => {
+    if (++steps > 4096) throw new Unresolved("budget");
+  };
   try {
     while (pending.length) {
       if (replays >= 128) throw new Unresolved("budget");
@@ -54,9 +57,7 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
                 return choice;
               },
               {
-                step: () => {
-                  if (++steps > 4096) throw new Unresolved("budget");
-                },
+                step,
               },
             ),
           ),

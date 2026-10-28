@@ -10,8 +10,8 @@ import { maximumHealth, type Combatant } from "./state";
 export function scoopBonus(state: GameState | undefined, unit: Combatant, amount: number) {
   if (
     state?.phase !== "battle" ||
-    isEnemy(unit) ||
     amount <= 0 ||
+    isEnemy(unit) ||
     !state.boons.includes("clover-measuring-scoop")
   )
     return 0;

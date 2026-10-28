@@ -96,8 +96,8 @@ export function modifiedDamage(
   if (alliedTarget) {
     if (
       stats.nullify &&
-      state.boons.includes("paper-lotus") &&
-      (type === "burn" || type === "poison" || type === "bleed")
+      (type === "burn" || type === "poison" || type === "bleed") &&
+      state.boons.includes("paper-lotus")
     )
       damage /= boonRule("paper-lotus").divisor;
     if (
