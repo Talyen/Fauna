@@ -114,21 +114,10 @@ it("never creates media in quiet previews and clamps persisted preferences", () 
 
 it("can retry music on a later gesture after initial playback is rejected", async () => {
   vi.useFakeTimers();
-  const report = vi.fn();
   let attempts = 0;
-  const runtime = createAudioRuntime(report, () => ({
-    volume: 0,
-    loop: false,
-    preload: "" as const,
-    onended: null,
-    onerror: null,
-    pause() {},
-    load() {},
-    removeAttribute() {},
-    play: async () => {
-      if (++attempts === 1) throw new Error("Playback denied");
-    },
-  }));
+  const { runtime, report } = fixture(false, undefined, async () => {
+    if (++attempts === 1) throw new Error("Playback denied");
+  });
   runtime.unlock();
   await Promise.resolve();
   await Promise.resolve();
@@ -164,17 +153,7 @@ it("owns one pending music start across gestures and preference updates", async 
         rejectStart = reject;
       }),
   );
-  const runtime = createAudioRuntime(vi.fn(), () => ({
-    volume: 0,
-    loop: false,
-    preload: "" as const,
-    onended: null,
-    onerror: null,
-    play,
-    pause() {},
-    load() {},
-    removeAttribute() {},
-  }));
+  const { runtime } = fixture(false, undefined, play);
   runtime.unlock();
   runtime.unlock();
   runtime.configure(defaultAudioPreferences);

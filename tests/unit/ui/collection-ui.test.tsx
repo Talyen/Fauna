@@ -1,6 +1,7 @@
+import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
-import { afterEach, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen } from "@testing-library/react";
+import { expect, it, vi } from "vitest";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
 import { MessageProvider } from "../../../src/ui/shared/localization/message-context";
@@ -11,21 +12,10 @@ import { createGame } from "../../../src/game/engine";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { SPECIES } from "../../../src/game/content";
 
-afterEach(() => {
-  cleanup();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment();
 
 it("pages through the full collection, resets filters and preserves focus across supported heights", async () => {
   vi.stubGlobal("innerHeight", 1080);
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
@@ -84,13 +74,6 @@ it("pages through the full collection, resets filters and preserves focus across
 });
 
 it("keeps encountered and eligible creatures out of the collected filter until recruited", async () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = ["mossguard", "prismram"];
     draft.discovery.recruited = { mossguard: 1 };
@@ -132,13 +115,6 @@ it("keeps encountered and eligible creatures out of the collected filter until r
 it("remembers each filter's page and retains its first visible creature when capacity changes", async () => {
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   let width = 120;
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     return {
       x: 0,
@@ -174,13 +150,6 @@ it("remembers each filter's page and retains its first visible creature when cap
 });
 
 it("uses localized collection controls while inspection retains the creature identity", async () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   const game = produce(createGame(), (draft) => {
     draft.discovery.recruited = { mossguard: 3 };
   });
