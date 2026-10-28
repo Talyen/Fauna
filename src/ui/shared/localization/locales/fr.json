@@ -6650,139 +6650,139 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "28f27ca450c6b7ae5a98a524fa293a0c82861203c1e2cb67860fc6306efae996",
+    "sourceHash": "ec97b0c361f13410471276373f27a706dacd6c1bf3b69648d0c7216a77578f45",
     "text": "Toupie acrobate : la prochaine attaque ne peut pas être <keyword0>Esquivée</keyword0>"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "436c0952efe2616abe8129b7765cec02ff805b345a52fe6540f91e7013c95b61",
+    "sourceHash": "8685e4f5c193ad6ecd5d8e4bdd8b9b7e5c311e37ad69bf830c96f6cba11c5d54",
     "text": "<keyword0>Renvoi d’attaque</keyword0> : renvoie la prochaine attaque contre vous à son auteur; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword1>renvoyées</keyword1> ne peuvent pas être <keyword2>renvoyées</keyword2> à nouveau; Dure jusqu’à consommation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "69aea20825a7b1ccd58651fc337d5a20adce52beff5c33a193e11fe150162046",
+    "sourceHash": "8728f7d6531410d84bc0c65cbf072f836c690a4c3de76a86f5d247e671a94b05",
     "text": "<keyword0>Aveuglement</keyword0> : {{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword1>Esquive</keyword1> pour chaque cible; Ne se cumule pas"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "654ef729315844b9981088811e8af9fd91096b93422fde47450408204aa43854",
+    "sourceHash": "2d2ea6158f7952902242d433d152fd617334b81f508a71c921057f85b28a246e",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "f734ef6259b2ed4e26b612a520aa6e12fa2eb79db34a549808306cdaf111aafc",
+    "sourceHash": "c8608862dfe028f10e3357e06a44d12d8eeb7cd60ab65dda793d6149b028fdad",
     "text": "Tour passé"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "8fe0d85fd49aad4bfea6024a81180f895b6903a220d38f1c9031d3c400d77fa5",
+    "sourceHash": "37cc2816c9a6a494d945c230457d194a0b55a5fa35529d7ba7e5fa665327a225",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tour"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "cdec03c680ef5553eb682a54860ac8e179303e5663abddd22b904d5cf3aff78a",
+    "sourceHash": "2bfbf701935ad8cebb9d69080c109f20359bce676ca0207a05c535176193f906",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "0035309b79454e0cc3f4ce44e3b8eec97c833637b68d33823b94daedc55c7e75",
+    "sourceHash": "90a1cfae73e84950fbbfc5f777a333bcc7344b5070337a8c381999e1e0741b71",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "fc9a905534375a14529c88ab7b308c4993771613dac6b0ad3b33a95502a921f8",
+    "sourceHash": "9d5e155f47cfc5fc774ffc540399b22bd76a4882fcbc2208f4f11da8a27608de",
     "text": "Immunité au contrôle {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "6e583b4e9af0714e598a2d406a5ae84aba362d42a2988213f83085c429efa725",
+    "sourceHash": "33902f1c934fe2c30a12024e4710ec8af7ff89d99799f32e0428464f6f1c90fd",
     "text": "Suivi gratuit : la prochaine carte est gratuite"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "ce7f6b98d89c4bc6e0590c414aa02e584afece2be73ecbbac5c68eaeca28ba34",
+    "sourceHash": "3ee6d6453de677ab5ad2b72495691c38bc84e53b4209b63d2b7b8b7128626bdd",
     "text": "Faveur divine : la prochaine carte de <keyword0>Lumière</keyword0> est gratuite"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "922a9fe100f027b861d7c5388949d4e1787ffe53396578b116432120fd8b4e9d",
+    "sourceHash": "f947707cfaefdffff52ba630b9cafe524a3903b55204122202d446a7387fa5a5",
     "text": "Pas du vent : la prochaine carte de <keyword0>Nature</keyword0> est gratuite"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "998e961b09c16eee0d0c6c6f24e4c450928fb049027ad7aaa528233890aeed7f",
+    "sourceHash": "bf3e8f1703e97da8722d58e3b2b9ae55943785b8f3e92a716f61ed07c558d4a6",
     "text": "Aux portes de la mort {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "910547508b0e1e0ee3885bd813343f4d33e6bd43030e5f31854d01ccf8716cbc",
+    "sourceHash": "894d6176c14f6578e8dc6f46f923a2fe354990a6e72af56f479872809e693e78",
     "text": "<keyword0>Négation</keyword0> : <keyword1>annule</keyword1> la prochaine attaque contre vous avant l’<keyword2>Esquive</keyword2>, empêchant ses dégâts et effets néfastes; Les <keyword3>Épines</keyword3> ripostent quand même; Dure jusqu’à consommation ou <keyword4>dissipation</keyword4>; Ne se cumule pas"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "7122486b1822b9f6a7c90fb69f30b03f48f1a644e5e90168df4c6d8c6c2470d2",
+    "sourceHash": "a0cb499b1e74f48fef903e4a518ae7828f8e3c59d4e8a1e54e02a60cb5f68aa7",
     "text": "Flanc exposé : la prochaine attaque inflige {{value0}} dégâts <keyword0>Physiques</keyword0> supplémentaires"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "6e0bb12bf9154c48467818458daa5ec25bad6466526befbe2edb9228fa8879c9",
+    "sourceHash": "11ad836cb84d8d4888f9cd67959684b64e2a2259b8324af9cd8bbd30d8e4f5ce",
     "text": "<keyword0>Annulation</keyword0> : empêche le prochain effet néfaste; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword1>dissipation</keyword1>; Ne se cumule pas"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "456bfcd15d7627bff87fe8a769b792760af35dd85416ec8c6edec9a0eb54d3af",
+    "sourceHash": "95daca621e6bd900ca7fcb5acafbc0c02fa3f4add7c6ead5bdc6ee506a3b7d73",
     "text": "<keyword0>Annule</keyword0> les prochains dégâts de <keyword1>Gel</keyword1>; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "419297139b8ce8b053fa7f93205d88365310382d9de06ee99b1bb0ac4f163648",
+    "sourceHash": "f92464617e8ed033ecd71a677e54433d9cbe50e98965119d95d864a625fb897c",
     "text": "Graine d’oasis : la prochaine attaque a <keyword0>Vol de vie</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "9f49a503ea9645a1b20cd7973f327c36ba2a4fb54acf067a2385b938a5459225",
+    "sourceHash": "7c577fad156331ddfa5d45e25cd4f93a9569b3b649b8ed88fb7c71dff50c4f53",
     "text": "Entaille d’adieu : le prochain coup <keyword0>Physique</keyword0> inflige la moitié de ses dégâts en dégâts de <keyword1>Saignement</keyword1> supplémentaires"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "9409cee58372919b34725eaded6bbff8fcc5367ab3d6ede7269ea2c7793fd3fc",
+    "sourceHash": "f032c0bdcf44f8bf04834f68139cf0264c72dbbffd627de47d1279fc0b09f47b",
     "text": "<keyword0>Renvoi</keyword0> : renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword1>renvoi d’attaque</keyword1> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword2>renvoi</keyword2> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword3>renvoyés</keyword3> ne peuvent pas être <keyword4>renvoyés</keyword4> à nouveau; Les charges ne se cumulent pas"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "6c102473b68fdc00a4f81104f8d02817c7a0286acf7c89190cd431f74435e567",
+    "sourceHash": "04edf18ae20cd7de3b78f3019c85c521a14208eef1e2d34bf4b1267092209f8a",
     "text": "<keyword0>Renvoie</keyword0> la prochaine <keyword1>Brûlure</keyword1>; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "66410b7f624cf704e8775223a7b2a2e6802975ef69a0d7ac458c20cee0f86430",
+    "sourceHash": "42ee0e2ed8d149a52eea30cc48dce913f0435104ef8f2b97ecde053e57069361",
     "text": "Trouver le rythme : +{{value0}}% de chances d’<keyword0>Esquive</keyword0>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "56dd04f2520966702ecdfbfc303be2e126bcd06a6e8e114de86aa688dccecf01",
+    "sourceHash": "11f605e6632fb1112e424c4c1b91b9e4a9c1a5ece4064575cd014ee782886c7d",
     "text": "Riposte : la prochaine attaque <keyword0>Physique</keyword0> est un <keyword1>coup critique</keyword1> garanti"
   },
   "content.talent.armor.armored-surge.name": {
