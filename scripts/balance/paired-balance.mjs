@@ -1,4 +1,18 @@
 const METRICS = ["win", "turns", "health", "encounter", "swaps", "currency", "xp"];
+export function validateBalanceMetrics(metrics, context) {
+  for (const metric of METRICS)
+    if (!Number.isSafeInteger(metrics?.[metric]))
+      throw new Error(`Invalid metric: ${metric}${context ? ` (${context})` : ""}`);
+  if (
+    ![0, 1].includes(metrics.win) ||
+    metrics.turns < 1 ||
+    metrics.health < 0 ||
+    metrics.encounter < 0 ||
+    metrics.swaps < 0 ||
+    metrics.xp < 0
+  )
+    throw new Error(`Invalid metrics${context ? ` (${context})` : ""}.`);
+}
 export function pairedStats(deltas) {
   if (!deltas.length || deltas.some((value) => !Number.isFinite(value)))
     throw new Error("Invalid paired samples.");
@@ -61,19 +75,8 @@ export function compareBalance(baseline, treatment) {
       (baseline.kind === "career" && left.initialHash !== right.initialHash)
     )
       throw new Error(`Incomplete/incompatible pair: ${left.key}`);
-    for (const metric of METRICS)
-      if (!Number.isSafeInteger(left.metrics?.[metric]) || !Number.isSafeInteger(right.metrics?.[metric]))
-        throw new Error(`Invalid metric: ${metric}`);
-    for (const metrics of [left.metrics, right.metrics])
-      if (
-        ![0, 1].includes(metrics.win) ||
-        metrics.turns < 1 ||
-        metrics.health < 0 ||
-        metrics.encounter < 0 ||
-        metrics.swaps < 0 ||
-        metrics.xp < 0
-      )
-        throw new Error(`Invalid metrics for pair: ${left.key}`);
+    validateBalanceMetrics(left.metrics, left.key);
+    validateBalanceMetrics(right.metrics, right.key);
     return {
       key: left.key,
       baseline: left.metrics,

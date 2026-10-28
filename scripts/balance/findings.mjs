@@ -1,4 +1,4 @@
-import { pairedStats } from "./paired-balance.mjs";
+import { pairedStats, validateBalanceMetrics } from "./paired-balance.mjs";
 
 const MIN_SAMPLES = 5;
 const SEVERITY = { critical: 0, review: 1, watch: 2 };
@@ -12,16 +12,10 @@ export function rankBalanceFindings(report) {
     if (!Array.isArray(report.pairs) || !report.pairs.length) throw new Error("Missing paired evidence.");
     if (new Set(report.pairs.map((pair) => pair.key)).size !== report.pairs.length)
       throw new Error("Duplicate paired evidence.");
-    for (const pair of report.pairs)
-      for (const arm of [pair.baseline, pair.treatment]) {
-        if (
-          ![0, 1].includes(arm?.win) ||
-          !["turns", "health", "currency", "xp"].every((metric) => Number.isFinite(arm?.[metric])) ||
-          arm.turns < 1 ||
-          arm.xp < 0
-        )
-          throw new Error(`Invalid paired metrics: ${pair.key}`);
-      }
+    for (const pair of report.pairs) {
+      validateBalanceMetrics(pair.baseline, pair.key);
+      validateBalanceMetrics(pair.treatment, pair.key);
+    }
     // Recalculate uncertainty from samples rather than trusting serialized summaries.
     for (const [metric, threshold, label] of [
       ["win", 0.2, "Journey success"],
@@ -45,8 +39,13 @@ export function rankBalanceFindings(report) {
       );
     }
   } else {
-    if (!Array.isArray(report.cases) || !Array.isArray(report.failures))
-      throw new Error("Invalid balance cases.");
+    if (
+      typeof report.complete !== "boolean" ||
+      !Array.isArray(report.cases) ||
+      !Array.isArray(report.failures) ||
+      report.cases.some((row) => !row || typeof row.complete !== "boolean")
+    )
+      throw new Error("Invalid balance cases or completion status.");
     if (!report.complete)
       add(
         "critical",
@@ -78,14 +77,7 @@ export function rankBalanceFindings(report) {
         );
     }
     for (const row of report.cases.filter((entry) => entry.complete)) {
-      if (
-        ![0, 1].includes(row.metrics?.win) ||
-        !Number.isFinite(row.metrics?.turns) ||
-        row.metrics.turns < 1 ||
-        !Number.isFinite(row.metrics?.xp) ||
-        row.metrics.xp < 0
-      )
-        throw new Error(`Invalid balance metrics: ${row.key}`);
+      validateBalanceMetrics(row.metrics, row.key);
       if (report.kind !== "career") continue;
       if (typeof row.actualStarter !== "string" || row.actualStarter !== row.starter) continue;
       const starter = row.starter ?? row.key.replace(/-\d+$/, "");
@@ -97,10 +89,14 @@ export function rankBalanceFindings(report) {
       const wins = pairedStats(rows.map((row) => row.metrics.win));
       const turns = pairedStats(rows.map((row) => row.metrics.turns));
       const evidence = rows.map((row) => ({ key: row.key, files: [row.evidence] }));
-      const seeds = rows.map((row) => String(row.seed ?? row.key.match(/-(\d+)$/)?.[1] ?? ""));
-      if (seeds.some((seed) => !/^\d+$/.test(seed)) || new Set(seeds).size !== seeds.length)
+      const seeds = rows.map((row) => {
+        const value = String(row.seed ?? row.key.match(/-(\d+)$/)?.[1] ?? "");
+        const seed = Number(value);
+        return /^\d+$/.test(value) && Number.isSafeInteger(seed) && seed <= 0xffffffff ? seed : null;
+      });
+      if (seeds.includes(null) || new Set(seeds).size !== seeds.length)
         throw new Error(`Missing or duplicate career seeds: ${starter}`);
-      summaries.push({ starter, wins, evidence });
+      summaries.push({ starter, wins, evidence, seeds: [...seeds].sort((a, b) => a - b) });
       if (rows.length < MIN_SAMPLES) {
         add(
           "watch",
@@ -144,19 +140,7 @@ export function rankBalanceFindings(report) {
     for (let i = 0; i < summaries.length; i++)
       for (const right of summaries.slice(i + 1)) {
         const left = summaries[i];
-        const leftSeeds = groups
-          .get(left.starter)
-          .map((row) => String(row.seed ?? row.key.match(/-(\d+)$/)?.[1]))
-          .sort();
-        const rightSeeds = groups
-          .get(right.starter)
-          .map((row) => String(row.seed ?? row.key.match(/-(\d+)$/)?.[1]))
-          .sort();
-        if (
-          JSON.stringify(leftSeeds) !== JSON.stringify(rightSeeds) ||
-          leftSeeds.some((seed) => seed === undefined)
-        )
-          continue;
+        if (JSON.stringify(left.seeds) !== JSON.stringify(right.seeds)) continue;
         const delta = left.wins.mean - right.wins.mean;
         if (left.wins.n < MIN_SAMPLES || right.wins.n < MIN_SAMPLES || Math.abs(delta) < 0.25) continue;
         const se = Math.sqrt(left.wins.standardError ** 2 + right.wins.standardError ** 2);
