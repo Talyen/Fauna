@@ -1,3 +1,4 @@
+import { emitSupport } from "./events";
 import { talentRule, type TalentRuleId } from "./rules/talents";
 import { battlefieldView } from "./battlefield";
 import { hasTalent, passiveAmount } from "./progression";
@@ -39,12 +40,7 @@ export function chance(
     !succeeds(state, probability, above)
   )
     return false;
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: provider.id,
-    text: "Good Fortune turns the odds",
-  });
+  emitSupport(events, provider.id, { text: "Good Fortune turns the odds" });
   return true;
 }
 

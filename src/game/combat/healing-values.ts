@@ -4,7 +4,7 @@ import { talentRule } from "../rules/talents";
 import { healingAllies, isEnemy } from "../battlefield";
 import { hasTalent } from "../progression";
 import type { GameState } from "../types";
-import { maximumHealth, type Combatant } from "./state";
+import { maximumHealth, mostInjured, type Combatant } from "./state";
 
 /** Adds the scoop's per-recipient bonus even when another healing effect supplies an adjusted amount. */
 export function scoopBonus(state: GameState | undefined, unit: Combatant, amount: number) {
@@ -46,28 +46,14 @@ export const overflowBlock = (excess: number) =>
 
 /** Overflow Cup uses the same recipient for execution and visible benefit estimates. */
 export function overflowCupRecipient(state: GameState, unit: Combatant) {
-  let target: Combatant | undefined;
-  let lowest = Infinity;
-  for (const ally of healingAllies(state)) {
-    if (ally.id === unit.id) continue;
-    const maximum = maximumHealth(ally);
-    if (!(ally.health < maximum)) continue;
-    const fraction = ally.health / maximum;
-    if (!target || fraction < lowest) {
-      target = ally;
-      lowest = fraction;
-    }
-  }
-  return target;
+  return mostInjured(
+    healingAllies(state).filter((ally) => ally.id !== unit.id && ally.health < maximumHealth(ally)),
+  );
 }
 
 /** Overflow can reach only other living allies still at Death's Door. */
 export function overflowRecipients(state: GameState, unit: Combatant) {
-  const allies = healingAllies(state);
-  let next = 0;
-  for (const ally of allies)
-    if (ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally))
-      allies[next++] = ally;
-  allies.length = next;
-  return allies;
+  return healingAllies(state).filter(
+    (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
+  );
 }

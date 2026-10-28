@@ -1,3 +1,4 @@
+import { emitSupport } from "./events";
 import { boonRule } from "./rules/boons";
 import { gainMana, grantBlock, restoreHealth } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
@@ -84,10 +85,7 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
   state.battle.discard.splice(state.battle.discard.indexOf(id), 1);
   receiveCard(state, id);
   journeyReturn(state, ownerId, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: ownerId,
+  emitSupport(events, ownerId, {
     text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
   });
 }
@@ -166,10 +164,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     const original = originalCard()!;
     const copy = createTemporaryCard(state, original)!;
     queueCard(state.battle!, capacity, copy.id);
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: reader.id,
+    emitSupport(events, reader.id, {
       targetId: original.ownerId ?? undefined,
       text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
@@ -246,10 +241,7 @@ export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?
   battle.discard.splice(battle.discard.indexOf(id), 1);
   fillHand(state);
   receiveDraw(state, id, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: card.ownerId ?? cardActor(state, card)!.id,
+  emitSupport(events, card.ownerId ?? cardActor(state, card)!.id, {
     text: `${definition(card.definitionId).name} is drawn from Discard`,
   });
   lostAndFound(state, card, events);
@@ -326,12 +318,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
     if (courier.health <= 0) continue;
     const chance = passiveAmount(state, courier.species, "expressDelivery");
     if (succeeds(state, chance / 100, false, events) && draw(state, 1, events))
-      events.push({
-        kind: "action",
-        actionType: "support",
-        actorId: courier.id,
-        text: "Express Delivery draws an extra card",
-      });
+      emitSupport(events, courier.id, { text: "Express Delivery draws an extra card" });
   }
 }
 

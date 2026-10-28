@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { boonRule } from "../rules/boons";
 import { talentChance } from "../chance";
 import { isEnemy, battlefield, battlefieldHasId, combatantById, cleanseTargets } from "../battlefield";
@@ -187,11 +188,7 @@ export function* startAction(
   }
   if (stats.controlled) {
     if (controlled(unit, state))
-      events.push({
-        kind: "status",
-        targetId: unit.id,
-        status: stats.controlled,
-        outcome: "skip",
+      emitStatus(events, unit.id, stats.controlled, "skip", {
         text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
       });
     const recovered = consumeControlTurn(stats);

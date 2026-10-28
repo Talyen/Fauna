@@ -22,14 +22,7 @@ import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
 import { CORNUCOPIA_CARD_ID } from "./journey-cards";
 function unique(values: readonly unknown[]) {
-  if (values.length < 2) return true;
-  if (values.length === 2) return values[0] !== values[1] && !Object.is(values[0], values[1]);
-  const seen = new Set<unknown>();
-  for (const value of values) {
-    if (seen.has(value)) return false;
-    seen.add(value);
-  }
-  return true;
+  return uniqueBy(values, (value) => value);
 }
 function uniqueBy<T>(values: readonly T[], key: (value: T) => unknown) {
   if (values.length < 2) return true;
