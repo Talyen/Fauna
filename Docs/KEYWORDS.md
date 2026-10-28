@@ -54,6 +54,8 @@ Temporary Dodge expires at the owner's next turn, including in backup or on a sk
 
 Leech restores half damage dealt, including damage absorbed by Block, capped by applicable Armor, overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Enemies have no automatic round healing; healing requires an ability or passive.
 
+Automatic group and most-injured healing normally include living deployed allies, including Minions. Camp Hammock extends those recipient pools and healing bounces to living backup allies through [healingAllies](../src/game/battlefield.ts). It does not activate backup passives, make backups selectable for ordinary ally-targeted cards or revive knockouts. Recipient-only follow-ups, such as Mending Spring’s Cleanse, apply to the same automatically selected recipient.
+
 ### Cleanse and Purge
 
 Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
@@ -116,7 +118,7 @@ Positive healing and effect values round to the nearest integer; received-healin
 
 Opening effects apply only at battle start to deployed creatures, never on purchases, resets, swaps or resume. Flashpoint is consumed by the first accepted Burn play whether or not it is currently purchased.
 
-A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the battle deck includes a Water card. Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to seven with Raincatcher Bowl. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
+A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the battle deck includes a Water card. Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to seven with Raincatcher Bowl. Rainkeeper raises the amount of Mana that can be held by two above that turn's maximum, reaching nine with all applicable bonuses; it does not add Mana Crystals or increase turn restoration. [Mana capacity](../src/game/ability-rules.ts) owns that overflow limit. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
 
 ### Repeats and derived effects
 

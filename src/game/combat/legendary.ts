@@ -13,7 +13,7 @@ import {
   MAX_BATTLE_CARDS,
   MAX_HAND_SIZE,
 } from "../card-zones";
-import { battlefield, battlefieldHasId, livingBattlefield, isEnemy } from "../battlefield";
+import { battlefieldView, battlefieldHasId, livingBattlefield, isEnemy } from "../battlefield";
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
@@ -167,7 +167,7 @@ export function removeDepartedMinions(state: GameState) {
     return;
   }
   const targets = new Set<string>();
-  for (const unit of battlefield(state, "player")) targets.add(unit.id);
+  for (const unit of battlefieldView(state, "player")) targets.add(unit.id);
   for (const enemy of state.battle.enemies)
     if (!targets.has(enemy.targetId)) enemy.targetId = state.team[0]!.id;
 }

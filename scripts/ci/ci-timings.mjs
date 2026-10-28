@@ -12,11 +12,11 @@ export function timingReport(run, jobs) {
   const starts = jobs
     .map((job) => job.started_at)
     .filter(Boolean)
-    .sort();
+    .sort((a, b) => Date.parse(a) - Date.parse(b));
   const completions = jobs
     .map((job) => job.completed_at)
     .filter(Boolean)
-    .sort();
+    .sort((a, b) => Date.parse(a) - Date.parse(b));
   const firstStart = starts[0];
   const lastCompletion = jobs.every((job) => job.completed_at) ? completions.at(-1) : undefined;
   return {

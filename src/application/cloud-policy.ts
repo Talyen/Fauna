@@ -2,10 +2,15 @@ import type { CloudSnapshot } from "./cloud-snapshots";
 
 /** Last duplicate wins without changing its original position; only ancestry retires a head. */
 export function newestHeads(records: readonly CloudSnapshot[]) {
-  const byId = new Map(records.map((record) => [record.id, record]));
+  const byId = new Map<string, CloudSnapshot>();
+  for (const record of records) byId.set(record.id, record);
+  const unique = [...byId.values()];
   const ancestors = new Set<string>();
-  for (const record of byId.values()) for (const ancestor of record.ancestors) ancestors.add(ancestor);
-  return [...byId.values()].filter((record) => !ancestors.has(record.id));
+  for (const record of unique) for (const ancestor of record.ancestors) ancestors.add(ancestor);
+  let kept = 0;
+  for (const record of unique) if (!ancestors.has(record.id)) unique[kept++] = record;
+  unique.length = kept;
+  return unique;
 }
 
 /** Sequence counters select device slots; ancestry alone retires competing progress. */

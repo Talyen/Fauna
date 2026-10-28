@@ -40,7 +40,7 @@ Additional opt-in tools:
 - `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](balance/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [bounded sampler](performance/sampler.mjs), [trace capture/accounting](performance/trace.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
 - `npm run verify:package`: [package gate](release/verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
-- `npm run check:types`: the gameplay, renderer, Node tooling and test/design compiler environments described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); selected environments are reported by `verify:changed`; all environments run in CI as part of `npm run check:full`.
+- `npm run check:types`: all six compiler environments, including the two desktop configurations, described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); selected environments are reported by `verify:changed`; all environments run in CI as part of `npm run check:full`.
 - `npm run deadcode`: [Knip entrypoints](../knip.config.js); included in full CI static verification; local investigation requires explicit heavy-local authorization.
 - `npm run investigate`: [bounded diagnostic launcher](agent/investigate.mjs); authorization and budgets live in [Contributing](../CONTRIBUTING.md#execution-and-evidence).
 - `npm run context`: [owner lookup](agent/agent-context.mjs), including runtime guidance for focused unit suites alongside test policy.
@@ -95,6 +95,8 @@ are checked against target blobs, with fresh Git indexes and normal status check
 No dependency or build-cache copying is added. Creation reports logical bytes omitted
 and cloned, plus population/first-status time; APFS extent sharing means these are
 not measured physical savings. Existing task checkouts retain their configuration.
+
+[The storage helper](lib/worktree-storage.mjs) checks literal compatibility markers in the target commit before omitting source assets. Keep these markers aligned with the build's output-validation owner when changing npm hooks or Vite setup. The current marker still requires the removed `prebuild` hook, so current-main tasks fall back to full assets despite validation now living in the active-assets plugin; this affects checkout storage, not build validation.
 
 [Contributing](../CONTRIBUTING.md#worktrees-and-integration) owns the review/commit/finish procedure. Implementation details for integration:
 
