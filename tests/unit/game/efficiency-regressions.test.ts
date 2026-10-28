@@ -1187,6 +1187,34 @@ it("keeps alternate attack estimates in damage-type order without touching state
   expect(state).toEqual(before);
 });
 
+it("preserves per-type attack estimates when Dawn Key bypasses only light negation", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram"])));
+  const actor = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  const def = definition("prismram-attack");
+  if (def.effect !== "attack") throw new Error("Expected attack");
+  const attack = { ...def, damageType: "physical", alternateDamageType: "light" } as const;
+  enemy.combat.negate = true;
+  state.boons = ["dawn-key"];
+  const before = structuredClone(state);
+  const outcomes = ordinaryAttackFacts(state, actor, attack, 12, enemy);
+  expect(outcomes[0]).toMatchObject({ negated: true, lost: 0, blocked: 0, eroded: 0 });
+  expect(outcomes[1]).toEqual(
+    ordinaryAttackFacts(
+      state,
+      actor,
+      { ...attack, damageType: "light", alternateDamageType: undefined },
+      12,
+      enemy,
+    )[0],
+  );
+  expect(outcomes[1]!.negated).toBe(false);
+  enemy.combat.attackReflection = true;
+  expect(ordinaryAttackFacts(state, actor, attack, 12, enemy).every((hit) => hit.negated)).toBe(true);
+  enemy.combat.attackReflection = false;
+  expect(state).toEqual(before);
+});
+
 it("keeps enemy probe values live without mutating battle or RNG", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
   state.boons = [];

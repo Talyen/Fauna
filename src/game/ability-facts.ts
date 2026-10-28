@@ -80,10 +80,10 @@ export function healingBenefit(
       ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
       : 0;
   const cleanses =
-    hasHarmfulEffects(ally) &&
     ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||
       (excess > 0 && hasTalent(state, "health.clean-slate")) ||
-      !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
+      !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient")) &&
+    hasHarmfulEffects(ally);
   const cupTarget =
     excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
       ? overflowCupRecipient(state, ally)
@@ -133,9 +133,8 @@ export function ordinaryAttackFacts(
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
   const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
-  const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
+  let packet: { origin: "ability"; cardLeech: boolean } | undefined;
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
-  const packet = { origin: "ability" as const, cardLeech };
   const outcomes: OrdinaryHit[] = [];
   const count = def.alternateDamageType ? 2 : 1;
   for (let index = 0; index < count; index++) {
@@ -143,6 +142,23 @@ export function ordinaryAttackFacts(
     const negated =
       enemy.combat.attackReflection ||
       (enemy.combat.negate && !(type === "light" && state.boons.includes("dawn-key")));
+    if (negated) {
+      outcomes.push({
+        negated,
+        lost: 0,
+        blocked: 0,
+        eroded: 0,
+        health: enemy.health,
+        main: !enemy.minion,
+        lethal: 0 >= enemy.health,
+        usefulExtras,
+      });
+      continue;
+    }
+    packet ??= {
+      origin: "ability",
+      cardLeech: !!(def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
+    };
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
     const damage = baseDamage * (lastCardCritical ? 2 : 1);

@@ -83,6 +83,9 @@ export function useFood(
     state,
   );
   const repeat = takeCardRepeat(state, "player");
+  let toothpick: boolean | undefined;
+  let waffle: boolean | undefined;
+  let whisk: boolean | undefined;
   for (let play = 0; play < (repeat ? 2 : 1); play++) {
     if (play === 1) emitSupport(events, presenter.id, { text: `${def.name} repeats` });
     if (def.effect === "mana") {
@@ -91,7 +94,7 @@ export function useFood(
         let healing: number | undefined;
         for (const ally of healingAllies(state)) {
           restoreHealth(ally, (healing ??= cornucopiaHealing(state)), events, false, state, true);
-          if (state.boons.includes("velvet-whisk"))
+          if ((whisk ??= state.boons.includes("velvet-whisk")))
             grantTemporaryDodge(ally, boonRule("velvet-whisk").dodge, events);
         }
       }
@@ -105,10 +108,11 @@ export function useFood(
           : [];
       for (const target of recipients) {
         if (target.health <= 0 || isDepartedMinion(state, target)) continue;
-        if (state.boons.includes("dragons-toothpick")) ensureCombat(target).toothpickReady = true;
+        if ((toothpick ??= state.boons.includes("dragons-toothpick")))
+          ensureCombat(target).toothpickReady = true;
         if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
         else if (def.effect === "guard") grantBlock(state, target, value, events);
-        if (state.boons.includes("crown-waffle-iron") && target.block > 0)
+        if ((waffle ??= state.boons.includes("crown-waffle-iron")) && target.block > 0)
           restoreHealth(
             target,
             target.block * (state.boons.includes("nectar-dipper") ? 2 : 1),
@@ -117,7 +121,7 @@ export function useFood(
             state,
             true,
           );
-        if (state.boons.includes("velvet-whisk"))
+        if ((whisk ??= state.boons.includes("velvet-whisk")))
           grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
       }
     }

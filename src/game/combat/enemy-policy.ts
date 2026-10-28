@@ -136,7 +136,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
   let fallenAllies: string[] | undefined;
   // Probes use the same state and fixed decisions throughout this choice. Keep
   // this cache local because the live turn draft can change after every play.
-  const values = enemy.deck ? new Map<CardDefinition, Map<string, number>>() : undefined;
+  const values = enemy.deck && cards.length > 1 ? new Map<CardDefinition, Map<string, number>>() : undefined;
   let best: EnemyChoice | undefined;
   let self: string[] | undefined;
   for (const def of cards) {

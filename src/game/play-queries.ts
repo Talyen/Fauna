@@ -25,8 +25,8 @@ export function chosenRecipients(state: BattleState, def: CardDefinition) {
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return [];
   if (def.effect === "resurrect") {
     const recipients: (Creature | Enemy)[] = [];
-    for (const row of [state.team, state.reserves])
-      for (const unit of row) if (recipientEligible(unit, def)) recipients.push(unit);
+    for (const unit of state.team) if (recipientEligible(unit, def)) recipients.push(unit);
+    for (const unit of state.reserves) if (recipientEligible(unit, def)) recipients.push(unit);
     return recipients;
   }
   return recipientPool(state, def, mode).filter((unit) => recipientEligible(unit, def));

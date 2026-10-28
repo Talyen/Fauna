@@ -198,8 +198,7 @@ export function validateRoster(state: GameState) {
   invalid(!uniqueBy(roster, (creature) => creature.species));
   invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
-  const teamById = new Map<string, (typeof state.team)[number]>();
-  for (const unit of state.team) teamById.set(unit.id, unit);
+  let teamById: Map<string, (typeof state.team)[number]> | undefined;
   invalid(
     state.cards.some((card) => {
       if (
@@ -220,6 +219,10 @@ export function validateRoster(state: GameState) {
               card.definitionId === "food-mana-berries" &&
               state.boons.includes("cornucopia")))
         );
+      if (!teamById) {
+        teamById = new Map();
+        for (const unit of state.team) teamById.set(unit.id, unit);
+      }
       const owner = teamById.get(card.ownerId);
       if (!owner) return true;
       return (

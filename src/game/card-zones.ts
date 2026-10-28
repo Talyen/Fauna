@@ -169,13 +169,13 @@ export function journeyReturnEligibility(
   state: GameState,
   ownerId: string | null,
 ): ((id: string) => boolean) | undefined {
-  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+  if (!state.battle?.draw.length || !ownerId || !state.boons.includes("journey-loom")) return;
   return eligibleDrawPool(state, journeyReturnMatcher(state, ownerId));
 }
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
-  if (!ownerId || !state.boons.includes("journey-loom")) return false;
+  if (!state.battle.draw.length || !ownerId || !state.boons.includes("journey-loom")) return false;
   return hasEligibleDraw(state, journeyReturnMatcher(state, ownerId));
 }
 
@@ -240,8 +240,14 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
     return firstOnly ? eligible : eligible ? [card] : [];
   }
   let owners: Set<string> | undefined;
-  const livingOwners = otherOwnerId === undefined ? undefined : new Set<string>();
-  if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
+  let livingOwners: Set<string> | undefined;
+  const living = () => {
+    if (!livingOwners) {
+      livingOwners = new Set();
+      for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
+    }
+    return livingOwners;
+  };
   let cards: Map<string, Card> | undefined;
   const result: Card[] | undefined = firstOnly ? undefined : [];
   const discard = state.battle!.discard;
@@ -255,7 +261,7 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
     if (
       otherOwnerId === undefined
         ? card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)
-        : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
+        : card.ownerId !== null && card.ownerId !== otherOwnerId && living().has(card.ownerId)
     ) {
       if (firstOnly) return true;
       result!.push(card);
@@ -297,6 +303,7 @@ export function fillHand(state: GameState) {
 
 function recycleEligibleDiscard(state: GameState, eligible: (id: string) => boolean) {
   const battle = state.battle!;
+  if (!battle.discard.length) return;
   const available: string[] = [];
   const retained: string[] = [];
   for (const id of battle.discard) (eligible(id) ? available : retained).push(id);
@@ -369,6 +376,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 
 export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
   fillHand(state);
+  if (!state.battle!.draw.length) return false;
   const eligible = eligibleDrawPool(state, (card) => card.ownerId === ownerId);
   return eligible ? drawEligibleCard(state, eligible, events) : false;
 }
@@ -380,6 +388,7 @@ export function drawKeyword(
 ) {
   if (!state.battle) return;
   fillHand(state);
+  if (!state.battle.draw.length) return;
   const eligible = eligibleDrawPool(state, drawableCard(state, keyword));
   if (eligible) drawEligibleCard(state, eligible, events);
 }
@@ -427,6 +436,7 @@ export function drawHasAnotherCard(
   _played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
+  if (!state.battle.draw.length) return false;
   return hasEligibleDraw(
     state,
     drawableCard(state, effect.kind === "drawKeyword" ? effect.keyword : undefined),

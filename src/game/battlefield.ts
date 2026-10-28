@@ -25,9 +25,11 @@ function battlefieldSnapshot(state: GameState, side: "player" | "enemy", livingO
   const result: (Creature | Enemy)[] = livingOnly ? row.filter((unit) => unit.health > 0) : [...row];
   const minions = state.battle?.minions ?? [];
   let owners: Set<string> | undefined;
+  let checkedMinion = false;
   for (const unit of minions) {
     if (unit.minion.side !== side || (livingOnly && unit.health <= 0)) continue;
-    if (minions.length === 1) {
+    if (!checkedMinion) {
+      checkedMinion = true;
       if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) result.push(unit);
     } else {
       if (!owners) {

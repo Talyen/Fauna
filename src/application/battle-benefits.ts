@@ -90,7 +90,6 @@ export function battleBenefitFacts(state: BattleState) {
       (state.battle.hand.length === 1 ||
         state.battle.cardsPlayedThisTurn === 1 ||
         state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1) &&
-      injuredAllies() &&
       ((state.battle.hand.length === 1 &&
         state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "lastWarmth") > 0)) ||
         (state.battle.cardsPlayedThisTurn === 1 &&
@@ -99,7 +98,8 @@ export function battleBenefitFacts(state: BattleState) {
           )) ||
         (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
           state.boons.includes("resonant-chimes") &&
-          hasTalent(state, "mana.arcane-mending"))));
+          hasTalent(state, "mana.arcane-mending"))) &&
+      injuredAllies());
   let enemies: Enemy[] | undefined;
   let allies: (Creature | Enemy)[] | undefined;
   let recoverable: Map<string | undefined, boolean> | undefined;

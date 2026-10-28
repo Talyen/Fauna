@@ -39,13 +39,7 @@ import { roll } from "../random";
 import { drawDiscard, draw, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
-import {
-  actorPower,
-  friendlyRow,
-  livingFriends,
-  livingOpponents,
-  type PrimaryContext,
-} from "./ability-context";
+import { actorPower, livingFriends, livingOpponents, type PrimaryContext } from "./ability-context";
 import { hasHarmfulEffects, unitName, type Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
@@ -194,7 +188,7 @@ export function executePrimary(context: PrimaryContext) {
           ? livingFriends(state, action)
           : cardTargeting(def) === "self"
             ? [actor]
-            : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId);
+            : battlefieldView(state, action.side).filter((unit) => unit.id === action.allyTargetId);
       for (const recipient of targets) {
         if (actor.health <= 0) break;
         grantBlock(state, recipient, value, events);
@@ -209,7 +203,7 @@ export function executePrimary(context: PrimaryContext) {
             ? [actor]
             : def.target === "mostInjured"
               ? [mostInjured(healingAllies(state, action.side))!]
-              : friendlyRow(state, action).filter(
+              : battlefieldView(state, action.side).filter(
                   (unit) => unit.id === action.allyTargetId && unit.health > 0,
                 );
       for (const recipient of targets) {
