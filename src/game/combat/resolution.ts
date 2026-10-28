@@ -6,6 +6,7 @@ import {
   grantBlock,
   gainMana,
   grantArmor,
+  armorStealRewards,
   leechHealth,
   healthThresholds,
 } from "./protection";
@@ -39,6 +40,7 @@ const handlers = {
   grantBlock,
   gainMana,
   grantArmor,
+  armorStealRewards,
   leechHealth,
   healthThresholds,
   grantStatus,

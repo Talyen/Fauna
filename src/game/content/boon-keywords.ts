@@ -3,6 +3,16 @@ import type { KeywordId } from "../keywords";
 
 // Authored associations for offer weighting; absent entries have no keyword preference.
 export const BOON_KEYWORDS: Partial<Record<BoonId, readonly KeywordId[]>> = {
+  "orchard-ladder-charm": ["food", "health"],
+  "spore-trivet": ["food", "burn", "cleanse"],
+  "victory-laurel": ["mana"],
+  "gilt-gauntlet": ["physical", "armor"],
+  "pumice-glass-inkwell": ["burn", "blind", "cleanse"],
+  "chime-crucible": ["stun", "burn"],
+  "crystal-harp": ["stun", "reflect"],
+  "orbit-tongs": ["armor", "block"],
+  "memory-cairn": ["resurrect", "cleanse"],
+  "vow-candle": ["light", "blind"],
   "ember-platter": ["burn"],
   "ash-bowl": ["burn", "thorns"],
   mossball: ["thorns"],

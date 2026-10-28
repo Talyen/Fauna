@@ -1,16 +1,11 @@
+import { deferred } from "../../support/deferred";
+import { cloudFixture as fixture, cloudIdentity as identity } from "../../support/cloud";
 import { expect, it, vi } from "vitest";
 import { createCloud } from "../../../src/application/cloud";
 import { snapshot, parseSnapshot, cloudName } from "../../../src/application/cloud-snapshots";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
-import type { CloudIdentity, CloudPort } from "../../../src/platform/ports";
-const identity: CloudIdentity = {
-  available: true,
-  device: "a".repeat(32),
-  profile: "b".repeat(32),
-  importAvailable: false,
-};
 const other = { ...identity, device: "c".repeat(32) };
 const initial = encodeSave(decodeSave(encodeSave(createGame(3))));
 const progress = encodeSave(
@@ -48,28 +43,6 @@ it("keeps published cloud status immutable so consumers cannot change retry deci
     vi.useRealTimers();
   }
 });
-function fixture() {
-  const files = new Map<string, string>(),
-    local = { data: null as string | null };
-  const preserve = vi.fn(async (_records: string[]) => {});
-  const port: CloudPort = {
-    identity: async () => identity,
-    readLocal: async () => local.data,
-    writeLocal: async (data) => {
-      local.data = data;
-    },
-    preserve,
-    importStandalone: async () => [],
-    list: async () => [...files.keys()],
-    read: async (name) => files.get(name) ?? null,
-    write: async (name, data) => {
-      files.set(name, data);
-    },
-  };
-  const install = vi.fn(async (_data: string) => {});
-  const manager = createCloud(port, () => {}, install);
-  return { manager, port, files, local, install, preserve };
-}
 it.each(["offline", "dispose"] as const)(
   "does not begin an identity lookup after a startup subscriber requests %s",
   async (action) => {
@@ -198,14 +171,8 @@ it("uploads only after durable local metadata, keeping devices in distinct slots
   const f = fixture();
   const remote = await snapshot(initial, other, 4);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  let entered!: () => void;
-  const writing = new Promise<void>((resolve) => {
-    entered = resolve;
-  });
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
+  const { promise: writing, resolve: entered } = deferred();
+  const { promise: gate, resolve: release } = deferred();
   f.port.writeLocal = async (data) => {
     entered();
     await gate;
@@ -276,14 +243,8 @@ it.each(["offline", "dispose"] as const)("does not install a late read after %s"
   const f = fixture();
   const remote = await snapshot(progress, other, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  let release!: () => void;
-  const gate = new Promise<void>((r) => {
-    release = r;
-  });
-  let entered!: () => void;
-  const reading = new Promise<void>((resolve) => {
-    entered = resolve;
-  });
+  const { promise: gate, resolve: release } = deferred();
+  const { promise: reading, resolve: entered } = deferred();
   f.port.list = async () => {
     entered();
     await gate;
@@ -435,10 +396,7 @@ it("automatically adopts a valid standalone backup without changing the original
 it("serializes retry metadata with newer commits", async () => {
   const f = fixture();
   await f.manager.start(null);
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
+  const { promise: gate, resolve: release } = deferred();
   const original = f.port.writeLocal;
   const calls: string[] = [];
   f.port.writeLocal = async (data) => {
@@ -546,10 +504,7 @@ it("retains every direct conflict head when parent ancestry fills the history li
 it("flush waits for admitted hashing, metadata and the resulting upload", async () => {
   const f = fixture();
   await f.manager.start(null);
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
+  const { promise: gate, resolve: release } = deferred();
   const write = f.port.write;
   f.port.write = async (name, data) => {
     await gate;
@@ -578,8 +533,7 @@ it("flush waits for admitted hashing, metadata and the resulting upload", async 
 it("bounds disposal when an admitted metadata write never finishes", async () => {
   vi.useFakeTimers();
   const f = fixture();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   try {
     await f.manager.start(null);
     f.port.writeLocal = vi.fn(async () => gate);
@@ -605,8 +559,8 @@ it("revokes retained retry and start capabilities after disposal", async () => {
   await f.manager.start(initial);
   await f.manager.flush();
   await f.manager.dispose();
-  const list = (f.port.list = vi.fn(f.port.list));
-  const identify = (f.port.identity = vi.fn(f.port.identity));
+  const list = vi.mocked(f.port.list).mockClear();
+  const identify = vi.mocked(f.port.identity).mockClear();
   await f.manager.retry();
   await f.manager.start(progress);
   expect(list).not.toHaveBeenCalled();
@@ -616,8 +570,7 @@ it("revokes retained retry and start capabilities after disposal", async () => {
 it("retries again after a stalled background read and ignores its late result", async () => {
   vi.useFakeTimers();
   const f = fixture();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   try {
     f.port.list = async () => {
       throw new Error("offline");
@@ -650,8 +603,7 @@ it("retains causal ancestry across overlapping local commits", async () => {
   const f = fixture();
   await f.manager.start(initial);
   await f.manager.flush();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   const records: string[] = [];
   const write = f.port.writeLocal;
   f.port.writeLocal = async (data) => {
@@ -689,15 +641,11 @@ it("recovers a valid remote backup when another slot rejects its read", async ()
     if (name === unreadable) throw new Error("slot unavailable");
     return read(name);
   };
-  try {
-    await f.manager.start(null);
-    expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
-    expect(f.manager.view.status).toBe("Pending");
-    expect(f.files.size).toBe(2);
-    expect(f.files.get(unreadable)).toBe("unreadable");
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(null);
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
+  expect(f.manager.view.status).toBe("Pending");
+  expect(f.files.size).toBe(2);
+  expect(f.files.get(unreadable)).toBe("unreadable");
 });
 
 it("preserves divergent snapshots in both slots of the same device", async () => {
@@ -706,40 +654,32 @@ it("preserves divergent snapshots in both slots of the same device", async () =>
   const second = await snapshot(progress, other, 2);
   f.files.set(cloudName(first), JSON.stringify(first));
   f.files.set(cloudName(second), JSON.stringify(second));
-  try {
-    await f.manager.start(null);
-    await f.manager.flush();
-    const preserved = f.preserve.mock.calls.flatMap(([records]) => records.map((raw) => JSON.parse(raw).id));
-    expect(preserved).toEqual(expect.arrayContaining([first.id, second.id]));
-    const resolved = await parseSnapshot(f.local.data!, identity.profile);
-    expect(resolved.ancestors).toEqual(expect.arrayContaining([first.id, second.id]));
-    expect(f.install).toHaveBeenCalledWith(
-      [first, second].sort((a, b) => a.id.localeCompare(b.id))[0]!.payload,
-      expect.any(Function),
-    );
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(null);
+  await f.manager.flush();
+  const preserved = f.preserve.mock.calls.flatMap(([records]) => records.map((raw) => JSON.parse(raw).id));
+  expect(preserved).toEqual(expect.arrayContaining([first.id, second.id]));
+  const resolved = await parseSnapshot(f.local.data!, identity.profile);
+  expect(resolved.ancestors).toEqual(expect.arrayContaining([first.id, second.id]));
+  expect(f.install).toHaveBeenCalledWith(
+    [first, second].sort((a, b) => a.id.localeCompare(b.id))[0]!.payload,
+    expect.any(Function),
+  );
 });
 
 it("pins account identity even if the transport mutates its returned object", async () => {
   const f = fixture();
   const transportIdentity = { ...identity };
   f.port.identity = async () => transportIdentity;
-  try {
-    await f.manager.start(initial);
-    await f.manager.flush();
-    transportIdentity.device = other.device;
-    transportIdentity.profile = "d".repeat(32);
-    await f.manager.commit(progress);
-    await f.manager.flush();
-    const saved = await parseSnapshot(f.local.data!, identity.profile);
-    expect(saved.device).toBe(identity.device);
-    expect(saved.profile).toBe(identity.profile);
-    expect([...f.files.keys()].every((name) => name.includes(identity.device))).toBe(true);
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  await f.manager.flush();
+  transportIdentity.device = other.device;
+  transportIdentity.profile = "d".repeat(32);
+  await f.manager.commit(progress);
+  await f.manager.flush();
+  const saved = await parseSnapshot(f.local.data!, identity.profile);
+  expect(saved.device).toBe(identity.device);
+  expect(saved.profile).toBe(identity.profile);
+  expect([...f.files.keys()].every((name) => name.includes(identity.device))).toBe(true);
 });
 
 it("rejects more than 32 remote streams even when this device already has a slot", async () => {
@@ -751,26 +691,20 @@ it("rejects more than 32 remote streams even when this device already has a slot
   );
   for (const record of records) f.files.set(cloudName(record), JSON.stringify(record));
   const before = new Map(f.files);
-  try {
-    await f.manager.start(initial);
-    await f.manager.flush();
-    expect(f.manager.view.status).toBe("Pending");
-    expect(f.manager.view.error).toContain("device limit");
-    expect(f.files).toEqual(before);
-    expect(f.install).not.toHaveBeenCalled();
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  await f.manager.flush();
+  expect(f.manager.view.status).toBe("Pending");
+  expect(f.manager.view.error).toContain("device limit");
+  expect(f.files).toEqual(before);
+  expect(f.install).not.toHaveBeenCalled();
 });
 
 it.each(["write", "read"] as const)(
   "does not start further transport calls after disposal during upload %s",
   async (stage) => {
     const f = fixture();
-    let entered!: () => void;
-    const started = new Promise<void>((resolve) => (entered = resolve));
-    let release!: () => void;
-    const gate = new Promise<void>((resolve) => (release = resolve));
+    const { promise: started, resolve: entered } = deferred();
+    const { promise: gate, resolve: release } = deferred();
     const read = f.port.read;
     const write = f.port.write;
     f.port.write = vi.fn(async (name, data) => {
@@ -808,10 +742,8 @@ it.each(["write", "read", "acknowledge"] as const)(
   async (stage) => {
     const f = fixture();
     await f.manager.start(null);
-    let release!: () => void;
-    const gate = new Promise<void>((resolve) => (release = resolve));
-    let entered!: () => void;
-    const started = new Promise<void>((resolve) => (entered = resolve));
+    const { promise: gate, resolve: release } = deferred();
+    const { promise: started, resolve: entered } = deferred();
     const pause = async () => {
       entered();
       await gate;
@@ -853,17 +785,13 @@ it("durably restores metadata when recovering this device's remote checkpoint", 
   const f = fixture();
   const remote = await snapshot(progress, identity, 8);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  try {
-    await f.manager.start(null);
-    await f.manager.flush();
-    expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
-    expect(f.local.data).not.toBeNull();
-    const restored = await parseSnapshot(f.local.data!, identity.profile);
-    expect(restored.payload).toBe(progress);
-    expect(restored.id === remote.id || restored.ancestors.includes(remote.id)).toBe(true);
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(null);
+  await f.manager.flush();
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
+  expect(f.local.data).not.toBeNull();
+  const restored = await parseSnapshot(f.local.data!, identity.profile);
+  expect(restored.payload).toBe(progress);
+  expect(restored.id === remote.id || restored.ancestors.includes(remote.id)).toBe(true);
 });
 
 it("flush drains progress admitted by an upload-completion subscriber", async () => {

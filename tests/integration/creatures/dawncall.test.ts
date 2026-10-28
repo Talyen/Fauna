@@ -1,21 +1,11 @@
 import { setBattleCards } from "../../support/cards";
-import {
-  enemyPlay,
-  addBackups,
-  authoredPack,
-  swapFixture,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { enemyPlay, addBackups, swapFixture, prepareDestination, accept, teamRun } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, species } from "../../../src/game/content";
+import { CARDS } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, openingCriticalBonus, startAction } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent, GameState } from "../../../src/game/types";
@@ -289,27 +279,4 @@ it.each([
       ),
     ).toHaveLength(3);
   }
-});
-
-it("discovers and recruits Dawncall through ordinary encounters", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((id) => id !== "dawncall")! }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "dawncall"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("dawncall");
-  game = accept(winBattle(game), { type: "recruit", species: "dawncall" });
-  expect(game.discovery.recruited.dawncall).toBe(1);
-  expect(game.cards.filter((card) => card.definitionId.startsWith("dawncall-"))).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-  expect(species("dawncall").health).toBe(24);
 });

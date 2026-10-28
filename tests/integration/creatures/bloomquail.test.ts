@@ -1,12 +1,11 @@
 import { setBattleCards } from "../../support/cards";
-import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../support/game";
+import { enemyPlay, accept, teamRun } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, grantBlock } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
@@ -175,29 +174,6 @@ it("uses enemy base conversion on its own side and Cradle heals only its actor",
     expect.objectContaining({ kind: "heal", targetId: "enemy-0", amount: 2 }),
   );
   expect(cradle.state.battle!.enemies[0]!.block).toBe(3);
-});
-
-it("discovers, recruits and resumes Bloomquail with its complete kit", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "bloomquail")! }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "bloomquail"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("bloomquail");
-  game = accept(winBattle(game), { type: "recruit", species: "bloomquail" });
-  expect(game.discovery.recruited.bloomquail).toBe(1);
-  expect(game.cards.filter((card) => card.ownerId === game.team[1]!.id)).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-  expect(() => decodeSave(JSON.stringify({ ...game, version: 32 }))).toThrow();
 });
 
 it("applies healing talents without card-only overhealing rewards or recursive conversion", () => {

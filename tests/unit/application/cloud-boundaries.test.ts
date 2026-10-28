@@ -1,40 +1,12 @@
+import { deferred } from "../../support/deferred";
+import { cloudFixture as fixture, cloudIdentity as identity } from "../../support/cloud";
 import { expect, it, vi } from "vitest";
-import { createCloud } from "../../../src/application/cloud";
 import { cloudName, parseSnapshot, snapshot } from "../../../src/application/cloud-snapshots";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { createGame } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import type { CloudIdentity, CloudPort } from "../../../src/platform/ports";
 
-const identity: CloudIdentity = {
-  available: true,
-  device: "a".repeat(32),
-  profile: "b".repeat(32),
-  importAvailable: false,
-};
 const payload = encodeSave(decodeSave(encodeSave(createGame(3))));
-
-function fixture(publish: Parameters<typeof createCloud>[1] = () => {}) {
-  const files = new Map<string, string>();
-  let local: string | null = null;
-  const port: CloudPort = {
-    identity: async () => identity,
-    readLocal: async () => local,
-    writeLocal: async (data) => {
-      local = data;
-    },
-    preserve: async () => {},
-    importStandalone: async () => [],
-    list: vi.fn(async () => [...files.keys()]),
-    read: async (name) => files.get(name) ?? null,
-    write: async (name, data) => {
-      files.set(name, data);
-    },
-  };
-  const install = vi.fn(async (_data: string) => {});
-  const manager = createCloud(port, publish, install);
-  return { manager, port, files, install, local: () => local };
-}
 
 it.each(["identity", "list", "install"] as const)(
   "automatically recovers remote progress after startup fails at %s with no local save",
@@ -68,10 +40,8 @@ it.each(["identity", "list", "install"] as const)(
 
 it("shares concurrent retries so they cannot cancel each other's recovery lease", async () => {
   const f = fixture();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
-  let entered!: () => void;
-  const reading = new Promise<void>((resolve) => (entered = resolve));
+  const { promise: gate, resolve: release } = deferred();
+  const { promise: reading, resolve: entered } = deferred();
   try {
     await f.manager.start(null);
     const remote = await snapshot(payload, { ...identity, device: "c".repeat(32) }, 1);
@@ -97,19 +67,17 @@ it("shares concurrent retries so they cannot cancel each other's recovery lease"
 });
 
 it("keeps saving and uploading when a Cloud status observer throws", async () => {
-  const f = fixture(() => {
-    throw new Error("observer failed");
+  const f = fixture({
+    publish: () => {
+      throw new Error("observer failed");
+    },
   });
-  try {
-    await f.manager.start(payload);
-    await f.manager.flush();
-    expect(f.manager.view.status).toBe("Synced");
-    const saved = await parseSnapshot(f.local()!, identity.profile);
-    expect(saved.payload).toBe(payload);
-    expect(f.files.get(cloudName(saved))).toBe(JSON.stringify(saved));
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(payload);
+  await f.manager.flush();
+  expect(f.manager.view.status).toBe("Synced");
+  const saved = await parseSnapshot(f.local.data!, identity.profile);
+  expect(saved.payload).toBe(payload);
+  expect(f.files.get(cloudName(saved))).toBe(JSON.stringify(saved));
 });
 
 it("captures parent identities and ancestry before snapshot hashing yields", async () => {
@@ -176,13 +144,9 @@ it("keeps cloud recovery available when a transport error message throws", async
     },
   });
   f.port.identity = vi.fn().mockRejectedValueOnce(error).mockResolvedValue(identity);
-  try {
-    await f.manager.start(payload);
-    expect(f.manager.view).toMatchObject({ status: "Pending", blocking: false, error: "Cloud sync failed." });
-    await f.manager.retry();
-    await f.manager.flush();
-    expect(f.manager.view.status).toBe("Synced");
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(payload);
+  expect(f.manager.view).toMatchObject({ status: "Pending", blocking: false, error: "Cloud sync failed." });
+  await f.manager.retry();
+  await f.manager.flush();
+  expect(f.manager.view.status).toBe("Synced");
 });
