@@ -77,7 +77,7 @@ The opt-in runner uses production application commands, current save validation,
 | `--seed`, `--runs` | Scenario seed and 1–20 journeys                                                                                                                               |
 | `--starter`        | Preference among actual offers, restricted to `FIRST_RUN_STARTERS` even with a save; if absent from offers, the policy chooses another using its separate RNG |
 | `--policy`         | `heuristic` or `random`; neither reads hidden intentions or future offers                                                                                     |
-| `--out`            | Directory under ignored `reports/`; path components cannot be symlinks                                                                                        |
+| `--out`            | Empty directory under ignored `reports/`; path components cannot be symlinks                                                                                  |
 
 | Output          | Contents and validity                                                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,7 +87,7 @@ The opt-in runner uses production application commands, current save validation,
 | Replay          | Matching code/content identity and exact checkpoints required; any divergence fails                                                           |
 | Comparison      | Completed careers with matching initial checkpoints/settings; changed code identity is explicit; changed save formats require fresh baselines |
 
-Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests. These are automated-policy observations, not human win rates or rendered acceptance.
+Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Replay uses its recorded scenario and checkpoint, so it cannot be combined with scenario or save overrides. Choose a fresh output directory for every run or replay; an interrupted output remains evidence. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests. These are automated-policy observations, not human win rates or rendered acceptance.
 
 ## Paired balance reports
 
