@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { TURN_MANA } from "../state-limits";
 import { shareNegate } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
@@ -221,11 +222,7 @@ export function executePrimary(context: PrimaryContext) {
           removeEffects(recipient, "cleanse", 6, events, state, undefined, actor, false);
         if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
           ensureCombat(recipient).negate = true;
-          events.push({
-            kind: "status",
-            targetId: recipient.id,
-            status: "negate",
-            outcome: "apply",
+          emitStatus(events, recipient.id, "negate", "apply", {
             text: `${unitName(recipient)} gains Negate`,
           });
         }
@@ -364,11 +361,7 @@ export function executePrimary(context: PrimaryContext) {
       for (const unit of battlefieldView(state, enemy ? "enemy" : "player")) {
         if (unit.health <= 0) continue;
         ensureCombat(unit).nullify = true;
-        events.push({
-          kind: "status",
-          targetId: unit.id,
-          status: "nullify",
-          outcome: "apply",
+        emitStatus(events, unit.id, "nullify", "apply", {
           text: `${species(unit.species).name} nullifies the next harmful status effect`,
         });
       }

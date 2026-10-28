@@ -1,25 +1,15 @@
 // @vitest-environment jsdom
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { screenTestEnvironment } from "../../support/ui";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { Button } from "../../../src/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../src/components/ui/tooltip";
 
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-});
+screenTestEnvironment();
 afterEach(() => {
-  cleanup();
   delete document.documentElement.dataset.focus;
-  vi.unstubAllGlobals();
-  vi.restoreAllMocks();
   vi.useRealTimers();
 });
 

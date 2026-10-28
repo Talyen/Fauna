@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
@@ -29,6 +30,8 @@ import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
+const bothAlive = (source: Combatant, target: Combatant) => source.health > 0 && target.health > 0;
+
 const periodicStatuses = ["burn", "poison", "bleed"] as const;
 
 export interface HitContext {
@@ -56,13 +59,7 @@ export function* dodgeResponse(
 ): Resolution<void> {
   const stats = ensureCombat(target),
     alliedTarget = !isEnemy(target);
-  events.push({
-    kind: "status",
-    targetId: target.id,
-    status: "dodge",
-    outcome: "dodge",
-    text: `${unitName(target)} Dodges.`,
-  });
+  emitStatus(events, target.id, "dodge", "dodge", { text: `${unitName(target)} Dodges.` });
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
   if (alliedTarget && state.boons.includes("echo-ocarina")) {
@@ -79,8 +76,7 @@ export function* dodgeResponse(
     if (
       retaliate &&
       isEnemy(source) &&
-      source.health > 0 &&
-      target.health > 0 &&
+      bothAlive(source, target) &&
       state.boons.includes("skyiron-horseshoe")
     ) {
       const { removed, depletion } = removeArmor(source, boonRule("skyiron-horseshoe").armor);
@@ -103,8 +99,7 @@ export function* dodgeResponse(
     if (
       retaliate &&
       isEnemy(source) &&
-      source.health > 0 &&
-      target.health > 0 &&
+      bothAlive(source, target) &&
       state.boons.includes("leafwing-shuttlecock")
     )
       yield* reaction("hit", state, target, source, boonRule("leafwing-shuttlecock").damage, "stun", events, {
@@ -112,8 +107,7 @@ export function* dodgeResponse(
       });
     if (
       retaliate &&
-      target.health > 0 &&
-      source.health > 0 &&
+      bothAlive(source, target) &&
       isEnemy(source) &&
       state.boons.includes("fern-fencing-foil")
     )
@@ -271,7 +265,8 @@ export function* passingFlame({ state, source, target, events }: HitContext): Re
   const share = Math.floor(total / recipients.length);
   const remainder = total % recipients.length;
   // Preserve the rounded total; ties for indivisible stacks retain battlefield order.
-  for (const [index, recipient] of recipients.entries()) {
+  for (let index = 0; index < recipients.length; index++) {
+    const recipient = recipients[index]!;
     if (source.health <= 0) break;
     const amount = share + Number(index < remainder);
     if (amount > 0) yield* reaction("applyHarmfulStatus", state, source, recipient, amount, "burn", events);
@@ -288,6 +283,7 @@ export function* damageRewards(
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
     stats = ensureCombat(target);
+  const playerHit = alliedSource && !alliedTarget;
   if (
     lost > 0 &&
     target.health === 0 &&
@@ -306,8 +302,7 @@ export function* damageRewards(
   }
   if (
     policy.attack &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     type === "water" &&
     stats.blind &&
     source.health > 0 &&
@@ -322,34 +317,20 @@ export function* damageRewards(
   }
   if (
     policy.attack &&
-    alliedSource &&
-    !alliedTarget &&
-    source.health > 0 &&
-    target.health > 0 &&
+    playerHit &&
+    bothAlive(source, target) &&
     type === "light" &&
     stats.burn > 0 &&
     state.boons.includes("furnace-prism")
   )
     yield* reaction("applyBlind", state, source, target, events);
-  if (
-    target.health === 0 &&
-    !alliedTarget &&
-    alliedSource &&
-    stats.poison > 0 &&
-    hasTalent(state, "poison.toxic-profit")
-  )
+  if (target.health === 0 && playerHit && stats.poison > 0 && hasTalent(state, "poison.toxic-profit"))
     gainGold(state, talentRule("poison.toxic-profit").amount, events);
-  if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
+  if (target.health === 0 && playerHit && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, boonRule("bone-charm").healing, events, false, state);
-  if (
-    lost > 0 &&
-    target.health === 0 &&
-    !alliedTarget &&
-    alliedSource &&
-    state.boons.includes("victory-laurel")
-  )
+  if (lost > 0 && target.health === 0 && playerHit && state.boons.includes("victory-laurel"))
     yield* reaction("gainMana", state, boonRule("victory-laurel").mana, events);
-  if (alliedSource && !alliedTarget && dealt > 0 && (source.health > 0 || policy.deadSource)) {
+  if (playerHit && dealt > 0 && (source.health > 0 || policy.deadSource)) {
     if (type === "bleed" && state.boons.includes("cutpurse-knife"))
       gainGold(state, boonRule("cutpurse-knife").gold, events);
     if (
@@ -577,7 +558,7 @@ export function* passiveRetaliation(
   depletedBlock: boolean,
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
-  if (target.health > 0 && source.health > 0) {
+  if (bothAlive(source, target)) {
     const amount = passiveAmount(alliedTarget ? state : undefined, target.species, "poisonRetaliation");
     if (amount > 0)
       yield* reaction("hit", state, target, source, amount, "poison", events, {
@@ -585,7 +566,7 @@ export function* passiveRetaliation(
       });
   }
   // Only direct attacks burst the bubble; derived damage cannot start retaliation chains
-  if (depletedBlock && target.health > 0 && source.health > 0) {
+  if (depletedBlock && bothAlive(source, target)) {
     const amount = passiveAmount(alliedTarget ? state : undefined, target.species, "blockBreak");
     if (amount > 0)
       yield* reaction("hit", state, target, source, amount, "water", events, { origin: "retaliation" });

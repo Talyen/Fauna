@@ -1,29 +1,8 @@
-import { bounce, hit, resolveHit, negateAttack } from "./damage";
+import * as damage from "./damage";
+import * as protection from "./protection";
+import * as statuses from "./statuses";
+import * as lifecycle from "./lifecycle";
 import { previewWork } from "../random";
-import {
-  restoreHealth,
-  shareProtection,
-  grantBlock,
-  gainMana,
-  grantArmor,
-  armorStealRewards,
-  leechHealth,
-  healthThresholds,
-} from "./protection";
-import {
-  grantStatus,
-  triggerArmorBreak,
-  removeControlBuildup,
-  removeEffects,
-  returnCleansedEffect,
-  cleanseRewards,
-  cleanseThorns,
-  poisonCleanseMana,
-  applyHarmfulStatus,
-  controlRewards,
-  applyBlind,
-} from "./statuses";
-import { tickStatuses, startAction } from "./lifecycle";
 import type {
   Operations,
   CombatArguments,
@@ -33,33 +12,7 @@ import type {
   Resolution,
 } from "./operations";
 
-const handlers = {
-  bounce,
-  restoreHealth,
-  shareProtection,
-  grantBlock,
-  gainMana,
-  grantArmor,
-  armorStealRewards,
-  leechHealth,
-  healthThresholds,
-  grantStatus,
-  triggerArmorBreak,
-  removeControlBuildup,
-  removeEffects,
-  returnCleansedEffect,
-  cleanseRewards,
-  cleanseThorns,
-  poisonCleanseMana,
-  applyHarmfulStatus,
-  controlRewards,
-  applyBlind,
-  hit,
-  resolveHit,
-  negateAttack,
-  tickStatuses,
-  startAction,
-} satisfies Operations;
+const handlers: Operations = { ...damage, ...protection, ...statuses, ...lifecycle };
 
 function frame(operation: CombatOperation): Resolution<unknown> {
   // The discriminated request ties each argument tuple to this closed handler registry.

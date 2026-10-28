@@ -1,3 +1,4 @@
+import { emitSupport } from "./events";
 import { forEachPermanentCard } from "./card-kit";
 import { battlefield, isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
@@ -306,10 +307,7 @@ export function mountainGuide(
     if (guide.health <= 0) continue;
     const amount = passiveAmount(allied ? state : undefined, guide.species, "mountainGuide");
     if (!amount) continue;
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: guide.id,
+    emitSupport(events, guide.id, {
       targetId: incoming.id,
       text: `Mountain Guide protects ${unitName(incoming)}`,
     });

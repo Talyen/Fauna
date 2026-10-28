@@ -43,6 +43,14 @@ const enabledOnlyFlags = [
   "allyOnly",
 ] as const;
 
+const battleStartEffects: readonly string[] = ["block", "thorns", "armor"];
+const cardBonusTriggers: readonly string[] = ["firstAttack", "stunAttack", "heal", "guard"];
+const bounceEffects: readonly string[] = ["light", "heal"];
+const foodEffects: readonly string[] = ["heal", "guard", "mana"];
+const drawKeywords: readonly string[] = ["light", "nature", "water", "burn"];
+const grantedStatuses: readonly string[] = ["armor", "thorns", "dodge"];
+const friendlyTargets: readonly string[] = ["recipient", "allAllies"];
+
 export interface ContentIssue {
   severity: "error" | "warning";
   id: string;
@@ -134,17 +142,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
           error(entry.id, "passiveTiers", "Passive chance cannot exceed 100 percent");
         if (effect.kind === "blockConversion" && effect.amount > 100)
           error(entry.id, "passiveTiers", "Block conversion cannot exceed the granted Block");
-        if (effect.kind === "battleStart" && !["block", "thorns", "armor"].includes(effect.effect))
+        if (effect.kind === "battleStart" && !battleStartEffects.includes(effect.effect))
           error(entry.id, "passiveTiers", "Unknown battle-start grant");
-        if (
-          effect.kind === "cardBonus" &&
-          !["firstAttack", "stunAttack", "heal", "guard"].includes(effect.trigger)
-        )
+        if (effect.kind === "cardBonus" && !cardBonusTriggers.includes(effect.trigger))
           error(entry.id, "passiveTiers", "Unknown card-bonus trigger");
         if (
           effect.kind === "bounce" &&
           (effect.amount > 2 ||
-            !["light", "heal"].includes(effect.effect) ||
+            !bounceEffects.includes(effect.effect) ||
             (effect.chance !== undefined &&
               (!Number.isFinite(effect.chance) || effect.chance <= 0 || effect.chance > 1)))
         )
@@ -160,7 +165,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(card.id, "target", "Unsupported primary target");
     if (
       card.species === null &&
-      (!["heal", "guard", "mana"].includes(card.effect) ||
+      (!foodEffects.includes(card.effect) ||
         card.effects?.length ||
         card.repeatChance !== undefined ||
         card.target !== undefined ||
@@ -224,18 +229,18 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
       if (!isSupplementalKind(effect.kind)) error(card.id, "effects", "Unknown supplemental effect.");
-      if (effect.kind === "drawKeyword" && !["light", "nature", "water", "burn"].includes(effect.keyword))
+      if (effect.kind === "drawKeyword" && !drawKeywords.includes(effect.keyword))
         error(card.id, "effects", "Unknown draw keyword.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
         error(card.id, "effects", "Unknown supplemental damage type.");
-      if (effect.kind === "status" && !["armor", "thorns", "dodge"].includes(effect.status))
+      if (effect.kind === "status" && !grantedStatuses.includes(effect.status))
         error(card.id, "effects", "Unknown granted status.");
       if (effect.kind === "heal" && effect.target !== undefined && effect.target !== "recipient")
         error(card.id, "effects", "Unknown healing recipient.");
       if (
         effect.kind === "cleanse" &&
         effect.target !== undefined &&
-        !["recipient", "allAllies"].includes(effect.target)
+        !friendlyTargets.includes(effect.target)
       )
         error(card.id, "effects", "Unknown Cleanse recipient");
       if (effect.kind === "reflect" && effect.status !== undefined && effect.status !== "burn")

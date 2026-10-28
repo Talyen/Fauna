@@ -1,3 +1,6 @@
+import { deferred } from "../../support/deferred";
+import type { ComponentProps, ReactNode } from "react";
+import { screenTestEnvironment } from "../../support/ui";
 import { CombatStatus } from "../../../src/ui/shared/combat/combat-status";
 import { Campfire, RestRecovery } from "../../../src/ui/expedition/campfire";
 import { dispatch } from "../../../src/game/engine";
@@ -10,7 +13,7 @@ import { createFood } from "../../../src/game/combat/food";
 import { createPearls, summonEcho } from "../../../src/game/combat/legendary";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import { swapFromCard } from "../../../src/game/team";
-import type { GameEvent } from "../../../src/game/types";
+import type { Combatant, GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
 import { cardRuleId } from "../../../src/ui/shared/localization/card-rule-id";
@@ -49,12 +52,7 @@ import { PageControls } from "../../../src/ui/shared/navigation/pagination";
 import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
 import { DamageValue } from "../../../src/ui/shared/combat/combat-values";
 // @vitest-environment jsdom
-import { createRequire } from "node:module";
-import { EventEmitter } from "node:events";
-import { mkdtemp, rm } from "node:fs/promises";
 import { readFileSync, readdirSync } from "node:fs";
-import { tmpdir } from "node:os";
-import path from "node:path";
 import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, it, vi } from "vitest";
@@ -107,6 +105,89 @@ import {
 } from "../../../src/ui/shared/localization/event-presentation";
 import { localizedCombatantName } from "../../../src/ui/shared/localization/combatant-name";
 import { localizedCardDenial } from "../../../src/ui/shared/localization/card-denial";
+
+screenTestEnvironment();
+
+function renderLocalized(children: ReactNode, catalog: MessageCatalog = french, locale: GameLocale = "fr") {
+  return render(
+    <LocalizationProvider
+      catalogs={{ [locale]: catalog }}
+      qualified={["en", locale]}
+      systemLanguages={[locale]}
+    >
+      <TooltipProvider>{children}</TooltipProvider>
+    </LocalizationProvider>,
+  );
+}
+
+function renderRules(
+  cards: ComponentProps<typeof CardRules>[],
+  catalog: MessageCatalog = french,
+  locale: GameLocale = "fr",
+) {
+  const view = renderLocalized(
+    cards.map((props, index) => <CardRules key={index} {...props} />),
+    catalog,
+    locale,
+  );
+  return {
+    ...view,
+    rules: [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  };
+}
+
+function renderMessages(children: ReactNode, catalog: MessageCatalog = french) {
+  return render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      {children}
+    </MessageProvider>,
+  );
+}
+
+function renderBattle(game: Parameters<typeof requireBattle>[0], catalog: MessageCatalog = french) {
+  const send = vi.fn(() => true);
+  const view = renderMessages(
+    <TooltipProvider>
+      <BattleScreen
+        game={requireBattle(game)}
+        send={send}
+        controls={{ current: null }}
+        bursts={[]}
+        controller={false}
+        navigateFocus={false}
+        onDenied={() => {}}
+      />
+    </TooltipProvider>,
+    catalog,
+  );
+  return { view, send };
+}
+
+function frenchReader(catalog: MessageCatalog) {
+  return createMessageReader("fr", { ...french, ...catalog });
+}
+
+function translatedReader(combatant: Combatant, name: string) {
+  return frenchReader({
+    [`content.species.${combatant.species}.name`]: { source: species(combatant.species).name, text: name },
+  });
+}
+
+function targetFixture(name: string) {
+  const game = run();
+  const target = game.team[0]!;
+  return { game, target, targetName: species(target.species).name, reader: translatedReader(target, name) };
+}
+
+function creatureSources() {
+  const directory = "src/game/content/creatures";
+  return readdirSync(directory)
+    .filter((file) => file.endsWith(".ts"))
+    .map((file) => ({
+      location: `${directory}/${file}`,
+      source: readFileSync(`${directory}/${file}`, "utf8"),
+    }));
+}
 
 it("selects locale plural forms and falls back when source or placeholders are stale", () => {
   const source = { one: "{{count}} talent point available", other: "{{count}} talent points available" };
@@ -179,8 +260,7 @@ it("localizes Dodge and interception announcements without rewriting unrelated e
   const target = game.team[1]!;
   const actorName = species(actor.species).name;
   const targetName = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: actorName, text: "Protecteur" },
     [`content.species.${target.species}.name`]: { source: targetName, text: "Allié" },
   });
@@ -211,8 +291,7 @@ it("localizes reflected attacks while preserving unrecognized events", () => {
   const target = game.team[1]!;
   const actorName = species(actor.species).name;
   const targetName = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: actorName, text: "Protecteur" },
     [`content.species.${target.species}.name`]: { source: targetName, text: "Attaquant" },
   });
@@ -247,13 +326,7 @@ it("localizes both next-card repeat announcements", () => {
 });
 
 it("localizes temporary Dodge and lost Freeze buildup with their exact amounts", () => {
-  const game = run();
-  const target = game.team[0]!;
-  const targetName = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
-  });
+  const { game, target, targetName, reader } = targetFixture("Créature traduite");
   const dodge = {
     kind: "status" as const,
     status: "dodge" as const,
@@ -279,13 +352,7 @@ it("localizes temporary Dodge and lost Freeze buildup with their exact amounts",
 });
 
 it("localizes applied, prevented and immune combat status announcements", () => {
-  const game = run();
-  const target = game.team[0]!;
-  const targetName = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
-  });
+  const { game, target, targetName, reader } = targetFixture("Créature traduite");
   const base = { kind: "status" as const, targetId: target.id };
   const gain = {
     ...base,
@@ -342,13 +409,7 @@ it("localizes applied, prevented and immune combat status announcements", () => 
 });
 
 it("localizes prevented Freeze damage and skipped control turns", () => {
-  const game = run();
-  const target = game.team[0]!;
-  const targetName = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
-  });
+  const { game, target, targetName, reader } = targetFixture("Créature traduite");
   const immune = {
     kind: "status" as const,
     status: "nullify" as const,
@@ -420,8 +481,7 @@ it("localizes committed position swaps and discovered creature names", () => {
   const events: GameEvent[] = [];
   const target = swapFromCard(game, actor, events)!;
   const swap = events.find((event) => event.kind === "action" && event.actionType === "swap")!;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: species(actor.species).name, text: "Premier" },
     [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Second" },
   });
@@ -435,13 +495,7 @@ it("localizes committed position swaps and discovered creature names", () => {
 });
 
 it("preserves the spent Block and named Boon in a localized combat event", () => {
-  const game = run();
-  const target = game.team[0]!;
-  const name = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: name, text: "Allié" },
-  });
+  const { game, target, targetName: name, reader } = targetFixture("Allié");
   const event: GameEvent = {
     kind: "block",
     targetId: target.id,
@@ -511,13 +565,7 @@ it("localizes real Pearl and Echo creation and a repeated Food card", () => {
 });
 
 it("localizes protective ward announcements without translating unrelated events", () => {
-  const game = run();
-  const target = game.team[0]!;
-  const english = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: english, text: "Allié" },
-  });
+  const { game, target, targetName: english, reader } = targetFixture("Allié");
   const ward: GameEvent = {
     kind: "status",
     targetId: target.id,
@@ -575,14 +623,6 @@ it("localizes a reflected status using its actual recipient", () => {
 });
 
 it("localizes campfire health and committed recovery without changing the rest outcome", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
   const before = accept(
     produce(merchantDestination(), (draft) => {
       draft.team[0]!.health = 5;
@@ -593,12 +633,10 @@ it("localizes campfire health and committed recovery without changing the rest o
   const result = dispatch(before, { type: "rest" });
   expect(result.accepted).toBe(true);
   expect(result.state.rng).toBe(before.rng);
-  const { container, rerender, unmount } = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TooltipProvider>
-        <Campfire game={before} send={() => true} />
-      </TooltipProvider>
-    </MessageProvider>,
+  const { container, rerender } = renderMessages(
+    <TooltipProvider>
+      <Campfire game={before} send={() => true} />
+    </TooltipProvider>,
   );
   expect(container.textContent).toContain(`5/${species(before.team[0]!.species).health} Santé · +`);
   expect(container.querySelector('[data-keyword="health"]')?.textContent).toBe("Santé");
@@ -609,36 +647,28 @@ it("localizes campfire health and committed recovery without changing the rest o
   );
   const after = result.state.team[0]!.health;
   expect(container.textContent).toContain(`5 → ${after} Santé · +${after - 5}`);
-  unmount();
-  vi.unstubAllGlobals();
 });
 
 it("announces a summoned Echo by its localized identity", () => {
   const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
   summonEcho(game, game.team[0]!, "player", 5, []);
   const echo = game.battle.minions![0]!;
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TooltipProvider>
-        <AllyCard creature={echo} />
-      </TooltipProvider>
-    </MessageProvider>,
+  renderMessages(
+    <TooltipProvider>
+      <AllyCard creature={echo} />
+    </TooltipProvider>,
   );
   expect(screen.getByRole("button", { name: /^Écho$/ })).toBeTruthy();
-  view.unmount();
 });
 
 it("shows the creature health detail in the selected language", async () => {
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TooltipProvider>
-        <CreatureCard kind="mossguard" actorId="ally-1" health={5} maxHealth={32} />
-      </TooltipProvider>
-    </MessageProvider>,
+  renderMessages(
+    <TooltipProvider>
+      <CreatureCard kind="mossguard" actorId="ally-1" health={5} maxHealth={32} />
+    </TooltipProvider>,
   );
   await userEvent.setup().hover(screen.getByRole("button", { name: "Mossguard" }));
   expect((await screen.findByRole("tooltip")).textContent).toContain("Santé 5/32");
-  view.unmount();
 });
 
 it("localizes shared Negate only when the bearer can be identified", () => {
@@ -672,10 +702,7 @@ it("localizes Death's Door and Armor loss using committed combat facts", () => {
     loseHealth(draft, draft.team[0]!, draft.team[0]!.health, events);
   });
   const death = events.find((event) => event.kind === "status" && event.status === "deathDoor")!;
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Allié" },
-  });
+  const reader = translatedReader(target, "Allié");
   expect(eventPresentation(game, death, reader)).toBe(
     "Allié atteint les portes de la mort : tours de répit restants : 2.",
   );
@@ -704,8 +731,7 @@ it("localizes a committed resurrection without changing its Health or participan
     resurrect(draft.team[1]!, draft.team[0]!, events);
   });
   const event = events.find((item) => item.kind === "heal")!;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: species(actor.species).name, text: "Guide" },
     [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Allié" },
   });
@@ -723,8 +749,7 @@ it("localizes an authored ability and Food announcement without guessing unknown
   const action = game.cards.find((card) => card.ownerId === actor.id)!;
   const ability = definition(action.definitionId);
   const apple = definition("food-apple");
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: actorName, text: "Créature traduite" },
     [`content.card.${ability.id}.name`]: { source: ability.name, text: "Capacité traduite" },
     [`content.card.${apple.id}.name`]: { source: apple.name, text: "Pomme" },
@@ -795,13 +820,7 @@ it("localizes an actual Food creation event without changing its count", () => {
   });
   const event = events.find((item) => item.text === `${species(actor.species).name} creates 2 Food cards`);
   expect(event).toBeDefined();
-  const reader = createMessageReader("fr", {
-    ...french,
-    [`content.species.${actor.species}.name`]: {
-      source: species(actor.species).name,
-      text: "Créature traduite",
-    },
-  });
+  const reader = translatedReader(actor, "Créature traduite");
   expect(eventPresentation(game, event!, reader)).toBe("Créature traduite crée des cartes Nourriture : 2");
   expect(eventPresentation(game, event!, createMessageReader("en", {}))).toBe(event!.text);
 });
@@ -820,8 +839,7 @@ it("localizes an actual discard draw event using its authored card", () => {
   });
   const event = events.find((entry) => entry.text === `${authored.name} is drawn from Discard`);
   expect(event).toBeDefined();
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.card.${authored.id}.name`]: { source: authored.name, text: "Capacité traduite" },
   });
   expect(eventPresentation(game, event!, reader)).toBe(
@@ -905,8 +923,7 @@ it("distinguishes gained status stacks from Stun or Freeze buildup", () => {
   const game = run();
   const target = game.team[0]!;
   const name = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     "log.gainStatus": {
       source: "{{name}} gains {{amount}} {{status}}.",
       text: "{{name}} : {{status}} +{{amount}}.",
@@ -938,8 +955,7 @@ it("distinguishes removed effects, empty removals and cleansed buildup", () => {
   const game = run();
   const target = game.team[0]!;
   const name = species(target.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     "log.removeEffect": {
       source: "{{name}}: {{action}} {{status}}.",
       text: "{{name}} : {{action}} — {{status}}.",
@@ -1016,7 +1032,6 @@ it("changes menu messages and accessible counts without replacing the focused ac
   expect(screen.getByLabelText("2 points disponibles")).toBeTruthy();
   fireEvent.click(button);
   expect(actions.onContinue).toHaveBeenCalledOnce();
-  view.unmount();
 });
 
 it("extracts stable source messages and rejects conflicts or invalid plural parameters", () => {
@@ -1058,17 +1073,15 @@ it("keeps replacement choices addressable when their accessible label is transla
     addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
   });
   const catalog: MessageCatalog = { "replacement.backup": { source: "Backup", text: "Réserve" } };
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <ReplacementPicker game={game} outgoing={game.team[0]!} send={() => true} />
-      </TooltipProvider>
-    </MessageProvider>,
+  renderMessages(
+    <TooltipProvider>
+      <ReplacementPicker game={game} outgoing={game.team[0]!} send={() => true} />
+    </TooltipProvider>,
+    catalog,
   );
   const section = screen.getByRole("region", { name: "Réserve" });
   expect(section.matches("[data-replacement-choices]")).toBe(true);
   expect(section.querySelector("button")).not.toBeNull();
-  view.unmount();
 });
 
 it("uses translated creature names for replacement choices and preserves the swap command", () => {
@@ -1085,17 +1098,15 @@ it("uses translated creature names for replacement choices and preserves the swa
     },
     "content.species.reedstag.name": { source: species("reedstag").name, text: "Réserve traduite" },
   };
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <ReplacementPicker game={game} outgoing={outgoing} send={send} />
-      </TooltipProvider>
-    </MessageProvider>,
+  renderMessages(
+    <TooltipProvider>
+      <ReplacementPicker game={game} outgoing={outgoing} send={send} />
+    </TooltipProvider>,
+    catalog,
   );
   expect(screen.getByRole("button", { name: "Allié traduit, K.-O." })).toBeTruthy();
   fireEvent.click(screen.getByRole("button", { name: "Réserve traduite, en réserve" }));
   expect(send).toHaveBeenCalledWith({ type: "swap", activeId: outgoing.id, reserve: "reserve" });
-  view.unmount();
 });
 
 it("validates translation freshness, terminology, placeholders, review and locale plural categories", () => {
@@ -1210,7 +1221,6 @@ function LanguageProbe() {
 }
 
 it("persists a qualified language locally and never selects an unavailable catalog", () => {
-  localStorage.removeItem("fauna.language.v1");
   const catalog: MessageCatalog = { "menu.play": { source: "Play", text: "Jouer" } };
   const props = {
     catalogs: { fr: catalog },
@@ -1231,19 +1241,17 @@ it("persists a qualified language locally and never selects an unavailable catal
   expect(document.documentElement.lang).toBe("fr");
   expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
   view.unmount();
-  const reopened = render(
+  render(
     <LocalizationProvider {...props}>
       <LanguageProbe />
     </LocalizationProvider>,
   );
   expect(screen.getByLabelText("locale").textContent).toBe("fr");
-  reopened.unmount();
-  localStorage.removeItem("fauna.language.v1");
 });
 
 it("keeps preview language choices isolated from saved preferences", () => {
   localStorage.setItem("fauna.language.v1", "ja");
-  const view = render(
+  render(
     <LocalizationProvider
       persist={false}
       catalogs={{ fr: french }}
@@ -1257,24 +1265,18 @@ it("keeps preview language choices isolated from saved preferences", () => {
   fireEvent.click(screen.getByRole("button", { name: "French" }));
   expect(screen.getByLabelText("locale").textContent).toBe("fr");
   expect(localStorage.getItem("fauna.language.v1")).toBe("ja");
-  view.unmount();
-  localStorage.removeItem("fauna.language.v1");
 });
 
 it("a late Steam response cannot override a manual language choice", async () => {
-  localStorage.removeItem("fauna.language.v1");
-  let resolveSteam!: (value: string | null) => void;
-  const steamLanguage = () =>
-    new Promise<string | null>((resolve) => {
-      resolveSteam = resolve;
-    });
+  const { promise, resolve: resolveSteam } = deferred<string | null>();
+  const steamLanguage = () => promise;
   const props = {
     catalogs: { fr: {}, de: {} },
     qualified: ["en", "fr", "de"] as GameLocale[],
     systemLanguages: ["en"],
     steamLanguage,
   };
-  const view = render(
+  render(
     <LocalizationProvider {...props}>
       <LanguageProbe />
     </LocalizationProvider>,
@@ -1288,21 +1290,19 @@ it("a late Steam response cannot override a manual language choice", async () =>
     await Promise.resolve();
   });
   expect(screen.getByLabelText("locale").textContent).toBe("fr");
-  view.unmount();
-  localStorage.removeItem("fauna.language.v1");
 });
 
 it("keeps play usable when optional language storage or Steam access fails", async () => {
-  const read = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+  vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
     throw new Error("unavailable");
   });
-  const write = vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+  vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
     throw new Error("unavailable");
   });
   const steamLanguage = () => {
     throw new Error("Steam unavailable");
   };
-  const view = render(
+  render(
     <LocalizationProvider
       catalogs={{ fr: {} }}
       qualified={["en", "fr"]}
@@ -1317,65 +1317,6 @@ it("keeps play usable when optional language storage or Steam access fails", asy
   });
   fireEvent.click(screen.getByRole("button", { name: "French" }));
   expect(screen.getByLabelText("locale").textContent).toBe("fr");
-  view.unmount();
-  read.mockRestore();
-  write.mockRestore();
-});
-
-it("keeps Steam Cloud usable when optional language replies are malformed or time out", async () => {
-  const { createSteam } = createRequire(import.meta.url)("../../../desktop/steam.cjs");
-  const directory = await mkdtemp(path.join(tmpdir(), "fauna-language-"));
-  vi.stubEnv("FAUNA_STEAM_APP_ID", "480");
-  let languageMode = "invalid";
-  let timedOutId = 0;
-  const worker = Object.assign(new EventEmitter(), {
-    kill: vi.fn(),
-    postMessage: ({ id, operation }: { id: number; operation: string }) => {
-      if (operation === "language" && languageMode === "timeout") {
-        timedOutId = id;
-        return;
-      }
-      void Promise.resolve().then(() =>
-        worker.emit("message", {
-          id,
-          value:
-            operation === "init"
-              ? "76561190000000000"
-              : operation === "language"
-                ? "not a valid language!"
-                : [],
-        }),
-      );
-    },
-  });
-  let adapter:
-    { language(): Promise<string | null>; list(): Promise<string[]>; dispose(): Promise<void> } | undefined;
-  try {
-    adapter = await createSteam({
-      app: { isPackaged: false },
-      directory,
-      isolated: false,
-      pause() {},
-      utilityProcess: { fork: () => worker },
-      loadBinding: () => ({ createOverlay: () => ({ account: "76561190000000000", disconnect() {} }) }),
-    });
-    expect(await adapter!.language()).toBeNull();
-    expect(worker.kill).not.toHaveBeenCalled();
-    expect(await adapter!.list()).toEqual([]);
-    languageMode = "timeout";
-    vi.useFakeTimers();
-    const pending = adapter!.language();
-    await vi.advanceTimersByTimeAsync(1500);
-    expect(await pending).toBeNull();
-    worker.emit("message", { id: timedOutId, value: "german" });
-    expect(worker.kill).not.toHaveBeenCalled();
-    expect(await adapter!.list()).toEqual([]);
-  } finally {
-    vi.useRealTimers();
-    await adapter?.dispose();
-    vi.unstubAllEnvs();
-    await rm(directory, { recursive: true, force: true });
-  }
 });
 
 it("updates the battle mana announcement while preserving the same interactive control", () => {
@@ -1396,18 +1337,9 @@ it("updates the battle mana announcement while preserving the same interactive c
   );
   expect(screen.getByRole("button", { name: "Mana 3 sur 4" })).toBe(control);
   expect(document.activeElement).toBe(control);
-  view.unmount();
 });
 
 it("translates a battle targeting prompt without issuing a gameplay command", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
   const game = produce(teamRun(7, ["prismram", "emberback", "pollenmoth"]), (draft) => {
     draft.battle!.hand = draft.cards.map((card) => card.id);
     draft.battle!.draw = [];
@@ -1422,38 +1354,18 @@ it("translates a battle targeting prompt without issuing a gameplay command", ()
       text: "Adversaire localisé",
     },
   };
-  const send = vi.fn(() => true);
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <BattleScreen
-          game={requireBattle(game)}
-          send={send}
-          controls={{ current: null }}
-          bursts={[]}
-          controller={false}
-          navigateFocus={false}
-          onDenied={() => {}}
-        />
-      </TooltipProvider>
-    </MessageProvider>,
-  );
-  try {
-    const attack = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="attack"]');
-    expect(attack).not.toBeNull();
-    fireEvent.click(attack!);
-    expect(screen.getByText("Choisir un ennemi · Prisme")).toBeTruthy();
-    const enemy = view.container.querySelector<HTMLButtonElement>(
-      `[data-actor-id="${game.battle!.enemies[0]!.id}"] .creature-card`,
-    )!;
-    expect(enemy.getAttribute("aria-label")).toBe("Target Adversaire localisé");
-    fireEvent.pointerEnter(enemy);
-    expect(screen.getByText("Adversaire localisé · Prisme")).toBeTruthy();
-    expect(send).not.toHaveBeenCalled();
-  } finally {
-    view.unmount();
-    vi.unstubAllGlobals();
-  }
+  const { view, send } = renderBattle(game, catalog);
+  const attack = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="attack"]');
+  expect(attack).not.toBeNull();
+  fireEvent.click(attack!);
+  expect(screen.getByText("Choisir un ennemi · Prisme")).toBeTruthy();
+  const enemy = view.container.querySelector<HTMLButtonElement>(
+    `[data-actor-id="${game.battle!.enemies[0]!.id}"] .creature-card`,
+  )!;
+  expect(enemy.getAttribute("aria-label")).toBe("Target Adversaire localisé");
+  fireEvent.pointerEnter(enemy);
+  expect(screen.getByText("Adversaire localisé · Prisme")).toBeTruthy();
+  expect(send).not.toHaveBeenCalled();
 });
 
 it("localizes standard combatant and Echo names while retaining a distinct boss name", () => {
@@ -1475,14 +1387,6 @@ it("localizes standard combatant and Echo names while retaining a distinct boss 
 });
 
 it("uses the localized backup name for the visible and accessible swap choice", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
   const game = produce(teamRun(7, ["wisterelle", "emberback", "pollenmoth"]), (draft) => {
     addBackups(
       draft,
@@ -1498,40 +1402,19 @@ it("uses the localized backup name for the visible and accessible swap choice", 
     "content.species.reedstag.name": { source: "Reedstag", text: "Cerf de roseau" },
     "battle.swapBackup": { source: "Swap in {{name}} from backup", text: "Faire entrer {{name}}" },
   };
-  const send = vi.fn(() => true);
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <BattleScreen
-          game={requireBattle(game)}
-          send={send}
-          controls={{ current: null }}
-          bursts={[]}
-          controller={false}
-          navigateFocus={false}
-          onDenied={() => {}}
-        />
-      </TooltipProvider>
-    </MessageProvider>,
-  );
-  try {
-    const card = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="swapChosen"]')!;
-    fireEvent.click(card);
-    const choice = screen.getByRole("button", { name: "Faire entrer Cerf de roseau" });
-    expect(choice.textContent).toBe("Cerf de roseau");
-    expect(send).not.toHaveBeenCalled();
-  } finally {
-    view.unmount();
-    vi.unstubAllGlobals();
-  }
+  const { view, send } = renderBattle(game, catalog);
+  const card = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="swapChosen"]')!;
+  fireEvent.click(card);
+  const choice = screen.getByRole("button", { name: "Faire entrer Cerf de roseau" });
+  expect(choice.textContent).toBe("Cerf de roseau");
+  expect(send).not.toHaveBeenCalled();
 });
 
 it("localizes unavailable card reasons and preserves unfamiliar diagnostics", () => {
   const game = run();
   const actor = game.team[0]!;
   const englishName = species(actor.species).name;
-  const reader = createMessageReader("fr", {
-    ...french,
+  const reader = frenchReader({
     [`content.species.${actor.species}.name`]: { source: englishName, text: "Créature traduite" },
   });
   expect(localizedCardDenial("Not enough Mana.", actor, reader)).toBe("Mana insuffisant.");
@@ -1545,54 +1428,18 @@ it("localizes unavailable card reasons and preserves unfamiliar diagnostics", ()
 });
 
 it("shows the localized Mana denial without issuing a gameplay command", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
   const game = produce(run(), (draft) => {
     draft.battle!.hand = draft.cards.map((card) => card.id);
     draft.battle!.draw = [];
     draft.battle!.mana = 0;
   });
-  const send = vi.fn(() => true);
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TooltipProvider>
-        <BattleScreen
-          game={requireBattle(game)}
-          send={send}
-          controls={{ current: null }}
-          bursts={[]}
-          controller={false}
-          navigateFocus={false}
-          onDenied={() => {}}
-        />
-      </TooltipProvider>
-    </MessageProvider>,
-  );
-  try {
-    fireEvent.click(view.container.querySelector<HTMLButtonElement>(".hand .action-card")!);
-    expect(screen.getByText("Mana insuffisant.")).toBeTruthy();
-    expect(send).not.toHaveBeenCalled();
-  } finally {
-    view.unmount();
-    vi.unstubAllGlobals();
-  }
+  const { view, send } = renderBattle(game);
+  fireEvent.click(view.container.querySelector<HTMLButtonElement>(".hand .action-card")!);
+  expect(screen.getByText("Mana insuffisant.")).toBeTruthy();
+  expect(send).not.toHaveBeenCalled();
 });
 
 it("shows localized Mana gained in a targeting preview without playing the card", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
   const game = produce(teamRun(7, ["wisterelle", "emberback", "pollenmoth"]), (draft) => {
     const card = draft.cards.find((entry) => entry.definitionId === "wisterelle-lantern-fare")!;
     draft.battle!.hand = [card.id];
@@ -1601,50 +1448,16 @@ it("shows localized Mana gained in a targeting preview without playing the card"
     draft.team[1]!.health -= 2;
     draft.team[2]!.health -= 1;
   });
-  const send = vi.fn(() => true);
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TooltipProvider>
-        <BattleScreen
-          game={requireBattle(game)}
-          send={send}
-          controls={{ current: null }}
-          bursts={[]}
-          controller={false}
-          navigateFocus={false}
-          onDenied={() => {}}
-        />
-      </TooltipProvider>
-    </MessageProvider>,
-  );
-  try {
-    fireEvent.click(view.container.querySelector<HTMLButtonElement>('.hand [data-effect="heal"]')!);
-    const ally = view.container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!;
-    fireEvent.pointerEnter(ally);
-    expect(screen.getByText("Gagnez 1 Mana.")).toBeTruthy();
-    expect(send).not.toHaveBeenCalled();
-  } finally {
-    view.unmount();
-    vi.unstubAllGlobals();
-  }
+  const { view, send } = renderBattle(game);
+  fireEvent.click(view.container.querySelector<HTMLButtonElement>('.hand [data-effect="heal"]')!);
+  const ally = view.container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!;
+  fireEvent.pointerEnter(ally);
+  expect(screen.getByText("Gagnez 1 Mana.")).toBeTruthy();
+  expect(send).not.toHaveBeenCalled();
 });
 
 it("changes language from Settings and returns focus without changing the journey", async () => {
-  localStorage.removeItem("fauna.language.v1");
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
-  const rects = vi
-    .spyOn(HTMLElement.prototype, "getClientRects")
-    .mockReturnValue([{}] as unknown as DOMRectList);
-  const mediaPlay = vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  const mediaPause = vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  const mediaLoad = vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   const session = createSession(createBrowserPlatform(), 7);
   await session.load();
   const before = session.store.getState().game;
@@ -1679,12 +1492,6 @@ it("changes language from Settings and returns focus without changing the journe
   } finally {
     view.unmount();
     await session.dispose();
-    rects.mockRestore();
-    mediaPlay.mockRestore();
-    mediaPause.mockRestore();
-    mediaLoad.mockRestore();
-    vi.unstubAllGlobals();
-    localStorage.removeItem("fauna.language.v1");
   }
 });
 
@@ -1736,21 +1543,19 @@ it("renders authored creature and card names by their stable IDs without changin
     "content.species.mossguard.trait": { source: "Overgrowth", text: "Croissance" },
     "content.card.mossguard-guard.name": { source: "Boulder Brace", text: "Garde de pierre" },
   };
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <CreatureCard kind="mossguard" />
-        <CreatureDetails kind="mossguard" />
-        <ActionDetails card={card} ownerName="Gardemousse" />
-      </TooltipProvider>
-    </MessageProvider>,
+  renderMessages(
+    <TooltipProvider>
+      <CreatureCard kind="mossguard" />
+      <CreatureDetails kind="mossguard" />
+      <ActionDetails card={card} ownerName="Gardemousse" />
+    </TooltipProvider>,
+    catalog,
   );
   expect(screen.getByRole("button", { name: "Gardemousse" })).toBeTruthy();
   expect(screen.getByText("Gardemousse")).toBeTruthy();
   expect(screen.getByText("Croissance")).toBeTruthy();
   expect(screen.getByText("Garde de pierre")).toBeTruthy();
   expect(card.definitionId).toBe("mossguard-guard");
-  view.unmount();
 });
 
 it("extracts and renders keyword labels without changing their semantic identity", () => {
@@ -1759,30 +1564,17 @@ it("extracts and renders keyword labels without changing their semantic identity
     "content.keyword.burn.label": { text: "Burn" },
   });
   const catalog: MessageCatalog = { "content.keyword.burn.label": { source: "Burn", text: "Brûlure" } };
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <Keyword id="burn" />
-    </MessageProvider>,
-  );
+  renderMessages(<Keyword id="burn" />, catalog);
   const term = screen.getByText("Brûlure");
   expect(term.getAttribute("data-keyword")).toBe("burn");
-  view.unmount();
 });
 
 it("presents the new Oasis Seed status with its localized Leech identity", () => {
-  localStorage.removeItem("fauna.language.v1");
   const combat = { ...freshCombat(), oasisLeech: true };
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CombatStatus combat={combat} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
+  const view = renderLocalized(<CombatStatus combat={combat} />);
   const status = view.container.querySelector('[data-status-id="oasisLeech"]');
   expect(status?.getAttribute("aria-label")).toBe("Graine d’oasis : la prochaine attaque a Vol de vie");
   expect(status?.querySelector("svg.lucide-heart")).toBeTruthy();
-  view.unmount();
 });
 
 it("extracts authored Boon rules exactly as the game produces them", () => {
@@ -1798,7 +1590,6 @@ it("extracts authored Boon rules exactly as the game produces them", () => {
 });
 
 it("preserves keyword identity in a translated Boon rule and rejects missing semantic tags", () => {
-  localStorage.removeItem("fauna.language.v1");
   const boon = BOONS.find((item) => item.id === "rook-of-mercy")!;
   const message = ruleMessage(boon.text);
   const source = { text: message.template, reference: boon.text };
@@ -1817,32 +1608,29 @@ it("preserves keyword identity in a translated Boon rule and rejects missing sem
     [`content.boon.${boon.id}.rule`]: entry,
     [`content.boon.${boon.id}.name`]: { source: boon.name, text: "Tour de miséricorde" },
   };
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+  const view = renderLocalized(
+    <>
       <BoonName boon={boon} />
       <BoonText boon={boon} />
-    </LocalizationProvider>,
+    </>,
+    catalog,
   );
   expect(screen.getByText("Tour de miséricorde")).toBeTruthy();
   expect(screen.getByText("Armure").getAttribute("data-keyword")).toBe("armor");
   expect(view.container.textContent).toContain("Armure 2 à l’arrivée des alliés");
-  view.unmount();
-  localStorage.removeItem("fauna.language.v1");
 });
 
 it("renders the reviewed French Boon catalog with gameplay magnitudes and keyword identity", () => {
-  localStorage.removeItem("fauna.language.v1");
   const boon = BOONS.find((item) => item.id === "rook-of-mercy")!;
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+  const view = renderLocalized(
+    <>
       <BoonName boon={boon} />
       <BoonText boon={boon} />
-    </LocalizationProvider>,
+    </>,
   );
   expect(screen.getByText("Tour de miséricorde")).toBeTruthy();
   expect(screen.getByText("Armure").getAttribute("data-keyword")).toBe("armor");
   expect(view.container.textContent).toContain("Les alliés qui entrent gagnent 2 en Armure");
-  view.unmount();
 });
 
 it("extracts every authored Talent rule exactly as the game produces it", () => {
@@ -1875,39 +1663,32 @@ it("extracts every creature passive tier exactly as the game produces it", () =>
 });
 
 it("presents the probabilistic and guaranteed passive tiers distinctly", () => {
-  localStorage.removeItem("fauna.language.v1");
   const progressed = produce(run(), (draft) => {
     draft.discovery.recruited.orifable = 6;
   });
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CreatureDetails kind="orifable" />
-        <CreatureDetails kind="orifable" progression={progressed} />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  renderLocalized(
+    <>
+      <CreatureDetails kind="orifable" />
+      <CreatureDetails kind="orifable" progression={progressed} />
+    </>,
   );
   expect(screen.getByText("50% de chances de piocher une carte supplémentaire à chaque tour")).toBeTruthy();
   expect(screen.getByText("Pioche une carte supplémentaire à chaque tour")).toBeTruthy();
-  view.unmount();
 });
 
 it("presents the reviewed Light and healing bounce tiers with their distinct chances", () => {
-  localStorage.removeItem("fauna.language.v1");
   const intermediate = produce(run(), (draft) => {
     draft.discovery.recruited.pollenmoth = 4;
   });
   const maximum = produce(run(), (draft) => {
     draft.discovery.recruited.pollenmoth = 6;
   });
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CreatureDetails kind="pollenmoth" />
-        <CreatureDetails kind="pollenmoth" progression={intermediate} />
-        <CreatureDetails kind="pollenmoth" progression={maximum} />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const view = renderLocalized(
+    <>
+      <CreatureDetails kind="pollenmoth" />
+      <CreatureDetails kind="pollenmoth" progression={intermediate} />
+      <CreatureDetails kind="pollenmoth" progression={maximum} />
+    </>,
   );
   const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
   expect(rules).toEqual([
@@ -1915,25 +1696,23 @@ it("presents the reviewed Light and healing bounce tiers with their distinct cha
     "Les dégâts de Lumière rebondissent deux fois ; la restauration de Santé a 50% de chances de rebondir une fois",
     "Les dégâts de Lumière et la restauration de Santé rebondissent deux fois",
   ]);
-  view.unmount();
 });
 
 it("presents Russian fallen-ally card counts with the right grammatical forms", () => {
-  localStorage.removeItem("fauna.language.v1");
   const rankTwo = produce(run(), (draft) => {
     draft.discovery.recruited.oathara = 2;
   });
   const rankFive = produce(run(), (draft) => {
     draft.discovery.recruited.oathara = 5;
   });
-  const view = render(
-    <LocalizationProvider catalogs={{ ru: russian }} qualified={["en", "ru"]} systemLanguages={["ru"]}>
-      <TooltipProvider>
-        <CreatureDetails kind="oathara" />
-        <CreatureDetails kind="oathara" progression={rankTwo} />
-        <CreatureDetails kind="oathara" progression={rankFive} />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const view = renderLocalized(
+    <>
+      <CreatureDetails kind="oathara" />
+      <CreatureDetails kind="oathara" progression={rankTwo} />
+      <CreatureDetails kind="oathara" progression={rankFive} />
+    </>,
+    russian,
+    "ru",
   );
   const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
   expect(rules).toEqual([
@@ -1941,23 +1720,21 @@ it("presents Russian fallen-ally card counts with the right grammatical forms", 
     "Оатара может разыграть за ход 2 карты павших союзников",
     "Оатара может разыграть за ход 5 карт павших союзников",
   ]);
-  view.unmount();
 });
 
 it("localizes shared pagination and combat announcements while preserving values", () => {
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
+  const view = renderMessages(
+    <>
       <PageControls page={1} pages={3} change={() => {}} />
       <BattleReadout health={7} maxHealth={10} block={4} previousBlock={2} knockout />
       <DamageValue type="burn" amount={3} />
-    </MessageProvider>,
+    </>,
   );
   expect(screen.getByRole("button", { name: "Page précédente" })).toBeTruthy();
   expect(screen.getByRole("button", { name: "Page suivante" })).toBeTruthy();
   expect(screen.getByLabelText("Blocage de 2 à 4")).toBeTruthy();
   expect(screen.getByLabelText("3 dégâts de Brûlure")).toBeTruthy();
   expect(view.container.textContent).toContain("2 → 4");
-  view.unmount();
 });
 
 it("blocks script qualification when bundled fonts are missing or cannot render the language", () => {
@@ -2033,7 +1810,6 @@ it("reorders rich message values without replacing interactive content and rejec
     </MessageProvider>,
   );
   expect(view.container.textContent).toBe("42 Gold earned");
-  view.unmount();
 });
 
 it("extracts glossary terms and definitions from the actual game vocabulary", () => {
@@ -2064,7 +1840,6 @@ it("extracts glossary terms and definitions from the actual game vocabulary", ()
 });
 
 it("renders localized glossary rules with keyword identity and leaves authored vocabulary unchanged", () => {
-  localStorage.removeItem("fauna.language.v1");
   const entry = GLOSSARY.find((item) => item.id === "keyword.burn")!;
   const catalog: MessageCatalog = {
     "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
@@ -2073,15 +1848,10 @@ it("renders localized glossary rules with keyword identity and leaves authored v
       text: "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
     },
   };
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <GlossaryScreen back={() => {}} />
-    </LocalizationProvider>,
-  );
+  renderLocalized(<GlossaryScreen back={() => {}} />, catalog);
   expect(screen.getByText("Brûlure").getAttribute("data-keyword")).toBe("burn");
   expect(screen.getByText("Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié")).toBeTruthy();
   expect(entry.term).toBe("Burn");
-  view.unmount();
 });
 
 it("localizes exact battle previews without changing their committed values", () => {
@@ -2096,17 +1866,12 @@ it("localizes exact battle previews without changing their committed values", ()
     changes: [],
     events: [],
   });
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TargetPreview forecast={forecast} displayName="Adversaire localisé" />
-    </MessageProvider>,
-  );
+  renderMessages(<TargetPreview forecast={forecast} displayName="Adversaire localisé" />);
   expect(screen.getByRole("status").getAttribute("aria-label")).toBe(
     "Aperçu pour Adversaire localisé : Santé de 6 à 0, Blocage de 2 à 0, 2 dégâts absorbés, K.-O.",
   );
   expect(screen.getByText("2 absorbés")).toBeTruthy();
   expect(forecast.health).toBe(0);
-  view.unmount();
 });
 
 it("localizes conditional preview outcomes without changing their alternatives", () => {
@@ -2129,17 +1894,12 @@ it("localizes conditional preview outcomes without changing their alternatives",
     events: [{ kind: "damage", targetId: "rival", amount: 3, damageType: "burn", critical: true, text: "" }],
   };
   const forecast: TargetForecast = { ...base, alternatives: [damaged, base] };
-  const view = render(
-    <MessageProvider locale="fr" catalog={french}>
-      <TargetPreview forecast={forecast} displayName="Adversaire localisé" />
-    </MessageProvider>,
-  );
+  renderMessages(<TargetPreview forecast={forecast} displayName="Adversaire localisé" />);
   const label = screen.getByRole("status").getAttribute("aria-label");
   expect(label).toContain("Adversaire localisé");
   expect(label).toContain("Critique : 3 de Brûlure; 2 absorbés; Blocage 2 → 0");
   expect(label).toContain("Aucun changement");
   expect(forecast.alternatives).toEqual([damaged, base]);
-  view.unmount();
 });
 
 it("keeps translated conditional outcome keywords attached to their effects", () => {
@@ -2187,11 +1947,9 @@ it("keeps translated conditional outcome keywords attached to their effects", ()
   expect(view.container.querySelector('.conditional-preview [data-keyword="burn"]')?.textContent).toBe(
     "Brûlure",
   );
-  view.unmount();
 });
 
 it("localizes projected status changes and retains their keyword identity", () => {
-  localStorage.removeItem("fauna.language.v1");
   const game = run();
   const changed = produce(game, (draft) => {
     Object.assign(draft.team[0]!.combat!, { burn: 2, controlled: "freeze", controlTurns: 2 });
@@ -2199,18 +1957,13 @@ it("localizes projected status changes and retains their keyword identity", () =
   const forecast = playPreviewModel(game, { accepted: true, state: changed, events: [] }).units.get(
     game.team[0]!.id,
   );
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TargetPreview forecast={forecast} />
-    </LocalizationProvider>,
-  );
+  const view = renderLocalized(<TargetPreview forecast={forecast} />);
   const label = screen.getByRole("status").getAttribute("aria-label");
   expect(label).toContain("Brûlure 0 → 2");
   expect(label).toContain("Gel : 2 tours");
   expect(view.container.querySelector('[data-keyword="burn"]')?.textContent).toBe("Brûlure");
   expect(view.container.querySelector('[data-keyword="freeze"]')?.textContent).toBe("Gel");
   expect(game.team[0]!.combat!.burn).toBe(0);
-  view.unmount();
 });
 
 it("bundles fonts covering each script language's native selector label", () => {
@@ -2252,7 +2005,6 @@ it("extracts Food rules for individual and team targets from the production desc
 });
 
 it("uses the same localized Food rule in tooltips and accessible card names", () => {
-  localStorage.removeItem("fauna.language.v1");
   const apple = FOOD_CARDS.find((entry) => entry.id === "food-apple")!;
   const card = { id: "food-test", definitionId: "food-apple" as const, ownerId: null, level: 0 };
   const view = render(
@@ -2285,7 +2037,6 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
     }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
-  view.unmount();
 });
 
 it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
@@ -2308,25 +2059,17 @@ it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
     </LocalizationProvider>,
   );
   expect(view.container.textContent).toBe("Gagne 4 Mana ; restaure 4 Santé à tous les alliés ; Consommer");
-  view.unmount();
 });
 
 it("presents reviewed draw and Mana variants with their actual values", () => {
-  localStorage.removeItem("fauna.language.v1");
   const card = definition("wickwaltz-draw");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CardRules card={card} value={1} />
-        <CardRules card={card} value={2} />
-        <CardRules card={enemyCard(card)} value={1} />
-        <CardRules card={enemyCard(card)} value={2} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
-  expect(
-    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
-  ).toEqual([
+  const view = renderRules([
+    { card: card, value: 1 },
+    { card: card, value: 2 },
+    { card: enemyCard(card), value: 1 },
+    { card: enemyCard(card), value: 2 },
+  ]);
+  expect(view.rules).toEqual([
     "Piochez 1 carte ; Gagnez 1 Mana",
     "Piochez 2 cartes ; Gagnez 1 Mana",
     "Piochez 1 carte",
@@ -2335,39 +2078,29 @@ it("presents reviewed draw and Mana variants with their actual values", () => {
   expect(view.container.querySelectorAll('[data-keyword="mana"]')).toHaveLength(2);
   view.unmount();
   localStorage.removeItem("fauna.language.v1");
-  const russianView = render(
-    <LocalizationProvider catalogs={{ ru: russian }} qualified={["en", "ru"]} systemLanguages={["ru"]}>
-      <TooltipProvider>
-        <CardRules card={card} value={1} />
-        <CardRules card={card} value={2} />
-        <CardRules card={card} value={5} />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const russianView = renderRules(
+    [
+      { card: card, value: 1 },
+      { card: card, value: 2 },
+      { card: card, value: 5 },
+    ],
+    russian,
+    "ru",
   );
-  expect(
-    [...russianView.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
-  ).toEqual([
+  expect(russianView.rules).toEqual([
     "Добор карт: 1; Получено маны: 1",
     "Добор карт: 2; Получено маны: 1",
     "Добор карт: 5; Получено маны: 1",
   ]);
-  russianView.unmount();
 });
 
 it("presents shared Stun, area Burn and Mana rules with their keyword identities", () => {
-  localStorage.removeItem("fauna.language.v1");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CardRules card={enemyCard(definition("chimecricket-attack"))} value={4} />
-        <CardRules card={definition("wickwaltz-attack")} value={2} />
-        <CardRules card={enemyCard(definition("stillara-reed-reservoir"))} value={2} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
-  expect(
-    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
-  ).toEqual([
+  const view = renderRules([
+    { card: enemyCard(definition("chimecricket-attack")), value: 4 },
+    { card: definition("wickwaltz-attack"), value: 2 },
+    { card: enemyCard(definition("stillara-reed-reservoir")), value: 2 },
+  ]);
+  expect(view.rules).toEqual([
     "Infligez 4 dégâts d’Étourdissement",
     "Infligez 2 dégâts de Brûlure à tous les ennemis",
     "Gagnez 2 Mana",
@@ -2375,69 +2108,45 @@ it("presents shared Stun, area Burn and Mana rules with their keyword identities
   expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="burn"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="mana"]')).toBeTruthy();
-  view.unmount();
 });
 
 it("presents conditional damage and Armor removal with their gameplay values", () => {
-  localStorage.removeItem("fauna.language.v1");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CardRules card={definition("alpenglen-last-light-charge")} value={4} />
-        <CardRules card={definition("cindernewt-ember-breath")} value={2} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
-  const rules = [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent);
-  expect(rules[0]).toContain("dernière carte en main");
-  expect(rules[1]).toContain("50% de l’Armure");
+  const view = renderRules([
+    { card: definition("alpenglen-last-light-charge"), value: 4 },
+    { card: definition("cindernewt-ember-breath"), value: 2 },
+  ]);
+  expect(view.rules[0]).toContain("dernière carte en main");
+  expect(view.rules[1]).toContain("50% de l’Armure");
   expect(view.container.querySelector('[data-keyword="light"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="armor"]')).toBeTruthy();
-  view.unmount();
 });
 
 it("presents shared Dodge and reflected attack card rules", () => {
-  localStorage.removeItem("fauna.language.v1");
   const dodge = definition("dunefox-dodge");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CardRules card={dodge} value={30} />
-        <CardRules card={enemyCard(dodge)} value={30} />
-        <CardRules card={definition("oathara-travelers-ward")} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
-  expect(
-    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
-  ).toEqual([
+  const view = renderRules([
+    { card: dodge, value: 30 },
+    { card: enemyCard(dodge), value: 30 },
+    { card: definition("oathara-travelers-ward") },
+  ]);
+  expect(view.rules).toEqual([
     "Gagnez 30% d’Esquive jusqu’à votre prochain tour ; Piochez 1 carte",
     "Gagnez 30% d’Esquive jusqu’à votre prochain tour",
     "Renvoyez la prochaine attaque",
   ]);
   expect(view.container.querySelectorAll('[data-keyword="dodge"]')).toHaveLength(2);
   expect(view.container.querySelector('[data-keyword="attackReflection"]')).toBeTruthy();
-  view.unmount();
 });
 
 it("presents translated composite swap and Stun card rules", () => {
-  localStorage.removeItem("fauna.language.v1");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CardRules card={definition("captoad-swap")} />
-        <CardRules card={definition("chimecricket-attack")} value={4} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
-  expect(
-    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
-  ).toEqual([
+  const view = renderRules([
+    { card: definition("captoad-swap") },
+    { card: definition("chimecricket-attack"), value: 4 },
+  ]);
+  expect(view.rules).toEqual([
     "Échangez avec un allié en réserve au hasard ; Piochez 2 cartes",
     "Infligez 4 dégâts d’Étourdissement ; Piochez 1 carte",
   ]);
   expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
-  view.unmount();
 });
 
 it("reads authored card description functions without executing source", () => {
@@ -2463,13 +2172,7 @@ it("reads authored card description functions without executing source", () => {
 });
 
 it("reads literal authored cards by identity and rejects unknown builder expressions", () => {
-  const directory = "src/game/content/creatures";
-  const files = readdirSync(directory)
-    .filter((file) => file.endsWith(".ts"))
-    .map((file) => ({
-      location: `${directory}/${file}`,
-      source: readFileSync(`${directory}/${file}`, "utf8"),
-    }));
+  const files = creatureSources();
   const authored = readAuthoredCards(files);
   expect(Object.keys(authored).sort()).toEqual([...CARDS, PEARL].map((card) => card.id).sort());
   for (const card of [...CARDS, PEARL])
@@ -2502,13 +2205,7 @@ it("reads complete authored card rules with changing values and room power", () 
 });
 
 it("models enemy card adaptation without changing authored cards", () => {
-  const directory = "src/game/content/creatures";
-  const files = readdirSync(directory)
-    .filter((file) => file.endsWith(".ts"))
-    .map((file) => ({
-      location: `${directory}/${file}`,
-      source: readFileSync(`${directory}/${file}`, "utf8"),
-    }));
+  const files = creatureSources();
   const cards = readAuthoredCards(files),
     abilities = readFileSync("src/game/rules/abilities.ts", "utf8"),
     supplemental = readFileSync("src/game/rules/supplemental.ts", "utf8");
@@ -2520,13 +2217,7 @@ it("models enemy card adaptation without changing authored cards", () => {
 });
 
 it("extracts each authored player and enemy rule variant using production text", () => {
-  const directory = "src/game/content/creatures";
-  const files = readdirSync(directory)
-    .filter((file) => file.endsWith(".ts"))
-    .map((file) => ({
-      location: `${directory}/${file}`,
-      source: readFileSync(`${directory}/${file}`, "utf8"),
-    }));
+  const files = creatureSources();
   const sources = {
     cardRules: readFileSync("src/game/card-rules.ts", "utf8"),
     abilities: readFileSync("src/game/rules/abilities.ts", "utf8"),
@@ -2560,38 +2251,34 @@ it("extracts each authored player and enemy rule variant using production text",
 });
 
 it("uses the reviewed card rule for both artwork announcements and tooltip values", () => {
-  localStorage.removeItem("fauna.language.v1");
   const game = run();
   const card = game.cards.find((item) => item.definitionId === "mossguard-guard")!;
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <ActionCard card={card} ownerName="Mossguard" onClick={() => {}} />
-        <CardRules card={definition(card.definitionId)} value={12} />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const view = renderLocalized(
+    <>
+      <ActionCard card={card} ownerName="Mossguard" onClick={() => {}} />
+      <CardRules card={definition(card.definitionId)} value={12} />
+    </>,
   );
   expect(
     screen.getByRole("button", { name: "Appui de rocher, Mossguard, 1 Mana, Gagne 6 Blocage" }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Gagne 12 Blocage");
   expect(screen.getByText("Blocage").getAttribute("data-keyword")).toBe("block");
-  view.unmount();
 });
 
 it("renders localized keyword labels and card rules with their shared gameplay identity", () => {
-  localStorage.removeItem("fauna.language.v1");
-  const view = render(
-    <LocalizationProvider catalogs={{ ja: japanese }} qualified={["en", "ja"]} systemLanguages={["ja"]}>
+  const view = renderLocalized(
+    <>
       <Keyword id="stun" />
       <CardRules card={definition("mossguard-attack")} value={4} />
-    </LocalizationProvider>,
+    </>,
+    japanese,
+    "ja",
   );
   const labels = screen.getAllByText("スタン");
   expect(labels).toHaveLength(2);
   expect(labels.every((label) => label.getAttribute("data-keyword") === "stun")).toBe(true);
   expect(view.container.textContent).toContain("すべての敵にスタンダメージを4与える");
-  view.unmount();
 });
 
 it("preserves English combat status snapshots and localizes their rules without changing identity", () => {
@@ -2670,60 +2357,42 @@ it("preserves English combat status snapshots and localizes their rules without 
 });
 
 it("keeps visual and accessible status counts consistent when the message falls back", () => {
-  localStorage.removeItem("fauna.language.v1");
   const game = produce(run(), (draft) => {
     draft.team[0]!.combat!.burn = 1000;
   });
   const combat = game.team[0]!.combat!;
   const catalog: MessageCatalog = { "content.keyword.burn.label": { source: "Burn", text: "Brand" } };
-  const view = render(
-    <LocalizationProvider catalogs={{ de: catalog }} qualified={["en", "de"]} systemLanguages={["de"]}>
-      <TooltipProvider>
-        <CombatStatus combat={combat} />
-        <CombatStatus combat={combat} details />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const view = renderLocalized(
+    <>
+      <CombatStatus combat={combat} />
+      <CombatStatus combat={combat} details />
+    </>,
+    catalog,
+    "de",
   );
   const label = screen.getByRole("button").getAttribute("aria-label");
   const text = view.container.querySelector(".combat-status-details p")?.textContent;
   expect(label).toContain("Brand 1.000");
   expect(label).toBe(text);
-  view.unmount();
 });
 
 it("announces a reviewed status and glossary definition in the selected language", () => {
-  localStorage.removeItem("fauna.language.v1");
   const game = produce(run(), (draft) => {
     draft.team[0]!.combat!.burn = 1;
   });
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CombatStatus combat={game.team[0]!.combat} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
+  renderLocalized(<CombatStatus combat={game.team[0]!.combat} />);
   expect(
     screen.getByRole("button", {
       name: "Brûlure 1 ; Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
     }),
   ).toBeTruthy();
-  view.unmount();
 });
 
 it("announces reviewed control immunity and Death's Door durations", () => {
-  localStorage.removeItem("fauna.language.v1");
   const combat = { ...freshCombat(), cooldown: 2, grace: 1 };
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CombatStatus combat={combat} />
-      </TooltipProvider>
-    </LocalizationProvider>,
-  );
+  renderLocalized(<CombatStatus combat={combat} />);
   expect(screen.getByRole("button", { name: "Immunité au contrôle 2" })).toBeTruthy();
   expect(screen.getByRole("button", { name: "Aux portes de la mort 1" })).toBeTruthy();
-  view.unmount();
 });
 
 it("extracts and presents transient combat status variants without changing their rules", () => {
@@ -2741,6 +2410,7 @@ it("extracts and presents transient combat status variants without changing thei
     grace: 2,
     rhythm: 10,
     nextPhysical: 2,
+    acrobatReady: true,
     partingCut: true,
     riposte: true,
     freeNature: true,
@@ -2779,19 +2449,15 @@ it("extracts and presents transient combat status variants without changing thei
   const source = ruleMessage(combatStatuses(frozen)[0]!.text).template;
   const id = statusRuleVariantId("controlled", source);
   expect(french[id as keyof typeof french]).toMatchObject({ source });
-  localStorage.removeItem("fauna.language.v1");
-  const view = render(
-    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
-      <TooltipProvider>
-        <CombatStatus combat={frozen} />
-        <CombatStatus combat={frozen} details />
-      </TooltipProvider>
-    </LocalizationProvider>,
+  const view = renderLocalized(
+    <>
+      <CombatStatus combat={frozen} />
+      <CombatStatus combat={frozen} details />
+    </>,
   );
   expect(screen.getByRole("button", { name: "Gel : 2 tours" })).toBeTruthy();
   expect(view.container.querySelector('.combat-status-details [data-keyword="freeze"]')?.textContent).toBe(
     "Gel",
   );
   expect(frozen.controlTurns).toBe(2);
-  view.unmount();
 });

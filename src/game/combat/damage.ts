@@ -1,3 +1,4 @@
+import { emitSupport, emitStatus } from "../events";
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { takeAttackReflection, publishAttackReflection } from "./attack-reflection";
@@ -55,23 +56,9 @@ export function shareNegate(
   if (blindMiss || !isEnemy(source) || !state.boons.includes("devotion-clasp")) return;
   const bearer = targets.find((unit) => unit.health > 0 && !isEnemy(unit) && ensureCombat(unit).negate);
   if (!bearer) return;
-  let unprotected: Combatant | undefined;
-  let fallback: Combatant | undefined;
-  let unprotectedFraction = Infinity;
-  let fallbackFraction = Infinity;
-  for (const unit of targets) {
-    if (unit.id === bearer.id || unit.health <= 0 || isEnemy(unit)) continue;
-    const fraction = unit.health / maximumHealth(unit);
-    if (!fallback || fraction < fallbackFraction) {
-      fallback = unit;
-      fallbackFraction = fraction;
-    }
-    if (!ensureCombat(unit).negate && (!unprotected || fraction < unprotectedFraction)) {
-      unprotected = unit;
-      unprotectedFraction = fraction;
-    }
-  }
-  const recipient = unprotected ?? fallback;
+  const candidates = targets.filter((unit) => unit.id !== bearer.id && unit.health > 0 && !isEnemy(unit));
+  const recipient =
+    mostInjured(candidates.filter((unit) => !ensureCombat(unit).negate)) ?? mostInjured(candidates);
   if (recipient) return { bearer, recipientId: recipient.id, spent: false };
 }
 
@@ -178,20 +165,16 @@ export function* bounce(
     for (let i = 0; i < entry.amount; i++) {
       if (source.health <= 0) return;
       // A previous bounce can remove a summoner and all of its Echoes.
-      const pool =
+      const eligible = (
         effect === "heal"
           ? healingAllies(state, allied ? "player" : "enemy")
-          : battlefield(state, allied ? "enemy" : "player");
-      let count = 0;
-      for (const unit of pool)
-        if (
+          : battlefield(state, allied ? "enemy" : "player")
+      ).filter(
+        (unit) =>
           unit.health > 0 &&
           !visitedTargets.has(unit.id) &&
-          (effect !== "heal" || unit.health < maximumHealth(unit))
-        )
-          pool[count++] = unit;
-      pool.length = count;
-      const eligible = pool;
+          (effect !== "heal" || unit.health < maximumHealth(unit)),
+      );
       if (!eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
@@ -308,10 +291,7 @@ export function* hit(
           : undefined;
     const chance = passiveAmount(isEnemy(source) ? undefined : state, source.species, "resonance");
     if (recipient && succeeds(state, chance / 100, isEnemy(source), events)) {
-      events.push({
-        kind: "action",
-        actionType: "support",
-        actorId: source.id,
+      emitSupport(events, source.id, {
         targetId: recipient.id,
         text: `${unitName(source)} repeats Stun damage with Resonance`,
       });
@@ -366,6 +346,10 @@ export function* resolveHit(
   const leech = "leech" in options && options.leech;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
+  const playerHit = alliedSource && !alliedTarget;
+  const playerAttack = attack && playerHit;
+  const playerDirect = direct && playerHit;
+  const bothAlive = () => source.health > 0 && target.health > 0;
   const stats = ensureCombat(target),
     before = target.health;
   const hadArmor = stats.armor > 0;
@@ -393,9 +377,7 @@ export function* resolveHit(
     (blindMiss ||
       (!("cannotDodge" in options && options.cannotDodge) &&
         !(
-          direct &&
-          alliedSource &&
-          !alliedTarget &&
+          playerDirect &&
           type === "freeze" &&
           stats.burn > 0 &&
           state.boons.includes("solstice-concertina")
@@ -404,8 +386,7 @@ export function* resolveHit(
         succeeds(state, dodge / 100, !alliedTarget, events)))
   ) {
     if (
-      alliedSource &&
-      !alliedTarget &&
+      playerHit &&
       state.boons.includes("coral-net-weight") &&
       target.block > 0 &&
       !(type === "bleed" && state.boons.includes("harvest-sickle"))
@@ -445,27 +426,17 @@ export function* resolveHit(
   }
   if (type === "freeze" && stats.nullifyFreeze) {
     stats.nullifyFreeze = false;
-    events.push({
-      kind: "status",
-      targetId: target.id,
-      status: "nullify",
-      outcome: "immune",
+    emitStatus(events, target.id, "nullify", "immune", {
       affectedStatus: "freeze",
       text: `${unitName(target)} nullifies Freeze damage`,
     });
-    if (attack && alliedSource && !alliedTarget && state.boons.includes("frostglass-die"))
+    if (playerAttack && state.boons.includes("frostglass-die"))
       yield* reaction("hit", state, source, target, boonRule("frostglass-die").damage, "burn", events, {
         origin: "boon",
       });
     return { outcome: "landed", lost: 0, dealt: 0 };
   }
-  if (
-    attack &&
-    alliedSource &&
-    !alliedTarget &&
-    type === "physical" &&
-    state.boons.includes("gilt-gauntlet")
-  ) {
+  if (playerAttack && type === "physical" && state.boons.includes("gilt-gauntlet")) {
     const { removed, depletion } = removeArmor(target, boonRule("gilt-gauntlet").armor);
     if (removed > 0) {
       events.push({
@@ -545,13 +516,7 @@ export function* resolveHit(
   target.block -= blockSpent;
   const depletedBlock = blocked > 0 && target.block === 0;
   damage = payment.remaining;
-  if (
-    attack &&
-    alliedSource &&
-    !alliedTarget &&
-    state.boons.includes("sundering-charm") &&
-    (type === "physical" || type === "stun")
-  )
+  if (playerAttack && state.boons.includes("sundering-charm") && (type === "physical" || type === "stun"))
     erode(boonRule("sundering-charm").armor);
   // Armor cannot change between these calculations; erosion above has already resolved.
   const appliesArmor = (!armorFirst || critical) && armorApplies(state, target, type, source, options);
@@ -568,7 +533,7 @@ export function* resolveHit(
   const criticalBonusDamage = critical
     ? Math.max(0, effectDamage - (appliesArmor ? armoredDamage(ordinaryDamage, stats.armor) : ordinaryDamage))
     : 0;
-  if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
+  if (playerDirect && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);
   if (alliedTarget && type === "burn" && state.boons.includes("hearth-coal"))
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
@@ -604,8 +569,7 @@ export function* resolveHit(
   yield* damageRewards(context, facts, policy);
   if (
     dealt > 0 &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     options.origin === "retaliation" &&
     options.thorns &&
     source.health > 0 &&
@@ -613,24 +577,18 @@ export function* resolveHit(
   )
     yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0, target);
   if (
-    attack &&
-    alliedSource &&
-    !alliedTarget &&
+    playerAttack &&
     type === "light" &&
     depletedBlock &&
-    source.health > 0 &&
-    target.health > 0 &&
+    bothAlive() &&
     state.boons.includes("suncrust-rolling-pin")
   )
     yield* applyResolvedStatus(state, source, target, 1, "blind", events);
   if (
-    attack &&
-    alliedSource &&
-    !alliedTarget &&
+    playerAttack &&
     type === "physical" &&
     hadArmor &&
-    source.health > 0 &&
-    target.health > 0 &&
+    bothAlive() &&
     state.boons.includes("stardust-whetstone")
   ) {
     const result = yield* reaction(
@@ -646,12 +604,10 @@ export function* resolveHit(
   }
   if (
     effectDamage > 0 &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     "thorns" in options &&
     options.thorns &&
-    source.health > 0 &&
-    target.health > 0 &&
+    bothAlive() &&
     state.boons.includes("resonance-kalimba")
   ) {
     const result = yield* reaction("applyHarmfulStatus", state, source, target, effectDamage, "stun", events);
@@ -660,18 +616,16 @@ export function* resolveHit(
   }
   if (
     effectDamage > 0 &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     "thorns" in options &&
     options.thorns &&
-    source.health > 0 &&
-    target.health > 0 &&
+    bothAlive() &&
     state.boons.includes("rosewax-seal")
   )
     yield* applyResolvedStatus(state, source, target, boonRule("rosewax-seal").bleed, "bleed", events);
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
-  if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
+  if (playerDirect && source.health > 0 && type === "water") {
     yield* waterFollowups(context, erode);
   }
   if (policy.buildup && effectDamage > 0 && source.health > 0) {
@@ -682,12 +636,7 @@ export function* resolveHit(
       source,
       target,
       effectDamage *
-        (attack &&
-        alliedSource &&
-        !alliedTarget &&
-        type === "burn" &&
-        blocked > 0 &&
-        state.boons.includes("chestnut-roaster")
+        (playerAttack && type === "burn" && blocked > 0 && state.boons.includes("chestnut-roaster")
           ? boonRule("chestnut-roaster").multiplier
           : 1),
       type,
@@ -698,19 +647,13 @@ export function* resolveHit(
       },
     );
     depletions.push(...statusResult.depletions);
-    if (
-      attack &&
-      alliedSource &&
-      !alliedTarget &&
-      type === "freeze" &&
-      state.boons.includes("moonpath-divider")
-    ) {
+    if (playerAttack && type === "freeze" && state.boons.includes("moonpath-divider")) {
       const other = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
       const amount = Math.round(effectDamage / boonRule("moonpath-divider").divisor);
       if (other && amount > 0) yield* applyResolvedStatus(state, source, other, amount, "freeze", events);
     }
     yield* poisonStun(context, effectDamage);
-    if (direct && alliedSource && !alliedTarget && source.health > 0)
+    if (playerDirect && source.health > 0)
       yield* attackProcs(
         context,
         facts,
@@ -739,14 +682,7 @@ export function* resolveHit(
       yield* reaction("controlRewards", state, source, target, type, events);
   }
   if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
-  if (
-    alliedSource &&
-    !alliedTarget &&
-    type === "burn" &&
-    dealt > 0 &&
-    target.health > 0 &&
-    state.boons.includes("ash-bowl")
-  ) {
+  if (playerHit && type === "burn" && dealt > 0 && target.health > 0 && state.boons.includes("ash-bowl")) {
     const removed = Math.min(stats.thorns, boonRule("ash-bowl").thorns);
     stats.thorns -= removed;
     if (removed)
@@ -761,9 +697,7 @@ export function* resolveHit(
       });
   }
   if (
-    attack &&
-    alliedSource &&
-    !alliedTarget &&
+    playerAttack &&
     type === "burn" &&
     effectDamage > 0 &&
     source.health > 0 &&
@@ -773,7 +707,7 @@ export function* resolveHit(
       if (other.id !== target.id && other.health > 0 && source.health > 0)
         yield* applyResolvedStatus(state, source, other, boonRule("ember-platter").burn, "burn", events);
   }
-  if (attack && alliedSource && !alliedTarget && type === "stun" && source.health > 0) {
+  if (playerAttack && type === "stun" && source.health > 0) {
     if (target.health > 0 && state.boons.includes("chime-crucible"))
       yield* applyResolvedStatus(state, source, target, boonRule("chime-crucible").burn, "burn", events);
     if (state.boons.includes("crystal-harp")) {
@@ -790,9 +724,7 @@ export function* resolveHit(
   }
   yield* boonHitFollowups(state, source, target, type, events, options, attack);
   if (
-    direct &&
-    alliedSource &&
-    !alliedTarget &&
+    playerDirect &&
     type === "stun" &&
     wasStunned &&
     source.health > 0 &&
@@ -804,22 +736,13 @@ export function* resolveHit(
         origin: "boon",
       });
   }
-  if (
-    criticalBonusDamage > 0 &&
-    alliedSource &&
-    !alliedTarget &&
-    source.health > 0 &&
-    target.health > 0 &&
-    state.boons.includes("eclipse-protractor")
-  ) {
+  if (criticalBonusDamage > 0 && playerHit && bothAlive() && state.boons.includes("eclipse-protractor")) {
     yield* applyResolvedStatus(state, source, target, criticalBonusDamage, "freeze", events);
   }
   // Absorbed critical hits still land; only damage-based procs require positive damage.
   if (
     effectDamage === 0 &&
-    direct &&
-    alliedSource &&
-    !alliedTarget &&
+    playerDirect &&
     type === "physical" &&
     critical &&
     source.health > 0 &&
@@ -838,8 +761,7 @@ export function* resolveHit(
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   if (
     (direct || options.origin === "overkill") &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     target.health === 0 &&
     damage > before &&
     state.boons.includes("wonder-domino")
@@ -851,8 +773,7 @@ export function* resolveHit(
   if (
     blocked > 0 &&
     type === "water" &&
-    alliedSource &&
-    !alliedTarget &&
+    playerHit &&
     options.origin !== "chain" &&
     state.boons.includes("brookskip-disc")
   ) {
@@ -865,8 +786,7 @@ export function* resolveHit(
     direct &&
     !alliedSource &&
     alliedTarget &&
-    target.health > 0 &&
-    source.health > 0 &&
+    bothAlive() &&
     state.boons.includes("fallingstar-anvil")
   ) {
     yield* applyResolvedStatus(

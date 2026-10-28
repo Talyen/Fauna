@@ -2,6 +2,7 @@ import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { unfencedLines } from "../lib/markdown.mjs";
 import { selectPaths, taskPaths } from "../lib/task-selection.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 export const topics = {
@@ -131,24 +132,19 @@ export const topics = {
 };
 export function sections(root, file) {
   const lines = readFileSync(path.join(root, file), "utf8").split("\n");
-  let fence = null;
   const headings = [];
-  for (let i = 0; i < lines.length; i++) {
-    const marker = /^ {0,3}(`{3,}|~{3,})/.exec(lines[i])?.[1];
-    if (marker) {
-      if (!fence) fence = marker;
-      else if (marker[0] === fence[0] && marker.length >= fence.length) fence = null;
-      continue;
-    }
-    if (!fence) {
-      const match = /^(#{1,6})\s+(.+)/.exec(lines[i]);
-      if (match) headings.push({ path: file, heading: match[2], start: i + 1, level: match[1].length });
-    }
+  const open = [];
+  for (const { line, index } of unfencedLines(lines)) {
+    const match = /^ {0,3}(#{1,6})[ \t]+(.*?)[ \t]*$/u.exec(line.replace(/\r$/u, ""));
+    if (!match) continue;
+    const heading = match[2].replace(/(?:^|[ \t]+)#+[ \t]*$/u, "").trim();
+    const level = match[1].length;
+    while (open.length && open.at(-1).level >= level) open.pop().end = index;
+    const entry = { path: file, heading, start: index + 1, level, end: lines.length };
+    headings.push(entry);
+    open.push(entry);
   }
-  return headings.map((entry, i) => ({
-    ...entry,
-    end: headings.slice(i + 1).find((h) => h.level <= entry.level)?.start - 1 || lines.length,
-  }));
+  return headings;
 }
 export function context(root, paths = [], requested = []) {
   for (const topic of requested)

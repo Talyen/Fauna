@@ -43,6 +43,8 @@ function imports(ast, file) {
     const target =
       path.posix.normalize(path.posix.join(path.posix.dirname(file), declaration.source.value)) + ".ts";
     for (const specifier of declaration.specifiers) {
+      if (specifier.type === "ImportNamespaceSpecifier")
+        result.set(specifier.local.value, { file: target, name: "*" });
       if (specifier.type === "ImportSpecifier" && !specifier.isTypeOnly)
         result.set(specifier.local.value, {
           file: target,
@@ -167,6 +169,22 @@ export function modifierContractViolations(sources) {
     )
       continue;
     const moduleImports = imports(module, file);
+    if (file === "src/game/combat/resolution.ts") {
+      for (const entry of declaredObject(module, "handlers")?.properties ?? []) {
+        if (entry.type === "Identifier") {
+          const target = moduleImports.get(entry.value);
+          if (target) invoked.add(identity(target.file, target.name));
+        } else if (entry.type === "SpreadElement" && entry.arguments.type === "Identifier") {
+          const target = moduleImports.get(entry.arguments.value);
+          if (target?.name !== "*") continue;
+          for (const exported of parsed[target.file]?.body ?? []) {
+            const declaration = exported.type === "ExportDeclaration" && exported.declaration;
+            if (declaration?.type === "FunctionDeclaration")
+              invoked.add(identity(target.file, declaration.identifier.value));
+          }
+        }
+      }
+    }
     const talentSelectors = new Set();
     const boonStateSelectors = new Map();
     walk(module, (entry, _parent, owner) => {
@@ -205,15 +223,6 @@ export function modifierContractViolations(sources) {
       if (entry.type === "CallExpression" && entry.callee.type === "Identifier") {
         const target = moduleImports.get(entry.callee.value);
         invoked.add(resolvedTarget(target?.file ?? file, target?.name ?? entry.callee.value));
-      }
-      // These are the existing typed scheduler's actual dispatch entries.
-      if (
-        file === "src/game/combat/resolution.ts" &&
-        parent?.type === "ObjectExpression" &&
-        entry.type === "Identifier"
-      ) {
-        const target = moduleImports.get(entry.value);
-        if (target) invoked.add(identity(target.file, target.name));
       }
       if (entry.type !== "StringLiteral" || !owner || !file.startsWith("src/game/")) return;
       for (const group of groups) {

@@ -1,7 +1,8 @@
+import { screenTestEnvironment } from "../../support/ui";
 import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
@@ -12,6 +13,8 @@ import { previewCard } from "../../../src/game/engine";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";
 import { requireBattle, teamRun } from "../../support/game";
+
+screenTestEnvironment({ visible: true });
 
 beforeEach(() => {
   // Keep chosen-ally targeting covered even though the current kits use self or group guards.
@@ -27,20 +30,9 @@ beforeEach(() => {
         }
       : original(id),
   );
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   document.documentElement.style.setProperty("--target-denial-duration", "2400ms");
 });
 afterEach(() => {
-  cleanup();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
   delete document.documentElement.dataset.focus;
 });
 function fixture() {

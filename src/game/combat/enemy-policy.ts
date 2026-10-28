@@ -147,9 +147,9 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
         : cardTargeting(def) === "ally"
           ? (livingAllies ??= recipientIds(battlefieldView(state, "enemy"), true))
           : (self ??= [enemy.id]);
+    let cardValues = recipients.length ? values?.get(def) : undefined;
+    if (recipients.length && values && !cardValues) values.set(def, (cardValues = new Map()));
     for (const allyTargetId of recipients) {
-      let cardValues = values?.get(def);
-      if (values && !cardValues) values.set(def, (cardValues = new Map()));
       let value = cardValues?.get(allyTargetId);
       if (value === undefined) {
         if (!targetResolved) {
