@@ -37,9 +37,7 @@ function fixture(kinds?: Parameters<typeof teamRun>[1]) {
 }
 
 function playAbility(f: ReturnType<typeof fixture>, def: CardDefinition) {
-  executeAbility(f.state, { side: "player", actor: f.ally, def, value: def.value }, f.events, {
-    swap: () => undefined,
-  });
+  executeAbility(f.state, { side: "player", actor: f.ally, def, value: def.value }, f.events);
 }
 
 it("Comb Uncapping Fork bypasses Block for allied Thorns without spending it", () => {

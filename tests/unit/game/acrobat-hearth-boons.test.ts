@@ -5,7 +5,6 @@ import { applyHarmfulStatus, grantStatus, hit, restoreHealth, tickStatuses } fro
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { definition } from "../../../src/game/content";
-import { swapFromCard } from "../../../src/game/team";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import { maximumHealth } from "../../../src/game/combat/state";
 import { observeDecisions } from "../../../src/game/random";
@@ -105,9 +104,7 @@ it("prepares the Dodging ally's next attack without protecting it from Blind", (
   hit(state, enemy, ally, 2, "physical", events, { origin: "ability", blindMiss: false });
   expect(ally.combat!.acrobatReady).toBe(true);
   const def = definition("prismram-attack");
-  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events);
   expect(enemy.health).toBeLessThan(100);
   expect(ally.combat!.acrobatReady).toBe(false);
 });
@@ -117,9 +114,7 @@ it("grants Negate to a resurrected ally", () => {
   state.boons = ["remembrance-wreath"];
   other.health = 0;
   const def = definition("oathara-vow-of-return");
-  executeAbility(state, { side: "player", actor: ally, def, value: 1, allyTargetId: other.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: ally, def, value: 1, allyTargetId: other.id }, events);
   expect(other.health).toBeGreaterThan(0);
   expect(other.combat!.negate).toBe(true);
 });
@@ -131,9 +126,7 @@ it("lets Blind defeat Acrobat Top's prepared attack", () => {
   ally.combat!.blind = true;
   observeDecisions(state, () => 0);
   const def = definition("prismram-attack");
-  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events);
   expect(enemy.health).toBe(100);
   expect(ally.combat!.acrobatReady).toBe(false);
 });

@@ -48,14 +48,10 @@ it("grants Water Leech while guarded, including damage absorbed by enemy Block",
   source.block = 3;
   enemy.block = 10;
   const def = { ...definition("prismram-attack"), damageType: "water" as const };
-  executeAbility(state, { side: "player", actor: source, def, value: 6, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 6, targetId: enemy.id }, events);
   expect(source.health).toBe(before + 3);
   source.block = 0;
-  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: enemy.id }, events);
   expect(source.health).toBe(before + 3);
 });
 
@@ -144,9 +140,7 @@ it("adds one target to the repeat without repeating self-directed bonuses", () =
   };
   enemy.combat.armor = 1;
   other.combat.armor = 1;
-  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: enemy.id }, events);
   expect(enemy.health).toBe(93);
   expect(other.health).toBe(97);
   expect(source.combat!.thorns).toBe(2);
@@ -189,7 +183,7 @@ it("does not add another hit to repeated area attacks", () => {
   const attack = definition("prismram-attack");
   if (attack.effect !== "attack") throw new Error("Expected an attack");
   const def = { ...attack, target: "allEnemies" as const };
-  executeAbility(state, { side: "player", actor: source, def, value: 4 }, events, { swap: swapFromCard });
+  executeAbility(state, { side: "player", actor: source, def, value: 4 }, events);
   expect(enemy.health).toBe(92);
   expect(other.health).toBe(92);
 });

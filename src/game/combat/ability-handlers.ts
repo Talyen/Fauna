@@ -1,4 +1,5 @@
 import { boonRule } from "../rules/boons";
+import { swapFromCard } from "../team";
 import { emitStatus } from "../events";
 import { TURN_MANA } from "../state-limits";
 import { shareNegate, shareDodge } from "./damage";
@@ -61,7 +62,6 @@ export function executePrimary(context: PrimaryContext) {
     additionalTarget,
     name,
     stats,
-    operations,
   } = context;
   const { actor, def, value } = action;
   const enemy = action.side === "enemy";
@@ -354,7 +354,7 @@ export function executePrimary(context: PrimaryContext) {
       let outgoing: Combatant | undefined;
       for (const unit of action.side === "player" ? state.team : state.battle.enemies)
         if (unit.health > 0 && (!outgoing || unit.health < outgoing.health)) outgoing = unit;
-      if (outgoing) operations.swap(state, outgoing, events, true);
+      if (outgoing) swapFromCard(state, outgoing, events, true);
       return;
     }
     case "teamBlind":
@@ -395,14 +395,14 @@ export function executePrimary(context: PrimaryContext) {
       return;
     }
     case "swap":
-      operations.swap(state, actor, events, def.backupOnly);
+      swapFromCard(state, actor, events, def.backupOnly);
       return;
     case "swapChosen":
       if (action.side === "player" && action.allyTargetId)
-        operations.swap(state, actor, events, true, action.allyTargetId);
+        swapFromCard(state, actor, events, true, action.allyTargetId);
       return;
     case "swapDodge": {
-      const incoming = operations.swap(state, actor, events);
+      const incoming = swapFromCard(state, actor, events);
       if (incoming) grantTemporaryDodge(incoming, value, events);
       return;
     }

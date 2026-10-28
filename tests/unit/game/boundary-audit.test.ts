@@ -15,7 +15,7 @@ import { summonEcho } from "../../../src/game/combat/legendary";
 import { periodicTick, reducePeriodicStacks, bleedPayments } from "../../../src/game/combat/status-state";
 import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { ownedCards, swapFromCard } from "../../../src/game/team";
+import { ownedCards } from "../../../src/game/team";
 import { createSession } from "../../../src/application/session";
 import { accept, authoredPack, prepareDestination, requireBattle, run, teamRun } from "../../support/game";
 
@@ -70,7 +70,6 @@ it("group healing stops after an overflow Cleanse reaction knocks out the healer
       value: 2,
     },
     [],
-    { swap: swapFromCard },
   );
   expect(actor!.health).toBe(0);
   expect(later!.health).toBe(9); // Molten Shell lands; the cancelled heal does not
@@ -269,7 +268,6 @@ it("retains Water's Moonboat protection when a reflected attack meets Negate", (
     state,
     { side: "enemy", actor: enemy, def: definition("almanelle-spring-current"), value: 4, targetId: ally.id },
     events,
-    { swap: swapFromCard },
   );
   expect(ally.health).toBe(health);
   expect(ally.combat.burn).toBe(0);
@@ -306,9 +304,7 @@ it.each(["area", "bounce"] as const)(
     observeDecisions(state, (decision) => (decision?.kind === "index" ? 0 : 0.99));
     if (delivery === "bounce") hit(state, actor, first!, 2, "light", events);
     else
-      executeAbility(state, { side: "player", actor, def: definition("captoad-attack"), value: 2 }, events, {
-        swap: swapFromCard,
-      });
+      executeAbility(state, { side: "player", actor, def: definition("captoad-attack"), value: 2 }, events);
     expect(boss.health).toBe(0);
     expect(later!.health).toBe(6);
     expect(later!.combat).toMatchObject({ negate: true, attackReflection: true, thorns: 10 });

@@ -8,7 +8,7 @@ import { freshCombat, startAction } from "../../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { swapBackup, swapFromCard } from "../../../../src/game/team";
+import { swapBackup } from "../../../../src/game/team";
 import { rankedBattleChoices } from "../../../../src/application/battle-policy";
 import { skybexBattle } from "../../../support/skybex";
 
@@ -183,7 +183,6 @@ describe("Skybex", () => {
         draft,
         { side: "enemy", actor: draft.battle.enemies[0]!, def: definition("skybex-cloudstep"), value: 20 },
         [],
-        { swap: swapFromCard },
       );
     });
     const incoming = state.battle.enemies[0]!;

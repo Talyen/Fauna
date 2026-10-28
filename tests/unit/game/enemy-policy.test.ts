@@ -8,7 +8,6 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { finishTurn } from "../../../src/game/combat/turns";
 import { intents } from "../../../src/game/journey";
 import { observeDecisions } from "../../../src/game/random";
-import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import { requireBattle, run } from "../../support/game";
 
@@ -154,9 +153,7 @@ describe("enemy targeting and card values", () => {
     enemy.health = 90;
     enemy.lastAbility = heal.id;
     expect(chooseEnemyCard(state, enemy, [guard, heal])?.def.id).toBe(heal.id);
-    executeAbility(state, { side: "enemy", actor: enemy, def: heal, value: 10, allyTargetId: enemy.id }, [], {
-      swap: swapFromCard,
-    });
+    executeAbility(state, { side: "enemy", actor: enemy, def: heal, value: 10, allyTargetId: enemy.id }, []);
     expect(chooseEnemyCard(state, enemy, [heal, guard])?.def.id).toBe(guard.id);
     expect(chooseEnemyCard(state, enemy, [heal])).toBeUndefined();
   });
@@ -189,7 +186,6 @@ describe("enemy targeting and card values", () => {
       state,
       { side: "enemy", actor: enemy, def: random, value: 6, targetId: choice.targetId },
       events,
-      { swap: swapFromCard },
     );
     expect(events.find((event) => event.kind === "damage")?.targetId).toBe(state.team[0]!.id);
   });
@@ -278,7 +274,6 @@ describe("enemy targeting and card values", () => {
       state,
       { side: "enemy", actor: enemy, def: attack, value: 6, targetId: choice.targetId },
       [],
-      { swap: swapFromCard },
     );
     choice = chooseEnemyCard(state, enemy, [attack])!;
     expect(choice.targetId).toBe(state.team[1]!.id);

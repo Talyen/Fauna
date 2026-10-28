@@ -12,7 +12,6 @@ import { executeAbility } from "../../../../src/game/combat/abilities";
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { swapFromCard } from "../../../../src/game/team";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { almanelleBattle } from "../../../support/almanelle";
 import { accept, addBackups, authoredPack, prepareDestination, requireBattle } from "../../../support/game";
@@ -34,7 +33,6 @@ function execute(game: BattleState, id: string, events: GameEvent[] = [], repeat
       allyTargetId: game.team[2]!.id,
     },
     events,
-    { swap: swapFromCard },
   );
 }
 
@@ -281,7 +279,6 @@ describe("Almanelle", () => {
         draft,
         { side: "enemy", actor, def, value: enemyAbilityValue(actor, def), allyTargetId: recipient.id },
         [],
-        { swap: swapFromCard },
       );
     });
     expect(game.battle.enemies[1]!.health).toBe(almanelleBattle().battle.enemies[1]!.health - 7);

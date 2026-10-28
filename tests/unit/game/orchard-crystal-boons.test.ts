@@ -7,7 +7,6 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { useFood } from "../../../src/game/combat/food";
 import { BOONS, definition } from "../../../src/game/content";
 import { encodeSave, decodeSave } from "../../../src/game/save";
-import { swapFromCard } from "../../../src/game/team";
 import { observeDecisions } from "../../../src/game/random";
 import type { GameEvent } from "../../../src/game/types";
 
@@ -115,7 +114,6 @@ it("Cleanses all harmful effects from a resurrected backup ally", () => {
       allyTargetId: backup.id,
     },
     events,
-    { swap: swapFromCard },
   );
   expect(backup.health).toBeGreaterThan(0);
   expect([backup.combat!.burn, backup.combat!.poison]).toEqual([0, 0]);
@@ -144,7 +142,6 @@ it("preserves Blind during a Light ability and leaves normal enemy defenses acti
     state,
     { side: "player", actor: ally, def: definition("prismram-spectrum-lance"), value: 4, targetId: enemy.id },
     events,
-    { swap: swapFromCard },
   );
   expect(ally.combat!.blind).toBe(true);
   expect(enemy.combat.negate).toBe(false);

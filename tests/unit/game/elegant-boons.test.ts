@@ -304,9 +304,7 @@ it("Dream Tangram moves only the existing repeat and sends its harmful extras to
   const def = { ...definition("emberback-attack"), effects: [{ kind: "purge" as const, amount: 1 }] };
   next.block = 2;
   next.combat.armor = 4;
-  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events);
   expect(target.health).toBe(0);
   expect(next.block).toBe(0);
   expect(next.combat.armor).toBe(0);
@@ -327,16 +325,12 @@ it("Dream Tangram does not invent a repeat or retarget a living original target"
   state.boons = ["dream-tangram"];
   target.health = 1;
   const def = definition("emberback-attack");
-  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events);
   expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
   target.health = 100;
   state.battle.repeatNext.player = true;
   events.length = 0;
-  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: source, def, value: 4, targetId: target.id }, events);
   expect(events.filter((event) => event.kind === "damage").map((event) => event.targetId)).toEqual([
     target.id,
     target.id,

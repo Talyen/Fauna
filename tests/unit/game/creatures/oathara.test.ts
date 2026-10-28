@@ -61,7 +61,6 @@ function enemyAttack(game: BattleState, events: GameEvent[], area = false, repea
       targetId: game.team[0]!.id,
     },
     events,
-    { swap: swapFromCard },
   );
 }
 
@@ -228,7 +227,6 @@ describe("Oathara", () => {
         draft,
         { side: "player", actor: draft.team[0]!, def: { ...def, repeatChance: 100 }, value: 1 },
         [],
-        { swap: swapFromCard },
       );
     });
     expect(repeated.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
@@ -410,7 +408,6 @@ describe("Oathara", () => {
         draft,
         { side: "enemy", actor, def: definition(vow), value: 20, allyTargetId: draft.battle.enemies[1]!.id },
         [],
-        { swap: swapFromCard },
       );
     });
     expect(result.battle.enemies[1]!.combat.deathDoorUsed).toBe(false);
@@ -436,7 +433,6 @@ describe("Oathara", () => {
         draft,
         { side: "enemy", actor: enemy, def, value: 20, allyTargetId: draft.battle.enemies[1]!.id },
         [],
-        { swap: swapFromCard },
       );
       expect(draft.battle.enemies[1]!.health).toBe(Math.round(draft.battle.enemies[1]!.maxHealth * 0.2));
     });

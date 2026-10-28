@@ -17,7 +17,6 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { shareNegate } from "../../../src/game/combat/damage";
 import { filterCardZones } from "../../../src/game/card-zones";
-import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import {
   freshCombat,
@@ -262,7 +261,7 @@ it.each(["pollenmoth-teamGuard", "cadenza-rousing-refrain"])("includes living al
   expect(decodeSave(before)).toEqual(game);
   const def = definition(id);
   const events: GameEvent[] = [];
-  executeAbility(game, { side: "player", actor, def, value: def.value }, events, { swap: swapFromCard });
+  executeAbility(game, { side: "player", actor, def, value: def.value }, events);
   expect(
     events
       .filter((event) => event.kind === "block" || (event.kind === "status" && event.status === "dodge"))
@@ -289,9 +288,7 @@ it.each(["pollenmoth-teamGuard", "cadenza-rousing-refrain"])(
     const value = enemyAbilityValue(actor, def);
     expect(enemyCanUse(def)).toBe(true);
     expect(value).toBe(def.effect === "guard" ? 6 : 20);
-    executeAbility(game, { side: "enemy", actor, def, value, allyTargetId: actor.id }, events, {
-      swap: swapFromCard,
-    });
+    executeAbility(game, { side: "enemy", actor, def, value, allyTargetId: actor.id }, events);
     const grants = events.filter(
       (event) => event.kind === "block" || (event.kind === "status" && event.status === "dodge"),
     );
@@ -313,7 +310,7 @@ it.each(["mossguard-guard", "dunefox-dodge"])("preserves self and chosen-ally bo
   expect(cardTargeting(def)).toBe("self");
   expect(playTargetError(game, def, actor.id, other.id)).toBe("This ability targets its acting creature.");
   const events: GameEvent[] = [];
-  executeAbility(game, { side: "player", actor, def, value: def.value }, events, { swap: swapFromCard });
+  executeAbility(game, { side: "player", actor, def, value: def.value }, events);
   expect(
     events
       .filter((event) => event.kind === "block" || event.kind === "status")
@@ -329,7 +326,6 @@ it.each(["mossguard-guard", "dunefox-dodge"])("preserves self and chosen-ally bo
       game,
       { side: "player", actor, def: chosen, value: def.value, allyTargetId: other.id },
       targeted,
-      { swap: swapFromCard },
     );
     expect(targeted.filter((event) => event.kind === "block").map((event) => event.targetId)).toEqual([
       other.id,

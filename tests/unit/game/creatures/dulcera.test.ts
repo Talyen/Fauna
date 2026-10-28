@@ -252,12 +252,7 @@ describe("Dulcera", () => {
       for (const id of [chapel, meadow, hush]) {
         expect(enemyCanUse(definition(id))).toBe(true);
         const def = enemyCard(definition(id));
-        executeAbility(
-          draft,
-          { side: "enemy", actor: enemy, def, value: enemyAbilityValue(enemy, def) },
-          [],
-          { swap: swapFromCard },
-        );
+        executeAbility(draft, { side: "enemy", actor: enemy, def, value: enemyAbilityValue(enemy, def) }, []);
       }
     });
     expect(game.battle.enemies[0]!).toMatchObject({ health: 13, block: 2, combat: { poison: 0 } });

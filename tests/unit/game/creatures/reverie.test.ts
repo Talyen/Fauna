@@ -49,7 +49,6 @@ function enemyAbility(game: BattleState, id: string, events: GameEvent[], repeat
       targetId: game.team[0]!.id,
     },
     events,
-    { swap: swapFromCard },
   );
 }
 
@@ -186,7 +185,6 @@ describe("Reverie", () => {
           targetId: d.team[0]!.id,
         },
         events,
-        { swap: swapFromCard },
       );
     });
     expect(result.team[0]!.health).toBe(28);
@@ -219,7 +217,6 @@ describe("Reverie", () => {
           value: 1,
         },
         [],
-        { swap: swapFromCard },
       );
     });
     expect(result.team[0]!.combat).toMatchObject({
@@ -340,9 +337,7 @@ describe("Reverie", () => {
       unhurried(d, true, []);
       expect(idle.health).toBe(idle.maxHealth - 7);
       const def = definition(harvest);
-      executeAbility(d, { side: "enemy", actor: enemy, def, value: enemyAbilityValue(enemy, def) }, [], {
-        swap: swapFromCard,
-      });
+      executeAbility(d, { side: "enemy", actor: enemy, def, value: enemyAbilityValue(enemy, def) }, []);
       expect(idle.combat.burn).toBe(0);
       expect(d.team[0]!.combat!.burn).toBe(9);
       const doubleDef = definition(double);
@@ -350,7 +345,6 @@ describe("Reverie", () => {
         d,
         { side: "enemy", actor: enemy, def: doubleDef, value: enemyAbilityValue(enemy, doubleDef) },
         [],
-        { swap: swapFromCard },
       );
       expect(enemy.combat).toMatchObject({ negate: true, thorns: 3 });
     });
@@ -423,7 +417,6 @@ describe("Reverie", () => {
         d,
         { side: "player", actor: d.team[0]!, def: { ...definition(harvest), repeatChance: 100 }, value: 1 },
         events,
-        { swap: swapFromCard },
       );
     });
     expect(result.battle.mana).toBe(2);

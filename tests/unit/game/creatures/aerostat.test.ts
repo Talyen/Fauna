@@ -19,7 +19,7 @@ import { draw, MAX_BATTLE_CARDS } from "../../../../src/game/card-zones";
 import { createFood } from "../../../../src/game/combat/food";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { executeAbility } from "../../../../src/game/combat/abilities";
-import { swapBackup, swapFromCard } from "../../../../src/game/team";
+import { swapBackup } from "../../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { battleChoices } from "../../../../src/application/battle-policy";
 import type { BattleState } from "../../../../src/game/types";
@@ -215,7 +215,6 @@ describe("Aerostat and battle provisions", () => {
         draft,
         { side: "enemy", actor: draft.battle.enemies[0]!, def: definition(bearing), value: 2 },
         [],
-        { swap: swapFromCard },
       );
     });
     expect(game.battle.enemies.every((unit) => !unit.combat.blind)).toBe(true);

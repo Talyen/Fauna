@@ -1,6 +1,6 @@
 import { setBattleCards } from "./cards";
 import { canVisitCampfire } from "../../src/game/destinations";
-import { ownedCards, swapBackup, swapFromCard } from "../../src/game/team";
+import { ownedCards, swapBackup } from "../../src/game/team";
 import { enemyCard } from "../../src/game/card-rules";
 import { enemyAbilityValue } from "../../src/game/ability-rules";
 import { executeAbility } from "../../src/game/combat/abilities";
@@ -108,7 +108,6 @@ export function enemyPlay(
         allyTargetId: options.allyTargetId ?? mostInjured(battlefield(draft, "enemy"))?.id,
       },
       events,
-      { swap: swapFromCard },
     );
   });
   return { accepted: true, state: next, events };

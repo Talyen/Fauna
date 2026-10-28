@@ -21,7 +21,7 @@ import {
   startAction,
 } from "../../../../src/game/combat/index";
 import { executeAbility } from "../../../../src/game/combat/abilities";
-import { swapFromCard, swapBackup } from "../../../../src/game/team";
+import { swapBackup } from "../../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { validateCatalog } from "../../../../src/game/content-validation";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
@@ -80,7 +80,7 @@ describe("Parhelion", () => {
       ally.combat!.freeze = 5;
       const actor = draft.team[2]!;
       const def = definition("stillara-thaw-path");
-      executeAbility(draft, { side: "player", actor, def, value: 1 }, events, { swap: swapFromCard });
+      executeAbility(draft, { side: "player", actor, def, value: 1 }, events);
     });
     expect(game.team[0]!.health).toBe(19);
     expect(game.team[1]!.health).toBe(22);
@@ -149,9 +149,7 @@ describe("Parhelion", () => {
     const game = produce(parhelionBattle(), (draft) => {
       addReserve(draft, "backup", "stillara", 12, { ...freshCombat(), freeze: 4 });
       const def = { ...definition(reprieve), repeatChance: 100 };
-      executeAbility(draft, { side: "player", actor: draft.team[0]!, def, value: 1 }, events, {
-        swap: swapFromCard,
-      });
+      executeAbility(draft, { side: "player", actor: draft.team[0]!, def, value: 1 }, events);
     });
     expect(game.team.map((ally) => ally.health)).toEqual([19, 21, 23]);
     expect(game.reserves[0]!).toMatchObject({ health: 12, combat: { freeze: 4 } });
@@ -233,9 +231,7 @@ describe("Parhelion", () => {
       ally.health -= 5;
       ally.combat.freeze = 3;
       const def = enemyCard(definition(reprieve));
-      executeAbility(draft, { side: "enemy", actor, def, value: enemyAbilityValue(actor, def) }, [], {
-        swap: swapFromCard,
-      });
+      executeAbility(draft, { side: "enemy", actor, def, value: enemyAbilityValue(actor, def) }, []);
     });
     expect(game.battle.enemies[0]!).toMatchObject({ health: 16, combat: { freeze: 0 } });
     expect(game.battle.enemies[1]!.health).toBe(ready.battle.enemies[1]!.health - 4);

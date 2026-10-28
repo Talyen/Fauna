@@ -9,7 +9,6 @@ import { availablePlays, chosenRecipients } from "../../../../src/game/play-quer
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { executeAbility } from "../../../../src/game/combat/abilities";
-import { swapFromCard } from "../../../../src/game/team";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { accept, requireBattle, teamRun, winBattle } from "../../../support/game";
 import { wisterelleBattle } from "../../../support/wisterelle";
@@ -214,7 +213,6 @@ describe("Wisterelle", () => {
         draft,
         { side: "enemy", actor, def: enemyCard(definition(lantern)), value: 3, allyTargetId: actor.id },
         events,
-        { swap: swapFromCard },
       );
     });
     expect(result.battle.enemies[0]!.health).toBe(13);

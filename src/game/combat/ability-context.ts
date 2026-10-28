@@ -10,15 +10,6 @@ export type AbilityAction = {
   allyTargetId?: string;
   lastCardInHand?: boolean;
 } & ({ side: "player"; actor: Creature } | { side: "enemy"; actor: Enemy });
-export interface AbilityOperations {
-  swap: (
-    state: GameState,
-    actor: Combatant,
-    events: GameEvent[],
-    backupOnly?: boolean,
-    backupId?: string,
-  ) => Combatant | undefined;
-}
 export const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);
 export const livingFriends = (state: GameState, action: AbilityAction): Combatant[] =>
   livingBattlefield(state, action.side);
@@ -29,7 +20,6 @@ export interface PrimaryContext {
   state: BattleState;
   action: AbilityAction;
   events: GameEvent[];
-  operations: AbilityOperations;
   target: Combatant | undefined;
   name: string;
   stats: CombatState;

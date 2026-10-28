@@ -1,5 +1,5 @@
 import { addReserve, requireBattle, teamRun } from "../../support/game";
-import { expect, it, vi } from "vitest";
+import { expect, it } from "vitest";
 import { produce } from "immer";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { abilityExtras } from "../../../src/game/combat/ability-values";
@@ -105,7 +105,6 @@ it.each(CARDS.filter((card) => card.species !== null && enemyCanUse(card) && car
     const def = enemyCard(authored);
     const resolve = (side: "player" | "enemy") => {
       const events: GameEvent[] = [];
-      const swap = vi.fn();
       const state = produce(game, (draft) => {
         if (side === "player")
           executeAbility(
@@ -127,7 +126,6 @@ it.each(CARDS.filter((card) => card.species !== null && enemyCanUse(card) && car
               allyTargetId: "ally-0",
             },
             events,
-            { swap },
           );
         else
           executeAbility(
@@ -141,19 +139,17 @@ it.each(CARDS.filter((card) => card.species !== null && enemyCanUse(card) && car
               allyTargetId: "enemy-0",
             },
             events,
-            { swap },
           );
       });
       const friendly = side === "player" ? state.team : state.battle!.enemies;
       const opposing = side === "player" ? state.battle!.enemies : state.team;
       const units = (row: typeof friendly) =>
-        row.map(({ health, block, combat }) => ({ health, block, combat }));
+        row.map(({ id, health, block, combat }) => ({ id, health, block, combat }));
       const result = {
         friendly: units(friendly),
         opposing: units(opposing),
         rng: state.rng,
-        events: events.filter((event) => event.kind !== "action"),
-        swaps: swap.mock.calls.length,
+        events: events.filter((event) => event.kind !== "action" || event.actionType === "swap"),
       };
       const friendPrefix = side === "player" ? "ally-" : "enemy-";
       const foePrefix = side === "player" ? "enemy-" : "ally-";
@@ -323,7 +319,6 @@ it("applies room power once to primary Block and supplemental damage/healing bef
         allyTargetId: actor.id,
       },
       events,
-      { swap: vi.fn() },
     );
   });
   expect(next.battle!.enemies[0]!.block).toBe(9);
@@ -363,7 +358,6 @@ it.each([
           targetId: "ally-0",
         },
         events,
-        { swap: vi.fn() },
       );
     });
     expect(next.battle!.enemies.map((unit) => [unit.block, unit.combat.thorns])).toEqual([
@@ -407,7 +401,6 @@ it.each(["player", "enemy"] as const)(
           ? { side, actor: state.team[0]!, def, value: 1 }
           : { side, actor: state.battle!.enemies[0]!, def, value: 1 },
         events,
-        { swap() {} },
       );
       expect(actor.health).toBe(survives ? 1 : 0);
       const hits = events.filter(

@@ -8,7 +8,7 @@ import { STACK_LIMIT } from "../../../../src/game/combat/state";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { swapBackup, swapFromCard } from "../../../../src/game/team";
+import { swapBackup } from "../../../../src/game/team";
 import { pyrellaBattle } from "../../../support/pyrella";
 
 const play = (state: ReturnType<typeof pyrellaBattle>, id: string) => ({
@@ -191,9 +191,7 @@ describe("Pyrella", () => {
       const actor = draft.battle.enemies[0]!;
       actor.species = "pyrella";
       draft.team[0]!.combat!.nullify = true;
-      executeAbility(draft, { side: "enemy", actor, def: definition("pyrella-spark-decoy"), value: 2 }, [], {
-        swap: swapFromCard,
-      });
+      executeAbility(draft, { side: "enemy", actor, def: definition("pyrella-spark-decoy"), value: 2 }, []);
     });
     expect(state.battle.enemies[0]!.combat.negate).toBe(true);
     expect(state.team.map((unit) => unit.combat!.burn)).toEqual([0, 2, 2]);

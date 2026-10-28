@@ -285,7 +285,6 @@ it("Pruning Crescent steals full Nature Thorns through an authored pre-attack Pu
     requireBattle(state),
     { side: "player", actor, def, value: def.value, targetId: target.id },
     [],
-    { swap: () => undefined },
   );
   expect(actor.combat!.thorns).toBe(8);
   expect(target.combat.thorns).toBe(0);
@@ -299,9 +298,7 @@ it("Pruning Crescent collects team Purges but never steals from an allied victim
     enemy.combat.thorns = (index + 1) * 2;
   });
   const def = definition("rookhaven-unwritten-ending");
-  executeAbility(requireBattle(state), { side: "player", actor, def, value: def.value }, [], {
-    swap: () => undefined,
-  });
+  executeAbility(requireBattle(state), { side: "player", actor, def, value: def.value }, []);
   expect(actor.combat!.thorns).toBe(12);
   removeEffects(actor, "purge", 100, [], state, undefined, state.battle!.enemies[0]!);
   expect(actor.combat!.thorns).toBe(0);
@@ -523,9 +520,7 @@ it("Camp Hammock includes living backups in automatic Healing while keeping them
   addBackups(state, backup);
   const card = state.cards.find((entry) => definition(entry.definitionId).name === "Moss Renewal")!;
   const def = definition(card.definitionId);
-  executeAbility(state, { side: "player", actor: state.team[0]!, def, value: 2 }, [], {
-    swap: () => undefined,
-  });
+  executeAbility(state, { side: "player", actor: state.team[0]!, def, value: 2 }, []);
   expect(backup.health).toBe(3);
   expect(playTargetError(state, definition("food-apple"), state.team[0]!.id, backup.id)).toBe(
     "Choose a living ally.",
@@ -1435,7 +1430,6 @@ it.each([true, false])(
         targetId: source.id,
       },
       events,
-      { swap: () => undefined },
     );
     expect(source.health).toBe(health);
     expect(source.block).toBe(10);
@@ -1559,7 +1553,6 @@ it("approved new Boons grant Leech only for actual healing and retain it through
     requireBattle(state),
     { side: "player", actor: source, def, value: 4, targetId: target.id },
     events,
-    { swap: () => undefined },
   );
   expect(source.combat.oasisLeech).toBe(false);
   expect(combatStatuses(source.combat).some((status) => status.id === "oasisLeech")).toBe(false);

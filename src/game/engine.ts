@@ -29,14 +29,7 @@ import {
   leaveCampfire,
   returnHome,
 } from "./journey";
-import {
-  ownedCards,
-  addRecruit,
-  swapBackup,
-  swapFromCard,
-  pendingReplacement,
-  rosterHasSpecies,
-} from "./team";
+import { ownedCards, addRecruit, swapBackup, pendingReplacement, rosterHasSpecies } from "./team";
 import { finishTurn } from "./combat/turns";
 import { replenishJourneyCards } from "./journey-cards";
 
@@ -301,7 +294,6 @@ function resolve(
               lastCardInHand,
             },
             events,
-            { swap: swapFromCard },
           );
         returnDodgedCard(draft, card, events, abilityEvents);
         courtRemembers(draft, actor, events);

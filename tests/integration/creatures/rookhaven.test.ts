@@ -16,7 +16,7 @@ import { validateContent } from "../../../src/game/content-validation";
 import { draw, drawAtTurnStart, drawKeyword, fillHand, MAX_BATTLE_CARDS } from "../../../src/game/card-zones";
 import { freshCombat } from "../../../src/game/combat/index";
 import { executeAbility } from "../../../src/game/combat/abilities";
-import { swapBackup, swapFromCard } from "../../../src/game/team";
+import { swapBackup } from "../../../src/game/team";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { roll } from "../../../src/game/random";
@@ -170,9 +170,7 @@ it("enemy Rookhaven attacks and Purges the opposing deployed row without player-
       draft.team.forEach((unit) => {
         unit.block = 3;
       });
-      executeAbility(requireBattle(draft), { side: "enemy", actor: enemy, def, value: 1 }, events, {
-        swap: swapFromCard,
-      });
+      executeAbility(requireBattle(draft), { side: "enemy", actor: enemy, def, value: 1 }, events);
     });
     expect(result.battle!.hand).toEqual(game.battle!.hand);
     expect(result.battle!.copySerial).toBe(game.battle!.copySerial);

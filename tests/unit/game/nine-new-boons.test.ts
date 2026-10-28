@@ -23,9 +23,7 @@ it("makes a repeated attack reliable without making the first attack reliable", 
   enemy.combat.dodge = 70;
   observeDecisions(state, () => 0);
   const def = definition("prismram-attack");
-  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "player", actor: ally, def, value: 4, targetId: enemy.id }, events);
   expect(events.filter((event) => event.kind === "status" && event.outcome === "dodge")).toHaveLength(1);
   expect(enemy.health).toBeLessThan(100);
 });

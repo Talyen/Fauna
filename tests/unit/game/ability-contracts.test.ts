@@ -27,7 +27,7 @@ import { rankedBattleChoices } from "../../../src/application/battle-policy";
 import { arabescaBattle } from "../../support/arabesca";
 import { freshCombat, hit, grantTemporaryDodge, startAction } from "../../../src/game/combat/index";
 import { executeAbility } from "../../../src/game/combat/abilities";
-import { swapFromCard, swapBackup } from "../../../src/game/team";
+import { swapBackup } from "../../../src/game/team";
 import { createFood } from "../../../src/game/combat/food";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
@@ -195,7 +195,6 @@ function enemyArabesca(game: BattleState, id: string, events: GameEvent[]) {
       allyTargetId: enemy.id,
     },
     events,
-    { swap: swapFromCard },
   );
 }
 
@@ -384,7 +383,6 @@ describe("Arabesca's selected ability contracts", () => {
           targetId: draft.battle.enemies[0]!.id,
         },
         events,
-        { swap: swapFromCard },
       );
     });
     expect(game.team[0]!.health).toBe(0);
@@ -401,7 +399,6 @@ describe("Arabesca's selected ability contracts", () => {
         draft,
         { side: "player", actor: draft.team[0]!, def: { ...def, repeatChance: 100 }, value: 30 },
         events,
-        { swap: swapFromCard },
       );
     });
     expect(game.team[0]!.combat!.temporaryDodge).toBe(60);

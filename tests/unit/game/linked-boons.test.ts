@@ -171,7 +171,6 @@ function areaAttack(f: ReturnType<typeof fixture>, repeat = false) {
       },
     },
     f.events,
-    { swap: () => undefined },
   );
 }
 

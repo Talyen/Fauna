@@ -37,7 +37,6 @@ function fixture() {
   return { state, ally, enemy, events: [] as GameEvent[] };
 }
 function attack(f: ReturnType<typeof fixture>, side: "player" | "enemy", all = false) {
-  const actor = side === "player" ? f.ally : f.enemy;
   const def = attackDefinition("mossguard-attack", "Rooted Stomp", 4, "physical", {
     target: all ? "allEnemies" : undefined,
   });
@@ -47,7 +46,6 @@ function attack(f: ReturnType<typeof fixture>, side: "player" | "enemy", all = f
       ? { side, actor: f.ally, def, value: 4, targetId: f.enemy.id }
       : { side, actor: f.enemy, def, value: 4, targetId: f.ally.id },
     f.events,
-    { swap: () => actor },
   );
 }
 

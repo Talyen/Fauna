@@ -15,7 +15,7 @@ import { enemyCardValue } from "../../../../src/game/combat/enemy-policy";
 import { createFood } from "../../../../src/game/combat/food";
 import { observeDecisions } from "../../../../src/game/random";
 import { ordinaryAttackFacts } from "../../../../src/game/ability-facts";
-import { swapBackup, swapFromCard } from "../../../../src/game/team";
+import { swapBackup } from "../../../../src/game/team";
 import type { BattleState, GameEvent } from "../../../../src/game/types";
 
 const reversal = "alpenglen-sunset-reversal";
@@ -198,7 +198,6 @@ describe("Alpenglen and Last Warmth", () => {
         draft,
         { side: "enemy", actor: source, def: definition(charge), value: 4, targetId: actor.id },
         events,
-        { swap: swapFromCard },
       );
       expect(actor.combat!.attackReflection).toBe(false);
       expect(actor.health).toBe(20);
@@ -222,7 +221,6 @@ describe("Alpenglen and Last Warmth", () => {
         draft,
         { side: "enemy", actor: enemy, def: definition(charge), value: 4, targetId: "ally-0" },
         events,
-        { swap: swapFromCard },
       );
       expect(damage(events).map((event) => event.critical)).toEqual([false]);
     });

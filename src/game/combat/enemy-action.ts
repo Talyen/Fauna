@@ -1,5 +1,4 @@
 import { enemyAbilityValue } from "../ability-rules";
-import { swapFromCard } from "../team";
 import type { CardDefinition } from "../content/types";
 import type { BattleState, Enemy, GameEvent } from "../types";
 import { executeAbility } from "./abilities";
@@ -36,7 +35,6 @@ export function playEnemyAbility(
       lastCardInHand: deck ? lastCardInHand : undefined,
     },
     events,
-    { swap: swapFromCard },
   );
   if (deck) courtRemembers(state, actor, events);
   return lastCardInHand;

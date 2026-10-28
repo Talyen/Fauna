@@ -11,7 +11,6 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { redrawHand, draw } from "../../../src/game/card-zones";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { swapFromCard } from "../../../src/game/team";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent, GameState } from "../../../src/game/types";
@@ -293,7 +292,6 @@ it("enemies redistribute their own Block and purge allied Thorns before attackin
       draft as Extract<GameState, { phase: "battle" }>,
       { side: "enemy", actor: enemy, def: definition("euphera-wish-exchange"), value: 1 },
       [],
-      { swap: swapFromCard },
     );
     expect(draft.battle!.enemies.map((unit) => unit.block)).toEqual([4, 3, 3]);
     draft.team[1]!.combat!.thorns = 30;
@@ -307,7 +305,6 @@ it("enemies redistribute their own Block and purge allied Thorns before attackin
         targetId: "ally-1",
       },
       [],
-      { swap: swapFromCard },
     );
     expect(draft.team[1]!.combat).toMatchObject({ thorns: 0 });
   });

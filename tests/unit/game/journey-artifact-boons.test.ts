@@ -6,7 +6,6 @@ import { useFood } from "../../../src/game/combat/food";
 import { definition } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { executeAbility } from "../../../src/game/combat/abilities";
-import { swapFromCard } from "../../../src/game/team";
 import { dispatch } from "../../../src/game/engine";
 import { produce } from "immer";
 import { replenishJourneyCards, CORNUCOPIA_CARD_ID } from "../../../src/game/journey-cards";
@@ -51,9 +50,7 @@ it("spreads a reflected authored ability as well as its damage packets", () => {
   state.boons = ["ripple-mirror"];
   ally.combat!.attackReflection = true;
   const def = { ...definition("emberback-attack"), effects: [{ kind: "blind" as const, amount: 1 }] };
-  executeAbility(state, { side: "enemy", actor: enemy, def, value: 4, targetId: ally.id }, events, {
-    swap: swapFromCard,
-  });
+  executeAbility(state, { side: "enemy", actor: enemy, def, value: 4, targetId: ally.id }, events);
   expect(enemy.health).toBe(96);
   expect(second.health).toBe(96);
   expect([enemy.combat.blind, second.combat.blind]).toEqual([true, true]);

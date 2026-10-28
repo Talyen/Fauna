@@ -4,7 +4,7 @@ import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
-import { livingOpponents, type AbilityAction, type AbilityOperations } from "./ability-context";
+import { livingOpponents, type AbilityAction } from "./ability-context";
 import { species } from "../content";
 import { abilityKeywords } from "../progression";
 import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
@@ -14,12 +14,7 @@ import { roll } from "../random";
 import type { GameEvent, BattleState } from "../types";
 
 /** Runs inside the command draft; command costs, counters and settlement stay with the caller. */
-export function executeAbility(
-  state: BattleState,
-  action: AbilityAction,
-  events: GameEvent[],
-  operations: AbilityOperations,
-) {
+export function executeAbility(state: BattleState, action: AbilityAction, events: GameEvent[]) {
   const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
@@ -118,7 +113,6 @@ export function executeAbility(
       state,
       action,
       events,
-      operations,
       target,
       name,
       stats,
