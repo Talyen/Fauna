@@ -10,6 +10,7 @@ import type { GameState } from "./types";
 
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
+  courtRemembers: ["water"],
   lostAndFound: ["health"],
   lastWarmth: ["health"],
   wellProvisioned: ["food"],
@@ -76,6 +77,10 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
         keywords.add(card.damageType);
         if (card.alternateDamageType) keywords.add(card.alternateDamageType);
         if (card.criticalWhenLastCard) keywords.add("criticalHit");
+        if (card.purgeThorns) {
+          keywords.add("purge");
+          keywords.add("thorns");
+        }
       } else {
         for (const keyword of abilityKeywordOverrides[card.effect] ?? abilityRule(card.effect).keywords)
           keywords.add(keyword);
