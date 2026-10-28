@@ -1,6 +1,6 @@
 import { cloudTransport } from "../../support/cloud";
 import { deferred } from "../../support/deferred";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
 import { cloudName, snapshot } from "../../../src/application/cloud-snapshots";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -48,16 +48,14 @@ function platform(data: string | null = null): Platform {
 it.each([false, true])("captures development permission at session creation (%s)", async (development) => {
   const capabilities = { development };
   const s = createSession(platform(JSON.stringify(run())), 3, capabilities);
-  try {
-    await s.load();
-    capabilities.development = !development;
-    const before = s.store.getState().game;
-    expect(s.command({ type: "devWinBattle" })).toBe(development);
-    if (development) expect(s.store.getState().game.phase).toBe("recruit");
-    else expect(s.store.getState().game).toBe(before);
-  } finally {
-    await s.dispose();
-  }
+  onTestFinished(() => s.dispose());
+
+  await s.load();
+  capabilities.development = !development;
+  const before = s.store.getState().game;
+  expect(s.command({ type: "devWinBattle" })).toBe(development);
+  if (development) expect(s.store.getState().game.phase).toBe("recruit");
+  else expect(s.store.getState().game).toBe(before);
 });
 
 it.each([
@@ -102,20 +100,18 @@ it("saves the latest browser checkpoint when backup growth exceeds the storage q
     set(key, data);
   };
   const s = createSession(createBrowserPlatform(memory));
+  onTestFinished(() => s.dispose());
+
+  await s.load();
+  expect(s.command({ type: "endTurn" })).toBe(true);
+  expect(await s.flush()).toBe(true);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!)).toEqual(s.store.getState().game);
+  const resumed = createSession(createBrowserPlatform(memory));
   try {
-    await s.load();
-    expect(s.command({ type: "endTurn" })).toBe(true);
-    expect(await s.flush()).toBe(true);
-    expect(JSON.parse(memory.getItem("fauna.save.v1")!)).toEqual(s.store.getState().game);
-    const resumed = createSession(createBrowserPlatform(memory));
-    try {
-      await resumed.load();
-      expect(resumed.store.getState().game).toEqual(s.store.getState().game);
-    } finally {
-      await resumed.dispose();
-    }
+    await resumed.load();
+    expect(resumed.store.getState().game).toEqual(s.store.getState().game);
   } finally {
-    await s.dispose();
+    await resumed.dispose();
   }
 });
 
@@ -163,15 +159,13 @@ describe("save orchestration", () => {
       };
       const p = createBrowserPlatform(memory);
       const s = createSession(p);
-      try {
-        await s.load();
-        expect(s.store.getState().game).toEqual(JSON.parse(saved));
-        expect(s.command({ type: "endTurn" })).toBe(true);
-        expect(await s.flush()).toBe(false);
-        expect((await p.saves.readCandidates()).some((candidate) => candidate.data === saved)).toBe(true);
-      } finally {
-        await s.dispose();
-      }
+      onTestFinished(() => s.dispose());
+
+      await s.load();
+      expect(s.store.getState().game).toEqual(JSON.parse(saved));
+      expect(s.command({ type: "endTurn" })).toBe(true);
+      expect(await s.flush()).toBe(false);
+      expect((await p.saves.readCandidates()).some((candidate) => candidate.data === saved)).toBe(true);
     },
   );
   it("preserves primary and backups in browser storage and reports quota failures", async () => {
@@ -204,12 +198,9 @@ describe("save orchestration", () => {
     "serializes writes and %s drains every admitted revision",
     async (close) => {
       const saved: string[] = [];
-      let releaseFirst!: () => void;
-      let releaseSecond!: () => void;
-      let enteredSecond!: () => void;
-      const first = new Promise<void>((resolve) => (releaseFirst = resolve));
-      const second = new Promise<void>((resolve) => (releaseSecond = resolve));
-      const secondStarted = new Promise<void>((resolve) => (enteredSecond = resolve));
+      const { promise: first, resolve: releaseFirst } = deferred();
+      const { promise: second, resolve: releaseSecond } = deferred();
+      const { promise: secondStarted, resolve: enteredSecond } = deferred();
       let active = 0;
       let maximumActive = 0;
       const write = vi.fn(async (data: string) => {
@@ -280,10 +271,7 @@ describe("save orchestration", () => {
     await s.dispose();
   });
   it("revokes command capabilities and ignores stale load completions after disposal", async () => {
-    let release!: (data: { source: string; data: string }[]) => void;
-    const pending = new Promise<{ source: string; data: string }[]>((resolve) => {
-      release = resolve;
-    });
+    const { promise: pending, resolve: release } = deferred<{ source: string; data: string }[]>();
     const write = vi.fn(async () => {});
     const s = createSession({
       ...platform(),
@@ -305,8 +293,7 @@ describe("save orchestration", () => {
 describe("desktop close handshake", () => {
   it("drains admitted writes and retries silently before allowing close after a save failure", async () => {
     let requestClose: (() => Promise<boolean>) | undefined;
-    let release: () => void = () => {};
-    const blocked = new Promise<void>((resolve) => (release = resolve));
+    const { promise: blocked, resolve: release } = deferred();
     const s = createSession({
       ...platform(),
       onCloseRequested(listener) {
@@ -427,10 +414,7 @@ it("retries the latest committed state in the background and cancels retries on 
 it("allows play after a stalled local read and ignores its late result", async () => {
   vi.useFakeTimers();
   try {
-    let release!: (data: { source: string; data: string }[]) => void;
-    const read = new Promise<{ source: string; data: string }[]>((resolve) => {
-      release = resolve;
-    });
+    const { promise: read, resolve: release } = deferred<{ source: string; data: string }[]>();
     const s = createSession({
       ...platform(),
       saves: { readCandidates: async () => read, write: async () => {} },
@@ -525,14 +509,9 @@ it.each([false, true])(
       [local],
     );
     let saved = initial;
-    let release!: () => void;
-    let entered!: () => void;
-    const gate = new Promise<void>((resolve) => {
-      release = resolve;
-    });
-    const writing = new Promise<void>((resolve) => {
-      entered = resolve;
-    });
+
+    const { promise: gate, resolve: release } = deferred();
+    const { promise: writing, resolve: entered } = deferred();
     let first = true;
     const s = createSession({
       ...platform(initial),
@@ -629,13 +608,11 @@ it.each(["fauna.save.v1", "fauna.save.v1.backup1"])(
       return read(key);
     };
     const s = createSession(createBrowserPlatform(memory));
-    try {
-      await s.load();
-      expect(s.store.getState().game).toEqual(JSON.parse(saved));
-      expect(s.store.getState().ready).toBe(true);
-    } finally {
-      await s.dispose();
-    }
+    onTestFinished(() => s.dispose());
+
+    await s.load();
+    expect(s.store.getState().game).toEqual(JSON.parse(saved));
+    expect(s.store.getState().ready).toBe(true);
   },
 );
 
@@ -815,17 +792,15 @@ it.each(["fauna.save.v1.backup1", "fauna.save.v1.backup2"])(
       return read(key);
     };
     const s = createSession(createBrowserPlatform(memory));
-    try {
-      await s.load();
-      expect(s.command({ type: "endTurn" })).toBe(true);
-      expect(await s.flush()).toBe(true);
-      expect(JSON.parse(read("fauna.save.v1")!).revision).toBe(s.store.getState().game.revision);
-      expect(read(unreadable)).toBe("unreadable checkpoint");
-      const availableBackup = unreadable.endsWith("backup1") ? "backup2" : "backup1";
-      expect(read(`fauna.save.v1.${availableBackup}`)).toBe(saved);
-    } finally {
-      await s.dispose();
-    }
+    onTestFinished(() => s.dispose());
+
+    await s.load();
+    expect(s.command({ type: "endTurn" })).toBe(true);
+    expect(await s.flush()).toBe(true);
+    expect(JSON.parse(read("fauna.save.v1")!).revision).toBe(s.store.getState().game.revision);
+    expect(read(unreadable)).toBe("unreadable checkpoint");
+    const availableBackup = unreadable.endsWith("backup1") ? "backup2" : "backup1";
+    expect(read(`fauna.save.v1.${availableBackup}`)).toBe(saved);
   },
 );
 
@@ -839,15 +814,13 @@ it("refuses to overwrite an unreadable primary even when a backup can be loaded"
     return read(key);
   };
   const s = createSession(createBrowserPlatform(memory));
-  try {
-    await s.load();
-    expect(s.command({ type: "endTurn" })).toBe(true);
-    expect(await s.flush()).toBe(false);
-    expect(read("fauna.save.v1")).toBe("unknown primary");
-    expect(read("fauna.save.v1.backup1")).toBe(JSON.stringify(run()));
-  } finally {
-    await s.dispose();
-  }
+  onTestFinished(() => s.dispose());
+
+  await s.load();
+  expect(s.command({ type: "endTurn" })).toBe(true);
+  expect(await s.flush()).toBe(false);
+  expect(read("fauna.save.v1")).toBe("unknown primary");
+  expect(read("fauna.save.v1.backup1")).toBe(JSON.stringify(run()));
 });
 
 it("isolates throwing presentation subscribers from commands, other subscribers and saving", async () => {
@@ -859,15 +832,13 @@ it("isolates throwing presentation subscribers from commands, other subscribers 
   });
   const observed: number[] = [];
   s.store.subscribe((view) => observed.push(view.game.revision));
-  try {
-    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
-    expect(await s.flush()).toBe(true);
-    expect(observed).toContain(1);
-    expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
-    expect(s.diagnostics.snapshot().some((entry) => entry.message === "presentation failed")).toBe(true);
-  } finally {
-    await s.dispose();
-  }
+  onTestFinished(() => s.dispose());
+
+  expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+  expect(await s.flush()).toBe(true);
+  expect(observed).toContain(1);
+  expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
+  expect(s.diagnostics.snapshot().some((entry) => entry.message === "presentation failed")).toBe(true);
 });
 
 it.each(["overlay", "close"])(
@@ -913,23 +884,21 @@ it.each(["overlay", "close"])(
 
 it("keeps session snapshots immutable across startup, commands and disposal", async () => {
   const s = createSession(platform());
-  try {
-    expect(Reflect.set(s.store.getInitialState(), "ready", true)).toBe(false);
-    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(false);
-    await s.load();
-    s.store.subscribe((view) => {
-      Reflect.set(view, "game", s.store.getInitialState().game);
-      Reflect.set(view, "closing", false);
-    });
-    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
-    expect(s.store.getState().game.revision).toBe(1);
-    expect(await s.flush()).toBe(true);
-    await s.dispose();
-    expect(Reflect.set(s.store.getState(), "ready", true)).toBe(false);
-    expect(s.store.getState().closing).toBe(true);
-  } finally {
-    await s.dispose();
-  }
+  onTestFinished(() => s.dispose());
+
+  expect(Reflect.set(s.store.getInitialState(), "ready", true)).toBe(false);
+  expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(false);
+  await s.load();
+  s.store.subscribe((view) => {
+    Reflect.set(view, "game", s.store.getInitialState().game);
+    Reflect.set(view, "closing", false);
+  });
+  expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+  expect(s.store.getState().game.revision).toBe(1);
+  expect(await s.flush()).toBe(true);
+  await s.dispose();
+  expect(Reflect.set(s.store.getState(), "ready", true)).toBe(false);
+  expect(s.store.getState().closing).toBe(true);
 });
 
 it("keeps browser diagnostics in the supplied storage profile", async () => {
@@ -939,17 +908,15 @@ it("keeps browser diagnostics in the supplied storage profile", async () => {
     JSON.stringify([{ source: "render", message: "prior failure", count: 1 }]),
   );
   const s = createSession(createBrowserPlatform(memory));
-  try {
-    expect(s.diagnostics.snapshot()).toContainEqual({ source: "render", message: "prior failure", count: 1 });
-    s.diagnostics.record("audio", "playback failed");
-    expect(JSON.parse(memory.getItem("fauna.diagnostics")!)).toContainEqual({
-      source: "audio",
-      message: "playback failed",
-      count: 1,
-    });
-  } finally {
-    await s.dispose();
-  }
+  onTestFinished(() => s.dispose());
+
+  expect(s.diagnostics.snapshot()).toContainEqual({ source: "render", message: "prior failure", count: 1 });
+  s.diagnostics.record("audio", "playback failed");
+  expect(JSON.parse(memory.getItem("fauna.diagnostics")!)).toContainEqual({
+    source: "audio",
+    message: "playback failed",
+    count: 1,
+  });
 });
 
 it.each(["non-string", "throwing"])(
@@ -975,17 +942,15 @@ it.each(["non-string", "throwing"])(
     });
     const observed: number[] = [];
     s.store.subscribe((view) => observed.push(view.game.revision));
-    try {
-      expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
-      expect(await s.flush()).toBe(true);
-      expect(observed).toContain(1);
-      expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
-      expect(s.diagnostics.snapshot()).toContainEqual(
-        expect.objectContaining({ source: "render", message: "Unknown failure" }),
-      );
-    } finally {
-      await s.dispose();
-    }
+    onTestFinished(() => s.dispose());
+
+    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+    expect(await s.flush()).toBe(true);
+    expect(observed).toContain(1);
+    expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
+    expect(s.diagnostics.snapshot()).toContainEqual(
+      expect.objectContaining({ source: "render", message: "Unknown failure" }),
+    );
   },
 );
 

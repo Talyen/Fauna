@@ -277,3 +277,28 @@ it("rejects oversized or non-string Cloud uploads before sending to the worker",
     "Invalid Steam request",
   );
 });
+
+it("keeps Steam Cloud usable when optional language replies are malformed or time out", async () => {
+  const { adapter, worker } = await transportFixture();
+  worker.postMessage.mockImplementationOnce(({ id }) => {
+    queueMicrotask(() => worker.emit("message", { id, value: "not a valid language!" }));
+  });
+  expect(await adapter.language()).toBeNull();
+  expect(worker.kill).not.toHaveBeenCalled();
+  expect(await adapter.list()).toEqual([]);
+  let timedOutId;
+  worker.postMessage.mockImplementationOnce(({ id }) => {
+    timedOutId = id;
+  });
+  vi.useFakeTimers();
+  try {
+    const pending = adapter.language();
+    await vi.advanceTimersByTimeAsync(1500);
+    expect(await pending).toBeNull();
+    worker.emit("message", { id: timedOutId, value: "german" });
+    expect(worker.kill).not.toHaveBeenCalled();
+    expect(await adapter.list()).toEqual([]);
+  } finally {
+    vi.useRealTimers();
+  }
+});

@@ -1,26 +1,16 @@
+import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
-import { afterEach, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen } from "@testing-library/react";
+import { expect, it, vi } from "vitest";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { PagedItems } from "../../../src/ui/shared/navigation/pagination";
 import { Button } from "../../../src/components/ui/button";
 import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 
-afterEach(() => {
-  cleanup();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment();
 
 it("reaches every creature after resizing and retains the first visible creature without taking outside focus", async () => {
   let width = 640;
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     const height = Element.prototype.matches.call(this, ".screen-stage")
       ? 720
@@ -64,13 +54,6 @@ it("reaches every creature after resizing and retains the first visible creature
 
 it("fits talent rows to height left after surrounding controls and responds to text growth", () => {
   let cellHeight = 120;
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     const count = document.querySelectorAll(".gallery > button").length;
     const height = Element.prototype.matches.call(this, ".screen-stage")
@@ -124,13 +107,6 @@ it("derives artwork identity from displayed effects and aliases, with a neutral 
 });
 
 it("does not oscillate when the next talent row has longer rules than the first", () => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     const cells = [...document.querySelectorAll(".gallery > button")];
     const gridHeight = cells.reduce((height, cell) => height + (cell.textContent === "Short" ? 120 : 280), 0);

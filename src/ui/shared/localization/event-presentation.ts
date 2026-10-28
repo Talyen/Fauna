@@ -2,7 +2,7 @@ import { battlefieldView, combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
 import { CARDS, FOOD_CARDS, SPECIES, species, type CardDefinition } from "../../../game/content";
 import { PEARL } from "../../../game/content/creatures/memento";
-import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
+import { isKeywordId, KEYWORD_DEFINITIONS, type KeywordId } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
 import type { createMessageReader } from "./messages";
 import { localizedCombatantName } from "./combatant-name";
@@ -265,6 +265,10 @@ export function eventPresentation(
   const englishName = unitName(target);
   const name = localizedCombatantName(target, i18n);
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  const keyword = (status: KeywordId, english: string = status) =>
+    i18n.locale === "en"
+      ? english
+      : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label);
   if (event.kind === "action" && event.actionType === "support") {
     const actor = combatant(event.actorId);
     if (actor && event.text === `${unitName(actor)} intercepts the attack against ${englishName}`)
@@ -359,10 +363,7 @@ export function eventPresentation(
       if (actor && recipient)
         return i18n.message("log.reflectStatus", "{{actor}} reflects {{status}} to {{target}}", {
           actor: localizedCombatantName(actor, i18n),
-          status:
-            i18n.locale === "en"
-              ? englishStatus
-              : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+          status: keyword(status, englishStatus),
           target: recipient,
         });
     }
@@ -399,10 +400,7 @@ export function eventPresentation(
       const status = event.affectedStatus;
       return i18n.message("log.nullifyEffect", "{{name}} nullifies {{status}}", {
         name,
-        status:
-          i18n.locale === "en"
-            ? status
-            : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+        status: keyword(status),
       });
     }
     if ((event.status === "freeze" || event.status === "stun") && event.outcome === "immune") {
@@ -410,10 +408,7 @@ export function eventPresentation(
       if (event.text === `${englishName} is immune to ${status} buildup.`)
         return i18n.message("log.immuneBuildup", "{{name}} is immune to {{status}} buildup.", {
           name,
-          status:
-            i18n.locale === "en"
-              ? status
-              : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+          status: keyword(status),
         });
     }
     if ((event.status === "freeze" || event.status === "stun") && event.outcome === "apply") {
@@ -421,13 +416,7 @@ export function eventPresentation(
       if (event.text === `${englishName} is ${englishStatus}.`)
         return i18n.message("log.controlApplied", "{{name}} is {{status}}.", {
           name,
-          status:
-            i18n.locale === "en"
-              ? englishStatus
-              : i18n.content(
-                  `content.keyword.${event.status}.label`,
-                  KEYWORD_DEFINITIONS[event.status].label,
-                ),
+          status: keyword(event.status, englishStatus),
         });
     }
     if ((event.status === "freeze" || event.status === "stun") && event.outcome === "skip") {
@@ -435,13 +424,7 @@ export function eventPresentation(
       if (event.text === `${englishName} skips its ${englishStatus} turn.`)
         return i18n.message("log.skipControlledTurn", "{{name}} skips its {{status}} turn.", {
           name,
-          status:
-            i18n.locale === "en"
-              ? englishStatus
-              : i18n.content(
-                  `content.keyword.${event.status}.label`,
-                  KEYWORD_DEFINITIONS[event.status].label,
-                ),
+          status: keyword(event.status, englishStatus),
         });
     }
   }
@@ -544,11 +527,8 @@ export function eventPresentation(
   if (event.kind === "status" && event.outcome === "gain" && event.amount !== undefined) {
     const status = event.status;
     if (isKeywordId(status)) {
-      const keyword =
-        i18n.locale === "en"
-          ? status
-          : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label);
-      const values = { name, amount: quantity(event.amount), status: keyword };
+      const label = keyword(status);
+      const values = { name, amount: quantity(event.amount), status: label };
       if (event.text === `${englishName} gains ${event.amount} ${status}.`)
         return i18n.message("log.gainStatus", "{{name}} gains {{amount}} {{status}}.", values);
       if (
@@ -614,10 +594,7 @@ export function eventPresentation(
     const { amount, damageType, critical } = event;
     if (event.text !== `${englishName} takes ${amount} ${damageType} damage${critical ? " (Critical)" : ""}.`)
       return event.text;
-    const type =
-      i18n.locale !== "en" && isKeywordId(damageType)
-        ? i18n.content(`content.keyword.${damageType}.label`, KEYWORD_DEFINITIONS[damageType].label)
-        : damageType;
+    const type = isKeywordId(damageType) ? keyword(damageType) : damageType;
     return critical
       ? i18n.message("log.criticalDamage", "{{name}} takes {{amount}} {{type}} damage (Critical).", {
           name,
