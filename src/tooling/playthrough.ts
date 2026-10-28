@@ -102,13 +102,13 @@ export async function runJourney(
       const { after, step } = await recording.step(index, command, selected.reason, replay?.steps[index]);
       progress.observe(after);
       bundle.steps.push(step);
-      for (const keyword of KEYWORDS)
+      for (const keyword of KEYWORDS) {
+        const previousPoints = talentPoints(before.keywordXP[keyword] ?? 0);
+        const currentPoints = talentPoints(after.keywordXP[keyword] ?? 0);
         for (const point of [1, 2])
-          if (
-            talentPoints(before.keywordXP[keyword] ?? 0) < point &&
-            talentPoints(after.keywordXP[keyword] ?? 0) >= point
-          )
+          if (previousPoints < point && currentPoints >= point)
             bundle.milestones.push({ keyword, point, action: index + 1 });
+      }
       if (before.phase === "battle" && after.phase !== "battle")
         bundle.battles.push({
           encounter: before.encounter,
