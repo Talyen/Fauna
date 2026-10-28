@@ -20,8 +20,12 @@ export function newestHeads(records: readonly CloudSnapshot[]) {
   let ancestors: Set<string> | undefined;
   for (const record of unique)
     for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
-  const knownAncestors = ancestors;
-  return knownAncestors ? unique.filter((record) => !knownAncestors.has(record.id)) : unique;
+  if (ancestors) {
+    let kept = 0;
+    for (const record of unique) if (!ancestors.has(record.id)) unique[kept++] = record;
+    unique.length = kept;
+  }
+  return unique;
 }
 
 /** Sequence counters select device slots; ancestry alone retires competing progress. */

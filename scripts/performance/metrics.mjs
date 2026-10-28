@@ -178,23 +178,31 @@ export function comparePerformance(before, after) {
 const overlaps = (entry, gap) =>
   entry.start < gap.end && (entry.end ?? entry.start + entry.duration) > gap.start;
 export function hitchInventory(sample) {
-  return sample.frames
-    .filter((frame) => frame.duration > 20)
-    .sort((a, b) => b.duration - a.duration)
-    .slice(0, 20)
-    .map((gap) => ({
-      ...gap,
-      actions: sample.segments.filter((segment) => overlaps(segment, gap)).map((segment) => segment.name),
-      spans: (sample.spans ?? [])
-        .filter((span) => overlaps(span, gap))
-        .map((span) => ({ name: span.name, details: span.details, outcome: span.outcome })),
-      longTasks: sample.longTasks === null ? null : sample.longTasks.filter((entry) => overlaps(entry, gap)),
-      input: sample.input === null ? null : sample.input.filter((entry) => overlaps(entry, gap)),
-      longAnimationFrames:
-        sample.longAnimationFrames == null
-          ? null
-          : sample.longAnimationFrames.filter((entry) => overlaps(entry, gap)),
-    }));
+  // Keep only the twenty largest gaps; insert after ties to preserve timeline order.
+  const largest = [];
+  for (const frame of sample.frames) {
+    if (!(frame.duration > 20)) continue;
+    const index = largest.findIndex((gap) => gap.duration < frame.duration);
+    if (index < 0) {
+      if (largest.length < 20) largest.push(frame);
+    } else {
+      largest.splice(index, 0, frame);
+      if (largest.length > 20) largest.pop();
+    }
+  }
+  return largest.map((gap) => ({
+    ...gap,
+    actions: sample.segments.filter((segment) => overlaps(segment, gap)).map((segment) => segment.name),
+    spans: (sample.spans ?? [])
+      .filter((span) => overlaps(span, gap))
+      .map((span) => ({ name: span.name, details: span.details, outcome: span.outcome })),
+    longTasks: sample.longTasks === null ? null : sample.longTasks.filter((entry) => overlaps(entry, gap)),
+    input: sample.input === null ? null : sample.input.filter((entry) => overlaps(entry, gap)),
+    longAnimationFrames:
+      sample.longAnimationFrames == null
+        ? null
+        : sample.longAnimationFrames.filter((entry) => overlaps(entry, gap)),
+  }));
 }
 export function hitchMarkdown(id, summary, trace) {
   const safe = (value) => String(value).replaceAll("|", "\\|").replaceAll("\n", " ");

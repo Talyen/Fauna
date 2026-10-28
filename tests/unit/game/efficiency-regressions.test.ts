@@ -1,3 +1,12 @@
+import { createDiagnostics } from "../../../src/application/diagnostics";
+import { offerBoons, rosterBoonKeywords } from "../../../src/game/boon-offers";
+import { BOON_KEYWORDS } from "../../../src/game/content/boon-keywords";
+import { boonRule } from "../../../src/game/rules/boons";
+import { scoopBonus } from "../../../src/game/combat/healing-values";
+import { harmfulStatuses } from "../../../src/game/combat/state";
+import { passiveCardBonus } from "../../../src/game/ability-rules";
+import { CARDS } from "../../../src/game/content";
+import { roll } from "../../../src/game/random";
 import { expect, it, vi } from "vitest";
 import { modifiedDamage } from "../../../src/game/combat/damage-values";
 import { applyHarmfulStatus, removeEffects, startAction } from "../../../src/game/combat/index";
@@ -869,6 +878,10 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
   expect(newestHeads([first, second, first])).toEqual([second]);
   expect(newestHeads([second, first, updated])).toEqual([second]);
   expect(newestHeads([first, { ...second, ancestors: [] }])).toEqual([first, { ...second, ancestors: [] }]);
+  const third = { ...first, id: "d".repeat(64), ancestors: [] };
+  const records = Object.freeze([first, third, second]);
+  expect(newestHeads(records)).toEqual([third, second]);
+  expect(records).toEqual([first, third, second]);
 });
 
 it("keeps Journey Loom's single-card eligibility, draw order and decisions", () => {
@@ -1022,4 +1035,92 @@ it("detects injured deployed and eligible reserve allies without changing heal t
   expect(battleBenefitFacts(state).injuredAllies).toBe(false);
   state.team[0]!.health--;
   expect(battleBenefitFacts(state).injuredAllies).toBe(true);
+});
+
+it("preserves weighted Boon choices and RNG with shrinking and exhausted pools", () => {
+  for (const seed of [1, 42, 591])
+    for (const unowned of [0, 1, 2, 3, BOONS.length]) {
+      const state = structuredClone(teamRun(seed, ["mossguard", "prismram"]));
+      state.boons = BOONS.slice(0, BOONS.length - unowned).map((boon) => boon.id);
+      const reference = structuredClone(state);
+      const owned = new Set(reference.boons);
+      const keywords = rosterBoonKeywords(reference);
+      const pool = BOONS.filter((boon) => !owned.has(boon.id)).map((boon) => ({
+        id: boon.id,
+        weight: BOON_KEYWORDS[boon.id]?.some((keyword) => keywords.has(keyword)) ? 2 : 1,
+      }));
+      const expected = [];
+      while (pool.length && expected.length < 3) {
+        let choice = roll(reference) * pool.reduce((sum, boon) => sum + boon.weight, 0);
+        let index = 0;
+        while (index < pool.length - 1 && choice >= pool[index]!.weight) choice -= pool[index++]!.weight;
+        expected.push(pool.splice(index, 1)[0]!.id);
+      }
+      expect(offerBoons(state)).toEqual(expected);
+      expect(state).toEqual(reference);
+    }
+});
+
+it("counts Scoop effects once per status and refreshes live combat changes", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.boons = ["clover-measuring-scoop"];
+  const unit = state.team[0]!;
+  const stats = unit.combat!;
+  for (const status of harmfulStatuses) {
+    stats[status] = 3;
+    const expected = harmfulStatuses.filter(
+      (entry) => stats.controlled === entry || Number(stats[entry]) > 0,
+    ).length;
+    expect(scoopBonus(state, unit, 1)).toBe(expected * boonRule("clover-measuring-scoop").healing);
+  }
+  stats.controlled = "freeze";
+  expect(scoopBonus(state, unit, 1)).toBe(
+    harmfulStatuses.length * boonRule("clover-measuring-scoop").healing,
+  );
+  expect(scoopBonus(state, unit, 0)).toBe(0);
+  for (const status of harmfulStatuses) stats[status] = 0;
+  stats.controlled = null;
+  expect(scoopBonus(state, unit, 1)).toBe(0);
+});
+
+it("preserves passive card bonuses across authored tiers and attack state", () => {
+  for (const kind of SPECIES)
+    for (const tier of kind.passiveTiers)
+      for (const def of CARDS) {
+        for (const attacked of [false, true]) {
+          const expected = tier.effects.reduce((sum, effect) => {
+            if (effect.kind !== "cardBonus") return sum;
+            const applies =
+              effect.trigger === "firstAttack"
+                ? def.effect === "attack" && !attacked
+                : effect.trigger === "stunAttack"
+                  ? def.effect === "attack" && def.damageType === "stun"
+                  : effect.trigger === "heal"
+                    ? def.effect === "heal"
+                    : def.effect === "guard" ||
+                      def.effect === "redistributeBlock" ||
+                      def.effect === "teamProtection";
+            return sum + (applies ? effect.amount : 0);
+          }, 0);
+          expect(passiveCardBonus(def, tier, attacked)).toBe(expected);
+        }
+      }
+});
+
+it("keeps diagnostic snapshots immutable and independent after bounded retention", () => {
+  const diagnostics = createDiagnostics();
+  diagnostics.record("render", "first failure");
+  const first = diagnostics.snapshot();
+  for (let index = 0; index < 55; index++) diagnostics.record("render", `failure ${index}`);
+  const latest = diagnostics.snapshot();
+  expect(first).toEqual([{ source: "render", message: "first failure", count: 1 }]);
+  expect(latest).toHaveLength(50);
+  expect(latest[0]!.message).toBe("failure 5");
+  expect(latest[49]!.message).toBe("failure 54");
+  expect(Object.isFrozen(latest)).toBe(true);
+  expect(latest.every(Object.isFrozen)).toBe(true);
+  diagnostics.record("render", "failure 54");
+  expect(diagnostics.snapshot()[49]!.count).toBe(2);
+  expect(latest[49]!.count).toBe(1);
+  diagnostics.dispose();
 });

@@ -2,8 +2,8 @@ import { it, expect } from "vitest";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
-import { rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
-import { compareBalance } from "../../../scripts/balance/paired-balance.mjs";
+import { findingsMarkdown, rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
+import { compareBalance, pairedStats } from "../../../scripts/balance/paired-balance.mjs";
 import { main } from "../../../scripts/balance/balance-compare.mjs";
 import { ROOT } from "../../../scripts/lib/tool-runtime.mjs";
 const row = (starter, seed, win = 0, turns = 20) => ({
@@ -180,4 +180,66 @@ it("findings boundary: counts each valid numeric career seed once, regardless of
   const second = { ...row("mossguard", 2), seed: 1 };
   expect(() => rankBalanceFindings(report([first, second]))).toThrow("duplicate career seeds");
   expect(() => rankBalanceFindings(report([{ ...first, seed: 4294967296 }]))).toThrow("career seeds");
+});
+
+it("compares equivalent nested settings regardless of JSON property order", () => {
+  const baseline = {
+    ...report([row("mossguard", 0)]),
+    settings: { policy: { version: 1, mode: "ranked" }, seeds: [0, 1] },
+  };
+  const treatment = { ...baseline, settings: { seeds: [0, 1], policy: { mode: "ranked", version: 1 } } };
+  expect(compareBalance(baseline, treatment).pairs).toHaveLength(1);
+  expect(() =>
+    compareBalance(baseline, { ...treatment, settings: { ...treatment.settings, seeds: [1, 0] } }),
+  ).toThrow("incompatible");
+});
+
+it("rejects sparse or non-array paired samples rather than inventing zero observations", () => {
+  const sparse = Array(3);
+  sparse[0] = 1;
+  sparse[2] = 3;
+  for (const values of [Array(2), sparse, { length: 1, 0: 2 }, null])
+    expect(() => pairedStats(values)).toThrow("Invalid paired samples");
+  expect(pairedStats([0, 2])).toMatchObject({ n: 2, mean: 1, standardError: 1 });
+});
+
+it("rejects paired aggregates that overflow despite finite individual samples", () => {
+  expect(() => pairedStats([Number.MAX_VALUE, Number.MAX_VALUE])).toThrow("numeric range");
+  expect(() => pairedStats([1e200, -1e200])).toThrow("numeric range");
+  expect(pairedStats([3])).toMatchObject({ mean: 3, standardError: null, noisy: true });
+});
+
+it("requires nonempty paired identities before ranking imported comparisons", () => {
+  const input = compareBalance(report([row("mossguard", 0)]), report([row("mossguard", 0)]));
+  for (const pair of [
+    null,
+    { ...input.pairs[0], key: "" },
+    { ...input.pairs[0], key: " " },
+    { ...input.pairs[0], key: 3 },
+  ])
+    expect(() => rankBalanceFindings({ ...input, pairs: [pair] })).toThrow("identity");
+});
+
+it("validates case identities without conflating colons in arm names and case keys", () => {
+  const entry = row("mossguard", 0);
+  for (const key of [undefined, "", " ", 3])
+    expect(() => rankBalanceFindings(report([{ ...entry, key }]))).toThrow("identity");
+  const input = {
+    ...report([
+      { ...entry, arm: "a:b", key: "c" },
+      { ...entry, arm: "a", key: "b:c" },
+    ]),
+    kind: "experiment",
+  };
+  expect(rankBalanceFindings(input).findings).toEqual([]);
+  expect(() => rankBalanceFindings({ ...input, cases: [input.cases[0], input.cases[0]] })).toThrow(
+    "Duplicate",
+  );
+});
+
+it("keeps fragment and query characters inside evidence filenames", () => {
+  const result = rankBalanceFindings(
+    report([{ ...row("mossguard", 0), evidence: "reports/case #1?details.json" }]),
+  );
+  expect(findingsMarkdown(result)).toContain("(<reports/case%20%231%3Fdetails.json>)");
 });
