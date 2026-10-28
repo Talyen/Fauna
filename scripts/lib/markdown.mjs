@@ -10,7 +10,11 @@ const FENCE_MARKER_RE = /^ {0,3}(`{3,}|~{3,})/u;
 function trackFenceLine(line, fence) {
   const marker = FENCE_MARKER_RE.exec(line)?.[1];
   if (!marker) return fence;
-  if (!fence) return marker;
+  if (!fence) {
+    // Backtick info strings cannot themselves contain backticks.
+    if (marker[0] === "`" && line.slice(line.indexOf(marker) + marker.length).includes("`")) return null;
+    return marker;
+  }
   if (marker[0] === fence[0] && marker.length >= fence.length && /^ {0,3}(?:`{3,}|~{3,})[ \t]*$/u.test(line))
     return null;
   return fence;
@@ -19,14 +23,26 @@ function trackFenceLine(line, fence) {
 function* unfencedLines(lines) {
   let fence = null;
   for (const [index, line] of lines.entries()) {
+    const previous = fence;
     fence = trackFenceLine(line.replace(/\r$/u, ""), fence);
-    if (!FENCE_MARKER_RE.test(line) && !fence) yield { line, index };
+    if (!previous && !fence) yield { line, index };
   }
+}
+
+function escapedAt(source, index) {
+  let escapes = 0;
+  for (let before = index - 1; before >= 0 && source[before] === "\\"; before--) escapes++;
+  return escapes % 2 !== 0;
 }
 
 export function extractMarkdownLinkTargets(source) {
   const targets = [];
-  for (const match of source.matchAll(/\[[^\]\n]*\]\(/gu)) {
+  // Preserve offsets while masking code spans, including multi-backtick delimiters.
+  const prose = source.replace(/(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/gu, (span, _delimiter, index) =>
+    escapedAt(source, index) ? span : " ".repeat(span.length),
+  );
+  for (const match of prose.matchAll(/\[[^\]\n]*\]\(/gu)) {
+    if (escapedAt(source, match.index)) continue;
     let index = (match.index ?? 0) + match[0].length;
     const leading = /^[ \t]*(?:\r?\n[ \t]*)?/u.exec(source.slice(index));
     index += leading?.[0].length ?? 0;
@@ -94,10 +110,25 @@ function headingPlainText(raw) {
 export function headingSlugs(source) {
   const slugs = new Set();
   const seen = new Map();
-  for (const { line } of unfencedLines(source.split("\n"))) {
+  let paragraph = [];
+  let previousIndex = -2;
+  for (const { line, index } of unfencedLines(source.split("\n"))) {
+    if (index !== previousIndex + 1) paragraph = [];
+    previousIndex = index;
+    const underline = /^ {0,3}(?:=+|-+)[ \t]*\r?$/u.test(line);
     const match = /^ {0,3}(#{1,6})[ \t]+(.+?)\s*#*\s*$/u.exec(line);
-    if (!match?.[2]) continue;
-    const base = githubHeadingSlug(headingPlainText(match[2]));
+    const title = match?.[2] ?? (underline && paragraph.length ? paragraph.join(" ") : null);
+    if (title === null) {
+      if (underline) {
+        paragraph = [];
+        continue;
+      }
+      if (!line.trim() || /^(?: {4}|\t| {0,3}(?:>|[-+*] |\d+[.)] ))/u.test(line)) paragraph = [];
+      else paragraph.push(line.trim());
+      continue;
+    }
+    paragraph = [];
+    const base = githubHeadingSlug(headingPlainText(title));
     if (!base) continue;
     let count = seen.get(base) ?? 0;
     let slug = count === 0 ? base : `${base}-${count}`;

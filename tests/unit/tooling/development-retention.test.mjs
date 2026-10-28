@@ -1,5 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
+import { snapshot } from "../../../scripts/lib/development-package-receipt.mjs";
 import { expect, it } from "vitest";
 import { repository } from "../../support/tooling.mjs";
 import { developmentPackage } from "../../../scripts/release/development-package.mjs";
@@ -99,4 +101,25 @@ it("retains the latest and protected packages while cleaning only sealed idle ou
     }),
   ).toBe(1);
   expect(readFileSync(path.join(interruptedOutput, "partial"), "utf8")).toBe("unfinished");
+});
+
+it("hashes differently sized package files without retaining prior buffer bytes", () => {
+  const root = repository({ "package.json": "{}" }, "fauna-package-hash-");
+  const output = path.join(root, "output");
+  mkdirSync(output);
+  const files = [
+    ["a", Buffer.alloc(1024 * 1024 + 7, 65)],
+    ["b", Buffer.from("small")],
+    ["c", Buffer.alloc(0)],
+  ];
+  for (const [name, bytes] of files) writeFileSync(path.join(output, name), bytes);
+  expect(snapshot(output)).toEqual([
+    ["", "directory"],
+    ...files.map(([name, bytes]) => [
+      name,
+      "file",
+      bytes.length,
+      createHash("sha256").update(bytes).digest("hex"),
+    ]),
+  ]);
 });

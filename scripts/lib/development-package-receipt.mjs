@@ -9,6 +9,7 @@ const present = (file) => lstatSync(file, { throwIfNoEntry: false });
 // is not eligible. Retain empty directories in the identity as well.
 export function snapshot(root) {
   const entries = [];
+  let buffer;
   function visit(file, relative) {
     const info = lstatSync(file);
     if (info.isSymbolicLink()) throw new Error("Output contains a symlink");
@@ -18,9 +19,9 @@ export function snapshot(root) {
       for (const name of readdirSync(file).sort()) visit(path.join(file, name), path.join(relative, name));
     } else if (info.isFile()) {
       const fd = openSync(file, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
-      const hash = createHash("sha256"),
-        buffer = Buffer.allocUnsafe(1024 * 1024);
+      const hash = createHash("sha256");
       try {
+        buffer ??= Buffer.allocUnsafe(1024 * 1024);
         for (;;) {
           const n = readSync(fd, buffer, 0, buffer.length, null);
           if (!n) break;

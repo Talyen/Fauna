@@ -8,6 +8,8 @@ export function releaseVersion(root, tag) {
   if (pkg.name !== "fauna" || pkg.build?.appId !== "com.fauna.game" || pkg.build?.productName !== "Fauna")
     throw new Error("Unexpected Fauna release identity.");
   if (
+    typeof pkg.version !== "string" ||
+    pkg.version.trim() !== pkg.version ||
     !VERSION.test(pkg.version) ||
     lock.name !== pkg.name ||
     lock.version !== pkg.version ||
@@ -31,10 +33,10 @@ export function buildIdentity(root) {
 }
 export function verifyBuildIdentity(record, expected) {
   if (
-    record.format !== 1 ||
+    record?.format !== 1 ||
     record.name !== "fauna" ||
-    record.dirty ||
-    expected.dirty ||
+    record.dirty !== false ||
+    expected?.dirty !== false ||
     record.version !== expected.version ||
     record.commit !== expected.commit ||
     record.tree !== expected.tree
