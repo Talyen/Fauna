@@ -104,7 +104,7 @@ export function* restoreHealth(
       if (floor > stats.armor)
         yield* reaction("grantStatus", unit, "armor", floor - stats.armor, events, state);
     }
-    if (state.boons.includes("thaw-spoon") && stats.freeze > 0) {
+    if (stats.freeze > 0 && state.boons.includes("thaw-spoon")) {
       const removed = Math.min(gain, stats.freeze);
       stats.freeze -= removed;
       if (!stats.freeze) clearHarmfulStatus(stats, "freeze");
@@ -397,7 +397,7 @@ export function* healthThresholds(
     if (before >= maximumHealth(unit) / 2 && after < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast"))
         yield* reaction("grantArmor", state, unit, talentRule("armor.steadfast").amount, events);
-      if (hasTalent(state, "health.desperate-guard") && !stats.desperateGuardUsed) {
+      if (!stats.desperateGuardUsed && hasTalent(state, "health.desperate-guard")) {
         stats.desperateGuardUsed = true;
         yield* reaction("grantBlock", state, unit, talentRule("health.desperate-guard").amount, events);
       }

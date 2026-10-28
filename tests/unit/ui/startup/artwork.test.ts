@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { immediateArtwork, likelyArtwork, startupBaseArtwork } from "../../../../src/ui/startup/artwork";
 import prepared from "../../../../src/assets/prepared.json" with { type: "json" };
 import { createGame } from "../../../../src/game/engine";
-import { definition } from "../../../../src/game/content";
+import { definition, speciesCards } from "../../../../src/game/content";
 import { assetUrl } from "../../../../src/ui/shared/assets";
 import {
   accept,
@@ -29,6 +29,16 @@ it("warms only offered starters and shared menu assets on a fresh start, without
   expect(JSON.stringify(game)).toBe(before);
   expect(likelyArtwork(game).length).toBeLessThanOrEqual(8);
   expect(likelyArtwork(game).every((url) => !urls.includes(url))).toBe(true);
+});
+it("prefetches distinct selected abilities in order up to the eight-image limit", () => {
+  const game = produce(createGame(7), (draft) => {
+    draft.selected = [...draft.starterOffers];
+  });
+  const expected = game.selected.flatMap(speciesCards).map((card) => assetUrl(card.artwork!));
+  expect(new Set(expected).size).toBeGreaterThan(8);
+  const before = JSON.stringify(game);
+  expect(likelyArtwork(game)).toEqual([...new Set(expected)].slice(0, 8));
+  expect(JSON.stringify(game)).toBe(before);
 });
 it("warms the saved combat's visible hand, creatures and minions without loading the full deck", () => {
   const game = run();

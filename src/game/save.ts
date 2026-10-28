@@ -1,5 +1,5 @@
 import saveFormat from "./save-format.json" with { type: "json" };
-import { matchesPermanentKit } from "./card-kit";
+import { matchesPermanentKit, speciesHasCard } from "./card-kit";
 import { isFood } from "./content/food";
 import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
@@ -17,7 +17,7 @@ import {
   validTalentSelection,
 } from "./progression";
 import { gameStateSchema } from "./state-schema";
-import { speciesCards, SPECIES, species } from "./content";
+import { SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
 import { CORNUCOPIA_CARD_ID } from "./journey-cards";
@@ -169,17 +169,6 @@ function validateExpedition(state: GameState) {
         state.team.length + state.reserves.length >= 5 ||
         (state.phase !== "teamSelection" && state.phase !== "support" && state.phase !== "campfire"),
     );
-}
-
-const cardIdsBySpecies = new Map<string, ReadonlySet<string>>();
-function speciesHasCard(kind: GameState["team"][number]["species"], cardId: string) {
-  let ids = cardIdsBySpecies.get(kind);
-  if (!ids) {
-    const authored = new Set<string>();
-    for (const card of speciesCards(kind)) authored.add(card.id);
-    cardIdsBySpecies.set(kind, (ids = authored));
-  }
-  return ids.has(cardId);
 }
 
 /** @modifierContract Typed data-only binding; the runtime caller is in this module. */

@@ -177,3 +177,28 @@ it("does not use another keyword's Talent row to fill a missing prerequisite row
     expect.objectContaining({ id: talent.id, field: "row", message: "Talent rows must be contiguous." }),
   );
 });
+
+it("reports independent catalog errors in validation order", () => {
+  const catalog = structuredClone(contentCatalog);
+  const [species] = catalog.species;
+  const [card] = catalog.cards;
+  const [boss] = catalog.bosses;
+  const [talent] = catalog.talents;
+  const [boon] = catalog.boons;
+  Object.assign(species!, { health: 0 });
+  Object.assign(card!, { cost: 2 });
+  Object.assign(boss!, { encounter: -1 });
+  Object.assign(talent!, { row: -1 });
+  Object.assign(boon!, { name: "" });
+  const expected = [
+    [species!.id, "health"],
+    [card!.id, "cost"],
+    [boss!.id, "encounter"],
+    [talent!.id, "row"],
+    [boon!.id, "description"],
+  ];
+  const issues = validateCatalog(catalog)
+    .filter((issue) => expected.some(([id, field]) => issue.id === id && issue.field === field))
+    .map(({ id, field }) => [id, field]);
+  expect(issues).toEqual(expected);
+});

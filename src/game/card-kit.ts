@@ -24,20 +24,29 @@ export function permanentKit(kind: SpeciesId) {
 }
 
 const kitCounts = new Map<SpeciesId, ReadonlyMap<string, number>>();
+function authoredCounts(kind: SpeciesId) {
+  let counts = kitCounts.get(kind);
+  if (!counts) {
+    const authored = new Map<string, number>();
+    const copies = permanentCardCopies(kind);
+    for (const definition of speciesCards(kind))
+      authored.set(definition.id, (authored.get(definition.id) ?? 0) + copies);
+    kitCounts.set(kind, (counts = authored));
+  }
+  return counts;
+}
+
+/** A creature may only own or use definitions from its authored kit. */
+export function speciesHasCard(kind: SpeciesId, cardId: string) {
+  return authoredCounts(kind).has(cardId);
+}
 
 /** Slots can move between piles, but the complete multiset must survive save and resume. */
 export function matchesPermanentKit(kind: SpeciesId, ids: readonly string[]) {
   const definitions = speciesCards(kind);
   const copies = permanentCardCopies(kind);
   if (ids.length !== definitions.length * copies) return false;
-  let counts = kitCounts.get(kind);
-  if (!counts) {
-    const authored = new Map<string, number>();
-    for (const definition of definitions)
-      authored.set(definition.id, (authored.get(definition.id) ?? 0) + copies);
-    kitCounts.set(kind, (counts = authored));
-  }
-  const expected = new Map(counts);
+  const expected = new Map(authoredCounts(kind));
   for (const id of ids) {
     const remaining = expected.get(id) ?? 0;
     if (remaining === 0) return false;
