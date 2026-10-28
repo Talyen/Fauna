@@ -1845,12 +1845,20 @@ it("renders localized glossary rules with keyword identity and leaves authored v
     "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
     "content.glossary.keyword.burn.definition.rule": {
       source: ruleMessage(entry.definition).template,
-      text: "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+      text: "Les coups de <keyword0>Brûlure</keyword0> accumulent leurs dégâts avant le <keyword1>Blocage</keyword1>",
     },
   };
   renderLocalized(<GlossaryScreen back={() => {}} />, catalog);
-  expect(screen.getByText("Brûlure").getAttribute("data-keyword")).toBe("burn");
-  expect(screen.getByText("Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié")).toBeTruthy();
+  expect(screen.getAllByText("Brûlure").every((node) => node.getAttribute("data-keyword") === "burn")).toBe(
+    true,
+  );
+  expect(
+    screen.getByText(
+      (_text, node) =>
+        node?.tagName === "DD" &&
+        node.textContent === "Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
+    ),
+  ).toBeTruthy();
   expect(entry.term).toBe("Burn");
 });
 
@@ -2310,7 +2318,7 @@ it("preserves English combat status snapshots and localizes their rules without 
     "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
     "content.glossary.keyword.burn.definition.rule": {
       source: ruleMessage(burn).template,
-      text: "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+      text: "Les coups de <keyword0>Brûlure</keyword0> accumulent leurs dégâts avant le <keyword1>Blocage</keyword1>",
     },
     "status.measured": {
       source: "{{keyword}} {{count}}; {{description}}",
@@ -2324,10 +2332,10 @@ it("preserves English combat status snapshots and localizes their rules without 
       </TooltipProvider>
     </LocalizationProvider>,
   );
-  const keyword = screen.getByText("Brûlure");
+  const keyword = screen.getAllByText("Brûlure")[0]!;
   expect(keyword.getAttribute("data-keyword")).toBe("burn");
   expect(keyword.closest("p")?.textContent).toBe(
-    "Brûlure 1 : Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+    "Brûlure 1 : Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
   );
   view.unmount();
   const onlyBurn = {
@@ -2350,7 +2358,7 @@ it("preserves English combat status snapshots and localizes their rules without 
   );
   expect(
     screen.getByRole("button", {
-      name: "Brûlure 1 : Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+      name: "Brûlure 1 : Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
     }),
   ).toBeTruthy();
   tile.unmount();
@@ -2383,7 +2391,7 @@ it("announces a reviewed status and glossary definition in the selected language
   renderLocalized(<CombatStatus combat={game.team[0]!.combat} />);
   expect(
     screen.getByRole("button", {
-      name: "Brûlure 1 ; Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+      name: "Brûlure 1 ; Les coups de Brûlure ajoutent autant de cumuls que leurs dégâts avant le Blocage; Au début du tour de la créature affectée, les cumuls infligent autant de dégâts puis sont divisés par deux; Le dernier cumul disparaît après avoir infligé ses dégâts",
     }),
   ).toBeTruthy();
 });

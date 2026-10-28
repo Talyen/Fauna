@@ -4129,9 +4129,9 @@
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,
-    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
-    "sourceHash": "047e8fd644d5b0859ac150713ae1a177faa89c6a891b5fd6124ecee2ad929484",
-    "text": "Une carte appartenant à une créature; Cette créature agit quand vous la jouez; Son coût est payé avec le <keyword0>Mana</keyword0> commun"
+    "source": "A creature's ability card; Playing it makes that creature act and spends your team's shared <keyword0>Mana</keyword0>",
+    "sourceHash": "db20fa05822a234727a0ceb2247c0ddd0f7c3afdb5a4b9daf07d325ebd805025",
+    "text": "La carte de capacité d’une créature; La jouer fait agir cette créature et dépense le <keyword0>Mana</keyword0> partagé de votre équipe"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -4141,9 +4141,9 @@
   },
   "content.glossary.attack.definition.rule": {
     "reviewed": true,
-    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
-    "sourceHash": "2dba1141f125db910b51e67d695bac6c26234fd23758032422308c226deeb0b4",
-    "text": "Une action qui inflige des dégâts à un ennemi; Les caractéristiques d’attaque modifient ses dégâts"
+    "source": "An action that deals damage to an enemy; Its traits determine which damage modifiers apply",
+    "sourceHash": "4d4dd400723be7d562d454e20f08e728cc4ad3fea4f242768b597b1c8ee7e198",
+    "text": "Une action qui inflige des dégâts à un ennemi; Ses traits déterminent les modificateurs de dégâts applicables"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -4151,11 +4151,23 @@
     "sourceHash": "d8a3461f51b089a62b7198b16ef483e4730d28460d328b1024f402c115f09fbc",
     "text": "Attaque"
   },
+  "content.glossary.auto-end-turn.definition.rule": {
+    "reviewed": true,
+    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "e3df304555d1934a79f1324fd19a5668d4277776eba11cc4991a9c5e89f771da",
+    "text": "Réglage facultatif; Après une carte jouée ou une permutation, termine votre tour si vous n’avez plus de <keyword0>Mana</keyword0>, aucune carte jouable et aucun remplacement en attente; Vous pouvez toujours choisir Terminer le tour sans confirmation"
+  },
+  "content.glossary.auto-end-turn.term.rule": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "935fccd6b70fd2f13b353fabdd2af480bc4f6c03fc5329eac6974e9c94e7dcf7",
+    "text": "Fin de tour automatique"
+  },
   "content.glossary.backup.definition.rule": {
     "reviewed": true,
-    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
-    "sourceHash": "007595fcc1338575f0ead8202e9407c16e7c120df74aab81b6c20198fe43115e",
-    "text": "Recrutez jusqu’à cinq créatures : jusqu’à trois créatures ordinaires ou une Légendaire déployées; Seules les créatures vivantes déployées fournissent leurs passifs; Après un K.-O., choisissez une réserve vivante avant de continuer; Les remplacements conservent les emplacements de cartes sans pioche supplémentaire ni bonus d’ouverture; Les autres permutations exigent des capacités ou des effets de jeu"
+    "source": "Creatures in your roster but off the field; Your roster holds up to five creatures, with up to three ordinary creatures or one Legendary deployed; Only living deployed creatures provide passives; After a knockout, choose a living backup to continue; Replacements preserve card slots without extra draws or opening bonuses",
+    "sourceHash": "4591a49f128b10df00171a210d4e31d3d9e6ac0254d8f1d5cb387ed42b6d8fbd",
+    "text": "Les créatures de votre groupe qui ne sont pas sur le terrain; Le groupe compte jusqu’à cinq créatures, dont trois ordinaires ou une Légendaire déployées au maximum; Seules les créatures vivantes déployées fournissent leurs passifs; Après une mise hors combat, choisissez une réserve vivante pour continuer; Les remplacements conservent les emplacements de cartes sans pioche supplémentaire ni bonus d’ouverture"
   },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
@@ -4165,9 +4177,9 @@
   },
   "content.glossary.battle.definition.rule": {
     "reviewed": true,
-    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
-    "sourceHash": "0a3b30d1d7d4f73250e854e733d3d19daefb105fb03be715ada6c6e0f16d47f2",
-    "text": "Une rencontre; Vaincre tous les ennemis pour gagner; La <keyword0>Santé</keyword0> et les K.-O. persistent entre les rencontres; Le repos au feu restaure {{value0}}% de la <keyword1>Santé</keyword1> maximale de chaque créature, même mise K.-O.; Les effets de combat et le <keyword2>Blocage</keyword2> sont réinitialisés pour le combat suivant"
+    "source": "Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts carry into later battles; <keyword1>Block</keyword1> and combat effects reset; Campfire Rest restores {{value0}}% maximum <keyword2>Health</keyword2> to each creature, including knocked-out creatures",
+    "sourceHash": "7ed6b30065d53abfb72d31bd8ebc2b73791621d85bab6108a26f284afb405d2c",
+    "text": "Battez tous les ennemis pour gagner; La <keyword0>Santé</keyword0> et les mises hors combat persistent entre les combats; Le <keyword1>Blocage</keyword1> et les effets de combat sont réinitialisés; Le repos au feu de camp restaure {{value0}}% de la <keyword2>Santé</keyword2> maximale de chaque créature, même hors combat"
   },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
@@ -4177,9 +4189,9 @@
   },
   "content.glossary.boons.definition.rule": {
     "reviewed": true,
-    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
-    "sourceHash": "bc69c835482bace1a0d134b7e3cb05fd69d318e5c1c4254d71ef98ad89187a82",
-    "text": "Effets passifs pour le voyage en cours; Lorsqu’ils sont proposés, choisissez une bénédiction parmi trois ou passez; Les bénédictions prennent fin avec le voyage"
+    "source": "Passive effects for the current journey; Choose one of three when offered, or skip; All Boons end with the journey",
+    "sourceHash": "197ea9c4d8edfeb63a694189dd0ef3f0b59eb5f1ed98673d6577331590e8802e",
+    "text": "Des effets passifs pour le voyage en cours; Choisissez l’une des trois bénédictions proposées ou passez; Toutes les bénédictions prennent fin avec le voyage"
   },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
@@ -4189,9 +4201,9 @@
   },
   "content.glossary.copy.definition.rule": {
     "reviewed": true,
-    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
-    "sourceHash": "2ea94ca3d7e4adcff0a4d539f3376ceadcc41578f966147b8a70665a2f82e89d",
-    "text": "Un double d’une carte piochée avec le même propriétaire, niveau et coût en <keyword0>Mana</keyword0>; Reste dans le paquet jusqu’à la fin du combat; Piocher une copie peut la copier à nouveau; Créer ou faire avancer une copie ne compte pas comme une pioche"
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Lasts only for the battle; Drawing a copy can create another copy; Creating a copy or moving it from overflow into hand does not count as drawing",
+    "sourceHash": "adf591c95c4a0d89dbd64f77de92f016f789472358f0428ee681d823612481f8",
+    "text": "Un double d’une carte piochée, avec le même propriétaire, niveau et coût en <keyword0>Mana</keyword0>; Ne dure que le temps du combat; Piocher une copie peut en créer une autre; Créer une copie ou la faire passer des cartes en attente à la main ne compte pas comme une pioche"
   },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
@@ -4201,9 +4213,9 @@
   },
   "content.glossary.damage.definition.rule": {
     "reviewed": true,
-    "source": "Attacks can <keyword0>Dodge</keyword0> or critically hit; <keyword1>Block</keyword1> absorbs damage first; <keyword2>Armor</keyword2> then reduces <keyword3>Physical</keyword3> and <keyword4>Stun</keyword4> damage; Reducing damage removes {{value0}} <keyword5>Armor</keyword5>; <keyword6>Burn</keyword6>, <keyword7>Poison</keyword7>, <keyword8>Bleed</keyword8>, <keyword9>Stun</keyword9>, and <keyword10>Freeze</keyword10> hits add their matching buildup; There are no elemental reactions",
-    "sourceHash": "561a8081013e9c64ca1f6913e5253d9b48593bd0a6995d9bde9a8712ba722c8e",
-    "text": "Les attaques peuvent être <keyword0>esquivées</keyword0> ou infliger un coup critique; Le <keyword1>Blocage</keyword1> absorbe d’abord les dégâts; L’<keyword2>Armure</keyword2> réduit ensuite les dégâts <keyword3>Physiques</keyword3> et d’<keyword4>Étourdissement</keyword4>; Réduire les dégâts retire {{value0}} <keyword5>Armure</keyword5>; Les touches de <keyword6>Brûlure</keyword6>, <keyword7>Poison</keyword7>, <keyword8>Saignement</keyword8>, <keyword9>Étourdissement</keyword9> et <keyword10>Gel</keyword10> ajoutent leur accumulation correspondante; Il n’y a pas de réactions élémentaires"
+    "source": "<keyword0>Block</keyword0> absorbs damage first; <keyword1>Armor</keyword1> then reduces <keyword2>Physical</keyword2> and <keyword3>Stun</keyword3> damage; <keyword4>Burn</keyword4>, <keyword5>Poison</keyword5>, <keyword6>Bleed</keyword6>, <keyword7>Stun</keyword7> and <keyword8>Freeze</keyword8> hits add matching buildup, even through <keyword9>Block</keyword9>; Different damage types do not trigger elemental reactions",
+    "sourceHash": "593f898d03824b12286d166c9a6faf5057b320425e8de4559350d856e67518ec",
+    "text": "Le <keyword0>Blocage</keyword0> absorbe les dégâts en premier; L’<keyword1>Armure</keyword1> réduit ensuite les dégâts <keyword2>Physiques</keyword2> et d’<keyword3>Étourdissement</keyword3>; Les coups de <keyword4>Brûlure</keyword4>, <keyword5>Poison</keyword5>, <keyword6>Saignement</keyword6>, d’<keyword7>Étourdissement</keyword7> et de <keyword8>Gel</keyword8> accumulent leur effet même à travers le <keyword9>Blocage</keyword9>; Les différents types de dégâts ne déclenchent pas de réactions élémentaires"
   },
   "content.glossary.damage.term.rule": {
     "reviewed": true,
@@ -4213,9 +4225,9 @@
   },
   "content.glossary.deaths-door.definition.rule": {
     "reviewed": true,
-    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
-    "sourceHash": "a562785819d42c44f940b5fe0c188c5fac99d66b10529a87eb3cc8e84dd6913b",
-    "text": "Chaque créature alliée survit une fois par combat aux dégâts mortels avec {{value0}} <keyword0>Santé</keyword0> et {{value1}} tours de répit; Les dégâts mortels pendant ce répit laissent encore {{value2}} <keyword1>Santé</keyword1>; Les dégâts ultérieurs peuvent la mettre K.-O.; Les tours en réserve consomment aussi le répit"
+    "source": "Once per battle, each allied creature survives fatal damage at {{value0}} <keyword0>Health</keyword0> and gains {{value1}} grace turns; Fatal damage also leaves {{value2}} <keyword1>Health</keyword1> during grace; Turns in backup still use up grace",
+    "sourceHash": "18720032f1fcb0c3dbcb68400c8e91953dca8bcd343a92ac6d2ebbc063ae484b",
+    "text": "Une fois par combat, chaque créature alliée survit aux dégâts mortels avec {{value0}} <keyword0>Santé</keyword0> et gagne {{value1}} tours de grâce; Pendant ce délai, les dégâts mortels laissent aussi {{value2}} <keyword1>Santé</keyword1>; Les tours en réserve consomment également ce délai"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -4225,9 +4237,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "52a061e2aa13290160c91308277f13c924993067549dd30194322a7f59da7a78",
-    "text": "Tous les équipiers partagent un paquet, une main et une défausse; Les cartes jouées vont à la défausse sauf si elles ont <keyword0>Consommer</keyword0>; Les cartes non jouées y vont en fin de tour; Dès que la pioche est vide, mélangez-y la défausse"
+    "source": "Your team shares a deck, hand and discard pile; Played cards go to discard unless Consumed, as do cards left in hand at turn end; Whenever the draw pile empties, shuffle discard into it",
+    "sourceHash": "52efbca6f3f333940814f8585e31800a8ca3e9a82ec75bcc894e9c356842ef70",
+    "text": "Votre équipe partage un paquet, une main et une défausse; Les cartes jouées sont défaussées sauf si elles sont consommées, tout comme les cartes en main à la fin du tour; Dès que la pioche est vide, la défausse y est mélangée"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -4237,9 +4249,9 @@
   },
   "content.glossary.echo.definition.rule": {
     "reviewed": true,
-    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
-    "sourceHash": "43724e7882e654f22408f714880839e7630b6fa985724caa38d9a3a67e7106b5",
-    "text": "Serviteur de Memento; Possède {{value0}} <keyword0>Santé</keyword0> avant les améliorations de carte; Attaque uniquement par La cour se souvient; Deux peuvent être invoqués au maximum"
+    "source": "Memento's Minion; Starts with {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "0cd4cebc1b81b95f73dcdebfbc17e26b58c4783a98ed94bf903dcff651ff5345",
+    "text": "Serviteur de Memento; Commence avec {{value0}} <keyword0>Santé</keyword0> avant les améliorations de carte; Attaque uniquement par La cour se souvient; Deux peuvent être invoqués au maximum"
   },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
@@ -4249,9 +4261,9 @@
   },
   "content.glossary.gold.definition.rule": {
     "reviewed": true,
-    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
-    "sourceHash": "af5382ed3a090b0142a813497a75e814706b79eaaec4905662170e58e1c05b7e",
-    "text": "L’Or gagné au combat est conservé entre les voyages; Dépensez-le chez les marchands de bénédictions pour le voyage en cours; L’Or n’est ni un mot-clé ni une catégorie de talents"
+    "source": "Permanent currency that carries between journeys; Spend it at Boon Merchants on Boons for the current journey",
+    "sourceHash": "c8a8d4d4c514571a362b00ae995f23af2680eb8f56bd662979a2b82e4a83163f",
+    "text": "Monnaie permanente conservée entre les voyages; Achetez des bénédictions pour le voyage en cours chez les marchands de bénédictions"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,
@@ -4261,9 +4273,9 @@
   },
   "content.glossary.hit.definition.rule": {
     "reviewed": true,
-    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
-    "sourceHash": "6f9760946b1b0aa58fac4c37c7a03887e426f93001ecd9e780cbe0751ceb8c3c",
-    "text": "Une attaque réussie, y compris absorbée par le <keyword0>Blocage</keyword0>; Les <keyword1>Esquives</keyword1> et dégâts périodiques ne sont pas des coups; Les <keyword2>Épines</keyword2> et Manteau de spores ripostent en cas de coup"
+    "source": "An attack that connects, even if <keyword0>Block</keyword0> absorbs all damage; <keyword1>Dodges</keyword1> and damage over time are not hits; Hit effects can trigger without <keyword2>Health</keyword2> loss",
+    "sourceHash": "924b618229574f0951d67e1f76bb92e4ba804194b1fe216900b59c85185f0ddb",
+    "text": "Une attaque qui touche, même si le <keyword0>Blocage</keyword0> absorbe tous les dégâts; Les <keyword1>Esquives</keyword1> et les dégâts sur la durée ne sont pas des coups; Les effets à l’impact peuvent se déclencher sans perte de <keyword2>Santé</keyword2>"
   },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
@@ -4273,9 +4285,9 @@
   },
   "content.glossary.keyword-xp.definition.rule": {
     "reviewed": true,
-    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
-    "sourceHash": "f6bda186c283c7e0c78d278f315b2d244d9cb61b5579c7417a88f694f8538391",
-    "text": "Jouer une carte d’action rapporte {{value0}} XP pour chacun de ses mots-clés; Les XP de fin de combat sont permanents, même après une défaite; Abandonner conserve les XP déjà gagnés sans accorder les récompenses de victoire"
+    "source": "Each action card played earns {{value0}} XP per eligible keyword; XP becomes permanent when battle ends, even after defeat or abandonment; Abandoning grants no victory rewards",
+    "sourceHash": "d7367f3c5e5ac8b852401cb1840bb1c845e1038616637b98abf67d6193dda492",
+    "text": "Chaque carte d’action jouée rapporte {{value0}} EXP par mot-clé admissible; L’EXP devient permanente à la fin du combat, même après une défaite ou un abandon; Abandonner ne donne aucune récompense de victoire"
   },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
@@ -4285,141 +4297,141 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
-    "sourceHash": "67b4dde4475f0594eccc157a1d5c9076620d0400ce0ff30acca9ea0dec5b1404",
-    "text": "Réduit les dégâts de type <keyword0>Physique</keyword0> et <keyword1>Étourdissement</keyword1> reçus après le <keyword2>Blocage</keyword2> ; perd {{value0}} cumul lorsque l’<keyword3>Armure</keyword3> réduit des dégâts"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
+    "sourceHash": "0f4f8f34f6863826e3d1d2c6d0f16c71e798c60371db71f2b6faae3e250b1153",
+    "text": "Réduit les dégâts <keyword0>Physiques</keyword0> et d’<keyword1>Étourdissement</keyword1> restants après le <keyword2>Blocage</keyword2> d’un montant égal à ses cumuls; Perd {{value0}} cumul chaque fois qu’elle réduit des dégâts"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "0ed62d056f196fb039d5f2d583f2308fc29d1955408348d020d87ad27fc138e6",
-    "text": "renvoie la prochaine attaque contre vous à son auteur; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword0>renvoyées</keyword0> ne peuvent pas être <keyword1>renvoyées</keyword1> à nouveau; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
+    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "c4250873e5938d617c3d50622fab48e6d8aa2e5394382905027695d0457ac5b6",
+    "text": "Renvoie la prochaine attaque de capacité reçue à son attaquant; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword0>renvoyées</keyword0> ne peuvent pas être <keyword1>renvoyées</keyword1> à nouveau; Dure jusqu’à utilisation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "Repeat damage next turn, then clear",
-    "sourceHash": "3370891b002614aaedcbfbf6261352b7114c1dae390caf13d723a7d71ead7178",
-    "text": "Répète les dégâts au prochain tour, puis se dissipe"
+    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
+    "sourceHash": "0170f647482d778f180de6b1ed842d25448ed1d7ef83880b1cfa799263bbf2e8",
+    "text": "Les coups de <keyword0>Saignement</keyword0> ajoutent autant de cumuls que leurs dégâts avant le <keyword1>Blocage</keyword1>; Au début du prochain tour de la créature affectée, les cumuls infligent autant de dégâts puis disparaissent"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
-    "sourceHash": "d5a2de3648b928eb996a36d6f32c899ffbcd7d61065ab752d2d348fcfe696a93",
-    "text": "{{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword0>Esquive</keyword0> pour chaque cible; Ne se cumule pas"
+    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
+    "sourceHash": "eb4674cc4a89fe1b01456d37dd5cc91a272debeaf84649136a112386055dde6a",
+    "text": "Votre prochaine attaque a {{value0}}% de chances de manquer toutes ses cibles; Prend fin après cette attaque, réussie ou non; Un échec compte comme une <keyword0>Esquive</keyword0> de chaque cible; Ne se cumule pas"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
-    "sourceHash": "704bc642d94937eb6933990c928e16ddbab4f9f47930d05abdbeedbc310c0049",
-    "text": "Absorbe les dégâts reçus avant la <keyword3>Santé</keyword3>, y compris les dégâts périodiques de <keyword0>Brûlure</keyword0>, <keyword1>Poison</keyword1> et <keyword2>Saignement</keyword2>; Ne prévient ni les effets de touche, ni l’accumulation, ni le <keyword4>Vol de vie</keyword4> sauf indication contraire; Le <keyword5>Blocage</keyword5> restant est normalement réduit de moitié au début de votre prochain tour, avec un arrondi normal"
+    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
+    "sourceHash": "4162dde0c167386a032fe5ce4c64b7d7ed9c0f49c228f961c8ceb5876432959d",
+    "text": "Absorbe les dégâts avant la <keyword0>Santé</keyword0>, y compris ceux sur la durée; N’empêche normalement ni les effets à l’impact, ni l’accumulation de statuts, ni le <keyword1>Vol de vie</keyword1>; Le <keyword2>Blocage</keyword2> restant est normalement divisé par deux au prochain tour de la créature, arrondi à l’entier le plus proche"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "Deal damage each turn, then halve the stacks",
-    "sourceHash": "6fcbab26474bc849ee126730fd36761b508bb61dd49a2c1dbc6c7cbbb237b2c9",
-    "text": "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié"
+    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
+    "sourceHash": "e8556cf8e0524f3a42a01799b8d960feeefdb60fb6c855e5f26bb3ae3c74d52e",
+    "text": "Les coups de <keyword0>Brûlure</keyword0> ajoutent autant de cumuls que leurs dégâts avant le <keyword1>Blocage</keyword1>; Au début du tour de la créature affectée, les cumuls infligent autant de dégâts puis sont divisés par deux; Le dernier cumul disparaît après avoir infligé ses dégâts"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
-    "source": "Remove harmful effects from an ally",
-    "sourceHash": "577247ef0e441f0e1e361fef07fa3338c0e9002ee7184ec58a622aaee7ea593c",
-    "text": "Retire les effets néfastes d’un allié"
+    "source": "Remove the stated number of harmful effect types from an ally, clearing all stacks of each removed type",
+    "sourceHash": "8ff39c39b11bb260916e95b8da7df1bac8ec3f1fd492716533a46691662edb1c",
+    "text": "Retire d’un allié le nombre indiqué de types d’effets néfastes, avec tous les cumuls de chaque type retiré"
   },
   "content.glossary.keyword.consume.definition.rule": {
     "reviewed": true,
-    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
-    "sourceHash": "d022f18acf92c8cf6f1961e87ffcffe5211ddd912823eff03bd9c0bed441e352",
-    "text": "Retire cette carte pour le reste du combat après utilisation ; Le deck initial est restauré à chaque combat ; Les cartes non jouées sont défaussées normalement"
+    "source": "Remove the card for the rest of the battle after it is played; Unplayed cards discard normally; Your starting deck returns each battle",
+    "sourceHash": "188a8646669b46b8985bf62cd087259ccda564bd0f202f3aaad9ad6f6694fc84",
+    "text": "Retire la carte pour le reste du combat après l’avoir jouée; Les cartes non jouées sont défaussées normalement; Votre paquet de départ revient à chaque combat"
   },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
-    "source": "An attack that deals double damage",
-    "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
-    "text": "Une attaque qui inflige le double de dégâts"
+    "source": "An attack that deals double damage; Attacks on either side have a base {{value0}}% <keyword0>critical</keyword0> chance",
+    "sourceHash": "ea6d29959117a140d458ffb9eeed089246d9ebcd7da3498026b73c22d035de22",
+    "text": "Une attaque qui inflige le double de dégâts; Les attaques des deux camps ont une chance de base de {{value0}}% de faire un <keyword0>coup critique</keyword0>"
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets normally cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
-    "sourceHash": "b80e8bde9df9007c329c222774c6d002597c66755c9ffd90761b1f2ab6b385d4",
-    "text": "Les deux camps ont {{value0}}% de chances d’éviter chaque paquet d’attaque avant les défenses; Les cibles sous contrôle ne peuvent normalement pas <keyword0>esquiver</keyword0>; L’<keyword1>Esquive</keyword1> totale est limitée à {{value1}}%"
+    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
+    "sourceHash": "1088ee0a85d53885f8874b158a66971dfa42b5adc72427a4058bf0683a49eb81",
+    "text": "Évite une attaque reçue avant le <keyword0>Blocage</keyword0> ou l’<keyword1>Armure</keyword1>; Chance de base de {{value0}}%, plafonnée à {{value1}}% avec les bonus; Les créatures <keyword2>étourdies</keyword2> ou <keyword3>gelées</keyword3> ne peuvent normalement pas <keyword4>esquiver</keyword4>; Les dégâts sur la durée ne peuvent pas être <keyword5>esquivés</keyword5>"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
-    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
-    "sourceHash": "7764a44520a38defff26c57f966eefc32614ada26ccb3f79ae4565eeeb1d2a5b",
-    "text": "Consommables partagés; Pomme restaure {{value0}} <keyword0>Santé</keyword0>; Baies de <keyword1>Mana</keyword1> confèrent {{value1}} <keyword2>Mana</keyword2>; Pain de voyage confère {{value2}} <keyword3>Blocage</keyword3>; Chaque carte coûte {{value3}} <keyword4>Mana</keyword4> et possède <keyword5>Consommer</keyword5>"
+    "source": "Cards shared by your team; Apple restores {{value0}} <keyword0>Health</keyword0>, <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2> and Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and is Consumed when played",
+    "sourceHash": "7bd469304b1c63455f71908eb47419d9f845af57d0e30483a3085b834baaef9f",
+    "text": "Cartes partagées par votre équipe; Pomme restaure {{value0}} <keyword0>Santé</keyword0>, Baies de <keyword1>Mana</keyword1> confèrent {{value1}} <keyword2>Mana</keyword2> et Pain de voyage confère {{value2}} <keyword3>Blocage</keyword3>; Chaque carte coûte {{value3}} <keyword4>Mana</keyword4> et est consommée lorsqu’elle est jouée"
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
-    "sourceHash": "f3c0719f87e072e801e417e0149b351558eb21a77d0c690c50766b03ae36ae8a",
-    "text": "Les dégâts accumulent le <keyword0>Gel</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
+    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
+    "sourceHash": "e52bf867f720ef2ed4068669839fc0307e0d72aeffe65d920cd6ab225253a69d",
+    "text": "Les coups de <keyword0>Gel</keyword0> accumulent l’effet selon leurs dégâts avant le <keyword1>Blocage</keyword1>; Quand l’accumulation atteint la moitié de la <keyword2>Santé</keyword2> maximale, la créature est <keyword3>gelée</keyword3> et passe un tour; À son rétablissement, elle gagne {{value0}} tours d’immunité à l’<keyword4>Étourdissement</keyword4> et au <keyword5>Gel</keyword5>"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
-    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
-    "sourceHash": "f045775a66bc7619dd675277901c8205596b49164532a0a6812390ca24849ade",
-    "text": "Points de vie restants ; À zéro <keyword0>Santé</keyword0>, une créature est mise hors combat ; La <keyword1>Santé</keyword1> peut être restaurée jusqu’à son maximum ; La restauration ne réanime pas pendant le combat"
+    "source": "A creature's remaining life; At {{value0}} <keyword0>Health</keyword0> it is knocked out; <keyword1>Healing</keyword1> restores <keyword2>Health</keyword2> up to its maximum but cannot revive a knocked-out creature during battle",
+    "sourceHash": "dc98c335dd43488e2b318378618b278ae18410f2624c3feab5fe9b79c626235d",
+    "text": "La vie restante d’une créature; À {{value0}} <keyword0>Santé</keyword0>, elle est mise hors combat; Les <keyword1>soins</keyword1> restaurent la <keyword2>Santé</keyword2> jusqu’au maximum, mais ne raniment pas une créature hors combat pendant une bataille"
   },
   "content.glossary.keyword.leech.definition.rule": {
     "reviewed": true,
-    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
-    "sourceHash": "4f0de462a03215e2953083e62b6da1c942f5c0a49a42b7750b60533110b14b8c",
-    "text": "Restaure la moitié des dégâts infligés, y compris ceux absorbés par le <keyword0>Blocage</keyword0>, avec un arrondi normal; Les dégâts excédentaires ne comptent pas; Le <keyword1>Saignement</keyword1> déclenche le <keyword2>Vol de vie</keyword2> lors de ses dégâts ultérieurs"
+    "source": "Restore <keyword0>Health</keyword0> equal to half the damage dealt, rounded to the nearest whole number; Includes damage absorbed by <keyword1>Block</keyword1>, but not damage prevented by <keyword2>Armor</keyword2> or excess damage beyond a knockout; <keyword3>Bleed</keyword3> restores this <keyword4>Health</keyword4> when it deals damage over time",
+    "sourceHash": "92504d23339bb6b93fac916a0de4be9825665e06769cedb70fe254dca0e255af",
+    "text": "Restaure de la <keyword0>Santé</keyword0> égale à la moitié des dégâts infligés, arrondie à l’entier le plus proche; Inclut les dégâts absorbés par le <keyword1>Blocage</keyword1>, mais pas ceux évités par l’<keyword2>Armure</keyword2> ni ceux dépassant le nécessaire pour mettre hors combat; Le <keyword3>Saignement</keyword3> restaure cette <keyword4>Santé</keyword4> lorsqu’il inflige ses dégâts sur la durée"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
-    "sourceHash": "0ccdb288626c953c14e40659793745c92f85e1490f84979258f7c5dda3037798",
-    "text": "Dégâts de <keyword0>Lumière</keyword0> ; n’implique aucune résistance ni aucun effet de statut"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "57c6fee3c922bd6d0d9075a56126164f12e7cf8bc3a0c70b21397ad4bab58bcf",
+    "text": "Dégâts directs absorbés par le <keyword0>Blocage</keyword0>; Ignore l’<keyword1>Armure</keyword1> et n’applique aucun statut"
   },
   "content.glossary.keyword.mana.definition.rule": {
     "reviewed": true,
-    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
-    "sourceHash": "37ed5d627b894403dea10608586b69b51733f115d316cdc650b2de001899ff65",
-    "text": "La ressource partagée utilisée pour jouer les cartes d’action; Chaque <keyword0>Cristal de mana</keyword0> ajoute {{value0}} au <keyword1>Mana maximum</keyword1>; Votre équipe commence chaque tour avec {{value1}} <keyword2>Mana</keyword2>; Le <keyword3>Mana</keyword3> est partagé; Chaque tour pioche {{value2}} cartes, avec jusqu’à {{value3}} en main"
+    "source": "Your team's shared resource for playing cards; Normally restored to {{value0}} each turn; A <keyword0>Mana Crystal</keyword0> is {{value1}} point of <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "cf47b3be747223299042d23c3ad87c307f0362e8382e0801ccdabcbc776beab8",
+    "text": "La ressource partagée de votre équipe pour jouer des cartes; Revient normalement à {{value0}} à chaque tour; Un <keyword0>Cristal de Mana</keyword0> représente {{value1}} point de <keyword1>Mana maximal</keyword1>"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
-    "sourceHash": "424eb843f6b0a5be6dfb51acd7aa4c1c30870e32d8ceaa69243c2514f24210a7",
-    "text": "Dégâts de <keyword0>Nature</keyword0> ; aucune résistance ni aucun effet de statut n’est implicite"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "57c6fee3c922bd6d0d9075a56126164f12e7cf8bc3a0c70b21397ad4bab58bcf",
+    "text": "Dégâts directs absorbés par le <keyword0>Blocage</keyword0>; Ignore l’<keyword1>Armure</keyword1> et n’applique aucun statut"
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "bfd553d0fd56abbbc5bb24ca1eb51140afeefc9901d2a3c0fda522e6ca2295eb",
-    "text": "<keyword0>annule</keyword0> la prochaine attaque contre vous avant l’<keyword1>Esquive</keyword1>, empêchant ses dégâts et effets néfastes; Les <keyword2>Épines</keyword2> ripostent quand même; Dure jusqu’à consommation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
+    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "735c852a6b0dc398a1383f049ec6b71b955e255cd195486405c74e436967fe15",
+    "text": "Annule la prochaine attaque de capacité reçue et ses effets néfastes sur vous avant l’<keyword0>Esquive</keyword0>; Les <keyword1>Épines</keyword1> ripostent quand même; Dure jusqu’à utilisation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
-    "sourceHash": "2602d446f940f6ebe3914c3b27d28f2f06e18239209a6fcd04624d6137ddc777",
-    "text": "Empêche le prochain effet de statut néfaste ; Les dégâts directs s’appliquent toujours ; Dure jusqu’à utilisation ou <keyword0>dissipation</keyword0> ; Ne se cumule pas"
+    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
+    "sourceHash": "b67f812cd40a83c4177f21c7e4eeeb31f0bed0ec0a2799b815b0afab819f72e5",
+    "text": "Empêche la prochaine application de <keyword0>Brûlure</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Saignement</keyword2>, d’<keyword3>Étourdissement</keyword3>, de <keyword4>Gel</keyword4> ou d’<keyword5>Aveuglement</keyword5>; Ne change ni les dégâts directs ni les statuts existants; Dure jusqu’à utilisation ou <keyword6>dissipation</keyword6>; Ne se cumule pas"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
-    "sourceHash": "370fd0c3157c1e3e29b16acc4e4cb0ed288200ae26c90a217746cd108bba42c0",
-    "text": "Les dégâts <keyword0>Physiques</keyword0> sont réduits par l’<keyword1>Armure</keyword1> après le <keyword2>Blocage</keyword2> ; Les attaques ont {{value0}}% de chances d’infliger un <keyword3>coup critique</keyword3> aux dégâts doublés"
+    "source": "Damage reduced by <keyword0>Armor</keyword0> after <keyword1>Block</keyword1>",
+    "sourceHash": "0c6ceab6f4b171de059102933c0e810c24fa2e5d42c7757b25fcde5281a1ddc7",
+    "text": "Dégâts réduits par l’<keyword0>Armure</keyword0> après le <keyword1>Blocage</keyword1>"
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
-    "sourceHash": "ba21a59771694224774a9c72f07267b7aca490b587f84124bca136d877a00cce",
-    "text": "Les coups de <keyword0>Poison</keyword0> ajoutent les dégâts infligés en <keyword1>Poison</keyword1>; Au début du tour, il inflige ses charges en dégâts puis perd {{value0}}% (au moins {{value1}})"
+    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
+    "sourceHash": "d488ee536e8cb95d13ccb2b8591046c15b3c824eea37c480b5875019efb9a5d5",
+    "text": "Les coups de <keyword0>Poison</keyword0> ajoutent autant de cumuls que leurs dégâts avant le <keyword1>Blocage</keyword1>; Au début du tour de la créature affectée, les cumuls infligent autant de dégâts puis diminuent de {{value0}}%, arrondis à l’entier le plus proche avec un minimum de {{value1}}"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
-    "source": "Remove beneficial effects from an enemy",
-    "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
-    "text": "Retire les effets bénéfiques d’un ennemi"
+    "source": "Remove the stated number of beneficial effect types from an enemy, starting with <keyword0>Block</keyword0> and clearing all stacks of each removed type",
+    "sourceHash": "3482dba560488b0d17812ac900a411e1d25ac2c76bf79bb0da09052c177f8d7b",
+    "text": "Retire d’un ennemi le nombre indiqué de types d’effets bénéfiques, en commençant par le <keyword0>Blocage</keyword0> et en retirant tous les cumuls de chaque type"
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "ac71d7c08ee74bd9e1bef6f8b13f817ee8834a7067e55e5205c6050866e322ec",
-    "text": "renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword0>renvoi d’attaque</keyword0> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword1>renvoi</keyword1> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword2>renvoyés</keyword2> ne peuvent pas être <keyword3>renvoyés</keyword3> à nouveau; Les charges ne se cumulent pas"
+    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
+    "sourceHash": "626f8e5ca9e392de817fe161c9f6cea85c18aab5eadcb54c53430af97ca27e3e",
+    "text": "Redirige le statut néfaste indiqué vers un ennemi vivant aléatoire; Les dégâts directs vous touchent toujours; Le <keyword0>Renvoi d’attaque</keyword0> renvoie plutôt toute l’attaque à son attaquant; Les effets <keyword1>renvoyés</keyword1> ne peuvent pas être <keyword2>renvoyés</keyword2> à nouveau; Les charges ne se cumulent pas"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -4429,27 +4441,27 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
-    "sourceHash": "f70ebc98cb61e0441bcdbf241b97cfbaf10c35c2366a19c4309a636682f8f91c",
-    "text": "Les dégâts accumulent l’<keyword0>Étourdissement</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
+    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
+    "sourceHash": "4f4e13e4d6325ee461a845bb29fc6e5da8d26f4ca9ee9eab87eac7170d6731f3",
+    "text": "Les coups d’<keyword0>Étourdissement</keyword0> accumulent l’effet selon leurs dégâts avant le <keyword1>Blocage</keyword1>, réduits par l’<keyword2>Armure</keyword2>; Quand l’accumulation atteint la moitié de la <keyword3>Santé</keyword3> maximale, la créature est <keyword4>étourdie</keyword4> et passe un tour; À son rétablissement, elle gagne {{value0}} tours d’immunité à l’<keyword5>Étourdissement</keyword5> et au <keyword6>Gel</keyword6>"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
-    "sourceHash": "d1abbe060b93e889424bd84f161330c092282d4e0f69a4cbc46f55f3976a3baa",
-    "text": "Les <keyword0>Épines</keyword0> ripostent avec des dégâts de <keyword1>Nature</keyword1> lorsque leur porteur est touché, même à travers le <keyword2>Blocage</keyword2> ; Elles perdent ensuite {{value0}} cumul"
+    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
+    "sourceHash": "b6e82e5ade5138970b5b6bcd6e2281f68a0be6010b17936dee61d5ae08e72d41",
+    "text": "Lorsqu’un coup touche ou qu’une attaque est <keyword0>annulée</keyword0>, inflige des dégâts de <keyword1>Nature</keyword1> égaux à vos <keyword2>Épines</keyword2>, puis perd {{value0}} cumul; Se déclenche même à travers le <keyword3>Blocage</keyword3> ou l’<keyword4>Armure</keyword4>; Une riposte ne déclenche pas d’autre riposte"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
-    "sourceHash": "ec710358846b6afb0280025a62a035fef37b1ff3df5d3a69ac5ca95ed25c19d1",
-    "text": "Dégâts d’<keyword0>Eau</keyword0> ; le <keyword1>Blocage</keyword1> les absorbe ; l’<keyword2>Armure</keyword2> ne les réduit pas ; aucun effet de statut n’est appliqué"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "57c6fee3c922bd6d0d9075a56126164f12e7cf8bc3a0c70b21397ad4bab58bcf",
+    "text": "Dégâts directs absorbés par le <keyword0>Blocage</keyword0>; Ignore l’<keyword1>Armure</keyword1> et n’applique aucun statut"
   },
   "content.glossary.knockout.definition.rule": {
     "reviewed": true,
-    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
-    "sourceHash": "fb7501b113d10ad7a6a80e93188901e33fe9bfc961dcd2a0a5a3afa840242b26",
-    "text": "À zéro <keyword0>Santé</keyword0>, une créature ne peut ni agir ni être <keyword1>soignée</keyword1> pendant ce combat; Ses cartes ne peuvent pas être jouées ni piochées normalement; Une réserve vivante peut la remplacer; Perdre toutes les créatures du groupe termine le voyage"
+    "source": "At {{value0}} <keyword0>Health</keyword0>, a creature cannot act or receive ordinary <keyword1>healing</keyword1> in battle; Its cards normally cannot be played or drawn; Choose a living backup to replace it; Losing your entire roster ends the journey",
+    "sourceHash": "b1fa089c2c8a4278cb01c05d45ed16fb23f2a4d3777cc57257f4e4f9788e84e2",
+    "text": "À {{value0}} <keyword0>Santé</keyword0>, une créature ne peut ni agir ni recevoir de <keyword1>soins</keyword1> ordinaires en combat; Ses cartes ne peuvent normalement être ni jouées ni piochées; Choisissez une réserve vivante pour la remplacer; Perdre tout votre groupe termine le voyage"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -4459,9 +4471,9 @@
   },
   "content.glossary.legendary.definition.rule": {
     "reviewed": true,
-    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
-    "sourceHash": "13f338a0d48e792629b4ed3587b1d528a887fd521bed22775437a6b5c6141e7b",
-    "text": "Une créature déployée seule; N’apparaît comme ennemie que lors des combats de boss; Peut être recrutée normalement; Ajoute deux copies de chaque capacité à votre paquet"
+    "source": "A creature that deploys alone and adds two copies of each ability to your deck; Can be recruited normally; Enemy Legendaries appear only in Boss encounters",
+    "sourceHash": "30793616afe082b48757c596cc552362d8b2d8d485c50224f7e728c9e27f10b6",
+    "text": "Une créature qui se déploie seule et ajoute deux copies de chaque capacité à votre paquet; Peut être recrutée normalement; Les Légendaires ennemies n’apparaissent que lors des combats de boss"
   },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
@@ -4471,9 +4483,9 @@
   },
   "content.glossary.minion.definition.rule": {
     "reviewed": true,
-    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
-    "sourceHash": "94d5558154065def55548f549b75a3b1a8a9922b2dc43133cdccd13d47236115",
-    "text": "Une invocation propre au combat avec sa propre <keyword0>Santé</keyword0>; N’a ni cartes ni place dans l’équipe; Disparaît si son invocateur tombe ou quitte le terrain"
+    "source": "A summoned creature with its own <keyword0>Health</keyword0> but no cards or roster slot; Lasts only for the battle and disappears if its summoner falls or leaves the field",
+    "sourceHash": "bd854128e5c192d08a1e8d87cdb724a2263bbb8d605f53dc68f780ce99e886f2",
+    "text": "Une créature invoquée avec sa propre <keyword0>Santé</keyword0>, mais sans carte ni place dans le groupe; Ne dure que le temps du combat et disparaît si son invocateur tombe ou quitte le terrain"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,
@@ -4483,9 +4495,9 @@
   },
   "content.glossary.pearl.definition.rule": {
     "reviewed": true,
-    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
-    "sourceHash": "bf2fc85115141fa1671e5434eb45d9d89886784b9dc5422a395ba80d96fb8f54",
-    "text": "Une carte créée en main uniquement pour le combat; Coûte {{value0}} <keyword0>Mana</keyword0>; Confère aléatoirement {{value1}} <keyword1>Blocage</keyword1> ou {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consommer</keyword3> la retire après utilisation; Les Perles non jouées peuvent être piochées et défaussées normalement"
+    "source": "A temporary card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0> and randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; Consumed when played; Unplayed Pearls discard and recycle normally",
+    "sourceHash": "46ae81219767c794e9e687f7b75923a0fff39fc48aa9941ab733d46b6ea9333d",
+    "text": "Une carte temporaire créée dans votre main; Coûte {{value0}} <keyword0>Mana</keyword0> et confère aléatoirement {{value1}} <keyword1>Blocage</keyword1> ou {{value2}} <keyword2>Mana</keyword2>; Consommée lorsqu’elle est jouée; Les perles non jouées sont défaussées et remélangées normalement"
   },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
@@ -4495,9 +4507,9 @@
   },
   "content.glossary.starting-lineup.definition.rule": {
     "reviewed": true,
-    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
-    "sourceHash": "6eeed09de045a4f6c032217ebc2767cf36d3136dddd6bcc30a9b911f0309d5b6",
-    "text": "Votre sélection détermine la formation initiale; Les remplacements après un K.-O. et les permutations par capacité la modifient pour les combats suivants; Les recrues occupent les places ordinaires libres avant de rejoindre la réserve; La formation ne peut pas être modifiée manuellement"
+    "source": "The creatures deployed at battle start; Your draft sets the initial lineup, and replacements and ability swaps update it for later battles; Recruits fill empty ordinary positions before joining backup; You cannot rearrange the lineup manually",
+    "sourceHash": "20e9b7c13752ebf36e05a3453cc88286d6edde099ee1c23c2525c177a2ae4754",
+    "text": "Les créatures déployées au début du combat; Votre sélection initiale fixe la formation, puis les remplacements et permutations de capacités la modifient pour les combats suivants; Les recrues remplissent les places ordinaires vides avant de rejoindre la réserve; La formation ne peut pas être réorganisée manuellement"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
@@ -4507,9 +4519,9 @@
   },
   "content.glossary.swap-cards.definition.rule": {
     "reviewed": true,
-    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
-    "sourceHash": "8e8259e51a309f9c171a36b4f5e7a57881568d2278d6cca64025b0fc43eea25c",
-    "text": "Permute avec une réserve vivante aléatoire; Retire les cartes de la créature sortante de la main et de toutes les piles, puis mélange les cartes de la créature entrante dans la pioche avant toute nouvelle pioche; Sans réserve vivante, échange les positions avec un allié vivant aléatoire; Si la créature est seule, la partie permutation reste sans effet; Passage sûr permute à la place l’allié ayant le moins de <keyword0>Santé</keyword0> et exige une réserve vivante; La <keyword1>Santé</keyword1> et les effets persistent"
+    "source": "Swap the acting creature with a random living backup; Remove its cards from hand and all piles, then shuffle the incoming creature's cards into the draw pile; Without a backup, swap positions with a random living ally; Alone, the swap has no effect; Safe Passage instead swaps the lowest-<keyword0>Health</keyword0> ally and requires a living backup; <keyword1>Health</keyword1> and effects carry through swaps",
+    "sourceHash": "c23bee3bd8a086fee0e8bbe9c1875be669421b7efee2e75108e79fd9c100164a",
+    "text": "Permute la créature qui agit avec une réserve vivante aléatoire; Retire ses cartes de la main et de toutes les piles, puis mélange celles de la créature entrante dans la pioche; Sans réserve, échange les positions avec un allié vivant aléatoire; Si la créature est seule, la permutation reste sans effet; Passage sûr permute l’allié ayant le moins de <keyword0>Santé</keyword0> et exige une réserve vivante; La <keyword1>Santé</keyword1> et les effets persistent lors des permutations"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,
@@ -4519,9 +4531,9 @@
   },
   "content.glossary.talents.definition.rule": {
     "reviewed": true,
-    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
-    "sourceHash": "ac13490e3bdb47cdba9802e6a9c5cfc2927ff6540e218e3e10e7f2c7e121b687",
-    "text": "Les XP d’un mot-clé donnent des points pour ses talents; Le premier point demande {{value0}} XP, puis {{value1}} supplémentaires, puis {{value2}}; Complétez chaque rangée pour ouvrir la suivante; Les talents s’appliquent immédiatement à toutes les créatures correspondantes; Réinitialisez une catégorie à tout moment pour récupérer ses points sans perdre les XP"
+    "source": "Keyword XP earns points for that keyword's talents; The first three points cost {{value0}}, {{value1}} and {{value2}} additional XP; Complete a row to unlock the next; Talents immediately affect all matching creatures; Reset a category to refund its points without losing XP",
+    "sourceHash": "6cde6670b76e589349ac5e0d4f00f0c592a278eb7e20dad4bc31465920276fba",
+    "text": "L’EXP d’un mot-clé rapporte des points pour ses talents; Les trois premiers points coûtent {{value0}}, {{value1}} et {{value2}} EXP supplémentaires; Complétez une rangée pour débloquer la suivante; Les talents affectent immédiatement toutes les créatures correspondantes; Réinitialisez une catégorie pour récupérer ses points sans perdre d’EXP"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
@@ -4531,9 +4543,9 @@
   },
   "content.glossary.turn.definition.rule": {
     "reviewed": true,
-    "source": "Play cards using shared <keyword0>mana</keyword0>; After playing a card or swapping, Auto-end turn ends the turn if enabled, <keyword1>mana</keyword1> is empty, no cards can be played and no replacement is pending; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore {{value0}} <keyword2>Mana</keyword2> and draw {{value1}} cards for the next turn; The hand normally holds {{value2}}, or {{value3}} with Facet Abacus; overflow waits in order and survives turn changes",
-    "sourceHash": "4dbf1456b93655def680e1e9f7b7292690e6ccce7d54e1b9f57ac14776ab65a6",
-    "text": "Jouez des cartes avec le <keyword0>Mana</keyword0> partagé; Si Fin de tour automatique est activée, le tour se termine après avoir joué une carte ou permuté si le <keyword1>Mana</keyword1> est épuisé, qu’aucune carte n’est jouable et qu’aucun remplacement n’est en attente; Vous pouvez aussi appuyer sur Terminer le tour à tout moment sans confirmation; Défaussez les cartes restantes en main; Restaurez {{value0}} <keyword2>Mana</keyword2> et piochez {{value1}} cartes pour le tour suivant; La main contient normalement {{value2}} cartes, ou {{value3}} avec l’Abaque à facettes; Les cartes excédentaires attendent dans l’ordre et persistent entre les tours"
+    "source": "Play cards with your team's shared <keyword0>Mana</keyword0>; End turn discards your hand and lets enemies act; Your next turn normally restores {{value0}} <keyword1>Mana</keyword1> and draws {{value1}} cards; The hand holds {{value2}} cards, or {{value3}} with Facet Abacus; Extra drawn cards wait for space in draw order, even across turns",
+    "sourceHash": "51b85bc080dc63fb70a412992ee57d13d6afda2f0efe2b5c08b676f37d5740df",
+    "text": "Jouez des cartes avec le <keyword0>Mana</keyword0> partagé de votre équipe; Terminer le tour défausse votre main et laisse les ennemis agir; Votre prochain tour restaure normalement {{value0}} <keyword1>Mana</keyword1> et pioche {{value1}} cartes; La main contient {{value2}} cartes, ou {{value3}} avec l’Abaque à facettes; Les cartes supplémentaires attendent une place dans l’ordre de pioche, même entre les tours"
   },
   "content.glossary.turn.term.rule": {
     "reviewed": true,
@@ -6650,139 +6662,139 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "ec97b0c361f13410471276373f27a706dacd6c1bf3b69648d0c7216a77578f45",
+    "sourceHash": "05e289459728fe855fe983d9261e41b7be06fc08dc07052b4c8a6b2f1f013fba",
     "text": "Toupie acrobate : la prochaine attaque ne peut pas être <keyword0>Esquivée</keyword0>"
   },
-  "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
+  "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "8685e4f5c193ad6ecd5d8e4bdd8b9b7e5c311e37ad69bf830c96f6cba11c5d54",
-    "text": "<keyword0>Renvoi d’attaque</keyword0> : renvoie la prochaine attaque contre vous à son auteur; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword1>renvoyées</keyword1> ne peuvent pas être <keyword2>renvoyées</keyword2> à nouveau; Dure jusqu’à consommation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "a426c7c66fcf9f3f81ee4ae639514ebf8137cccb82b7b0bf677587ca2f952ceb",
+    "text": "<keyword0>Renvoi d’attaque</keyword0>: Renvoie la prochaine attaque de capacité reçue à son attaquant; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword1>renvoyées</keyword1> ne peuvent pas être <keyword2>renvoyées</keyword2> à nouveau; Dure jusqu’à utilisation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
   },
-  "content.status.blind.v0b0434b4eb43f4a6.rule": {
+  "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "8728f7d6531410d84bc0c65cbf072f836c690a4c3de76a86f5d247e671a94b05",
-    "text": "<keyword0>Aveuglement</keyword0> : {{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword1>Esquive</keyword1> pour chaque cible; Ne se cumule pas"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
+    "sourceHash": "5bb2a2c87abd23e823508f97a8f9fca1a82389ca47d5646669940b8597dce887",
+    "text": "<keyword0>Aveuglement</keyword0>: Votre prochaine attaque a {{value0}}% de chances de manquer toutes ses cibles; Prend fin après cette attaque, réussie ou non; Un échec compte comme une <keyword1>Esquive</keyword1> de chaque cible; Ne se cumule pas"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "2d2ea6158f7952902242d433d152fd617334b81f508a71c921057f85b28a246e",
+    "sourceHash": "e9d22477ad28f63d0cbedc9f6d1485b412db690cab0338f936e4e1baf6db56ac",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "c8608862dfe028f10e3357e06a44d12d8eeb7cd60ab65dda793d6149b028fdad",
+    "sourceHash": "f5a4ce7903b594427168c0298026c304a08cbd34c8018ec58e2dc1fda4040495",
     "text": "Tour passé"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "37cc2816c9a6a494d945c230457d194a0b55a5fa35529d7ba7e5fa665327a225",
+    "sourceHash": "f488a8fdc924ee54cd5d29346ee21b4cb07624e364a3b337604cae098f431d9a",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tour"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "2bfbf701935ad8cebb9d69080c109f20359bce676ca0207a05c535176193f906",
+    "sourceHash": "c0998d3716237f56d4d8a87704ac5b7a3e778e0441636e66402ca64deb005d0a",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "90a1cfae73e84950fbbfc5f777a333bcc7344b5070337a8c381999e1e0741b71",
+    "sourceHash": "098a5bc8140b9c5ecae598cf6921ea2a0f644a763415e4e3b20c54ddf48be9fd",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "9d5e155f47cfc5fc774ffc540399b22bd76a4882fcbc2208f4f11da8a27608de",
+    "sourceHash": "921814bc89a1e27e65ea3ba1ffcf1d4076a3577d1e73bd427e989031664d297d",
     "text": "Immunité au contrôle {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "33902f1c934fe2c30a12024e4710ec8af7ff89d99799f32e0428464f6f1c90fd",
+    "sourceHash": "30803aa7a149e16afe1f0ca88091090266a8e96f7ed3e39fc9eba3e5d106c4da",
     "text": "Suivi gratuit : la prochaine carte est gratuite"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "3ee6d6453de677ab5ad2b72495691c38bc84e53b4209b63d2b7b8b7128626bdd",
+    "sourceHash": "cbd444e28ba0a6af83ad73cd21c2cded0f5537c263a12259e8e95a9b0bd78d5a",
     "text": "Faveur divine : la prochaine carte de <keyword0>Lumière</keyword0> est gratuite"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "f947707cfaefdffff52ba630b9cafe524a3903b55204122202d446a7387fa5a5",
+    "sourceHash": "5e02ac345f9db581e3be3f9981fd4743637513a33d98023a049991e9cc997e63",
     "text": "Pas du vent : la prochaine carte de <keyword0>Nature</keyword0> est gratuite"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "bf3e8f1703e97da8722d58e3b2b9ae55943785b8f3e92a716f61ed07c558d4a6",
+    "sourceHash": "cb548bc826b133f1bef3eea85d90e768e3911ccdf94042b33c8593cf6e84d2eb",
     "text": "Aux portes de la mort {{value0}}"
   },
-  "content.status.negate.v74a74c8005c653ca.rule": {
+  "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "894d6176c14f6578e8dc6f46f923a2fe354990a6e72af56f479872809e693e78",
-    "text": "<keyword0>Négation</keyword0> : <keyword1>annule</keyword1> la prochaine attaque contre vous avant l’<keyword2>Esquive</keyword2>, empêchant ses dégâts et effets néfastes; Les <keyword3>Épines</keyword3> ripostent quand même; Dure jusqu’à consommation ou <keyword4>dissipation</keyword4>; Ne se cumule pas"
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "be536bf67dba8806aefa6f99e5c56c723cad789579beeb180c3825dd4e69accf",
+    "text": "<keyword0>Négation</keyword0>: Annule la prochaine attaque de capacité reçue et ses effets néfastes sur vous avant l’<keyword1>Esquive</keyword1>; Les <keyword2>Épines</keyword2> ripostent quand même; Dure jusqu’à utilisation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "a0cb499b1e74f48fef903e4a518ae7828f8e3c59d4e8a1e54e02a60cb5f68aa7",
+    "sourceHash": "92f4f2efbf79d22635462dbf4ad175a2365b7177d935ba6c084bb1af61a3c8c4",
     "text": "Flanc exposé : la prochaine attaque inflige {{value0}} dégâts <keyword0>Physiques</keyword0> supplémentaires"
   },
-  "content.status.nullify.v31f2b57af0674222.rule": {
+  "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "11ad836cb84d8d4888f9cd67959684b64e2a2259b8324af9cd8bbd30d8e4f5ce",
-    "text": "<keyword0>Annulation</keyword0> : empêche le prochain effet néfaste; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword1>dissipation</keyword1>; Ne se cumule pas"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
+    "sourceHash": "efcfd11cfa5eca32e069b97f0c77cd7acf9706911f0143d9a0b7554738777b51",
+    "text": "<keyword0>Annulation</keyword0>: Empêche la prochaine application de <keyword1>Brûlure</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Saignement</keyword3>, d’<keyword4>Étourdissement</keyword4>, de <keyword5>Gel</keyword5> ou d’<keyword6>Aveuglement</keyword6>; Ne change ni les dégâts directs ni les statuts existants; Dure jusqu’à utilisation ou <keyword7>dissipation</keyword7>; Ne se cumule pas"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "95daca621e6bd900ca7fcb5acafbc0c02fa3f4add7c6ead5bdc6ee506a3b7d73",
+    "sourceHash": "a76a9536dcfa0550e3883275683c54eee89233d262f3915cd2d3b7eb2180ad53",
     "text": "<keyword0>Annule</keyword0> les prochains dégâts de <keyword1>Gel</keyword1>; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "f92464617e8ed033ecd71a677e54433d9cbe50e98965119d95d864a625fb897c",
+    "sourceHash": "0b94f102feeaa7efa2c9c731bc464e7bc9f207256c6e11e1b8ea4981394252c5",
     "text": "Graine d’oasis : la prochaine attaque a <keyword0>Vol de vie</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "7c577fad156331ddfa5d45e25cd4f93a9569b3b649b8ed88fb7c71dff50c4f53",
+    "sourceHash": "c89722e90f962a5fd399cccccff847fc403621d85a99e662663d54e0b92e2233",
     "text": "Entaille d’adieu : le prochain coup <keyword0>Physique</keyword0> inflige la moitié de ses dégâts en dégâts de <keyword1>Saignement</keyword1> supplémentaires"
   },
-  "content.status.reflect.v1f90dd3050df6a1c.rule": {
+  "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "f032c0bdcf44f8bf04834f68139cf0264c72dbbffd627de47d1279fc0b09f47b",
-    "text": "<keyword0>Renvoi</keyword0> : renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword1>renvoi d’attaque</keyword1> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword2>renvoi</keyword2> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword3>renvoyés</keyword3> ne peuvent pas être <keyword4>renvoyés</keyword4> à nouveau; Les charges ne se cumulent pas"
+    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "8b63ce58c291050d20f27d4bf85519d66163e8e6ce574254af062d012abf0b23",
+    "text": "<keyword0>Renvoi</keyword0>: Redirige le statut néfaste indiqué vers un ennemi vivant aléatoire; Les dégâts directs vous touchent toujours; Le <keyword1>Renvoi d’attaque</keyword1> renvoie plutôt toute l’attaque à son attaquant; Les effets <keyword2>renvoyés</keyword2> ne peuvent pas être <keyword3>renvoyés</keyword3> à nouveau; Les charges ne se cumulent pas"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "04edf18ae20cd7de3b78f3019c85c521a14208eef1e2d34bf4b1267092209f8a",
+    "sourceHash": "9b22a07edd9f552244abd3b709727137fb68d5703cf94c99efd64e5f1407af66",
     "text": "<keyword0>Renvoie</keyword0> la prochaine <keyword1>Brûlure</keyword1>; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "42ee0e2ed8d149a52eea30cc48dce913f0435104ef8f2b97ecde053e57069361",
+    "sourceHash": "9de29f331924c7446521f7cc83fbe1825f0ecb8e0a504524bafd06cc95a84322",
     "text": "Trouver le rythme : +{{value0}}% de chances d’<keyword0>Esquive</keyword0>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "11f605e6632fb1112e424c4c1b91b9e4a9c1a5ece4064575cd014ee782886c7d",
+    "sourceHash": "62a8bd723d7f7b4e0afcbf5703be44e6d702dcb6dbfbdca18c5afe2fcc3ae901",
     "text": "Riposte : la prochaine attaque <keyword0>Physique</keyword0> est un <keyword1>coup critique</keyword1> garanti"
   },
   "content.talent.armor.armored-surge.name": {
