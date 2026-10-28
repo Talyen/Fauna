@@ -15,6 +15,8 @@ export function summarizeSample(sample) {
     throw new Error("Incomplete: fewer than 60 usable frame samples.");
   if (sample.truncated || sample.interrupted || sample.focused !== true || sample.visibility !== "visible")
     throw new Error("Incomplete or interrupted foreground timeline.");
+  if (sample.startupMs != null && (!Number.isFinite(sample.startupMs) || sample.startupMs < 0))
+    throw new Error("Invalid startup measurement.");
   const observations = [sample.longTasks, sample.input, sample.longAnimationFrames ?? null];
   if (
     observations.some(
@@ -40,14 +42,16 @@ export function summarizeSample(sample) {
     !sample.segments?.length ||
     sample.segments.some(
       (s) =>
-        !s.complete ||
+        s.complete !== true ||
         !Number.isFinite(s.start) ||
         !Number.isFinite(s.end) ||
         !Number.isFinite(s.duration) ||
         Math.abs(s.end - s.start - s.duration) > 0.1 ||
         s.end <= s.start ||
         s.duration <= 0 ||
-        s.frames < 10,
+        !Number.isSafeInteger(s.frames) ||
+        s.frames < 10 ||
+        s.frames > sample.frames.length,
     )
   )
     throw new Error("Incomplete action segment.");
@@ -72,11 +76,29 @@ export function comparePerformance(before, after) {
   if (
     before.format !== 3 ||
     after.format !== 3 ||
-    !before.complete ||
-    !after.complete ||
+    before.complete !== true ||
+    after.complete !== true ||
+    !before.environment ||
+    typeof before.environment !== "object" ||
+    Array.isArray(before.environment) ||
+    !after.environment ||
+    typeof after.environment !== "object" ||
+    Array.isArray(after.environment) ||
     JSON.stringify(before.environment) !== JSON.stringify(after.environment)
   )
     throw new Error("Incomplete or incompatible performance environment.");
+  const validCase = (row) =>
+    row &&
+    [row.id, row.checkpointHash, row.actionHash, row.fixture].every(
+      (value) => typeof value === "string" && value.length > 0,
+    );
+  if (
+    !Array.isArray(before.cases) ||
+    !Array.isArray(after.cases) ||
+    !before.cases.every(validCase) ||
+    !after.cases.every(validCase)
+  )
+    throw new Error("Performance case identity is incomplete.");
   const rows = new Map(after.cases.map((row) => [row.id, row]));
   if (
     !before.cases.length ||

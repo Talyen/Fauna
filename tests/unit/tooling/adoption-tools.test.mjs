@@ -160,6 +160,40 @@ it("rejects empty performance segments and incompatible replays", () => {
   expect(comparePerformance(report, report)[0].p95Delta).toBe(0);
   expect(() => comparePerformance(report, { ...report, environment: { viewport: 1920 } })).toThrow();
 });
+
+it("rejects malformed performance evidence instead of comparing incomplete measurements", () => {
+  const sample = {
+    frames: Array.from({ length: 80 }, (_, i) => ({ start: i * 16, end: (i + 1) * 16, duration: 16 })),
+    focused: true,
+    visibility: "visible",
+    segments: [{ complete: true, start: 0, end: 1280, duration: 1280, frames: 80 }],
+    longTasks: null,
+    input: null,
+    startupMs: 0,
+  };
+  const report = {
+    format: 3,
+    complete: true,
+    environment: { viewport: 1280 },
+    cases: [{ id: "battle", checkpointHash: "a", actionHash: "b", fixture: "v1", sample }],
+  };
+  expect(comparePerformance(report, report)[0].startupDelta).toBe(0);
+  for (const frames of [undefined, NaN, 10.5, 81])
+    expect(() => summarizeSample({ ...sample, segments: [{ ...sample.segments[0], frames }] })).toThrow();
+  expect(() =>
+    summarizeSample({ ...sample, segments: [{ ...sample.segments[0], complete: "true" }] }),
+  ).toThrow();
+  expect(() => comparePerformance({ ...report, complete: "true" }, report)).toThrow();
+  for (const startupMs of [-1, NaN, Infinity, "100"])
+    expect(() => summarizeSample({ ...sample, startupMs })).toThrow();
+  expect(() =>
+    comparePerformance({ ...report, environment: undefined }, { ...report, environment: undefined }),
+  ).toThrow();
+  for (const field of ["id", "checkpointHash", "actionHash", "fixture"]) {
+    const incomplete = { ...report, cases: [{ ...report.cases[0], [field]: "" }] };
+    expect(() => comparePerformance(incomplete, incomplete)).toThrow();
+  }
+});
 it("rejects broken Windows headers, escaping resources and corrupt packaged media", () => {
   const identity = { version: "1.2.3", build: { productName: "Fauna" } };
   expect(() =>
