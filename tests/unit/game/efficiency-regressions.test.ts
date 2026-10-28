@@ -2,7 +2,8 @@ import { contentCatalog, validateCatalog } from "../../../src/game/content-valid
 import { talentRepeat } from "../../../src/game/combat/ability-modifiers";
 import { useFood } from "../../../src/game/combat/food";
 import { cornucopiaHealing } from "../../../src/game/rules/boons";
-import { grantStatus } from "../../../src/game/combat/index";
+import { createSession } from "../../../src/application/session";
+import { tickStatuses, grantStatus } from "../../../src/game/combat/index";
 import { recruitLineup, swapFromCard } from "../../../src/game/team";
 import { enemyReflectionRecipients } from "../../../src/game/battlefield";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
@@ -1133,6 +1134,10 @@ it("keeps diagnostic snapshots immutable and independent after bounded retention
   diagnostics.record("render", "failure 54");
   expect(diagnostics.snapshot()[49]!.count).toBe(2);
   expect(latest[49]!.count).toBe(1);
+  diagnostics.record("render", "failure 5");
+  expect(diagnostics.snapshot()[49]).toEqual({ source: "render", message: "failure 5", count: 2 });
+  expect(latest[0]!.message).toBe("failure 5");
+  expect(latest[0]!.count).toBe(1);
   diagnostics.dispose();
 });
 
@@ -1358,6 +1363,59 @@ it("returns an independent recruit lineup without changing deployment", () => {
   const incoming = { ...state.team[0]!, id: "incoming", species: "mossguard" as const };
   expect(recruitLineup(state, incoming)).toEqual([...before, incoming.id]);
   expect(state.team.map((unit) => unit.id)).toEqual(before);
+});
+
+it("commits and saves without viewers, then delivers only new updates to later subscribers", async () => {
+  const saved: number[] = [];
+  const session = createSession({
+    desktop: false,
+    saves: {
+      readCandidates: async () => [],
+      write: async (data) => {
+        saved.push(JSON.parse(data).revision);
+      },
+    },
+  });
+  try {
+    await session.load();
+    expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+      true,
+    );
+    await session.flush();
+    expect(saved).toEqual([1]);
+    expect(session.store.getState().game.revision).toBe(1);
+    const observed: number[] = [];
+    const unsubscribe = session.store.subscribe((view, previous) => {
+      if (view.game !== previous.game) observed.push(view.game.revision);
+    });
+    expect(session.command({ type: "start" })).toBe(true);
+    await session.flush();
+    expect(observed).toEqual([2]);
+    unsubscribe();
+    expect(saved).toEqual([1, 2]);
+  } finally {
+    await session.dispose();
+  }
+});
+
+it("keeps Cinder Fan remainder damage in battlefield order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.boons = ["cinder-fan"];
+  state.talents = [];
+  const target = state.battle.enemies[0]!;
+  for (const enemy of state.battle.enemies) {
+    enemy.health = enemy.maxHealth = 100;
+    enemy.block = 0;
+    enemy.combat = freshCombat();
+  }
+  target.combat.burn = 7;
+  target.combat.statusSources.burn = state.team[0]!.id;
+  const rng = state.rng;
+  const events: GameEvent[] = [];
+  tickStatuses(state, target, events);
+  expect(target.combat.burn).toBe(4);
+  expect(state.battle.enemies.slice(1).map((enemy) => enemy.health)).toEqual([98, 99]);
+  expect(state.rng).toBe(rng);
 });
 
 it("persists the exact immutable diagnostic snapshot through deduplication and escaped-size limits", () => {

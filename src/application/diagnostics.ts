@@ -89,7 +89,9 @@ function errorMessage(error: unknown): string {
 export function createDiagnostics(port?: DiagnosticPort) {
   const retain = (values: Diagnostic[]) => {
     // JSON escaping can cost six characters per message character. Bound the stored form too.
-    const bounded = values.length > MAX_ENTRIES ? values.slice(-MAX_ENTRIES) : values;
+    // Every caller supplies a fresh private array; published snapshots are never passed back in.
+    const bounded = values;
+    if (bounded.length > MAX_ENTRIES) bounded.splice(0, bounded.length - MAX_ENTRIES);
     let serialized = JSON.stringify(bounded);
     if (serialized.length >= MAX_STORED_LENGTH) {
       let storedLength = 2 + Math.max(0, bounded.length - 1);
