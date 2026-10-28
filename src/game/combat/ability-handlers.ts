@@ -212,7 +212,19 @@ export function executePrimary(context: PrimaryContext) {
       const recipient = enemy
         ? state.battle.enemies.find(matches)
         : (state.team.find(matches) ?? state.reserves.find(matches));
-      if (recipient) resurrect(recipient, actor, events);
+      if (recipient) {
+        resurrect(recipient, actor, events);
+        if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
+          ensureCombat(recipient).negate = true;
+          events.push({
+            kind: "status",
+            targetId: recipient.id,
+            status: "negate",
+            outcome: "apply",
+            text: `${name} grants Negate`,
+          });
+        }
+      }
       return;
     }
     case "dreamDouble":

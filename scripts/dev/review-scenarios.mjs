@@ -69,6 +69,11 @@ export const SCENARIOS = [
   "journey-boons-2",
   "journey-boons-3",
   "journey-boons-4",
+  "acrobat-ready",
+  "acrobat-boons-1",
+  "acrobat-boons-2",
+  "acrobat-boons-3",
+  "acrobat-boons-4",
   "seal-boons-1",
   "seal-boons-2",
   "seal-boons-3",
@@ -139,6 +144,21 @@ export async function reviewScenario(server, name) {
     const initial = createGame(7);
     game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0] }), { type: "start" });
     game = { ...game, boons: [BOONS[0].id] };
+  }
+  if (name === "acrobat-ready") {
+    game = structuredClone(game);
+    game.boons = ["acrobat-top"];
+    game.team[0].combat.acrobatReady = true;
+  }
+  if (name.startsWith("acrobat-boons-")) {
+    const groups = [
+      ["ember-platter", "ash-bowl", "mossball"],
+      ["skyiron-horseshoe", "nebula-weld-clamp", "clover-measuring-scoop"],
+      ["treaty-teapot", "dawn-gong", "acrobat-top"],
+      ["remembrance-wreath"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name.startsWith("new-boons-")) {
     const groups = [

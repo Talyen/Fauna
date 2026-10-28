@@ -353,6 +353,7 @@ function validateBattle(state: BattleState) {
             battle.enemies.some((owner) => speciesHasCard(owner.species, enemy.lastAbility!))
           )) ||
         enemy.combat.oasisLeech ||
+        enemy.combat.acrobatReady ||
         enemy.combat.deathDoorUsed ||
         enemy.combat.grace > 0 ||
         !playerField.some((c) => c.id === enemy.targetId),
@@ -434,7 +435,7 @@ function validateMinions(state: BattleState) {
         unit.health > unit.maxHealth ||
         ![6, 8, 10, 12].includes(unit.maxHealth) ||
         (unit.id !== `echo-${unit.minion.ownerId}-0` && unit.id !== `echo-${unit.minion.ownerId}-1`) ||
-        (unit.minion.side === "enemy" && unit.combat.oasisLeech) ||
+        (unit.minion.side === "enemy" && (unit.combat.oasisLeech || unit.combat.acrobatReady)) ||
         unit.combat.deathDoorUsed ||
         unit.combat.grace > 0,
     );

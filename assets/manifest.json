@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.ember-platter",
+      "origin": "repository",
+      "source": "public/art/boons/ember-platter.png",
+      "output": "art/boons/ember-platter.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Ember Platter.png; https://drive.google.com/file/d/1PaSryuIkNSc605y3jOWdGY817w9b6mH9/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.ash-bowl",
+      "origin": "repository",
+      "source": "public/art/boons/ash-bowl.png",
+      "output": "art/boons/ash-bowl.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Ash Bowl.png; https://drive.google.com/file/d/1-CvfofPw1e5y7lj7DIM7Zm2ut8Kk4tyk/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.mossball",
+      "origin": "repository",
+      "source": "public/art/boons/mossball.png",
+      "output": "art/boons/mossball.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Mossball.png; https://drive.google.com/file/d/1vhGSVPdLEDVIcHU9tOHpKdRiDlqks2Mh/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.skyiron-horseshoe",
+      "origin": "repository",
+      "source": "public/art/boons/skyiron-horseshoe.png",
+      "output": "art/boons/skyiron-horseshoe.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Skyiron Horseshoe.png; https://drive.google.com/file/d/1c5zeFh9L1We_LHNzJNDGkXvws36X0Wwl/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.nebula-weld-clamp",
+      "origin": "repository",
+      "source": "public/art/boons/nebula-weld-clamp.png",
+      "output": "art/boons/nebula-weld-clamp.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Nebula Weld Clamp.png; https://drive.google.com/file/d/1SoxKd2TVTQW8axwYbS3U4gzUsJl6EKTM/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.clover-measuring-scoop",
+      "origin": "repository",
+      "source": "public/art/boons/clover-measuring-scoop.png",
+      "output": "art/boons/clover-measuring-scoop.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Clover Measuring Scoop.png; https://drive.google.com/file/d/1DbSgVm8uAerVdFsMlP5YUlO3hEQ24VuJ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.treaty-teapot",
+      "origin": "repository",
+      "source": "public/art/boons/treaty-teapot.png",
+      "output": "art/boons/treaty-teapot.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Treaty Teapot.png; https://drive.google.com/file/d/1wtBKVgFLe7ic9ZaOp_Pgh9yWXmnUUAjq/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dawn-gong",
+      "origin": "repository",
+      "source": "public/art/boons/dawn-gong.png",
+      "output": "art/boons/dawn-gong.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Dawn Gong.png; https://drive.google.com/file/d/1x3kgOHs6pP0RJ4RqAYcNqCGcE4inklTr/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.acrobat-top",
+      "origin": "repository",
+      "source": "public/art/boons/acrobat-top.png",
+      "output": "art/boons/acrobat-top.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Acrobat Top.png; https://drive.google.com/file/d/1Wx_pWdu5Z-Ji5l5q1Onv50kYpJAWP0pl/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.remembrance-wreath",
+      "origin": "repository",
+      "source": "public/art/boons/remembrance-wreath.png",
+      "output": "art/boons/remembrance-wreath.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Remembrance Wreath.png; https://drive.google.com/file/d/12YFVFxACGtYKNaWQg_r13miSyvR3IsUB/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.vanishing-hat",
       "origin": "repository",
       "source": "public/art/boons/vanishing-hat.png",

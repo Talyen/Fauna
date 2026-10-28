@@ -22,6 +22,7 @@ const combatStateSchema = z
     freeLight: z.boolean(),
     freeCard: z.boolean(),
     oasisLeech: z.boolean(),
+    acrobatReady: z.boolean(),
     reflect: z.boolean(),
     reflectBurn: z.boolean(),
     nullify: z.boolean(),

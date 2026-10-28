@@ -75,6 +75,29 @@ export function* dodgeResponse(
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
+    if (retaliate && isEnemy(source) && state.boons.includes("acrobat-top")) stats.acrobatReady = true;
+    if (
+      retaliate &&
+      isEnemy(source) &&
+      source.health > 0 &&
+      target.health > 0 &&
+      state.boons.includes("skyiron-horseshoe")
+    ) {
+      const { removed, depletion } = removeArmor(source, boonRule("skyiron-horseshoe").armor);
+      if (removed) {
+        events.push({
+          kind: "status",
+          actorId: target.id,
+          targetId: source.id,
+          status: "armor",
+          outcome: "remove",
+          amount: removed,
+          text: `${unitName(target)} steals ${removed} Armor`,
+        });
+        yield* reaction("grantArmor", state, target, removed, events);
+        yield* reaction("triggerArmorBreak", state, depletion, events);
+      }
+    }
     if (
       retaliate &&
       isEnemy(source) &&
@@ -515,6 +538,13 @@ export function* thornRetaliation({
   const stats = ensureCombat(target);
   const reflected = stats.thorns;
   if (source.health <= 0 || reflected <= 0) return;
+  if (
+    isEnemy(target) &&
+    !isEnemy(source) &&
+    ensureCombat(source).thorns > 0 &&
+    state.boons.includes("treaty-teapot")
+  )
+    return;
   if (
     isEnemy(target) &&
     !isEnemy(source) &&

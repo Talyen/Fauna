@@ -3,6 +3,7 @@ import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
 import {
   healingValue,
+  scoopBonus,
   restoration,
   overflowBlock,
   overflowRecipients,
@@ -49,6 +50,7 @@ export function* restoreHealth(
   if (unit.health === 0 && !revive) return;
   const baseAmount = amount;
   if (!options.adjusted) amount = healingValue(state, unit, amount);
+  else amount += scoopBonus(state, unit, amount);
   const { gain, excess } = restoration(unit, amount);
   const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
@@ -184,6 +186,7 @@ export function* shareProtection(
   effect: "block" | "thorns",
   amount: number,
   events: GameEvent[],
+  mossball = true,
 ): Resolution<void> {
   if (state.phase !== "battle" || !state.battle || source.health <= 0 || amount <= 0) return;
   const allied = !isEnemy(source);
@@ -201,7 +204,7 @@ export function* shareProtection(
   if (!succeeds(state, chance / 100, !allied, events)) return;
   for (const recipient of pool) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
-    else yield* reaction("grantStatus", recipient, effect, amount, events, state, false);
+    else yield* reaction("grantStatus", recipient, effect, amount, events, state, false, mossball);
   }
 }
 export function* grantBlock(

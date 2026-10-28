@@ -538,7 +538,11 @@ export function* resolveHit(
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
-  if (armorReducedDamage && !(alliedTarget && stats.grace > 0 && state.boons.includes("cypress-reliquary")))
+  if (
+    armorReducedDamage &&
+    !(alliedTarget && type === "poison" && state.boons.includes("nebula-weld-clamp")) &&
+    !(alliedTarget && stats.grace > 0 && state.boons.includes("cypress-reliquary"))
+  )
     erode(1);
   if (effectDamage > 0) {
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
@@ -700,6 +704,40 @@ export function* resolveHit(
       yield* reaction("controlRewards", state, source, target, type, events);
   }
   if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
+  if (
+    alliedSource &&
+    !alliedTarget &&
+    type === "burn" &&
+    dealt > 0 &&
+    target.health > 0 &&
+    state.boons.includes("ash-bowl")
+  ) {
+    const removed = Math.min(stats.thorns, boonRule("ash-bowl").thorns);
+    stats.thorns -= removed;
+    if (removed)
+      events.push({
+        kind: "status",
+        actorId: source.id,
+        targetId: target.id,
+        status: "thorns",
+        outcome: "remove",
+        amount: removed,
+        text: `${unitName(target)} loses ${removed} Thorns to Ash Bowl`,
+      });
+  }
+  if (
+    attack &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "burn" &&
+    effectDamage > 0 &&
+    source.health > 0 &&
+    state.boons.includes("ember-platter")
+  ) {
+    for (const other of battlefield(state, "enemy"))
+      if (other.id !== target.id && other.health > 0 && source.health > 0)
+        yield* applyResolvedStatus(state, source, other, boonRule("ember-platter").burn, "burn", events);
+  }
   yield* boonHitFollowups(state, source, target, type, events, options, attack);
   if (
     direct &&

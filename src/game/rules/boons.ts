@@ -6,6 +6,28 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "ember-platter": boon({ burn: 1 }, (p) => `Burn hits also apply ${p.burn} Burn to other enemies`),
+    "ash-bowl": boon({ thorns: 1 }, (p) => `Burn damage removes ${p.thorns} Thorns from enemies`),
+    mossball: boon(
+      { thorns: 1 },
+      (p) => `When an ally gains Thorns, another ally with the fewest Thorns gains ${p.thorns} Thorns`,
+    ),
+    "skyiron-horseshoe": boon(
+      { armor: 1 },
+      (p) => `Dodging an attack steals ${p.armor} Armor from the attacker`,
+    ),
+    "nebula-weld-clamp": boon({}, () => "Allied Armor reduces Poison damage without wearing down"),
+    "clover-measuring-scoop": boon(
+      { healing: 2 },
+      (p) => `Healing restores ${p.healing} extra Health for each harmful effect on the ally`,
+    ),
+    "treaty-teapot": boon({}, () => "Enemies with Thorns cannot retaliate against allies with Thorns"),
+    "dawn-gong": boon({}, () => "When an ally is Stunned, Cleanse Stun from other allies"),
+    "acrobat-top": boon(
+      { state: "acrobatReady" as const },
+      () => "After an ally Dodges, their next attack cannot be Dodged",
+    ),
+    "remembrance-wreath": boon({}, () => "Resurrected allies gain Negate"),
     "vanishing-hat": boon({}, () => "Allies can Dodge enemy Purge"),
     "rocking-chair-charm": boon({}, () => "Burn, Poison and Bleed cannot damage allies in backup"),
     "asteroid-hammer": boon({ multiplier: 2 }, () => "Stun damage is twice as effective against enemy Block"),
