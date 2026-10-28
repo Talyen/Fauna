@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { npmCommand } from "../lib/npm-command.mjs";
+import { fileDigestSync } from "../lib/file-integrity.mjs";
 import { leasePackage } from "./development-retention.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
@@ -24,7 +25,10 @@ export function dependencyNotices(root, lock) {
     if (!location || entry.dev) continue;
     if (
       !location.startsWith("node_modules/") ||
-      location.split("/").includes("..") ||
+      location.split("/").some((part) => !part || part === "." || part === "..") ||
+      !/^node_modules\/(?:@[^/]+\/)?[^@/][^/]*(?:\/node_modules\/(?:@[^/]+\/)?[^@/][^/]*)*$/u.test(
+        location,
+      ) ||
       location.includes("\\")
     )
       throw new Error(`Invalid dependency location: ${location}`);
@@ -37,7 +41,11 @@ export function dependencyNotices(root, lock) {
       continue;
     const directory = path.join(root, location);
     const manifest = readJSON(path.join(directory, "package.json"));
-    if (manifest.version !== entry.version) throw new Error(`Dependency version differs: ${location}`);
+    const expectedName = entry.name ?? location.slice(location.lastIndexOf("node_modules/") + 13);
+    if (typeof manifest.name !== "string" || !manifest.name.trim() || manifest.name !== expectedName)
+      throw new Error(`Dependency name differs: ${location}`);
+    if (typeof entry.version !== "string" || !entry.version.trim() || manifest.version !== entry.version)
+      throw new Error(`Dependency version differs: ${location}`);
     const identity = `${manifest.name}@${manifest.version}`;
     const files = readdirSync(directory)
       .filter(
@@ -77,12 +85,18 @@ export function dependencyNotices(root, lock) {
     "Docs/NOTO-SANS-LICENSE.txt",
     "Docs/NOTO-SANS-JP-LICENSE.txt",
     "Docs/NOTO-SANS-SC-LICENSE.txt",
-  ])
-    sections.push(`=== ${file} ===`, readFileSync(path.join(root, file), "utf8"));
+  ]) {
+    const text = readFileSync(path.join(root, file), "utf8");
+    if (!text.trim()) throw new Error(`Missing bundled license text: ${file}`);
+    sections.push(`=== ${file} ===`, text);
+  }
   return { notices: sections.join("\n\n") + "\n", inventory };
 }
 
 export function generateInventory(root = ROOT) {
+  const output = path.join(root, "dist");
+  if (!statSync(path.join(output, "index.html"), { throwIfNoEntry: false })?.isFile())
+    throw new Error("Build the renderer before generating its inventory.");
   const lockBytes = readFileSync(path.join(root, "package-lock.json"));
   const lock = JSON.parse(lockBytes.toString("utf8"));
   const { notices, inventory } = dependencyNotices(root, lock);
@@ -123,9 +137,6 @@ export function generateInventory(root = ROOT) {
         "production npm build inputs and Electron runtime; Chromium native components retain Electron's LICENSES.chromium.html",
     },
   ];
-  const output = path.join(root, "dist");
-  if (!statSync(path.join(output, "index.html")).isFile())
-    throw new Error("Build the renderer before generating its inventory.");
   writeFileSync(path.join(output, "THIRD-PARTY-NOTICES.txt"), notices);
   writeFileSync(path.join(output, "dependencies.cdx.json"), JSON.stringify(sbom, null, 2) + "\n");
   return { dependencies: inventory.length, sbom: "dist/dependencies.cdx.json" };
@@ -143,9 +154,10 @@ export function packageInventory(directory, output = path.resolve(ROOT, "reports
 function packageInventoryFiles(directory, output) {
   const files = ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"];
   const manifest = files.map((name) => {
-    const bytes = readFileSync(path.join(directory, name));
-    if (!bytes.length) throw new Error(`Empty packaged component: ${name}`);
-    return { path: name, size: bytes.length, sha256: sha(bytes) };
+    const file = path.join(directory, name);
+    const digest = fileDigestSync(file);
+    if (!digest.size) throw new Error(`Empty packaged component: ${name}`);
+    return { path: name, ...digest };
   });
   mkdirSync(output, { recursive: true });
   writeFileSync(
