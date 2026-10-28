@@ -118,7 +118,8 @@ export async function pruneBalanceReports(
           record.finished < 0 ||
           record.finished > now ||
           !Array.isArray(record.files) ||
-          !record.files.length
+          !record.files.length ||
+          record.files.some((file) => !file || typeof file !== "object")
         )
           continue;
         const expected = new Set(record.files.map((file) => file.name));
@@ -132,7 +133,14 @@ export async function pruneBalanceReports(
         let bytes = 0,
           unchanged = true;
         for (const file of record.files) {
-          if (typeof file.name !== "string" || !generatedName.test(file.name)) {
+          if (
+            typeof file.name !== "string" ||
+            !generatedName.test(file.name) ||
+            !Number.isSafeInteger(file.bytes) ||
+            file.bytes < 0 ||
+            !Number.isSafeInteger(file.modified) ||
+            file.modified < 0
+          ) {
             unchanged = false;
             break;
           }

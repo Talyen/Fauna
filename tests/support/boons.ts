@@ -1,5 +1,15 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "orchard-ladder-charm": "Food restores 3 Health to backup allies",
+  "spore-trivet": "Food Cleanses Burn from all allies",
+  "victory-laurel": "Defeating an enemy restores 1 Mana",
+  "gilt-gauntlet": "Physical hits steal 1 Armor",
+  "pumice-glass-inkwell": "Cleansing Burn Blinds the enemy that applied it",
+  "chime-crucible": "Stun hits also apply 1 Burn",
+  "crystal-harp": "Stun hits grant you Reflect",
+  "orbit-tongs": "Stealing Armor grants 2 Block to other allies",
+  "memory-cairn": "Resurrected allies Cleanse all harmful effects",
+  "vow-candle": "Blind cannot cause Light attacks to miss",
   "vanishing-hat": "Allies can Dodge enemy Purge",
   "rocking-chair-charm": "Burn, Poison and Bleed cannot damage allies in backup",
   "asteroid-hammer": "Stun damage is twice as effective against enemy Block",

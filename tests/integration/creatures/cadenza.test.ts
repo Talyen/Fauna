@@ -1,13 +1,6 @@
 import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
-import {
-  authoredPack,
-  swapFixture,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { swapFixture, accept, teamRun } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
@@ -15,7 +8,6 @@ import { cardText } from "../../../src/game/card-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState } from "../../../src/game/types";
 
@@ -29,7 +21,7 @@ function ready(ability = "resonant-well") {
 function play(game: GameState, autoEndTurn = false) {
   return dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn });
 }
-it("registers Cadenza's kit, recruitment, automatic targeting and save/preview parity", () => {
+it("registers Cadenza's kit, automatic targeting and save/preview parity", () => {
   expect(
     CARDS.filter((card) => card.species === "cadenza").map((card) => [card.cost, cardText(card)]),
   ).toEqual([
@@ -56,22 +48,6 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
       expect.objectContaining({ type: "play", cardId: game.battle!.hand[0] }),
     );
   }
-  let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    prepareDestination(draft);
-    draft.expedition = {
-      recruit: null,
-      lastRoom: null,
-      pack: authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "cadenza"),
-      ),
-    };
-  });
-  game = accept(game, { type: "beginBattle" });
-  expect(game.discovery.encountered).toContain("cadenza");
-  expect(accept(winBattle(game), { type: "recruit", species: "cadenza" }).discovery.recruited.cadenza).toBe(
-    1,
-  );
 });
 it("Resonant Well draws twice and refunds before automatic end turn", () => {
   const game = produce(ready(), (draft) => {

@@ -148,6 +148,10 @@ it("rejects version, tag, source and dirty-build mismatches and records build ra
     const expected = buildIdentity(root);
     expect(() => verifyBuildIdentity(expected, expected)).not.toThrow();
     for (const record of [
+      null,
+      { ...expected, dirty: undefined },
+      { ...expected, dirty: null },
+      { ...expected, dirty: 0 },
       { ...expected, dirty: true },
       { ...expected, commit: "old" },
       { ...expected, tree: "old" },
@@ -181,3 +185,39 @@ it("fails release verification before package access when the tagged renderer is
     writeFixture(root, "dist/release.json", JSON.stringify({ ...buildIdentity(root), commit: "old" }));
     await expect(verifyRelease(root, { tag: "v1.0.0" })).rejects.toThrow("stale");
   }));
+
+it("rejects whitespace in otherwise matching release versions", () =>
+  repository((root) => {
+    const pkg = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
+    const lock = JSON.parse(readFileSync(path.join(root, "package-lock.json"), "utf8"));
+    for (const version of ["1.0.0\n", "1.0.0\r", " 1.0.0"]) {
+      pkg.version = lock.version = lock.packages[""].version = version;
+      writeFixture(root, "package.json", JSON.stringify(pkg));
+      writeFixture(root, "package-lock.json", JSON.stringify(lock));
+      expect(() => releaseVersion(root)).toThrow("version");
+    }
+  }));
+
+it("includes player-facing changes owned by application policy modules", () => {
+  expect(playerNote("fix: preserve battle rewards", ["src/application/battle-benefits.ts"])).toEqual({
+    section: "Fixes",
+    text: "Preserve battle rewards",
+  });
+});
+
+it("rejects matching but missing or malformed build provenance", () => {
+  const identity = {
+    format: 1,
+    name: "fauna",
+    version: "1.0.0",
+    dirty: false,
+    commit: "a".repeat(40),
+    tree: "b".repeat(40),
+  };
+  for (const field of ["commit", "tree"]) {
+    for (const value of [undefined, "", "HEAD", "a".repeat(39), "a".repeat(40) + "\n"]) {
+      const malformed = { ...identity, [field]: value };
+      expect(() => verifyBuildIdentity(malformed, malformed)).toThrow("stale");
+    }
+  }
+});

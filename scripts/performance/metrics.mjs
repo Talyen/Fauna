@@ -1,12 +1,14 @@
 import { isDeepStrictEqual } from "node:util";
 
 export function summarizeSample(sample) {
+  if (!sample || typeof sample !== "object") throw new Error("Invalid performance sample.");
   if (
     !Array.isArray(sample.frames) ||
     sample.frames.length < 60 ||
     sample.frames.length > 12000 ||
     sample.frames.some(
       (frame, index) =>
+        !frame ||
         !Number.isFinite(frame.start) ||
         frame.start < 0 ||
         !Number.isFinite(frame.end) ||
@@ -31,6 +33,7 @@ export function summarizeSample(sample) {
           entries.length > 12000 ||
           entries.some(
             (entry) =>
+              !entry ||
               !Number.isFinite(entry.start) ||
               entry.start < 0 ||
               !Number.isFinite(entry.duration) ||
@@ -45,15 +48,21 @@ export function summarizeSample(sample) {
     !Array.isArray(sample.spans ?? []) ||
     (sample.spans ?? []).some(
       (span) =>
-        !Number.isFinite(span.start) || span.start < 0 || !Number.isFinite(span.end) || span.end < span.start,
+        !span ||
+        !Number.isFinite(span.start) ||
+        span.start < 0 ||
+        !Number.isFinite(span.end) ||
+        span.end < span.start,
     ) ||
     (sample.spans?.length ?? 0) > 12000
   )
     throw new Error("Invalid semantic span timeline.");
   if (
-    !sample.segments?.length ||
+    !Array.isArray(sample.segments) ||
+    !sample.segments.length ||
     sample.segments.some(
       (s, index) =>
+        !s ||
         s.complete !== true ||
         !Number.isFinite(s.start) ||
         s.start < 0 ||
@@ -72,7 +81,8 @@ export function summarizeSample(sample) {
   )
     throw new Error("Incomplete action segment.");
   const sorted = sample.frames.map((frame) => frame.duration).sort((a, b) => a - b);
-  const percentile = (p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
+  // Nearest-rank percentiles select the first sample at or above the requested rank.
+  const percentile = (p) => sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * p) - 1)];
   return {
     hitches: hitchInventory(sample),
     startupMs: sample.startupMs ?? null,
@@ -175,6 +185,10 @@ export function hitchInventory(sample) {
 }
 export function hitchMarkdown(id, summary, trace) {
   const safe = (value) => String(value).replaceAll("|", "\\|").replaceAll("\n", " ");
+  const fileId = encodeURIComponent(id).replace(
+    /[!'()*]/gu,
+    (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`,
+  );
   const rows = summary.hitches.map((gap, index) => {
     const work = trace?.available ? trace.hitches[index] : null;
     return `| ${gap.start.toFixed(1)}–${gap.end.toFixed(1)} | ${gap.duration.toFixed(1)} ms | ${safe(gap.actions.join(", ") || "between actions")} | ${safe([...new Set(gap.spans.map((span) => span.name))].join(", ") || "unattributed")} | ${
@@ -188,7 +202,7 @@ export function hitchMarkdown(id, summary, trace) {
         : "Trace unavailable"
     } |`;
   });
-  return `# ${safe(id)} hitch evidence\n\n[Raw timeline](${id}-sample.json) · [Summary](${id}-summary.json)${trace?.available ? ` · [Deep trace](${id}-trace.json)` : ""}\n\nIntervals share the renderer clock. Overlapping spans are context, not additive CPU totals or proof of a cause. Unsupported browser observations are unavailable, not zero. Trace timings include diagnostic overhead.\n\n| Interval (ms) | Gap | Action | Overlapping work | Trace observations |\n| --- | --- | --- | --- | --- |\n${rows.join("\n")}\n${rows.length ? "" : "\nNo frame gaps above 20 ms were observed\n"}`;
+  return `# ${safe(id)} hitch evidence\n\n[Raw timeline](${fileId}-sample.json) · [Summary](${fileId}-summary.json)${trace?.available ? ` · [Deep trace](${fileId}-trace.json)` : ""}\n\nIntervals share the renderer clock. Overlapping spans are context, not additive CPU totals or proof of a cause. Unsupported browser observations are unavailable, not zero. Trace timings include diagnostic overhead.\n\n| Interval (ms) | Gap | Action | Overlapping work | Trace observations |\n| --- | --- | --- | --- | --- |\n${rows.join("\n")}\n${rows.length ? "" : "\nNo frame gaps above 20 ms were observed\n"}`;
 }
 
 export function compareRecorderOverhead(inactive, active) {

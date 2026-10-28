@@ -1,5 +1,5 @@
 import { it, expect, vi } from "vitest";
-import { EventEmitter } from "node:events";
+import { transportFixture } from "../../support/steam.mjs";
 import { createRequire } from "node:module";
 import { mkdtemp, rm, writeFile, mkdir, readdir, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -8,70 +8,26 @@ import { createGame } from "../../../src/game/engine";
 import { encodeSave } from "../../../src/game/save";
 import { createSteam } from "../../../desktop/steam.cjs";
 
-async function transportFixture({ initializationFails = false } = {}) {
-  const directory = await mkdtemp(path.join(tmpdir(), "fauna-transport-lifetime-"));
-  const env = process.env.FAUNA_STEAM_APP_ID;
-  process.env.FAUNA_STEAM_APP_ID = "999999999";
-  const worker = new EventEmitter();
-  worker.kill = vi.fn();
-  worker.postMessage = vi.fn(({ id, operation }) => {
-    queueMicrotask(() => {
-      worker.emit("message", {
-        id,
-        ...(operation === "init" && initializationFails ? { error: "native initialization failed" } : {}),
-        value: operation === "init" ? "76561190000000000" : operation === "list" ? [] : true,
-      });
-    });
-  });
-  const disconnect = vi.fn();
-  const pause = vi.fn();
-  let overlay;
-  try {
-    const adapter = await createSteam({
-      app: { isPackaged: false },
-      directory,
-      isolated: false,
-      pause,
-      utilityProcess: { fork: () => worker },
-      loadBinding: () => ({
-        createOverlay: (_appId, handler) => {
-          overlay = (value) => handler(value.active);
-          return { account: "76561190000000000", disconnect };
-        },
-      }),
-    });
-    return { adapter, directory, worker, disconnect, pause, overlay };
-  } finally {
-    if (env === undefined) delete process.env.FAUNA_STEAM_APP_ID;
-    else process.env.FAUNA_STEAM_APP_ID = env;
-  }
-}
-
 it("drains every metadata write admitted before disposal and refuses later admission", async () => {
   const f = await transportFixture();
-  try {
-    const identity = await f.adapter.identity();
-    const profile = path.join(f.directory, "profiles", identity.profile);
-    const admitted = [
-      f.adapter.writeLocal("earlier metadata"),
-      f.adapter.writeLocal("latest metadata"),
-      f.adapter.acknowledge("f".repeat(64)),
-      f.adapter.preserve(["competing progress"]),
-    ];
-    const closing = f.adapter.dispose();
-    await Promise.all([...admitted, closing]);
-    expect(await readFile(path.join(profile, "cloud.json"), "utf8")).toBe("latest metadata");
-    expect(await readFile(path.join(profile, "cloud-ack"), "utf8")).toBe("f".repeat(64));
-    const recovery = await readdir(path.join(profile, "recovery"));
-    expect(recovery).toHaveLength(1);
-    expect(await readFile(path.join(profile, "recovery", recovery[0]), "utf8")).toBe("competing progress");
-    await expect(f.adapter.writeLocal("late metadata")).rejects.toThrow("unavailable");
-    await expect(f.adapter.readLocal()).rejects.toThrow("unavailable");
-    expect(await readFile(path.join(profile, "cloud.json"), "utf8")).toBe("latest metadata");
-  } finally {
-    await f.adapter.dispose();
-    await rm(f.directory, { recursive: true, force: true });
-  }
+  const identity = await f.adapter.identity();
+  const profile = path.join(f.directory, "profiles", identity.profile);
+  const admitted = [
+    f.adapter.writeLocal("earlier metadata"),
+    f.adapter.writeLocal("latest metadata"),
+    f.adapter.acknowledge("f".repeat(64)),
+    f.adapter.preserve(["competing progress"]),
+  ];
+  const closing = f.adapter.dispose();
+  await Promise.all([...admitted, closing]);
+  expect(await readFile(path.join(profile, "cloud.json"), "utf8")).toBe("latest metadata");
+  expect(await readFile(path.join(profile, "cloud-ack"), "utf8")).toBe("f".repeat(64));
+  const recovery = await readdir(path.join(profile, "recovery"));
+  expect(recovery).toHaveLength(1);
+  expect(await readFile(path.join(profile, "recovery", recovery[0]), "utf8")).toBe("competing progress");
+  await expect(f.adapter.writeLocal("late metadata")).rejects.toThrow("unavailable");
+  await expect(f.adapter.readLocal()).rejects.toThrow("unavailable");
+  expect(await readFile(path.join(profile, "cloud.json"), "utf8")).toBe("latest metadata");
 });
 
 it("retires the Cloud worker immediately when native initialization fails", async () => {
@@ -121,7 +77,6 @@ it("rejects all timed-out requests even when native worker termination throws", 
   } finally {
     await f.adapter.dispose();
     vi.useRealTimers();
-    await rm(f.directory, { recursive: true, force: true });
   }
 });
 
@@ -140,7 +95,6 @@ it("retires a failed native send without leaving a timeout that kills later tran
   } finally {
     await f.adapter.dispose();
     vi.useRealTimers();
-    await rm(f.directory, { recursive: true, force: true });
   }
 });
 
@@ -187,55 +141,15 @@ it.each(["disconnect", "kill"])(
       release();
       await closing?.catch(() => {});
       renaming.mockRestore();
-      await rm(f.directory, { recursive: true, force: true });
     }
   },
 );
 
 it("pins account storage, limits slot ownership and closes only its own worker", async () => {
-  const directory = await mkdtemp(path.join(tmpdir(), "fauna-transport-"));
-  const env = process.env.FAUNA_STEAM_APP_ID;
-  process.env.FAUNA_STEAM_APP_ID = "999999999"; // Fake binding only; no external Steam call occurs.
-  const files = new Map();
-  let overlay;
-  const disconnect = vi.fn(),
-    kill = vi.fn();
-  class Worker extends EventEmitter {
-    postMessage({ id, operation, args }) {
-      queueMicrotask(() => {
-        let value;
-        if (operation === "init") value = "76561190000000000";
-        if (operation === "enabled") value = true;
-        if (operation === "list") value = [...files.keys()];
-        if (operation === "read") value = files.get(args[0]) ?? null;
-        if (operation === "write") {
-          files.set(args[0], args[1]);
-          value = true;
-        }
-        this.emit("message", { id, value });
-      });
-    }
-    kill() {
-      kill();
-      this.emit("exit");
-    }
-  }
-  const pause = vi.fn();
-  let adapter;
+  const { adapter, directory, worker, disconnect, pause, overlay } = await transportFixture();
+  const kill = worker.kill;
+  kill.mockImplementation(() => worker.emit("exit"));
   try {
-    adapter = await createSteam({
-      app: { isPackaged: false },
-      directory,
-      isolated: false,
-      pause,
-      utilityProcess: { fork: () => new Worker() },
-      loadBinding: () => ({
-        createOverlay: (_appId, handler) => {
-          overlay = (value) => handler(value.active);
-          return { account: "76561190000000000", disconnect };
-        },
-      }),
-    });
     const identity = await adapter.identity();
     expect(identity.available).toBe(true);
     overlay({ active: true });
@@ -257,9 +171,6 @@ it("pins account storage, limits slot ownership and closes only its own worker",
     await expect(adapter.preserve([...recovery, "extra"])).rejects.toThrow("Invalid recovery set");
   } finally {
     await adapter?.dispose();
-    if (env === undefined) delete process.env.FAUNA_STEAM_APP_ID;
-    else process.env.FAUNA_STEAM_APP_ID = env;
-    await rm(directory, { recursive: true, force: true });
   }
   expect(kill).toHaveBeenCalledOnce();
   expect(disconnect).toHaveBeenCalledOnce();
@@ -329,55 +240,40 @@ it.each([
   ["duplicate slots", [`fauna-v1-${"a".repeat(32)}-0.json`, `fauna-v1-${"a".repeat(32)}-0.json`]],
 ])("rejects %s from the Cloud inventory without losing local metadata", async (_label, value) => {
   const f = await transportFixture();
-  try {
-    f.worker.postMessage.mockImplementationOnce(({ id }) =>
-      queueMicrotask(() => f.worker.emit("message", { id, value })),
-    );
-    await expect(f.adapter.list()).rejects.toThrow("Invalid Steam response");
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-    await f.adapter.writeLocal("local metadata");
-    expect(await f.adapter.readLocal()).toBe("local metadata");
-  } finally {
-    await f.adapter.dispose();
-    await rm(f.directory, { recursive: true, force: true });
-  }
+  f.worker.postMessage.mockImplementationOnce(({ id }) =>
+    queueMicrotask(() => f.worker.emit("message", { id, value })),
+  );
+  await expect(f.adapter.list()).rejects.toThrow("Invalid Steam response");
+  expect(f.worker.kill).toHaveBeenCalledOnce();
+  await f.adapter.writeLocal("local metadata");
+  expect(await f.adapter.readLocal()).toBe("local metadata");
 });
 
 it("rejects oversized Cloud read replies before publishing them", async () => {
   const f = await transportFixture();
-  try {
-    const name = `fauna-v1-${"a".repeat(32)}-0.json`;
-    f.worker.postMessage.mockImplementationOnce(({ id }) =>
-      queueMicrotask(() => f.worker.emit("message", { id, value: "é".repeat(524289) })),
-    );
-    await expect(f.adapter.read(name)).rejects.toThrow("Invalid Steam response");
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-  } finally {
-    await f.adapter.dispose();
-    await rm(f.directory, { recursive: true, force: true });
-  }
+  const name = `fauna-v1-${"a".repeat(32)}-0.json`;
+  f.worker.postMessage.mockImplementationOnce(({ id }) =>
+    queueMicrotask(() => f.worker.emit("message", { id, value: "é".repeat(524289) })),
+  );
+  await expect(f.adapter.read(name)).rejects.toThrow("Invalid Steam response");
+  expect(f.worker.kill).toHaveBeenCalledOnce();
 });
 
 it("rejects oversized or non-string Cloud uploads before sending to the worker", async () => {
   const f = await transportFixture();
-  try {
-    const identity = await f.adapter.identity();
-    const name = `fauna-v1-${identity.device}-0.json`;
-    const before = f.worker.postMessage.mock.calls.length;
-    await expect(f.adapter.write(name, "é".repeat(524289))).rejects.toThrow("Invalid cloud payload");
-    await expect(f.adapter.write(name, {})).rejects.toThrow("Invalid cloud payload");
-    expect(f.worker.postMessage).toHaveBeenCalledTimes(before);
-    await expect(f.adapter.write(name, "é".repeat(524288))).resolves.toBeUndefined();
-    expect(f.worker.postMessage).toHaveBeenCalledTimes(before + 1);
-    const { parseRequest } = await import("../../../desktop/steam-wire.cjs");
-    expect(() => parseRequest({ id: 1, operation: "write", args: [name, "é".repeat(524289)] })).toThrow(
-      "Invalid Steam request",
-    );
-    expect(() => parseRequest({ id: 1, operation: "read", args: ["not-a-cloud-slot"] })).toThrow(
-      "Invalid Steam request",
-    );
-  } finally {
-    await f.adapter.dispose();
-    await rm(f.directory, { recursive: true, force: true });
-  }
+  const identity = await f.adapter.identity();
+  const name = `fauna-v1-${identity.device}-0.json`;
+  const before = f.worker.postMessage.mock.calls.length;
+  await expect(f.adapter.write(name, "é".repeat(524289))).rejects.toThrow("Invalid cloud payload");
+  await expect(f.adapter.write(name, {})).rejects.toThrow("Invalid cloud payload");
+  expect(f.worker.postMessage).toHaveBeenCalledTimes(before);
+  await expect(f.adapter.write(name, "é".repeat(524288))).resolves.toBeUndefined();
+  expect(f.worker.postMessage).toHaveBeenCalledTimes(before + 1);
+  const { parseRequest } = await import("../../../desktop/steam-wire.cjs");
+  expect(() => parseRequest({ id: 1, operation: "write", args: [name, "é".repeat(524289)] })).toThrow(
+    "Invalid Steam request",
+  );
+  expect(() => parseRequest({ id: 1, operation: "read", args: ["not-a-cloud-slot"] })).toThrow(
+    "Invalid Steam request",
+  );
 });

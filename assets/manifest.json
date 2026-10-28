@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.orchard-ladder-charm",
+      "origin": "repository",
+      "source": "public/art/boons/orchard-ladder-charm.png",
+      "output": "art/boons/orchard-ladder-charm.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Orchard Ladder Charm.png; https://drive.google.com/file/d/11lN0nS6kSRC5tb-WEfbvez4AQuC1XTyY/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.spore-trivet",
+      "origin": "repository",
+      "source": "public/art/boons/spore-trivet.png",
+      "output": "art/boons/spore-trivet.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Spore Trivet.png; https://drive.google.com/file/d/1JL02I_xNIhBKzfXp54UtSm5HQwQ08jzQ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.victory-laurel",
+      "origin": "repository",
+      "source": "public/art/boons/victory-laurel.png",
+      "output": "art/boons/victory-laurel.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Victory Laurel.png; https://drive.google.com/file/d/1LXr_cf7VwKuEdjkprYUVWF034Qa5SW22/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.gilt-gauntlet",
+      "origin": "repository",
+      "source": "public/art/boons/gilt-gauntlet.png",
+      "output": "art/boons/gilt-gauntlet.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Gilt Gauntlet.png; https://drive.google.com/file/d/1OOb0Tgj2P438O0nJWkxLaanlN4aoc9wQ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.pumice-glass-inkwell",
+      "origin": "repository",
+      "source": "public/art/boons/pumice-glass-inkwell.png",
+      "output": "art/boons/pumice-glass-inkwell.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Pumice Glass Inkwell.png; https://drive.google.com/file/d/1zTe7FbqkFMR_mBLpwsIfurYGMhNUXTJp/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.chime-crucible",
+      "origin": "repository",
+      "source": "public/art/boons/chime-crucible.png",
+      "output": "art/boons/chime-crucible.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Chime Crucible.png; https://drive.google.com/file/d/1VPZJ_fZY5INoQklcUzT2zc169edtmdK-/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.crystal-harp",
+      "origin": "repository",
+      "source": "public/art/boons/crystal-harp.png",
+      "output": "art/boons/crystal-harp.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Crystal Harp.png; https://drive.google.com/file/d/1MjBu9sCXY40a46a4IYNPOo9cpb-LQAkI/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.orbit-tongs",
+      "origin": "repository",
+      "source": "public/art/boons/orbit-tongs.png",
+      "output": "art/boons/orbit-tongs.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Orbit Tongs.png; https://drive.google.com/file/d/1-Z11ePqTCpU42hk8xOThgqby6RG_VgCR/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.memory-cairn",
+      "origin": "repository",
+      "source": "public/art/boons/memory-cairn.png",
+      "output": "art/boons/memory-cairn.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Memory Cairn.png; https://drive.google.com/file/d/1UmSg4WTP1M3PQqDY70eQIbTfZH8InYzP/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.vow-candle",
+      "origin": "repository",
+      "source": "public/art/boons/vow-candle.png",
+      "output": "art/boons/vow-candle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Vow Candle.png; https://drive.google.com/file/d/1dDF9KjxEUN3nKGpRy1Bw4Qf0D_VaJr13/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.ember-platter",
       "origin": "repository",
       "source": "public/art/boons/ember-platter.png",

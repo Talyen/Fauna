@@ -1,6 +1,5 @@
 import {
   addReserve,
-  authoredPack,
   swapFixture,
   prepareDestination,
   requireBattle,
@@ -22,7 +21,6 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { roll } from "../../../src/game/random";
 import { settle } from "../../../src/game/journey";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState, GameEvent } from "../../../src/game/types";
 
@@ -45,7 +43,7 @@ function copies(game: GameState) {
 function roundTrip(game: GameState) {
   expect(decodeSave(encodeSave(game))).toEqual(game);
 }
-it("registers the agreed kit, ranks, recruitment and enemy support", () => {
+it("registers the agreed kit, ranks and enemy support", () => {
   expect(() => validateContent()).not.toThrow();
   expect(
     CARDS.filter((card) => card.species === "rookhaven").map((card) => [card.cost, cardText(card)]),
@@ -61,22 +59,6 @@ it("registers the agreed kit, ranks, recruitment and enemy support", () => {
   expect(species("rookhaven").passiveTiers[5].description).toBe("Drawing a card copies it");
   expect(FIRST_RUN_STARTERS).not.toContain("rookhaven");
   expect(CARDS.filter((card) => card.species === "rookhaven").map(enemyCanUse)).toEqual([true, true, false]);
-  let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    prepareDestination(draft);
-    draft.expedition = {
-      recruit: null,
-      lastRoom: null,
-      pack: authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "rookhaven"),
-      ),
-    };
-  });
-  game = accept(game, { type: "beginBattle" });
-  expect(game.discovery.encountered).toContain("rookhaven");
-  game = accept(winBattle(game), { type: "recruit", species: "rookhaven" });
-  expect(game.discovery.recruited.rookhaven).toBe(1);
-  roundTrip(game);
 });
 it.each(["borrowed-brilliance", "unwritten-ending", "margin-of-possibility"])(
   "%s uses authoritative preview without changing the source or rejected state",

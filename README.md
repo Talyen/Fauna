@@ -33,7 +33,8 @@ Accepted commands save automatically. Desktop close drains queued saves; abrupt 
 - [Keywords and Glossary](Docs/KEYWORDS.md) and [Journey design](Docs/EXPEDITION_DESIGN.md): gameplay rules
 - [UI](Docs/UI.md): shared appearance, accessibility and review; [screens and navigation](Docs/ui/screens.md) and [battle](Docs/ui/battle.md): affected flows
 - [Development tools](Docs/DEVELOPMENT_TOOLS.md): previews, replay, balance and performance; [script map](scripts/README.md): implementations
-- [Release](Docs/RELEASE.md): shipping gates and platform qualification
+- [Localization](Docs/LOCALIZATION.md): enabled languages, translation authoring and review scope
+- [CI](Docs/CI.md): hosted verification and evidence; [Release](Docs/RELEASE.md): shipping gates and platform qualification
 - [History](Docs/archive/README.md) and [design references](design/README.md): implementation records, measurements and scoped user choices
 
 Alchemy informed the technology and some selected media; Fauna has its own implementation and no runtime dependency on Alchemy. Asset provenance lives in the manifest and linked source records.
