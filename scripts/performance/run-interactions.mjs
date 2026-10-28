@@ -3,30 +3,15 @@ import { preview } from "vite";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
-import { shrinkTrace, validateInteractionReport } from "../lib/interaction-replay.mjs";
+import {
+  parseInteractionArgs,
+  reserveInteractionReport,
+  shrinkTrace,
+  validateInteractionReport,
+} from "../lib/interaction-replay.mjs";
 import { action as battleAction } from "./run-performance.mjs";
 
-const options = { seed: 42, steps: 24, family: "mixed" };
-for (let i = 2; i < process.argv.length; i += 2) {
-  const key = process.argv[i].slice(2),
-    value = process.argv[i + 1];
-  if (!["seed", "steps", "family", "replay", "out", "shrink"].includes(key) || value === undefined)
-    throw new Error(
-      "Usage: test:interactions -- [--seed N] [--steps 1..100] [--family mixed|navigation|battle|persistence] [--replay report.json] [--shrink true|false] [--out reports/path]",
-    );
-  options[key] = ["seed", "steps"].includes(key) ? Number(value) : value;
-}
-if (
-  !Number.isInteger(options.seed) ||
-  options.seed < 0 ||
-  options.seed > 0xffffffff ||
-  !Number.isInteger(options.steps) ||
-  options.steps < 1 ||
-  options.steps > 100 ||
-  !["mixed", "navigation", "battle", "persistence"].includes(options.family) ||
-  (options.shrink && !["true", "false"].includes(options.shrink))
-)
-  throw new Error("Invalid interaction configuration.");
+const options = parseInteractionArgs(process.argv.slice(2));
 const prior = options.replay
   ? validateInteractionReport(JSON.parse(await readFile(path.resolve(options.replay), "utf8")))
   : null;
@@ -42,6 +27,20 @@ try {
   initial = prior?.initial ?? perf.performanceCases()[0].initial;
   decodeSave(initial);
   const out = await reportDirectory(options.out, `reports/interactions/run-${Date.now()}`);
+  const family = prior?.family ?? options.family;
+  const report = {
+    format: 1,
+    identity: build,
+    seed: prior?.seed ?? options.seed,
+    family,
+    initial,
+    actions: [],
+    ...(prior?.checkpointMode === "recompute" ? { checkpointMode: "recompute" } : {}),
+    complete: false,
+    failure: "Run in progress or interrupted",
+    shrunk: null,
+  };
+  await reserveInteractionReport(out, report);
   const server = await preview({
     root: ROOT,
     preview: { host: "127.0.0.1", port: 0, strictPort: true, open: false },
@@ -56,7 +55,6 @@ try {
     rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
     return items[Math.floor((rng / 4294967296) * items.length)];
   };
-  const family = prior?.family ?? options.family;
   const kinds =
     family === "navigation"
       ? ["collection", "settings", "talents"]
@@ -65,18 +63,7 @@ try {
         : family === "persistence"
           ? ["reload", "battle"]
           : ["collection", "settings", "talents", "battle", "reload"];
-  const report = {
-    format: 1,
-    identity: build,
-    seed: prior?.seed ?? options.seed,
-    family,
-    initial,
-    actions: [],
-    complete: false,
-    failure: null,
-    shrunk: null,
-  };
-  async function replay(trace, generate = false) {
+  async function replay(trace, generate = false, captureCheckpoints = false) {
     const actor = createBattleActor();
     const context = await browser.newContext({
       viewport: { width: 1280, height: 800 },
@@ -140,6 +127,10 @@ try {
         if (!generate && step.checkpointHash && step.checkpointHash !== checkpointHash)
           throw new Error("Recorded checkpoint diverged");
         if (generate) step.checkpointHash = checkpointHash;
+        else if (captureCheckpoints && !step.checkpointHash) {
+          step.checkpointHash = checkpointHash;
+          trace[index] = step;
+        }
         state = expected;
       }
       return { valid: true, failure: null };
@@ -155,7 +146,7 @@ try {
     }
   }
   try {
-    const result = await replay(prior?.actions, !prior);
+    const result = await replay(prior?.actions, !prior, !!prior);
     if (prior) report.actions = prior.actions;
     report.failure = result.failure ?? (!result.valid ? "Inapplicable replay command" : null);
     report.complete = result.valid && !result.failure;
@@ -164,7 +155,11 @@ try {
       report.shrunk = await shrinkTrace(candidates, report.failure, (trace) => replay(trace));
       await writeFile(
         path.join(out, "minimal.json"),
-        JSON.stringify({ ...report, actions: report.shrunk.actions, shrunk: null }, null, 2),
+        JSON.stringify(
+          { ...report, actions: report.shrunk.actions, checkpointMode: "recompute", shrunk: null },
+          null,
+          2,
+        ),
       );
     }
   } finally {
