@@ -34,7 +34,6 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   dodgeBurn: ["dodge", "burn"],
   armorBreak: ["armor", "burn"],
   blockBreak: ["block", "water"],
-  faultline: ["block", "armor"],
   statusReflection: ["reflect"],
   shareProtection: ["block", "thorns"],
   shareDodge: ["dodge"],

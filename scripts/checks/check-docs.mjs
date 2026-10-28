@@ -59,14 +59,15 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
     edges.set(file, targets);
     for (const { target } of links) {
       if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(target)) continue;
-      let decoded;
+      const [destination, fragment] = target.split("#", 2);
+      let relative, anchor;
       try {
-        decoded = decodeURIComponent(target);
+        relative = decodeURIComponent(destination.split("?", 1)[0]);
+        anchor = fragment === undefined ? undefined : decodeURIComponent(fragment);
       } catch {
         fail(file, `invalid encoded link ${target}`);
         continue;
       }
-      const [relative, anchor] = decoded.split("#");
       const absolute = relative ? path.resolve(root, path.dirname(file), relative) : path.join(root, file);
       const local = path.relative(root, absolute).split(path.sep).join("/");
       if (local === ".." || local.startsWith("../")) {

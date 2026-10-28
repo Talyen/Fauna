@@ -3617,42 +3617,6 @@
     "sourceHash": "c1cc74f2585afe8a37038253bb2c8a68c82a22587fbf67628efee947096362b0",
     "text": "Aplica {{value0}} de <keyword0>Quemadura</keyword0> a todos los enemigos / Obtiene <keyword1>Anulación</keyword1>"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "8f74c2930ab73419eb0865b9568d76c22cf3749c3cb756f1896eca0506cfe2fa",
-    "text": "Paso de astas"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "52c6502afbbf549432ea7e211f297eaef5b37ca9cbc81c122dca392a62779f49",
-    "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "c0d76d9bcf7f0005e7de17377b88f57bbc234bebf28f1d08e59852edbef8f41d",
-    "text": "Reprensión del cañón"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "ab7b2fde59e7b437ad981dee061cd7a7831c8dab42570520ae406cea50c123e7",
-    "text": "Inflige {{value0}} de daño de tipo <keyword0>Físico</keyword0> a todos los enemigos"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "430fa8f1529e76a39aff477afdfa98ba0b6706eea0f1908f6f69c49d8e39249f",
-    "text": "Resguardo de lluvia"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "643594afa74c9144ccbb4e93760dac587201f58db77ee73124268b19b9812054",
-    "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -6088,60 +6052,6 @@
     "source": "Passing Flame",
     "sourceHash": "3c9183e9ba4a4f89a9d2be4d1fcb8c20b26fde741abb26f8f4b987d1ae095af5",
     "text": "Llama transmitida"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "2f44e3631b28ad835c29e74801a043c48f47de9084e290157f74e4ea0b9735ef",
-    "text": "Ravelland"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "2ef11ba96ba734972bcc9edc655fa3768e7a6e1385d3f801cb584ead9c172744",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "63572f6e337d91e2e7ccb355c157fcce55761bd7b6523aa32bca1e1e1bec7451",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "a159fa3e9f63d444736d2898710836a5c938386e62b7130ea689dc2ec396d72a",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "627a5c9e02b117cc97887ddddbb97b1657c1a0910a60772c96965cf17ddbee61",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "1aee3e82a9fb5edb817a39967ad129a9af77b1e3446f9c9e946becc0354b6190",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "ee2136014b6b24aa64bd611cdb6945e6f93db3a229cc30ca9239fd72bd4299d0",
-    "text": "Obtén {{value0}} de <keyword0>Armadura</keyword0> cuando el daño rompa tu <keyword1>Bloqueo</keyword1>"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "321d9d4217e80e86a11f824db39c7ceb4136a05134254ee4d7a81fd953f9a827",
-    "text": "El cañón andante"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "dd774a565ff99cbe79d76e19a22a2efa6a8f1395e4f4a84ba60e1b39e759a03d",
-    "text": "Línea de falla"
   },
   "content.species.reedstag.name": {
     "reviewed": true,

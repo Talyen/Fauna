@@ -80,27 +80,30 @@ describe("journey encounters", () => {
     }
   });
 
-  it("uses an eligible ordinary Boss when the player's roster contains Memento", () => {
-    const started = starterJourney(7, "memento");
-    const ready = produce(started, (draft) => {
-      draft.encounter = 3;
-      draft.journey!.victories = 3;
-      draft.expedition!.pack = generateEncounterPack(draft);
-    });
-    const source = encounterSource(ready);
-    expect(source.name).toBe("Boss");
-    expect(source.enemies).toHaveLength(1);
-    expect(source.enemies[0]!.species).not.toBe("memento");
-    expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
-    const battle = enter(decodeSave(encodeSave(ready)));
-    expect(decodeSave(encodeSave(battle))).toEqual(battle);
-    const result = dispatch(battle, { type: "devWinBattle" }, true);
-    expect(result.accepted).toBe(true);
-    const reward = result.state;
-    expect(reward.reward!.currency).toBe(40);
-    expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
-    expect(decodeSave(encodeSave(reward))).toEqual(reward);
-  });
+  it.each([3, 7])(
+    "uses an eligible ordinary Boss at encounter %s when the roster contains Memento",
+    (encounter) => {
+      const started = starterJourney(7, "memento");
+      const ready = produce(started, (draft) => {
+        draft.encounter = encounter;
+        draft.journey!.victories = encounter;
+        draft.expedition!.pack = generateEncounterPack(draft);
+      });
+      const source = encounterSource(ready);
+      expect(source.name).toBe("Boss");
+      expect(source.enemies).toHaveLength(1);
+      expect(source.enemies[0]!.species).not.toBe("memento");
+      expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
+      const battle = enter(decodeSave(encodeSave(ready)));
+      expect(decodeSave(encodeSave(battle))).toEqual(battle);
+      const result = dispatch(battle, { type: "devWinBattle" }, true);
+      expect(result.accepted).toBe(true);
+      const reward = result.state;
+      expect(reward.reward!.currency).toBe(40);
+      expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
+      expect(decodeSave(encodeSave(reward))).toEqual(reward);
+    },
+  );
 
   it("replaces only conflicting enemies after an optional recruit and persists the new pack", () => {
     const ready = produce(start(), (draft) => {

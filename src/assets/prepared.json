@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "aea6214f8f0a756c52343e81ef2d4567f76e49e706e4d68ab02277acb5fd4e21",
-  "generation": "936bfaf84fc40d397885e69a7f7562349672a55569315ca763604b6e0906b3b7",
+  "manifestHash": "0e02a9b791c9ef3684ad5d0c2d993ecb12c00066f5f69bcd5ea11b734b357b14",
+  "generation": "f909c3c8e1e207b843ae94292483b8762f7bc66ac1f0629bf4996d00da8f9225",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -870,58 +870,6 @@
       "outputHash": "51f4c5af4d16babd472b3a7efc2ad72de40b3f3821d455cfc5634b2ec526c50f",
       "sourceBytes": 1916769,
       "outputBytes": 704478,
-      "width": 720,
-      "height": 960,
-      "alpha": false
-    },
-    "creature.ravelland": {
-      "url": "./prepared/objects/8f59069e339b8eba0d9ac5217ddfede7585a78b5c50487430b7de0b1b364271a/asset.webp",
-      "sourceHash": "01913be2d67b5d7d8c840b9a53755d371b5f72509e7c102737752ce4d57d0a78",
-      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
-      "recipe": "card-webp",
-      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
-      "outputHash": "5ad991d9af5c021b348b4ad987d99d2fb6f0546e5b33769f8652d95137177a1a",
-      "sourceBytes": 2137448,
-      "outputBytes": 848762,
-      "width": 960,
-      "height": 720,
-      "alpha": false
-    },
-    "action.ravelland.antler-pass": {
-      "url": "./prepared/objects/8c22641eb9a0269124272fd3fbf8c6a04f9b26aac5974f047390574b11e44462/asset.webp",
-      "sourceHash": "f69120a2c097f5eee0a05bd04ab22f61e962dbde9e8abcb49b58e90802f1d6cd",
-      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
-      "recipe": "card-webp",
-      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
-      "outputHash": "fad267e735f35372b51f34fecd37ff9a769eb5d23849239d74b5e0024abbb344",
-      "sourceBytes": 2432488,
-      "outputBytes": 970506,
-      "width": 720,
-      "height": 960,
-      "alpha": false
-    },
-    "action.ravelland.canyon-rebuke": {
-      "url": "./prepared/objects/14fd264e0feecd6540dfe7b29ed4ed3c2e1b88b5f108d422d031cf781f53857c/asset.webp",
-      "sourceHash": "b05b919c43f6a822c10a17ac18f99f060b8f4d7864e3f5fc15e4d3da8d4c32d3",
-      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
-      "recipe": "card-webp",
-      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
-      "outputHash": "5ff30663801e0ccf979bdf98aef01566f7f6a6973655e07d7806a0727fa656f0",
-      "sourceBytes": 2418544,
-      "outputBytes": 988116,
-      "width": 720,
-      "height": 960,
-      "alpha": false
-    },
-    "action.ravelland.rainward": {
-      "url": "./prepared/objects/dab87ec7ead67e7c7d6c2fc140ddd2ffc7fda83f6a1aeae6e3e64751af556b43/asset.webp",
-      "sourceHash": "c7f0dd801bdeb6f2367b0823ecb664c7fede50c8b5b350918cb0246c7e17b0d6",
-      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
-      "recipe": "card-webp",
-      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
-      "outputHash": "db3369459fd23c6bad7e575290020d79676440021ebf13001c6844dac8a429e0",
-      "sourceBytes": 2451084,
-      "outputBytes": 941186,
       "width": 720,
       "height": 960,
       "alpha": false

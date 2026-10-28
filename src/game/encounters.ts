@@ -84,8 +84,8 @@ export const BOSSES = [
   {
     id: "hollow-crown",
     encounter: 7,
-    name: "Ravelland",
-    pack: ["ravelland"],
+    name: "Memento",
+    pack: ["memento"],
   },
 ] as const;
 const recruitableSpecies = SPECIES.filter((entry) => !entry.legendary);

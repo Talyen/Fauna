@@ -10,7 +10,6 @@ export default {
     "scripts/*.mjs",
     "scripts/{agent,assets,balance,checks,ci,dev,performance,release}/*.mjs",
     "src/tooling/{playthrough,balance,performance}.ts",
-    "tests/support/ravelland.ts", // Vite loads the named review fixture dynamically.
     "design/**/*.tsx",
   ],
   project: [

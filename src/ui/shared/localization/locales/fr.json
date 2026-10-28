@@ -3617,42 +3617,6 @@
     "sourceHash": "89d0de1ef2b3a6f546402d21c710170d0fa93c640deff9e05ccc1804c457721b",
     "text": "Applique {{value0}} <keyword0>Brûlure</keyword0> à tous les ennemis / Gagne <keyword1>Négation</keyword1>"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "8317829aa92adf8b15c6818dd545490c3e0948e0004caf5d954cccb551949d53",
-    "text": "Col des bois"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "94b014a9d7aca12d2f46cb51a38f1cd25977b034a22e521845896d6f93273a4e",
-    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "26bcb57d4e1889d2df96eccade11258f328094ca897a6153ba0fe0e91c7898f1",
-    "text": "Réplique du canyon"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "1ab33f1ec6a5ec9a8a117783ef60e938811b59051b437365acb6eb1c64ac556c",
-    "text": "Inflige {{value0}} dégâts de type <keyword0>Physique</keyword0> à tous les ennemis"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "ace4a3681857d096ebedf7290f6df48ff32cbae333e43a8a4bb783599bca0e57",
-    "text": "Rempart de pluie"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "099ca18b3aac79d0d4693612c86fe352516720b01f623e22ff62d24a59f72610",
-    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -6088,60 +6052,6 @@
     "source": "Passing Flame",
     "sourceHash": "44b8a665146983cc778ea830529b9b966d0ff558d6dd7963c6dc9a047f7d06cf",
     "text": "Flamme transmise"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "282d34381e13b0c0418699d9dfb48014d9312755b77c9e99eae25af3d313d1a0",
-    "text": "Ravelland"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "8436b6c621dc7fb432e3a04ce984c8e378fca444db845a7fdfbe0ca7f5f28b0c",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "66e0f6c2a8f302c12c19ed0c72c7d4949b2884b989e435d9f81b6ec243ae93c2",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "79dbd7bab9649f370ee2d0603c39dacba04734054620c9d6548fe6cb960c8d4d",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "34f31813cc461915344bcfaf45aa1ca6d84c363ab0e4a6f619a55f5e6d530679",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "2407d6e72b04a457798fb55c581e351ddc71f7285cf6933269720ba01395b38a",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "d8f2711e5f1136bdc2553436c2303a193047533f07f7036230169216b8ee4d99",
-    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "41f95ac939ed30b90f65970f8d4eedf37ce79fb528f71c475c1712ae62f488da",
-    "text": "Le canyon ambulant"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "8829c8911c8f738324abc7f9af036e18d6665e1bc55923507412dc4be98e8d7d",
-    "text": "Ligne de faille"
   },
   "content.species.reedstag.name": {
     "reviewed": true,

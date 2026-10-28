@@ -9,6 +9,7 @@ const eligible = (name) =>
   /^(?:playwright-report|blob-report|all-blob-reports|test-results)$/.test(name) ||
   /^reports\/balance\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(name) ||
   /^reports\/(?:performance\/capture|interactions\/run)-[0-9]+$/.test(name) ||
+  /^reports\/agent-diff\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(name) ||
   /^release\/\.fauna-development\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\/output$/.test(
     name,
   ) ||
@@ -24,6 +25,27 @@ function captureEvidence(file) {
   if (names.some((name) => typeof name !== "string" || path.basename(name) !== name)) return false;
   const actual = readdirSync(file).sort();
   return names.length === actual.length && names.sort().every((name, index) => name === actual[index]);
+}
+
+function committedReview(file) {
+  const record = JSON.parse(readFileSync(path.join(file, "index.json"), "utf8"));
+  if (
+    record.retention?.version !== 1 ||
+    !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(record.retention.base) ||
+    !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(record.retention.head) ||
+    !Array.isArray(record.inventory) ||
+    !Array.isArray(record.selected)
+  )
+    return false;
+  const names = readdirSync(file).sort();
+  if (record.patches === undefined) return names.length === 1 && names[0] === "index.json";
+  return (
+    typeof record.patches === "string" &&
+    path.basename(record.patches) === "patches.txt" &&
+    names.length === 2 &&
+    names[0] === "index.json" &&
+    names[1] === "patches.txt"
+  );
 }
 
 function balanceEvidence(file) {
@@ -132,6 +154,28 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
   const names = ignored.map((name) => name.replace(/\/$/u, "")).filter(eligible);
   if (ignored.includes("reports/")) {
     try {
+      const review = path.join(archive, "files/reports/agent-diff");
+      if (safeParents(archive, "reports/agent-diff/item")) {
+        for (const name of readdirSync(review)) {
+          const relative = `reports/agent-diff/${name}`;
+          try {
+            const item = lstatSync(path.join(review, name));
+            if (
+              eligible(relative) &&
+              item.isDirectory() &&
+              !item.isSymbolicLink() &&
+              committedReview(path.join(review, name))
+            )
+              names.push(relative);
+          } catch {
+            // Preserve incomplete, modified or unclassified review output.
+          }
+        }
+      }
+    } catch {
+      // Missing or unusual report trees are retained.
+    }
+    try {
       const review = path.join(archive, "files/reports/review");
       if (safeParents(archive, "reports/review/item")) {
         for (const name of readdirSync(review)) {
@@ -224,7 +268,13 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
       if (!safeParents(archive, relative)) continue;
       const root = lstatSync(path.join(archive, "files", relative));
       if (!root.isDirectory() || root.isSymbolicLink()) continue;
-      entries.push({ path: relative, snapshot: evidenceSnapshot(path.join(archive, "files", relative)) });
+      const item = path.join(archive, "files", relative);
+      if (relative.startsWith("reports/agent-diff/") && !committedReview(item)) continue;
+      const snapshot = evidenceSnapshot(item);
+      const review = relative.startsWith("reports/agent-diff/")
+        ? JSON.parse(readFileSync(path.join(item, "index.json"), "utf8"))
+        : undefined;
+      entries.push({ path: relative, snapshot, ...(review ? { review } : {}) });
     } catch {
       // Unknown or explicitly retained evidence remains archived indefinitely.
     }

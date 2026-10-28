@@ -31,8 +31,7 @@ import { requireBattle, teamRun } from "../../support/game";
 // Preserve the recorded oracle across save versions and dormant combat fields.
 // New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/*.test.ts.
 const recordedSpecies = SPECIES.filter(
-  (entry) =>
-    !["arabesca", "skybex", "dulcera", "parhelion", "pyrella", "alpenglen", "ravelland"].includes(entry.id),
+  (entry) => !["arabesca", "skybex", "dulcera", "parhelion", "pyrella", "alpenglen"].includes(entry.id),
 );
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));

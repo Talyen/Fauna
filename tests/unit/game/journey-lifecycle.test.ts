@@ -24,7 +24,7 @@ function traceLine(value: unknown): string {
 }
 
 // The captured commands and expected states have one owner, independent of later policy revisions.
-// Team-weighted Boon offers change seeded choices and subsequent journey RNG.
+// Removing the former final Boss changes encounter packs, rewards, and subsequent seeded choices.
 // Earlier recordings remain in journey-baseline-pre-team-weighting.tsv and journey-baseline-pre-expansion.tsv.
 const baselines = new Map<number, string[]>();
 for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
@@ -187,6 +187,38 @@ describe("journey lifecycle behavior baseline", () => {
   });
 });
 
+it("completes the final Boss reward after removing the former Legendary", () => {
+  const ready = produce(starterJourney(7, "captoad"), (draft) => {
+    draft.encounter = 7;
+    draft.journey!.victories = 7;
+    draft.expedition!.pack = generateEncounterPack(draft);
+  });
+  expect(ready.expedition!.pack).toEqual(["memento"]);
+  const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
+  expect(battle.battle!.enemies[0]!.species).toBe("memento");
+  const won = winBattle(battle);
+  expect(won.reward!.recruits).toEqual(["memento"]);
+  const recruited = accept(decodeSave(encodeSave(won)), { type: "recruit", species: "memento" });
+  expect(recruited.phase).toBe("victory");
+  expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
+});
+
+it("uses a valid ordinary final Boss when Memento is on the roster", () => {
+  const ready = produce(starterJourney(7, "memento"), (draft) => {
+    draft.encounter = 7;
+    draft.journey!.victories = 7;
+    draft.expedition!.pack = generateEncounterPack(draft);
+  });
+  expect(ready.expedition!.pack).toHaveLength(1);
+  expect(ready.expedition!.pack![0]).not.toBe("memento");
+  const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
+  const result = dispatch(battle, { type: "devWinBattle" }, true);
+  expect(result.accepted).toBe(true);
+  const won = result.state;
+  expect(won.reward!.recruits).toEqual(ready.expedition!.pack);
+  expect(accept(won, { type: "recruit", species: won.reward!.recruits[0]! }).phase).toBe("victory");
+});
+
 it("keeps a completed receipt detached from recruitment and rejects repeated settlement", () => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
   expect(won.phase).toBe("recruit");
@@ -227,7 +259,7 @@ it("rejects phase payload mismatches and contradictory completed receipts", () =
     { ...won, phase: "boon" },
     { ...won, reward: { ...won.reward, currency: won.reward!.currency + 1 } },
     { ...won, journey: { ...won.journey, lastBattle: { ...won.journey!.lastBattle, encounter: 7 } } },
-    { ...won, version: 44 },
+    { ...won, version: 68 },
   ];
   for (const candidate of cases) expect(() => decodeSave(JSON.stringify(candidate))).toThrow();
 });

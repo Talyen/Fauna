@@ -3617,42 +3617,6 @@
     "sourceHash": "6ecc2464c8461e0ddf72171451ed93c2bf8e9eb70813b1e9cee9e162ae8780ea",
     "text": "Наложите {{value0}} <keyword0>горения</keyword0> на всех врагов / Получите <keyword1>отведение</keyword1>"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "3f5d48b7b71fcc3795233ba22326e5370508282121251523d779ba82fed067e3",
-    "text": "Рогатый перевал"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "7315fb4a202a311cf474ccbbeaf43654d1db8b01dc252359f84fc9d02cf34b32",
-    "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "8a0d06d9d8d4cd0a82f7b2d02f19ed01aa566ff79d6d78282993bf85996e341e",
-    "text": "Отпор каньона"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "5df2820a38fab5e19649b7d2555f2333550f2364ada2489443381ae113233b02",
-    "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "41f6da70d24f2f8210e001a36c642f7ad4ebc88fb6578c713bf372e72c0c7707",
-    "text": "Защита от дождя"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "55fb539346e770ebe77ef7bdfb46c8a6644e6df04abbe0a85dc820d4ecf20cf2",
-    "text": "Получить {{value0}} <keyword0>блока</keyword0>"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -6088,60 +6052,6 @@
     "source": "Passing Flame",
     "sourceHash": "94d8908a2591a329938c9c0dcc15a209f1d14437b027e42c51e625ca1919f114",
     "text": "Переданное пламя"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "4677a778c0eb9e2c4e50f0573dad086353c4c063423dc3ab48fd6d1ceeb29edb",
-    "text": "Равелланд"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "5cf6fa6e64ffbca0cf9dbcdd241d302520b139d157914d0e704bf06b85f73615",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "dffa7638182546a8a426e7d033823eed2a78a8e714b5b34e97d8434bb8635025",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "32417760a555abd5701c7b04c477af1b8bb450057494040ecc860746143f35f3",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "f34b8e71621c7563ceb5418ae52469772d115699eac794b155ab63faa99faafa",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "5bf628363e180d0c90329e066e16c09b359539fb7d89a80d2e9ca25ab929875d",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "e047b7b192bc58b67632783409c64610b87ea26aa7bebc60ceecc50e111fc72d",
-    "text": "Получите {{value0}} <keyword0>брони</keyword0>, когда урон разрушает ваш <keyword1>блок</keyword1>"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "fca603f73a239fa1ffd73a6cff78b6239472b27f18f8d27a55b7ee7f448395fd",
-    "text": "Шагающий каньон"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "78bdc3c7fb26cc3d128e03e5dcc629e775ee9a69755ed052b22e3ca5e5feac1d",
-    "text": "Линия разлома"
   },
   "content.species.reedstag.name": {
     "reviewed": true,

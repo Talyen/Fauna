@@ -2033,30 +2033,6 @@
     "reference": "Apply 2 Burn to all enemies / Gain Negate",
     "contextHash": "1bd23631bc27c1b5bf972c32c2b503cf84455cc2e15ae7377a939754d249d0cb"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "text": "Antler Pass"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "reference": "Deal 8 Physical damage",
-    "contextHash": "b45803386251048cde90056097a5e0d64dc5342756cf0870e411e9b833ea637d"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "text": "Canyon Rebuke"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "reference": "Deal 3 Physical damage to all enemies",
-    "contextHash": "a6ff89fe598f7b686f2f4151aea1c92651578d106796dfa6050be6310bae7617"
-  },
-  "content.card.ravelland-rainward.name": {
-    "text": "Rainward"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "text": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "reference": "Gain 6 Block",
-    "contextHash": "9fa1bf89f272f1767017bb1a178d00c07b5a67fbc61a3e524d913ad9f1e27c69"
-  },
   "content.card.reedstag-attack.name": {
     "text": "Reed Rush"
   },
@@ -3597,39 +3573,6 @@
   },
   "content.species.pyrella.trait": {
     "text": "Passing Flame"
-  },
-  "content.species.ravelland.name": {
-    "text": "Ravelland"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 1 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 2 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 3 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 4 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 5 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "reference": "Gain 6 Armor when damage breaks your Block"
-  },
-  "content.species.ravelland.title": {
-    "text": "The walking canyon"
-  },
-  "content.species.ravelland.trait": {
-    "text": "Faultline"
   },
   "content.species.reedstag.name": {
     "text": "Reedstag"

@@ -3617,42 +3617,6 @@
     "sourceHash": "40d8f4b18727178ee72ff2ae5cb847a00757176985a089e6c47aee8140d0eb5d",
     "text": "对所有敌人施加{{value0}}点<keyword0>灼烧</keyword0> / 获得<keyword1>抵消</keyword1>"
   },
-  "content.card.ravelland-antler-pass.name": {
-    "reviewed": true,
-    "source": "Antler Pass",
-    "sourceHash": "8ca602b9a8991e03d031ad52fc8fa052837cfd87c3844d95c9b5b6c7dc8c2ae3",
-    "text": "鹿角山口"
-  },
-  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "6cc9ec32b6bd831183d274909342942701c33e38ec599dea0e85672e5b4e29dd",
-    "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
-  },
-  "content.card.ravelland-canyon-rebuke.name": {
-    "reviewed": true,
-    "source": "Canyon Rebuke",
-    "sourceHash": "67acb0b11e6b4aa29c214319181e34786da56e839f3a0758e1fb6c24d1ba13c6",
-    "text": "峡谷回击"
-  },
-  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
-    "reviewed": true,
-    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "85563ec952df3a6b955d192d112f4920bd4137a587f680ab2c02345aaab14d29",
-    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
-  },
-  "content.card.ravelland-rainward.name": {
-    "reviewed": true,
-    "source": "Rainward",
-    "sourceHash": "2c05ee4480a90e7b8e450c3059c71f2f3a124b2052a4e78f7a2b018cc9356926",
-    "text": "雨幕守护"
-  },
-  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "adb9980a5cd5573c1a5d974f950208af1f0c0302ff1b7789c469432fdd0fd002",
-    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
-  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -6088,60 +6052,6 @@
     "source": "Passing Flame",
     "sourceHash": "882af31494b5d2116a23d6c4ccd2b13c4b0611b3539c5301b62c8b5ed92ebaae",
     "text": "流转之焰"
-  },
-  "content.species.ravelland.name": {
-    "reviewed": true,
-    "source": "Ravelland",
-    "sourceHash": "0cd8202e4490782b1beafc4cdda01691eb49948c9c5e9325d192e2e965aad6f9",
-    "text": "拉文兰"
-  },
-  "content.species.ravelland.passive.0.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "35a5e2baff99c4a7613db9ad2cc55e750d4068b60a9c9517ffb820e4d3b1b032",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.passive.1.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "d2effa1c48f610c5a3fbcfa884b6a227033ccda33b17b263a00c7c61700d2817",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.passive.2.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "469c72ab0109a1a8d1401223e67091db0d6e4abbf4519f9c30e65b524109dcd1",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.passive.3.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "79243f723f266b3c50eecc6e316b2e891e9fa4c5ca779c4df0696666093159ba",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.passive.4.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "368cfa77f8e3baa5a3cb35434c0a6a80fdd04a1f6d9839654f26c1f24e601ab5",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.passive.5.rule": {
-    "reviewed": true,
-    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
-    "sourceHash": "3093c5ac0d7a64e3be0e087288f9c436cb88dd4d0510e94906a651b9db39f1e9",
-    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
-  },
-  "content.species.ravelland.title": {
-    "reviewed": true,
-    "source": "The walking canyon",
-    "sourceHash": "04e1d1ae32fcadf965678d38c4fdfa76d767e02d8f1182685db602678f6dd265",
-    "text": "行走的峡谷"
-  },
-  "content.species.ravelland.trait": {
-    "reviewed": true,
-    "source": "Faultline",
-    "sourceHash": "a67e28122e94e003e04d2c73ab96a92ba6b16b33c8b0733a851f8d8bffe6c615",
-    "text": "断层线"
   },
   "content.species.reedstag.name": {
     "reviewed": true,
