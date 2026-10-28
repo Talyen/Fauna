@@ -1,5 +1,5 @@
 {
-  "version": 69,
+  "version": 70,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -78,7 +78,10 @@
         "bleedLeech": [],
         "negate": false,
         "attackReflection": false,
-        "fallenCardsPlayedThisTurn": 0
+        "fallenCardsPlayedThisTurn": 0,
+        "moonseedReady": false,
+        "toothpickReady": false,
+        "slipperCard": null
       }
     }
   ],
@@ -127,7 +130,10 @@
         "bleedLeech": [],
         "negate": false,
         "attackReflection": false,
-        "fallenCardsPlayedThisTurn": 0
+        "fallenCardsPlayedThisTurn": 0,
+        "moonseedReady": false,
+        "toothpickReady": false,
+        "slipperCard": null
       }
     },
     {
@@ -174,7 +180,10 @@
         "bleedLeech": [],
         "negate": false,
         "attackReflection": false,
-        "fallenCardsPlayedThisTurn": 0
+        "fallenCardsPlayedThisTurn": 0,
+        "moonseedReady": false,
+        "toothpickReady": false,
+        "slipperCard": null
       }
     },
     {
@@ -221,7 +230,10 @@
         "bleedLeech": [],
         "negate": false,
         "attackReflection": false,
-        "fallenCardsPlayedThisTurn": 0
+        "fallenCardsPlayedThisTurn": 0,
+        "moonseedReady": false,
+        "toothpickReady": false,
+        "slipperCard": null
       }
     },
     {
@@ -268,7 +280,10 @@
         "bleedLeech": [],
         "negate": false,
         "attackReflection": false,
-        "fallenCardsPlayedThisTurn": 0
+        "fallenCardsPlayedThisTurn": 0,
+        "moonseedReady": false,
+        "toothpickReady": false,
+        "slipperCard": null
       }
     }
   ],
@@ -385,7 +400,10 @@
           "bleedLeech": [],
           "negate": false,
           "attackReflection": false,
-          "fallenCardsPlayedThisTurn": 0
+          "fallenCardsPlayedThisTurn": 0,
+          "moonseedReady": false,
+          "toothpickReady": false,
+          "slipperCard": null
         },
         "lastAbility": null,
         "minion": {
@@ -440,7 +458,10 @@
           "bleedLeech": [],
           "negate": false,
           "attackReflection": false,
-          "fallenCardsPlayedThisTurn": 0
+          "fallenCardsPlayedThisTurn": 0,
+          "moonseedReady": false,
+          "toothpickReady": false,
+          "slipperCard": null
         },
         "lastAbility": null,
         "minion": {
@@ -515,7 +536,10 @@
           "bleedLeech": [],
           "negate": false,
           "attackReflection": false,
-          "fallenCardsPlayedThisTurn": 0
+          "fallenCardsPlayedThisTurn": 0,
+          "moonseedReady": false,
+          "toothpickReady": false,
+          "slipperCard": null
         },
         "lastAbility": null,
         "deck": {
