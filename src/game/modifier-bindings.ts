@@ -17,6 +17,7 @@ type Modules = {
     farewellOar: typeof farewellOar;
   };
   "./battlefield": typeof import("./battlefield");
+  "./boon-offers": typeof import("./boon-offers");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": typeof import("./ability-rules") & { passiveCardBonus: typeof passiveCardBonus };
   "./card-actors": typeof import("./card-actors");
@@ -469,6 +470,9 @@ export const modifierQueries = freeze(
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
       wellRead: ["./card-zones#drawHasAnotherCard"],
+      cardBonus: ["./boon-offers#rosterBoonKeywords"],
+      battleStart: ["./boon-offers#rosterBoonKeywords"],
+      bounce: ["./boon-offers#rosterBoonKeywords"],
     } satisfies Partial<Record<PassiveKind, Binding>>,
   },
   true,

@@ -95,7 +95,7 @@ With roster space, add a new species immediately. A repeat species completes rec
 
 Gold is permanent and buys journey Boons at Merchants. Ordinary victories grant 20 and Boss victories 40 as initial tuning. Spending atomically reduces the wallet; journey earnings measure gross retained income. Permanent upgrade purchases, other currencies and material/item rewards are undefined.
 
-Intermediate Bosses offer up to three distinct unowned Boons after recruitment. Choose one or Skip; smaller nonempty pools remain available and empty pools advance automatically. Ordinary victories offer recruitment only; the final Boss offers recruitment before results. Boons last for the journey and remain inspectable through its menu.
+Intermediate Bosses offer up to three distinct unowned Boons after recruitment. Offers are prepared at victory using the current roster, including backup; Boons sharing a keyword with a creature’s current passive or abilities have twice the selection weight, while all unowned Boons remain possible. Choose one or Skip; smaller nonempty pools remain available and empty pools advance automatically. Ordinary victories offer recruitment only; the final Boss offers recruitment before results. Boons last for the journey and remain inspectable through its menu.
 
 The [Boon catalog](../src/game/content/boons.ts) defines available items. [Support visits](#optional-support-visits) defines stock, rolls and saved prices; [reward presentation](ui/screens.md#victory-recruitment-and-team-replacement) defines disclosure.
 
@@ -146,7 +146,7 @@ Resting or leaving suppresses Campfire until another room is visited. Both prese
 
 Offer Merchant only when it was not the last room and at least one unowned Boon is affordable. Entering commits the saved visit and rechecks affordability. Starting battle forfeits an unvisited Merchant.
 
-Stock contains up to three distinct unowned Boons, each with an independently rolled integer price of 20–40 Gold inclusive. Merchant's Favor subtracts 7 when stock is prepared, yielding 13–33. Inspection, menus, Campfire and reload preserve prices.
+Stock uses the same roster keyword weighting as Boss rewards and contains up to three distinct unowned Boons, each with an independently rolled integer price of 20–40 Gold inclusive. Merchant's Favor subtracts 7 when stock is prepared, yielding 13–33. Inspection, menus, Campfire and reload preserve prices.
 
 Purchase commits one Boon and immediately completes the room. A saved purchase resumes by completing the room without another grant. Shelf and purchase survive menus/reload without duplicate grants or spending. Leaving, including Back without buying, prepares a fresh combat pack and optional Recruit offer at the same ordinal and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
 

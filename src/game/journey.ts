@@ -11,7 +11,8 @@ import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
 import { merchantPriceRange } from "./destinations";
 import { starterCount, starterOfferPool, STARTER_OFFER_COUNT, KEYWORDS } from "./progression";
-import { BOONS, SPECIES } from "./content";
+import { SPECIES } from "./content";
+import { offerBoons } from "./boon-offers";
 import { freshCombat } from "./combat/index";
 import { highestHealth } from "./combat/state";
 import { shuffle, roll } from "./random";
@@ -42,19 +43,13 @@ function prepareEncounter(state: GameState) {
     roll(state) < OPTIONAL_DESTINATION_CHANCE
       ? recruitSpecies[Math.floor(roll(state) * recruitSpecies.length)]!.id
       : null;
-  const ownedBoons = kind === "merchant" ? new Set(state.boons) : undefined;
   const stock =
     kind === "merchant"
-      ? shuffle(
-          state,
-          BOONS.filter((b) => !ownedBoons!.has(b.id)),
-        )
-          .slice(0, 3)
-          .map((b, i) => ({
-            slot: `slot-${i}`,
-            boon: b.id,
-            price: prices!.min + Math.floor(roll(state) * (prices!.max - prices!.min + 1)),
-          }))
+      ? offerBoons(state).map((boon, i) => ({
+          slot: `slot-${i}`,
+          boon,
+          price: prices!.min + Math.floor(roll(state) * (prices!.max - prices!.min + 1)),
+        }))
       : [];
   state.support =
     kind && stock.length
@@ -169,12 +164,7 @@ function finishBattle(state: BattleState, defeated: boolean) {
   if (outcome === "victory") {
     state.wins = Math.min(1_000_000, state.wins + 1);
   }
-  const availableBoons: typeof state.boons = [];
-  if (!defeated && outcome !== "victory" && boss) {
-    const owned = new Set(state.boons);
-    for (const boon of BOONS) if (!owned.has(boon.id)) availableBoons.push(boon.id);
-  }
-  const boons = availableBoons.length ? shuffle(state, availableBoons).slice(0, 3) : [];
+  const boons = !defeated && outcome !== "victory" && boss ? offerBoons(state) : [];
   const receipt = {
     xp,
     currency,
