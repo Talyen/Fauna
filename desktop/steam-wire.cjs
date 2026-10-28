@@ -1,3 +1,11 @@
+const CLOUD_MAX_BYTES = 1_048_576;
+/** @param {unknown} name */
+const validCloudSlot = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+/** @param {unknown} id */
+const validAppId = (id) => Number.isSafeInteger(id) && Number(id) > 0 && Number(id) <= 0xffffffff;
+/** @param {unknown} data */
+const validCloudData = (data) => typeof data === "string" && Buffer.byteLength(data) <= CLOUD_MAX_BYTES;
+
 /** @param {unknown} value @returns {import("./steam-types").SteamRequest} */
 function parseRequest(value) {
   if (!value || typeof value !== "object") throw new Error("Invalid Steam request.");
@@ -6,10 +14,10 @@ function parseRequest(value) {
   if (!Number.isSafeInteger(id) || Number(id) <= 0 || !Array.isArray(args))
     throw new Error("Invalid Steam request.");
   const valid =
-    (operation === "init" && args.length === 1 && Number.isSafeInteger(args[0]) && args[0] > 0) ||
+    (operation === "init" && args.length === 1 && validAppId(args[0])) ||
     ((operation === "enabled" || operation === "language" || operation === "list") && args.length === 0) ||
-    (operation === "read" && args.length === 1 && typeof args[0] === "string") ||
-    (operation === "write" && args.length === 2 && args.every((arg) => typeof arg === "string"));
+    (operation === "read" && args.length === 1 && validCloudSlot(args[0])) ||
+    (operation === "write" && args.length === 2 && validCloudSlot(args[0]) && validCloudData(args[1]));
   if (!valid) throw new Error("Invalid Steam request.");
   return /** @type {import("./steam-types").SteamRequest} */ (value);
 }
@@ -30,8 +38,9 @@ function parseReply(operation, value) {
     (operation === "list" &&
       Array.isArray(value) &&
       value.length <= 64 &&
-      value.every((name) => typeof name === "string")) ||
-    (operation === "read" && (value === null || typeof value === "string"));
+      value.every(validCloudSlot) &&
+      new Set(value).size === value.length) ||
+    (operation === "read" && (value === null || validCloudData(value)));
   if (!valid) throw new Error("Invalid Steam response.");
   return /** @type {import("./steam-types").SteamRequests[K]["result"]} */ (value);
 }
@@ -47,4 +56,12 @@ function parseResponse(value) {
     throw new Error("Invalid Steam response envelope.");
   return /** @type {{id: number, value?: unknown, error?: string}} */ (value);
 }
-module.exports = { parseRequest, parseReply, parseResponse };
+module.exports = {
+  CLOUD_MAX_BYTES,
+  validCloudSlot,
+  validCloudData,
+  validAppId,
+  parseRequest,
+  parseReply,
+  parseResponse,
+};

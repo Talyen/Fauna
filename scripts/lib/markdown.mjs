@@ -26,9 +26,47 @@ function* unfencedLines(lines) {
 
 export function extractMarkdownLinkTargets(source) {
   const targets = [];
-  for (const match of source.matchAll(/\[[^\]]*\]\(([^)]+)\)/gu)) {
-    const target = match[1]?.split(/\s+/u)[0]?.replace(/^<|>$/gu, "");
-    if (!target) continue;
+  for (const match of source.matchAll(/\[[^\]\n]*\]\(/gu)) {
+    let index = (match.index ?? 0) + match[0].length;
+    const leading = /^[ \t]*(?:\r?\n[ \t]*)?/u.exec(source.slice(index));
+    index += leading?.[0].length ?? 0;
+    const enclosed = source[index] === "<";
+    if (enclosed) index++;
+    let target = "";
+    let depth = 0;
+    let closed = !enclosed;
+    while (index < source.length) {
+      const character = source[index];
+      if (character === "\n" || character === "\r") break;
+      if (character === "\\" && /[!"#$%&'()*+,\-./:;<=>?@[\]\\^_`{|}~]/u.test(source[index + 1] ?? "")) {
+        target += source[index + 1];
+        index += 2;
+        continue;
+      }
+      if (enclosed && character === ">") {
+        index++;
+        closed = true;
+        break;
+      }
+      if (!enclosed) {
+        if (character === "(") depth++;
+        if (character === ")") {
+          if (!depth) break;
+          depth--;
+        }
+        if (/\s/u.test(character)) break;
+      }
+      target += character;
+      index++;
+    }
+    if (!closed || depth || !target) continue;
+    // A title, if present, must be quoted or parenthesized before the closing delimiter.
+    if (
+      !/^[ \t]*(?:\r?\n[ \t]*)?(?:(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))[ \t]*(?:\r?\n[ \t]*)?)?\)/u.test(
+        source.slice(index),
+      )
+    )
+      continue;
     targets.push({ target, index: match.index ?? 0 });
   }
   return targets;
@@ -48,6 +86,7 @@ function headingPlainText(raw) {
     .replaceAll(/\[([^\]]+)\]\[[^\]]*\]/gu, "$1")
     .replaceAll(/`([^`]+)`/gu, "$1")
     .replaceAll(/\*/gu, "")
+    .replaceAll(/(^|[^\p{L}\p{N}_])(_{1,3})(\S(?:.*?\S)?)\2(?=$|[^\p{L}\p{N}_])/gu, "$1$3")
     .trim();
 }
 
@@ -56,13 +95,15 @@ export function headingSlugs(source) {
   const slugs = new Set();
   const seen = new Map();
   for (const { line } of unfencedLines(source.split("\n"))) {
-    const match = /^(#{1,6})\s+(.+?)\s*#*\s*$/u.exec(line);
+    const match = /^ {0,3}(#{1,6})[ \t]+(.+?)\s*#*\s*$/u.exec(line);
     if (!match?.[2]) continue;
     const base = githubHeadingSlug(headingPlainText(match[2]));
     if (!base) continue;
-    const count = seen.get(base) ?? 0;
+    let count = seen.get(base) ?? 0;
+    let slug = count === 0 ? base : `${base}-${count}`;
+    while (slugs.has(slug)) slug = `${base}-${++count}`;
     seen.set(base, count + 1);
-    slugs.add(count === 0 ? base : `${base}-${count}`);
+    slugs.add(slug);
   }
   return slugs;
 }
