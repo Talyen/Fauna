@@ -77,11 +77,14 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
 export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
   const row = livingBattlefield(state, enemy ? "enemy" : "player");
   for (const dreamer of row) {
+    if (dreamer.health <= 0) continue;
     const amount = passiveAmount(enemy ? undefined : state, dreamer.species, "unhurried");
     if (amount <= 0) continue;
-    for (const recipient of healingAllies(state, enemy ? "enemy" : "player"))
+    for (const recipient of healingAllies(state, enemy ? "enemy" : "player")) {
+      if (dreamer.health <= 0) break;
       if (ensureCombat(recipient).cardsPlayedThisTurn === 0)
         restoreHealth(recipient, amount, events, false, state, false, dreamer);
+    }
   }
 }
 export function finishTurn(draft: BattleState, events: GameEvent[]) {

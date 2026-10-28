@@ -241,7 +241,8 @@ export function* grantBlock(
       }
     }
   }
-  if (!gained) return;
+  // Conversion healing can trigger reactions that knock out the Block recipient.
+  if (!gained || unit.health <= 0) return;
   unit.block += gained;
   events.push({
     kind: "block",
