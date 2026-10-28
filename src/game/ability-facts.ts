@@ -4,14 +4,7 @@ import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
 import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
-import {
-  controlled,
-  dodgeChance,
-  hasHarmfulEffects,
-  maximumHealth,
-  STACK_LIMIT,
-  type Combatant,
-} from "./combat/state";
+import { dodgeChance, hasHarmfulEffects, maximumHealth, STACK_LIMIT, type Combatant } from "./combat/state";
 import {
   armoredDamage,
   blockPayment,
@@ -42,17 +35,14 @@ export function foodDodgeBenefit(state: BattleState, card: CardDefinition, ally:
   if (
     card.species !== null ||
     !state.boons.includes("velvet-whisk") ||
-    controlled(ally, state) ||
     (ally.combat?.temporaryDodge ?? 0) === 70
   )
     return 0;
+  const currentDodge = dodgeChance(state, ally);
+  if (currentDodge === 0) return 0;
   return Math.max(
     0,
-    Math.min(
-      boonRule("velvet-whisk").dodge,
-      70 - (ally.combat?.temporaryDodge ?? 0),
-      75 - dodgeChance(state, ally),
-    ),
+    Math.min(boonRule("velvet-whisk").dodge, 70 - (ally.combat?.temporaryDodge ?? 0), 75 - currentDodge),
   );
 }
 /** Approximate the Food's extra Healing after its ordinary effect, using visible facts. */

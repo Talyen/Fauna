@@ -126,6 +126,19 @@ export function battleBenefitFacts(state: BattleState) {
   };
 }
 
+/** The played card reaches Discard before a non-consuming draw resolves. */
+function selfDrawReward(state: BattleState, play: AvailablePlay, keywordDraw = false): boolean {
+  if (play.def.consume) return false;
+  const owner = state.team.find((unit) => unit.id === play.card.ownerId && unit.health > 0);
+  return (
+    (!!owner && state.boons.includes("dune-shuttle") && owner.block < STACK_LIMIT) ||
+    (state.battle.draw.length === 0 &&
+      (keywordDraw || state.battle.discard.length === 0) &&
+      state.boons.includes("mineral-bookend") &&
+      state.battle.mana - cardCost(play.card, state, play.def, play.actor) < manaCapacity(state))
+  );
+}
+
 /** A self-only draw still needs a draw reward to justify spending the card. */
 function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   return !!play.def.effects?.some(
@@ -133,20 +146,13 @@ function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
       (effect.kind === "draw" || effect.kind === "drawKeyword") &&
       effect.amount > 0 &&
       (drawHasAnotherCard(state, play.card, effect) ||
-        (!play.def.consume &&
-          (effect.kind === "draw" || cardHasKeyword(play.card, effect.keyword)) &&
-          (state.boons.includes("mineral-bookend") ||
-            (state.boons.includes("dune-shuttle") &&
-              state.team.some((unit) => unit.id === play.card.ownerId && unit.health > 0))))),
+        ((effect.kind === "draw" || cardHasKeyword(play.card, effect.keyword)) &&
+          selfDrawReward(state, play, effect.kind === "drawKeyword"))),
   );
 }
 
 function ordinaryDrawBenefit(state: BattleState, play: AvailablePlay, amount: number): boolean {
-  return (
-    drawHasAnotherCard(state, play.card, { kind: "draw", amount }) ||
-    state.boons.includes("mineral-bookend") ||
-    state.boons.includes("dune-shuttle")
-  );
+  return drawHasAnotherCard(state, play.card, { kind: "draw", amount }) || selfDrawReward(state, play);
 }
 
 /** A spent primary effect can still justify a play through healing or a useful draw. */
@@ -351,7 +357,13 @@ export function battleBenefits(
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
       const foodHealing =
-        def.id === "food-mana-berries" && cornucopiaHealing(state) > 0 && facts.injuredAllies;
+        def.id === "food-mana-berries" && cornucopiaHealing(state) > 0
+          ? facts
+              .healingAllies()
+              .map((ally) => healingBenefit(state, ally, cornucopiaHealing(state), undefined))
+          : [];
+      const foodRestored = foodHealing.reduce((sum, benefit) => sum + benefit.restored, 0);
+      const foodUtility = foodHealing.reduce((sum, benefit) => sum + benefit.utility, 0);
       const foodDodge =
         def.id === "food-mana-berries" &&
         cornucopiaHealing(state) > 0 &&
@@ -359,19 +371,19 @@ export function battleBenefits(
       return support(
         net > 0
           ? "resource"
-          : mending || foodHealing || facts.healingOnPlay
+          : mending || foodRestored > 0 || facts.healingOnPlay
             ? "healing"
-            : foodDodge
+            : foodDodge || foodUtility > 0
               ? "utility"
               : "none",
         net > 0
           ? net
-          : foodHealing
-            ? cornucopiaHealing(state)
+          : foodRestored > 0
+            ? foodRestored
             : mending || facts.healingOnPlay
               ? regained
-              : foodDodge
-                ? 1
+              : foodDodge || foodUtility > 0
+                ? foodUtility || 1
                 : 0,
       );
     }
