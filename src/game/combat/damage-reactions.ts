@@ -136,6 +136,7 @@ export function* dodgeResponse(
     if (target.health <= 0) return;
     if (hasTalent(state, "block.footwork"))
       yield* reaction("grantBlock", state, target, talentRule("block.footwork").amount, events);
+    if (target.health <= 0) return;
     if (hasTalent(state, "bleed.parting-cut")) stats[talentRule("bleed.parting-cut").state] = true;
     if (hasTalent(state, "physical.riposte")) stats[talentRule("physical.riposte").state] = true;
     if (hasTalent(state, "nature.windstep")) stats[talentRule("nature.windstep").state] = true;

@@ -172,7 +172,10 @@ export function executePrimary(context: PrimaryContext) {
           : cardTargeting(def) === "self"
             ? [actor]
             : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId);
-      for (const recipient of targets) grantBlock(state, recipient, value, events);
+      for (const recipient of targets) {
+        if (actor.health <= 0) break;
+        grantBlock(state, recipient, value, events);
+      }
       return;
     }
     case "heal": {
@@ -281,7 +284,10 @@ export function executePrimary(context: PrimaryContext) {
             text: "Wish Exchange redistributes Block",
           });
       });
-      for (const recipient of recipients) grantBlock(state, recipient, value, events);
+      for (const recipient of recipients) {
+        if (actor.health <= 0) break;
+        grantBlock(state, recipient, value, events);
+      }
       return;
     }
     case "redraw":
@@ -353,6 +359,7 @@ export function executePrimary(context: PrimaryContext) {
     case "teamProtection": {
       const block = roll(state, { kind: "chance", threshold: 0.5 }) < 0.5;
       for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
+        if (actor.health <= 0) break;
         if (unit.health <= 0) continue;
         if (block) grantBlock(state, unit, scalePower(value, power), events);
         else grantStatus(unit, "thorns", value, events, state);
