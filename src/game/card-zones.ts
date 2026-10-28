@@ -286,7 +286,7 @@ export function drawEligibleCard(state: GameState, eligible: (id: string) => boo
     index = lastEligibleIndex(battle.draw, eligible);
   }
   if (index < 0) return false;
-  const id = battle.draw.splice(index, 1)[0]!;
+  const id = index === battle.draw.length - 1 ? battle.draw.pop()! : battle.draw.splice(index, 1)[0]!;
   const last = battle.draw.length === 0;
   receiveDraw(state, id, events);
   if (last && state.boons.includes("mineral-bookend"))
@@ -354,10 +354,11 @@ export function drawKeyword(
 export function redrawHand(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
   if (!battle.hand.length) return;
-  const returned = battle.hand.splice(0);
-  battle.draw.push(...returned);
+  const count = battle.hand.length;
+  battle.draw.push(...battle.hand);
+  battle.hand.length = 0;
   shuffle(state, battle.draw);
-  draw(state, returned.length, events);
+  draw(state, count, events);
 }
 
 /** Shared capacity query for generated cards and visible policy assessment. */

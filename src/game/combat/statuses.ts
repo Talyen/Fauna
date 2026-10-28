@@ -154,9 +154,16 @@ export function* grantStatus(
   ) {
     const allies = battlefield(state, "player");
     if (allies.some((ally) => ally.id === unit.id)) {
-      const recipient = allies
-        .filter((ally) => ally.id !== unit.id && ally.health > 0)
-        .sort((a, b) => ensureCombat(a).thorns - ensureCombat(b).thorns)[0];
+      let recipient: Combatant | undefined;
+      let lowest = Infinity;
+      for (const ally of allies) {
+        if (ally.id === unit.id || ally.health <= 0) continue;
+        const thorns = ensureCombat(ally).thorns;
+        if (!recipient || thorns < lowest) {
+          recipient = ally;
+          lowest = thorns;
+        }
+      }
       if (recipient)
         yield* reaction(
           "grantStatus",

@@ -126,7 +126,9 @@ function validateJourney(state: GameState) {
           state.phase === "battle" ||
           (receipt.encounter === state.encounter - 1 && receipt.outcome !== "next") ||
           (receipt.outcome === "victory" &&
-            !["victory", "recruit", "boon"].includes(state.phase) &&
+            state.phase !== "victory" &&
+            state.phase !== "recruit" &&
+            state.phase !== "boon" &&
             !(
               state.phase === "defeat" &&
               summary.outcome === "returned" &&
@@ -166,7 +168,7 @@ function validateExpedition(state: GameState) {
     invalid(
       species(route.recruit).legendary === true ||
         state.team.length + state.reserves.length >= 5 ||
-        !["teamSelection", "support", "campfire"].includes(state.phase),
+        (state.phase !== "teamSelection" && state.phase !== "support" && state.phase !== "campfire"),
     );
 }
 
@@ -174,8 +176,9 @@ const cardIdsBySpecies = new Map<string, ReadonlySet<string>>();
 function speciesHasCard(kind: GameState["team"][number]["species"], cardId: string) {
   let ids = cardIdsBySpecies.get(kind);
   if (!ids) {
-    ids = new Set(speciesCards(kind).map((card) => card.id));
-    cardIdsBySpecies.set(kind, ids);
+    const authored = new Set<string>();
+    for (const card of speciesCards(kind)) authored.add(card.id);
+    cardIdsBySpecies.set(kind, (ids = authored));
   }
   return ids.has(cardId);
 }
@@ -451,37 +454,42 @@ function validateMinions(state: BattleState) {
 }
 
 function validateCombatants(state: GameState) {
-  const allCombatants = [
-    ...state.team,
-    ...state.reserves,
-    ...(state.battle?.enemies ?? []),
-    ...(state.battle?.minions ?? []),
-  ];
+  const rows = [state.team, state.reserves, state.battle?.enemies, state.battle?.minions];
   const combatantIds = new Set<string>();
-  for (const unit of allCombatants) combatantIds.add(unit.id);
-  invalid(combatantIds.size !== allCombatants.length);
-  for (const unit of allCombatants)
-    if (unit.combat) {
-      const stats = unit.combat;
-      invalid(
-        stats.fallenCardsPlayedThisTurn >
-          unfinishedJourneyLimit("maxHealth" in unit ? undefined : state, unit),
-      );
-      invalid((stats.controlled === null) !== (stats.controlTurns === 0));
-      invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
-      invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
-      for (const id in stats.statusSources)
-        if (Object.hasOwn(stats.statusSources, id))
-          invalid(!combatantIds.has(stats.statusSources[id as keyof typeof stats.statusSources]!));
-      if (stats.bleedLeech.length) {
-        const sources = new Set<string>();
-        let total = 0;
-        for (const row of stats.bleedLeech) {
-          invalid(sources.has(row.sourceId) || row.amount === 0 || !combatantIds.has(row.sourceId));
-          sources.add(row.sourceId);
-          total += row.amount;
-        }
-        invalid(total > stats.bleed);
+  let count = 0;
+  for (const row of rows)
+    if (row)
+      for (const unit of row) {
+        combatantIds.add(unit.id);
+        count++;
       }
-    }
+  invalid(combatantIds.size !== count);
+  for (const row of rows)
+    if (row)
+      for (const unit of row)
+        if (unit.combat) {
+          const stats = unit.combat;
+          invalid(
+            stats.fallenCardsPlayedThisTurn >
+              unfinishedJourneyLimit("maxHealth" in unit ? undefined : state, unit),
+          );
+          invalid((stats.controlled === null) !== (stats.controlTurns === 0));
+          invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
+          invalid(
+            (stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0),
+          );
+          for (const id in stats.statusSources)
+            if (Object.hasOwn(stats.statusSources, id))
+              invalid(!combatantIds.has(stats.statusSources[id as keyof typeof stats.statusSources]!));
+          if (stats.bleedLeech.length) {
+            const sources = new Set<string>();
+            let total = 0;
+            for (const row of stats.bleedLeech) {
+              invalid(sources.has(row.sourceId) || row.amount === 0 || !combatantIds.has(row.sourceId));
+              sources.add(row.sourceId);
+              total += row.amount;
+            }
+            invalid(total > stats.bleed);
+          }
+        }
 }

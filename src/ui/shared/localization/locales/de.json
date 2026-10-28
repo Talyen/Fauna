@@ -6650,139 +6650,139 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "7bee190fb01c446006f5a172029e9c3814d052d1ebf5d29d59861924aed3074a",
+    "sourceHash": "184d0a227bc61cb197fd458b91fcef67c2a07085b736702e1891a8224cf5f7c5",
     "text": "Akrobatenkreisel: Dem nächsten Angriff kann nicht <keyword0>ausgewichen</keyword0> werden"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "e398a60cf3c39adc6ded0d1f3c9ed0a2e8392556169bd319eb7712bd33fb3f03",
+    "sourceHash": "803800cb29685aedc9884034c8289a81429efbdd174abb8d7097ed1adc694aa9",
     "text": "<keyword0>Angriffsreflexion</keyword0>: Wirft den nächsten Angriff gegen dich auf den Angreifer zurück; Verhindert dessen Schaden und schädliche Effekte auf dich; <keyword1>Reflektierte</keyword1> Angriffe können nicht erneut <keyword2>reflektiert</keyword2> werden; Hält an, bis verbraucht oder <keyword3>gebannt</keyword3>; Ist nicht stapelbar"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "5fb4af4cbf2f0edbaa19bbca821dc07fea622561ac0f9307fecffabd7301769d",
+    "sourceHash": "742a6b95e40ced1d5f79d378e0da2d1b71efc62651f0018cbebfb6823be5fe2f",
     "text": "<keyword0>Blindheit</keyword0>: {{value0}}% Chance, den nächsten Angriff zu verfehlen; Endet nach diesem Angriff, ob er trifft oder nicht; Ein Fehlschlag zählt für jedes Ziel als <keyword1>Ausweichen</keyword1>; Ist nicht stapelbar"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "b898074a8a5f4856dc93206390d62afd5da2905b458e9dfb665b9384308f90cd",
+    "sourceHash": "91f1afca6a7f64a9afa7cad0b791615482fe512c5c86089df154eee707979777",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "7e68219199ed46b95bd1dedf20762599c3c0852d018f03caa988c3d056df4a2f",
+    "sourceHash": "4472ac71f0de274a71d8d17e9298658590da1cd98e37a9ad1e1f425c58d297fa",
     "text": "Runde ausgesetzt"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "33df2027579d16e224471b14abd410d5be3e6518d8e066c92bf5f04c19bb746d",
+    "sourceHash": "17a4e6a5203698b531a1b52b443ded4fee8ba7960d222b880a16cb8ef7532dc8",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runde"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "d8365849ca5fd0a880ba6b13137243379b096c6fcd9c2df37e652c28096cba57",
+    "sourceHash": "391c3b78794911ca3f1ee1237796d369d4af71321fa77c0afc9baaddfa727e1f",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "a938400a0692a8fbb96a70f22150e8950dd30307382455ecaa13156f50645cd7",
+    "sourceHash": "25ca512154953646976fef3b0f221897aa131b57b39f56efdeb2906e39647830",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runde"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "154897b8d5f58d59b41e7c823f76a5e4ca43e341a7931c6cd3f3e1486bad5f44",
+    "sourceHash": "2302be80dfbbf4a9bed806b530207ff07c8a117cde05b33c2c211878ff6126a6",
     "text": "Kontrollimmunität {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "c1f5bd7dc6ead7ee8752a505ba3b594a433d2c6d79fa06eab94dd27c9611632b",
+    "sourceHash": "94b3ff7317a996d825c0cb12174149d3dd464b7be366bdac35cda15d4915ee68",
     "text": "Kostenloses Nachsetzen: nächste Karte ist kostenlos"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "b84888ca7fd10fe66ce7c720fc6ac7f50864f7869475ad62e6a3cf3992e9f742",
+    "sourceHash": "ab6b2eb6e0086a0d50c1d44259d7434bcf4d2e0264c67b3b9f6d07387a096f57",
     "text": "Göttliche Gunst: nächste <keyword0>Licht</keyword0>-Karte ist kostenlos"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "88c6151abc1e2b8f0ef3e30104426471c307f9137ce35a8e127cba7933acb3f3",
+    "sourceHash": "4bd77bb91a94efb36f89a8b03f7ac0c6860b4e8b7a09c50af62ed04d0f8ed619",
     "text": "Windschritt: nächste <keyword0>Natur</keyword0>-Karte ist kostenlos"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "9282dcd618749bdbd3d3ffdf6b7131b46696f3f3372bf34db361f6d31555e9db",
+    "sourceHash": "f0684d36505df5069c64b1dabc2ad8b209a09918a4799c941c7f143cf64d0e3e",
     "text": "Nahtod {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "0e526acfd948d40dba73947040a05cffacc9e435063ecce637c790823151202b",
+    "sourceHash": "07e7814f6a25c16c41686b53bc30556508fa566c2b61c809c5139182ec0d43f3",
     "text": "<keyword0>Abwehren</keyword0>: Den nächsten Angriff gegen dich vor dem <keyword2>Ausweichen</keyword2> <keyword1>abwehren</keyword1> und seinen Schaden und seine schädlichen Effekte verhindern; <keyword3>Dornen</keyword3> schlagen dennoch zurück; Hält an, bis verbraucht oder <keyword4>gebannt</keyword4>; Ist nicht stapelbar"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "359ed653d26d5ccbec2c8215b0e1d3a1ced3dcc307923d4017d22e84318e0764",
+    "sourceHash": "b66b601ba1f5218dfa753789ae8fd19fdc5aa4da53d85690e277e81a06d41962",
     "text": "Offene Flanke: nächster Angriff verursacht {{value0}} zusätzlichen <keyword0>physischen</keyword0> Schaden"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "891ef19466d56387d68d6c67b431620a27d2af4740327ce0b06deb74ad8970e4",
+    "sourceHash": "626a06d450068d445e01d898044341410286408d83d6c58168be11a88821220d",
     "text": "<keyword0>Aufheben</keyword0>: Verhindert den nächsten schädlichen Statuseffekt; Direkter Schaden trifft weiterhin; Hält an, bis verbraucht oder <keyword1>gebannt</keyword1>; Ist nicht stapelbar"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "e51a2ca653ec322395fa73ffad4ee5d1d748cdc970385e28067e9aedecec0749",
+    "sourceHash": "3eb53b94e0964359d6e1b22d783e5606636aca0c849ece7449ae8e44fea52be0",
     "text": "Den nächsten <keyword1>Frost</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "39dc278e6b588b160740a691c07083fd971744ddc91852c67f720029b2cc5ac6",
+    "sourceHash": "236126b513267a0ca98bca51f05ed4d25f6c56b45dda607feec6269d76dfadfe",
     "text": "Oasensamen: nächster Angriff hat <keyword0>Lebensraub</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "c17e9e8ebc8a390dc7d6c777bf7bf1766621d06e418c043e61ccaec49cae3966",
+    "sourceHash": "ca95e930d74e4572c782ed722752d8c02964773210cdd86c104ba70f0e1c8409",
     "text": "Abschiedsschnitt: nächster <keyword0>physischer</keyword0> Treffer verursacht die Hälfte seines Schadens zusätzlich als <keyword1>Blutungsschaden</keyword1>"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "c72a3f4fc6f55873ba171ecf37cd586789de3fe97c1668b9d0138d669f4195cb",
+    "sourceHash": "f7bf1c772be978001109b6a5d12374e1c96932b8b2404b8818c33a874c0596df",
     "text": "<keyword0>Reflektieren</keyword0>: Wirft den angegebenen Angriff oder schädlichen Statuseffekt zurück; <keyword1>Angriffsreflexion</keyword1> gibt Schaden und schädliche Folgeeffekte an den Angreifer zurück; Reine Status<keyword2>reflexion</keyword2> lenkt den Effekt auf einen zufälligen lebenden Gegner um, während direkter Schaden weiterhin trifft; <keyword3>Reflektierte</keyword3> Angriffe und Status können nicht erneut <keyword4>reflektiert</keyword4> werden; Ladungen sind nicht stapelbar"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "b6afeca60b6f8feb9b49b94611ed748a8c8fa68a8cc502b4b88092bae4f8d98b",
+    "sourceHash": "f10ada4c0d5618e6f9d8ce625777ed8fa32642f0cdc4a363b257d42639ef80e4",
     "text": "Den nächsten <keyword1>Brand</keyword1> <keyword0>reflektieren</keyword0>; Direkter Schaden trifft weiterhin; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "3b03beae5bae385f30d88bdfe4cb31e21ef723f740b5c0740e2eeafebd898264",
+    "sourceHash": "241985175aac9ff840678a6a972f26dcabd687e8969e1ac9e1b09bbb080dbdb5",
     "text": "Rhythmus finden: +{{value0}}% Chance auf <keyword0>Ausweichen</keyword0>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "62c0da50ef7335b5144b2f9c81f47e1034b1600af90e42758b7a5242128493cc",
+    "sourceHash": "fee352b635a3a7450389e8e10aaa45d2458bc272d04f1ad6bda527f412957bc6",
     "text": "Riposte: nächster <keyword0>physischer</keyword0> Angriff ist garantiert ein <keyword1>kritischer Treffer</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {

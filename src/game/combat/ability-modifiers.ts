@@ -54,14 +54,11 @@ export function talentRepeat(
   events: GameEvent[],
 ) {
   if (enemy) return false;
-  const repeatTalents = [
-    ["burn", "burn.flash-fire"],
-    ["freeze", "freeze.winter-s-grasp"],
-    ["nature", "nature.overgrowth"],
-    ["poison", "poison.venom-strike"],
-    ["stun", "stun.jarring-blow"],
-  ] as const;
-  return repeatTalents.some(
-    ([keyword, talent]) => keywords.includes(keyword) && talentChance(state, talent, events),
+  return (
+    (keywords.includes("burn") && talentChance(state, "burn.flash-fire", events)) ||
+    (keywords.includes("freeze") && talentChance(state, "freeze.winter-s-grasp", events)) ||
+    (keywords.includes("nature") && talentChance(state, "nature.overgrowth", events)) ||
+    (keywords.includes("poison") && talentChance(state, "poison.venom-strike", events)) ||
+    (keywords.includes("stun") && talentChance(state, "stun.jarring-blow", events))
   );
 }

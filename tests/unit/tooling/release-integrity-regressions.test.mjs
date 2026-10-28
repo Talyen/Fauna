@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { temporaryDirectory, put, repository, git } from "../../support/tooling.mjs";
 import { verifyBuildIdentity } from "../../../scripts/lib/release-identity.mjs";
-import { fileDigestSync } from "../../../scripts/lib/file-integrity.mjs";
+import { fileHash } from "../../../scripts/lib/file-integrity.mjs";
 import { notesArgs, generatePatchNotes } from "../../../scripts/release/generate-patch-notes.mjs";
 import {
   dependencyNotices,
@@ -91,7 +91,7 @@ it("requires the installed dependency name and version while retaining locked al
   expect(dependencyNotices(root, lock).inventory[0].name).toBe("substitute");
   delete lock.packages["node_modules/example"].version;
   put(root, "node_modules/example/package.json", JSON.stringify({ name: "substitute" }));
-  expect(() => dependencyNotices(root, lock)).toThrow("version differs");
+  expect(() => dependencyNotices(root, lock)).toThrow("dependency version");
 });
 
 it("requires nonempty bundled font and source notices", () => {
@@ -109,17 +109,17 @@ it("rejects inventory generation before reading dependencies when the renderer i
   expect(() => generateInventory(root)).toThrow("Build the renderer");
 });
 
-it("hashes multiple chunks and a partial tail without changing package manifest hashes", () => {
+it("hashes multiple chunks and a partial tail without changing package manifest hashes", async () => {
   const root = temporaryDirectory("fauna-chunked-hashes-");
   const bytes = Buffer.alloc(2 * 1024 * 1024 + 17, 91);
   bytes[bytes.length - 1] = 19;
   for (const name of ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"])
     put(root, name, name.endsWith("asar") ? bytes : Buffer.from(name));
-  expect(fileDigestSync(path.join(root, "resources/app.asar")).sha256).toBe(
+  expect(await fileHash(path.join(root, "resources/app.asar"))).toBe(
     createHash("sha256").update(bytes).digest("hex"),
   );
   const output = path.join(root, "inventory");
-  const inventory = packageInventory(root, output);
+  const inventory = await packageInventory(root, output);
   for (const entry of inventory) {
     const content = readFileSync(path.join(root, entry.path));
     expect(entry).toMatchObject({
@@ -129,7 +129,7 @@ it("hashes multiple chunks and a partial tail without changing package manifest 
   }
   expect(JSON.parse(readFileSync(path.join(output, "package-hashes.json"), "utf8")).files).toEqual(inventory);
   put(root, "empty", "");
-  expect(fileDigestSync(path.join(root, "empty")).sha256).toBe(createHash("sha256").digest("hex"));
+  expect(await fileHash(path.join(root, "empty"))).toBe(createHash("sha256").digest("hex"));
   rmSync(path.join(root, "empty"));
 });
 
