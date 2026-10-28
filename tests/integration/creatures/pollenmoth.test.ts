@@ -11,7 +11,7 @@ import { validateCatalog } from "../../../src/game/content-validation";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, accept, teamRun, winBattle, requireBattle } from "../../support/game";
+import { authoredPack, accept, teamRun, requireBattle } from "../../support/game";
 
 function ready(id: string, copies = 1) {
   return produce(teamRun(1, ["pollenmoth", "mossguard", "prismram"]), (game) => {
@@ -176,30 +176,6 @@ it("honors the probabilistic healing tier and stops damage bounces after actor k
         event.kind === "damage" && event.actorId === "ally-0",
     ),
   ).toHaveLength(1);
-});
-
-it("discovers and recruits Pollenmoth with its complete kit", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "pollenmoth")! }),
-    {
-      type: "start",
-    },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("pollenmoth");
-  game = accept(winBattle(game), { type: "recruit", species: "pollenmoth" });
-  expect(game.discovery.recruited.pollenmoth).toBe(1);
-  expect(game.cards.filter((card) => card.ownerId === game.team[1]!.id)).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
 });
 
 it.each([

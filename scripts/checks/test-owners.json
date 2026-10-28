@@ -50,7 +50,8 @@
     "suites": [
       "tests/unit/game/content-ownership.test.ts",
       "tests/unit/game/creature-passives.test.ts",
-      "tests/unit/game/modifier-contracts.test.ts"
+      "tests/unit/game/modifier-contracts.test.ts",
+      "tests/unit/game/creature-recruitment.test.ts"
     ]
   },
   "src/application/": {
@@ -185,5 +186,13 @@
   "src/ui/talents/": {
     "reason": "Talent requirements, category reset and menu cues stay in sync with committed purchases",
     "suites": ["tests/unit/ui/menu-navigation.test.tsx", "tests/unit/ui/combat-ui.test.tsx"]
+  },
+  "tests/unit/game/creatures/": {
+    "reason": "Creature gameplay and shared encounter recruitment contracts",
+    "suites": ["tests/unit/game/creature-recruitment.test.ts"]
+  },
+  "tests/integration/creatures/": {
+    "reason": "Creature gameplay and shared encounter recruitment contracts",
+    "suites": ["tests/unit/game/creature-recruitment.test.ts"]
   }
 }
