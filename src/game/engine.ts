@@ -382,9 +382,11 @@ function resolve(
       case "buyTalent":
         draft.talents.push(command.talentId);
         break;
-      case "resetTalents":
-        draft.talents = draft.talents.filter((id) => !id.startsWith(`${command.keyword}.`));
+      case "resetTalents": {
+        const prefix = `${command.keyword}.`;
+        draft.talents = draft.talents.filter((id) => !id.startsWith(prefix));
         break;
+      }
       case "newRun": {
         const fresh = createGame(command.seed);
         Object.assign(draft, fresh, {

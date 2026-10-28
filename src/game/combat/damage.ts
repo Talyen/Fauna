@@ -3,7 +3,14 @@ import { boonRule } from "../rules/boons";
 import { takeAttackReflection, publishAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
-import { findLivingBattlefield, isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
+import {
+  findLivingBattlefield,
+  isEnemy,
+  battlefield,
+  healingAllies,
+  isDepartedMinion,
+  enemyReflectionRecipients,
+} from "../battlefield";
 import { packetPolicyView, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
 import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
@@ -260,7 +267,7 @@ export function* hit(
   ) {
     const recipients =
       isEnemy(source) && !isEnemy(target) && state.boons.includes("ripple-mirror")
-        ? [source, ...battlefield(state, "enemy").filter((unit) => unit.health > 0 && unit.id !== source.id)]
+        ? enemyReflectionRecipients(state, source)
         : [source];
     let primary: number | undefined;
     for (const recipient of recipients) {

@@ -8,6 +8,7 @@ import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import {
   battlefield,
+  enemyReflectionRecipients,
   battlefieldView,
   findLivingBattlefield,
   healingAllies,
@@ -122,10 +123,7 @@ export function executePrimary(context: PrimaryContext) {
         const source = reflected ? recipient : actor;
         const reflectedTargets =
           reflected && action.side === "enemy" && state.boons.includes("ripple-mirror")
-            ? [
-                actor,
-                ...battlefield(state, "enemy").filter((unit) => unit.health > 0 && unit.id !== actor.id),
-              ]
+            ? enemyReflectionRecipients(state, actor)
             : reflected
               ? [actor]
               : [recipient];

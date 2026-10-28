@@ -260,8 +260,10 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   }
   state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
-    const kept = new Set(state.cards.map((card) => card.id));
-    const changed = fromCard && mapped.length ? new Set(mapped.map((card) => card.id)) : undefined;
+    const kept = new Set<string>();
+    for (const card of state.cards) kept.add(card.id);
+    const changed = fromCard && mapped.length ? new Set<string>() : undefined;
+    if (changed) for (const card of mapped) changed.add(card.id);
     filterCardZones(state.battle, (id) => kept.has(id) && (!changed || !changed.has(id)));
     if (mapped.length) {
       const zoned = new Set<string>();
@@ -343,8 +345,10 @@ export function swapBackup(
     if (removed.size) state.cards = state.cards.filter((card) => !removed.has(card.id));
     const oldDefs = speciesCards(outgoing.species);
     const newDefs = speciesCards(incoming.species);
-    const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
-    for (const card of replaced) {
+    const replacedIds = state.battle && fromCard ? new Set<string>() : undefined;
+    for (const card of state.cards) {
+      if (card.ownerId !== outgoing.id) continue;
+      replacedIds?.add(card.id);
       card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
       card.ownerId = incoming.id;
       card.level = 0;
@@ -354,7 +358,7 @@ export function swapBackup(
       for (const enemy of state.battle.enemies)
         if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
       if (fromCard) {
-        const ids = new Set(replaced.map((card) => card.id));
+        const ids = replacedIds!;
         filterCardZones(state.battle, (id) => !ids.has(id));
         state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
       }
