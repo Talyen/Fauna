@@ -146,3 +146,35 @@ it("retains the newest diagnostics that fit the serialized size limit", () => {
   expect(JSON.stringify(entries.slice(-retained.length - 1)).length).toBeGreaterThanOrEqual(100_000);
   expect(createDiagnostics({ read: () => stored, write: () => {} }).snapshot()).toEqual(retained);
 });
+
+it.each([
+  ["API key", 'request failed: {"api_key":"private-value"}', "private-value"],
+  ["API key header", "X-API-Key: private-value", "private-value"],
+  ["cookie header", "Cookie: session=private-value; theme=light", "private-value"],
+  ["set-cookie header", "Set-Cookie: session=private-value; HttpOnly", "private-value"],
+  ["JSON cookie", '{"cookie":"session=private-value; theme=light"}', "private-value"],
+  ["URL user info", "request to https://user:private-value@example.test failed", "private-value"],
+  ["parenthesized Basic credentials", "request failed (Basic dXNlcjpwcml2YXRl)", "dXNlcjpwcml2YXRl"],
+  ["single-component Windows path", "failed to read C:\\private-value", "private-value"],
+  ["nested Windows path", "failed to read C:\\Users\\private-value\\save.json", "private-value"],
+])("redacts %s from live and restored diagnostics", (_label, message, sensitive) => {
+  let stored = "";
+  const port = {
+    read: () => stored || null,
+    write: (value: string) => {
+      stored = value;
+    },
+  };
+  const diagnostics = createDiagnostics(port);
+  diagnostics.record("global", message, { revision: 1, phase: message });
+  expect(JSON.stringify(diagnostics.snapshot())).not.toContain(sensitive);
+  expect(stored).not.toContain(sensitive);
+  stored = JSON.stringify([{ source: "global", message, count: 1, revision: 1, phase: message }]);
+  expect(JSON.stringify(createDiagnostics(port).snapshot())).not.toContain(sensitive);
+});
+
+it("keeps ordinary diagnostic text readable", () => {
+  const diagnostics = createDiagnostics();
+  diagnostics.record("global", "Basic settings are unavailable");
+  expect(diagnostics.snapshot()[0]!.message).toBe("Basic settings are unavailable");
+});

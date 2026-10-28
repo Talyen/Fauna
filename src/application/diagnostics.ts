@@ -32,7 +32,12 @@ const storedDiagnostic = z.object({
 });
 const sanitize = (value: string) =>
   value
-    .replace(/\bBasic[ \t]+([A-Za-z0-9+/]+={0,2})(?=$|[\s,;"'])/gi, (match, credential: string) => {
+    .replace(/\b(https?:\/\/)[^\s/@]+@/gi, "$1[redacted]@")
+    .replace(
+      /\b(?:set-cookie|cookie)["']?\s*[:=]\s*(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\r\n]*)/gi,
+      "[redacted]",
+    )
+    .replace(/\bBasic[ \t]+([A-Za-z0-9+/]+={0,2})(?![A-Za-z0-9+/=])/gi, (match, credential: string) => {
       try {
         return atob(credential).includes(":") ? "[redacted]" : match;
       } catch {
@@ -40,11 +45,12 @@ const sanitize = (value: string) =>
       }
     })
     .replace(/\bBearer[ \t]+[^\s,;"']+/gi, "[redacted]")
-    .replace(/(?:\/[^/\r\n]+){2,}\/|[A-Za-z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
+    .replace(/\b[A-Za-z]:\\[^"'\r\n<>|?*,;]*/g, "[path]")
+    .replace(/(?:\/[^/\r\n]+){2,}\//g, "[path]/")
     .replace(/\\\\[^\\\r\n]+\\[^\\\r\n]+(?:\\[^\\\r\n]+)*/g, "[path]")
     .replace(/(?:\/[^/\r\n]+){2,}$/gm, "[path]")
     .replace(
-      /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
+      /(?:token|password|secret|authorization|api[_-]?key)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
       "[redacted]",
     )
     .slice(0, MAX_MESSAGE_LENGTH);
