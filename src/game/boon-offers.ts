@@ -8,6 +8,7 @@ import type { AbilityKind } from "./rules/ability-types";
 import { roll } from "./random";
 import type { GameState } from "./types";
 
+const noKeywords: readonly KeywordId[] = [];
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   courtRemembers: ["water"],
@@ -60,69 +61,71 @@ const abilityKeywordOverrides: Partial<Record<AbilityKind, readonly KeywordId[]>
 
 export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
   const keywords = new Set<KeywordId>();
-  for (const creature of [...state.team, ...state.reserves]) {
-    for (const effect of creaturePassiveTier(state, creature.species).effects) {
-      for (const keyword of passiveKeywords[effect.kind] ?? []) keywords.add(keyword);
-      if (effect.kind === "battleStart") keywords.add(effect.effect);
-      if (effect.kind === "bounce") keywords.add(effect.effect === "heal" ? "health" : "light");
-      if (effect.kind === "cardBonus") {
-        if (effect.trigger === "stunAttack") keywords.add("stun");
-        if (effect.trigger === "heal") keywords.add("health");
-        if (effect.trigger === "guard") keywords.add("block");
-      }
-    }
-    for (const card of speciesCards(creature.species)) {
-      if (card.effect === "attack") {
-        keywords.add(card.damageType);
-        if (card.alternateDamageType) keywords.add(card.alternateDamageType);
-        if (card.criticalWhenLastCard) keywords.add("criticalHit");
-        if (card.purgeThorns) {
-          keywords.add("purge");
-          keywords.add("thorns");
-        }
-      } else {
-        for (const keyword of abilityKeywordOverrides[card.effect] ?? abilityRule(card.effect).keywords)
-          keywords.add(keyword);
-      }
-      if (card.leech) keywords.add("leech");
-      for (const effect of card.effects ?? []) {
-        switch (effect.kind) {
-          case "status":
-            keywords.add(effect.status);
-            break;
-          case "damage":
-            keywords.add(effect.damageType);
-            if (effect.leech) keywords.add("leech");
-            break;
-          case "heal":
-            keywords.add("health");
-            break;
-          case "mana":
-            keywords.add("mana");
-            break;
-          case "drawKeyword":
-            keywords.add(effect.keyword);
-            break;
-          case "cleanse":
-          case "purge":
-          case "blind":
-            keywords.add(effect.kind);
-            break;
-          case "reflect":
-            keywords.add("reflect");
-            if (effect.status) keywords.add(effect.status);
-            break;
-          case "nullifyFreeze":
-            keywords.add("nullify");
-            keywords.add("freeze");
-            break;
-          case "meltArmor":
-            keywords.add("armor");
-            break;
+  for (const row of [state.team, state.reserves])
+    for (const creature of row) {
+      for (const effect of creaturePassiveTier(state, creature.species).effects) {
+        for (const keyword of passiveKeywords[effect.kind] ?? noKeywords) keywords.add(keyword);
+        if (effect.kind === "battleStart") keywords.add(effect.effect);
+        if (effect.kind === "bounce") keywords.add(effect.effect === "heal" ? "health" : "light");
+        if (effect.kind === "cardBonus") {
+          if (effect.trigger === "stunAttack") keywords.add("stun");
+          if (effect.trigger === "heal") keywords.add("health");
+          if (effect.trigger === "guard") keywords.add("block");
         }
       }
+      for (const card of speciesCards(creature.species)) {
+        if (card.effect === "attack") {
+          keywords.add(card.damageType);
+          if (card.alternateDamageType) keywords.add(card.alternateDamageType);
+          if (card.criticalWhenLastCard) keywords.add("criticalHit");
+          if (card.purgeThorns) {
+            keywords.add("purge");
+            keywords.add("thorns");
+          }
+        } else {
+          for (const keyword of abilityKeywordOverrides[card.effect] ?? abilityRule(card.effect).keywords)
+            keywords.add(keyword);
+        }
+        if (card.leech) keywords.add("leech");
+        if (card.effects)
+          for (const effect of card.effects) {
+            switch (effect.kind) {
+              case "status":
+                keywords.add(effect.status);
+                break;
+              case "damage":
+                keywords.add(effect.damageType);
+                if (effect.leech) keywords.add("leech");
+                break;
+              case "heal":
+                keywords.add("health");
+                break;
+              case "mana":
+                keywords.add("mana");
+                break;
+              case "drawKeyword":
+                keywords.add(effect.keyword);
+                break;
+              case "cleanse":
+              case "purge":
+              case "blind":
+                keywords.add(effect.kind);
+                break;
+              case "reflect":
+                keywords.add("reflect");
+                if (effect.status) keywords.add(effect.status);
+                break;
+              case "nullifyFreeze":
+                keywords.add("nullify");
+                keywords.add("freeze");
+                break;
+              case "meltArmor":
+                keywords.add("armor");
+                break;
+            }
+          }
+      }
     }
-  }
   return keywords;
 }
 
@@ -130,17 +133,22 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
 export function offerBoons(state: GameState): BoonId[] {
   const owned = new Set(state.boons);
   const keywords = rosterBoonKeywords(state);
-  const pool = BOONS.filter((boon) => !owned.has(boon.id)).map((boon) => ({
-    id: boon.id,
-    weight: BOON_KEYWORDS[boon.id]?.some((keyword) => keywords.has(keyword)) ? 2 : 1,
-  }));
+  const pool: { id: BoonId; weight: number }[] = [];
+  let total = 0;
+  for (const boon of BOONS) {
+    if (owned.has(boon.id)) continue;
+    const weight = BOON_KEYWORDS[boon.id]?.some((keyword) => keywords.has(keyword)) ? 2 : 1;
+    pool.push({ id: boon.id, weight });
+    total += weight;
+  }
   const offered: BoonId[] = [];
   while (pool.length && offered.length < 3) {
-    const total = pool.reduce((sum, boon) => sum + boon.weight, 0);
     let choice = roll(state) * total;
     let index = 0;
     while (index < pool.length - 1 && choice >= pool[index]!.weight) choice -= pool[index++]!.weight;
-    offered.push(pool.splice(index, 1)[0]!.id);
+    const selected = pool.splice(index, 1)[0]!;
+    offered.push(selected.id);
+    total -= selected.weight;
   }
   return offered;
 }
