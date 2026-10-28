@@ -43,15 +43,18 @@ function unitValue(unit: Combatant) {
   for (const key of harms) harm += Number(stats?.[key] ?? 0);
   return unit.health + unit.block + benefit - harm;
 }
+function rowValue(state: BattleState, side: "player" | "enemy") {
+  let total = 0;
+  for (const unit of battlefieldView(state, side)) total += unitValue(unit);
+  return total;
+}
 function positionValue(state: BattleState) {
-  const rowValue = (side: "player" | "enemy") =>
-    battlefieldView(state, side).reduce((sum, unit) => sum + unitValue(unit), 0);
-  const resources = state.battle.enemies.reduce(
-    (sum, enemy) =>
-      sum + (enemy.deck ? enemy.deck.mana + enemy.deck.hand.length + enemy.deck.buffer.length : 0),
-    0,
+  let resources = 0;
+  for (const enemy of state.battle.enemies)
+    resources += enemy.deck ? enemy.deck.mana + enemy.deck.hand.length + enemy.deck.buffer.length : 0;
+  return (
+    rowValue(state, "enemy") - rowValue(state, "player") + resources + Number(state.battle.repeatNext.enemy)
   );
-  return rowValue("enemy") - rowValue("player") + resources + Number(state.battle.repeatNext.enemy);
 }
 
 interface EnemyChoice {

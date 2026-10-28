@@ -379,11 +379,12 @@ function validateBattle(state: BattleState) {
   );
   // Unique zones containing only known IDs and matching the unique card count cover every card.
   invalid(zoneIds.size !== zoneCount || unknownZoneCard);
-  const roster = [...state.team, ...state.reserves];
   const capacity = handCapacity(state);
-  invalid(roster.some((creature) => !creature.combat));
   invalid(
-    !roster.some((c) => c.health > 0) ||
+    state.team.some((creature) => !creature.combat) || state.reserves.some((creature) => !creature.combat),
+  );
+  invalid(
+    !(state.team.some((c) => c.health > 0) || state.reserves.some((c) => c.health > 0)) ||
       !battle.enemies.some((e) => e.health > 0) ||
       battle.hand.length > capacity ||
       (battle.buffer.length > 0 && battle.hand.length < capacity) ||

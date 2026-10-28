@@ -19,14 +19,15 @@ export const initialCloudView: CloudView = Object.freeze({
   blocking: false,
   error: "",
 });
-async function bounded(operation: Promise<void>, timeout: number, expired: () => boolean | void = () => {}) {
+async function bounded(operation: Promise<void>, timeout: number, expired: () => void = () => {}) {
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     await Promise.race([
       operation,
       new Promise<void>((resolve) => {
         timer = setTimeout(() => {
-          if (expired() !== false) resolve();
+          expired();
+          resolve();
         }, timeout);
       }),
     ]);
@@ -349,20 +350,23 @@ export function createCloud(
       update({ status: identity?.enabled === false ? "Unavailable" : "Pending", error: errorText(error) });
     }
   }
+  function withDeadline(operation: () => Promise<void>) {
+    const token = generation + 1;
+    return bounded(operation(), 5000, () => {
+      if (owns(token)) offline();
+    });
+  }
   function retry(forceBackground = false) {
     if (!alive()) return Promise.resolve();
     // Own retry before status publication can synchronously request it again.
     return (retryOperation ??= Promise.resolve()
       .then(() => {
         const background = forceBackground || localData !== null;
-        const token = generation + 1;
-        const operation =
+        return withDeadline(() =>
           lifecycle === "ready"
             ? reconcile(background, undefined, background && localData === null)
-            : initialize(localData, background);
-        return bounded(operation, 5000, () => {
-          if (owns(token)) offline();
-        });
+            : initialize(localData, background),
+        );
       })
       .finally(() => {
         retryOperation = undefined;
@@ -375,12 +379,7 @@ export function createCloud(
     start(data: string | null) {
       if (!alive()) return Promise.resolve();
       // Own startup before publishing to subscribers; retries use the latest localData.
-      return (startup ??= Promise.resolve().then(() => {
-        const token = generation + 1;
-        return bounded(initialize(data), 5000, () => {
-          if (owns(token)) offline();
-        });
-      }));
+      return (startup ??= Promise.resolve().then(() => withDeadline(() => initialize(data))));
     },
     commit,
     retry: () => retry(),
