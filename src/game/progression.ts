@@ -41,8 +41,7 @@ export function passiveAmount(
   speciesId: SpeciesId,
   kind: PassiveKind,
 ): number {
-  const rank = state ? creatureStars(state, speciesId) : 0;
-  const tier = species(speciesId).passiveTiers[rank]!;
+  const tier = creaturePassiveTier(state, speciesId);
   let amounts = passiveAmounts.get(tier);
   const cached = amounts?.get(kind);
   if (cached !== undefined) return cached;

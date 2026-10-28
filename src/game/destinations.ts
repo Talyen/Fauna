@@ -5,14 +5,16 @@ export function merchantPriceRange(state: Pick<GameState, "boons">) {
   const discount = state.boons.includes("merchants-favor") ? boonRule("merchants-favor").discount : 0;
   return { min: 20 - discount, max: 40 - discount };
 }
+const CAMPFIRE_RECOVERY_PERCENT = 30;
+
 export function campfireRecovery(creature: GameState["team"][number]) {
   const maximum = species(creature.species).health;
-  return Math.min(maximum - creature.health, Math.round(maximum * 0.3));
+  return Math.min(maximum - creature.health, Math.round(maximum * (CAMPFIRE_RECOVERY_PERCENT / 100)));
 }
 export function needsCampfire(state: GameState) {
   const needsRecovery = (creature: GameState["team"][number]) => {
     const maximum = species(creature.species).health;
-    return (maximum - creature.health) * 10 >= maximum * 3;
+    return (maximum - creature.health) * 100 >= maximum * CAMPFIRE_RECOVERY_PERCENT;
   };
   return state.team.some(needsRecovery) || state.reserves.some(needsRecovery);
 }
