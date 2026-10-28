@@ -143,8 +143,8 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       status === "burn" &&
       isEnemy(unit) &&
       !isEnemy(source) &&
-      state.boons.includes("cinder-fan") &&
-      old > decayed
+      old > decayed &&
+      state.boons.includes("cinder-fan")
     ) {
       const targets = battlefield(state, "enemy");
       let count = 0;

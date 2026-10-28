@@ -447,8 +447,8 @@ export function* resolveHit(
   ) {
     if (
       playerHit &&
-      state.boons.includes("coral-net-weight") &&
       target.block > 0 &&
+      state.boons.includes("coral-net-weight") &&
       !(type === "bleed" && state.boons.includes("harvest-sickle"))
     ) {
       const payment = blockPayment(
@@ -526,8 +526,8 @@ export function* resolveHit(
     alliedSource &&
     type === "burn" &&
     state.battle &&
-    state.boons.includes("meteorite") &&
-    !state.battle.meteoriteUsed
+    !state.battle.meteoriteUsed &&
+    state.boons.includes("meteorite")
   ) {
     state.battle.meteoriteUsed = true;
     damage *= boonRule("meteorite").multiplier;
@@ -578,7 +578,7 @@ export function* resolveHit(
   target.block -= blockSpent;
   const depletedBlock = blocked > 0 && target.block === 0;
   damage = payment.remaining;
-  if (playerAttack && state.boons.includes("sundering-charm") && (type === "physical" || type === "stun"))
+  if (playerAttack && (type === "physical" || type === "stun") && state.boons.includes("sundering-charm"))
     erode(boonRule("sundering-charm").armor);
   // Armor cannot change between these calculations; erosion above has already resolved.
   const appliesArmor = (!armorFirst || critical) && armorApplies(state, target, type, source, options);
