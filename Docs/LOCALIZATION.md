@@ -52,9 +52,10 @@ physical controllers, Steam and Deck remain separate qualification work.
 ## Migration inventory
 
 `npm --silent run localization:inventory` prints a JSON inventory of literal JSX text,
-selected text attributes and simple conditional or interpolated expressions in
-`src/ui`. Paths and line/column locations support review; a `{…}` marks a dynamic
-expression and is not a translation placeholder. The inventory is an aid, not a
+selected text attributes (including accessible value and role descriptions), and
+simple conditional, fallback, array or interpolated expressions in `src/ui`. It
+recognizes letters across scripts and follows TypeScript expression wrappers. Paths
+and line/column locations support review; a `{…}` marks a dynamic expression and is not a translation placeholder. The inventory is an aid, not a
 catalog, a stable message ID source or a coverage gate: it misses text in variables,
 helpers, content, game rules, startup code and other attributes, and may include
 non-player literals. Review each candidate in context and separately enumerate the
