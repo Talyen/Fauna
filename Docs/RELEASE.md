@@ -86,7 +86,7 @@ Configure `WINDOWS_CSC_LINK` and `WINDOWS_CSC_KEY_PASSWORD` in the protected `re
 
 ## Dependency inventory and provenance
 
-Every production build runs `npm run generate:release-inventory` after Vite, producing `dependencies.cdx.json` and `THIRD-PARTY-NOTICES.txt`. The CycloneDX inventory covers production npm build inputs and the distributed Electron runtime, not every native Chromium component; retain Electron's `LICENSE.electron.txt` and `LICENSES.chromium.html`. Installed production versions must match the lockfile and include nonempty license text. Font and shadcn notices must also be nonempty. Unsupported optional packages are omitted according to npm OS/CPU restrictions, including exclusions; required packages remain mandatory.
+Every production build runs `npm run generate:release-inventory` after Vite, producing `dependencies.cdx.json` and `THIRD-PARTY-NOTICES.txt`. The CycloneDX inventory covers production npm build inputs and the distributed Electron runtime, not every native Chromium component; retain Electron's `LICENSE.electron.txt` and `LICENSES.chromium.html`. Installed production names and versions must match the lockfile (including explicit npm aliases), and dependency paths must identify canonical package locations. Dependency, font and shadcn license texts must all be nonempty. Inventory generation requires an existing renderer before it inspects dependencies or invokes npm. It rejects an SBOM for a different application/version and a lockfile changed during the npm command before replacing existing evidence. Unsupported optional packages are omitted according to npm OS/CPU restrictions, including exclusions; required packages remain mandatory.
 
 The published react-remove-scroll-bar 2.3.8 package omits its MIT text. Its [supplemental license](third-party/react-remove-scroll-bar-LICENSE.txt) comes from [upstream commit 7301c160](https://github.com/theKashey/react-remove-scroll-bar/blob/7301c160fda44cb8cf2b9fdfde61efad35736196/LICENSE); the fallback applies only to that version.
 
@@ -106,7 +106,7 @@ npm run generate:patch-notes
 npm run generate:patch-notes -- --tag v0.1.0 --dry-run
 ```
 
-Without a tag, the range is the nearest reachable release tag through HEAD; a tagged release starts after its nearest preceding reachable release tag. Unrelated tags and tag dates do not affect selection. With no preceding release, all reachable non-merge commits are considered; uncommitted edits are excluded. Drafts go under ignored `reports/release-notes/`; dry-run prints without writing.
+Without a tag, the range is the nearest reachable release tag through HEAD; a tagged release starts after its nearest preceding reachable release tag. Unrelated tags and tag dates do not affect selection. With no preceding release, all reachable non-merge commits are considered; uncommitted edits are excluded. Release tags use the same strict version grammar as package identity; malformed version tags cannot become note baselines. Drafts go under ignored `reports/release-notes/`; dry-run prints without writing.
 
 | History                                          | Draft treatment                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------- |
