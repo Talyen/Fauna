@@ -1,8 +1,8 @@
 # Fauna roadmap
 
-Last inventoried: October 23, 2026
+Last inventoried: October 27, 2026
 
-Fauna has a complete short playable journey. Checked items below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are future work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
+Fauna has a complete short playable journey. The current capabilities below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are remaining work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
 ## Current capabilities
 
@@ -15,6 +15,8 @@ Fauna has a complete short playable journey. Checked items below are implemented
 | Persistence/platform | Offline browser/Electron saves, validated backups, graceful close, optional Steam/Cloud adapters and Windows package checks                | [Architecture](ARCHITECTURE.md), [Release](RELEASE.md)                        |
 | Development          | Isolated worktrees, locked integration, media preparation, audits, replay/balance/performance tools and full hosted verification           | [Contributing](../CONTRIBUTING.md), [Development tools](DEVELOPMENT_TOOLS.md) |
 
+Localization includes bundled English, German, Simplified Chinese, Russian, Spanish (Spain), Brazilian Portuguese, Japanese and French catalogs, device-local language selection and script fonts. The [localization guide](LOCALIZATION.md) separates enabled-language metadata, recorded browser review and remaining platform qualification.
+
 Catalogs own current creature, ability, talent and Boon counts. Implemented adapters and passing automation do not establish live Steam or hardware acceptance.
 
 ## Next: finish and validate the current experience
@@ -25,6 +27,7 @@ Before substantial expansion:
 - [ ] Replace remaining encounter/support artwork placeholders and inspect them in play
 - [ ] Approve source rights, artwork/audio selections, mix and long-session listening comfort
 - [ ] Qualify current rendered flows, Windows, physical controllers, live Steam/two-device Cloud and Steam Deck through the [release checklist](RELEASE_QUALIFICATION.md)
+- [ ] **Localization follow-through:** maintain translation freshness as content changes and qualify the enabled languages on release platforms; [localization](LOCALIZATION.md) records implemented support and review scope
 - [ ] Finalize store material, distribution and privacy/support decisions under [release readiness](RELEASE.md)
 
 These remain open until their own evidence is recorded. The release guide owns the detailed platform/setup requirements.
@@ -58,7 +61,6 @@ The groups below are in recommended order. Each proposal needs design and playte
 
 - [ ] **Additional creatures:** fill demonstrated gaps in team roles, each with three unique abilities, six distinct passive tiers and complete artwork
 - [ ] **Distinct journey regions:** explore themed enemy pools, bosses, music and locations if route variety improves replayability
-- [ ] **Localization:** follow [localization preparation](LOCALIZATION.md) for the target languages, translation and rendered qualification
 - [ ] **Additional desktop platforms:** evaluate native Linux/macOS distribution after Windows and the intended Steam Deck path are qualified
 
 Start with balance and first-journey learning, then challenge modifiers and encounter variety. Reassess larger content expansions after playtests show which teams and decisions players want more of. Multiplayer, accounts and live services are outside the current single-player roadmap.
