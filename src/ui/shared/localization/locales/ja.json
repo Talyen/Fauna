@@ -4407,7 +4407,7 @@
     "reviewed": true,
     "source": "Each action card played earns {{value0}} XP per eligible keyword; XP becomes permanent when battle ends, even after defeat or abandonment; Abandoning grants no victory rewards",
     "sourceHash": "4a947b6471cacc218c302a0d02ef6ae08d0472c56a577f9acf016ee3fbe04985",
-    "text": "アクションカードを使うたび、対象となる各キーワードに{{value0}} XPを得る; 戦闘終了時にXPが永続化し、敗北や放棄でも残る; 放棄では勝利報酬を得られない"
+    "text": "アクションカードを使うたび、対象となる各キーワードに経験値{{value0}}を得る; 獲得した経験値は戦闘終了時に永続化し、敗北や放棄でも残る; 放棄では勝利報酬を得られない"
   },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
@@ -4653,7 +4653,7 @@
     "reviewed": true,
     "source": "Keyword XP earns points for that keyword's talents; The first three points cost {{value0}}, {{value1}} and {{value2}} additional XP; Complete a row to unlock the next; Talents immediately affect all matching creatures; Reset a category to refund its points without losing XP",
     "sourceHash": "bdb52d121a3386875b132219f340364c036edcab0502c4d17cd8aa2f70fe5298",
-    "text": "キーワードXPで、そのキーワードのタレントポイントを得る; 最初の3ポイントにはそれぞれ追加で{{value0}}、{{value1}}、{{value2}} XPが必要; 列を完成させると次の列が開く; タレントは該当する全クリーチャーに即座に適用される; カテゴリをリセットするとXPを失わずにポイントを返還できる"
+    "text": "キーワード経験値で、対応するタレントポイントを得る; 最初の3ポイントにはそれぞれ追加で経験値{{value0}}、{{value1}}、{{value2}}が必要; 列を完成させると次の列が開く; タレントは該当する全クリーチャーに即座に適用される; カテゴリをリセットすると経験値を失わずにポイントを返還できる"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

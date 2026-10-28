@@ -4407,7 +4407,7 @@
     "reviewed": true,
     "source": "Each action card played earns {{value0}} XP per eligible keyword; XP becomes permanent when battle ends, even after defeat or abandonment; Abandoning grants no victory rewards",
     "sourceHash": "ef9aebdeedf367813fd4e313986b2d78657cab78743d54b3b2dc4c8fd7bbc08a",
-    "text": "Cada carta de acción jugada otorga {{value0}} PX por palabra clave válida; Los PX se vuelven permanentes al terminar el combate, incluso tras una derrota o abandono; Abandonar no otorga recompensas de victoria"
+    "text": "Cada carta de acción jugada otorga {{value0}} EXP por palabra clave válida; Los EXP se vuelven permanentes al terminar el combate, incluso tras una derrota o abandono; Abandonar no otorga recompensas de victoria"
   },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
@@ -4653,7 +4653,7 @@
     "reviewed": true,
     "source": "Keyword XP earns points for that keyword's talents; The first three points cost {{value0}}, {{value1}} and {{value2}} additional XP; Complete a row to unlock the next; Talents immediately affect all matching creatures; Reset a category to refund its points without losing XP",
     "sourceHash": "42c7b0d351cddbe005b0716fd8e6ab0406f49797c205938a80c0bf91fdb3dd51",
-    "text": "Los PX de una palabra clave otorgan puntos para sus talentos; Los tres primeros puntos cuestan {{value0}}, {{value1}} y {{value2}} PX adicionales; Completa una fila para desbloquear la siguiente; Los talentos afectan de inmediato a todas las criaturas correspondientes; Reinicia una categoría para recuperar sus puntos sin perder PX"
+    "text": "Los EXP de una palabra clave otorgan puntos para sus talentos; Los tres primeros puntos cuestan {{value0}}, {{value1}} y {{value2}} EXP adicionales; Completa una fila para desbloquear la siguiente; Los talentos afectan de inmediato a todas las criaturas correspondientes; Reinicia una categoría para recuperar sus puntos sin perder EXP"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

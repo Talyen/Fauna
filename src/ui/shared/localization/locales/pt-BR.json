@@ -4407,7 +4407,7 @@
     "reviewed": true,
     "source": "Each action card played earns {{value0}} XP per eligible keyword; XP becomes permanent when battle ends, even after defeat or abandonment; Abandoning grants no victory rewards",
     "sourceHash": "e7a5939dbf39ad095921e21bea1da56beba9b1b8ff531dc5d9639ee92808208b",
-    "text": "Cada carta de ação jogada concede {{value0}} XP por palavra-chave elegível; O XP se torna permanente ao fim do combate, mesmo após derrota ou abandono; Abandonar não concede recompensas de vitória"
+    "text": "Cada carta de ação jogada concede {{value0}} EXP por palavra-chave elegível; O EXP se torna permanente ao fim do combate, mesmo após derrota ou abandono; Abandonar não concede recompensas de vitória"
   },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
@@ -4653,7 +4653,7 @@
     "reviewed": true,
     "source": "Keyword XP earns points for that keyword's talents; The first three points cost {{value0}}, {{value1}} and {{value2}} additional XP; Complete a row to unlock the next; Talents immediately affect all matching creatures; Reset a category to refund its points without losing XP",
     "sourceHash": "09bc1d3f3b744696cb0d8108f45fe556e802090d6cada7c99b9539b2d3dab427",
-    "text": "O XP de uma palavra-chave concede pontos para seus talentos; Os três primeiros pontos custam {{value0}}, {{value1}} e {{value2}} XP adicionais; Complete uma linha para liberar a próxima; Os talentos afetam imediatamente todas as criaturas correspondentes; Reinicie uma categoria para recuperar os pontos sem perder XP"
+    "text": "O EXP de uma palavra-chave concede pontos para seus talentos; Os três primeiros pontos custam {{value0}}, {{value1}} e {{value2}} EXP adicionais; Complete uma linha para liberar a próxima; Os talentos afetam imediatamente todas as criaturas correspondentes; Reinicie uma categoria para recuperar os pontos sem perder EXP"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
