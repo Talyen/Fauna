@@ -224,6 +224,7 @@ export const PROGRESSION_KEYWORDS = freeze([
   "mana",
 ] as const);
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
+const progressionKeywords = new Set<string>(PROGRESSION_KEYWORDS);
 const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
   thorns: "nature",
   cleanse: "health",
@@ -240,7 +241,7 @@ export function definitionKeywords(definition: {
   const keywords: ProgressionKeyword[] = [];
   const add = (id: string) => {
     const keyword = (progressionCategory[id as KeywordId] ?? id) as ProgressionKeyword;
-    if (PROGRESSION_KEYWORDS.includes(keyword) && !keywords.includes(keyword)) keywords.push(keyword);
+    if (progressionKeywords.has(keyword) && !keywords.includes(keyword)) keywords.push(keyword);
   };
   if (definition.effect === "attack") add(definition.damageType!);
   else for (const keyword of abilityRule(definition.effect).keywords) add(keyword);

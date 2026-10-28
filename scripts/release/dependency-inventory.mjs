@@ -3,6 +3,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync, mkdirSync } from "n
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { fileHash } from "../lib/file-integrity.mjs";
 import { npmCommand } from "../lib/npm-command.mjs";
 import { leasePackage } from "./development-retention.mjs";
 
@@ -14,29 +15,64 @@ const SUPPLEMENTS = new Map([
   ["react-remove-scroll-bar@2.3.8", "Docs/third-party/react-remove-scroll-bar-LICENSE.txt"],
 ]);
 
+function supportsPlatform(value, restriction, location) {
+  if (restriction === undefined) return true;
+  const list = typeof restriction === "string" ? [restriction] : restriction;
+  if (
+    !Array.isArray(list) ||
+    list.some(
+      (entry) => typeof entry !== "string" || !entry.trim() || entry !== entry.trim() || entry === "!",
+    )
+  )
+    throw new Error(`Invalid dependency platform restriction: ${location}`);
+  if (list.length === 1 && list[0] === "any") return true;
+  let positive = false,
+    matched = false;
+  for (const entry of list) {
+    if (entry.startsWith("!")) {
+      if (entry.slice(1) === value) return false;
+    } else {
+      positive = true;
+      if (entry === value) matched = true;
+    }
+  }
+  return !positive || matched;
+}
+
 export function dependencyNotices(root, lock) {
+  if (!lock?.packages || typeof lock.packages !== "object" || Array.isArray(lock.packages))
+    throw new Error("Invalid dependency lock packages.");
   const sections = [
     "Fauna third-party notices",
     "These notices cover production npm dependencies and bundled source/font licenses.",
   ];
   const inventory = [];
   for (const [location, entry] of Object.entries(lock.packages).sort(([a], [b]) => a.localeCompare(b))) {
-    if (!location || entry.dev) continue;
+    if (!location) continue;
+    if (!entry || typeof entry !== "object" || Array.isArray(entry))
+      throw new Error(`Invalid dependency lock entry: ${location}`);
+    if (entry.dev === true) continue;
     if (
       !location.startsWith("node_modules/") ||
-      location.split("/").includes("..") ||
+      location.split("/").some((part) => !part || part === "." || part === "..") ||
       location.includes("\\")
     )
       throw new Error(`Invalid dependency location: ${location}`);
-    // Platform-specific optional native binaries are absent on other build hosts.
-    if (
-      location.startsWith("node_modules/@koromix/koffi-") &&
-      entry.optional &&
-      ((entry.os && !entry.os.includes(process.platform)) || (entry.cpu && !entry.cpu.includes(process.arch)))
-    )
-      continue;
+    if (typeof entry.version !== "string" || !entry.version.trim())
+      throw new Error(`Missing dependency version: ${location}`);
+    const osSupported = supportsPlatform(process.platform, entry.os, location);
+    const cpuSupported = supportsPlatform(process.arch, entry.cpu, location);
+    // npm omits unsupported optional dependencies regardless of package family.
+    if (entry.optional === true && (!osSupported || !cpuSupported)) continue;
     const directory = path.join(root, location);
     const manifest = readJSON(path.join(directory, "package.json"));
+    if (
+      !manifest ||
+      typeof manifest.name !== "string" ||
+      !manifest.name.trim() ||
+      manifest.name !== manifest.name.trim()
+    )
+      throw new Error(`Invalid installed dependency name: ${location}`);
     if (manifest.version !== entry.version) throw new Error(`Dependency version differs: ${location}`);
     const identity = `${manifest.name}@${manifest.version}`;
     const files = readdirSync(directory)
@@ -77,8 +113,11 @@ export function dependencyNotices(root, lock) {
     "Docs/NOTO-SANS-LICENSE.txt",
     "Docs/NOTO-SANS-JP-LICENSE.txt",
     "Docs/NOTO-SANS-SC-LICENSE.txt",
-  ])
-    sections.push(`=== ${file} ===`, readFileSync(path.join(root, file), "utf8"));
+  ]) {
+    const text = readFileSync(path.join(root, file), "utf8");
+    if (!text.trim()) throw new Error(`Missing bundled license text: ${file}`);
+    sections.push(`=== ${file} ===`, text);
+  }
   return { notices: sections.join("\n\n") + "\n", inventory };
 }
 
@@ -131,22 +170,29 @@ export function generateInventory(root = ROOT) {
   return { dependencies: inventory.length, sbom: "dist/dependencies.cdx.json" };
 }
 
-export function packageInventory(directory, output = path.resolve(ROOT, "reports/release-inventory")) {
+export async function packageInventory(directory, output = path.resolve(ROOT, "reports/release-inventory")) {
   const lease = leasePackage(ROOT, directory);
   try {
-    return packageInventoryFiles(directory, output);
+    return await packageInventoryFiles(directory, output);
   } finally {
     lease?.release();
   }
 }
 
-function packageInventoryFiles(directory, output) {
+async function packageInventoryFiles(directory, output) {
   const files = ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"];
-  const manifest = files.map((name) => {
-    const bytes = readFileSync(path.join(directory, name));
-    if (!bytes.length) throw new Error(`Empty packaged component: ${name}`);
-    return { path: name, size: bytes.length, sha256: sha(bytes) };
-  });
+  const manifest = [];
+  for (const name of files) {
+    const file = path.join(directory, name);
+    const before = statSync(file, { bigint: true });
+    if (!before.isFile() || before.size === 0n)
+      throw new Error(`Empty or invalid packaged component: ${name}`);
+    const digest = await fileHash(file);
+    const after = statSync(file, { bigint: true });
+    if (["dev", "ino", "size", "mtimeNs", "ctimeNs"].some((key) => before[key] !== after[key]))
+      throw new Error(`Packaged component changed during inventory: ${name}`);
+    manifest.push({ path: name, size: Number(before.size), sha256: digest });
+  }
   mkdirSync(output, { recursive: true });
   writeFileSync(
     path.join(output, "package-hashes.json"),
@@ -158,6 +204,7 @@ function packageInventoryFiles(directory, output) {
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
   if (!args.length) console.log(generateInventory());
-  else if (args.length === 2 && args[0] === "--package") console.log(packageInventory(path.resolve(args[1])));
+  else if (args.length === 2 && args[0] === "--package")
+    console.log(await packageInventory(path.resolve(args[1])));
   else throw new Error("Usage: generate:release-inventory -- [--package <unpacked-directory>]");
 }
