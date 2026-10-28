@@ -71,6 +71,16 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
   const played = step(started.state, attack);
   const knockedOut = structuredClone(started.state);
   knockedOut.team[0]!.health = 0;
+  knockedOut.discovery.encountered.push("captoad");
+  knockedOut.discovery.recruited.captoad = 1;
+  knockedOut.reserves.push({
+    id: "reserve-1",
+    species: "captoad",
+    health: species("captoad").health,
+    block: 0,
+    combat: freshCombat(),
+    attacked: false,
+  });
   const previewActions = [
     { kind: "select", cardId: attack.cardId, checkpoint: initial },
     { kind: "target", targetId: attack.targetId, checkpoint: initial },
@@ -123,7 +133,7 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
     {
       id: "swap",
       initial: encodeSave(decodeSave(encodeSave(knockedOut))),
-      fixture: "explicit-three-deployed-one-reserve-v2",
+      fixture: "knockout-with-two-backups-v3",
       actions: [
         {
           kind: "swap",

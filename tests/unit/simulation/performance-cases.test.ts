@@ -2,6 +2,8 @@ import { it, expect } from "vitest";
 import { performanceCases, reachablePerformanceCases } from "../../../src/tooling/performance";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { dispatch } from "../../../src/game/engine";
+import { soleReplacement } from "../../../src/application/battle-policy";
+import { pendingReplacement } from "../../../src/game/team";
 import type { Command } from "../../../src/game/types";
 
 it("retains replayable current-format performance checkpoints", () => {
@@ -18,6 +20,14 @@ it("retains replayable current-format performance checkpoints", () => {
     targetId: expect.any(String),
     checkpoint: preview.initial,
   });
+  const swap = cases.find((row) => row.id === "swap")!;
+  const swapState = decodeSave(swap.initial);
+  expect(pendingReplacement(swapState)?.id).toBe("ally-0");
+  expect(swapState.reserves.filter((unit) => unit.health > 0).map((unit) => unit.id)).toEqual([
+    "reserve-0",
+    "reserve-1",
+  ]);
+  expect(soleReplacement(swapState, false)).toBeNull();
   for (const scenario of cases) {
     let state = decodeSave(scenario.initial);
     for (const action of scenario.actions) {
