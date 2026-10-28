@@ -158,3 +158,11 @@ export function cleanseTargets(state: GameState | undefined, unit: Creature | En
       if (ally.id !== unit.id && ally.health > 0) targets.push(ally);
   return targets;
 }
+
+/** Snapshot reflected attacks with the original attacker first, then living enemy peers. */
+export function enemyReflectionRecipients(state: GameState, source: Creature | Enemy): (Creature | Enemy)[] {
+  const recipients: (Creature | Enemy)[] = [source];
+  for (const unit of battlefieldView(state, "enemy"))
+    if (unit.health > 0 && unit.id !== source.id) recipients.push(unit);
+  return recipients;
+}
