@@ -8,7 +8,7 @@ const TYPES = { feat: "New", balance: "Balance", fix: "Fixes", perf: "Performanc
 const PLAYER_PATH = /^(src\/(?:game|ui|platform|application)\/|public\/|assets\/|desktop\/(?!after-pack))/;
 export function playerNote(body, files) {
   const lines = body.trim().split(/\r?\n/);
-  const visibility = lines.filter((line) => /^User-Facing:\s*(yes|no)\s*$/i.test(line)).at(-1);
+  const visibility = lines.findLast((line) => /^User-Facing:\s*(yes|no)\s*$/i.test(line));
   if (visibility && /no\s*$/i.test(visibility)) return null;
   const explicit = lines
     .find((line) => /^Player-Note:\s*\S/i.test(line))
@@ -17,6 +17,7 @@ export function playerNote(body, files) {
   const subject = lines[0]?.match(/^(feat|fix|balance|perf)(?:\([^\r\n)]+\))?!?:\s+(.+)$/);
   if (!explicit && !visibility && (!subject || !files.some((file) => PLAYER_PATH.test(file)))) return null;
   const text = explicit ?? subject?.[2] ?? lines[0].replace(/^[a-z]+(?:\([^)]*\))?!?:\s*/, "");
+  if (!text.trim()) return null;
   return { section: subject ? TYPES[subject[1]] : "Changes", text: text[0].toUpperCase() + text.slice(1) };
 }
 export function notesArgs(args) {
@@ -39,14 +40,21 @@ export function generatePatchNotes(root, { tag } = {}) {
     .split("\n")
     .filter((value) => /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(value));
   // Measure ancestry distance; tag date and unrelated newer tags cannot change the range.
-  const candidates = tags
-    .filter((value) => !tag || git(root, ["rev-parse", `refs/tags/${value}^{commit}`]).trim() !== head)
-    .map((value) => ({
+  let nearest;
+  for (const value of tags) {
+    if (tag && git(root, ["rev-parse", `refs/tags/${value}^{commit}`]).trim() === head) continue;
+    const candidate = {
       tag: value,
       distance: Number(git(root, ["rev-list", "--count", `refs/tags/${value}..${head}`])),
-    }))
-    .sort((a, b) => a.distance - b.distance || a.tag.localeCompare(b.tag));
-  const base = candidates[0]?.tag;
+    };
+    if (
+      !nearest ||
+      candidate.distance < nearest.distance ||
+      (candidate.distance === nearest.distance && candidate.tag.localeCompare(nearest.tag) < 0)
+    )
+      nearest = candidate;
+  }
+  const base = nearest?.tag;
   const commits = git(root, [
     "rev-list",
     "--reverse",
