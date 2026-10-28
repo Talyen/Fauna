@@ -9,14 +9,12 @@ export const cloudIdentity: CloudIdentity = {
   importAvailable: false,
 };
 
-/** In-memory transport only; each scenario still drives the real Cloud manager. */
-export function cloudFixture({
+/** In-memory transport shared by controller and session boundary scenarios. */
+export function cloudTransport({
   identity = { ...cloudIdentity },
-  publish = () => {},
   standalone = [],
 }: {
   identity?: CloudIdentity;
-  publish?: Parameters<typeof createCloud>[1];
   standalone?: SaveCandidate[];
 } = {}) {
   const files = new Map<string, string>();
@@ -36,8 +34,17 @@ export function cloudFixture({
       files.set(name, data);
     }),
   };
+  return { port, files, local, preserve };
+}
+
+/** Each scenario drives the real controller; the fixture owns its final disposal. */
+export function cloudFixture({
+  publish = () => {},
+  ...options
+}: Parameters<typeof cloudTransport>[0] & { publish?: Parameters<typeof createCloud>[1] } = {}) {
+  const transport = cloudTransport(options);
   const install = vi.fn(async (_data: string, _owns?: () => boolean) => {});
-  const manager = createCloud(port, publish, install);
+  const manager = createCloud(transport.port, publish, install);
   onTestFinished(() => manager.dispose());
-  return { manager, port, files, local, install, preserve };
+  return { ...transport, manager, install };
 }

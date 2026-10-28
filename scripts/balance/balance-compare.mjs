@@ -1,36 +1,15 @@
-import { readFile, writeFile, appendFile, readdir, rm, open, unlink } from "node:fs/promises";
+import { readFile, writeFile, appendFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
 import { runOwnedWorker } from "../lib/worker.mjs";
-import { compareBalance } from "./paired-balance.mjs";
+import { isDeepStrictEqual } from "node:util";
+import { reserveBalanceDirectory } from "./report-directory.mjs";
+export { reserveBalanceDirectory } from "./report-directory.mjs";
+import { compareBalance, validateBalanceMetrics } from "./paired-balance.mjs";
 import { writeBalanceFindings } from "./balance-findings.mjs";
 import { pruneBalanceReports, sealBalanceReport } from "./report-retention.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
-
-export async function reserveBalanceDirectory(directory) {
-  const marker = path.join(directory, ".balance-writing");
-  let handle;
-  try {
-    handle = await open(marker, "wx");
-  } catch (error) {
-    if (error.code === "EEXIST")
-      throw new Error("Choose an empty output directory; existing balance evidence is preserved.");
-    throw error;
-  }
-  const release = async () => {
-    await handle.close();
-    await unlink(marker);
-  };
-  try {
-    if ((await readdir(directory)).some((name) => name !== ".balance-writing"))
-      throw new Error("Choose an empty output directory; existing balance evidence is preserved.");
-  } catch (error) {
-    await release();
-    throw error;
-  }
-  return release;
-}
 
 export function parseBalanceOptions(args) {
   const options = {};
@@ -50,7 +29,14 @@ export function parseBalanceOptions(args) {
 export function parseBalanceSeeds(value) {
   const parts = value.split(",");
   if (parts.some((part) => !/^\d+$/u.test(part))) throw new Error("Invalid or excessive suite.");
-  return parts.map(Number);
+  const seeds = parts.map(Number);
+  if (
+    seeds.length > 10 ||
+    new Set(seeds).size !== seeds.length ||
+    seeds.some((seed) => !Number.isSafeInteger(seed) || seed < 0 || seed > 0xffffffff)
+  )
+    throw new Error("Invalid or excessive suite.");
+  return seeds;
 }
 export function experimentConfigs(checkpoint, loadouts) {
   const state = JSON.parse(checkpoint);
@@ -69,7 +55,10 @@ export function experimentConfigs(checkpoint, loadouts) {
     if (
       !loadout ||
       ![loadout.talents, loadout.boons].every(
-        (ids) => Array.isArray(ids) && ids.every((id) => typeof id === "string" && id.length > 0),
+        (ids) =>
+          Array.isArray(ids) &&
+          new Set(ids).size === ids.length &&
+          ids.every((id) => typeof id === "string" && id.trim().length > 0 && id === id.trim()),
       )
     )
       throw new Error("Provide baseline and treatment talent/boon ID arrays.");
@@ -84,14 +73,24 @@ export async function worker(input, output) {
   if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
     throw new Error("Worker reports must remain under reports/.");
   await reportDirectory(path.dirname(path.resolve(output)));
+  const code = await identity();
   const server = await runtime();
   try {
     const config = await load(input);
     const { balanceCase, BALANCE_CONFIG } = await server.ssrLoadModule("/src/tooling/balance.ts");
-    const result = await balanceCase(config, await identity(), undefined, (record) =>
+    const result = await balanceCase(config, code, undefined, (record) =>
       appendFile(`${output}.journal.jsonl`, JSON.stringify(record) + "\n"),
     );
-    await writeFile(output, JSON.stringify({ ...result, settings: BALANCE_CONFIG }));
+    const unchanged = code === (await identity());
+    await writeFile(
+      output,
+      JSON.stringify({
+        ...result,
+        ...(unchanged ? {} : { complete: false, reason: "Source identity changed during the case." }),
+        identity: code,
+        settings: BALANCE_CONFIG,
+      }),
+    );
   } finally {
     await server.close();
   }
@@ -104,7 +103,10 @@ export function runWorker(input, output, timeout, options) {
     options,
   );
 }
-export async function main(args = process.argv.slice(2), { runCase = runWorker } = {}) {
+export async function main(
+  args = process.argv.slice(2),
+  { runCase = runWorker, sourceIdentity = identity, pruneReports = pruneBalanceReports } = {},
+) {
   if (args[0] === "--worker") return worker(args[1], args[2]);
   const mode = args.shift();
   if (mode === "compare") {
@@ -163,11 +165,33 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
   const options = parseBalanceOptions(args);
   const evidencePolicy = options["--evidence"] ?? "failures";
   if (!["failures", "full"].includes(evidencePolicy)) throw new Error("--evidence must be failures or full.");
-  await pruneBalanceReports(ROOT, { includeArchives: true });
+  let configs;
+  if (mode === "run") {
+    if (options["--checkpoint"] || options["--loadouts"])
+      throw new Error("Use experiment for checkpoint loadouts.");
+    const starters = (options["--starters"] ?? "emberback,prismram,captoad,dunefox,cindernewt").split(",");
+    const seeds = parseBalanceSeeds(options["--seeds"] ?? "0,1,2,3,4,5,6,7,8,9");
+    if (
+      starters.length > 5 ||
+      new Set(starters).size !== starters.length ||
+      starters.some((starter) => !/^[a-z][a-z0-9-]*$/u.test(starter))
+    )
+      throw new Error("Invalid or excessive suite.");
+    configs = starters.flatMap((starter) =>
+      seeds.map((seed) => ({ key: `${starter}-${seed}`, config: { starter, seed } })),
+    );
+  } else {
+    if (!options["--checkpoint"] || !options["--loadouts"] || options["--starters"] || options["--seeds"])
+      throw new Error("Experiment requires only --checkpoint and --loadouts.");
+    const checkpoint = await readFile(path.resolve(options["--checkpoint"]), "utf8");
+    const loadouts = await load(options["--loadouts"]);
+    configs = experimentConfigs(checkpoint, loadouts);
+  }
+  await pruneReports(ROOT, { includeArchives: true });
   const out = await reportDirectory(options["--out"], `reports/balance/${mode}-${Date.now()}`);
   let release = await reserveBalanceDirectory(out);
   try {
-    const code = await identity();
+    const code = await sourceIdentity();
     const report = {
       format: 1,
       kind: mode === "run" ? "career" : "experiment",
@@ -181,30 +205,6 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
     const manifest = path.join(out, "report.json");
     await writeFile(manifest, JSON.stringify(report));
     const deadline = Date.now() + 15 * 60_000;
-    let configs;
-    if (mode === "run") {
-      if (options["--checkpoint"] || options["--loadouts"])
-        throw new Error("Use experiment for checkpoint loadouts.");
-      const starters = (options["--starters"] ?? "emberback,prismram,captoad,dunefox,cindernewt").split(",");
-      const seeds = parseBalanceSeeds(options["--seeds"] ?? "0,1,2,3,4,5,6,7,8,9");
-      if (
-        new Set(starters).size !== starters.length ||
-        new Set(seeds).size !== seeds.length ||
-        starters.length > 5 ||
-        seeds.length > 10 ||
-        seeds.some((s) => !Number.isSafeInteger(s) || s < 0 || s > 0xffffffff)
-      )
-        throw new Error("Invalid or excessive suite.");
-      configs = starters.flatMap((starter) =>
-        seeds.map((seed) => ({ key: `${starter}-${seed}`, config: { starter, seed } })),
-      );
-    } else {
-      if (!options["--checkpoint"] || !options["--loadouts"] || options["--starters"] || options["--seeds"])
-        throw new Error("Experiment requires only --checkpoint and --loadouts.");
-      const checkpoint = await readFile(path.resolve(options["--checkpoint"]), "utf8");
-      const loadouts = await load(options["--loadouts"]);
-      configs = experimentConfigs(checkpoint, loadouts);
-    }
     const controller = new AbortController();
     const cancel = () => controller.abort();
     process.once("SIGINT", cancel);
@@ -221,8 +221,16 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
           if (remaining <= 0) throw new Error("Suite deadline exhausted.");
           await runCase(input, output, Math.min(60_000, remaining), { signal: controller.signal });
           const result = await load(output);
-          await writeFile(output, JSON.stringify({ ...result, config, identity: code }));
-          report.settings = result.settings;
+          if (result.identity !== code || (await sourceIdentity()) !== code)
+            throw new Error("Source identity changed; case evidence is preserved.");
+          if (typeof result.complete !== "boolean") throw new Error("Invalid case completion status.");
+          if (!result.settings || typeof result.settings !== "object" || Array.isArray(result.settings))
+            throw new Error("Invalid case settings.");
+          if (report.settings !== null && !isDeepStrictEqual(report.settings, result.settings))
+            throw new Error("Case settings differ; mixed settings cannot form a suite.");
+          if (result.complete) validateBalanceMetrics(result.metrics, key);
+          await writeFile(output, JSON.stringify({ ...result, config }));
+          report.settings ??= result.settings;
           report.cases.push({
             key,
             starter: config.starter,
@@ -280,6 +288,8 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
       process.removeListener("SIGINT", cancel);
       process.removeListener("SIGTERM", cancel);
     }
+    if ((await sourceIdentity()) !== code)
+      report.failures.push({ key: "source-identity", reason: "Source identity changed during the suite." });
     report.complete =
       !controller.signal.aborted && report.failures.length === 0 && report.cases.length === configs.length;
     await writeFile(manifest, JSON.stringify(report, null, 2));

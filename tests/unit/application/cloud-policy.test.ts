@@ -27,6 +27,20 @@ it("keeps competing heads in input order and uses only the last record for dupli
   expect(newestHeads([])).toEqual([]);
 });
 
+it.each([
+  ["empty", [], []],
+  ["single", [head("a")], ["a"]],
+  ["self ancestor", [head("a", ["a"])], []],
+  ["independent pair", [head("a"), head("b")], ["a", "b"]],
+  ["descendant pair", [head("a"), head("b", ["a"])], ["b"]],
+  ["cycle", [head("a", ["b"]), head("b", ["a"])], []],
+  ["last duplicate clears ancestry", [head("a", ["a"]), head("a")], ["a"]],
+  ["last duplicate sets ancestry", [head("a"), head("a", ["a"])], []],
+  ["duplicate must not retire other head", [head("a", ["b"]), head("b"), head("a")], ["a", "b"]],
+] as const)("selects ancestry heads for %s", (_label, records, expected) => {
+  expect(newestHeads(records).map((record) => record.id)).toEqual(expected);
+});
+
 it("adopts a proven descendant at startup and preserves alternatives before installation", () => {
   const current = head("local"),
     remote = head("remote", [current.id]);

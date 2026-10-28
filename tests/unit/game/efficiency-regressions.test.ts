@@ -1,3 +1,8 @@
+import { enemyReflectionRecipients } from "../../../src/game/battlefield";
+import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
+import { freshCombat } from "../../../src/game/combat/state";
+import { enemyCardValue, chooseEnemyCard } from "../../../src/game/combat/enemy-policy";
+import { swapBackup } from "../../../src/game/team";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { offerBoons, rosterBoonKeywords } from "../../../src/game/boon-offers";
 import { BOON_KEYWORDS } from "../../../src/game/content/boon-keywords";
@@ -1123,4 +1128,97 @@ it("keeps diagnostic snapshots immutable and independent after bounded retention
   expect(diagnostics.snapshot()[49]!.count).toBe(2);
   expect(latest[49]!.count).toBe(1);
   diagnostics.dispose();
+});
+
+it("snapshots reflected victims in attacker-first order and excludes departed summons", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  const source = state.battle.enemies[1]!;
+  summonEcho(state, source, "enemy", 12, []);
+  const echo = state.battle.minions![0]!;
+  const expected = [
+    source,
+    ...battlefield(state, "enemy").filter((unit) => unit.health > 0 && unit.id !== source.id),
+  ];
+  const recipients = enemyReflectionRecipients(state, source);
+  expect(recipients).toEqual(expected);
+  expect(recipients.filter((unit) => unit === source)).toHaveLength(1);
+  state.battle.enemies.splice(1, 1);
+  expect(recipients).toEqual(expected);
+  expect(enemyReflectionRecipients(state, source)).not.toContain(echo);
+  expect(enemyReflectionRecipients(state, source)[0]).toBe(source);
+});
+
+it("keeps alternate attack estimates in damage-type order without touching state", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram"])));
+  const actor = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  const def = definition("prismram-attack");
+  if (def.effect !== "attack") throw new Error("Expected attack");
+  const before = structuredClone(state);
+  for (const cost of [0, 1]) {
+    const dual = { ...def, damageType: "physical", alternateDamageType: "water" } as const;
+    expect(ordinaryAttackFacts(state, actor, dual, 12, enemy, cost)).toEqual([
+      ...ordinaryAttackFacts(state, actor, { ...dual, alternateDamageType: undefined }, 12, enemy, cost),
+      ...ordinaryAttackFacts(
+        state,
+        actor,
+        { ...dual, damageType: "water", alternateDamageType: undefined },
+        12,
+        enemy,
+        cost,
+      ),
+    ]);
+  }
+  expect(state).toEqual(before);
+});
+
+it("keeps enemy probe values live without mutating battle or RNG", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.boons = [];
+  state.talents = [];
+  const enemy = state.battle.enemies[0]!;
+  enemy.species = "mossguard";
+  enemy.health = 97;
+  enemy.maxHealth = 100;
+  enemy.combat = freshCombat();
+  state.battle.enemies = [enemy];
+  const heal = {
+    ...definition("mossguard-attack"),
+    effect: "heal",
+    value: 10,
+    target: undefined,
+    effects: undefined,
+  } as const;
+  const before = structuredClone(state);
+  expect(enemyCardValue(state, enemy, heal, undefined, enemy.id)).toBe(3);
+  expect(chooseEnemyCard(state, enemy, [heal, heal])?.value).toBe(3);
+  expect(state).toEqual(before);
+  enemy.health = 100;
+  expect(enemyCardValue(state, enemy, heal, undefined, enemy.id)).toBe(0);
+});
+
+it("retains replacement slots and valid battle zones for manual and card-driven swaps", () => {
+  for (const fromCard of [false, true]) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram", "emberback"])));
+    const backup = state.team.pop()!;
+    state.reserves.push(backup);
+    rebuildCards(state);
+    state.battle.hand = [];
+    state.battle.buffer = [];
+    state.battle.discard = [];
+    state.battle.draw = state.cards.map((card) => card.id);
+    const outgoing = state.team[0]!;
+    const slots = state.cards.filter((card) => card.ownerId === outgoing.id).map((card) => card.id);
+    swapBackup(state, outgoing.id, backup.id, [], fromCard);
+    expect(state.cards.filter((card) => card.ownerId === backup.id).map((card) => card.id)).toEqual(slots);
+    const zones = [
+      ...state.battle.hand,
+      ...state.battle.buffer,
+      ...state.battle.draw,
+      ...state.battle.discard,
+    ];
+    expect([...zones].sort()).toEqual(state.cards.map((card) => card.id).sort());
+    expect(new Set(zones).size).toBe(zones.length);
+    expect(decodeSave(encodeSave(state))).toEqual(state);
+  }
 });

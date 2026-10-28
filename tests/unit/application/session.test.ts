@@ -1,3 +1,4 @@
+import { cloudTransport } from "../../support/cloud";
 import { deferred } from "../../support/deferred";
 import { describe, expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
@@ -33,7 +34,6 @@ class MemoryStorage implements Storage {
 function platform(data: string | null = null): Platform {
   return {
     desktop: false,
-    steam: { available: false },
     saves: {
       async readCandidates() {
         return data ? [{ source: "primary", data }] : [];
@@ -483,14 +483,8 @@ it.each(["saved", "empty", "invalid"])(
     const s = createSession({
       ...platform(candidate === "saved" ? JSON.stringify(run()) : candidate === "invalid" ? "broken" : null),
       cloud: {
+        ...cloudTransport().port,
         identity,
-        readLocal: async () => null,
-        writeLocal: async () => {},
-        preserve: async () => {},
-        importStandalone: async () => [],
-        list: async () => [],
-        read: async () => null,
-        write: async () => {},
       },
     });
     const admitted: boolean[] = [];
@@ -553,11 +547,8 @@ it.each([false, true])(
         },
       },
       cloud: {
-        identity: async () => identity,
+        ...cloudTransport({ identity }).port,
         readLocal: async () => JSON.stringify(local),
-        writeLocal: async () => {},
-        preserve: async () => {},
-        importStandalone: async () => [],
         list: async () => [cloudName(remote)],
         read: async () => JSON.stringify(remote),
         write: async () => {},
