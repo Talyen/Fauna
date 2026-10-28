@@ -172,12 +172,14 @@ it("treats hidden draws as unresolved and rejects unavailable cards without publ
   const game = ready();
   const invalid = projectPlay(game, "missing", "enemy-0");
   expect(playPreviewModel(game, invalid, "enemy-0").units.size).toBe(0);
-  // A shuffle after a play must not use the real future deck order as a forecast oracle.
-  const hidden = produce(game, (state) => {
+  // A mid-turn draw must not reveal the hidden card at the top of the draw pile.
+  const hidden = ready(true);
+  expect(projectPlay(hidden, hidden.battle!.hand[0]!, "enemy-0").kind).toBe("unknown");
+  const exhausted = produce(hidden, (state) => {
     state.battle!.discard = state.battle!.draw;
     state.battle!.draw = [];
   });
-  expect(projectPlay(hidden, hidden.battle!.hand[0]!, "enemy-0").kind).toBe("unknown");
+  expect(projectPlay(exhausted, exhausted.battle!.hand[0]!, "enemy-0").kind).toBe("complete");
 });
 
 it("drops incomplete outcome sets when finite branching exceeds the preview budget", () => {

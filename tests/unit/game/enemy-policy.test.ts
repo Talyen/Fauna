@@ -216,8 +216,8 @@ describe("enemy targeting and card values", () => {
     expect(enemyCardValue(state, enemy, definition("memento-pearl"))).toBe(1.5);
     enemy.deck.hand = ["memento-drowned-revelation"];
     enemy.deck.pearls = 0;
-    // With no other cards, only the just-discarded draw card can be drawn.
-    expect(enemyCardValue(state, enemy, definition("memento-drowned-revelation"))).toBe(1);
+    // Mid-turn draws cannot recycle the just-discarded card.
+    expect(enemyCardValue(state, enemy, definition("memento-drowned-revelation"))).toBe(0);
     enemy.deck.mana = 0;
     expect(chooseEnemyCard(state, enemy, [definition("memento-drowned-revelation")])).toBeUndefined();
   });

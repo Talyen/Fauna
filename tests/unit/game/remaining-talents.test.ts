@@ -607,7 +607,8 @@ it("Armored Surge triggers on a Block card once and Radiant Guard draws an eligi
     state.rng = seed * 7919;
     const light = playable(state, "pollenmoth-attack");
     state.battle!.hand = [];
-    state.battle!.discard = [light.id];
+    state.battle!.draw = [light.id];
+    state.battle!.discard = [];
     const events: GameEvent[] = [];
     grantBlock(state, state.team[0]!, 1, events);
     if (state.battle!.hand.includes(light.id)) return;
@@ -696,7 +697,8 @@ it("keyword draws include cards classified by supplemental effects", () => {
   );
   const card = playable(state, "emberback-attack");
   state.battle!.hand = [];
-  state.battle!.discard = [card.id];
+  state.battle!.draw = state.cards.map((entry) => entry.id);
+  state.battle!.discard = [];
   drawKeyword(state, "nature");
   expect(state.battle!.hand).toEqual([card.id]);
   expect(state.battle!.discard).toEqual([]);

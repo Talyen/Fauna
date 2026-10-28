@@ -348,7 +348,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
   for (const courier of state.team) {
     if (courier.health <= 0) continue;
     const chance = passiveAmount(state, courier.species, "expressDelivery");
-    if (succeeds(state, chance / 100, false, events) && draw(state, 1, events))
+    if (succeeds(state, chance / 100, false, events) && drawAtTurnStart(state, 1, events))
       emitSupport(events, courier.id, { text: "Express Delivery draws an extra card" });
   }
 }

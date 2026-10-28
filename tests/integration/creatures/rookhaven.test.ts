@@ -13,7 +13,7 @@ import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../src/game/card-rules";
 import { validateContent } from "../../../src/game/content-validation";
-import { draw, drawKeyword, fillHand, MAX_BATTLE_CARDS } from "../../../src/game/card-zones";
+import { draw, drawAtTurnStart, drawKeyword, fillHand, MAX_BATTLE_CARDS } from "../../../src/game/card-zones";
 import { freshCombat } from "../../../src/game/combat/index";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { swapBackup, swapFromCard } from "../../../src/game/team";
@@ -282,7 +282,7 @@ it("copies survive play, discard, reshuffle, save/resume and copying a previousl
   game = produce(game, (draft) => {
     draft.battle!.hand.push(...draft.battle!.draw.splice(0));
     draft.battle!.buffer.push(...draft.battle!.hand.splice(6));
-    draw(draft, 1);
+    drawAtTurnStart(draft, 1, []);
   });
   expect(copies(game)).toHaveLength(2);
   expect(game.battle!.buffer).toContain(copy.id);
@@ -338,7 +338,7 @@ it("bounds extreme copy growth without dropping drawn cards or accepting corrupt
   const game = produce(ready(), (draft) => {
     for (let i = 0; i < 100; i++) {
       draft.battle!.discard.push(...draft.battle!.hand.splice(0));
-      draw(draft, 9);
+      drawAtTurnStart(draft, 9, []);
     }
   });
   expect(game.cards).toHaveLength(MAX_BATTLE_CARDS);
