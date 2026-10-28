@@ -15,7 +15,7 @@ import { dispatch, previewCard } from "../../../../src/game/engine";
 import { createPearls } from "../../../../src/game/combat/legendary";
 import { ownedCards } from "../../../../src/game/team";
 import { definition, species } from "../../../../src/game/content";
-import { draw } from "../../../../src/game/card-zones";
+import { draw, drawAtTurnStart } from "../../../../src/game/card-zones";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { battlefield } from "../../../../src/game/battlefield";
@@ -107,7 +107,7 @@ describe("Memento and Legendary formations", () => {
     expect(rejected.accepted).toBe(false);
     expect(rejected.state).toBe(empty);
   });
-  it("recycles immediately after the last draw, including unplayed Pearls", () => {
+  it("retains Discard until turn-start draws, including unplayed Pearls", () => {
     let state = play(memento(), "createPearls").state as BattleState;
     state = produce(state, (draft) => {
       const cards = draft.cards.map((card) => card.id);
@@ -117,9 +117,17 @@ describe("Memento and Legendary formations", () => {
       draft.battle.discard = cards.slice(1);
       draw(draft, 1);
     });
+    expect(state.battle.draw).toEqual([]);
+    expect(state.battle.discard).toHaveLength(state.cards.length - 1);
+    state = produce(state, (draft) => {
+      drawAtTurnStart(draft, 1, []);
+    });
     expect(state.battle.discard).toEqual([]);
-    expect(state.battle.draw).toHaveLength(state.cards.length - 1);
-    expect(state.battle.draw.some((id) => state.cards.find((card) => card.id === id)!.temporary)).toBe(true);
+    expect(
+      [...state.battle.draw, ...state.battle.hand].some(
+        (id) => state.cards.find((card) => card.id === id)!.temporary,
+      ),
+    ).toBe(true);
   });
   it("keeps generation capacity available after consumed cards while preserving unique IDs", () => {
     let state = produce(memento(), (draft) => {

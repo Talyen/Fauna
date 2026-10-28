@@ -696,8 +696,8 @@
     "text": "Mineral Bookend"
   },
   "content.boon.mineral-bookend.rule": {
-    "text": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "reference": "Drawing the last card in your draw pile restores 1 Mana"
+    "text": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "reference": "Drawing the last card in your draw pile grants 2 Block to all allies"
   },
   "content.boon.miracle-megaphone.name": {
     "text": "Miracle Megaphone"
@@ -2527,8 +2527,8 @@
     "reference": "Death's Door"
   },
   "content.glossary.draw-discard.definition.rule": {
-    "text": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "reference": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have Consume; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty"
+    "text": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "reference": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have Consume; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn"
   },
   "content.glossary.draw-discard.term.rule": {
     "text": "Draw / discard",

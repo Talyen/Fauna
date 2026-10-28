@@ -1513,9 +1513,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "d59404aa1f95523b59184b936cd0eed905c114ceec112254bd217698a451e176",
-    "text": "Comprar a última carta da pilha de compra restaura {{value0}} de <keyword0>Mana</keyword0>"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "d6bbfbf037432e615f3b76d3559de11ad04d4dac85643ec34e07c73c625bee38",
+    "text": "Comprar a última carta da pilha de compra concede {{value0}} de <keyword0>Bloqueio</keyword0> a todos os aliados"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4345,9 +4345,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "648f048b9571d0fd0019f977bf31439cf24f3f09aa120de8954b256ada1995fa",
-    "text": "Toda a equipe compartilha baralho, mão e descarte; Cartas jogadas vão para o descarte, exceto as com <keyword0>Consumir</keyword0>; Cartas não jogadas são descartadas no fim do turno; Assim que a pilha de compra esvazia, embaralhe nela o descarte"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "828b4a407c555ea163cf02c6b0f99ae4b5e0388ba03b862f52a4f915e15b4f68",
+    "text": "Toda a equipe compartilha baralho, mão e descarte; Cartas jogadas vão para o descarte, exceto as com <keyword0>Consumir</keyword0>; Cartas não jogadas são descartadas no fim do turno; No início do seu turno, reponha a pilha de compra vazia com as cartas do descarte"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

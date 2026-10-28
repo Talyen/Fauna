@@ -92,7 +92,7 @@ Food is shared consumable card vocabulary and awards no separate keyword XP. The
 
 ### Draws and returns
 
-Ordinary, keyword and owner-specific draws use the shared [card-zone owner](../src/game/card-zones.ts). Direct Discard recovery, including Cadenza, Almanelle and Wisterelle, also counts as a draw: it retains the existing card’s identity and can trigger Well Read, draw Boons and Wisterelle’s Lost and Found. Copies and overflow promotion do not create additional draws. Dream Yo-Yo and Cloud Cup-and-Ball return cards without drawing; recycling Discard into Draw does not itself trigger Lost and Found.
+Only turn-start draws refill the draw pile from Discard, including when the pile runs out partway through the starting draw. Fallen owners’ inert slots remain in place and cannot prevent eligible Discard cards from refilling at turn start. Mid-turn draws never refill from Discard, including during the enemy phase; enemy decks follow the same turn-start boundary. Ordinary, keyword and owner-specific draws use the shared [card-zone owner](../src/game/card-zones.ts). Direct Discard recovery, including Cadenza, Almanelle and Wisterelle, also counts as a draw: it retains the existing card’s identity and can trigger Well Read, draw Boons and Wisterelle’s Lost and Found. Copies and overflow promotion do not create additional draws. Dream Yo-Yo and Cloud Cup-and-Ball return cards without drawing; recycling Discard into Draw does not itself trigger Lost and Found.
 
 ### Consume
 

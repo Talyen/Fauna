@@ -55,7 +55,7 @@ it("Auto-play values Food Dodge while Quiet Pinwheel permits a controlled ally t
 it.each([
   ["aerostat", "aerostat-true-bearing"],
   ["dawncall", "dawncall-teamCleanse"],
-] as const)("Auto-play does not value capped self-draw rewards for %s", (kind, definitionId) => {
+] as const)("Auto-play does not invent self-draw rewards for %s", (kind, definitionId) => {
   const state = produce(requireBattle(teamRun(42, [kind])), (game) => {
     game.battle.hand = game.cards.map((card) => card.id);
     game.battle.draw = [];
@@ -76,14 +76,8 @@ it.each([
     });
     expect(choice(capped)).toBeUndefined();
     const useful = produce(capped, (game) => {
-      if (boon === "dune-shuttle") game.team[0]!.block--;
-      else game.battle.mana--;
+      game.team[0]!.block--;
     });
-    const selected = choice(useful);
-    expect(selected).toBeDefined();
-    const result = dispatch(useful, selected!.command);
-    expect(result.accepted).toBe(true);
-    if (boon === "dune-shuttle") expect(result.state.team[0]!.block).toBe(1_000_000);
-    else expect(result.state.battle!.mana).toBe(useful.battle.mana + 1);
+    expect(choice(useful)).toBeUndefined();
   }
 });

@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { draw, drawKeyword, receiveCard } from "../../../src/game/card-zones";
+import { draw, drawAtTurnStart, drawKeyword, receiveCard } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
 import { drawBossCards } from "../../../src/game/combat/legendary";
 import type { GameEvent } from "../../../src/game/types";
@@ -56,7 +56,7 @@ it("keeps draw eligibility and seeded recycling stable while Well Read grows a l
   const drawn = [initial.battle!.draw[0]!, ...recycled];
   const events: GameEvent[] = [];
   const result = produce(initial, (state) => {
-    draw(state, 3, events);
+    drawAtTurnStart(state, 3, events);
   });
   expect(result.battle!.hand).toEqual(drawn.flatMap((id, index) => [id, `copy-${200 + index}`]));
   expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
@@ -91,7 +91,7 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
   const random = { ...initial };
   const recycled = shuffle(random, allDead ? [ids[1]!, ids[4]!, ids[2]!, ids[5]!] : [ids[1]!, ids[2]!]);
   const result = produce(initial, (state) => {
-    draw(state, allDead ? 6 : 3);
+    drawAtTurnStart(state, allDead ? 6 : 3, []);
   });
   expect(result.battle!.hand).toEqual([...(allDead ? [ids[3]!, ids[0]!] : [ids[0]!]), ...recycled.reverse()]);
   expect(result.battle!.draw).toEqual(allDead ? [] : [ids[3]!]);
@@ -99,7 +99,7 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
   expect(result.rng).toBe(random.rng);
 });
 
-it("keyword draws prefer the last eligible slot and recycle only living owners' matching cards", () => {
+it("keyword draws prefer the last eligible slot without recycling Discard", () => {
   const initial = produce(teamRun(42, ["reedstag", "captoad", "almanelle"]), (state) => {
     state.team[1]!.health = 0;
     const first = state.cards.find((card) => card.definitionId === "reedstag-attack")!;
@@ -124,14 +124,7 @@ it("keyword draws prefer the last eligible slot and recycle only living owners' 
   const second = produce(first, (state) => drawKeyword(state, "nature"));
   expect(second.battle!.hand).toEqual([initial.battle!.draw[1], initial.battle!.draw[0]]);
   const third = produce(second, (state) => drawKeyword(state, "nature"));
-  expect(third.battle!.hand).toEqual([
-    initial.battle!.draw[1],
-    initial.battle!.draw[0],
-    initial.battle!.discard[0],
-  ]);
-  expect(third.battle!.draw).toEqual(initial.battle!.draw.slice(2));
-  expect(third.battle!.discard).toEqual(initial.battle!.discard.slice(1));
-  expect(third.rng).toBe(initial.rng);
+  expect(third).toEqual(second);
 });
 
 it("keyword draws leave fallen owners' matching cards in place when no owner can draw", () => {
@@ -149,7 +142,7 @@ it("keyword draws leave fallen owners' matching cards in place when no owner can
   expect(result).toEqual(initial);
 });
 
-it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %s", (keyword) => {
+it.each([false, true])("does not refill an empty pile during ordinary or keyword draws: %s", (keyword) => {
   const initial = produce(teamRun(42, ["reedstag", "captoad", "almanelle"]), (state) => {
     state.team[1]!.health = 0;
     state.battle!.hand = [];
@@ -158,29 +151,11 @@ it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %
     state.battle!.discard = state.cards.map((card) => card.id);
     state.rng = 17;
   });
-  const matching = initial.cards
-    .filter(
-      (card) =>
-        card.ownerId !== initial.team[1]!.id &&
-        ["reedstag-attack", "reedstag-guard", "almanelle-rooted-year"].includes(card.definitionId),
-    )
-    .map((card) => card.id);
-  const drawable = initial.cards
-    .filter((card) => card.ownerId !== initial.team[1]!.id)
-    .map((card) => card.id);
-  const random = { ...initial };
-  const shuffled = shuffle(random, keyword ? [...matching] : [...initial.battle!.discard]);
-  const drawn = [...shuffled].reverse().find((id) => keyword || drawable.includes(id))!;
   const result = produce(initial, (state) => {
     if (keyword) drawKeyword(state, "nature");
-    else expect(draw(state, 1)).toBe(1);
+    else expect(draw(state, 1)).toBe(0);
   });
-  expect(result.battle!.hand).toEqual([drawn]);
-  expect(result.battle!.draw).toEqual(shuffled.filter((id) => id !== drawn));
-  expect(result.battle!.discard).toEqual(
-    keyword ? initial.battle!.discard.filter((id) => !matching.includes(id)) : [],
-  );
-  expect(result.rng).toBe(random.rng);
+  expect(result).toEqual(initial);
   expect(decodeSave(encodeSave(result))).toEqual(result);
 });
 

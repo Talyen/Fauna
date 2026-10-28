@@ -1513,9 +1513,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "32ab8b9a5fb3d4461d4283b6e750bee838de6ac89f11f7663810ddb0a05b6399",
-    "text": "Das Ziehen der letzten Karte deines Nachziehstapels stellt {{value0}} <keyword0>Mana</keyword0> wieder her"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "10ea6a9d7d4a0ed176f11d92973f188898fb60644e587b8a1ae5361fd899bf1a",
+    "text": "Das Ziehen der letzten Karte deines Nachziehstapels gewährt allen Verbündeten {{value0}} <keyword0>Block</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4345,9 +4345,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "9b5e67c004de2ce196ceb6ee3404f1aa75fe1a6dd6ce006643ea38c21447fc43",
-    "text": "Alle Teammitglieder teilen ein Deck, eine Hand und einen Ablagestapel; Gespielte Karten gehen auf die Ablage, außer mit <keyword0>Verbrauchen</keyword0>; Ungespielte Karten gehen am Zugende auf die Ablage; Sobald der Nachziehstapel leer ist, mische die Ablage hinein"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "708fe384f2e74c939b77f7a31b6c3bb6220eb391bf4d2f6e4a092cb3b0c3d855",
+    "text": "Alle Teammitglieder teilen ein Deck, eine Hand und einen Ablagestapel; Gespielte Karten gehen auf die Ablage, außer mit <keyword0>Verbrauchen</keyword0>; Ungespielte Karten gehen am Zugende auf die Ablage; Fülle zu Beginn deines Zuges einen leeren Nachziehstapel aus der Ablage auf"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
