@@ -1,5 +1,5 @@
 import { resolveCombat } from "./resolution";
-import type { CombatArguments } from "./operations";
+import type { CombatArguments, OperationName } from "./operations";
 export {
   TURN_MANA,
   TURN_DRAW,
@@ -16,26 +16,23 @@ export {
   removeArmor,
 } from "./state";
 export type { Combatant } from "./state";
-export const restoreHealth = (...args: CombatArguments<"restoreHealth">) =>
-  resolveCombat("restoreHealth", ...args);
-export const grantBlock = (...args: CombatArguments<"grantBlock">) => resolveCombat("grantBlock", ...args);
-export const gainMana = (...args: CombatArguments<"gainMana">) => resolveCombat("gainMana", ...args);
-export const grantArmor = (...args: CombatArguments<"grantArmor">) => resolveCombat("grantArmor", ...args);
-export const armorStealRewards = (...args: CombatArguments<"armorStealRewards">) =>
-  resolveCombat("armorStealRewards", ...args);
-export const grantStatus = (...args: CombatArguments<"grantStatus">) => resolveCombat("grantStatus", ...args);
-export const triggerArmorBreak = (...args: CombatArguments<"triggerArmorBreak">) =>
-  resolveCombat("triggerArmorBreak", ...args);
-export const removeControlBuildup = (...args: CombatArguments<"removeControlBuildup">) =>
-  resolveCombat("removeControlBuildup", ...args);
-export const removeEffects = (...args: CombatArguments<"removeEffects">) =>
-  resolveCombat("removeEffects", ...args);
-export const applyBlind = (...args: CombatArguments<"applyBlind">) => resolveCombat("applyBlind", ...args);
-export const applyHarmfulStatus = (...args: CombatArguments<"applyHarmfulStatus">) =>
-  resolveCombat("applyHarmfulStatus", ...args);
-export const negateAttack = (...args: CombatArguments<"negateAttack">) =>
-  resolveCombat("negateAttack", ...args);
-export const hit = (...args: CombatArguments<"hit">) => resolveCombat("hit", ...args);
-export const tickStatuses = (...args: CombatArguments<"tickStatuses">) =>
-  resolveCombat("tickStatuses", ...args);
-export const startAction = (...args: CombatArguments<"startAction">) => resolveCombat("startAction", ...args);
+const operation =
+  <K extends OperationName>(kind: K) =>
+  (...args: CombatArguments<K>) =>
+    resolveCombat(kind, ...args);
+
+export const restoreHealth = operation("restoreHealth");
+export const grantBlock = operation("grantBlock");
+export const gainMana = operation("gainMana");
+export const grantArmor = operation("grantArmor");
+export const armorStealRewards = operation("armorStealRewards");
+export const grantStatus = operation("grantStatus");
+export const triggerArmorBreak = operation("triggerArmorBreak");
+export const removeControlBuildup = operation("removeControlBuildup");
+export const removeEffects = operation("removeEffects");
+export const applyBlind = operation("applyBlind");
+export const applyHarmfulStatus = operation("applyHarmfulStatus");
+export const negateAttack = operation("negateAttack");
+export const hit = operation("hit");
+export const tickStatuses = operation("tickStatuses");
+export const startAction = operation("startAction");

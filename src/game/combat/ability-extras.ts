@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { battlefield, livingBattlefield } from "../battlefield";
 import { species } from "../content";
 import { draw, drawKeyword } from "../card-zones";
@@ -102,22 +103,12 @@ export function applyExtras(
         break;
       case "nullifyFreeze":
         ensureCombat(actor).nullifyFreeze = true;
-        events.push({
-          kind: "status",
-          targetId: actor.id,
-          status: "nullify",
-          outcome: "apply",
-          text: "Nullify the next Freeze damage",
-        });
+        emitStatus(events, actor.id, "nullify", "apply", { text: "Nullify the next Freeze damage" });
         break;
       case "reflect":
         if (effect.status === "burn") ensureCombat(actor).reflectBurn = true;
         else ensureCombat(actor).reflect = true;
-        events.push({
-          kind: "status",
-          targetId: actor.id,
-          status: "reflect",
-          outcome: "apply",
+        emitStatus(events, actor.id, "reflect", "apply", {
           text: effect.status === "burn" ? "Reflect the next Burn" : "Reflect the next harmful status effect",
         });
         break;

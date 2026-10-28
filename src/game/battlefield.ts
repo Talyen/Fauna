@@ -17,27 +17,22 @@ export function battlefield(state: GameState, side: "player"): (Creature | Enemy
 export function battlefield(state: GameState, side: "enemy"): Enemy[];
 export function battlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
 export function battlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[] {
+  return battlefieldSnapshot(state, side, false);
+}
+
+function battlefieldSnapshot(state: GameState, side: "player" | "enemy", livingOnly: boolean) {
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
-  const result: (Creature | Enemy)[] = [...row];
-  const minions = state.battle?.minions;
-  if (!minions?.length) return result;
-  if (minions.length === 1) {
-    const unit = minions[0]!;
-    if (
-      unit.minion.side === side &&
-      row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)
-    )
-      result.push(unit);
-    return result;
-  }
+  const result: (Creature | Enemy)[] = livingOnly ? row.filter((unit) => unit.health > 0) : [...row];
+  const minions = state.battle?.minions ?? [];
   let owners: Set<string> | undefined;
   for (const unit of minions) {
-    if (unit.minion.side !== side) continue;
-    if (!owners) {
-      owners = new Set<string>();
-      for (const owner of row) if (owner.health > 0) owners.add(owner.id);
+    if (unit.minion.side !== side || (livingOnly && unit.health <= 0)) continue;
+    if (minions.length === 1) {
+      if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) result.push(unit);
+    } else {
+      owners ??= new Set(row.filter((owner) => owner.health > 0).map((owner) => owner.id));
+      if (owners.has(unit.minion.ownerId)) result.push(unit);
     }
-    if (owners.has(unit.minion.ownerId)) result.push(unit);
   }
   return result;
 }
@@ -103,39 +98,13 @@ export function findLivingBattlefield(
 export function livingBattlefield(state: GameState, side: "enemy"): Enemy[];
 export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
 export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[] {
-  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
-  const living: (Creature | Enemy)[] = [];
-  for (const unit of row) if (unit.health > 0) living.push(unit);
-  const minions = state.battle?.minions;
-  if (!minions?.length) return living;
-  let owners: Set<string> | undefined;
-  for (const unit of minions) {
-    if (unit.minion.side !== side || unit.health <= 0) continue;
-    if (minions.length === 1) {
-      if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) living.push(unit);
-    } else {
-      if (!owners) {
-        owners = new Set();
-        for (const owner of living) owners.add(owner.id);
-      }
-      if (owners.has(unit.minion.ownerId)) living.push(unit);
-    }
-  }
-  return living;
+  return battlefieldSnapshot(state, side, true);
 }
 
 /** Stored summon receipts become inert immediately when their owner leaves or falls. */
 export function isDepartedMinion(state: GameState, unit: Creature | Enemy): boolean {
   if (!("minion" in unit) || !unit.minion) return false;
-  const side = unit.minion.side;
-  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
-  if (row.some((current) => current.id === unit.id)) return false;
-  return !state.battle?.minions?.some(
-    (current) =>
-      current.id === unit.id &&
-      current.minion.side === side &&
-      row.some((owner) => owner.health > 0 && owner.id === current.minion.ownerId),
-  );
+  return !battlefieldHasId(state, unit.minion.side, unit.id);
 }
 
 /** Automatic healing can include backups; selectable targets remain the battlefield. */

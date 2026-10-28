@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git } from "../lib/git.mjs";
-import { releaseVersion } from "../lib/release-identity.mjs";
+import { releaseVersion, isReleaseVersion } from "../lib/release-identity.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const TYPES = { feat: "New", balance: "Balance", fix: "Fixes", perf: "Performance" };
 const PLAYER_PATH = /^(src\/(?:game|ui|platform|application)\/|public\/|assets\/|desktop\/(?!after-pack))/;
@@ -28,7 +28,7 @@ export function notesArgs(args) {
       result.tag = args[++i];
     else throw new Error(`Invalid patch-note option: ${args[i]}`);
   }
-  if (result.tag && !/^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(result.tag))
+  if (result.tag && (!result.tag.startsWith("v") || !isReleaseVersion(result.tag.slice(1))))
     throw new Error("Invalid release tag.");
   return result;
 }
@@ -38,7 +38,7 @@ export function generatePatchNotes(root, { tag } = {}) {
   const head = git(root, ["rev-parse", "--verify", `${target}^{commit}`]).trim();
   const tags = git(root, ["tag", "--merged", head, "--list", "v[0-9]*"])
     .split("\n")
-    .filter((value) => /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(value));
+    .filter((value) => value.startsWith("v") && isReleaseVersion(value.slice(1)));
   // Measure ancestry distance; tag date and unrelated newer tags cannot change the range.
   let nearest;
   for (const value of tags) {

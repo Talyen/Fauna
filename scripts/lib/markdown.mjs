@@ -20,7 +20,7 @@ function trackFenceLine(line, fence) {
   return fence;
 }
 
-function* unfencedLines(lines) {
+export function* unfencedLines(lines) {
   let fence = null;
   for (const [index, line] of lines.entries()) {
     const previous = fence;

@@ -119,12 +119,16 @@ export async function balanceCase(
   }
 }
 function metrics(before: GameState, after: GameState, steps: JourneyStep[], turns: number, win: boolean) {
+  let health = 0;
+  for (const row of [after.team, after.reserves]) for (const unit of row) health += unit.health;
+  let swaps = 0;
+  for (const step of steps) if (step.command.type === "swap" && step.accepted) swaps++;
   return {
     win: Number(win),
     turns,
-    health: [...after.team, ...after.reserves].reduce((n, c) => n + c.health, 0),
+    health,
     encounter: after.encounter,
-    swaps: steps.filter((step) => step.command.type === "swap" && step.accepted).length,
+    swaps,
     currency: after.currency - before.currency,
     xp:
       Object.values(after.keywordXP).reduce((n, xp) => n + (xp ?? 0), 0) -

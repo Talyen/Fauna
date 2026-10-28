@@ -1,8 +1,9 @@
-import { expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import path from "node:path";
-import { git, put, repository } from "../../support/tooling.mjs";
+import { git, put, repository, temporaryDirectory } from "../../support/tooling.mjs";
 import { parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
 import { describeTask, hostedStatus, taskStatus } from "../../../scripts/agent/task-status.mjs";
+import { sections } from "../../../scripts/agent/agent-context.mjs";
 import { lookupModifier } from "../../../scripts/agent/modifier-lookup.mjs";
 import { uiGuide } from "../../../scripts/agent/ui-guide.mjs";
 import {
@@ -127,4 +128,91 @@ it("guides a matching layout capture without claiming visual approval", () => {
   expect(guide).toContain("--label after");
   expect(guide).toContain("have not been performed");
   expect(() => uiGuide("layout", "missing")).toThrow("Choose a scenario");
+});
+
+describe("navigation guidance boundaries", () => {
+  const scan = (source) => {
+    const root = temporaryDirectory("fauna-context-headings-");
+    put(root, "guide.md", source);
+    return sections(root, "guide.md");
+  };
+
+  it("does not close a code fence on a delimiter with trailing content", () => {
+    const rows = scan("# Guide\n```ts\n```still-code\n## Hidden\n```\n## Visible");
+    expect(rows.map((row) => row.heading)).toEqual(["Guide", "Visible"]);
+  });
+
+  it("does not open a backtick fence with backticks inside its info string", () => {
+    const rows = scan("# Guide\n```invalid`info\n## Visible");
+    expect(rows.map((row) => row.heading)).toEqual(["Guide", "Visible"]);
+  });
+
+  it("recognizes up to three spaces of heading indentation without treating code as a heading", () => {
+    const rows = scan(" # One\n  ## Two\n   ### Three\n    # Code");
+    expect(rows.map((row) => [row.heading, row.start])).toEqual([
+      ["One", 1],
+      ["Two", 2],
+      ["Three", 3],
+    ]);
+  });
+
+  it("removes closing heading markers but preserves hashes attached to the title", () => {
+    const rows = scan("# Guide ###\n## C#\n## Recovery owners ##");
+    expect(rows.map((row) => row.heading)).toEqual(["Guide", "C#", "Recovery owners"]);
+  });
+
+  it("normalizes CRLF headings for exact topic matching", () => {
+    const rows = scan("# Guide\r\n## Recovery owners\r\ntext\r\n");
+    expect(rows[1]).toMatchObject({ heading: "Recovery owners", start: 2, end: 4 });
+  });
+
+  it("closes nested sections at the next same-level or parent heading", () => {
+    const rows = scan("# One\nbody\n## Child\n### Deep\ntext\n## Sibling\ntext\n# Two\nlast");
+    expect(rows.map(({ heading, start, end }) => ({ heading, start, end }))).toEqual([
+      { heading: "One", start: 1, end: 7 },
+      { heading: "Child", start: 3, end: 5 },
+      { heading: "Deep", start: 4, end: 5 },
+      { heading: "Sibling", start: 6, end: 7 },
+      { heading: "Two", start: 8, end: 9 },
+    ]);
+  });
+
+  it("matches dollar-sign handler names exactly and refreshes file caches on the next lookup", () => {
+    const root = repository({
+      "src/game/modifier-bindings.ts": `export const modifierImplementations = { talents: { sample: ["./rules/sample#$apply", "./rules/sample#apply$", "./rules/sample#apply"] } };
+export const modifierQueries = { talents: { sample: ["./rules/sample#apply"] } };`,
+      "src/game/rules/sample.ts": `export function applyExtra() {}
+export function apply$Extra() {}
+export function $apply() {}
+export const apply$ = () => {};
+export function apply() {}
+const id = "sample";`,
+      "tests/unit/game/sample.test.ts": `const double = "sample";
+const single = 'sample';
+const template = \`sample\`;`,
+    });
+    const first = lookupModifier(root, "sample");
+    expect(first.owners.map((owner) => owner.location)).toEqual([
+      "src/game/rules/sample.ts:3",
+      "src/game/rules/sample.ts:4",
+      "src/game/rules/sample.ts:5",
+      "src/game/rules/sample.ts:5",
+    ]);
+    expect(first.tests).toEqual([
+      "tests/unit/game/sample.test.ts:1",
+      "tests/unit/game/sample.test.ts:2",
+      "tests/unit/game/sample.test.ts:3",
+    ]);
+    put(
+      root,
+      "src/game/rules/sample.ts",
+      "\nexport function $apply() {}\nexport const apply$ = () => {};\nexport function apply() {}\n",
+    );
+    expect(lookupModifier(root, "sample").owners.map((owner) => owner.location)).toEqual([
+      "src/game/rules/sample.ts:2",
+      "src/game/rules/sample.ts:3",
+      "src/game/rules/sample.ts:4",
+      "src/game/rules/sample.ts:4",
+    ]);
+  });
 });

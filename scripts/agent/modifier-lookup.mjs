@@ -26,27 +26,39 @@ export function lookupModifier(root, id) {
     .split("\0")
     .filter((file) => /\.[cm]?[jt]sx?$/.test(file) && file !== "src/game/modifier-bindings.ts");
   const matches = [];
+  const literals = [`"${id}"`, `'${id}'`, `\`${id}\``];
+  const ownerFiles = new Set(
+    bindings.flatMap((entry) =>
+      entry.handlers.map((handler) => `src/game/${handler.split("#")[0].slice(2)}.ts`),
+    ),
+  );
+  const sourceLines = new Map();
+  const linesFor = (file) => {
+    const cached = sourceLines.get(file);
+    if (cached) return cached;
+    const lines = readFileSync(path.join(root, file), "utf8").split("\n");
+    if (ownerFiles.has(file)) sourceLines.set(file, lines);
+    return lines;
+  };
   for (const file of new Set(files)) {
-    let source;
+    let lines;
     try {
-      source = readFileSync(path.join(root, file), "utf8");
+      lines = linesFor(file);
     } catch {
       continue;
     }
-    const lines = source.split("\n");
     for (let index = 0; index < lines.length; index++) {
-      if ([`"${id}"`, `'${id}'`, `\`${id}\``].some((literal) => lines[index].includes(literal)))
-        matches.push(`${file}:${index + 1}`);
+      if (literals.some((literal) => lines[index].includes(literal))) matches.push(`${file}:${index + 1}`);
     }
   }
   const owners = bindings.flatMap((entry) =>
     entry.handlers.map((handler) => {
       const [module, name] = handler.split("#");
       const file = `src/game/${module.slice(2)}.ts`;
-      const lines = readFileSync(path.join(root, file), "utf8").split("\n");
-      const index = lines.findIndex((line) =>
-        new RegExp(`\\b(?:function\\s*\\*?|const|let)\\s+${name}\\b`).test(line),
-      );
+      const lines = linesFor(file);
+      const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const declaration = new RegExp(`\\b(?:function\\s*\\*?|const|let)\\s+${escapedName}(?![\\w$])`);
+      const index = lines.findIndex((line) => declaration.test(line));
       return { contract: entry.contract, handler, location: index < 0 ? file : `${file}:${index + 1}` };
     }),
   );

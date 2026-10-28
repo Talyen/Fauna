@@ -1,4 +1,4 @@
-import { it, expect, vi } from "vitest";
+import { it, expect, onTestFinished, vi } from "vitest";
 import { transportFixture } from "../../support/steam.mjs";
 import { createRequire } from "node:module";
 import { mkdtemp, rm, writeFile, mkdir, readdir, readFile } from "node:fs/promises";
@@ -32,22 +32,16 @@ it("drains every metadata write admitted before disposal and refuses later admis
 
 it("retires the Cloud worker immediately when native initialization fails", async () => {
   const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-  let f;
-  try {
-    f = await transportFixture({ initializationFails: true });
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-    expect((await f.adapter.identity()).available).toBe(false);
-    // Overlay pause remains useful when Cloud is unavailable.
-    f.overlay({ active: true });
-    expect(f.pause).toHaveBeenCalledWith(true);
-    await f.adapter.dispose();
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-    expect(f.disconnect).toHaveBeenCalledOnce();
-  } finally {
-    await f?.adapter.dispose();
-    if (f) await rm(f.directory, { recursive: true, force: true });
-    warning.mockRestore();
-  }
+  onTestFinished(() => warning.mockRestore());
+  const f = await transportFixture({ initializationFails: true });
+  expect(f.worker.kill).toHaveBeenCalledOnce();
+  expect((await f.adapter.identity()).available).toBe(false);
+  // Overlay pause remains useful when Cloud is unavailable.
+  f.overlay({ active: true });
+  expect(f.pause).toHaveBeenCalledWith(true);
+  await f.adapter.dispose();
+  expect(f.worker.kill).toHaveBeenCalledOnce();
+  expect(f.disconnect).toHaveBeenCalledOnce();
 });
 
 it("rejects all timed-out requests even when native worker termination throws", async () => {
@@ -276,4 +270,29 @@ it("rejects oversized or non-string Cloud uploads before sending to the worker",
   expect(() => parseRequest({ id: 1, operation: "read", args: ["not-a-cloud-slot"] })).toThrow(
     "Invalid Steam request",
   );
+});
+
+it("keeps Steam Cloud usable when optional language replies are malformed or time out", async () => {
+  const { adapter, worker } = await transportFixture();
+  worker.postMessage.mockImplementationOnce(({ id }) => {
+    queueMicrotask(() => worker.emit("message", { id, value: "not a valid language!" }));
+  });
+  expect(await adapter.language()).toBeNull();
+  expect(worker.kill).not.toHaveBeenCalled();
+  expect(await adapter.list()).toEqual([]);
+  let timedOutId;
+  worker.postMessage.mockImplementationOnce(({ id }) => {
+    timedOutId = id;
+  });
+  vi.useFakeTimers();
+  try {
+    const pending = adapter.language();
+    await vi.advanceTimersByTimeAsync(1500);
+    expect(await pending).toBeNull();
+    worker.emit("message", { id: timedOutId, value: "german" });
+    expect(worker.kill).not.toHaveBeenCalled();
+    expect(await adapter.list()).toEqual([]);
+  } finally {
+    vi.useRealTimers();
+  }
 });

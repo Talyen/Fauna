@@ -31,8 +31,11 @@ export const WINDOWS_RUNTIME_FILES = [
   "vk_swiftshader_icd.json",
 ];
 export function verifyWindowsRuntime(size) {
-  for (const name of WINDOWS_RUNTIME_FILES)
-    if (!(size(name) > 0)) throw new Error(`Missing or empty Electron runtime: ${name}`);
+  for (const name of WINDOWS_RUNTIME_FILES) {
+    const bytes = size(name);
+    if (!Number.isSafeInteger(bytes) || bytes <= 0)
+      throw new Error(`Missing or empty Electron runtime: ${name}`);
+  }
 }
 export function verifyFuses(wire) {
   for (const index of Object.keys(wire))
@@ -48,6 +51,7 @@ export function verifyPE(bytes) {
     throw new Error("Missing Windows executable header.");
   const offset = bytes.readUInt32LE(60);
   if (
+    offset < 64 ||
     offset > bytes.length - 24 ||
     bytes.toString("ascii", offset, offset + 4) !== "PE\0\0" ||
     bytes.readUInt16LE(offset + 4) !== 0x8664
@@ -102,11 +106,29 @@ export function verifyArchive(read, { expected, receipt, runtimeFiles, rendererF
   ])
     if (!main.includes(field)) throw new Error(`Desktop boundary missing: ${field}`);
   const html = required("dist/index.html").toString();
-  const resources = [...html.matchAll(/<(script|link)\b[^>]*>/gi)].flatMap(([tag, kind]) => {
-    if (kind.toLowerCase() === "link" && !/rel=["'](?:stylesheet|modulepreload)["']/i.test(tag)) return [];
-    const ref = /(?:src|href)=["']([^"']+)["']/i.exec(tag)?.[1];
-    return ref ? [rendererPath(ref)] : [];
-  });
+  const resources = [...html.matchAll(/<(script|link)\b((?:"[^"]*"|'[^']*'|[^'">])*)>/gi)].flatMap(
+    ([, kind, attributes]) => {
+      const values = new Map();
+      for (const [, name, double, single, bare] of attributes.matchAll(
+        /(?:^|\s)([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g,
+      )) {
+        const key = name.toLowerCase();
+        if (!values.has(key)) values.set(key, double ?? single ?? bare ?? "");
+      }
+      const script = kind.toLowerCase() === "script";
+      if (
+        !script &&
+        !values
+          .get("rel")
+          ?.toLowerCase()
+          .split(/\s+/)
+          .some((rel) => ["stylesheet", "modulepreload"].includes(rel))
+      )
+        return [];
+      const ref = values.get(script ? "src" : "href");
+      return ref ? [rendererPath(ref)] : [];
+    },
+  );
   if (!resources.some((name) => name.endsWith(".js"))) throw new Error("Renderer has no application script.");
   for (const name of resources) {
     const bytes = required(name);

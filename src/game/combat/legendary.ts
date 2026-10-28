@@ -1,4 +1,5 @@
-import { battleCardCapacity, createTemporaryCard } from "../card-zones";
+import { emitSupport } from "../events";
+import { createTemporaryCard } from "../card-zones";
 import { forEachPermanentCard, permanentKitSize } from "../card-kit";
 import { TURN_MANA } from "../state-limits";
 import { species } from "../content";
@@ -58,21 +59,18 @@ export function createPearls(
       deck.pearls++;
       queueCard(deck, MAX_HAND_SIZE, PEARL.id);
     } else {
-      if (battleCardCapacity(state) === 0) break;
       const card = createTemporaryCard(state, {
         definitionId: PEARL.id,
         ownerId: actor.id,
         level: 0,
-      })!;
+      });
+      if (!card) break;
       receiveCard(state, card.id);
     }
     created++;
   }
   if (created)
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: actor.id,
+    emitSupport(events, actor.id, {
       amount: created,
       text: `${species(actor.species).name} creates ${created} Pearls`,
     });
@@ -86,19 +84,20 @@ export function summonEcho(
 ) {
   const minions = state.battle.minions ?? (state.battle.minions = []);
   let ownedCount = 0;
-  let old: (typeof minions)[number] | undefined;
+  let oldIndex = -1;
   let alive: (typeof minions)[number][] | undefined;
-  for (const unit of minions) {
+  for (let index = 0; index < minions.length; index++) {
+    const unit = minions[index]!;
     if (unit.minion.ownerId !== actor.id) continue;
     ownedCount++;
     if (unit.health > 0) (alive ??= []).push(unit);
-    else if (unit.health === 0 && !old) old = unit;
+    else if (unit.health === 0 && oldIndex < 0) oldIndex = index;
   }
   if (alive && alive.length >= MINION_LIMIT) {
     for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
     return;
   }
-  const id = old?.id ?? `echo-${actor.id}-${ownedCount}`;
+  const id = minions[oldIndex]?.id ?? `echo-${actor.id}-${ownedCount}`;
   const echo = {
     id,
     name: "Echo" as const,
@@ -112,15 +111,9 @@ export function summonEcho(
     lastAbility: null,
     minion: { ownerId: actor.id, side },
   };
-  if (old) minions[minions.indexOf(old)] = echo;
+  if (oldIndex >= 0) minions[oldIndex] = echo;
   else minions.push(echo);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: actor.id,
-    targetId: id,
-    text: "Memento summons an Echo",
-  });
+  emitSupport(events, actor.id, { targetId: id, text: "Memento summons an Echo" });
 }
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
 export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {

@@ -1,3 +1,4 @@
+import { emitSupport } from "./events";
 import { boonRule } from "./rules/boons";
 import { gainMana, grantBlock, restoreHealth } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
@@ -69,12 +70,7 @@ export function returnSlipperCard(state: GameState, ownerId: string, events: Gam
   filterCardZones(state.battle, (candidate) => candidate !== id);
   receiveCard(state, id);
   journeyReturn(state, ownerId, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: ownerId,
-    text: "Crystal Slipper returns the last played card to hand",
-  });
+  emitSupport(events, ownerId, { text: "Crystal Slipper returns the last played card to hand" });
 }
 
 export function controlRecoveryDraw(state: GameState, ownerId: string, events: GameEvent[]) {
@@ -117,10 +113,7 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
   state.battle.discard.splice(state.battle.discard.indexOf(id), 1);
   receiveCard(state, id);
   journeyReturn(state, ownerId, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: ownerId,
+  emitSupport(events, ownerId, {
     text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
   });
 }
@@ -199,10 +192,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     const original = originalCard()!;
     const copy = createTemporaryCard(state, original)!;
     queueCard(state.battle!, capacity, copy.id);
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: reader.id,
+    emitSupport(events, reader.id, {
       targetId: original.ownerId ?? undefined,
       text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
@@ -240,7 +230,9 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
   if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
   let cards: Map<string, Card> | undefined;
   const result: Card[] | undefined = firstOnly ? undefined : [];
-  for (const [index, id] of state.battle!.discard.entries()) {
+  const discard = state.battle!.discard;
+  for (let index = 0; index < discard.length; index++) {
+    const id = discard[index]!;
     if ((!firstOnly && index === 0) || (firstOnly && index === 1)) {
       cards = new Map<string, Card>();
       for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
@@ -277,10 +269,7 @@ export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?
   battle.discard.splice(battle.discard.indexOf(id), 1);
   fillHand(state);
   receiveDraw(state, id, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: card.ownerId ?? cardActor(state, card)!.id,
+  emitSupport(events, card.ownerId ?? cardActor(state, card)!.id, {
     text: `${definition(card.definitionId).name} is drawn from Discard`,
   });
   lostAndFound(state, card, events);
@@ -357,12 +346,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
     if (courier.health <= 0) continue;
     const chance = passiveAmount(state, courier.species, "expressDelivery");
     if (succeeds(state, chance / 100, false, events) && draw(state, 1, events))
-      events.push({
-        kind: "action",
-        actionType: "support",
-        actorId: courier.id,
-        text: "Express Delivery draws an extra card",
-      });
+      emitSupport(events, courier.id, { text: "Express Delivery draws an extra card" });
   }
 }
 
