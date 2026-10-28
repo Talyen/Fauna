@@ -1,0 +1,9 @@
+# Turn-start draw recording review
+
+The turn-start recycling change retains spent cards in Discard during ordinary mid-turn draws and refills only when a turn-start draw needs them. The earlier recordings remain available at commit `6f71af291dfffc563f5be0248564857478e192c1`.
+
+Hosted capture at commit `db7552e05ccc227ddec46e3dbbfba8a3e679d56e` compared the recorded rankings and journey traces with the current rules. The ranking capture checked accepted commands, hidden-order independence, save/resume and input preservation for all 144 creature/condition pairs. Twenty-seven pairs changed: empty-pile draw and swap choices can disappear, and the all-Boon cases also reflect newly available healing and other Boon effects. The three journey recordings retain their command and save/resume assertions; changed draw timing changes RNG and therefore later support visits and recruits.
+
+For the modifier traces, all unchanged hashes were retained. Detailed old/current captures were compared for Perfect Timing, Memento tier 1 and Orifable tier 1. Perfect Timing's end-turn trace now leaves spent cards in Discard when the draw request ends exactly as Draw empties; Memento's mid-turn draw does not recycle its just-played card; Orifable's later delivery roll follows the changed shuffle/RNG sequence. The remaining Memento and Orifable tier hashes follow those same scenarios at other passive ranks. Three combined-combat recordings change after draw or turn transitions and retain accepted-command and save/resume checks.
+
+Evidence: [ranking and journey capture](https://github.com/Talyen/Fauna/actions/runs/40640034415), [focused old/current combat capture](https://github.com/Talyen/Fauna/actions/runs/40640735126), and [full unit failure before reconciliation](https://github.com/Talyen/Fauna/actions/runs/40639967348). These captures are hosted test evidence, not a balance or rendered-player assessment.

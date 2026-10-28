@@ -26,6 +26,7 @@ function traceLine(value: unknown): string {
 // The captured commands and expected states have one owner, independent of later policy revisions.
 // Removing the former final Boss changes encounter packs, rewards, and subsequent seeded choices.
 // Earlier recordings remain in journey-baseline-pre-team-weighting.tsv and journey-baseline-pre-expansion.tsv.
+// Turn-start recycling changes the draw sequence and later seeded choices; see task evidence.
 const baselines = new Map<number, string[]>();
 for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
   .trimEnd()

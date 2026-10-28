@@ -40,6 +40,7 @@ const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, bo
 // Neradora's six traces were updated when Undertow Knot changed from Water Thorns to Block and Cleanse.
 // The Talent digest includes descriptions that identify the extra status damage packets.
 // The passive digest includes Bloomquail's clarification that only gained Block is converted.
+// The turn-start draw change updates Perfect Timing, Memento and Orifable traces; see task evidence.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
     talents: digest(TALENTS),
