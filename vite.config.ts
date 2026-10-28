@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import { releaseIdentityPlugin } from "./scripts/lib/release-identity.mjs";
 import { activeAssetsPlugin } from "./scripts/assets/active-assets.mjs";
 import { runtimeCatalogPlugin } from "./scripts/localization/runtime-catalogs.mjs";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import babel from "@rolldown/plugin-babel";
 import tailwind from "@tailwindcss/vite";
 export default defineConfig(({ command }) => ({
@@ -57,13 +57,12 @@ export default defineConfig(({ command }) => ({
     },
     react(),
     // Keep an uncompiled build available for the paired performance workflow.
-    ...(process.env.FAUNA_REACT_COMPILER !== "0"
-      ? [babel({ plugins: ["babel-plugin-react-compiler"] })]
-      : []),
+    ...(process.env.FAUNA_REACT_COMPILER !== "0" ? [babel({ presets: [reactCompilerPreset()] })] : []),
     tailwind(),
     releaseIdentityPlugin(fileURLToPath(new URL(".", import.meta.url))),
   ],
   server: { port: 48209, strictPort: true },
   // Fauna's supported Chromium already implements modulepreload; keep the startup entry lean.
-  build: { target: "es2022", modulePreload: { polyfill: false } },
+  // The bundle gate measures emitted bytes; gzip reporting only adds console diagnostics.
+  build: { target: "es2022", modulePreload: { polyfill: false }, reportCompressedSize: false },
 }));

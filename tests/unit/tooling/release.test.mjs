@@ -197,3 +197,27 @@ it("rejects whitespace in otherwise matching release versions", () =>
       expect(() => releaseVersion(root)).toThrow("version");
     }
   }));
+
+it("includes player-facing changes owned by application policy modules", () => {
+  expect(playerNote("fix: preserve battle rewards", ["src/application/battle-benefits.ts"])).toEqual({
+    section: "Fixes",
+    text: "Preserve battle rewards",
+  });
+});
+
+it("rejects matching but missing or malformed build provenance", () => {
+  const identity = {
+    format: 1,
+    name: "fauna",
+    version: "1.0.0",
+    dirty: false,
+    commit: "a".repeat(40),
+    tree: "b".repeat(40),
+  };
+  for (const field of ["commit", "tree"]) {
+    for (const value of [undefined, "", "HEAD", "a".repeat(39), "a".repeat(40) + "\n"]) {
+      const malformed = { ...identity, [field]: value };
+      expect(() => verifyBuildIdentity(malformed, malformed)).toThrow("stale");
+    }
+  }
+});

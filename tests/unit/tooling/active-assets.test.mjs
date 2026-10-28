@@ -32,6 +32,11 @@ it("emits exactly the active inventory without originals, old generations, recei
   const dist = path.join(repository, "dist");
   await mkdir(dist);
   const plugin = activeAssetsPlugin(repository);
+  const preparedFile = path.join(repository, "public", receipt.records[entry.id].url.slice(2));
+  const preparedBytes = await readFile(preparedFile);
+  await writeFile(preparedFile, "corrupt");
+  await expect(plugin.buildStart()).rejects.toThrow("Prepared output changed");
+  await writeFile(preparedFile, preparedBytes);
   await plugin.buildStart();
   const runtime = plugin.transform("", path.join(repository, "src/assets/prepared.json"));
   expect(runtime.code).toBe(

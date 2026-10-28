@@ -37,11 +37,27 @@ function escapedAt(source, index) {
 
 export function extractMarkdownLinkTargets(source) {
   const targets = [];
-  // Preserve offsets while masking code spans, including multi-backtick delimiters.
-  const prose = source.replace(/(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/gu, (span, _delimiter, index) =>
-    escapedAt(source, index) ? span : " ".repeat(span.length),
-  );
-  for (const match of prose.matchAll(/\[[^\]\n]*\]\(/gu)) {
+  // Mask inline code without shifting offsets used to parse link destinations.
+  const masked = source.split("");
+  for (let i = 0; i < source.length; i++) {
+    if (source[i] !== "`") continue;
+    if (escapedAt(source, i)) continue;
+    let end = i;
+    while (source[end] === "`") end++;
+    const marker = source.slice(i, end);
+    let close = end;
+    while ((close = source.indexOf(marker, close)) !== -1) {
+      if (source[close - 1] !== "`" && source[close + marker.length] !== "`") break;
+      close += marker.length;
+    }
+    if (close < 0) {
+      i = end - 1;
+      continue;
+    }
+    for (let j = i; j < close + marker.length; j++) masked[j] = " ";
+    i = close + marker.length - 1;
+  }
+  for (const match of masked.join("").matchAll(/\[[^\]\n]*\]\(/gu)) {
     if (escapedAt(source, match.index)) continue;
     let index = (match.index ?? 0) + match[0].length;
     const leading = /^[ \t]*(?:\r?\n[ \t]*)?/u.exec(source.slice(index));

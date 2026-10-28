@@ -35,6 +35,12 @@ export function verifyBuildIdentity(record, expected) {
   if (
     record?.format !== 1 ||
     record.name !== "fauna" ||
+    typeof record.commit !== "string" ||
+    record.commit.length !== 40 ||
+    !/^[a-f0-9]{40}$/u.test(record.commit) ||
+    typeof record.tree !== "string" ||
+    record.tree.length !== 40 ||
+    !/^[a-f0-9]{40}$/u.test(record.tree) ||
     record.dirty !== false ||
     expected?.dirty !== false ||
     record.version !== expected.version ||

@@ -5,8 +5,7 @@ import { git } from "../lib/git.mjs";
 import { releaseVersion } from "../lib/release-identity.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const TYPES = { feat: "New", balance: "Balance", fix: "Fixes", perf: "Performance" };
-const PLAYER_PATH =
-  /^(src\/(?:game|ui|platform)\/|src\/application\/(?:session|cloud)\.ts$|public\/|assets\/|desktop\/(?!after-pack))/;
+const PLAYER_PATH = /^(src\/(?:game|ui|platform|application)\/|public\/|assets\/|desktop\/(?!after-pack))/;
 export function playerNote(body, files) {
   const lines = body.trim().split(/\r?\n/);
   const visibility = lines.filter((line) => /^User-Facing:\s*(yes|no)\s*$/i.test(line)).at(-1);
