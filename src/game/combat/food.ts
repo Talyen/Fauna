@@ -1,3 +1,4 @@
+import { emitSupport } from "../events";
 import { actionValue } from "../ability-rules";
 import { takeCardRepeat } from "./card-repeat";
 import { battleCardCapacity, createTemporaryCard, draw } from "../card-zones";
@@ -47,10 +48,7 @@ export function createFood(
     created++;
   }
   if (created)
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: actor.id,
+    emitSupport(events, actor.id, {
       amount: created,
       text: `${species(actor.species).name} creates ${created} Food cards`,
     });
@@ -77,13 +75,7 @@ export function useFood(
       ? undefined
       : findLivingBattlefield(state, "player", (unit) => unit.id === targetId);
   const presenter = recipient ?? state.team.find((unit) => unit.health > 0)!;
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: presenter.id,
-    targetId: recipient?.id,
-    text: `Use ${def.name}`,
-  });
+  emitSupport(events, presenter.id, { targetId: recipient?.id, text: `Use ${def.name}` });
   const value = actionValue(
     { definitionId: def.id, level: 0, ownerId: null, id: def.id },
     { species: null, attacked: false },
@@ -91,13 +83,7 @@ export function useFood(
   );
   const repeat = takeCardRepeat(state, "player");
   for (let play = 0; play < (repeat ? 2 : 1); play++) {
-    if (play === 1)
-      events.push({
-        kind: "action",
-        actionType: "support",
-        actorId: presenter.id,
-        text: `${def.name} repeats`,
-      });
+    if (play === 1) emitSupport(events, presenter.id, { text: `${def.name} repeats` });
     if (def.effect === "mana") {
       gainMana(state, value, events);
       if (def.id === "food-mana-berries" && state.boons.includes("cornucopia"))

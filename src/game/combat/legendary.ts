@@ -1,3 +1,4 @@
+import { emitSupport } from "../events";
 import { battleCardCapacity, createTemporaryCard } from "../card-zones";
 import { forEachPermanentCard, permanentKitSize } from "../card-kit";
 import { TURN_MANA } from "../state-limits";
@@ -69,10 +70,7 @@ export function createPearls(
     created++;
   }
   if (created)
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: actor.id,
+    emitSupport(events, actor.id, {
       amount: created,
       text: `${species(actor.species).name} creates ${created} Pearls`,
     });
@@ -114,13 +112,7 @@ export function summonEcho(
   };
   if (old) minions[minions.indexOf(old)] = echo;
   else minions.push(echo);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: actor.id,
-    targetId: id,
-    text: "Memento summons an Echo",
-  });
+  emitSupport(events, actor.id, { targetId: id, text: "Memento summons an Echo" });
 }
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
 export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {

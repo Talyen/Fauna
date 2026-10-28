@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
@@ -272,6 +273,8 @@ export function* removeEffects(
       return removed;
     }
   }
+  const playerPurge = state && kind === "purge" && source && !isEnemy(source) && isEnemy(unit);
+  const enemyPurge = state && kind === "purge" && source && isEnemy(source) && !isEnemy(unit);
   const stats = ensureCombat(unit);
   const frozenBefore = stats.controlled === "freeze";
   const thornsBefore = stats.thorns;
@@ -320,12 +323,8 @@ export function* removeEffects(
     count = Math.min(count, Math.max(0, remaining - 1));
   }
   if (
-    kind === "purge" &&
+    enemyPurge &&
     count > 0 &&
-    state &&
-    !isEnemy(unit) &&
-    source &&
-    isEnemy(source) &&
     source.health > 0 &&
     unit.health > 0 &&
     state.boons.includes("vanishing-hat") &&
@@ -341,12 +340,8 @@ export function* removeEffects(
     return 0;
   }
   if (
-    kind === "purge" &&
+    enemyPurge &&
     count > 0 &&
-    state &&
-    !isEnemy(unit) &&
-    source &&
-    isEnemy(source) &&
     source.health > 0 &&
     unit.health > 0 &&
     state.boons.includes("star-hoop") &&
@@ -441,24 +436,22 @@ export function* removeEffects(
   }
   const distinctRemovedStatuses = removedStatuses.length > 1 ? new Set(removedStatuses) : removedStatuses;
   for (const affectedStatus of distinctRemovedStatuses)
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      status: kind,
-      outcome: "remove",
+    emitStatus(events, unit.id, kind, "remove", {
       affectedStatus,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus}.`,
     });
   if (removedStatuses.length === 0)
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      status: kind,
-      outcome: "remove",
+    emitStatus(events, unit.id, kind, "remove", {
       amount: 0,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
-  if (cleansed > 0 && state)
+  // Typed wards spend separate Purge categories; Cleanse coalesces control and buildup.
+  const removedCount =
+    kind === "purge" || Array.isArray(distinctRemovedStatuses)
+      ? removedStatuses.length
+      : distinctRemovedStatuses.size;
+  if (!state) return removedCount;
+  if (cleansed > 0)
     yield* reaction(
       "cleanseRewards",
       state,
@@ -468,7 +461,6 @@ export function* removeEffects(
       hadFreezeBuildup && stats.freeze === 0 && removedStatuses.includes("freeze"),
     );
   if (
-    state &&
     kind === "cleanse" &&
     !isEnemy(unit) &&
     unit.health > 0 &&
@@ -477,60 +469,45 @@ export function* removeEffects(
   )
     yield* reaction("grantArmor", state, unit, boonRule("sail-needle").armor, events);
   if (
-    kind === "purge" &&
-    state &&
-    isEnemy(unit) &&
-    source &&
-    !isEnemy(source) &&
+    playerPurge &&
     source.health > 0 &&
     thornsBefore > stats.thorns &&
     state.boons.includes("pruning-crescent")
   )
     yield* reaction("grantStatus", source, "thorns", thornsBefore - stats.thorns, events, state);
-  if (state)
-    yield* cleanseThorns(
+  yield* cleanseThorns(
+    state,
+    unit,
+    returned.reduce(
+      (sum, effect) => sum + (effect.status === "poison" || effect.status === "bleed" ? effect.amount : 0),
+      0,
+    ),
+    events,
+  );
+  for (const effect of returned)
+    yield* returnCleansedEffect(
       state,
       unit,
-      returned.reduce(
-        (sum, effect) => sum + (effect.status === "poison" || effect.status === "bleed" ? effect.amount : 0),
-        0,
-      ),
+      effect.status,
+      effect.amount,
+      effect.sourceId,
       events,
+      effect.turns,
     );
-  if (state)
-    for (const effect of returned)
-      yield* returnCleansedEffect(
-        state,
-        unit,
-        effect.status,
-        effect.amount,
-        effect.sourceId,
-        events,
-        effect.turns,
-      );
-  if (state && !isEnemy(unit) && unit.health > 0 && state.boons.includes("pumice-glass-inkwell")) {
+  if (!isEnemy(unit) && unit.health > 0 && state.boons.includes("pumice-glass-inkwell")) {
     const burn = returned.find((effect) => effect.status === "burn");
     const enemy =
       burn && findLivingBattlefield(state, "enemy", (candidate) => candidate.id === burn.sourceId);
     if (enemy) yield* reaction("applyBlind", state, unit, enemy, events);
   }
-  if (state)
-    for (const effect of returned)
-      if (effect.status === "poison")
-        yield* reaction("poisonCleanseMana", state, unit, effect.amount, events);
-  if (
-    kind === "purge" &&
-    state &&
-    !isEnemy(unit) &&
-    purgedArmor > 0 &&
-    state.boons.includes("comet-crucible")
-  )
+  for (const effect of returned)
+    if (effect.status === "poison") yield* reaction("poisonCleanseMana", state, unit, effect.amount, events);
+  if (kind === "purge" && !isEnemy(unit) && purgedArmor > 0 && state.boons.includes("comet-crucible"))
     yield* reaction("grantBlock", state, unit, purgedArmor, events);
-  if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
+  yield* reaction("triggerArmorBreak", state, depletion, events);
   if (
     kind === "purge" &&
     removedStatuses.length > 0 &&
-    state &&
     isEnemy(unit) &&
     source &&
     !isEnemy(source) &&
@@ -544,7 +521,6 @@ export function* removeEffects(
     });
   }
   if (
-    state &&
     isEnemy(unit) &&
     source &&
     !isEnemy(source) &&
@@ -564,26 +540,14 @@ export function* removeEffects(
       );
   }
   if (
-    kind === "purge" &&
-    state &&
-    isEnemy(unit) &&
-    source &&
-    !isEnemy(source) &&
+    playerPurge &&
     source.health > 0 &&
     unit.health > 0 &&
     purgedArmor > 0 &&
     state.boons.includes("prism-chisel")
   )
     yield* reaction("hit", state, source, unit, purgedArmor, "light", events, { origin: "derived" });
-  if (
-    kind === "purge" &&
-    state &&
-    isEnemy(unit) &&
-    source &&
-    !isEnemy(source) &&
-    source.health > 0 &&
-    !linked
-  ) {
+  if (playerPurge && source.health > 0 && !linked) {
     // Linked removals retain ordinary reactions, but cannot fan out again.
     if (state.boons.includes("pattern-reel"))
       for (const status of purgedKinds)
@@ -615,11 +579,7 @@ export function* removeEffects(
         count = Math.max(0, count - Math.max(0, removed - freeBlock));
       }
   }
-  // Typed wards share feedback labels but spend separate Purge categories;
-  // Cleanse still coalesces active control with buildup of the same status
-  return kind === "purge" || Array.isArray(distinctRemovedStatuses)
-    ? removedStatuses.length
-    : distinctRemovedStatuses.size;
+  return removedCount;
 }
 export function* poisonCleanseMana(
   state: GameState,
@@ -689,13 +649,7 @@ export function* cleanseRewards(
     !harmfulStatuses.some((status) => Number(stats[status]) > 0)
   ) {
     stats.nullify = true;
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      status: "nullify",
-      outcome: "gain",
-      text: `${unitName(unit)} gains Nullify`,
-    });
+    emitStatus(events, unit.id, "nullify", "gain", { text: `${unitName(unit)} gains Nullify` });
   }
   if (freezeBuildupRemoved && unit.health > 0) {
     const allied = !isEnemy(unit);
@@ -776,10 +730,11 @@ export function* applyHarmfulStatus(
   const stats = ensureCombat(target);
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
+  const playerHit = alliedSource && !alliedTarget;
   let appliedControl = false;
   let applied = false;
   const depletions: ArmorDepletion[] = [];
-  const storesControl = alliedSource && !alliedTarget && state.boons.includes("sleepers-urn");
+  const storesControl = playerHit && state.boons.includes("sleepers-urn");
   const immune =
     (type === "stun" || type === "freeze") &&
     (stats.controlled ||
@@ -871,21 +826,13 @@ export function* applyHarmfulStatus(
     const gained = addPeriodicStacks(stats, type, damage, source.id);
     applied = gained > 0;
     if (type === "bleed" && options.leech) deferLeech(stats, source.id, gained);
-    events.push({
-      kind: "status",
-      targetId: target.id,
-      status: type,
-      outcome: "gain",
+    emitStatus(events, target.id, type, "gain", {
       amount: gained,
       text: `${unitName(target)} gains ${gained} ${type}.`,
     });
   }
   if ((type === "stun" || type === "freeze") && target.health > 0 && immune)
-    events.push({
-      kind: "status",
-      targetId: target.id,
-      status: type,
-      outcome: "immune",
+    emitStatus(events, target.id, type, "immune", {
       text: `${unitName(target)} is immune to ${type} buildup.`,
     });
   if ((type === "stun" || type === "freeze") && source.health > 0 && target.health > 0 && !immune) {
@@ -893,18 +840,14 @@ export function* applyHarmfulStatus(
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
     applied = stats[type] > beforeStacks;
     if (applied) stats.statusSources[type] = source.id;
-    events.push({
-      kind: "status",
-      targetId: target.id,
-      status: type,
-      outcome: "gain",
+    emitStatus(events, target.id, type, "gain", {
       amount: stats[type] - beforeStacks,
       text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
     });
     const threshold = controlThreshold(state, source, target, type);
     let reachesThreshold = stats[type] >= threshold;
     let controlTotal = stats[type];
-    if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
+    if (playerHit && state.boons.includes("undertow-castanets")) {
       const other = type === "stun" ? "freeze" : "stun";
       const otherThreshold = controlThreshold(state, source, target, other);
       reachesThreshold = stats[type] / threshold + stats[other] / otherThreshold >= 1;
@@ -915,7 +858,7 @@ export function* applyHarmfulStatus(
       const turns =
         type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")
           ? 1 + talentRule("stun.extended-stun").amount
-          : type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch")
+          : type === "freeze" && playerHit && state.boons.includes("frozen-pocketwatch")
             ? 1 + boonRule("frozen-pocketwatch").turns
             : 1;
       enterControl(stats, type, options.controlTurns ?? turns);
@@ -924,12 +867,12 @@ export function* applyHarmfulStatus(
           if (ally.id !== target.id && ally.health > 0)
             yield* reaction("removeEffects", ally, "cleanse", 1, events, state, "stun", undefined, false);
 
-      if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
+      if (playerHit && state.boons.includes("undertow-castanets")) {
         const other = type === "stun" ? "freeze" : "stun";
         clearHarmfulStatus(stats, other);
       }
       appliedControl = true;
-      if (alliedSource && !alliedTarget) {
+      if (playerHit) {
         if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
         if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) {
           const { depletion } = removeArmor(target, stats.armor);
@@ -949,20 +892,10 @@ export function* applyHarmfulStatus(
           if (depletion) depletions.push(depletion);
         }
       }
-      events.push({
-        kind: "status",
-        targetId: target.id,
-        status: type,
-        outcome: "apply",
+      emitStatus(events, target.id, type, "apply", {
         text: `${unitName(target)} is ${type === "stun" ? "Stunned" : "Frozen"}.`,
       });
-      if (
-        excess > 0 &&
-        alliedSource &&
-        !alliedTarget &&
-        source.health > 0 &&
-        state.boons.includes("wonder-ball-maze")
-      ) {
+      if (excess > 0 && playerHit && source.health > 0 && state.boons.includes("wonder-ball-maze")) {
         // Successful control spends this pool; each new control removes another recipient from the route.
         const recipient = findLivingBattlefield(
           state,

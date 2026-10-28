@@ -1,3 +1,4 @@
+import { emitSupport } from "../events";
 import { findLivingBattlefield } from "../battlefield";
 import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
 import { takeCardRepeat } from "./card-repeat";
@@ -80,10 +81,7 @@ export function executeAbility(
     )
       break;
     if (play === 1 && (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat))
-      events.push({
-        kind: "action",
-        actionType: "support",
-        actorId: actor.id,
+      emitSupport(events, actor.id, {
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
     const oasisLeech = def.effect === "attack" && !enemy && stats[boonRule("oasis-seed").state];

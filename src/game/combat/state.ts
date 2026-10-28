@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { talentRule } from "../rules/talents";
 import { chance as succeeds } from "../chance";
 import { isEnemy, isRosterCreature, battlefieldView } from "../battlefield";
@@ -108,11 +109,7 @@ export function loseHealth(state: GameState, unit: Combatant, amount: number, ev
       stats.grace = hasTalent(state, "health.will-to-live")
         ? 2 + talentRule("health.will-to-live").amount
         : 2;
-      events.push({
-        kind: "status",
-        targetId: unit.id,
-        status: "deathDoor",
-        outcome: "apply",
+      emitStatus(events, unit.id, "deathDoor", "apply", {
         text: `${unitName(unit)} reaches Death's Door: ${stats.grace} grace turns.`,
       });
     }
@@ -195,11 +192,7 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
   stats.temporaryDodge = Math.min(70, before + amount);
   const gained = stats.temporaryDodge - before;
   if (!gained) return;
-  events.push({
-    kind: "status",
-    targetId: unit.id,
-    status: "dodge",
-    outcome: "gain",
+  emitStatus(events, unit.id, "dodge", "gain", {
     amount: gained,
     text: `${unitName(unit)} gains ${gained}% Dodge until its next turn`,
   });
