@@ -1,5 +1,5 @@
 import { battlefield, battlefieldView } from "../../game/battlefield";
-import { sharedDodgeChance } from "../../game/combat/index";
+import { sharedControlImmunity, sharedDodgeChance } from "../../game/combat/index";
 import { maximumHealth, unitName } from "../../game/combat/state";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
 import type { CommandResult, GameEvent, GameState } from "../../game/types";
@@ -47,7 +47,11 @@ function baselineUnits(before: GameState) {
     for (const old of row)
       units.push({
         old,
-        statuses: combatStatuses(old.combat, sharedDodgeChance(before, old)),
+        statuses: combatStatuses(
+          old.combat,
+          sharedDodgeChance(before, old),
+          sharedControlImmunity(before, old),
+        ),
         name: unitName(old),
         maxHealth: maximumHealth(old),
       });
@@ -90,7 +94,11 @@ function resolvedPreviewModel(
   if (targetId) affected.add(targetId);
   for (const { old, statuses: previous, name, maxHealth } of baseline()) {
     const next = nextUnits.get(old.id) ?? { ...old, health: 0, block: 0 };
-    const current = combatStatuses(next.combat, sharedDodgeChance(result.state, next));
+    const current = combatStatuses(
+      next.combat,
+      sharedDodgeChance(result.state, next),
+      sharedControlImmunity(result.state, next),
+    );
     const statusesChanged =
       previous.length !== current.length ||
       previous.some((status, index) => {

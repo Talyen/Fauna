@@ -1,3 +1,27 @@
+/** Scenario IDs become filenames, so replayed evidence must not escape or collide. */
+export function validateReplayScenarios(cases) {
+  if (!Array.isArray(cases) || !cases.length) throw new Error("Invalid performance replay scenarios.");
+  const ids = new Set();
+  for (const row of cases) {
+    const scenario = row?.scenario;
+    if (
+      !scenario ||
+      typeof scenario.id !== "string" ||
+      !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(scenario.id) ||
+      row.id !== scenario.id ||
+      ids.has(scenario.id) ||
+      typeof scenario.initial !== "string" ||
+      !scenario.initial ||
+      typeof scenario.fixture !== "string" ||
+      !scenario.fixture ||
+      !Array.isArray(scenario.actions) ||
+      !scenario.actions.length
+    )
+      throw new Error("Invalid performance replay scenarios.");
+    ids.add(scenario.id);
+  }
+}
+
 /** Parse the complete command before loading evidence or starting a capture. */
 export function parsePerformanceArgs(args) {
   if (["compare", "overhead", "replay"].includes(args[0])) {

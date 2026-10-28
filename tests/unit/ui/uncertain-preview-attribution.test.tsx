@@ -23,6 +23,22 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+it("forecasts Ribbon Spool immunity disappearing when its bearer leaves the battlefield", () => {
+  const before = produce(ready(), (state) => {
+    state.boons = ["ribbon-spool"];
+    state.team[0]!.combat!.cooldown = 2;
+  });
+  const after = produce(before, (state) => {
+    state.team[0]!.health = 0;
+  });
+  const recipient = before.team[1]!;
+  const model = playPreviewModel(before, { accepted: true, state: after, events: [] });
+  expect(model.affected.has(recipient.id)).toBe(true);
+  expect(model.units.get(recipient.id)!.changes).toContainEqual(
+    expect.objectContaining({ id: "ribbonSpool", now: undefined }),
+  );
+});
+
 it("projects random damage, criticals and Dodge without reading the seeded answer or changing a later play", () => {
   const game = ready(),
     cardId = game.battle!.hand[0]!;

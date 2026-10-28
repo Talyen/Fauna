@@ -6,7 +6,7 @@ import os from "node:os";
 import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory, reserveEvidenceFile } from "../lib/tool-runtime.mjs";
-import { parsePerformanceArgs } from "./options.mjs";
+import { parsePerformanceArgs, validateReplayScenarios } from "./options.mjs";
 import { comparePerformance, summarizeSample, hitchMarkdown, compareRecorderOverhead } from "./metrics.mjs";
 import { installSampler } from "./sampler.mjs";
 import { beginTrace, attributeTrace } from "./trace.mjs";
@@ -235,6 +235,7 @@ export async function main(args = process.argv.slice(2)) {
       typeof prior.environment.cold !== "boolean"
     )
       throw new Error("Cannot replay incomplete or old performance report; recapture with format 3.");
+    validateReplayScenarios(prior.cases);
     output = options.output;
     native = prior.environment.runtime === "electron";
     cold = prior.environment.cold;

@@ -104,6 +104,34 @@ it("rejects extra replay or comparison arguments and non-boolean replay completi
   }
 });
 
+it("rejects replay scenario paths and duplicate output names before creating evidence", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "fauna-perf-replay-path-"));
+  try {
+    const file = path.join(directory, "report.json");
+    const scenario = { id: "battle", initial: "save", fixture: "fixture", actions: [{ kind: "idle" }] };
+    const report = {
+      format: 3,
+      complete: true,
+      environment: { runtime: "chromium", cold: false },
+      cases: [{ id: "battle", scenario }],
+    };
+    for (const cases of [
+      [{ id: "../outside", scenario: { ...scenario, id: "../outside" } }],
+      [
+        { id: "battle", scenario },
+        { id: "battle", scenario },
+      ],
+      [{ id: "other", scenario }],
+    ]) {
+      await writeFile(file, JSON.stringify({ ...report, cases }));
+      await expect(main(["replay", file])).rejects.toThrow("Invalid performance replay scenarios");
+    }
+    expect(await readFile(file, "utf8")).toContain('"other"');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 it("includes the capture driver's shared dependencies in the hosted baseline overlay", async () => {
   const workflow = await readFile(path.join(ROOT, ".github/workflows/performance.yml"), "utf8");
   const overlay = workflow.match(/\$harness = @\(([^\n]+)\)/)?.[1] ?? "";
