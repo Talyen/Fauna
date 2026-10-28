@@ -88,13 +88,12 @@ function validateCollection(state: GameState) {
   const encountered = encounters.length > 1 ? new Set(encounters) : undefined;
   invalid((encountered !== undefined && encountered.size !== encounters.length) || !unique(state.boons));
   invalid(state.phase === "draft" && state.boons.length > 0);
-  invalid(
-    SPECIES.some(
-      ({ id }) =>
-        state.discovery.recruited[id] !== undefined &&
-        !(encountered ? encountered.has(id) : encounters[0] === id),
-    ),
-  );
+  let hasRecruited = false;
+  for (const { id } of SPECIES) {
+    if (state.discovery.recruited[id] === undefined) continue;
+    hasRecruited = true;
+    invalid(!(encountered ? encountered.has(id) : encounters[0] === id));
+  }
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
   const starterPool = state.selected.length || drafting ? starterSpecies(state) : [];
@@ -108,7 +107,7 @@ function validateCollection(state: GameState) {
     !unique(state.selected) ||
       state.selected.some((kind) => !starterPool.includes(kind)) ||
       (state.phase === "draft" && state.selected.length > count) ||
-      (state.phase !== "draft" && !SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined)),
+      (state.phase !== "draft" && !hasRecruited),
   );
 }
 
@@ -199,6 +198,8 @@ export function validateRoster(state: GameState) {
   invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
   let teamById: Map<string, (typeof state.team)[number]> | undefined;
+  let cornucopia: boolean | undefined;
+  const hasCornucopia = () => (cornucopia ??= state.boons.includes("cornucopia"));
   invalid(
     state.cards.some((card) => {
       if (
@@ -207,7 +208,7 @@ export function validateRoster(state: GameState) {
           card.definitionId !== "food-mana-berries" ||
           card.level !== 0 ||
           card.temporary ||
-          !state.boons.includes("cornucopia"))
+          !hasCornucopia())
       )
         return true;
       if (card.ownerId === null)
@@ -215,9 +216,7 @@ export function validateRoster(state: GameState) {
           card.level === 0 &&
           isFood(card.definitionId) &&
           (card.temporary ||
-            (card.id === CORNUCOPIA_CARD_ID &&
-              card.definitionId === "food-mana-berries" &&
-              state.boons.includes("cornucopia")))
+            (card.id === CORNUCOPIA_CARD_ID && card.definitionId === "food-mana-berries" && hasCornucopia()))
         );
       if (!teamById) {
         teamById = new Map();
@@ -232,9 +231,7 @@ export function validateRoster(state: GameState) {
     }),
   );
   if (state.phase !== "battle")
-    invalid(
-      state.cards.some((card) => card.id === CORNUCOPIA_CARD_ID) !== state.boons.includes("cornucopia"),
-    );
+    invalid(state.cards.some((card) => card.id === CORNUCOPIA_CARD_ID) !== hasCornucopia());
   invalid(
     state.cards.some(
       (card) =>

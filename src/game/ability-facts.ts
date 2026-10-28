@@ -124,65 +124,77 @@ export function ordinaryAttackFacts(
   enemy: Enemy,
   manaCost: number = def.cost,
 ): OrdinaryHit[] {
+  return ordinaryAttackEvaluator(state, actor, def, value, manaCost)(enemy);
+}
+
+/** Reuse play-wide facts only while scoring the same unmodified battle state. */
+export function ordinaryAttackEvaluator(
+  state: BattleState,
+  actor: Creature,
+  def: Extract<CardDefinition, { effect: "attack" }>,
+  value: number,
+  manaCost: number = def.cost,
+) {
   // The engine pays before damage modifiers read Mana; free grants retain the full pool.
   const paid = manaCost
     ? { ...state, battle: { ...state.battle, mana: state.battle.mana - manaCost } }
     : state;
-
   const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
-  const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
-  let packet: { origin: "ability"; cardLeech: boolean } | undefined;
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
-  const outcomes: OrdinaryHit[] = [];
-  const count = def.alternateDamageType ? 2 : 1;
-  for (let index = 0; index < count; index++) {
-    const type = index === 0 ? def.damageType : def.alternateDamageType!;
-    const negated =
-      enemy.combat.attackReflection ||
-      (enemy.combat.negate && !(type === "light" && state.boons.includes("dawn-key")));
-    if (negated) {
+  let packet: { origin: "ability"; cardLeech: boolean } | undefined;
+  return (enemy: Enemy): OrdinaryHit[] => {
+    const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
+    const outcomes: OrdinaryHit[] = [];
+    const count = def.alternateDamageType ? 2 : 1;
+    for (let index = 0; index < count; index++) {
+      const type = index === 0 ? def.damageType : def.alternateDamageType!;
+      const negated =
+        enemy.combat.attackReflection ||
+        (enemy.combat.negate && !(type === "light" && state.boons.includes("dawn-key")));
+      if (negated) {
+        outcomes.push({
+          negated,
+          lost: 0,
+          blocked: 0,
+          eroded: 0,
+          health: enemy.health,
+          main: !enemy.minion,
+          lethal: 0 >= enemy.health,
+          usefulExtras,
+        });
+        continue;
+      }
+      packet ??= {
+        origin: "ability",
+        cardLeech: !!(def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
+      };
+      // Ordinary primary packets omit chance effects and most talent reactions deliberately.
+      const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
+      const damage = baseDamage * (lastCardCritical ? 2 : 1);
+      const armored = armorApplies(state, enemy, type, actor);
+      const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
+      const payment = blockPayment(
+        damage,
+        type === "bleed" && state.boons.includes("harvest-sickle") ? 0 : enemy.block,
+        blockEfficiency(state, enemy, type, actor),
+      );
+      const piercing = craterPunch ? Math.round(payment.absorbed / boonRule("crater-punch").divisor) : 0;
+      const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);
+      const lost = prevented ? 0 : armoredDamage(payment.remaining, armor) + piercing;
+      const eroded = !negated && armored ? Math.min(erosion, enemy.combat.armor) : 0;
       outcomes.push({
         negated,
-        lost: 0,
-        blocked: 0,
-        eroded: 0,
+        lost,
+        blocked: prevented ? 0 : payment.absorbed,
+        eroded,
         health: enemy.health,
         main: !enemy.minion,
-        lethal: 0 >= enemy.health,
+        lethal: lost >= enemy.health,
         usefulExtras,
       });
-      continue;
     }
-    packet ??= {
-      origin: "ability",
-      cardLeech: !!(def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
-    };
-    // Ordinary primary packets omit chance effects and most talent reactions deliberately.
-    const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
-    const damage = baseDamage * (lastCardCritical ? 2 : 1);
-    const armored = armorApplies(state, enemy, type, actor);
-    const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
-    const payment = blockPayment(
-      damage,
-      type === "bleed" && state.boons.includes("harvest-sickle") ? 0 : enemy.block,
-      blockEfficiency(state, enemy, type, actor),
-    );
-    const piercing = craterPunch ? Math.round(payment.absorbed / boonRule("crater-punch").divisor) : 0;
-    const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);
-    const lost = prevented ? 0 : armoredDamage(payment.remaining, armor) + piercing;
-    const eroded = !negated && armored ? Math.min(erosion, enemy.combat.armor) : 0;
-    outcomes.push({
-      negated,
-      lost,
-      blocked: prevented ? 0 : payment.absorbed,
-      eroded,
-      health: enemy.health,
-      main: !enemy.minion,
-      lethal: lost >= enemy.health,
-      usefulExtras,
-    });
-  }
-  return outcomes;
+    return outcomes;
+  };
 }

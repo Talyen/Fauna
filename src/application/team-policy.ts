@@ -1,5 +1,5 @@
 import { abilityKeywords, creaturePassiveTier } from "../game/progression";
-import { speciesCards, type SpeciesId } from "../game/content";
+import { SPECIES, speciesCards, type SpeciesId } from "../game/content";
 import { permanentCardCopies } from "../game/card-kit";
 import type { GameState } from "../game/types";
 
@@ -46,38 +46,52 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
   return values;
 }
 
+const authoredTiers = new WeakSet(SPECIES.flatMap((entry) => entry.passiveTiers));
+const passiveCapabilities = new WeakMap<object, readonly string[]>();
+function tierCapabilities(tier: ReturnType<typeof creaturePassiveTier>): readonly string[] {
+  const cached = passiveCapabilities.get(tier);
+  if (cached) return cached;
+  const result = new Set<string>();
+  for (const effect of tier.effects) {
+    if (effect.kind === "courtRemembers") {
+      result.add("attack");
+      result.add("water");
+      result.add("armorBypass");
+    }
+    if (
+      effect.kind === "unhurried" ||
+      effect.kind === "livingChorus" ||
+      effect.kind === "lastWarmth" ||
+      effect.kind === "tidalRegeneration" ||
+      effect.kind === "petalwake"
+    )
+      result.add("health");
+    if (effect.kind === "dodgeBurn") {
+      result.add("burn");
+      result.add("armorBypass");
+    }
+    if (effect.kind === "poisonRetaliation") {
+      result.add("poison");
+      result.add("armorBypass");
+    }
+  }
+  const values = [...result];
+  if (authoredTiers.has(tier)) passiveCapabilities.set(tier, values);
+  return values;
+}
+
 export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
   const result = new Set<string>();
   for (const kind of kinds) {
     for (const value of cardCapabilities(kind)) result.add(value);
-    for (const effect of creaturePassiveTier(state, kind).effects) {
-      if (effect.kind === "courtRemembers") {
-        result.add("attack");
-        result.add("water");
-        result.add("armorBypass");
-      }
-      if (
-        effect.kind === "unhurried" ||
-        effect.kind === "livingChorus" ||
-        effect.kind === "lastWarmth" ||
-        effect.kind === "tidalRegeneration" ||
-        effect.kind === "petalwake"
-      )
-        result.add("health");
-      if (effect.kind === "dodgeBurn") {
-        result.add("burn");
-        result.add("armorBypass");
-      }
-      if (effect.kind === "poisonRetaliation") {
-        result.add("poison");
-        result.add("armorBypass");
-      }
-    }
+    for (const value of tierCapabilities(creaturePassiveTier(state, kind))) result.add(value);
   }
   return result;
 }
 export function coverageScore(state: GameState, kinds: SpeciesId[]) {
-  const has = capabilities(state, kinds);
+  return scoreCapabilities(capabilities(state, kinds));
+}
+export function scoreCapabilities(has: ReadonlySet<string>) {
   return (
     (has.has("attack") ? 3000 : 0) +
     (has.has("armorBypass") ? 1000 : 0) +
@@ -88,6 +102,8 @@ export function coverageScore(state: GameState, kinds: SpeciesId[]) {
   );
 }
 const authoredOffense = new Map<SpeciesId, { authored: number; reactive: number; cardCount: number }>();
+
+const tierOffense = new WeakMap<object, Map<number, number>>();
 
 /** Approximate damage over an authored kit rotation; no enemy intent or chance is sampled. */
 export function offenseValue(state: GameState, kind: SpeciesId): number {
@@ -106,15 +122,24 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
     authoredOffense.set(kind, values);
   }
   const { authored, reactive, cardCount } = values;
-  const passive = creaturePassiveTier(state, kind).effects.reduce(
-    (sum, effect) =>
-      sum +
-      (effect.kind === "courtRemembers"
-        ? effect.amount * cardCount
-        : effect.kind === "poisonRetaliation" || effect.kind === "dodgeBurn"
-          ? effect.amount
-          : 0),
-    0,
-  );
+  const tier = creaturePassiveTier(state, kind);
+  let byCardCount = tierOffense.get(tier);
+  let passive = byCardCount?.get(cardCount);
+  if (passive === undefined) {
+    passive = tier.effects.reduce(
+      (sum, effect) =>
+        sum +
+        (effect.kind === "courtRemembers"
+          ? effect.amount * cardCount
+          : effect.kind === "poisonRetaliation" || effect.kind === "dodgeBurn"
+            ? effect.amount
+            : 0),
+      0,
+    );
+    if (authoredTiers.has(tier)) {
+      if (!byCardCount) tierOffense.set(tier, (byCardCount = new Map()));
+      byCardCount.set(cardCount, passive);
+    }
+  }
   return (authored + passive + reactive) * permanentCardCopies(kind);
 }
