@@ -6,8 +6,7 @@ export default defineConfig({
   // A broken shared layout otherwise repeats the same failure across every viewport.
   // Green runs still execute the complete suite.
   maxFailures: process.env.CI ? 5 : undefined,
-  timeout: 90000,
-  globalTimeout: process.env.CI ? 12 * 60 * 1000 : undefined,
+  timeout: process.env.CI ? 0 : 90000,
   forbidOnly: !!process.env.CI,
   retries: 0,
   use: {

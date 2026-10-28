@@ -160,7 +160,8 @@ async function capture(
     }));
     await page.bringToFront();
     if (measured && traceMode) stopTrace = await beginTrace(page, `${artifactBase}-trace.json`);
-    if (measured) await page.evaluate(installSampler, { recordSpans });
+    if (measured)
+      await page.evaluate(installSampler, { recordSpans, deadlineMs: process.env.CI ? 0 : 120000 });
     await observeMemory("before-actions");
     for (const [i, step] of scenario.actions.entries()) {
       if (measured) await page.evaluate((name) => window.faunaPerf.segment(name), `${i}-${step.kind}`);

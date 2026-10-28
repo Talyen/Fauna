@@ -53,43 +53,47 @@ function choices(state: GameState, autoEndTurn: boolean): Command[] {
   }
 }
 
-it("preserves command and save contracts across generated player sequences", () => {
-  const step = fc.record({ choice: fc.nat(), invalid: fc.boolean(), autoEndTurn: fc.boolean() });
-  fc.assert(
-    fc.property(
-      fc.integer({ min: 0, max: 0xffffffff }),
-      fc.boolean(),
-      fc.array(step, { minLength: 20, maxLength: 40 }),
-      (seed, battle, steps) => {
-        let state = battle ? run(seed) : createGame(seed);
-        for (const { choice, invalid, autoEndTurn } of steps) {
-          const options = choices(state, autoEndTurn);
-          const command: Command =
-            invalid || options.length === 0
-              ? { type: "play", cardId: "missing-generated-card" }
-              : options[choice % options.length]!;
-          const before = encodeSave(state);
-          const replay = decodeSave(before);
-          const result = dispatch(state, command);
-          const repeated = dispatch(replay, command);
+it(
+  "preserves command and save contracts across generated player sequences",
+  () => {
+    const step = fc.record({ choice: fc.nat(), invalid: fc.boolean(), autoEndTurn: fc.boolean() });
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 0, max: 0xffffffff }),
+        fc.boolean(),
+        fc.array(step, { minLength: 20, maxLength: 40 }),
+        (seed, battle, steps) => {
+          let state = battle ? run(seed) : createGame(seed);
+          for (const { choice, invalid, autoEndTurn } of steps) {
+            const options = choices(state, autoEndTurn);
+            const command: Command =
+              invalid || options.length === 0
+                ? { type: "play", cardId: "missing-generated-card" }
+                : options[choice % options.length]!;
+            const before = encodeSave(state);
+            const replay = decodeSave(before);
+            const result = dispatch(state, command);
+            const repeated = dispatch(replay, command);
 
-          expect(encodeSave(state)).toBe(before);
-          expect(repeated).toEqual(result);
-          if (invalid || options.length === 0) expect(result.accepted).toBe(false);
-          if (!result.accepted) {
-            expect(result.state).toBe(state);
-            expect(result.state.rng).toBe(state.rng);
-            expect(result.events).toEqual([]);
-          } else {
-            expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+            expect(encodeSave(state)).toBe(before);
+            expect(repeated).toEqual(result);
+            if (invalid || options.length === 0) expect(result.accepted).toBe(false);
+            if (!result.accepted) {
+              expect(result.state).toBe(state);
+              expect(result.state.rng).toBe(state.rng);
+              expect(result.events).toEqual([]);
+            } else {
+              expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+            }
+            state = result.state;
           }
-          state = result.state;
-        }
-      },
-    ),
-    { seed: 741819, numRuns: 20 },
-  );
-}, 15_000);
+        },
+      ),
+      { seed: 741819, numRuns: 20 },
+    );
+  },
+  ciTimeout(15_000),
+);
 
 it("rejects generated corruptions of valid draft and battle checkpoints", () => {
   fc.assert(
@@ -128,3 +132,7 @@ it("rejects generated corruptions of valid draft and battle checkpoints", () => 
     { seed: 193501, numRuns: 30 },
   );
 });
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

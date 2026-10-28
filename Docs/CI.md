@@ -10,7 +10,7 @@ Unit CI discovers every unit, DOM and exhaustive case without filtering. Regular
 
 Static CI runs types, lint, formatting, boundaries and unused-code checks independently, retaining each failure while reporting all categories. `npm run check:full` remains their sequential entrypoint.
 
-CI installs with the pinned npm version and lockfile, omitting non-gating audit/funding requests under a three-minute deadline. `package.json` approves install scripts per version; `.npmrc` rejects unreviewed scripts. `npm run security:audit` retains audit details and fails on advisories or incomplete audit results. No advisory exceptions are currently configured.
+CI installs with the pinned npm version and lockfile, omitting non-gating audit/funding requests. Repository-defined CI execution deadlines are disabled; GitHub-hosted jobs retain GitHub’s six-hour limit. `package.json` approves install scripts per version; `.npmrc` rejects unreviewed scripts. `npm run security:audit` retains audit details and fails on advisories or incomplete audit results. No advisory exceptions are currently configured.
 
 ## Required gate and reruns
 

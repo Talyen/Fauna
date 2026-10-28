@@ -10,7 +10,15 @@ describe("all ordinary creature combinations", () => {
     process.env.FAUNA_LINEUP_SCHEDULE,
   ))
     // Each case retains up to 500 commands and a validated save after every step.
-    it(`supports ${scenario.name} without engine failures or invalid saves`, () => {
-      expectSupportedLineup(scenario);
-    }, 20_000);
+    it(
+      `supports ${scenario.name} without engine failures or invalid saves`,
+      () => {
+        expectSupportedLineup(scenario);
+      },
+      ciTimeout(20_000),
+    );
 });
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

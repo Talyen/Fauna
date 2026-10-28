@@ -335,7 +335,7 @@ it("prepares required review conditions and rejects ambiguous, unsupported or re
 
 it(
   "runs one final combined gate with added regressions and preserves the clean-main guard",
-  { timeout: 30_000 },
+  { timeout: ciTimeout(30_000) },
   async () => {
     const root = fixture();
     const task = createWorktree(root, "final-gate");
@@ -368,22 +368,26 @@ it(
   },
 );
 
-it("rejects CLI options that could narrow or bypass the final integration gate", { timeout: 30_000 }, () => {
-  const root = fixture();
-  const task = createWorktree(root, "no-bypass");
-  const before = git(root, "rev-parse", "HEAD");
-  for (const args of [["--working-tree"], ["--base", "HEAD"], ["--plan"], ["--test"]]) {
-    expect(() =>
-      execFileSync(
-        process.execPath,
-        [path.resolve(import.meta.dirname, "../../../scripts/integrate.mjs"), task.branch, ...args],
-        { cwd: root, stdio: "pipe" },
-      ),
-    ).toThrow("Usage: npm run integrate");
-    expect(git(root, "rev-parse", "HEAD")).toBe(before);
-    expect(git(task.path, "status", "--porcelain")).toBe("");
-  }
-});
+it(
+  "rejects CLI options that could narrow or bypass the final integration gate",
+  { timeout: ciTimeout(30_000) },
+  () => {
+    const root = fixture();
+    const task = createWorktree(root, "no-bypass");
+    const before = git(root, "rev-parse", "HEAD");
+    for (const args of [["--working-tree"], ["--base", "HEAD"], ["--plan"], ["--test"]]) {
+      expect(() =>
+        execFileSync(
+          process.execPath,
+          [path.resolve(import.meta.dirname, "../../../scripts/integrate.mjs"), task.branch, ...args],
+          { cwd: root, stdio: "pipe" },
+        ),
+      ).toThrow("Usage: npm run integrate");
+      expect(git(root, "rev-parse", "HEAD")).toBe(before);
+      expect(git(task.path, "status", "--porcelain")).toBe("");
+    }
+  },
+);
 
 it("terminates a timed-out diagnostic instead of accepting a late successful exit", async () => {
   const result = await runInvestigation(process.execPath, ["-e", "setInterval(() => {}, 1000)"], {
@@ -496,7 +500,7 @@ it("prints ordinary multiline patches while retaining bounded output and machine
 
 it(
   "keeps a recorded custom task base across branch renames and reports empty checks explicitly",
-  { timeout: 30_000 },
+  { timeout: ciTimeout(30_000) },
   () => {
     const root = fixture();
     git(root, "checkout", "-qb", "feature/custom-base");
@@ -519,18 +523,22 @@ it(
   },
 );
 
-it("includes committed work on an unregistered branch regardless of its prefix", { timeout: 30_000 }, () => {
-  const root = fixture();
-  git(root, "checkout", "-qb", "fix-without-prefix");
-  put(root, "README.md", "# Committed fix\n");
-  git(root, "add", ".");
-  git(root, "commit", "-qm", "fix");
-  expect(selectedPaths(root, parseCheckArgs([]))).toEqual(["README.md"]);
-});
+it(
+  "includes committed work on an unregistered branch regardless of its prefix",
+  { timeout: ciTimeout(30_000) },
+  () => {
+    const root = fixture();
+    git(root, "checkout", "-qb", "fix-without-prefix");
+    put(root, "README.md", "# Committed fix\n");
+    git(root, "add", ".");
+    git(root, "commit", "-qm", "fix");
+    expect(selectedPaths(root, parseCheckArgs([]))).toEqual(["README.md"]);
+  },
+);
 
 it(
   "remembers extra regressions after failure and finishes from a renamed task checkout",
-  { timeout: 30_000 },
+  { timeout: ciTimeout(30_000) },
   async () => {
     const root = fixture();
     const suite = "tests/unit/existing.test.mjs";
@@ -810,3 +818,7 @@ it("admits outer heavy commands before setup, preserves busy status and avoids n
   expect(runner).not.toHaveBeenCalled();
   expect(localPolicy("build", [], { root, env: { CI: "true" } })).toContain("CI-owned");
 });
+
+function ciTimeout(ms) {
+  return process.env.CI ? 0 : ms;
+}

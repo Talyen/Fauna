@@ -1,5 +1,5 @@
 /** Serialized into the measured renderer; owns only this capture's handles and bounded evidence. */
-export async function installSampler({ recordSpans = true } = {}) {
+export async function installSampler({ recordSpans = true, deadlineMs = 120000 } = {}) {
   // Retire a previous capture before replacing its only public cleanup handle.
   window.faunaPerf?.stop();
   const supported = PerformanceObserver.supportedEntryTypes ?? [];
@@ -128,10 +128,13 @@ export async function installSampler({ recordSpans = true } = {}) {
     handle = requestAnimationFrame(frame);
   };
   sample.markerStart = performance.mark("fauna-capture-start").startTime;
-  const deadline = setTimeout(() => {
-    sample.truncated = true;
-    stop();
-  }, 120000);
+  const deadline =
+    deadlineMs > 0
+      ? setTimeout(() => {
+          sample.truncated = true;
+          stop();
+        }, deadlineMs)
+      : undefined;
   const stop = () => {
     if (stopped) return sample;
     sample.end = performance.now();

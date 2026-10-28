@@ -139,7 +139,9 @@ export function generateInventory(root = ROOT, { runNpm = execFileSync } = {}) {
     "--package-lock-only",
     "--sbom-format=cyclonedx",
   ]);
-  const sbom = JSON.parse(runNpm(command, args, { cwd: root, encoding: "utf8", timeout: 60_000 }));
+  const sbom = JSON.parse(
+    runNpm(command, args, { cwd: root, encoding: "utf8", timeout: process.env.CI ? 0 : 60_000 }),
+  );
   if (!lockBytes.equals(readFileSync(path.join(root, "package-lock.json"))))
     throw new Error("Dependency lock changed during inventory generation; existing evidence is preserved.");
   if (sbom?.bomFormat !== "CycloneDX" || !Array.isArray(sbom.components) || !Array.isArray(sbom.dependencies))

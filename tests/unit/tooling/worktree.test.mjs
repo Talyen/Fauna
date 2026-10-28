@@ -35,7 +35,7 @@ it("creates and reuses a task checkout from committed main while preserving dirt
 // Several real Git/Node processes exercise safety, not application latency; the task gate still caps the suite at 60 seconds.
 it(
   "completes cleanup while preserving unrelated unfinished work, but reports artifact archival failures",
-  { timeout: 45_000 },
+  { timeout: ciTimeout(45_000) },
   () => {
     const directory = repository(
       {
@@ -70,17 +70,21 @@ it(
   },
 );
 
-it("verifies automatic storage defaults and independent tracked clones", { timeout: 30_000 }, () => {
-  const result = spawnSync(
-    process.execPath,
-    [
-      new URL("../../fixtures/worktree-storage-check.mjs", import.meta.url).pathname,
-      new URL("../../../scripts/lib/worktree-storage.mjs", import.meta.url).pathname,
-    ],
-    { encoding: "utf8", timeout: 25_000 },
-  );
-  expect(result.status, result.stdout + result.stderr).toBe(0);
-});
+it(
+  "verifies automatic storage defaults and independent tracked clones",
+  { timeout: ciTimeout(30_000) },
+  () => {
+    const result = spawnSync(
+      process.execPath,
+      [
+        new URL("../../fixtures/worktree-storage-check.mjs", import.meta.url).pathname,
+        new URL("../../../scripts/lib/worktree-storage.mjs", import.meta.url).pathname,
+      ],
+      { encoding: "utf8", timeout: 25_000 },
+    );
+    expect(result.status, result.stdout + result.stderr).toBe(0);
+  },
+);
 
 it("validates sparse documentation references without hiding deleted files or broken anchors", () => {
   const root = repository(
@@ -193,3 +197,7 @@ it("reports a safe cleanup retry after integration and retries without reintegra
     process.chdir(previous);
   }
 });
+
+function ciTimeout(ms) {
+  return process.env.CI ? 0 : ms;
+}

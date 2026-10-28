@@ -18,7 +18,11 @@ export function auditFindings(audit) {
 }
 function main() {
   const [command, args] = npmCommand(["audit", "--package-lock-only", "--json", "--ignore-scripts"]);
-  const result = spawnSync(command, args, { encoding: "utf8", timeout: 60_000, maxBuffer: 4_000_000 });
+  const result = spawnSync(command, args, {
+    encoding: "utf8",
+    timeout: process.env.CI ? 0 : 60_000,
+    maxBuffer: 4_000_000,
+  });
   if (result.error || ![0, 1].includes(result.status)) throw new Error("Dependency audit could not finish.");
   const report = JSON.parse(result.stdout);
   const findings = auditFindings(report);

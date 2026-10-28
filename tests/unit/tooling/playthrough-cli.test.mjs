@@ -76,67 +76,79 @@ it("releases a successful playthrough's watchdog and signal listeners", async ()
   expect(vi.getTimerCount()).toBe(0);
 });
 
-it("writes a durable journal and replays the CLI's recorded production career", async () => {
-  const directory = path.join("reports", `cli-fixture-${randomUUID()}`);
-  const replayDirectory = path.join(directory, "replay");
-  try {
-    const invoke = (args) =>
-      execFileSync(process.execPath, ["scripts/balance/run-playthrough.mjs", ...args], {
-        encoding: "utf8",
-        timeout: 10_000,
-        env: { ...process.env, FAUNA_PLAYTHROUGH_PROFILE: "1" },
-      });
-    // Policy changes can stall a particular career; this fixture owns successful CLI replay.
-    invoke(["--seed", "0", "--starter", "captoad", "--runs", "1", "--out", directory]);
-    const summary = JSON.parse(readFixture(directory, "summary.json"));
-    const bundle = JSON.parse(readFixture(directory, "journey.json"));
-    expect(summary.complete).toBe(true);
-    expect(bundle.identity).toBe(await identity());
-    expect(bundle.steps.every((step) => typeof step.decision === "string" && step.decision.length > 0)).toBe(
-      true,
-    );
-    const journal = readFixture(directory, summary.journal)
-      .trim()
-      .split("\n")
-      .map((line) => JSON.parse(line));
-    expect(journal.filter((record) => record.type === "attempt")).toHaveLength(bundle.steps.length);
-    expect(journal.filter((record) => record.type === "completed")).toHaveLength(bundle.steps.length);
-    expect(journal[0]).toMatchObject({ type: "initial", identity: bundle.identity, initial: bundle.initial });
-    for (const [index, step] of bundle.steps.entries()) {
-      expect(journal[index * 2 + 1]).toMatchObject({ type: "attempt", index, command: step.command });
-      expect(journal[index * 2 + 2]).toEqual({ type: "completed", index, ...step });
-    }
-    invoke(["--replay", path.join(directory, "journey.json"), "--out", replayDirectory]);
-    expect(JSON.parse(readFixture(replayDirectory, "journey.json")).steps).toEqual(bundle.steps);
-    const replaySummary = JSON.parse(readFixture(replayDirectory, "summary.json"));
-    for (const { profile } of [summary, replaySummary]) {
-      expect(profile.journalRecords).toBe(1 + 2 * bundle.steps.length);
-      expect(Object.keys(profile.stages)).toEqual([
-        "viteSetupMs",
-        "identityMs",
-        "moduleLoadMs",
-        "fixtureSetupMs",
-        "journeyMs",
-      ]);
+it(
+  "writes a durable journal and replays the CLI's recorded production career",
+  async () => {
+    const directory = path.join("reports", `cli-fixture-${randomUUID()}`);
+    const replayDirectory = path.join(directory, "replay");
+    try {
+      const invoke = (args) =>
+        execFileSync(process.execPath, ["scripts/balance/run-playthrough.mjs", ...args], {
+          encoding: "utf8",
+          timeout: 10_000,
+          env: { ...process.env, FAUNA_PLAYTHROUGH_PROFILE: "1" },
+        });
+      // Policy changes can stall a particular career; this fixture owns successful CLI replay.
+      invoke(["--seed", "0", "--starter", "captoad", "--runs", "1", "--out", directory]);
+      const summary = JSON.parse(readFixture(directory, "summary.json"));
+      const bundle = JSON.parse(readFixture(directory, "journey.json"));
+      expect(summary.complete).toBe(true);
+      expect(bundle.identity).toBe(await identity());
       expect(
-        [profile.journalMs, ...Object.values(profile.stages)].every((ms) => Number.isFinite(ms) && ms >= 0),
+        bundle.steps.every((step) => typeof step.decision === "string" && step.decision.length > 0),
       ).toBe(true);
+      const journal = readFixture(directory, summary.journal)
+        .trim()
+        .split("\n")
+        .map((line) => JSON.parse(line));
+      expect(journal.filter((record) => record.type === "attempt")).toHaveLength(bundle.steps.length);
+      expect(journal.filter((record) => record.type === "completed")).toHaveLength(bundle.steps.length);
+      expect(journal[0]).toMatchObject({
+        type: "initial",
+        identity: bundle.identity,
+        initial: bundle.initial,
+      });
+      for (const [index, step] of bundle.steps.entries()) {
+        expect(journal[index * 2 + 1]).toMatchObject({ type: "attempt", index, command: step.command });
+        expect(journal[index * 2 + 2]).toEqual({ type: "completed", index, ...step });
+      }
+      invoke(["--replay", path.join(directory, "journey.json"), "--out", replayDirectory]);
+      expect(JSON.parse(readFixture(replayDirectory, "journey.json")).steps).toEqual(bundle.steps);
+      const replaySummary = JSON.parse(readFixture(replayDirectory, "summary.json"));
+      for (const { profile } of [summary, replaySummary]) {
+        expect(profile.journalRecords).toBe(1 + 2 * bundle.steps.length);
+        expect(Object.keys(profile.stages)).toEqual([
+          "viteSetupMs",
+          "identityMs",
+          "moduleLoadMs",
+          "fixtureSetupMs",
+          "journeyMs",
+        ]);
+        expect(
+          [profile.journalMs, ...Object.values(profile.stages)].every((ms) => Number.isFinite(ms) && ms >= 0),
+        ).toBe(true);
+      }
+      mkdirSync("reports/ci", { recursive: true });
+      writeFileSync(
+        "reports/ci/playthrough-timings.json",
+        JSON.stringify(
+          {
+            identity: bundle.identity,
+            sha: process.env.GITHUB_SHA ?? null,
+            generation: summary.profile,
+            replay: replaySummary.profile,
+          },
+          null,
+          2,
+        ) + "\n",
+      );
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
     }
-    mkdirSync("reports/ci", { recursive: true });
-    writeFileSync(
-      "reports/ci/playthrough-timings.json",
-      JSON.stringify(
-        {
-          identity: bundle.identity,
-          sha: process.env.GITHUB_SHA ?? null,
-          generation: summary.profile,
-          replay: replaySummary.profile,
-        },
-        null,
-        2,
-      ) + "\n",
-    );
-  } finally {
-    rmSync(directory, { recursive: true, force: true });
-  }
-}, 25_000);
+  },
+  ciTimeout(25_000),
+);
+
+function ciTimeout(ms) {
+  return process.env.CI ? 0 : ms;
+}

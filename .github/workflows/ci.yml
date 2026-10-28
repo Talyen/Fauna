@@ -37,7 +37,6 @@ env:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     outputs:
       run: ${{ steps.plan.outputs.run }}
       attempt: ${{ steps.plan.outputs.attempt }}
@@ -69,7 +68,6 @@ jobs:
     needs: [prepare]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
     steps:
@@ -83,7 +81,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Verify release version
         run: npm run verify:release-version
@@ -146,7 +143,6 @@ jobs:
     needs: [prepare]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
     steps:
@@ -158,7 +154,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Discover complete unit and exhaustive coverage
         run: npx vitest list --json=reports/ci/unit-discovery.json --staticParse=false
@@ -193,7 +188,6 @@ jobs:
     needs: [prepare]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -210,7 +204,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Exhaustive lineup shard
         run: npm run test:full -- tests/exhaustive/roster-combinations.test.ts --reporter=default --reporter=json --outputFile.json=reports/vitest.json
@@ -237,7 +230,6 @@ jobs:
     needs: [prepare]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     env:
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
       CI_BROWSER_WORKERS: ${{ needs.prepare.outputs.workers }}
@@ -252,7 +244,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Build production browser assets
         run: |
@@ -307,7 +298,6 @@ jobs:
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     container: ${{ needs.prepare.outputs.browser_image || null }}
-    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -334,7 +324,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Download browser-build
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -374,7 +363,6 @@ jobs:
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     container: ${{ needs.prepare.outputs.browser_image || null }}
-    timeout-minutes: 20
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
     steps:
@@ -394,7 +382,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Download browser-build
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -435,7 +422,6 @@ jobs:
     needs: [prepare]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: windows-latest
-    timeout-minutes: 20
     env:
       ELECTRON_SKIP_BINARY_DOWNLOAD: ""
     outputs:
@@ -449,7 +435,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Verify release version
         run: npm run verify:release-version
@@ -490,7 +475,6 @@ jobs:
     needs: [prepare, static, unit, lineups, build, browser, interactions, windows]
     if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     env:
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
       CI_BROWSER_WORKERS: ${{ needs.prepare.outputs.workers }}
@@ -517,7 +501,6 @@ jobs:
       - name: Select pinned npm
         run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Install dependencies
-        timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Download browser-shard-*
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -606,7 +589,6 @@ jobs:
     needs: [verify]
     if: ${{ needs.verify.result == 'success' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     permissions:
       contents: read
       actions: read

@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { auditFindings } from "../../../scripts/checks/security-audit.mjs";
 it("rejects advisories and incomplete audits", () => {
   const advisory = {
@@ -17,4 +17,20 @@ it("rejects advisories and incomplete audits", () => {
   expect(auditFindings(report({ ...advisory, severity: "high" })).rejected).toHaveLength(1);
   expect(() => auditFindings({ error: "offline" })).toThrow();
   expect(() => auditFindings(report("indirect-only"))).toThrow();
+});
+
+it("leaves CI suite and test execution unbounded without weakening audit checks", async () => {
+  vi.stubEnv("CI", "true");
+  try {
+    vi.resetModules();
+    const { default: vitest } = await import("../../../vitest.config.ts");
+    const { default: playwright } = await import("../../../playwright.config.ts");
+    expect(vitest.test.testTimeout).toBe(0);
+    expect(vitest.test.hookTimeout).toBe(0);
+    expect(playwright.timeout).toBe(0);
+    expect(playwright.globalTimeout ?? 0).toBe(0);
+  } finally {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  }
 });

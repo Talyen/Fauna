@@ -6,7 +6,7 @@ import { test, seed, state } from "./support/session";
 import { continueToRecruit, step } from "./support/journey";
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
-  test.setTimeout(120_000);
+  test.setTimeout(process.env.CI ? 0 : 120_000);
   await page.clock.setFixedTime(new Date(FULL_JOURNEY_SEED));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page);

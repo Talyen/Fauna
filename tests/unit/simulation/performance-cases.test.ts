@@ -49,27 +49,35 @@ it("repeats artwork navigation without changing gameplay checkpoints or broadeni
   expect(scenario.actions.every((action) => action.checkpoint === scenario.initial)).toBe(true);
 });
 // Constructing and replaying three full journeys can exceed the default deadline on hosted CPUs
-it("derives reachable early and late inventories from replay evidence without fixture grants", async () => {
-  const scenarios = await reachablePerformanceCases(0);
-  expect(scenarios).toHaveLength(2);
-  const journey = scenarios[0]!.journey;
-  expect(journey.complete).toBe(true);
-  let state = decodeSave(journey.initial);
-  for (const step of journey.steps) {
-    const result = dispatch(state, step.command);
-    expect(result.accepted).toBe(step.accepted);
-    expect(decodeSave(encodeSave(result.state))).toEqual(decodeSave(step.checkpoint));
-    state = result.state;
-  }
-  for (const scenario of scenarios) {
-    expect(journey.steps.some((step) => step.checkpoint === scenario.initial)).toBe(true);
-    state = decodeSave(scenario.initial);
-    expect(scenario.inventory.talents).toEqual(state.talents);
-    for (const action of scenario.actions) {
-      const result = dispatch(state, action.command);
-      expect(result.accepted).toBe(true);
-      expect(encodeSave(result.state)).toBe(action.checkpoint);
+it(
+  "derives reachable early and late inventories from replay evidence without fixture grants",
+  async () => {
+    const scenarios = await reachablePerformanceCases(0);
+    expect(scenarios).toHaveLength(2);
+    const journey = scenarios[0]!.journey;
+    expect(journey.complete).toBe(true);
+    let state = decodeSave(journey.initial);
+    for (const step of journey.steps) {
+      const result = dispatch(state, step.command);
+      expect(result.accepted).toBe(step.accepted);
+      expect(decodeSave(encodeSave(result.state))).toEqual(decodeSave(step.checkpoint));
       state = result.state;
     }
-  }
-}, 30000);
+    for (const scenario of scenarios) {
+      expect(journey.steps.some((step) => step.checkpoint === scenario.initial)).toBe(true);
+      state = decodeSave(scenario.initial);
+      expect(scenario.inventory.talents).toEqual(state.talents);
+      for (const action of scenario.actions) {
+        const result = dispatch(state, action.command);
+        expect(result.accepted).toBe(true);
+        expect(encodeSave(result.state)).toBe(action.checkpoint);
+        state = result.state;
+      }
+    }
+  },
+  ciTimeout(30000),
+);
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

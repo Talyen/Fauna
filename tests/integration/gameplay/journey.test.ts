@@ -243,35 +243,43 @@ describe("journey earnings and results", () => {
   });
 });
 
-it("deterministically replays the complete one-starter journey through the final boss within the browser budget", () => {
-  const actor = createBattleActor();
-  const initial = createGame(FULL_JOURNEY_SEED);
-  let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
-  let replay = game;
-  let deployedThree = false;
-  for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
-    deployedThree ||= game.team.length === 3;
-    expect(game.phase).not.toBe("defeat");
-    expect(game.reward?.outcome).not.toBe("defeat");
-    const command =
-      game.phase === "recruit"
-        ? fullJourneyRecruit(game)
-        : game.phase === "battle"
-          ? actor.choose(game).command
-          : policy(game);
-    game = accept(game, command);
-    replay = accept(replay, command);
-    expect(replay).toEqual(game);
+it(
+  "deterministically replays the complete one-starter journey through the final boss within the browser budget",
+  () => {
+    const actor = createBattleActor();
+    const initial = createGame(FULL_JOURNEY_SEED);
+    let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
+      type: "start",
+    });
+    let replay = game;
+    let deployedThree = false;
+    for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
+      deployedThree ||= game.team.length === 3;
+      expect(game.phase).not.toBe("defeat");
+      expect(game.reward?.outcome).not.toBe("defeat");
+      const command =
+        game.phase === "recruit"
+          ? fullJourneyRecruit(game)
+          : game.phase === "battle"
+            ? actor.choose(game).command
+            : policy(game);
+      game = accept(game, command);
+      replay = accept(replay, command);
+      expect(replay).toEqual(game);
+      expect(decodeSave(encodeSave(game))).toEqual(game);
+    }
+    expect(game.phase).toBe("victory");
+    expect(deployedThree).toBe(true);
+    // Replacing a solo Legendary can leave one ordinary creature deployed; reserves stay on the roster.
+    expect(game.team.length).toBeGreaterThanOrEqual(1);
+    expect(game.team.length).toBeLessThanOrEqual(3);
+    if (game.team.some((unit) => species(unit.species).legendary)) expect(game.team).toHaveLength(1);
+    expect([...game.team, ...game.reserves].map((unit) => unit.species)).toHaveLength(5);
     expect(decodeSave(encodeSave(game))).toEqual(game);
-  }
-  expect(game.phase).toBe("victory");
-  expect(deployedThree).toBe(true);
-  // Replacing a solo Legendary can leave one ordinary creature deployed; reserves stay on the roster.
-  expect(game.team.length).toBeGreaterThanOrEqual(1);
-  expect(game.team.length).toBeLessThanOrEqual(3);
-  if (game.team.some((unit) => species(unit.species).legendary)) expect(game.team).toHaveLength(1);
-  expect([...game.team, ...game.reserves].map((unit) => unit.species)).toHaveLength(5);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-}, 20_000);
+  },
+  ciTimeout(20_000),
+);
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

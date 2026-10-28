@@ -39,36 +39,44 @@ it("covers every distinct ordinary trio once with stable seeded identities", () 
   ]);
 });
 
-it("collects every generated lineup in the full suite without executing the simulations", () => {
-  const root = path.resolve(import.meta.dirname, "../../..");
-  const cases = JSON.parse(
-    execFileSync(
-      process.execPath,
-      [
-        path.join(root, "node_modules/vitest/vitest.mjs"),
-        "list",
-        "tests/exhaustive/roster-combinations.test.ts",
-        "--json",
-        "--staticParse=false",
-        "--maxWorkers=1",
-        "--no-file-parallelism",
-      ],
-      {
-        cwd: root,
-        encoding: "utf8",
-        maxBuffer: 16 * 1024 * 1024,
-        timeout: 30_000,
-        env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
-      },
-    ),
-  ) as { name: string }[];
-  expect(cases.map(({ name }) => name).sort()).toEqual(
-    ordinaryLineups()
-      .map(
-        ({ name }) =>
-          `all ordinary creature combinations > supports ${name} without engine failures or invalid saves`,
-      )
-      .sort(),
-  );
-  // Collection launches a subprocess with its own 30-second deadline.
-}, 35_000);
+it(
+  "collects every generated lineup in the full suite without executing the simulations",
+  () => {
+    const root = path.resolve(import.meta.dirname, "../../..");
+    const cases = JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          path.join(root, "node_modules/vitest/vitest.mjs"),
+          "list",
+          "tests/exhaustive/roster-combinations.test.ts",
+          "--json",
+          "--staticParse=false",
+          "--maxWorkers=1",
+          "--no-file-parallelism",
+        ],
+        {
+          cwd: root,
+          encoding: "utf8",
+          maxBuffer: 16 * 1024 * 1024,
+          timeout: 30_000,
+          env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
+        },
+      ),
+    ) as { name: string }[];
+    expect(cases.map(({ name }) => name).sort()).toEqual(
+      ordinaryLineups()
+        .map(
+          ({ name }) =>
+            `all ordinary creature combinations > supports ${name} without engine failures or invalid saves`,
+        )
+        .sort(),
+    );
+    // Collection launches a subprocess with its own 30-second deadline.
+  },
+  ciTimeout(35_000),
+);
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

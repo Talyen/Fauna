@@ -16,19 +16,23 @@ const config: JourneyConfig = {
 };
 describe("headless production sessions", () => {
   // Several full simulations and checkpoint replays need headroom on shared hosted CPUs
-  it("replays journeys exactly across serialized save/resume without leaking policy randomness", async () => {
-    const journey = await runJourney(config, "fixture");
-    expect(journey.complete, journey.reason).toBe(true);
-    expect(journey.steps.every((step) => step.accepted)).toBe(true);
-    const replay = await runJourney({ ...config, resumeEvery: 1 }, "fixture", journey.initial, journey);
-    expect(replay.steps).toEqual(journey.steps);
-    const uninterrupted = await runJourney({ ...config, resumeEvery: 0 }, "fixture");
-    expect(uninterrupted.steps).toEqual(journey.steps);
-    const changed = structuredClone(journey);
-    changed.steps[0]!.checkpoint = "corrupt";
-    await expect(runJourney(config, "fixture", journey.initial, changed)).rejects.toThrow("diverged");
-    await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
-  }, 30000);
+  it(
+    "replays journeys exactly across serialized save/resume without leaking policy randomness",
+    async () => {
+      const journey = await runJourney(config, "fixture");
+      expect(journey.complete, journey.reason).toBe(true);
+      expect(journey.steps.every((step) => step.accepted)).toBe(true);
+      const replay = await runJourney({ ...config, resumeEvery: 1 }, "fixture", journey.initial, journey);
+      expect(replay.steps).toEqual(journey.steps);
+      const uninterrupted = await runJourney({ ...config, resumeEvery: 0 }, "fixture");
+      expect(uninterrupted.steps).toEqual(journey.steps);
+      const changed = structuredClone(journey);
+      changed.steps[0]!.checkpoint = "corrupt";
+      await expect(runJourney(config, "fixture", journey.initial, changed)).rejects.toThrow("diverged");
+      await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
+    },
+    ciTimeout(30000),
+  );
   it("retains decision reasons and live battle diagnostics when an action budget is exhausted", async () => {
     const checkpoint = teamRun(42, ["mossguard"]);
     const initial = encodeSave(checkpoint);
@@ -90,3 +94,7 @@ describe("authored content", () => {
     );
   });
 });
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}

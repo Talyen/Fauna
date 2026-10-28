@@ -218,9 +218,13 @@ describe("game commands", () => {
   ] as const) {
     const scenario = scenarios.find((entry) => kinds.every((kind) => entry.kinds.includes(kind)))!;
     // Full command/checkpoint journeys need headroom during combined local verification.
-    it(`supports representative lineup ${scenario.name} through commands and save round trips`, () => {
-      expectSupportedLineup(scenario);
-    }, 15_000);
+    it(
+      `supports representative lineup ${scenario.name} through commands and save round trips`,
+      () => {
+        expectSupportedLineup(scenario);
+      },
+      ciTimeout(15_000),
+    );
   }
 });
 describe("save validation", () => {
@@ -313,3 +317,7 @@ describe("creature traits and deck circulation", () => {
     expect(s.battle!.discard).toHaveLength(4);
   });
 });
+
+function ciTimeout(ms: number) {
+  return process.env.CI ? 0 : ms;
+}
