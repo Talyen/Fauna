@@ -10,13 +10,24 @@ export const storagePolicy = {
   assets: ["public/art", "public/ui", "assets/source", "public/prepared"],
   prepared: ["public/prepared/objects"],
   markers: [
-    ["package.json", '"prebuild": "npm run assets:check:outputs"'],
+    ["vite.config.ts", "activeAssetsPlugin()"],
     ["package.json", '"predev": "npm run assets:check:outputs"'],
     ["src/assets/prepared.json", '"records"'],
     ["vite.config.ts", 'publicDir: command === "build" ? false'],
   ],
 };
 const POLICY = storagePolicy;
+
+/** Reserve the destination atomically so two creators cannot populate the same checkout. */
+export function reserveWorktreeTarget(target) {
+  try {
+    fs.mkdirSync(target);
+  } catch (error) {
+    if (error.code === "EEXIST")
+      throw new Error("Task directory already exists; preserve it and choose another name.");
+    throw error;
+  }
+}
 const git = (cwd, args, input) => {
   for (let attempt = 0; ; attempt++) {
     try {

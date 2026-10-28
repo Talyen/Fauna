@@ -203,7 +203,7 @@ try {
   const child = path.join(directory, "child.mjs");
   write(
     child,
-    `import {execFileSync} from 'node:child_process'; import {storageProfile,populateWorktree} from ${JSON.stringify(pathToFileURL(moduleFile).href)}; const [root,target]=process.argv.slice(2); execFileSync('git',['worktree','add','--no-checkout','--detach',target,'main'],{cwd:root,stdio:'pipe'}); populateWorktree(root,target,storageProfile(root,'main'));`,
+    `import {execFileSync} from 'node:child_process'; import {storageProfile,populateWorktree,reserveWorktreeTarget} from ${JSON.stringify(pathToFileURL(moduleFile).href)}; const [root,target]=process.argv.slice(2); reserveWorktreeTarget(target); execFileSync('git',['worktree','add','--no-checkout','--detach',target,'main'],{cwd:root,stdio:'pipe'}); populateWorktree(root,target,storageProfile(root,'main'));`,
   );
   const start = (target) =>
     new Promise((resolve) => {

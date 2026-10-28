@@ -3,7 +3,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
 import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs";
-import { storageProfile, populateWorktree } from "./lib/worktree-storage.mjs";
+import { storageProfile, populateWorktree, reserveWorktreeTarget } from "./lib/worktree-storage.mjs";
 import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
 import { expireEvidence } from "./lib/evidence-retention.mjs";
 import { expireCheckoutReviews } from "./lib/review-retention.mjs";
@@ -48,6 +48,7 @@ export function createWorktree(root, slug, base = "main", options = {}) {
   if (git(root, ["branch", "--list", branch]).trim())
     throw new Error("Task branch already exists; inspect it before choosing another name.");
   mkdirSync(path.dirname(target), { recursive: true });
+  reserveWorktreeTarget(target);
   git(root, ["worktree", "add", "--no-checkout", "-b", branch, target, commit]);
   populateWorktree(root, target, storageProfile(root, commit, options));
   recordTaskIntent(target, { base: commit });

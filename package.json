@@ -17,7 +17,6 @@
     "test": "node scripts/local.mjs test",
     "test:smoke": "node scripts/checks/run-local-tests.mjs",
     "test:full": "node scripts/local.mjs test:full",
-    "prebuild": "npm run assets:check:outputs",
     "build": "node scripts/local.mjs build",
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "node scripts/local.mjs test:e2e",
