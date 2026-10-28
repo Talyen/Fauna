@@ -150,8 +150,11 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       for (const enemy of targets) if (enemy.id !== unit.id && enemy.health > 0) targets[count++] = enemy;
       targets.length = count;
       const lost = old - decayed;
-      for (const [index, target] of targets.entries()) {
-        const damage = Math.floor(lost / targets.length) + Number(index < lost % targets.length);
+      const share = Math.floor(lost / targets.length);
+      const remainder = lost % targets.length;
+      for (let index = 0; index < targets.length; index++) {
+        const target = targets[index]!;
+        const damage = share + Number(index < remainder);
         if (damage > 0)
           yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "derived" });
       }

@@ -89,7 +89,9 @@ function errorMessage(error: unknown): string {
 export function createDiagnostics(port?: DiagnosticPort) {
   const retain = (values: Diagnostic[]) => {
     // JSON escaping can cost six characters per message character. Bound the stored form too.
-    const bounded = values.slice(-MAX_ENTRIES);
+    // Every caller supplies a fresh private array; published snapshots are never passed back in.
+    const bounded = values;
+    if (bounded.length > MAX_ENTRIES) bounded.splice(0, bounded.length - MAX_ENTRIES);
     if (JSON.stringify(bounded).length >= MAX_STORED_LENGTH) {
       let storedLength = 2 + Math.max(0, bounded.length - 1);
       const lengths = bounded.map((entry) => JSON.stringify(entry).length);
@@ -144,15 +146,15 @@ export function createDiagnostics(port?: DiagnosticPort) {
         }
         if (disposed) return;
         const match = entries.find((entry) => entry.source === source && entry.message === message);
-        entries = retain([
-          ...(match ? entries.filter((entry) => entry !== match) : entries),
-          {
-            source,
-            message,
-            count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
-            ...location,
-          },
-        ]);
+        const next: Diagnostic[] = [];
+        for (const entry of entries) if (entry !== match) next.push(entry);
+        next.push({
+          source,
+          message,
+          count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
+          ...location,
+        });
+        entries = retain(next);
         // Capture delivery ownership before persistence or listeners can register new viewers.
         const notification = [...listeners];
         try {
