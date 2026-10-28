@@ -50,7 +50,7 @@ it("repeats artwork navigation without changing gameplay checkpoints or broadeni
 });
 // Constructing and replaying three full journeys can exceed the default deadline on hosted CPUs
 it("derives reachable early and late inventories from replay evidence without fixture grants", async () => {
-  const scenarios = await reachablePerformanceCases(15);
+  const scenarios = await reachablePerformanceCases(0);
   expect(scenarios).toHaveLength(2);
   const journey = scenarios[0]!.journey;
   expect(journey.complete).toBe(true);

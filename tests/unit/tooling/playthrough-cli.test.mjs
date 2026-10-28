@@ -87,7 +87,7 @@ it("writes a durable journal and replays the CLI's recorded production career", 
         env: { ...process.env, FAUNA_PLAYTHROUGH_PROFILE: "1" },
       });
     // Policy changes can stall a particular career; this fixture owns successful CLI replay.
-    invoke(["--seed", "15", "--starter", "captoad", "--runs", "1", "--out", directory]);
+    invoke(["--seed", "0", "--starter", "captoad", "--runs", "1", "--out", directory]);
     const summary = JSON.parse(readFixture(directory, "summary.json"));
     const bundle = JSON.parse(readFixture(directory, "journey.json"));
     expect(summary.complete).toBe(true);

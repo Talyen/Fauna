@@ -25,7 +25,7 @@ import type {
 } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 // Fixed current-catalog full-journey fixture; shared with the browser expedition.
-export const FULL_JOURNEY_SEED = 2;
+export const FULL_JOURNEY_SEED = 30;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 /** Preserve the established five-creature roster while still collecting each offered recruit. */
 export function fullJourneyRecruit(

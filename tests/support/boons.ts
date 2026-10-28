@@ -1,5 +1,16 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "ember-platter": "Burn hits also apply 1 Burn to other enemies",
+  "ash-bowl": "Burn damage removes 1 Thorns from enemies",
+  mossball: "When an ally gains Thorns, another ally with the fewest Thorns gains 1 Thorns",
+  "skyiron-horseshoe": "Dodging an attack steals 1 Armor from the attacker",
+  "nebula-weld-clamp": "Allied Armor reduces Poison damage without wearing down",
+  "clover-measuring-scoop": "Healing restores 2 extra Health for each harmful effect on the ally",
+  "treaty-teapot": "Enemies with Thorns cannot retaliate against allies with Thorns",
+  "dawn-gong": "When an ally is Stunned, Cleanse Stun from other allies",
+  "acrobat-top": "After an ally Dodges, their next attack cannot be Dodged",
+  "remembrance-wreath": "Resurrected allies gain Negate",
+
   "sandfold-parasol": "When an ally Dodges, other allies Dodge the same attack",
   "ribbon-spool": "An ally’s immunity to Stun and Freeze protects all allies",
   "dawn-key": "Light attacks break through Negate",

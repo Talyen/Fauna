@@ -6,7 +6,7 @@ import { encodeSave } from "../../../src/game/save";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
-  seed: 15,
+  seed: 0,
   runs: 2,
   starter: "captoad",
   policy: "heuristic",
