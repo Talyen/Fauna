@@ -1,8 +1,9 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { expect, it } from "vitest";
-import { put, temporaryDirectory } from "../../support/tooling.mjs";
+import { put, repository, temporaryDirectory } from "../../support/tooling.mjs";
 import { expireEvidence, expiringEvidence } from "../../../scripts/lib/evidence-retention.mjs";
+import { review } from "../../../scripts/agent/agent-review.mjs";
 import { sealBalanceReport } from "../../../scripts/balance/report-retention.mjs";
 import {
   createDevelopmentRun,
@@ -70,6 +71,36 @@ it("expires only complete, unchanged focused captures within mixed reports", () 
   writeFileSync(path.join(archive, "manifest.json"), JSON.stringify({ retention }));
   expect(expireEvidence(root, { now: 86_400_000 })).toEqual([path.join(archive, "files", capture)]);
   expect(existsSync(path.join(archive, "files/reports/localization/font-sources/source.otf"))).toBe(true);
+});
+
+it("expires reconstructible committed reviews but preserves reviews containing unfinished source", () => {
+  const source = repository({ ".gitignore": "reports/\n", "source.txt": "committed" });
+  const clean = review(source, [], { base: "HEAD" });
+  put(source, "source.txt", "unfinished source");
+  const dirty = review(source, [], { base: "HEAD" });
+  expect(clean.retention).toBeDefined();
+  expect(dirty.retention).toBeUndefined();
+
+  const root = temporaryDirectory("fauna-review-retention-");
+  const archive = path.join(root, "task-one");
+  put(archive, "files/reports/placeholder", "retain");
+  cpSync(path.join(source, "reports/agent-diff"), path.join(archive, "files/reports/agent-diff"), {
+    recursive: true,
+  });
+  const retention = expiringEvidence(archive, ["reports/"], 0);
+  writeFileSync(path.join(archive, "manifest.json"), JSON.stringify({ retention }));
+  expect(expireEvidence(root, { now: 86_400_000 })).toEqual([
+    path.dirname(clean.patches).replace(source, path.join(archive, "files")),
+  ]);
+  expect(
+    JSON.parse(readFileSync(path.join(archive, "manifest.json"), "utf8")).retention.entries[0].review,
+  ).toMatchObject({ retention: clean.retention, selected: clean.selected });
+  expect(
+    readFileSync(
+      path.dirname(dirty.patches).replace(source, path.join(archive, "files")) + "/patches.txt",
+      "utf8",
+    ),
+  ).toContain("unfinished source");
 });
 
 it("expires only sealed complete balance and identifiable generated runs", async () => {

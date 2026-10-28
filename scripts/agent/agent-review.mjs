@@ -68,6 +68,25 @@ function netInventory(root, base) {
     entries.push({ status: "??", file });
   return entries;
 }
+
+// Only a clean, unchanged committed diff is safe to regenerate after retirement.
+function committedReviewIdentity(root, base) {
+  try {
+    if (reviewGit(root, ["status", "--porcelain=v1", "--untracked-files=all"]).trim()) return null;
+    const resolve = (ref) =>
+      reviewGit(root, ["rev-parse", "--verify", "--end-of-options", `${ref}^{commit}`]).trim();
+    const identity = { version: 1, base: resolve(base), head: resolve("HEAD") };
+    reviewGit(root, ["merge-base", "--is-ancestor", identity.base, identity.head]);
+    return identity;
+  } catch {
+    return null;
+  }
+}
+
+function completedReviewIdentity(root, base, before) {
+  const after = committedReviewIdentity(root, base);
+  return before && after && JSON.stringify(before) === JSON.stringify(after) ? after : undefined;
+}
 export function review(
   root,
   inputs = [],
@@ -75,6 +94,7 @@ export function review(
 ) {
   const paths = selectPaths(root, inputs);
   const base = taskBase(root, requestedBase);
+  const identity = committedReviewIdentity(root, base);
   const all = layers ? inventory(root, base) : netInventory(root, base);
   if (!layers && paths.length) {
     const history = inventory(root, base);
@@ -100,7 +120,8 @@ export function review(
     const directory = path.join(root, "reports", "agent-diff", randomUUID());
     mkdirSync(directory, { recursive: true });
     const indexPath = path.join(directory, "index.json");
-    writeFileSync(indexPath, JSON.stringify({ base, inventory: all, selected }, null, 2));
+    const retention = completedReviewIdentity(root, base, identity);
+    writeFileSync(indexPath, JSON.stringify({ base, inventory: all, selected, retention }, null, 2));
     const rendered = selected.map((entry) => `${entry.status} ${JSON.stringify(entry.file)}`).join("\n");
     return {
       base,
@@ -162,6 +183,7 @@ export function review(
     inventory: all,
     selected: sections.map((s) => s.index),
     patches: path.join(directory, "patches.txt"),
+    retention: completedReviewIdentity(root, base, identity),
   };
   writeFileSync(index.patches, sections.map((s) => s.body).join("\n"));
   const indexPath = path.join(directory, "index.json");
