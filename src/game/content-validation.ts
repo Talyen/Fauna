@@ -77,8 +77,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "health", "Unsupported Health.");
     if (!entry.name.trim() || !entry.trait.trim())
       error(entry.id, "description", "Name and trait description required.");
-    if (entry.passiveTiers.length !== 6 || Array.from(entry.passiveTiers).some((tier) => !tier))
-      error(entry.id, "passiveTiers", "All six passive tiers must be defined.");
+    let completeTiers = entry.passiveTiers.length === 6;
+    if (completeTiers)
+      for (const tier of entry.passiveTiers)
+        if (!tier) {
+          completeTiers = false;
+          break;
+        }
+    if (!completeTiers) error(entry.id, "passiveTiers", "All six passive tiers must be defined.");
     const passiveEffects = new Set<string>();
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
@@ -96,11 +102,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       const effectKey = JSON.stringify(
         tier.effects
           .map((effect) =>
-            Object.entries(
-              effect.kind === "bounce" ? { ...effect, chance: effect.chance ?? 1 } : effect,
-            ).sort(([a], [b]) => a.localeCompare(b)),
+            JSON.stringify(
+              Object.entries(
+                effect.kind === "bounce" ? { ...effect, chance: effect.chance ?? 1 } : effect,
+              ).sort(([a], [b]) => a.localeCompare(b)),
+            ),
           )
-          .map((effect) => JSON.stringify(effect))
           .sort(),
       );
       if (passiveEffects.has(effectKey))

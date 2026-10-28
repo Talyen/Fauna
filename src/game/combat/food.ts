@@ -100,12 +100,14 @@ export function useFood(
       });
     if (def.effect === "mana") {
       gainMana(state, value, events);
-      if (def.id === "food-mana-berries" && state.boons.includes("cornucopia"))
+      if (def.id === "food-mana-berries" && state.boons.includes("cornucopia")) {
+        let healing: number | undefined;
         for (const ally of healingAllies(state)) {
-          restoreHealth(ally, cornucopiaHealing(state), events, false, state, true);
+          restoreHealth(ally, (healing ??= cornucopiaHealing(state)), events, false, state, true);
           if (state.boons.includes("velvet-whisk"))
             grantTemporaryDodge(ally, boonRule("velvet-whisk").dodge, events);
         }
+      }
     } else {
       const recipients = foodForAllies(def, state)
         ? def.effect === "heal"
