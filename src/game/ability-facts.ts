@@ -131,23 +131,13 @@ export function ordinaryAttackFacts(
   const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
   const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
+  const packet = { origin: "ability" as const, cardLeech };
   const outcomes: OrdinaryHit[] = [];
   const count = def.alternateDamageType ? 2 : 1;
   for (let index = 0; index < count; index++) {
     const type = index === 0 ? def.damageType : def.alternateDamageType!;
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
-    const baseDamage = modifiedDamage(
-      paid,
-      actor,
-      enemy,
-      magnitude,
-      type,
-      {
-        origin: "ability",
-        cardLeech,
-      },
-      true,
-    );
+    const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
     const damage = baseDamage * (lastCardCritical ? 2 : 1);
     const armored = armorApplies(state, enemy, type, actor);
     const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;

@@ -72,7 +72,7 @@ const category = (name) =>
       ? "paint"
       : /GC|CollectGarbage/.test(name)
         ? "garbage collection"
-        : /FunctionCall|EvaluateScript|RunMicrotasks|v8.execute|V8.Execute/.test(name)
+        : /FunctionCall|EvaluateScript|RunMicrotasks|v8\.execute|V8\.Execute/.test(name)
           ? "script"
           : null;
 
@@ -84,7 +84,7 @@ export function attributeTrace(trace, sample, hitches) {
   if (
     !Array.isArray(hitches) ||
     hitches.length > 20 ||
-    hitches.some(
+    Array.from(hitches).some(
       (gap) =>
         !gap ||
         !Number.isFinite(gap.start) ||
@@ -97,10 +97,12 @@ export function attributeTrace(trace, sample, hitches) {
     )
   )
     return { available: false, reason: "Invalid hitch intervals or attribution budget exceeded" };
-  const start = events.find((event) => event?.name === "fauna-capture-start");
-  const end = events.find(
-    (event) => event?.name === "fauna-capture-end" && event.pid === start?.pid && event.tid === start?.tid,
-  );
+  const starts = events.filter((event) => event?.name === "fauna-capture-start");
+  const ends = events.filter((event) => event?.name === "fauna-capture-end");
+  if (starts.length !== 1 || ends.length !== 1)
+    return { available: false, reason: "Missing or ambiguous renderer synchronization markers" };
+  const [start] = starts;
+  const [end] = ends;
   if (
     !start ||
     !end ||
@@ -108,12 +110,18 @@ export function attributeTrace(trace, sample, hitches) {
     !Number.isFinite(end.ts) ||
     !Number.isInteger(start.pid) ||
     !Number.isInteger(start.tid) ||
+    end.pid !== start.pid ||
+    end.tid !== start.tid ||
+    start.ts < 0 ||
     end.ts <= start.ts ||
-    !Number.isFinite(sample.markerStart) ||
-    !Number.isFinite(sample.markerEnd) ||
+    !Number.isFinite(sample?.markerStart) ||
+    !Number.isFinite(sample?.markerEnd) ||
+    sample.markerStart < 0 ||
     sample.markerEnd <= sample.markerStart
   )
     return { available: false, reason: "Missing renderer synchronization markers" };
+  if (hitches.some((gap) => gap.start < sample.markerStart || gap.end > sample.markerEnd))
+    return { available: false, reason: "Hitch interval outside synchronized capture" };
   const offset = start.ts / 1000 - sample.markerStart;
   if (Math.abs(end.ts / 1000 - offset - sample.markerEnd) > 5)
     return { available: false, reason: "Trace and renderer clocks did not align" };

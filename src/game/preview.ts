@@ -6,7 +6,7 @@ export type PlayProjection =
   | { kind: "complete"; outcomes: readonly CommandResult[]; replays: number }
   | { kind: "unknown"; reason: "hidden" | "budget"; replays: number };
 class Fork extends Error {
-  constructor(readonly values: readonly number[]) {
+  constructor(readonly decision: RandomDecision) {
     super("Alternative decisions");
   }
 }
@@ -50,13 +50,7 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
                 )
                   return decision.kind === "chance" ? 0 : 0.5;
                 const choice = choices[index++];
-                if (choice === undefined) {
-                  const values =
-                    decision.kind === "chance"
-                      ? [0, decision.threshold]
-                      : Array.from({ length: decision.size }, (_, i) => (i + 0.5) / decision.size);
-                  throw new Fork(values);
-                }
+                if (choice === undefined) throw new Fork(decision);
                 return choice;
               },
               {
@@ -69,8 +63,14 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
         );
       } catch (error) {
         if (!(error instanceof Fork)) throw error;
-        if (pending.length + outcomes.length + error.values.length > 64) throw new Unresolved("budget");
-        for (const value of error.values) pending.push([...choices, value]);
+        const decision = error.decision;
+        const count = decision.kind === "chance" ? 2 : decision.size;
+        if (pending.length + outcomes.length + count > 64) throw new Unresolved("budget");
+        for (let option = 0; option < count; option++) {
+          const value =
+            decision.kind === "chance" ? (option === 0 ? 0 : decision.threshold) : (option + 0.5) / count;
+          pending.push([...choices, value]);
+        }
       }
     }
     return { kind: "complete", outcomes, replays };

@@ -4,6 +4,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
 import {
+  finishInteractionRun,
   parseInteractionArgs,
   reserveInteractionReport,
   shrinkTrace,
@@ -163,9 +164,14 @@ try {
       );
     }
   } finally {
-    await browser.close();
-    await new Promise((resolve) => server.httpServer.close(resolve));
-    await writeFile(path.join(out, "report.json"), JSON.stringify(report, null, 2));
+    await finishInteractionRun(
+      () => browser.close(),
+      () =>
+        new Promise((resolve, reject) =>
+          server.httpServer.close((error) => (error ? reject(error) : resolve())),
+        ),
+      () => writeFile(path.join(out, "report.json"), JSON.stringify(report, null, 2)),
+    );
   }
   console.log(
     `${report.complete ? "Complete" : "Failed"} interaction trace: ${path.join(out, "report.json")}`,

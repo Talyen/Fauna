@@ -86,13 +86,13 @@ Configure `WINDOWS_CSC_LINK` and `WINDOWS_CSC_KEY_PASSWORD` in the protected `re
 
 ## Dependency inventory and provenance
 
-Every production build runs `npm run generate:release-inventory` after Vite, producing `dependencies.cdx.json` and `THIRD-PARTY-NOTICES.txt`. The CycloneDX inventory covers production npm build inputs and the distributed Electron runtime, not every native Chromium component; retain Electron's `LICENSE.electron.txt` and `LICENSES.chromium.html`. Installed production versions must match the lockfile and include nonempty license text. Font and shadcn notices are included.
+Every production build runs `npm run generate:release-inventory` after Vite, producing `dependencies.cdx.json` and `THIRD-PARTY-NOTICES.txt`. The CycloneDX inventory covers production npm build inputs and the distributed Electron runtime, not every native Chromium component; retain Electron's `LICENSE.electron.txt` and `LICENSES.chromium.html`. Installed production names and versions must match the lockfile (including explicit npm aliases), and dependency paths must identify canonical package locations. Dependency, font and shadcn license texts must all be nonempty. Inventory generation requires an existing renderer before it inspects dependencies or invokes npm. It rejects an SBOM for a different application/version and a lockfile changed during the npm command before replacing existing evidence. Unsupported optional packages are omitted according to npm OS/CPU restrictions, including exclusions; required packages remain mandatory.
 
 The published react-remove-scroll-bar 2.3.8 package omits its MIT text. Its [supplemental license](third-party/react-remove-scroll-bar-LICENSE.txt) comes from [upstream commit 7301c160](https://github.com/theKashey/react-remove-scroll-bar/blob/7301c160fda44cb8cf2b9fdfde61efad35736196/LICENSE); the fallback applies only to that version.
 
 Koffi 3.3.3 and 3.3.4 platform binary packages omit license text. Their manifests declare MIT, and their matching `koffi` package supplies that text. The inventory uses it only when the installed parent, native package and locked parent versions match and both manifests declare MIT.
 
-After package validation, Windows CI runs `npm run generate:release-inventory -- --package release/win-unpacked` to retain hashes of the final executable, archive and Electron license inventories. Once the complete gate passes, trusted main/tag pushes attest the executable, ASAR and matching SBOM in a separate job with narrowly scoped OIDC permissions. Branch/PR jobs receive neither attestation-write nor OIDC permissions. Artifacts preserve `release/`, `dist/` and `reports/` paths so attestation consumes exact same-run files.
+After package validation, Windows CI runs `npm run generate:release-inventory -- --package release/win-unpacked` to retain hashes of the final executable, archive and Electron license inventories. Hashing streams each component and rejects files changed during the read before replacing the inventory receipt. Once the complete gate passes, trusted main/tag pushes attest the executable, ASAR and matching SBOM in a separate job with narrowly scoped OIDC permissions. Branch/PR jobs receive neither attestation-write nor OIDC permissions. Artifacts preserve `release/`, `dist/` and `reports/` paths so attestation consumes exact same-run files.
 
 Optional signed candidates inventory final signed components and attest installer/SBOM for the explicitly selected release tag. Provenance establishes build origin/integrity, not Authenticode trust or suppression of Windows warnings; qualify installer and Steam delivery separately.
 
@@ -106,7 +106,7 @@ npm run generate:patch-notes
 npm run generate:patch-notes -- --tag v0.1.0 --dry-run
 ```
 
-Without a tag, the range is the nearest reachable release tag through HEAD; a tagged release starts after its nearest preceding reachable release tag. Unrelated tags and tag dates do not affect selection. With no preceding release, all reachable non-merge commits are considered; uncommitted edits are excluded. Drafts go under ignored `reports/release-notes/`; dry-run prints without writing.
+Without a tag, the range is the nearest reachable release tag through HEAD; a tagged release starts after its nearest preceding reachable release tag. Unrelated tags and tag dates do not affect selection. With no preceding release, all reachable non-merge commits are considered; uncommitted edits are excluded. Release tags use the same strict version grammar as package identity; malformed version tags cannot become note baselines. Drafts go under ignored `reports/release-notes/`; dry-run prints without writing.
 
 | History                                          | Draft treatment                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------- |

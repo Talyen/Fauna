@@ -96,6 +96,7 @@ function evaluateEnemyCard(
   allyTargetId?: string,
 ) {
   const spentCard = enemy.deck?.hand.includes(def.id) ? 1 : 0;
+  const spentResources = enemy.deck ? def.cost + spentCard : 0;
   let total = 0;
   for (let probe = 0; probe < 8; probe++) {
     let decisions = 0;
@@ -106,7 +107,7 @@ function evaluateEnemyCard(
       if (lastCardInHand) lastWarmth(draft, true, []);
     });
     // Rank effect value, with Mana paid before restoration so resource caps are accurate.
-    const value = positionValue(after) - before + (enemy.deck ? def.cost + spentCard : 0);
+    const value = positionValue(after) - before + spentResources;
     total += value;
     if (probe === 0 && decisions === 0) {
       // With no random or hidden decision, every remaining probe follows the same path.
@@ -146,9 +147,9 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
         : cardTargeting(def) === "ally"
           ? (livingAllies ??= recipientIds(battlefieldView(state, "enemy"), true))
           : (self ??= [enemy.id]);
+    let cardValues = recipients.length ? values?.get(def) : undefined;
+    if (recipients.length && values && !cardValues) values.set(def, (cardValues = new Map()));
     for (const allyTargetId of recipients) {
-      let cardValues = values?.get(def);
-      if (values && !cardValues) values.set(def, (cardValues = new Map()));
       let value = cardValues?.get(allyTargetId);
       if (value === undefined) {
         if (!targetResolved) {

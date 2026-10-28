@@ -134,11 +134,13 @@ export function recruitLineup(
     return ids.includes(incoming.id) && species(incoming.species).legendary ? [incoming.id] : ids;
   }
   const active = state.team.map((unit) => unit.id);
-  return active.length < 3 &&
+  if (
+    active.length < 3 &&
     !species(incoming.species).legendary &&
     !state.team.some((unit) => species(unit.species).legendary)
-    ? [...active, incoming.id]
-    : active;
+  )
+    active.push(incoming.id);
+  return active;
 }
 /** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
@@ -259,7 +261,9 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
       }
     }
   }
-  state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
+  const cards = removed.size ? retained.filter((card) => !removed.has(card.id)) : retained;
+  cards.push(...mapped);
+  state.cards = cards;
   if (state.battle) {
     const kept = new Set<string>();
     for (const card of state.cards) kept.add(card.id);
@@ -400,7 +404,8 @@ export function swapFromCard(
   const allied = isRosterCreature(actor);
   const row = allied ? state.team : state.battle!.enemies;
   // A repeat cannot swap an actor that already left the deployed formation.
-  if (!row.some((unit) => unit.id === actor.id)) return;
+  const from = row.findIndex((unit) => unit.id === actor.id);
+  if (from < 0) return;
   if (allied && backupId !== undefined) {
     const incoming = state.reserves.find((unit) => unit.id === backupId && unit.health > 0);
     if (incoming) {
@@ -420,7 +425,6 @@ export function swapFromCard(
   const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
   if (!others.length) return;
   const other = others[Math.floor(roll(state, { kind: "index", size: others.length }) * others.length)]!;
-  const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
   if (allied) {

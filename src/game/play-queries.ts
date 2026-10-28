@@ -153,7 +153,8 @@ export function hasAvailablePlay(state: BattleState): boolean {
     }
     return lastRecoverable;
   };
-  for (const [index, id] of state.battle.hand.entries()) {
+  for (let index = 0; index < state.battle.hand.length; index++) {
+    const id = state.battle.hand[index]!;
     if (index === 1) {
       cards = new Map<string, Card>();
       for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
@@ -188,8 +189,9 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
   let recoverableByActor: Map<string, boolean> | undefined;
   const recoverable = (actorId: string) => {
     recoverableByActor ??= new Map();
-    if (!recoverableByActor.has(actorId)) recoverableByActor.set(actorId, hasDiscardDrawCard(state, actorId));
-    return recoverableByActor.get(actorId)!;
+    let result = recoverableByActor.get(actorId);
+    if (result === undefined) recoverableByActor.set(actorId, (result = hasDiscardDrawCard(state, actorId)));
+    return result;
   };
   const plays: AvailablePlay[] = [];
   for (const cardId of state.battle.hand) {

@@ -265,7 +265,8 @@ export function* passingFlame({ state, source, target, events }: HitContext): Re
   const share = Math.floor(total / recipients.length);
   const remainder = total % recipients.length;
   // Preserve the rounded total; ties for indivisible stacks retain battlefield order.
-  for (const [index, recipient] of recipients.entries()) {
+  for (let index = 0; index < recipients.length; index++) {
+    const recipient = recipients[index]!;
     if (source.health <= 0) break;
     const amount = share + Number(index < remainder);
     if (amount > 0) yield* reaction("applyHarmfulStatus", state, source, recipient, amount, "burn", events);
