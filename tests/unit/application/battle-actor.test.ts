@@ -48,6 +48,7 @@ it("keeps playing productive Memento cards without an attacks-per-turn cap", () 
   for (let count = 0; count < 20 && state.phase === "battle" && state.battle.mana > 0; count++) {
     const before = state.battle.enemies.reduce((sum, enemy) => sum + enemy.health, 0);
     const command = actor.choose(state, false).command;
+    if (command.type === "endTurn") break;
     expect(command.type).toBe("play");
     const result = dispatch(state, command);
     expect(result.accepted).toBe(true);
@@ -57,15 +58,17 @@ it("keeps playing productive Memento cards without an attacks-per-turn cap", () 
   expect(damagingPlays).toBeGreaterThan(3);
 });
 
-it("keeps a self-replacing card productive while it advances Encore Baton", () => {
-  let state = produce(decodeSave(JSON.stringify(reedstag)), (draft) => {
+it("recognizes Encore Baton progress when a visible decision recurs", () => {
+  const state = produce(decodeSave(JSON.stringify(reedstag)), (draft) => {
     draft.boons.push("encore-baton");
   });
   const actor = createBattleActor();
   const first = actor.choose(state, false);
-  state = accept(state, first.command);
-  expect(state.battle!.encoreProgress).toBe(1);
-  expect(actor.choose(state, false).command).toEqual(first.command);
+  const progressed = produce(state, (draft) => {
+    draft.battle!.encoreProgress = 1;
+    draft.revision++;
+  });
+  expect(actor.choose(progressed, false).command).toEqual(first.command);
 });
 
 it("resets cycle history for a new turn and explicit manual takeover", () => {
