@@ -116,7 +116,7 @@ Positive healing and effect values round to the nearest integer; received-healin
 
 Opening effects apply only at battle start to deployed creatures, never on purchases, resets, swaps or resume. Flashpoint is consumed by the first accepted Burn play whether or not it is currently purchased.
 
-A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the battle deck includes a Water card. Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to seven with Raincatcher Bowl. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
+A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the battle deck includes a Water card. Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to seven with Raincatcher Bowl. Rainkeeper raises the amount of Mana that can be held by two above that turn's maximum, reaching nine with all applicable bonuses; it does not add Mana Crystals or increase turn restoration. [Mana capacity](../src/game/ability-rules.ts) owns that overflow limit. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
 
 ### Repeats and derived effects
 

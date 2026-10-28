@@ -12,11 +12,14 @@ export interface JourneyDecision {
   command: Command;
   reason: string;
 }
+function livingRosterKinds(state: GameState) {
+  const kinds: GameState["team"][number]["species"][] = [];
+  for (const row of [state.team, state.reserves])
+    for (const unit of row) if (unit.health > 0) kinds.push(unit.species);
+  return kinds;
+}
 /** Prepare roster facts once when comparing multiple Boons. */
-function boonScorer(
-  state: GameState,
-  kinds = [...state.team, ...state.reserves].filter((unit) => unit.health > 0).map((unit) => unit.species),
-) {
+function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
   const has = capabilities(state, kinds);
   const healing =
     has.has("health") ||
@@ -34,11 +37,18 @@ function boonScorer(
   let livingBackup: boolean | undefined;
   const hasLivingBackup = () => (livingBackup ??= state.reserves.some((unit) => unit.health > 0));
   const swapping = effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest");
-  const thorns =
-    effect("dreamDouble") ||
-    effect("teamProtection") ||
-    state.boons.includes("ironwood-buckler") ||
-    cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
+  let thorns: boolean | undefined;
+  const hasThorns = () =>
+    (thorns ??=
+      effect("dreamDouble") ||
+      effect("teamProtection") ||
+      state.boons.includes("ironwood-buckler") ||
+      cards.some((card) =>
+        card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"),
+      ));
+  let reflection: boolean | undefined;
+  const hasReflection = () =>
+    (reflection ??= cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")));
   return (boon: BoonId): number => {
     switch (boon) {
       case "vanishing-hat":
@@ -57,7 +67,7 @@ function boonScorer(
         return has.has("poison") && has.has("purge") ? 60 : 0;
       case "rosewax-seal":
       case "rootspool":
-        return thorns ? 60 : 0;
+        return hasThorns() ? 60 : 0;
       case "crown-waffle-iron":
         return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
           has.has("block")
@@ -68,7 +78,7 @@ function boonScorer(
       case "overflow-cup":
         return healing && kinds.length > 1 ? 60 : 0;
       case "ripple-mirror":
-        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 60 : 0;
+        return hasReflection() ? 60 : 0;
       case "sail-needle":
       case "dandelion-poultice":
         return has.has("cleanse") || state.boons.includes("knot-comb") ? 60 : 0;
@@ -87,7 +97,7 @@ function boonScorer(
       case "acorn-skittle":
         return has.has("stun") ? 60 : 0;
       case "wonder-kaleidoscope":
-        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+        return hasReflection() ? 50 : 0;
       case "welcome-doormat":
         return swapping ? 50 : 0;
       case "shelter-lantern":
@@ -116,7 +126,7 @@ function boonScorer(
           ? 60
           : 0;
       case "pollen-basket":
-        return kinds.length > 1 && thorns ? 60 : 0;
+        return kinds.length > 1 && hasThorns() ? 60 : 0;
       case "farewell-oar":
         return swapping && has.has("block") ? 60 : 0;
       case "oasis-seed":
@@ -135,7 +145,7 @@ function boonScorer(
       case "frostglass-die":
         return has.has("freeze") ? 60 : 0;
       case "reef-diadem":
-        return has.has("water") && thorns ? 60 : 0;
+        return has.has("water") && hasThorns() ? 60 : 0;
       case "chromatic-viol":
         return has.has("attack") ? 50 : 0;
       case "mirror-locket":
@@ -163,7 +173,7 @@ function boonScorer(
       case "tide-anklet":
         return swapping ? 60 : 0;
       case "tidecrest-hairpin":
-        return thorns ? 60 : 0;
+        return hasThorns() ? 60 : 0;
       case "stardust-whetstone":
         return has.has("physical") ? 60 : 0;
       case "ashfall-pendant":
@@ -194,7 +204,7 @@ function boonScorer(
       case "basalt-glass-bookmark":
         return 40;
       case "star-hoop":
-        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+        return hasReflection() ? 50 : 0;
       case "blooming-still":
       case "miracle-megaphone":
       case "thistle-sieve":
@@ -209,7 +219,7 @@ function boonScorer(
       case "comb-uncapping-fork":
       case "resonance-kalimba":
       case "thornheart-ring":
-        return thorns ? 60 : 0;
+        return hasThorns() ? 60 : 0;
       case "fern-fencing-foil":
         return has.has("dodge") ? 60 : 0;
       case "reef-casket":
@@ -284,7 +294,7 @@ function boonScorer(
           ? 60
           : 0;
       case "briar-racquet":
-        return thorns ? 50 : 0;
+        return hasThorns() ? 50 : 0;
       case "pruning-crescent":
         return has.has("purge") || cards.some((card) => card.effect === "attack" && card.purgeThorns)
           ? 50

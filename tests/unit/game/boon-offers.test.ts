@@ -2,7 +2,8 @@ import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import { offerBoons, rosterBoonKeywords } from "../../../src/game/boon-offers";
 import { BOONS } from "../../../src/game/content";
-import { observeDecisions } from "../../../src/game/random";
+import { BOON_KEYWORDS } from "../../../src/game/content/boon-keywords";
+import { roll, observeDecisions } from "../../../src/game/random";
 import { starterJourney, teamRun } from "../../support/game";
 
 describe("team-weighted Boon offers", () => {
@@ -52,4 +53,34 @@ describe("team-weighted Boon offers", () => {
     expect(new Set(first.offered).size).toBe(3);
     expect(first.offered).not.toContain("ember-platter");
   });
+});
+
+it("preserves weighted offers and RNG against the original sampler as the pool shrinks", () => {
+  for (const seed of [1, 23, 42]) {
+    for (const remaining of [0, 1, 2, 7, BOONS.length]) {
+      const state = produce(starterJourney(seed, "cindernewt"), (draft) => {
+        draft.boons = BOONS.slice(remaining).map((boon) => boon.id);
+      });
+      let actual: ReturnType<typeof offerBoons> = [];
+      const after = produce(state, (draft) => {
+        actual = offerBoons(draft);
+      });
+      const expected: ReturnType<typeof offerBoons> = [];
+      const baseline = produce(state, (draft) => {
+        const keywords = rosterBoonKeywords(draft);
+        const pool = BOONS.filter((boon) => !draft.boons.includes(boon.id)).map((boon) => ({
+          id: boon.id,
+          weight: BOON_KEYWORDS[boon.id]?.some((keyword) => keywords.has(keyword)) ? 2 : 1,
+        }));
+        while (pool.length && expected.length < 3) {
+          let choice = roll(draft) * pool.reduce((sum, boon) => sum + boon.weight, 0);
+          let index = 0;
+          while (index < pool.length - 1 && choice >= pool[index]!.weight) choice -= pool[index++]!.weight;
+          expected.push(pool.splice(index, 1)[0]!.id);
+        }
+      });
+      expect(actual).toEqual(expected);
+      expect(after).toEqual(baseline);
+    }
+  }
 });

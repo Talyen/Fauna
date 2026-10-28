@@ -143,6 +143,12 @@ export function recruitLineup(
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
   // Repeat discoveries improve Collection rank without replacing or refreshing an individual.
   if (rosterHasSpecies(state, kind)) return;
+  if (
+    replacement &&
+    !state.team.some((unit) => unit.id === replacement) &&
+    !state.reserves.some((unit) => unit.id === replacement)
+  )
+    return;
   let id = `recruit-${state.revision}`;
   for (
     let suffix = 1;
@@ -274,9 +280,9 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
 }
 /** Knockout replacement is derived from the committed roster, including after resume. */
 export function pendingReplacement(state: GameState) {
-  return state.phase === "battle" && state.reserves.some((unit) => unit.health > 0)
-    ? state.team.find((unit) => unit.health <= 0)
-    : undefined;
+  if (state.phase !== "battle") return;
+  const fallen = state.team.find((unit) => unit.health <= 0);
+  return fallen && state.reserves.some((unit) => unit.health > 0) ? fallen : undefined;
 }
 /** The guide can lead the arrival or accompany it; inactive backups supply no protection. */
 export function mountainGuide(
@@ -315,7 +321,8 @@ export function swapBackup(
   const index = state.team.findIndex((unit) => unit.id === activeId);
   const backupIndex = state.reserves.findIndex((unit) => unit.id === backupId);
   const outgoing = state.team[index];
-  const incoming = state.reserves[backupIndex]!;
+  const incoming = state.reserves[backupIndex];
+  if (!incoming) return;
   const previous = [...state.team];
   if (!outgoing || species(incoming.species).legendary || species(outgoing.species).legendary) {
     const formation = formationForSwap(
@@ -392,12 +399,17 @@ export function swapFromCard(
   const row = allied ? state.team : state.battle!.enemies;
   // A repeat cannot swap an actor that already left the deployed formation.
   if (!row.some((unit) => unit.id === actor.id)) return;
-  const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
+  if (allied && backupId !== undefined) {
+    const incoming = state.reserves.find((unit) => unit.id === backupId && unit.health > 0);
+    if (incoming) {
+      swapBackup(state, actor.id, incoming.id, events, true);
+      return incoming;
+    }
+    if (state.reserves.some((unit) => unit.health > 0)) return;
+  }
+  const backup = allied && backupId === undefined ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
-    const incoming =
-      backupId !== undefined
-        ? backup.find((unit) => unit.id === backupId)
-        : backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
+    const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
     if (!incoming) return;
     swapBackup(state, actor.id, incoming.id, events, true);
     return incoming;

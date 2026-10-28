@@ -147,7 +147,8 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
   if (eligible) drawEligibleCard(state, eligible, events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
-  queueCard(state.battle!, handCapacity(state), id);
+  const capacity = handCapacity(state);
+  queueCard(state.battle!, capacity, id);
   let original: Card | undefined;
   const originalCard = () => (original ??= state.cards.find((card) => card.id === id));
   if (state.boons.includes("dune-shuttle")) {
@@ -164,7 +165,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     if (!succeeds(state, chance / 100, false, events)) continue;
     const original = originalCard()!;
     const copy = createTemporaryCard(state, original)!;
-    queueCard(state.battle!, handCapacity(state), copy.id);
+    queueCard(state.battle!, capacity, copy.id);
     events.push({
       kind: "action",
       actionType: "support",
