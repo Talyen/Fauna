@@ -126,11 +126,7 @@ function renderRules(
   locale: GameLocale = "fr",
 ) {
   const view = renderLocalized(
-    <>
-      {cards.map((props, index) => (
-        <CardRules key={index} {...props} />
-      ))}
-    </>,
+    cards.map((props, index) => <CardRules key={index} {...props} />),
     catalog,
     locale,
   );
@@ -150,20 +146,19 @@ function renderMessages(children: ReactNode, catalog: MessageCatalog = french) {
 
 function renderBattle(game: Parameters<typeof requireBattle>[0], catalog: MessageCatalog = french) {
   const send = vi.fn(() => true);
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <TooltipProvider>
-        <BattleScreen
-          game={requireBattle(game)}
-          send={send}
-          controls={{ current: null }}
-          bursts={[]}
-          controller={false}
-          navigateFocus={false}
-          onDenied={() => {}}
-        />
-      </TooltipProvider>
-    </MessageProvider>,
+  const view = renderMessages(
+    <TooltipProvider>
+      <BattleScreen
+        game={requireBattle(game)}
+        send={send}
+        controls={{ current: null }}
+        bursts={[]}
+        controller={false}
+        navigateFocus={false}
+        onDenied={() => {}}
+      />
+    </TooltipProvider>,
+    catalog,
   );
   return { view, send };
 }
@@ -638,7 +633,7 @@ it("localizes campfire health and committed recovery without changing the rest o
   const result = dispatch(before, { type: "rest" });
   expect(result.accepted).toBe(true);
   expect(result.state.rng).toBe(before.rng);
-  const { container, rerender, unmount } = renderMessages(
+  const { container, rerender } = renderMessages(
     <TooltipProvider>
       <Campfire game={before} send={() => true} />
     </TooltipProvider>,
@@ -652,8 +647,6 @@ it("localizes campfire health and committed recovery without changing the rest o
   );
   const after = result.state.team[0]!.health;
   expect(container.textContent).toContain(`5 → ${after} Santé · +${after - 5}`);
-  unmount();
-  vi.unstubAllGlobals();
 });
 
 it("announces a summoned Echo by its localized identity", () => {
@@ -1300,16 +1293,16 @@ it("a late Steam response cannot override a manual language choice", async () =>
 });
 
 it("keeps play usable when optional language storage or Steam access fails", async () => {
-  const read = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+  vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
     throw new Error("unavailable");
   });
-  const write = vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+  vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
     throw new Error("unavailable");
   });
   const steamLanguage = () => {
     throw new Error("Steam unavailable");
   };
-  const view = render(
+  render(
     <LocalizationProvider
       catalogs={{ fr: {} }}
       qualified={["en", "fr"]}
@@ -1324,9 +1317,6 @@ it("keeps play usable when optional language storage or Steam access fails", asy
   });
   fireEvent.click(screen.getByRole("button", { name: "French" }));
   expect(screen.getByLabelText("locale").textContent).toBe("fr");
-  view.unmount();
-  read.mockRestore();
-  write.mockRestore();
 });
 
 it("updates the battle mana announcement while preserving the same interactive control", () => {
@@ -1467,9 +1457,7 @@ it("shows localized Mana gained in a targeting preview without playing the card"
 });
 
 it("changes language from Settings and returns focus without changing the journey", async () => {
-  const rects = vi
-    .spyOn(HTMLElement.prototype, "getClientRects")
-    .mockReturnValue([{}] as unknown as DOMRectList);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   const session = createSession(createBrowserPlatform(), 7);
   await session.load();
   const before = session.store.getState().game;
@@ -1504,9 +1492,6 @@ it("changes language from Settings and returns focus without changing the journe
   } finally {
     view.unmount();
     await session.dispose();
-    rects.mockRestore();
-    vi.unstubAllGlobals();
-    localStorage.removeItem("fauna.language.v1");
   }
 });
 
@@ -2130,9 +2115,8 @@ it("presents conditional damage and Armor removal with their gameplay values", (
     { card: definition("alpenglen-last-light-charge"), value: 4 },
     { card: definition("cindernewt-ember-breath"), value: 2 },
   ]);
-  const rules = view.rules;
-  expect(rules[0]).toContain("dernière carte en main");
-  expect(rules[1]).toContain("50% de l’Armure");
+  expect(view.rules[0]).toContain("dernière carte en main");
+  expect(view.rules[1]).toContain("50% de l’Armure");
   expect(view.container.querySelector('[data-keyword="light"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="armor"]')).toBeTruthy();
 });
@@ -2465,7 +2449,6 @@ it("extracts and presents transient combat status variants without changing thei
   const source = ruleMessage(combatStatuses(frozen)[0]!.text).template;
   const id = statusRuleVariantId("controlled", source);
   expect(french[id as keyof typeof french]).toMatchObject({ source });
-  localStorage.removeItem("fauna.language.v1");
   const view = renderLocalized(
     <>
       <CombatStatus combat={frozen} />

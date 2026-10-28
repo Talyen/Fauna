@@ -508,7 +508,6 @@ it.each([false, true])(
       [local],
     );
     let saved = initial;
-
     const { promise: gate, resolve: release } = deferred();
     const { promise: writing, resolve: entered } = deferred();
     let first = true;

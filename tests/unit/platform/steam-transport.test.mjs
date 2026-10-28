@@ -1,4 +1,4 @@
-import { it, expect, vi } from "vitest";
+import { it, expect, onTestFinished, vi } from "vitest";
 import { transportFixture } from "../../support/steam.mjs";
 import { createRequire } from "node:module";
 import { mkdtemp, rm, writeFile, mkdir, readdir, readFile } from "node:fs/promises";
@@ -32,22 +32,16 @@ it("drains every metadata write admitted before disposal and refuses later admis
 
 it("retires the Cloud worker immediately when native initialization fails", async () => {
   const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-  let f;
-  try {
-    f = await transportFixture({ initializationFails: true });
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-    expect((await f.adapter.identity()).available).toBe(false);
-    // Overlay pause remains useful when Cloud is unavailable.
-    f.overlay({ active: true });
-    expect(f.pause).toHaveBeenCalledWith(true);
-    await f.adapter.dispose();
-    expect(f.worker.kill).toHaveBeenCalledOnce();
-    expect(f.disconnect).toHaveBeenCalledOnce();
-  } finally {
-    await f?.adapter.dispose();
-    if (f) await rm(f.directory, { recursive: true, force: true });
-    warning.mockRestore();
-  }
+  onTestFinished(() => warning.mockRestore());
+  const f = await transportFixture({ initializationFails: true });
+  expect(f.worker.kill).toHaveBeenCalledOnce();
+  expect((await f.adapter.identity()).available).toBe(false);
+  // Overlay pause remains useful when Cloud is unavailable.
+  f.overlay({ active: true });
+  expect(f.pause).toHaveBeenCalledWith(true);
+  await f.adapter.dispose();
+  expect(f.worker.kill).toHaveBeenCalledOnce();
+  expect(f.disconnect).toHaveBeenCalledOnce();
 });
 
 it("rejects all timed-out requests even when native worker termination throws", async () => {
