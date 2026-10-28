@@ -32,7 +32,9 @@ State initial values and the main balance uncertainty. Estimates are proposals, 
 
 ## Write the player rule
 
-Give one exact, concise effect using [game terminology](../../../Docs/KEYWORDS.md#glossary-and-terminology) and the [effect-copy rule](../../../AGENTS.md#high-risk-invariants). Use established terms such as allies, effects, attacks, damage, Block and restore Health; avoid poetic synonyms, taglines, helper text and new keywords. Omit “your” when ownership is clear. Describe the automatic rule directly.
+Give one exact, concise effect using [game terminology](../../../Docs/KEYWORDS.md#glossary-and-terminology) and the [effect-copy rule](../../../AGENTS.md#high-risk-invariants). Edit for the fewest natural words that preserve the full rule. Use established terms such as allies, effects, attacks, damage, Block and restore Health; avoid poetic synonyms, taglines, helper text and new keywords. Omit “your” when ownership is clear. Describe the automatic rule directly.
+
+Avoid “target” in player-facing effects; name the affected ally or enemy naturally while keeping the recipient and scope clear. Refer to Food cards as “Food”, not “feeding” or “fed”: for example, “Food grants 2 Thorns to the ally receiving it”. Do not imply that Food without an ally recipient affects one.
 
 Keep restrictions essential to the player's decision visible; leave tuning, recipient tie-breaks and engine details in execution notes when they do not change reasonable expectations. “Mana can overflow”, “Cards Dodged by enemies return to hand” and “Light hits Blind Burning enemies” illustrate the intended brevity. Do not routinely restore qualifiers such as “single-target”, “all its hits” or “first living enemy” just because execution needs precision. Use hit, attack, draw, Cleanse and Purge only for their actual rules. Shortening must preserve meaning:
 
