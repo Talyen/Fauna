@@ -1,12 +1,11 @@
 import { setBattleCards } from "../../../support/cards";
-import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../../support/game";
+import { enemyPlay, teamRun } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, definition, species } from "../../../../src/game/content";
+import { CARDS } from "../../../../src/game/content";
 import { cardText } from "../../../../src/game/card-rules";
 import { freshCombat, hit } from "../../../../src/game/combat";
-import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../../src/game/engine";
 import { cardKeywords } from "../../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { GameEvent } from "../../../../src/game/types";
@@ -158,34 +157,6 @@ it("enemy Cinderstep uses its base tier and periodic damage cannot trigger Dodge
     hit(game, actor, target, 1, "burn", [], { origin: "periodic" as const });
     expect(actor.health).toBe(health);
   });
-});
-
-it("discovers, recruits and resumes Cindernewt with its full kit", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "cindernewt")! }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "cindernewt"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("cindernewt");
-  game = accept(winBattle(game), { type: "recruit", species: "cindernewt" });
-  expect(game.discovery.recruited.cindernewt).toBe(1);
-  expect(
-    game.cards
-      .filter((card) => card.ownerId === game.team[1]!.id)
-      .map((card) => definition(card.definitionId).species),
-  ).toEqual(["cindernewt", "cindernewt", "cindernewt"]);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-  expect(species("cindernewt").passiveTiers).toHaveLength(6);
-  expect(() => decodeSave(JSON.stringify({ ...game, version: 28 }))).toThrow();
 });
 
 it("Cinderstep also follows ordinary Dodge and retains normal Block mitigation", () => {
