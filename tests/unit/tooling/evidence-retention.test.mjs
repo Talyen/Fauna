@@ -1,8 +1,9 @@
 import { cpSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { expect, it } from "vitest";
-import { put, repository, temporaryDirectory } from "../../support/tooling.mjs";
+import { git, put, repository, temporaryDirectory } from "../../support/tooling.mjs";
 import { expireEvidence, expiringEvidence } from "../../../scripts/lib/evidence-retention.mjs";
+import { expireCheckoutReviews } from "../../../scripts/lib/review-retention.mjs";
 import { review } from "../../../scripts/agent/agent-review.mjs";
 import { sealBalanceReport } from "../../../scripts/balance/report-retention.mjs";
 import {
@@ -101,6 +102,52 @@ it("expires reconstructible committed reviews but preserves reviews containing u
       "utf8",
     ),
   ).toContain("unfinished source");
+});
+
+it("expires only unchanged, closed main-checkout committed reviews after a day", () => {
+  const root = repository({ ".gitignore": "reports/\n", "source.txt": "before" });
+  const base = git(root, "rev-parse", "HEAD");
+  put(root, "source.txt", "committed change");
+  git(root, "add", "source.txt");
+  git(root, "commit", "-qm", "change");
+  const clean = review(root, [], { base });
+  const changed = review(root, [], { base });
+  const pinned = review(root, [], { base });
+  const open = review(root, [], { base });
+  const late = review(root, [], { base });
+  const changedIndex = review(root, [], { base });
+  put(root, "source.txt", "unfinished source");
+  const dirty = review(root, [], { base });
+  writeFileSync(changed.patches, "edited report");
+  writeFileSync(changedIndex.indexPath, "edited summary");
+  put(path.dirname(pinned.patches), ".retention-keep", "");
+  const seals = path.join(root, "reports/.review-retention");
+  const created = [clean, changed, pinned, open, late, changedIndex].map(
+    (r) =>
+      JSON.parse(readFileSync(path.join(seals, `${path.basename(path.dirname(r.patches))}.json`), "utf8"))
+        .createdAt,
+  );
+  const closed = (files) => {
+    if (files[0] === path.dirname(open.patches)) return false;
+    if (files[0] === path.dirname(late.patches) && path.basename(files[2]).startsWith(".patches-expiring-"))
+      writeFileSync(files[2], "late source change");
+    return true;
+  };
+  expect(
+    expireCheckoutReviews(root, { now: Math.min(...created) + 86_400_000 - 1, isInactive: closed }),
+  ).toEqual([]);
+  expect(expireCheckoutReviews(root, { now: Math.max(...created) + 86_400_000, isInactive: closed })).toEqual(
+    [clean.patches],
+  );
+  expect(existsSync(clean.indexPath)).toBe(true);
+  expect(existsSync(path.join(path.dirname(clean.patches), "patches-expired.json"))).toBe(true);
+  expect(readFileSync(changed.patches, "utf8")).toBe("edited report");
+  expect(existsSync(pinned.patches)).toBe(true);
+  expect(existsSync(open.patches)).toBe(true);
+  expect(readFileSync(late.patches, "utf8")).toBe("late source change");
+  expect(readFileSync(changedIndex.indexPath, "utf8")).toBe("edited summary");
+  expect(existsSync(changedIndex.patches)).toBe(true);
+  expect(readFileSync(dirty.patches, "utf8")).toContain("unfinished source");
 });
 
 it("expires only sealed complete balance and identifiable generated runs", async () => {

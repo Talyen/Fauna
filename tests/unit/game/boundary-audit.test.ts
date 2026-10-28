@@ -162,7 +162,6 @@ it.each(["enemy-0", "echo-ally-0-0"])(
     expect(() => decodeSave(encodeSave(corrupt))).toThrow();
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [
           { source: "primary", data: encodeSave(corrupt) },

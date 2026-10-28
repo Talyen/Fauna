@@ -6,6 +6,7 @@ import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs"
 import { storageProfile, populateWorktree } from "./lib/worktree-storage.mjs";
 import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
 import { expireEvidence } from "./lib/evidence-retention.mjs";
+import { expireCheckoutReviews } from "./lib/review-retention.mjs";
 
 export function createWorktree(root, slug, base = "main", options = {}) {
   root = realpathSync(root);
@@ -19,6 +20,9 @@ export function createWorktree(root, slug, base = "main", options = {}) {
     const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());
     const removed = expireEvidence(path.join(common, "fauna-worktree-archives"));
     if (removed.length) console.log(`Expired evidence from ${removed.length} completed task outputs.`);
+    const reviews = expireCheckoutReviews(root);
+    if (reviews.length)
+      console.log(`Expired ${reviews.length} reconstructible main-checkout review patches.`);
   } catch (error) {
     console.warn(`Evidence expiration skipped: ${error.message}`);
   }

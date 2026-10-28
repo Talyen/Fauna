@@ -39,14 +39,18 @@ async function createSteam({
   /** @type {Promise<void> | undefined} */
   let disposal;
   /** @param {Error} error */
-  function stopTransport(error) {
-    const shouldKill = !transportStopped;
-    transportStopped = true;
+  function rejectRequests(error) {
     for (const entry of requests.values()) {
       clearTimeout(entry.timer);
       entry.reject(error);
     }
     requests.clear();
+  }
+  /** @param {Error} error */
+  function stopTransport(error) {
+    const shouldKill = !transportStopped;
+    transportStopped = true;
+    rejectRequests(error);
     if (shouldKill)
       try {
         worker?.kill();
@@ -146,11 +150,7 @@ async function createSteam({
         });
         worker.on("exit", () => {
           transportStopped = true;
-          for (const entry of requests.values()) {
-            clearTimeout(entry.timer);
-            entry.reject(new Error("Steam transport stopped."));
-          }
-          requests.clear();
+          rejectRequests(new Error("Steam transport stopped."));
         });
         const workerAccount = await request("init", [appId]);
         if (account !== workerAccount) throw new Error("Steam account differs between processes.");
@@ -305,11 +305,7 @@ async function createSteam({
             // Independent cleanup and admitted metadata must still finish.
           }
         }
-        for (const entry of requests.values()) {
-          clearTimeout(entry.timer);
-          entry.reject(new Error("Steam transport disposed."));
-        }
-        requests.clear();
+        rejectRequests(new Error("Steam transport disposed."));
         await lane;
       });
       return disposal;

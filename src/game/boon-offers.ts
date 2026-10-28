@@ -131,13 +131,14 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
 
 /** Sample distinct unowned Boons; a matching Boon has twice the weight of an unmatched one. */
 export function offerBoons(state: GameState): BoonId[] {
-  const owned = new Set(state.boons);
-  const keywords = rosterBoonKeywords(state);
+  const owned = state.boons.length ? new Set(state.boons) : undefined;
+  let keywords: Set<KeywordId> | undefined;
   const pool: { id: BoonId; weight: number }[] = [];
   let total = 0;
   for (const boon of BOONS) {
-    if (owned.has(boon.id)) continue;
-    const weight = BOON_KEYWORDS[boon.id]?.some((keyword) => keywords.has(keyword)) ? 2 : 1;
+    if (owned?.has(boon.id)) continue;
+    const rosterKeywords = (keywords ??= rosterBoonKeywords(state));
+    const weight = BOON_KEYWORDS[boon.id]?.some((keyword) => rosterKeywords.has(keyword)) ? 2 : 1;
     pool.push({ id: boon.id, weight });
     total += weight;
   }

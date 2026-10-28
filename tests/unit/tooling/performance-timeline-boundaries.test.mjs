@@ -441,3 +441,118 @@ it("retains exactly the twenty largest hitches in stable order without changing 
   expect(input.frames).toEqual(original);
   expect(hitchInventory(sample())).toEqual([]);
 });
+
+it("CI timing boundaries: ignores invalid start dates and keeps invalid completions pending", () => {
+  const run = { run_started_at: "2026-10-21T00:00:00Z", updated_at: "2026-10-21T00:00:30Z" };
+  const jobs = [
+    { started_at: "invalid", completed_at: "invalid" },
+    { started_at: "2026-10-21T00:00:05Z", completed_at: "2026-10-21T00:00:20Z" },
+  ];
+  const result = timingReport(run, jobs);
+  expect(result.initialQueueSeconds).toBe(5);
+  expect(result.activeElapsedSeconds).toBeNull();
+  expect(result.elapsedSeconds).toBe(30);
+  expect(result.runnerSeconds).toBe(15);
+  expect(timingReport(run, [...jobs].reverse())).toEqual({ ...result, jobs: [...result.jobs].reverse() });
+  expect(timingReport(run, []).activeElapsedSeconds).toBeNull();
+});
+
+it("rejects sparse evidence arrays instead of skipping absent observations", () => {
+  for (const field of ["frames", "longTasks", "input", "longAnimationFrames", "spans", "segments"]) {
+    const input = sample();
+    input[field] = field === "frames" ? [...input.frames] : Array(1);
+    delete input[field][0];
+    expect(() => summarizeSample(input)).toThrow();
+  }
+  expect(attributeTrace(traceFixture([]), { markerStart: 0, markerEnd: 10 }, Array(1))).toMatchObject({
+    available: false,
+  });
+});
+
+it("rejects sparse comparison case lists with an identity diagnostic", () => {
+  const sparse = report();
+  sparse.cases = Array(1);
+  expect(() => comparePerformance(sparse, report())).toThrow("case identity");
+  expect(() => comparePerformance(report(), sparse)).toThrow("case identity");
+});
+
+it("rejects blank comparison identities even when both reports agree", () => {
+  for (const field of ["id", "checkpointHash", "actionHash", "fixture"]) {
+    const input = report();
+    input.cases[0][field] = " \t\n";
+    expect(() => comparePerformance(input, input)).toThrow("case identity");
+  }
+});
+
+it("enforces the action-segment evidence budget before reading entries", () => {
+  const input = sample();
+  input.segments = Array(12001);
+  Object.defineProperty(input.segments, 0, {
+    get() {
+      throw new Error("oversized array was traversed");
+    },
+  });
+  expect(() => summarizeSample(input)).toThrow("action segment");
+});
+
+it("reports missing synchronization samples as unavailable without throwing", () => {
+  for (const input of [null, undefined, {}])
+    expect(attributeTrace(traceFixture([]), input, [])).toMatchObject({ available: false });
+});
+
+it("rejects negative synchronization clocks even when their durations align", () => {
+  expect(attributeTrace(traceFixture([]), { markerStart: -1, markerEnd: 9 }, [])).toMatchObject({
+    available: false,
+  });
+  const trace = traceFixture([]);
+  trace.traceEvents[0].ts = -1000;
+  trace.traceEvents[1].ts = 9000;
+  expect(attributeTrace(trace, { markerStart: 0, markerEnd: 10 }, [])).toMatchObject({ available: false });
+});
+
+it("refuses ambiguous or cross-thread capture markers", () => {
+  for (const index of [0, 1]) {
+    const trace = traceFixture([]);
+    trace.traceEvents.push({ ...trace.traceEvents[index] });
+    expect(attributeTrace(trace, { markerStart: 0, markerEnd: 10 }, [])).toMatchObject({ available: false });
+  }
+  const trace = traceFixture([]);
+  trace.traceEvents[1].tid = 2;
+  expect(attributeTrace(trace, { markerStart: 0, markerEnd: 10 }, [])).toMatchObject({ available: false });
+});
+
+it("refuses hitch attribution outside the synchronized capture", () => {
+  for (const gap of [
+    { start: 0, end: 5, duration: 5 },
+    { start: 5, end: 16, duration: 11 },
+  ])
+    expect(attributeTrace(traceFixture([]), { markerStart: 5, markerEnd: 15 }, [gap])).toMatchObject({
+      available: false,
+      reason: "Hitch interval outside synchronized capture",
+    });
+  expect(
+    attributeTrace(traceFixture([]), { markerStart: 5, markerEnd: 15 }, [{ start: 5, end: 15, duration: 10 }])
+      .available,
+  ).toBe(true);
+});
+
+it("requires literal V8 execution event names for script attribution", () => {
+  for (const name of ["v8.execute", "V8.Execute"])
+    expect(attribute([{ name, ph: "X", ts: 1000, dur: 10000 }]).hitches[0].work[0].category).toBe("script");
+  for (const name of ["v8Xexecute", "V8-Execute"])
+    expect(attribute([{ name, ph: "X", ts: 1000, dur: 10000 }]).hitches[0]).toMatchObject({
+      work: [],
+      unaccountedMs: 10,
+    });
+});
+
+it("matches hitch report attribution by interval instead of array position", () => {
+  const gap = (start, end) => ({ start, end, duration: end - start, actions: [], spans: [] });
+  const work = (start, end, name) => ({ start, end, work: [{ name, selfMs: 5 }], unaccountedMs: 0 });
+  const summary = { hitches: [gap(0, 30), gap(40, 65), gap(70, 95)] };
+  const trace = { available: true, hitches: [work(40, 65, "Second"), work(0, 30, "First")] };
+  const rows = hitchMarkdown("test", summary, trace).split("\n");
+  expect(rows.find((row) => row.startsWith("| 0.0–30.0"))).toContain("First: 5.0 ms");
+  expect(rows.find((row) => row.startsWith("| 40.0–65.0"))).toContain("Second: 5.0 ms");
+  expect(rows.find((row) => row.startsWith("| 70.0–95.0"))).toContain("Trace unavailable");
+});

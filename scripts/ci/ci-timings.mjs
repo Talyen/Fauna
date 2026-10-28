@@ -9,16 +9,25 @@ const seconds = (start, end) => {
   return Number.isFinite(elapsed) && elapsed >= 0 ? elapsed : null;
 };
 export function timingReport(run, jobs) {
-  const starts = jobs
-    .map((job) => job.started_at)
-    .filter(Boolean)
-    .sort((a, b) => Date.parse(a) - Date.parse(b));
-  const completions = jobs
-    .map((job) => job.completed_at)
-    .filter(Boolean)
-    .sort((a, b) => Date.parse(a) - Date.parse(b));
-  const firstStart = starts[0];
-  const lastCompletion = jobs.every((job) => job.completed_at) ? completions.at(-1) : undefined;
+  let firstStart;
+  let lastCompletion;
+  let firstTime = Infinity;
+  let lastTime = -Infinity;
+  let complete = jobs.length > 0;
+  for (const job of jobs) {
+    const start = Date.parse(job.started_at);
+    const end = Date.parse(job.completed_at);
+    if (Number.isFinite(start) && start < firstTime) {
+      firstTime = start;
+      firstStart = job.started_at;
+    }
+    if (!Number.isFinite(end)) complete = false;
+    else if (end > lastTime) {
+      lastTime = end;
+      lastCompletion = job.completed_at;
+    }
+  }
+  if (!complete) lastCompletion = undefined;
   return {
     run: run.id,
     attempt: run.run_attempt,

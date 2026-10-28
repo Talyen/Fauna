@@ -1,3 +1,10 @@
+import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
+import { talentRepeat } from "../../../src/game/combat/ability-modifiers";
+import { useFood } from "../../../src/game/combat/food";
+import { cornucopiaHealing } from "../../../src/game/rules/boons";
+import { createSession } from "../../../src/application/session";
+import { tickStatuses, grantStatus } from "../../../src/game/combat/index";
+import { recruitLineup, swapFromCard } from "../../../src/game/team";
 import { enemyReflectionRecipients } from "../../../src/game/battlefield";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { freshCombat } from "../../../src/game/combat/state";
@@ -64,7 +71,7 @@ import {
   playTargetError,
 } from "../../../src/game/play-queries";
 import { battlefield, cleanseTargets, healingAllies, isDepartedMinion } from "../../../src/game/battlefield";
-import { bossDeck, summonEcho } from "../../../src/game/combat/legendary";
+import { bossDeck, summonEcho, createPearls } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions, shuffle } from "../../../src/game/random";
@@ -72,7 +79,7 @@ import { requireBattle, teamRun } from "../../support/game";
 import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
 import { ownedCards, rebuildCards } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { snapshot } from "../../../src/application/cloud-snapshots";
+import { snapshot, parseSnapshot } from "../../../src/application/cloud-snapshots";
 import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
@@ -1127,6 +1134,10 @@ it("keeps diagnostic snapshots immutable and independent after bounded retention
   diagnostics.record("render", "failure 54");
   expect(diagnostics.snapshot()[49]!.count).toBe(2);
   expect(latest[49]!.count).toBe(1);
+  diagnostics.record("render", "failure 5");
+  expect(diagnostics.snapshot()[49]).toEqual({ source: "render", message: "failure 5", count: 2 });
+  expect(latest[0]!.message).toBe("failure 5");
+  expect(latest[0]!.count).toBe(1);
   diagnostics.dispose();
 });
 
@@ -1220,5 +1231,266 @@ it("retains replacement slots and valid battle zones for manual and card-driven 
     expect([...zones].sort()).toEqual(state.cards.map((card) => card.id).sort());
     expect(new Set(zones).size).toBe(zones.length);
     expect(decodeSave(encodeSave(state))).toEqual(state);
+  }
+});
+
+it("keeps validation errors for sparse tiers and equivalent reordered effects", () => {
+  expect(validateCatalog().filter((issue) => issue.severity === "error")).toEqual([]);
+  const sparse = structuredClone(contentCatalog);
+  delete (sparse.species[0]!.passiveTiers as unknown as unknown[])[2];
+  expect(validateCatalog(sparse)).toContainEqual(
+    expect.objectContaining({
+      id: sparse.species[0]!.id,
+      field: "passiveTiers",
+      message: "All six passive tiers must be defined.",
+    }),
+  );
+  const repeated = structuredClone(contentCatalog);
+  const tiers = repeated.species[0]!.passiveTiers as unknown as { description: string; effects: unknown[] }[];
+  tiers[1] = { ...tiers[0]!, effects: [...tiers[0]!.effects].reverse() };
+  expect(validateCatalog(repeated)).toContainEqual(
+    expect.objectContaining({
+      id: repeated.species[0]!.id,
+      field: "passiveTiers",
+      message: "Each passive tier must have different effects.",
+    }),
+  );
+});
+
+it("keeps repeat talent decision order and stops on the first success", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.talents = ["burn.flash-fire", "nature.overgrowth"];
+  const decisions: unknown[] = [];
+  observeDecisions(state, (decision) => {
+    decisions.push(decision);
+    return decisions.length === 1 ? 0.9 : 0;
+  });
+  expect(talentRepeat(state, ["nature", "burn"], false, [])).toBe(true);
+  expect(decisions).toEqual([
+    { kind: "chance", threshold: 0.1 },
+    { kind: "chance", threshold: 0.1 },
+  ]);
+  decisions.length = 0;
+  expect(talentRepeat(state, ["nature", "burn"], true, [])).toBe(false);
+  expect(decisions).toEqual([]);
+});
+
+it("keeps repeated Cornucopia healing ordered and refreshes between Food uses", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  state.talents = [];
+  state.boons = ["cornucopia"];
+  for (const unit of state.team) unit.health = 1;
+  state.battle.repeatNext.player = true;
+  const events: GameEvent[] = [];
+  const amount = cornucopiaHealing(state);
+  useFood(state, definition("food-mana-berries"), undefined, events);
+  expect(state.team.map((unit) => unit.health)).toEqual([1 + amount * 2, 1 + amount * 2]);
+  expect(events.filter((event) => event.kind === "heal").map((event) => event.targetId)).toEqual([
+    state.team[0]!.id,
+    state.team[1]!.id,
+    state.team[0]!.id,
+    state.team[1]!.id,
+  ]);
+  state.boons.push("nectar-dipper");
+  const before = state.team[0]!.health;
+  useFood(state, definition("food-mana-berries"), undefined, []);
+  expect(state.team[0]!.health).toBe(before + cornucopiaHealing(state));
+});
+
+it("preserves preview branch-budget rejection before enqueuing oversized worlds", () => {
+  const state = requireBattle(teamRun(42, ["mossguard"]));
+  const spy = vi.spyOn(engine, "previewCard").mockImplementation((game, _card, _target, decide) => {
+    decide!({ kind: "index", size: 64 });
+    decide!({ kind: "chance", threshold: 0.5 });
+    return { accepted: true, state: game, events: [] };
+  });
+  try {
+    expect(projectPlay(state, "card")).toEqual({ kind: "unknown", reason: "budget", replays: 2 });
+  } finally {
+    spy.mockRestore();
+  }
+});
+it("preserves redraw state, events, buffer order and RNG against the original exchange", () => {
+  for (const seed of [1, 42, 591]) {
+    const state = requireBattle(structuredClone(teamRun(seed, ["mossguard", "prismram"])));
+    const reference = structuredClone(state);
+    const events: GameEvent[] = [];
+    const expected: GameEvent[] = [];
+    const returned = reference.battle.hand.splice(0);
+    reference.battle.draw.push(...returned);
+    shuffle(reference, reference.battle.draw);
+    draw(reference, returned.length, expected);
+    redrawHand(state, events);
+    expect(state).toEqual(reference);
+    expect(events).toEqual(expected);
+  }
+});
+
+it("keeps Mossball's first tied living recipient and excludes the source", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback", "mossguard"])));
+  state.boons = ["mossball"];
+  const [source, first, second] = state.team;
+  for (const unit of state.team) unit.combat = freshCombat();
+  first!.combat!.thorns = 4;
+  second!.combat!.thorns = 4;
+  const rng = state.rng;
+  const events: GameEvent[] = [];
+  grantStatus(source!, "thorns", 1, events, state);
+  expect(first!.combat!.thorns).toBe(4 + boonRule("mossball").thorns);
+  expect(second!.combat!.thorns).toBe(4);
+  expect(state.rng).toBe(rng);
+  first!.health = 0;
+  grantStatus(source!, "thorns", 1, [], state);
+  expect(second!.combat!.thorns).toBe(4 + boonRule("mossball").thorns);
+});
+
+it("keeps card-driven position swaps and their random choice aligned", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback", "mossguard"])));
+  const actor = state.team[0]!;
+  const original = [...state.team];
+  const reference = structuredClone(state);
+  const others = original.slice(1);
+  const other = others[Math.floor(roll(reference, { kind: "index", size: others.length }) * others.length)]!;
+  expect(swapFromCard(state, actor, [])).toBe(other);
+  expect(state.team[0]).toBe(other);
+  expect(state.team[original.indexOf(other)]).toBe(actor);
+  expect(state.rng).toBe(reference.rng);
+});
+
+it("returns an independent recruit lineup without changing deployment", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback"])));
+  const before = state.team.map((unit) => unit.id);
+  const incoming = { ...state.team[0]!, id: "incoming", species: "mossguard" as const };
+  expect(recruitLineup(state, incoming)).toEqual([...before, incoming.id]);
+  expect(state.team.map((unit) => unit.id)).toEqual(before);
+});
+
+it("commits and saves without viewers, then delivers only new updates to later subscribers", async () => {
+  const saved: number[] = [];
+  const session = createSession({
+    desktop: false,
+    saves: {
+      readCandidates: async () => [],
+      write: async (data) => {
+        saved.push(JSON.parse(data).revision);
+      },
+    },
+  });
+  try {
+    await session.load();
+    expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+      true,
+    );
+    await session.flush();
+    expect(saved).toEqual([1]);
+    expect(session.store.getState().game.revision).toBe(1);
+    const observed: number[] = [];
+    const unsubscribe = session.store.subscribe((view, previous) => {
+      if (view.game !== previous.game) observed.push(view.game.revision);
+    });
+    expect(session.command({ type: "start" })).toBe(true);
+    await session.flush();
+    expect(observed).toEqual([2]);
+    unsubscribe();
+    expect(saved).toEqual([1, 2]);
+  } finally {
+    await session.dispose();
+  }
+});
+
+it("keeps Cinder Fan remainder damage in battlefield order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.boons = ["cinder-fan"];
+  state.talents = [];
+  const target = state.battle.enemies[0]!;
+  for (const enemy of state.battle.enemies) {
+    enemy.health = enemy.maxHealth = 100;
+    enemy.block = 0;
+    enemy.combat = freshCombat();
+  }
+  target.combat.burn = 7;
+  target.combat.statusSources.burn = state.team[0]!.id;
+  const rng = state.rng;
+  const events: GameEvent[] = [];
+  tickStatuses(state, target, events);
+  expect(target.combat.burn).toBe(4);
+  expect(state.battle.enemies.slice(1).map((enemy) => enemy.health)).toEqual([98, 99]);
+  expect(state.rng).toBe(rng);
+});
+
+it("persists the exact immutable diagnostic snapshot through deduplication and escaped-size limits", () => {
+  let stored = "[]";
+  const diagnostics = createDiagnostics({
+    read: () => stored,
+    write: (value) => {
+      stored = value;
+    },
+  });
+  const first = diagnostics.snapshot();
+  for (let index = 0; index < 55; index++) {
+    diagnostics.record("render", `${index}:` + "\u0001".repeat(1190));
+    expect(JSON.parse(stored)).toEqual(diagnostics.snapshot());
+    expect(stored.length).toBeLessThan(100_000);
+  }
+  expect(diagnostics.snapshot().length).toBeLessThan(50);
+  const previous = diagnostics.snapshot();
+  const message = previous[0]!.message;
+  diagnostics.record("render", message);
+  expect(JSON.parse(stored)).toEqual(diagnostics.snapshot());
+  expect(diagnostics.snapshot().at(-1)).toMatchObject({ message, count: 2 });
+  expect(previous[0]!.count).toBe(1);
+  expect(first).toEqual([]);
+  diagnostics.dispose();
+});
+
+it("preserves cloud validation and head ownership for zero, one and duplicate ancestors", async () => {
+  const identity = {
+    available: true,
+    device: "a".repeat(32),
+    profile: "b".repeat(32),
+    importAvailable: false,
+  };
+  const payload = encodeSave(teamRun(42, ["mossguard"]));
+  const parent = await snapshot(payload, identity, 1);
+  const child = await snapshot(payload, identity, 2, [parent]);
+  for (const record of [parent, child]) {
+    expect(await parseSnapshot(JSON.stringify(record), identity.profile)).toEqual(record);
+    const records = Object.freeze([record]);
+    const heads = newestHeads(records);
+    expect(heads).toEqual([record]);
+    expect(heads).not.toBe(records);
+    expect(heads[0]).toBe(record);
+    await expect(
+      parseSnapshot(JSON.stringify({ ...record, ancestors: [record.id] }), identity.profile),
+    ).rejects.toThrow("Invalid cloud metadata");
+  }
+  expect(newestHeads([])).toEqual([]);
+  expect(newestHeads([{ ...parent, ancestors: [parent.id] }])).toEqual([]);
+  await expect(
+    parseSnapshot(JSON.stringify({ ...child, ancestors: [parent.id, parent.id] }), identity.profile),
+  ).rejects.toThrow("Invalid cloud metadata");
+});
+
+it("creates only the Pearls admitted by card capacity and safe copy serials", () => {
+  for (const limit of ["cards", "serial"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["memento"])));
+    if (limit === "cards")
+      while (state.cards.length < 255)
+        state.cards.push({ ...state.cards[0]!, id: `existing-${state.cards.length}`, temporary: true });
+    else state.battle.copySerial = Number.MAX_SAFE_INTEGER - 1;
+    const count = state.cards.length;
+    const serial = state.battle.copySerial;
+    const rng = state.rng;
+    const events: GameEvent[] = [];
+    createPearls(state, state.team[0]!, "player", 3, events);
+    expect(state.cards).toHaveLength(count + 1);
+    expect(state.battle.copySerial).toBe(serial + 1);
+    expect(events).toHaveLength(1);
+    expect(events[0]).toMatchObject({ kind: "action", amount: 1 });
+    expect(state.rng).toBe(rng);
+    const before = structuredClone(state);
+    createPearls(state, state.team[0]!, "player", 3, events);
+    expect(state).toEqual(before);
+    expect(events).toHaveLength(1);
   }
 });

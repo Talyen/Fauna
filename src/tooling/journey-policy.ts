@@ -21,11 +21,13 @@ function livingRosterKinds(state: GameState) {
 /** Prepare roster facts once when comparing multiple Boons. */
 function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
   const has = capabilities(state, kinds);
-  const healing =
-    has.has("health") ||
-    has.has("leech") ||
-    state.boons.includes("bone-charm") ||
-    state.boons.includes("sin-eaters-lantern");
+  let healing: boolean | undefined;
+  const canHeal = () =>
+    (healing ??=
+      has.has("health") ||
+      has.has("leech") ||
+      state.boons.includes("bone-charm") ||
+      state.boons.includes("sin-eaters-lantern"));
   const cards = kinds.flatMap(speciesCards);
   const effects = new Set<(typeof cards)[number]["effect"]>();
   for (const card of cards) effects.add(card.effect);
@@ -36,7 +38,9 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")));
   let livingBackup: boolean | undefined;
   const hasLivingBackup = () => (livingBackup ??= state.reserves.some((unit) => unit.health > 0));
-  const swapping = effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest");
+  let swapping: boolean | undefined;
+  const canSwap = () =>
+    (swapping ??= effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest"));
   let thorns: boolean | undefined;
   const hasThorns = () =>
     (thorns ??=
@@ -51,6 +55,51 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
     (reflection ??= cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "orchard-ladder-charm":
+        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
+          hasLivingBackup()
+          ? 60
+          : 0;
+      case "spore-trivet":
+        return effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")
+          ? 50
+          : 0;
+      case "victory-laurel":
+        return 70;
+      case "gilt-gauntlet":
+        return has.has("physical") ? 60 : 0;
+      case "pumice-glass-inkwell":
+        return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
+      case "chime-crucible":
+      case "crystal-harp":
+        return has.has("stun") ? 60 : 0;
+      case "orbit-tongs":
+        return kinds.length > 1 &&
+          ((has.has("physical") && state.boons.includes("gilt-gauntlet")) ||
+            (has.has("dodge") && state.boons.includes("skyiron-horseshoe")) ||
+            (has.has("leech") && state.talents.includes("leech.armor-siphon")))
+          ? 60
+          : 0;
+      case "memory-cairn":
+      case "remembrance-wreath":
+        return effect("resurrect") ? 60 : 0;
+      case "vow-candle":
+        return has.has("light") ? 50 : 0;
+      case "ember-platter":
+      case "ash-bowl":
+        return has.has("burn") ? 60 : 0;
+      case "mossball":
+        return kinds.length > 1 && hasThorns() ? 60 : 0;
+      case "treaty-teapot":
+        return hasThorns() ? 50 : 0;
+      case "nebula-weld-clamp":
+        return has.has("armor") ? 50 : 0;
+      case "clover-measuring-scoop":
+        return canHeal() ? 60 : 0;
+      case "dawn-gong":
+        return kinds.length > 1 ? 40 : 0;
+      case "skyiron-horseshoe":
+      case "acrobat-top":
       case "vanishing-hat":
         return has.has("dodge") ? 60 : 30;
       case "rocking-chair-charm":
@@ -76,7 +125,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "beeswax-crown":
         return has.has("armor") ? 60 : 0;
       case "overflow-cup":
-        return healing && kinds.length > 1 ? 60 : 0;
+        return canHeal() && kinds.length > 1 ? 60 : 0;
       case "ripple-mirror":
         return hasReflection() ? 60 : 0;
       case "sail-needle":
@@ -99,13 +148,13 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "wonder-kaleidoscope":
         return hasReflection() ? 50 : 0;
       case "welcome-doormat":
-        return swapping ? 50 : 0;
+        return canSwap() ? 50 : 0;
       case "shelter-lantern":
         return has.has("block") ? 50 : 0;
       case "chestnut-roaster":
         return has.has("burn") ? 60 : 0;
       case "chamomile-compress":
-        return healing ? 50 : 0;
+        return canHeal() ? 50 : 0;
       case "cadence-panpipes":
         return has.has("attack") ? 50 : 0;
       case "hearthcap-kettle":
@@ -128,11 +177,11 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "pollen-basket":
         return kinds.length > 1 && hasThorns() ? 60 : 0;
       case "farewell-oar":
-        return swapping && has.has("block") ? 60 : 0;
+        return canSwap() && has.has("block") ? 60 : 0;
       case "oasis-seed":
-        return kinds.length > 1 && healing && has.has("attack") ? 60 : 0;
+        return kinds.length > 1 && canHeal() && has.has("attack") ? 60 : 0;
       case "bellows-heart":
-        return healing && has.has("burn") ? 60 : 0;
+        return canHeal() && has.has("burn") ? 60 : 0;
       case "leafwing-shuttlecock":
       case "echo-ocarina":
         return has.has("dodge") ? 60 : 30;
@@ -171,7 +220,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "prayer-sailboat":
       case "accordioned-bridge":
       case "tide-anklet":
-        return swapping ? 60 : 0;
+        return canSwap() ? 60 : 0;
       case "tidecrest-hairpin":
         return hasThorns() ? 60 : 0;
       case "stardust-whetstone":
@@ -215,7 +264,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "lovers-knot":
       case "last-threshold":
       case "groves-favor":
-        return healing ? 60 : 0;
+        return canHeal() ? 60 : 0;
       case "comb-uncapping-fork":
       case "resonance-kalimba":
       case "thornheart-ring":
@@ -258,11 +307,11 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "brookskip-disc":
         return has.has("water") ? 60 : 0;
       case "grafting-needle":
-        return healing && has.has("armor") ? 60 : 0;
+        return canHeal() && has.has("armor") ? 60 : 0;
       case "camp-hammock":
-        return healing && hasLivingBackup() ? 60 : 0;
+        return canHeal() && hasLivingBackup() ? 60 : 0;
       case "thaw-spoon":
-        return healing ? 40 : 0;
+        return canHeal() ? 40 : 0;
       case "moonveil-mask":
       case "apiary-smoker":
         return hasBlind() ? 50 : 0;
@@ -282,7 +331,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "echo-lens":
         return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
       case "saddle-pouch":
-        return swapping && hasLivingBackup() ? 60 : 0;
+        return canSwap() && hasLivingBackup() ? 60 : 0;
       case "story-puzzle-cube":
         return Number(has.has("burn")) +
           Number(has.has("poison")) +
@@ -359,14 +408,15 @@ function recruitDecision(state: GameState): JourneyDecision {
   const selected = state.phase === "recruit" ? state.reward.selectedRecruit : undefined;
   const offers = selected === undefined ? state.reward!.recruits : [selected];
   const roster = [...state.team, ...state.reserves];
-  const living = (units: typeof roster) => units.filter((unit) => unit.health > 0);
-  const before = capabilities(
-    state,
-    living(roster).map((unit) => unit.species),
-  );
+  const livingKinds = (units: typeof roster) => {
+    const kinds: (typeof roster)[number]["species"][] = [];
+    for (const unit of units) if (unit.health > 0) kinds.push(unit.species);
+    return kinds;
+  };
+  const before = capabilities(state, livingKinds(roster));
   const score = (next: typeof roster, active: typeof roster) => {
-    const nextKinds = living(next).map((unit) => unit.species);
-    const activeUnits = living(active);
+    const nextKinds = livingKinds(next);
+    const activeUnits = active.filter((unit) => unit.health > 0);
     const scoreBoon = state.boons.length ? boonScorer(state, nextKinds) : undefined;
     return (
       coverageScore(state, nextKinds) +
@@ -396,11 +446,10 @@ function recruitDecision(state: GameState): JourneyDecision {
       const active = recruitLineup(state, incoming, released?.id).map((id) =>
         next.find((unit) => unit.id === id)!,
       );
-      const after = capabilities(
-        state,
-        living(next).map((unit) => unit.species),
-      );
-      const lost = ["armorBypass", "purge"].filter((role) => before.has(role) && !after.has(role));
+      const after = capabilities(state, livingKinds(next));
+      const lost =
+        Number(before.has("armorBypass") && !after.has("armorBypass")) +
+        Number(before.has("purge") && !after.has("purge"));
       // A repeated recruit can improve an owned passive even when deployment is unchanged.
       const rankGain =
         selected === undefined &&
@@ -417,14 +466,16 @@ function recruitDecision(state: GameState): JourneyDecision {
       };
     }),
   );
-  options.sort((a, b) => a.lost.length - b.lost.length || b.score - a.score || a.key.localeCompare(b.key));
-  const chosen = options[0];
+  const compare = (a: (typeof options)[number], b: (typeof options)[number]) =>
+    a.lost - b.lost || b.score - a.score || a.key.localeCompare(b.key);
+  let chosen: (typeof options)[number] | undefined;
+  for (const option of options) if (!chosen || compare(option, chosen) < 0) chosen = option;
   if (selected === undefined)
     return {
       command: { type: "recruit", species: chosen?.kind ?? offers[0]! },
       reason: "Commit the offered recruit to Collection before choosing the team",
     };
-  if (!chosen || chosen.lost.length || chosen.score <= keep)
+  if (!chosen || chosen.lost || chosen.score <= keep)
     return {
       command: { type: "confirmRecruit" },
       reason: "Keep the current roster and its deployed damage, recovery and unique coverage",

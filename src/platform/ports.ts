@@ -11,18 +11,13 @@ interface SaveStorage {
   /** The application supplies validation when an adapter rotates recoverable checkpoints. */
   write(data: string, isRecoverable?: (data: string) => boolean): Promise<void>;
 }
-interface SteamCapabilities {
-  readonly available: boolean;
-  achievements?: { unlock(id: string): Promise<void> };
-  getLanguage?: () => Promise<string | null>;
-}
 export interface Platform {
   diagnostics?: DiagnosticPort;
   display?: DisplayPort;
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;
   saves: SaveStorage;
-  steam: SteamCapabilities;
+  getSteamLanguage?: () => Promise<string | null>;
   desktop: boolean;
   quit?: () => Promise<void>;
   onCloseRequested?: (listener: () => Promise<boolean>) => () => void;

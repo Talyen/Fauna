@@ -35,6 +35,17 @@ export function eventPresentation(
   i18n: ReturnType<typeof createMessageReader>,
   previousGame?: GameState | null,
 ) {
+  const quantity = (amount: number | string) => (i18n.locale === "en" ? String(amount) : Number(amount));
+  const keyword = (status: KeywordId, english: string = status) =>
+    i18n.locale === "en"
+      ? english
+      : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label);
+  const statusIs = (
+    status: KeywordId | "deathDoor",
+    outcome: import("../../../game/types").StatusEvent["outcome"],
+  ) => event.kind === "status" && event.status === status && event.outcome === outcome;
+  const matchAfter = (prefix: string, pattern: RegExp) =>
+    event.text.startsWith(prefix) ? pattern.exec(event.text.slice(prefix.length)) : null;
   const combatant = (id: string | undefined) =>
     combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
   const uniqueName = (english: string) => {
@@ -67,7 +78,7 @@ export function eventPresentation(
     )
       return i18n.message("log.createFood", "{{actor}} creates {{count}} Food cards", {
         actor: localizedCombatantName(actor, i18n),
-        count: i18n.locale === "en" ? String(event.amount) : event.amount,
+        count: quantity(event.amount),
       });
     if (
       actor &&
@@ -77,7 +88,7 @@ export function eventPresentation(
     )
       return i18n.message("log.createPearls", "{{actor}} creates {{count}} Pearls", {
         actor: localizedCombatantName(actor, i18n),
-        count: i18n.locale === "en" ? String(event.amount) : event.amount,
+        count: quantity(event.amount),
       });
     if (
       actor?.species === "memento" &&
@@ -189,8 +200,8 @@ export function eventPresentation(
     const turn = /^Turn (\d+)\. (\d+) Mana restored\.$/.exec(event.text);
     if (turn)
       return i18n.message("log.turnRestored", "Turn {{turn}}. {{amount}} Mana restored.", {
-        turn: i18n.locale === "en" ? turn[1]! : Number(turn[1]),
-        amount: i18n.locale === "en" ? turn[2]! : Number(turn[2]),
+        turn: quantity(turn[1]!),
+        amount: quantity(turn[2]!),
       });
   }
   if (event.kind === "reward") {
@@ -198,7 +209,7 @@ export function eventPresentation(
       return i18n.message("log.boonPurchased", "Boon purchased for this journey.");
     if (event.amount !== undefined && event.text === `Gain ${event.amount} Gold.`)
       return i18n.message("log.gainGold", "Gain {{amount}} Gold.", {
-        amount: i18n.locale === "en" ? String(event.amount) : event.amount,
+        amount: quantity(event.amount),
       });
     const joinedSuffix = " joined your roster.";
     if (event.text.endsWith(joinedSuffix)) {
@@ -257,18 +268,14 @@ export function eventPresentation(
   }
   if (event.kind === "status" && event.targetId === undefined && event.text === `Gain ${event.amount} Mana.`)
     return i18n.message("log.gainMana", "Gain {{amount}} Mana.", {
-      amount: i18n.locale === "en" ? String(event.amount) : event.amount,
+      amount: quantity(event.amount),
     });
   if (!("targetId" in event) || !event.targetId) return event.text;
   const target = combatant(event.targetId);
   if (!target) return event.text;
   const englishName = unitName(target);
   const name = localizedCombatantName(target, i18n);
-  const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
-  const keyword = (status: KeywordId, english: string = status) =>
-    i18n.locale === "en"
-      ? english
-      : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label);
+  const amounts = (amount: number) => ({ name, amount: quantity(amount) });
   if (event.kind === "action" && event.actionType === "support") {
     const actor = combatant(event.actorId);
     if (actor && event.text === `${unitName(actor)} intercepts the attack against ${englishName}`)
@@ -287,17 +294,12 @@ export function eventPresentation(
         target: name,
       });
   }
-  if (
-    event.kind === "status" &&
-    event.status === "dodge" &&
-    event.outcome === "dodge" &&
-    event.text === `${englishName} Dodges.`
-  )
+  if (statusIs("dodge", "dodge") && event.text === `${englishName} Dodges.`)
     return i18n.message("log.dodge", "{{name}} Dodges.", { name });
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
-    if (event.status === "negate" && event.outcome === "immune") {
+    if (statusIs("negate", "immune")) {
       const suffix = ` protects ${englishName} with Devotion Clasp`;
       const bearer = event.text.endsWith(suffix)
         ? uniqueName(event.text.slice(0, -suffix.length))
@@ -336,24 +338,18 @@ export function eventPresentation(
           name,
         });
     }
-    if (
-      event.status === "negate" &&
-      event.outcome === "immune" &&
-      event.text === `${englishName} negates the attack`
-    )
+    if (statusIs("negate", "immune") && event.text === `${englishName} negates the attack`)
       return i18n.message("log.negateAttack", "{{name}} negates the attack", { name });
-    if (event.status === "deathDoor" && event.outcome === "apply") {
-      const prefix = `${englishName} reaches Death's Door: `;
-      const turns = event.text.startsWith(prefix)
-        ? /^(\d+) grace turns\.$/.exec(event.text.slice(prefix.length))
-        : null;
+    if (statusIs("deathDoor", "apply")) {
+      const turns = matchAfter(`${englishName} reaches Death's Door: `, /^(\d+) grace turns\.$/);
       if (turns)
-        return i18n.message("log.reachDeathsDoor", "{{name}} reaches Death's Door: {{amount}} grace turns.", {
-          name,
-          amount: quantity(Number(turns[1])),
-        });
+        return i18n.message(
+          "log.reachDeathsDoor",
+          "{{name}} reaches Death's Door: {{amount}} grace turns.",
+          amounts(Number(turns[1])),
+        );
     }
-    if (event.status === "reflect" && event.outcome === "apply") {
+    if (statusIs("reflect", "apply")) {
       const actor = combatant(event.actorId);
       const status = event.affectedStatus ?? "purge";
       const englishStatus = event.affectedStatus ?? "Purge";
@@ -367,7 +363,7 @@ export function eventPresentation(
           target: recipient,
         });
     }
-    if (event.status === "attackReflection" && event.outcome === "immune") {
+    if (statusIs("attackReflection", "immune")) {
       const actor = combatant(event.actorId);
       if (actor && event.text === `${unitName(actor)} reflects the attack back at ${englishName}`)
         return i18n.message("log.reflectAttack", "{{actor}} reflects the attack back at {{target}}", {
@@ -375,17 +371,12 @@ export function eventPresentation(
           target: name,
         });
     }
-    if (
-      event.status === "nullify" &&
-      event.outcome === "gain" &&
-      event.text === `${englishName} gains Nullify`
-    )
+    if (statusIs("nullify", "gain") && event.text === `${englishName} gains Nullify`)
       return i18n.message("log.gainNullify", "{{name}} gains Nullify", { name });
-    if (event.status === "blind" && event.outcome === "apply" && event.text === `${englishName} is Blinded`)
+    if (statusIs("blind", "apply") && event.text === `${englishName} is Blinded`)
       return i18n.message("log.blinded", "{{name}} is Blinded", { name });
     if (
-      event.status === "nullify" &&
-      event.outcome === "immune" &&
+      statusIs("nullify", "immune") &&
       event.affectedStatus === "freeze" &&
       event.text === `${englishName} nullifies Freeze damage`
     )
@@ -403,89 +394,60 @@ export function eventPresentation(
         status: keyword(status),
       });
     }
-    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "immune") {
+    if (event.status === "freeze" || event.status === "stun") {
       const status = event.status;
-      if (event.text === `${englishName} is immune to ${status} buildup.`)
+      const englishStatus = status === "freeze" ? "Frozen" : "Stunned";
+      if (event.outcome === "immune" && event.text === `${englishName} is immune to ${status} buildup.`)
         return i18n.message("log.immuneBuildup", "{{name}} is immune to {{status}} buildup.", {
           name,
           status: keyword(status),
         });
-    }
-    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "apply") {
-      const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
-      if (event.text === `${englishName} is ${englishStatus}.`)
-        return i18n.message("log.controlApplied", "{{name}} is {{status}}.", {
-          name,
-          status: keyword(event.status, englishStatus),
-        });
-    }
-    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "skip") {
-      const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
-      if (event.text === `${englishName} skips its ${englishStatus} turn.`)
-        return i18n.message("log.skipControlledTurn", "{{name}} skips its {{status}} turn.", {
-          name,
-          status: keyword(event.status, englishStatus),
-        });
+      const values = { name, status: keyword(status, englishStatus) };
+      if (event.outcome === "apply" && event.text === `${englishName} is ${englishStatus}.`)
+        return i18n.message("log.controlApplied", "{{name}} is {{status}}.", values);
+      if (event.outcome === "skip" && event.text === `${englishName} skips its ${englishStatus} turn.`)
+        return i18n.message("log.skipControlledTurn", "{{name}} skips its {{status}} turn.", values);
     }
   }
   if (event.kind === "status" && event.amount !== undefined) {
     if (
-      event.status === "armor" &&
-      event.outcome === "remove" &&
+      statusIs("armor", "remove") &&
       event.text === `${englishName} loses ${event.amount} Armor to Grain Flail`
     )
       return i18n.message("log.loseArmorToBoon", "{{name}} loses {{amount}} Armor to {{boon}}", {
-        name,
-        amount: quantity(event.amount),
+        ...amounts(event.amount),
         boon: i18n.content("content.boon.grain-flail.name", "Grain Flail"),
       });
     if (
-      event.status === "cleanse" &&
-      event.outcome === "remove" &&
+      statusIs("cleanse", "remove") &&
       event.affectedStatus === "poison" &&
       event.amount < 0 &&
       event.text === `${englishName} Cleanses ${-event.amount} Poison.`
     )
-      return i18n.message("log.cleansePoison", "{{name}} Cleanses {{amount}} Poison.", {
-        name,
-        amount: quantity(-event.amount),
-      });
+      return i18n.message(
+        "log.cleansePoison",
+        "{{name}} Cleanses {{amount}} Poison.",
+        amounts(-event.amount),
+      );
+    if (statusIs("thorns", "remove") && event.text === `${englishName} loses ${event.amount} Thorns`)
+      return i18n.message("log.loseThorns", "{{name}} loses {{amount}} Thorns", amounts(event.amount));
+    if (statusIs("armor", "remove") && event.text === `${englishName} loses ${event.amount} Armor`)
+      return i18n.message("log.loseArmor", "{{name}} loses {{amount}} Armor", amounts(event.amount));
     if (
-      event.status === "thorns" &&
-      event.outcome === "remove" &&
-      event.text === `${englishName} loses ${event.amount} Thorns`
-    )
-      return i18n.message("log.loseThorns", "{{name}} loses {{amount}} Thorns", {
-        name,
-        amount: quantity(event.amount),
-      });
-    if (
-      event.status === "armor" &&
-      event.outcome === "remove" &&
-      event.text === `${englishName} loses ${event.amount} Armor`
-    )
-      return i18n.message("log.loseArmor", "{{name}} loses {{amount}} Armor", {
-        name,
-        amount: quantity(event.amount),
-      });
-    if (
-      event.status === "dodge" &&
-      event.outcome === "gain" &&
+      statusIs("dodge", "gain") &&
       event.text === `${englishName} gains ${event.amount}% Dodge until its next turn`
     )
-      return i18n.message("log.temporaryDodge", "{{name}} gains {{amount}}% Dodge until its next turn", {
-        name,
-        amount: quantity(event.amount),
-      });
-    if (
-      event.status === "freeze" &&
-      event.outcome === "remove" &&
-      event.text === `${englishName} loses ${event.amount} Freeze buildup`
-    )
-      return i18n.message("log.loseFreezeBuildup", "{{name}} loses {{amount}} Freeze buildup", {
-        name,
-        amount: quantity(event.amount),
-      });
+      return i18n.message(
+        "log.temporaryDodge",
+        "{{name}} gains {{amount}}% Dodge until its next turn",
+        amounts(event.amount),
+      );
+    if (statusIs("freeze", "remove") && event.text === `${englishName} loses ${event.amount} Freeze buildup`)
+      return i18n.message(
+        "log.loseFreezeBuildup",
+        "{{name}} loses {{amount}} Freeze buildup",
+        amounts(event.amount),
+      );
   }
   if (event.kind === "status" && event.outcome === "remove") {
     const { status, affectedStatus } = event;
@@ -527,8 +489,7 @@ export function eventPresentation(
   if (event.kind === "status" && event.outcome === "gain" && event.amount !== undefined) {
     const status = event.status;
     if (isKeywordId(status)) {
-      const label = keyword(status);
-      const values = { name, amount: quantity(event.amount), status: label };
+      const values = { ...amounts(event.amount), status: keyword(status) };
       if (event.text === `${englishName} gains ${event.amount} ${status}.`)
         return i18n.message("log.gainStatus", "{{name}} gains {{amount}} {{status}}.", values);
       if (
@@ -548,45 +509,27 @@ export function eventPresentation(
       });
   }
   if (event.kind === "heal" && event.text === `${englishName} restores ${event.amount} Health.`)
-    return i18n.message("log.heal", "{{name}} restores {{amount}} Health.", {
-      name,
-      amount: quantity(event.amount),
-    });
+    return i18n.message("log.heal", "{{name}} restores {{amount}} Health.", amounts(event.amount));
   if (event.kind === "block" && event.text === `${englishName} gains ${event.amount} Block.`)
-    return i18n.message("log.gainBlock", "{{name}} gains {{amount}} Block.", {
-      name,
-      amount: quantity(event.amount),
-    });
+    return i18n.message("log.gainBlock", "{{name}} gains {{amount}} Block.", amounts(event.amount));
   if (event.kind === "block" && event.text === `${englishName} blocks ${-event.amount} damage.`)
-    return i18n.message("log.absorb", "{{name}} blocks {{amount}} damage.", {
-      name,
-      amount: quantity(-event.amount),
-    });
+    return i18n.message("log.absorb", "{{name}} blocks {{amount}} damage.", amounts(-event.amount));
   if (event.kind === "block") {
     if (event.amount < 0 && event.text === `${englishName} loses ${-event.amount} Block to Ashfall Pendant`)
       return i18n.message("log.loseBlockToBoon", "{{name}} loses {{amount}} Block to {{boon}}", {
-        name,
-        amount: quantity(-event.amount),
+        ...amounts(-event.amount),
         boon: i18n.content("content.boon.ashfall-pendant.name", "Ashfall Pendant"),
       });
-    const prefix = `${englishName} keeps `;
-    const kept = event.text.startsWith(prefix)
-      ? /^(\d+) Block with Tide Anklet$/.exec(event.text.slice(prefix.length))
-      : null;
+    const kept = matchAfter(`${englishName} keeps `, /^(\d+) Block with Tide Anklet$/);
     if (kept && event.amount > 0)
       return i18n.message("log.keepBlockWithBoon", "{{name}} keeps {{amount}} Block with {{boon}}", {
-        name,
-        amount: quantity(Number(kept[1])),
+        ...amounts(Number(kept[1])),
         boon: i18n.content("content.boon.tide-anklet.name", "Tide Anklet"),
       });
-    const lostPrefix = `${englishName} loses `;
-    const lost = event.text.startsWith(lostPrefix)
-      ? /^(\d+) Block to Coral Net Weight$/.exec(event.text.slice(lostPrefix.length))
-      : null;
+    const lost = matchAfter(`${englishName} loses `, /^(\d+) Block to Coral Net Weight$/);
     if (lost && event.amount < 0)
       return i18n.message("log.loseBlockToBoon", "{{name}} loses {{amount}} Block to {{boon}}", {
-        name,
-        amount: quantity(Number(lost[1])),
+        ...amounts(Number(lost[1])),
         boon: i18n.content("content.boon.coral-net-weight.name", "Coral Net Weight"),
       });
   }
@@ -594,18 +537,13 @@ export function eventPresentation(
     const { amount, damageType, critical } = event;
     if (event.text !== `${englishName} takes ${amount} ${damageType} damage${critical ? " (Critical)" : ""}.`)
       return event.text;
-    const type = isKeywordId(damageType) ? keyword(damageType) : damageType;
+    const values = {
+      ...amounts(amount),
+      type: isKeywordId(damageType) ? keyword(damageType) : damageType,
+    };
     return critical
-      ? i18n.message("log.criticalDamage", "{{name}} takes {{amount}} {{type}} damage (Critical).", {
-          name,
-          amount: quantity(amount),
-          type,
-        })
-      : i18n.message("log.damage", "{{name}} takes {{amount}} {{type}} damage.", {
-          name,
-          amount: quantity(amount),
-          type,
-        });
+      ? i18n.message("log.criticalDamage", "{{name}} takes {{amount}} {{type}} damage (Critical).", values)
+      : i18n.message("log.damage", "{{name}} takes {{amount}} {{type}} damage.", values);
   }
   return event.text;
 }

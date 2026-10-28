@@ -129,9 +129,11 @@ export function battleBenefitFacts(state: BattleState) {
 /** The played card reaches Discard before a non-consuming draw resolves. */
 function selfDrawReward(state: BattleState, play: AvailablePlay, keywordDraw = false): boolean {
   if (play.def.consume) return false;
-  const owner = state.team.find((unit) => unit.id === play.card.ownerId && unit.health > 0);
+  const owner = state.boons.includes("dune-shuttle")
+    ? state.team.find((unit) => unit.id === play.card.ownerId && unit.health > 0)
+    : undefined;
   return (
-    (!!owner && state.boons.includes("dune-shuttle") && owner.block < STACK_LIMIT) ||
+    (!!owner && owner.block < STACK_LIMIT) ||
     (state.battle.draw.length === 0 &&
       (keywordDraw || state.battle.discard.length === 0) &&
       state.boons.includes("mineral-bookend") &&
@@ -228,22 +230,14 @@ export function battleBenefits(
     case "procession": {
       let count = 0;
       let injured = false;
+      let canAct = false;
       for (const unit of state.battle.minions ?? []) {
         if (unit.minion.ownerId !== actor.id || unit.health <= 0) continue;
         count++;
         if (unit.health < unit.maxHealth) injured = true;
+        if (!controlled(unit)) canAct = true;
       }
-      return support(
-        count < 2
-          ? "summon"
-          : injured
-            ? "summonRecovery"
-            : state.battle.minions?.some(
-                  (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
-                )
-              ? "protection"
-              : "none",
-      );
+      return support(count < 2 ? "summon" : injured ? "summonRecovery" : canAct ? "protection" : "none");
     }
     case "createFood":
     case "createPearls":
@@ -253,10 +247,11 @@ export function battleBenefits(
     case "attack": {
       const enemies = facts.livingEnemies();
       const cost = cardCost(card, state, def, actor);
-      const attacks = enemies.map((enemy) => ({
-        enemy,
-        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost),
-      }));
+      let remaining = 0;
+      const attacks = enemies.map((enemy) => {
+        if (!enemy.minion) remaining++;
+        return { enemy, outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost) };
+      });
       const cleanse = def.effects?.some(
         (effect) =>
           effect.kind === "cleanse" &&
@@ -269,8 +264,6 @@ export function battleBenefits(
           (sum, hit) => sum + Math.max(ordinaryHitScore(hit), cleanse ? priorities.standardUtility : 0),
           0,
         ) / outcomes.length;
-      let remaining = 0;
-      for (const attack of attacks) if (!attack.enemy.minion) remaining++;
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
       const winning =
         !actor.combat?.blind &&

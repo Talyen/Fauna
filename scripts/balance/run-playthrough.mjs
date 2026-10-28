@@ -1,3 +1,4 @@
+import { isDeepStrictEqual } from "node:util";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, open, readdir, unlink } from "node:fs/promises";
 import path from "node:path";
@@ -29,6 +30,22 @@ export function parsePlaythroughArgs(args) {
     ["--seed", "--runs", "--starter", "--policy", "--save"].some((flag) => options[flag])
   )
     throw new Error("Replay cannot be combined with scenario or save options.");
+  for (const [flag, minimum, maximum] of [
+    ["--seed", 0, 0xffffffff],
+    ["--runs", 1, 20],
+  ]) {
+    const value = options[flag];
+    if (
+      value !== undefined &&
+      (!/^\d+$/u.test(value) ||
+        !Number.isSafeInteger(Number(value)) ||
+        Number(value) < minimum ||
+        Number(value) > maximum)
+    )
+      throw new Error(`Invalid playthrough value: ${flag}`);
+  }
+  if (options["--policy"] !== undefined && !["heuristic", "random"].includes(options["--policy"]))
+    throw new Error("Invalid playthrough policy.");
   return options;
 }
 
@@ -65,20 +82,37 @@ export function validatePlaythroughComparison(baseline, bundle, config) {
     baseline.complete !== true ||
     bundle.complete !== true ||
     typeof baseline.identity !== "string" ||
-    !baseline.identity ||
+    !baseline.identity.trim() ||
     typeof bundle.identity !== "string" ||
-    !bundle.identity ||
+    !bundle.identity.trim() ||
     !Number.isSafeInteger(baseline.policyVersion) ||
     baseline.policyVersion < 1 ||
     baseline.policyVersion !== bundle.policyVersion ||
     typeof baseline.initial !== "string" ||
-    !baseline.initial ||
+    !baseline.initial.trim() ||
     baseline.initial !== bundle.initial ||
-    JSON.stringify(baseline.config) !== JSON.stringify(config)
+    !config ||
+    !isDeepStrictEqual(baseline.config, config) ||
+    !isDeepStrictEqual(bundle.config, config)
   )
     throw new Error(
       "Comparison needs completed, matched starting scenarios and policies with source identities.",
     );
+}
+
+export function validatePlaythroughReplay(replay, identity, policyVersion) {
+  if (
+    !replay ||
+    replay.format !== 4 ||
+    replay.identity !== identity ||
+    replay.policyVersion !== policyVersion ||
+    typeof replay.initial !== "string" ||
+    !replay.initial.trim() ||
+    !replay.config ||
+    !Array.isArray(replay.steps) ||
+    replay.steps.length > 5000
+  )
+    throw new Error("Invalid replay journal or content/build identity mismatch.");
 }
 
 export async function runPlaythrough(args, { timeout = 60_000, spawnWorker } = {}) {
@@ -98,7 +132,7 @@ export async function runPlaythrough(args, { timeout = 60_000, spawnWorker } = {
   }
 }
 
-async function worker(args) {
+export async function runPlaythroughWorker(args, { createServer, readIdentity = sourceIdentity } = {}) {
   const options = parsePlaythroughArgs(args);
   const profile =
     process.env.FAUNA_PLAYTHROUGH_PROFILE === "1"
@@ -110,7 +144,7 @@ async function worker(args) {
     if (profile) profile.stages[name] = now - checkpoint;
     checkpoint = now;
   };
-  const { createServer } = await import("vite");
+  createServer ??= (await import("vite")).createServer;
   const server = await createServer({
     root,
     configFile: false,
@@ -122,12 +156,14 @@ async function worker(args) {
   let journal, releaseOutput;
   try {
     const value = (name, fallback) => options[name] ?? fallback;
-    const identity = await sourceIdentity();
+    const identity = await readIdentity();
     mark("identityMs");
     const { runJourney } = await server.ssrLoadModule("/src/tooling/playthrough.ts");
     const { FIRST_RUN_STARTERS } = await server.ssrLoadModule("/src/game/content.ts");
     mark("moduleLoadMs");
     const replay = value("--replay") ? JSON.parse(await readFile(value("--replay"), "utf8")) : undefined;
+    const { BATTLE_POLICY_VERSION } = await server.ssrLoadModule("/src/application/battle-policy.ts");
+    if (replay !== undefined) validatePlaythroughReplay(replay, identity, BATTLE_POLICY_VERSION);
     const config = replay?.config ?? {
       seed: Number(value("--seed", 42)),
       runs: Number(value("--runs", 2)),
@@ -148,15 +184,30 @@ async function worker(args) {
       !FIRST_RUN_STARTERS.includes(config.starter)
     )
       throw new Error("Invalid scenario configuration.");
-    const output = await reportDirectory(value("--out"), "reports/playthrough");
-    releaseOutput = await reservePlaythroughDirectory(output);
     const baseline = value("--compare") ? JSON.parse(await readFile(value("--compare"), "utf8")) : undefined;
-    const journalPath = path.join(output, `journal-${randomUUID()}.jsonl`);
-    journal = await open(journalPath, "a");
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
+    const { decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
     const initial =
       replay?.initial ??
       (value("--save") ? await readFile(value("--save"), "utf8") : JSON.stringify(createGame(config.seed)));
+    decodeSave(initial);
+    if (baseline !== undefined)
+      validatePlaythroughComparison(
+        baseline,
+        {
+          format: 4,
+          complete: true,
+          identity,
+          policyVersion: BATTLE_POLICY_VERSION,
+          initial,
+          config,
+        },
+        config,
+      );
+    const output = await reportDirectory(value("--out"), "reports/playthrough");
+    releaseOutput = await reservePlaythroughDirectory(output);
+    const journalPath = path.join(output, `journal-${randomUUID()}.jsonl`);
+    journal = await open(journalPath, "a");
     const appendRecord = async (record) => {
       const started = performance.now();
       // Every record is still awaited before the next command; keep no user-space batch buffer.
@@ -179,6 +230,8 @@ async function worker(args) {
     mark("fixtureSetupMs");
     const bundle = await runJourney(config, identity, initial, replay, appendRecord);
     mark("journeyMs");
+    if ((await readIdentity()) !== identity)
+      throw new Error("Playthrough source changed during execution; evidence is incomplete.");
     await writeFile(path.join(output, "journey.json"), JSON.stringify(bundle));
     if (baseline !== undefined) validatePlaythroughComparison(baseline, bundle, config);
     const summary = {
@@ -222,7 +275,7 @@ async function worker(args) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
-  if (args.at(-1) === "--worker") await worker(args.slice(0, -1));
+  if (args.at(-1) === "--worker") await runPlaythroughWorker(args.slice(0, -1));
   else {
     try {
       await runPlaythrough(args);

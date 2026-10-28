@@ -450,7 +450,6 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   let saved = "";
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [{ source: "primary" as const, data: JSON.stringify(initial) }],
       write: async (data) => {

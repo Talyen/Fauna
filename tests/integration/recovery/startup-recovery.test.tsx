@@ -46,7 +46,6 @@ it("reveals the existing recovery owner after an initial render failure without 
   const read = vi.fn().mockResolvedValue([]);
   vi.mocked(createPlatform).mockReturnValue({
     desktop: false,
-    steam: { available: false },
     saves: { readCandidates: read, write: async () => {} },
   });
   await act(async () => {
@@ -72,7 +71,6 @@ it("handles invalid content once, settles the splash accessibly and leaves saved
   window.addEventListener("unhandledrejection", unhandled);
   vi.mocked(createPlatform).mockReturnValue({
     desktop: false,
-    steam: { available: false },
     diagnostics: { read: () => null, write: diagnostics },
     saves: { readCandidates: read, write },
   });
@@ -107,7 +105,6 @@ it.each(["dispose", "pagehide"])("suppresses a queued startup failure after %s",
   const read = vi.fn(async () => []);
   vi.mocked(createPlatform).mockReturnValue({
     desktop: false,
-    steam: { available: false },
     saves: { readCandidates: read, write: async () => {} },
   });
   vi.mocked(validateContent).mockImplementation(() => {
@@ -134,7 +131,6 @@ it("does not reveal a disposed startup when a saved screen finishes loading late
   });
   vi.mocked(createPlatform).mockReturnValue({
     desktop: false,
-    steam: { available: false },
     saves: { readCandidates: () => read, write: async () => {} },
   });
   renderState.broken = false;

@@ -7,28 +7,43 @@ import { parseSync } from "@swc/core";
 const textAttributes = new Set([
   "aria-label",
   "aria-description",
+  "aria-valuetext",
+  "aria-roledescription",
   "alt",
   "title",
   "placeholder",
   "label",
   "description",
 ]);
-const readable = (value) => /[A-Za-z]{2}/.test(value);
+const readable = (value) => /\p{L}/u.test(value);
 
 export function inventorySource(source, filename) {
   const ast = parseSync(source, { syntax: "typescript", tsx: true, target: "es2022" });
   const bytes = Buffer.from(source);
+  const lineStarts = [0];
+  for (let index = 0; index < bytes.length; index++) if (bytes[index] === 10) lineStarts.push(index + 1);
+  const location = (offset) => {
+    let low = 0,
+      high = lineStarts.length;
+    while (low + 1 < high) {
+      const middle = Math.floor((low + high) / 2);
+      if (lineStarts[middle] <= offset) low = middle;
+      else high = middle;
+    }
+    return {
+      line: low + 1,
+      column: Array.from(bytes.subarray(lineStarts[low], offset).toString()).length + 1,
+    };
+  };
   const entries = [];
   const add = (node, kind, value) => {
     const text = value.replace(/\s+/g, " ").trim();
     if (!readable(text)) return;
     const leading = node.type === "JSXText" ? node.value.match(/^\s*/)[0] : "";
-    const before = bytes.subarray(0, node.span.start - 1).toString() + leading;
-    const lines = before.split("\n");
+    const position = location(node.span.start - 1 + Buffer.byteLength(leading));
     entries.push({
       file: filename,
-      line: lines.length,
-      column: Array.from(lines.at(-1)).length + 1,
+      ...position,
       kind,
       text,
     });
@@ -42,8 +57,22 @@ export function inventorySource(source, filename) {
       expression(node.consequent, kind);
       expression(node.alternate, kind);
     } else if (node.type === "BinaryExpression" && ["&&", "??", "||"].includes(node.operator)) {
+      if (node.operator !== "&&") expression(node.left, kind);
       expression(node.right, kind);
-    } else if (node.type === "ParenthesisExpression") expression(node.expression, kind);
+    } else if (node.type === "ArrayExpression") {
+      for (const element of node.elements)
+        if (element && !element.spread) expression(element.expression, kind);
+    } else if (
+      [
+        "ParenthesisExpression",
+        "TsAsExpression",
+        "TsConstAssertion",
+        "TsSatisfiesExpression",
+        "TsNonNullExpression",
+        "TsTypeAssertion",
+      ].includes(node.type)
+    )
+      expression(node.expression, kind);
   }
   function visit(node, parent) {
     if (!node || typeof node !== "object") return;

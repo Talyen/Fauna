@@ -20,7 +20,7 @@ function trackFenceLine(line, fence) {
   return fence;
 }
 
-function* unfencedLines(lines) {
+export function* unfencedLines(lines) {
   let fence = null;
   for (const [index, line] of lines.entries()) {
     const previous = fence;
@@ -57,9 +57,28 @@ export function extractMarkdownLinkTargets(source) {
     for (let j = i; j < close + marker.length; j++) masked[j] = " ";
     i = close + marker.length - 1;
   }
-  for (const match of masked.join("").matchAll(/\[[^\]\n]*\]\(/gu)) {
-    if (escapedAt(source, match.index)) continue;
-    let index = (match.index ?? 0) + match[0].length;
+  const openings = [];
+  const candidates = [];
+  for (let index = 0; index < masked.length; index++) {
+    if ((masked[index] !== "[" && masked[index] !== "]") || escapedAt(source, index)) continue;
+    if (masked[index] === "[") openings.push(index);
+    else if (masked[index] === "]" && openings.length) {
+      const start = openings.pop();
+      if (masked[index + 1] === "(")
+        candidates.push({
+          start,
+          destination: index + 2,
+          image: source[start - 1] === "!" && !escapedAt(source, start - 1),
+        });
+    }
+  }
+  let lastLinkStart = -1;
+  for (const candidate of candidates) {
+    if (/\r?\n[ \t]*\r?\n/u.test(source.slice(candidate.start, candidate.destination))) continue;
+    // An image may appear inside a link, but another link cannot.
+    if (!candidate.image && lastLinkStart > candidate.start && lastLinkStart < candidate.destination)
+      continue;
+    let index = candidate.destination;
     const leading = /^[ \t]*(?:\r?\n[ \t]*)?/u.exec(source.slice(index));
     index += leading?.[0].length ?? 0;
     const enclosed = source[index] === "<";
@@ -75,6 +94,7 @@ export function extractMarkdownLinkTargets(source) {
         index += 2;
         continue;
       }
+      if (enclosed && character === "<") break;
       if (enclosed && character === ">") {
         index++;
         closed = true;
@@ -92,6 +112,8 @@ export function extractMarkdownLinkTargets(source) {
       index++;
     }
     if (!closed || depth || !target) continue;
+    // A title needs whitespace after the destination, including an angle-enclosed one.
+    if (source[index] !== ")" && !/[ \t\r\n]/u.test(source[index] ?? "")) continue;
     // A title, if present, must be quoted or parenthesized before the closing delimiter.
     if (
       !/^[ \t]*(?:\r?\n[ \t]*)?(?:(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))[ \t]*(?:\r?\n[ \t]*)?)?\)/u.test(
@@ -99,7 +121,8 @@ export function extractMarkdownLinkTargets(source) {
       )
     )
       continue;
-    targets.push({ target, index: match.index ?? 0 });
+    targets.push({ target, index: candidate.start });
+    if (!candidate.image) lastLinkStart = candidate.start;
   }
   return targets;
 }
@@ -131,6 +154,10 @@ export function headingSlugs(source) {
   for (const { line, index } of unfencedLines(source.split("\n"))) {
     if (index !== previousIndex + 1) paragraph = [];
     previousIndex = index;
+    if (/^ {0,3}#{1,6}[ \t]*\r?$/u.test(line)) {
+      paragraph = [];
+      continue;
+    }
     const underline = /^ {0,3}(?:=+|-+)[ \t]*\r?$/u.test(line);
     const match = /^ {0,3}(#{1,6})[ \t]+(.+?)\s*#*\s*$/u.exec(line);
     const title = match?.[2] ?? (underline && paragraph.length ? paragraph.join(" ") : null);
