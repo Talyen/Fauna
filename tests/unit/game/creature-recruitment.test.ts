@@ -1,12 +1,27 @@
 import { produce } from "immer";
 import { expect, it } from "vitest";
-import { CARDS, FIRST_RUN_STARTERS, definition, species, type SpeciesId } from "../../../src/game/content";
-import { createGame } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import {
+  CARDS,
+  FIRST_RUN_STARTERS,
+  SPECIES,
+  definition,
+  species,
+  type SpeciesId,
+} from "../../../src/game/content";
+import { createGame, dispatch } from "../../../src/game/engine";
+import { COMBAT_PACKS, generateEncounterPack } from "../../../src/game/encounters";
+import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameState } from "../../../src/game/types";
 import { almanelleBattle } from "../../support/almanelle";
-import { accept, authoredPack, prepareDestination, teamRun, winBattle } from "../../support/game";
+import {
+  accept,
+  authoredPack,
+  prepareDestination,
+  starterJourney,
+  teamRun,
+  winBattle,
+} from "../../support/game";
 
 // Keep the original starter seed and exclusions: the recruit must be a new roster member.
 function firstJourney(kind: SpeciesId) {
@@ -49,6 +64,109 @@ const cases: {
   { kind: "parhelion", copies: 2, start: (kind) => knownRecruit(kind, "stillara") },
   { kind: "dulcera", copies: 2, start: (kind) => knownRecruit(kind, "almanelle") },
 ];
+
+it.each(SPECIES.filter((entry) => !entry.legendary))(
+  "discovers and recruits $id from an encounter and resumes the complete kit",
+  ({ id }) => {
+    const pack = COMBAT_PACKS.find((candidate) => candidate.some((kind) => kind === id));
+    const encounter = pack ? pack.findIndex((kind) => kind === id) : 0;
+    const authored: readonly SpeciesId[] = pack?.slice(0, encounter + 1) ?? [id];
+    const starter = FIRST_RUN_STARTERS.find((kind) => !authored.includes(kind));
+    expect(starter).toBeDefined();
+    if (!starter) throw new Error(`No starter available outside ${id}'s encounter`);
+    // Species without a fixed pack are reachable when an authored pack conflicts with the roster.
+    const conflict = COMBAT_PACKS.find((candidate) => candidate[0] === starter);
+    if (!pack && !conflict) throw new Error(`No authored encounter conflicts with ${starter}`);
+    const ready = produce(starterJourney(7, starter), (draft) => {
+      draft.encounter = encounter;
+      draft.journey!.victories = encounter;
+      if (pack) draft.expedition = { recruit: null, lastRoom: null, pack: [...authored] };
+      else {
+        const eligible = SPECIES.filter((entry) => !entry.legendary && entry.id !== starter);
+        const index = eligible.findIndex((entry) => entry.id === id);
+        observeDecisions(draft, () => (index + 0.5) / eligible.length);
+        draft.expedition = { recruit: null, lastRoom: null, pack: generateEncounterPack(draft, conflict!) };
+      }
+    });
+    const offered = ready.expedition!.pack!;
+    expect(offered).toContain(id);
+    const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
+    expect(battle.battle!.enemies.map((enemy) => enemy.species)).toEqual(offered);
+    expect(battle.discovery.encountered).toContain(id);
+    const won = dispatch(decodeSave(encodeSave(battle)), { type: "devWinBattle" }, true);
+    expect(won.accepted).toBe(true);
+    expect(won.state.reward!.recruits).toEqual(offered);
+    const recruited = accept(decodeSave(encodeSave(won.state)), { type: "recruit", species: id });
+    const creature = recruited.team.find((unit) => unit.species === id);
+    expect(creature).toBeDefined();
+    expect(recruited.discovery.recruited[id]).toBe(1);
+    const kit = recruited.cards
+      .filter((card) => card.ownerId === creature!.id)
+      .map((card) => card.definitionId);
+    expect(kit).toHaveLength(3);
+    expect(kit).toEqual(CARDS.filter((card) => card.species === id).map((card) => card.id));
+    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
+  },
+);
+
+it("settles a known encounter once and keeps its earnings through saved recruitment", () => {
+  const ready = produce(starterJourney(7, "captoad"), (draft) => {
+    draft.expedition = { recruit: null, lastRoom: null, pack: ["emberback"] };
+  });
+  const battle = produce(accept(decodeSave(encodeSave(ready)), { type: "beginBattle" }), (draft) => {
+    draft.battleXP = { nature: 4, block: 2 };
+  });
+  expect(battle.battle!.enemies.map((enemy) => enemy.species)).toEqual(["emberback"]);
+  const beforeDenied = encodeSave(battle);
+  const denied = dispatch(battle, { type: "devWinBattle" });
+  expect(denied.accepted).toBe(false);
+  expect(denied.state).toBe(battle);
+  expect(denied.events).toEqual([]);
+  expect(encodeSave(battle)).toBe(beforeDenied);
+
+  const result = dispatch(decodeSave(encodeSave(battle)), { type: "devWinBattle" }, true);
+  expect(result.accepted).toBe(true);
+  const won = result.state;
+  expect(won.phase).toBe("recruit");
+  expect(won.battle).toBeNull();
+  expect(won.currency).toBe(20);
+  expect(won.keywordXP).toMatchObject({ nature: 4, block: 2 });
+  expect(won.journey).toMatchObject({
+    victories: 1,
+    currency: 20,
+    xp: { nature: 4, block: 2 },
+    lastBattle: { encounter: 0, outcome: "next", currency: 20, xp: { nature: 4, block: 2 } },
+  });
+  expect(won.reward).toMatchObject({
+    outcome: "next",
+    currency: 20,
+    xp: { nature: 4, block: 2 },
+    recruits: ["emberback"],
+    boons: [],
+  });
+  expect(won.journey!.xp).toEqual({ nature: 4, block: 2 });
+  expect(won.reward!.xp).toEqual({ nature: 4, block: 2 });
+  const beforeRepeated = encodeSave(won);
+  const repeated = dispatch(won, { type: "devWinBattle" }, true);
+  expect(repeated.accepted).toBe(false);
+  expect(repeated.state).toBe(won);
+  expect(repeated.events).toEqual([]);
+  expect(encodeSave(won)).toBe(beforeRepeated);
+
+  const recruited = accept(decodeSave(encodeSave(won)), { type: "recruit", species: "emberback" });
+  expect(recruited.phase).toBe("teamSelection");
+  expect(recruited.team.map((unit) => unit.species)).toEqual(["captoad", "emberback"]);
+  expect(recruited.discovery.recruited.emberback).toBe(1);
+  expect(recruited.currency).toBe(20);
+  expect(recruited.journey!.lastBattle).toEqual(won.journey!.lastBattle);
+  expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
+  const beforeDuplicate = encodeSave(recruited);
+  const duplicate = dispatch(recruited, { type: "recruit", species: "emberback" });
+  expect(duplicate.accepted).toBe(false);
+  expect(duplicate.state).toBe(recruited);
+  expect(duplicate.events).toEqual([]);
+  expect(encodeSave(recruited)).toBe(beforeDuplicate);
+});
 
 it.each(cases)(
   "discovers, recruits and resumes $kind through its authored encounter",
