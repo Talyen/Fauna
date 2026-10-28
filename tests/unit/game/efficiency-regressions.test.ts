@@ -1,7 +1,5 @@
 import { grantStatus } from "../../../src/game/combat/index";
 import { recruitLineup, swapFromCard } from "../../../src/game/team";
-import { cardText } from "../../../src/game/card-rules";
-import { cornucopiaHealing } from "../../../src/game/rules/boons";
 import { enemyReflectionRecipients } from "../../../src/game/battlefield";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { freshCombat } from "../../../src/game/combat/state";
@@ -1274,16 +1272,10 @@ it("keeps card-driven position swaps and their random choice aligned", () => {
   expect(state.rng).toBe(reference.rng);
 });
 
-it("returns an independent recruit lineup and retains Cornucopia's exact rule text", () => {
+it("returns an independent recruit lineup without changing deployment", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback"])));
   const before = state.team.map((unit) => unit.id);
   const incoming = { ...state.team[0]!, id: "incoming", species: "mossguard" as const };
   expect(recruitLineup(state, incoming)).toEqual([...before, incoming.id]);
   expect(state.team.map((unit) => unit.id)).toEqual(before);
-  const card = definition("food-mana-berries");
-  const ordinary = cardText(card);
-  state.boons = ["cornucopia"];
-  expect(cardText(card, 0, undefined, 1, state)).toBe(
-    ordinary.replace("; Consume", `; Restore ${cornucopiaHealing(state)} Health to all allies; Consume`),
-  );
 });

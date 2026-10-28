@@ -116,10 +116,8 @@ export function cardText(
     if (foodForAllies(card, state))
       text =
         card.effect === "heal" ? `Restore ${value} Health to all allies` : `Give all allies ${value} Block`;
-    if (card.id === "food-mana-berries") {
-      const healing = cornucopiaHealing(state);
-      if (healing) text += `; Restore ${healing} Health to all allies`;
-    }
+    if (card.id === "food-mana-berries" && cornucopiaHealing(state))
+      text += `; Restore ${cornucopiaHealing(state)} Health to all allies`;
     if (card.consume) text += "; Consume";
   } else if (card.consume) text = `Consume; ${text}`;
   return text;
