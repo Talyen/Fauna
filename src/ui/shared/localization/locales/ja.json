@@ -4249,9 +4249,9 @@
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,
-    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
-    "sourceHash": "6574e75d089c55b6783b39261e566e6bfe2836ea74c5f41f71e42cbd05e51db3",
-    "text": "1体のクリーチャーに属するカード; 使用するとそのクリーチャーが行動する; コストは共有の<keyword0>マナ</keyword0>から支払う"
+    "source": "A creature's ability card; Playing it makes that creature act and spends your team's shared <keyword0>Mana</keyword0>",
+    "sourceHash": "73d36f3c6e297180062814df19401bc8e6035acea2c698df3012fc45bffa8a12",
+    "text": "クリーチャーの能力カード; 使うとそのクリーチャーが行動し、チーム共有の<keyword0>マナ</keyword0>を消費する"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -4261,9 +4261,9 @@
   },
   "content.glossary.attack.definition.rule": {
     "reviewed": true,
-    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
-    "sourceHash": "031554d6bea6bdab315a6cf2f98b86447cb54fcbfd951b054626dd00ef59af64",
-    "text": "敵にダメージを与える行動; 攻撃特性がそのダメージを変える"
+    "source": "An action that deals damage to an enemy; Its traits determine which damage modifiers apply",
+    "sourceHash": "1cf9fcc24e03d956ca62308588e1e5ef40f76a3de39b828e53abeca2aab61dec",
+    "text": "敵にダメージを与える行動; 攻撃の特性によって適用されるダメージ補正が決まる"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -4271,11 +4271,23 @@
     "sourceHash": "fdb0cb37cd1ec5b30168ac2ed88ed29af551d91c5ab1a60b1182a547d6c8b122",
     "text": "攻撃"
   },
+  "content.glossary.auto-end-turn.definition.rule": {
+    "reviewed": true,
+    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "dee112a0e64f6360334e82ff79eb9589a02b4268e2010e6aa3c756af86ff7b61",
+    "text": "任意の設定; カード使用か交代後、<keyword0>マナ</keyword0>も使えるカードもなく、交代待ちでもない場合にターンを終了する; ターン終了はいつでも確認なしで選べる"
+  },
+  "content.glossary.auto-end-turn.term.rule": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "c523f723b78cf837f9dceef8038bcb91174b21ffe355a3d6dd222d781ec557d5",
+    "text": "ターンを自動終了"
+  },
   "content.glossary.backup.definition.rule": {
     "reviewed": true,
-    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
-    "sourceHash": "6ba1197de2d223b06768b28851264789926ec251f9b491a9f1dfe232a412866d",
-    "text": "最大5体を仲間にできる; 出撃できるのは通常クリーチャー最大3体またはレジェンダリー1体; パッシブを発揮するのは出撃中の生存クリーチャーのみ; 戦闘不能後は生存している控えを選んで続行; 交代後もカード枠は維持され、追加ドローや開始時ボーナスは得られない; 他の交代には能力かゲーム効果が必要"
+    "source": "Creatures in your roster but off the field; Your roster holds up to five creatures, with up to three ordinary creatures or one Legendary deployed; Only living deployed creatures provide passives; After a knockout, choose a living backup to continue; Replacements preserve card slots without extra draws or opening bonuses",
+    "sourceHash": "4c675b0fb583e65542caf47c1a66713c5333ef7a522eb2f6bc9d3cea0496a12c",
+    "text": "仲間のうち、戦場に出ていないクリーチャー; 仲間は最大5体で、出撃できるのは通常クリーチャー最大3体かレジェンダリー1体; 生存している出撃中のクリーチャーだけがパッシブを発揮する; 戦闘不能後は生存している控えを選んで続行する; 交代してもカード枠は維持され、追加ドローや開始時ボーナスは得られない"
   },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
@@ -4285,9 +4297,9 @@
   },
   "content.glossary.battle.definition.rule": {
     "reviewed": true,
-    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
-    "sourceHash": "2ea5eb3825da6072d39b088928867e233152fb3cdfe96a16ed23670751d1b64e",
-    "text": "1回の遭遇; すべての敵を倒すと勝利; <keyword0>体力</keyword0>と戦闘不能状態は遭遇をまたいで維持; 焚き火で休むと戦闘不能を含む各クリーチャーの最大<keyword1>体力</keyword1>の{{value0}}%を回復; 戦闘効果と<keyword2>ブロック</keyword2>は次の戦闘でリセット"
+    "source": "Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts carry into later battles; <keyword1>Block</keyword1> and combat effects reset; Campfire Rest restores {{value0}}% maximum <keyword2>Health</keyword2> to each creature, including knocked-out creatures",
+    "sourceHash": "d53342964b1e78691b2426ff823e6372194c1c2eb09b39942ff582950ce7fe71",
+    "text": "すべての敵を倒すと勝利; <keyword0>体力</keyword0>と戦闘不能は次の戦闘にも持ち越す; <keyword1>ブロック</keyword1>と戦闘効果はリセットされる; 焚き火の休息は戦闘不能を含む各クリーチャーの最大<keyword2>体力</keyword2>の{{value0}}%を回復する"
   },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
@@ -4297,9 +4309,9 @@
   },
   "content.glossary.boons.definition.rule": {
     "reviewed": true,
-    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
-    "sourceHash": "672a7bbabdd3ecb9ad984de22f8222339a6b44c1c0ca2bf710c8e74dea0e4035",
-    "text": "現在の旅の間続くパッシブ効果; 提示されたら3つの祝福から1つ選ぶか見送る; 旅が終わると祝福も終わる"
+    "source": "Passive effects for the current journey; Choose one of three when offered, or skip; All Boons end with the journey",
+    "sourceHash": "db1c60492101f72d37ee11d1b8cfdbf06ca28375fab7bc14a5c5659979f49c55",
+    "text": "現在の旅で続くパッシブ効果; 提示された3つから1つを選ぶか、見送れる; 旅が終わるとすべての祝福を失う"
   },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
@@ -4309,9 +4321,9 @@
   },
   "content.glossary.copy.definition.rule": {
     "reviewed": true,
-    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
-    "sourceHash": "26f651d7ba35e72f142ed9a75d667c5ec50c7994836afdf6d25cbc3a52c68383",
-    "text": "引いたカードの複製で、所有者、レベル、<keyword0>マナ</keyword0>コストは同じ; 戦闘終了までデッキに残る; 複製を引くとさらに複製されることがある; 複製の作成や繰り上げはドローではない"
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Lasts only for the battle; Drawing a copy can create another copy; Creating a copy or moving it from overflow into hand does not count as drawing",
+    "sourceHash": "4873ab34fdf9a732986186716d4e28de7cd27ceaf3871a852e6deef6b96dc229",
+    "text": "引いたカードの複製で、持ち主・レベル・<keyword0>マナ</keyword0>コストは同じ; 戦闘中のみ残る; コピーを引くとさらにコピーが作られることがある; コピーの作成や、あふれたカードの待機列から手札への移動はドローに数えない"
   },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
@@ -4321,9 +4333,9 @@
   },
   "content.glossary.damage.definition.rule": {
     "reviewed": true,
-    "source": "Attacks can <keyword0>Dodge</keyword0> or critically hit; <keyword1>Block</keyword1> absorbs damage first; <keyword2>Armor</keyword2> then reduces <keyword3>Physical</keyword3> and <keyword4>Stun</keyword4> damage; Reducing damage removes {{value0}} <keyword5>Armor</keyword5>; <keyword6>Burn</keyword6>, <keyword7>Poison</keyword7>, <keyword8>Bleed</keyword8>, <keyword9>Stun</keyword9>, and <keyword10>Freeze</keyword10> hits add their matching buildup; There are no elemental reactions",
-    "sourceHash": "251fd790e39522cd51a7662fc7e2afd47f3922c8aa37d992f214c0d0a5ed951d",
-    "text": "攻撃は<keyword0>回避</keyword0>されるか、クリティカルになることがある; まず<keyword1>ブロック</keyword1>がダメージを吸収; 次に<keyword2>装甲</keyword2>が<keyword3>物理</keyword3>と<keyword4>スタン</keyword4>のダメージを軽減; ダメージを軽減すると<keyword5>装甲</keyword5>を{{value0}}失う; <keyword6>炎上</keyword6>、<keyword7>毒</keyword7>、<keyword8>出血</keyword8>、<keyword9>スタン</keyword9>、<keyword10>凍結</keyword10>のヒットは対応する蓄積を加える; 属性反応はない"
+    "source": "<keyword0>Block</keyword0> absorbs damage first; <keyword1>Armor</keyword1> then reduces <keyword2>Physical</keyword2> and <keyword3>Stun</keyword3> damage; <keyword4>Burn</keyword4>, <keyword5>Poison</keyword5>, <keyword6>Bleed</keyword6>, <keyword7>Stun</keyword7> and <keyword8>Freeze</keyword8> hits add matching buildup, even through <keyword9>Block</keyword9>; Different damage types do not trigger elemental reactions",
+    "sourceHash": "0db81b52be6e142353c7f0452aba2626f6de5991b183f1a92ef77bd8562b84aa",
+    "text": "まず<keyword0>ブロック</keyword0>がダメージを吸収し、その後<keyword1>装甲</keyword1>が<keyword2>物理</keyword2>と<keyword3>スタン</keyword3>のダメージを軽減する; <keyword4>炎上</keyword4>・<keyword5>毒</keyword5>・<keyword6>出血</keyword6>・<keyword7>スタン</keyword7>・<keyword8>凍結</keyword8>のヒットは、<keyword9>ブロック</keyword9>越しでも対応する効果を蓄積する; 異なるダメージ属性による元素反応はない"
   },
   "content.glossary.damage.term.rule": {
     "reviewed": true,
@@ -4333,9 +4345,9 @@
   },
   "content.glossary.deaths-door.definition.rule": {
     "reviewed": true,
-    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
-    "sourceHash": "a5d0e293c62d98b54284f3db9d451fa0efcffb244b5a6adbdf4daebc057168eb",
-    "text": "味方クリーチャーは各戦闘で1回、致命傷を<keyword0>体力</keyword0>{{value0}}で生き残り、猶予を{{value1}}ターン得る; 猶予中の致命的なダメージでも<keyword1>体力</keyword1>{{value2}}が残る; その後のダメージで戦闘不能になることがある; 控えで過ごすターンも猶予を消費"
+    "source": "Once per battle, each allied creature survives fatal damage at {{value0}} <keyword0>Health</keyword0> and gains {{value1}} grace turns; Fatal damage also leaves {{value2}} <keyword1>Health</keyword1> during grace; Turns in backup still use up grace",
+    "sourceHash": "ae5f1c9e795182be1403a5eac14adc224146a6369400d3809e81359787e4353c",
+    "text": "味方クリーチャーは戦闘ごとに1回、致死ダメージを受けても<keyword0>体力</keyword0>{{value0}}で生き残り、{{value1}}ターンの猶予を得る; 猶予中も致死ダメージで<keyword1>体力</keyword1>{{value2}}を残す; 控えで過ごすターンも猶予を消費する"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -4345,9 +4357,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
-    "sourceHash": "ab6950af8aa29dc818d07bb1cc6997aec383595c6cac78e8afea736173d42257",
-    "text": "全員でデッキ、手札、捨て札を共有; 使用したカードは<keyword0>消費</keyword0>がなければ捨て札になる; ターン終了時の未使用カードも捨て札になる; 自分のターン開始時に山札が空なら、捨て札から補充する"
+    "source": "Your team shares a deck, hand and discard pile; Played cards go to discard unless Consumed, as do cards left in hand at turn end; Only turn-start draws refill the draw pile from discard",
+    "sourceHash": "d426966ff552d5e02bd2e33f045d964b4c1fa82fdae99054d05e96d5fa6e8b54",
+    "text": "チーム全員でデッキ・手札・捨て札を共有する; 使ったカードは消費されるものを除いて捨て札になり、ターン終了時の手札も捨てる; 捨て札から山札を補充するのはターン開始時のドローのみ"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -4357,9 +4369,9 @@
   },
   "content.glossary.echo.definition.rule": {
     "reviewed": true,
-    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
-    "sourceHash": "d84c1376a17a486b2062d11c10e5ab322e4884a610721f871719d050e9e6a399",
-    "text": "メメントのミニオン; カード強化前の<keyword0>体力</keyword0>は{{value0}}; 宮廷は覚えているによってのみ攻撃する; 最大2体まで召喚できる"
+    "source": "Memento's Minion; Starts with {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "5433fc7746c73412aa70f6174ae02b607574a37d2beda48c8d4a5b37cdbabf4b",
+    "text": "メメントのミニオン; カード強化前は<keyword0>体力</keyword0>{{value0}}で開始する; 宮廷は覚えているによってのみ攻撃する; 最大2体まで召喚できる"
   },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
@@ -4369,9 +4381,9 @@
   },
   "content.glossary.gold.definition.rule": {
     "reviewed": true,
-    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
-    "sourceHash": "363b26c1cbc3bff1e374c6a98fe28544c76ac5cadce261932ac60fb681a20811",
-    "text": "戦闘で得たゴールドは旅をまたいで保持される; 祝福商人で現在の旅の祝福を購入できる; ゴールドはキーワードでもタレントのカテゴリでもない"
+    "source": "Permanent currency that carries between journeys; Spend it at Boon Merchants on Boons for the current journey",
+    "sourceHash": "6f0a53a66394a63a1fbebeb885ead39b9b2205b2929db52f38302f77c5f59a45",
+    "text": "旅をまたいで保持される通貨; 祝福商人で現在の旅に使う祝福を購入できる"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,
@@ -4381,9 +4393,9 @@
   },
   "content.glossary.hit.definition.rule": {
     "reviewed": true,
-    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
-    "sourceHash": "5f0668aa71c85e46457d1c22a28b38f233ba24a9b40ca6ff8dcacad120799858",
-    "text": "命中した攻撃で、<keyword0>ブロック</keyword0>に吸収されたものも含む; <keyword1>回避</keyword1>と継続ダメージは命中ではない; <keyword2>棘</keyword2>と胞子の衣は命中を受けると反撃する"
+    "source": "An attack that connects, even if <keyword0>Block</keyword0> absorbs all damage; <keyword1>Dodges</keyword1> and damage over time are not hits; Hit effects can trigger without <keyword2>Health</keyword2> loss",
+    "sourceHash": "6033dfc6587f50a30b3d4ccfc73d46af9fa624956d23f4d601f5fd2bdf341a36",
+    "text": "命中した攻撃で、<keyword0>ブロック</keyword0>が全ダメージを吸収しても該当する; <keyword1>回避</keyword1>された攻撃と継続ダメージはヒットではない; <keyword2>体力</keyword2>が減らなくてもヒット時の効果は発動できる"
   },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
@@ -4393,9 +4405,9 @@
   },
   "content.glossary.keyword-xp.definition.rule": {
     "reviewed": true,
-    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
-    "sourceHash": "20051bf61857db75b2a4584a7d0c366f0c210db6e673f12be6fd5e8b22813171",
-    "text": "アクションカードを使うと、そのキーワードごとに経験値を{{value0}}獲得; 戦闘終了時の経験値は敗北後も永続; 戦闘を放棄すると獲得済みの経験値は保持されるが、勝利報酬は得られない"
+    "source": "Each action card played earns {{value0}} XP per eligible keyword; XP becomes permanent when battle ends, even after defeat or abandonment; Abandoning grants no victory rewards",
+    "sourceHash": "4a947b6471cacc218c302a0d02ef6ae08d0472c56a577f9acf016ee3fbe04985",
+    "text": "アクションカードを使うたび、対象となる各キーワードに経験値{{value0}}を得る; 獲得した経験値は戦闘終了時に永続化し、敗北や放棄でも残る; 放棄では勝利報酬を得られない"
   },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
@@ -4405,141 +4417,141 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
-    "sourceHash": "a47e6882afbc2114cb44f9fdaa7651d33a600b74e1d560ff1c46f0a78461b5cb",
-    "text": "<keyword2>ブロック</keyword2>適用後、受ける<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージを軽減; <keyword3>装甲</keyword3>でダメージを軽減すると{{value0}}スタック失う"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
+    "sourceHash": "c263fe9a2da1b894a3ae7bb267ae522c9dfe4b0db1372b324d8a640b520a4569",
+    "text": "<keyword2>ブロック</keyword2>後に残った<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージをスタック数だけ軽減する; 軽減するたびに{{value0}}スタック失う"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "9ef748cdaaee762323f07e50c3d2c87216a782c40fae05e1f723071eea58729f",
-    "text": "次に受ける攻撃を攻撃者へ返す; その攻撃のダメージと有害効果を防ぐ; <keyword0>反射</keyword0>された攻撃は再び<keyword1>反射</keyword1>できない; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
+    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "4393d1712fc4fbe960f7294c6092926ce1f6cfc02bb39f0affcfbe9845f91845",
+    "text": "次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword0>反射</keyword0>された攻撃を再び<keyword1>反射</keyword1>することはできない; 使用されるか<keyword2>強化解除</keyword2>されるまで続く; 重複しない"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "Repeat damage next turn, then clear",
-    "sourceHash": "6da3f15702a4ba027407d4a1cbae0826da5fdb8f3417329601540f8fd42edc2c",
-    "text": "次のターンにダメージを繰り返し、その後消える"
+    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
+    "sourceHash": "a1f63eef37e77f4ff31bc50531010f755f797a00e7edd356b7e078dc5ee8fc80",
+    "text": "<keyword0>出血</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーの次のターン開始時にスタック数と同じダメージを与え、すべて消える"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
-    "sourceHash": "6a4e228c102f35034518ce6a4656b740de91cf0a41e4e414f11582da2d98629a",
-    "text": "次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword0>回避</keyword0>として扱う; 重複しない"
+    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
+    "sourceHash": "3056f7cc5b69729caeaeea1f4b3ef5cf02c3bad36cc5b346d221a7d9e0d17812",
+    "text": "次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword0>回避</keyword0>として扱う; 重複しない"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
-    "sourceHash": "37632409d3676b2ff75d2d4c1451b70f091426c54c01b44a90e9d78f7e682eb3",
-    "text": "<keyword0>炎上</keyword0>、<keyword1>毒</keyword1>、<keyword2>出血</keyword2>の継続ダメージを含む被ダメージを<keyword3>体力</keyword3>より先に吸収; 特記がない限りヒット効果、蓄積、<keyword4>吸血</keyword4>は防がない; 残った<keyword5>ブロック</keyword5>は通常、次の自分のターン開始時に半減し、通常通り四捨五入"
+    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
+    "sourceHash": "aa48ab26fb0275e165a3d832281af33968d07580fcb88bde6681ffaf2b7ba021",
+    "text": "継続ダメージを含むダメージを<keyword0>体力</keyword0>より先に吸収する; 通常、ヒット時効果・状態異常の蓄積・<keyword1>吸血</keyword1>は防がない; 残りの<keyword2>ブロック</keyword2>は通常、そのクリーチャーの次のターンに半減し、四捨五入する"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "Deal damage each turn, then halve the stacks",
-    "sourceHash": "fe0870a8e5a220d130a7c653b619168b2ef41aa63e384a6ba52656df60667c7c",
-    "text": "毎ターンダメージを与え、その後スタックを半減する"
+    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
+    "sourceHash": "076621e2200a9b96dde8d0ae244aa1c5996cbdd32ef4a9c2b06c701c0f9c6810",
+    "text": "<keyword0>炎上</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーのターン開始時にスタック数と同じダメージを与え、その後スタックが半減する; 最後の1スタックはダメージを与えて消える"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
-    "source": "Remove harmful effects from an ally",
-    "sourceHash": "6d8e126df35884ca7b2ad31e5108faec39f214974ad177096aebde98f6f6041a",
-    "text": "味方1体の有害な効果を取り除く"
+    "source": "Remove the stated number of harmful effect types from an ally, clearing all stacks of each removed type",
+    "sourceHash": "56c18e1c541a76148891e6e3084d4701302f3cd73ecdf703faf57870ed3b297b",
+    "text": "味方から指定された種類数の有害効果を取り除く; 取り除く効果は全スタックを消す"
   },
   "content.glossary.keyword.consume.definition.rule": {
     "reviewed": true,
-    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
-    "sourceHash": "5ae57176488b3b7a315708bf09d890a783f495ed8fbdd4ecb2775fc4ccde7f05",
-    "text": "使用後、このカードを戦闘終了まで取り除く; 初期デッキは戦闘ごとに復元される; 未使用のカードは通常どおり捨てられる"
+    "source": "Remove the card for the rest of the battle after it is played; Unplayed cards discard normally; Your starting deck returns each battle",
+    "sourceHash": "8e77976a95c326caa48a2a3196bbb71c496e91ae8162328bf340ad8bd0bc96f0",
+    "text": "使用後、そのカードを戦闘終了まで取り除く; 使わなかったカードは通常どおり捨てる; 各戦闘で開始時のデッキに戻る"
   },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
-    "source": "An attack that deals double damage",
-    "sourceHash": "52c6fe2c3393e73bf0036d22fc23ee908fd3c55c133059ced59337f62c4e2eba",
-    "text": "ダメージが2倍になる攻撃"
+    "source": "An attack that deals double damage; Attacks on either side have a base {{value0}}% <keyword0>critical</keyword0> chance",
+    "sourceHash": "0d3d1c273faae0907bdbb81b4a081a5261543c242e6c4f268c086ce5fdea945d",
+    "text": "ダメージが2倍になる攻撃; 両陣営の攻撃の基本<keyword0>クリティカル</keyword0>率は{{value0}}%"
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets normally cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
-    "sourceHash": "8ee75efc3f874ec9ace75cf644277b687f3b5d9b0fb9e8803621724bd170043e",
-    "text": "両陣営は防御の前に各攻撃ダメージを{{value0}}%の確率で避ける; 行動不能の対象は通常<keyword0>回避</keyword0>できない; 合計<keyword1>回避</keyword1>率は{{value1}}%が上限"
+    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
+    "sourceHash": "d7df51b19662e8cf67705c8ec5ac0001c33f5d94e01366295606804b6f5bf4e5",
+    "text": "<keyword0>ブロック</keyword0>や<keyword1>装甲</keyword1>の前に攻撃を避ける; 基本確率は{{value0}}%で、ボーナス込みの上限は{{value1}}%; <keyword2>スタン</keyword2>中や<keyword3>凍結</keyword3>中のクリーチャーは通常<keyword4>回避</keyword4>できない; 継続ダメージは<keyword5>回避</keyword5>できない"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
-    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
-    "sourceHash": "08345d087d11dc6da6ea3017640cd01d65702c3599e6023886fa588abbbe4d35",
-    "text": "共有の消耗品; リンゴは<keyword0>体力</keyword0>を{{value0}}回復; <keyword1>マナ</keyword1>の木の実は<keyword2>マナ</keyword2>を{{value1}}付与; 旅のパンは<keyword3>ブロック</keyword3>を{{value2}}付与; それぞれ<keyword4>マナ</keyword4>を{{value3}}消費し、<keyword5>消費</keyword5>を持つ"
+    "source": "Cards shared by your team; Apple restores {{value0}} <keyword0>Health</keyword0>, <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2> and Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and is Consumed when played",
+    "sourceHash": "faca1fc2c6bc896bd2083817050657c486673148fb97e5f515161281c600bc6b",
+    "text": "チーム共有のカード; リンゴは<keyword0>体力</keyword0>を{{value0}}回復し、<keyword1>マナ</keyword1>の木の実は<keyword2>マナ</keyword2>を{{value1}}、旅のパンは<keyword3>ブロック</keyword3>を{{value2}}付与する; 各カードは<keyword4>マナ</keyword4>{{value3}}を消費し、使うと戦闘から取り除かれる"
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
-    "sourceHash": "a687dbe4b14a67d8e07d59e516ad55a9780091ed884976d705793c78ca0134b4",
-    "text": "ダメージで<keyword0>凍結</keyword0>が蓄積; 蓄積が最大<keyword1>体力</keyword1>の半分に達すると1ターン行動不能; 回復後は<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の両方に{{value0}}ターン免疫を得る"
+    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
+    "sourceHash": "5e61b0022ac55b98312beda0cbfd40a3e4f8860b6b9a810ffe5727fb9af214d2",
+    "text": "<keyword0>凍結</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分を蓄積する; 蓄積が最大<keyword2>体力</keyword2>の半分に達すると<keyword3>凍結</keyword3>状態になり、1ターン行動できない; 回復後は<keyword4>スタン</keyword4>と<keyword5>凍結</keyword5>の両方に{{value0}}ターンの耐性を得る"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
-    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
-    "sourceHash": "a425f1343bf67f0b86d14c762eab7728391a673711eb294225b4ff71b6ef4542",
-    "text": "残りの生命力; <keyword0>体力</keyword0>がゼロになるとクリーチャーは戦闘不能になる; <keyword1>体力</keyword1>は最大値まで回復できる; 戦闘中、回復では戦闘不能から復帰できない"
+    "source": "A creature's remaining life; At {{value0}} <keyword0>Health</keyword0> it is knocked out; <keyword1>Healing</keyword1> restores <keyword2>Health</keyword2> up to its maximum but cannot revive a knocked-out creature during battle",
+    "sourceHash": "0dbe46a9d1b55c9caa5a34ac8ccbf662fbd1ee2ef2c079171fc6e0d8179bbe39",
+    "text": "クリーチャーの残りの生命力; <keyword0>体力</keyword0>が{{value0}}になると戦闘不能; <keyword1>回復</keyword1>は<keyword2>体力</keyword2>を最大値まで戻すが、戦闘中に戦闘不能のクリーチャーを復活させることはできない"
   },
   "content.glossary.keyword.leech.definition.rule": {
     "reviewed": true,
-    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
-    "sourceHash": "97f85abba3419077c3c2ee8450ef400e3d5db35fd65075e84b77fefff6f0f1ff",
-    "text": "<keyword0>ブロック</keyword0>に吸収された分を含む与ダメージの半分を通常どおり丸めて回復; 過剰ダメージは含まない; <keyword1>出血</keyword1>の<keyword2>吸血</keyword2>は後の継続ダメージ時に発生"
+    "source": "Restore <keyword0>Health</keyword0> equal to half the damage dealt, rounded to the nearest whole number; Includes damage absorbed by <keyword1>Block</keyword1>, but not damage prevented by <keyword2>Armor</keyword2> or excess damage beyond a knockout; <keyword3>Bleed</keyword3> restores this <keyword4>Health</keyword4> when it deals damage over time",
+    "sourceHash": "5e2e851f3ae1b668dde11ef4eab353b3ad6e3e1e886efb40ca862d63fb42be97",
+    "text": "与えたダメージの半分を四捨五入し、その分の<keyword0>体力</keyword0>を回復する; <keyword1>ブロック</keyword1>に吸収されたダメージも含むが、<keyword2>装甲</keyword2>で防がれた分や倒すのに必要な量を超えた分は含まない; <keyword3>出血</keyword3>は継続ダメージを与えた時にこの<keyword4>体力</keyword4>を回復する"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
-    "sourceHash": "bb6441fd170f9398de509d3aa940161c6aadd16983a45279e7c40ac064b88cab",
-    "text": "<keyword0>光</keyword0>ダメージ; 耐性や状態効果を意味しない"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "b7964a2a495d5edf7783483d289b813c5b8611bb088f5837bb298e55538eab83",
+    "text": "<keyword0>ブロック</keyword0>に吸収される直接ダメージ; <keyword1>装甲</keyword1>を無視し、状態異常を付与しない"
   },
   "content.glossary.keyword.mana.definition.rule": {
     "reviewed": true,
-    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
-    "sourceHash": "e909972bd6fe7ebdcf3fee01d96f30cb6c0df396de289289dba8a07009995e35",
-    "text": "アクションカードの使用に必要な共有資源; <keyword0>マナクリスタル</keyword0>1つにつき<keyword1>最大マナ</keyword1>が{{value0}}増える; 各ターン開始時、チームは<keyword2>マナ</keyword2>{{value1}}を得る; <keyword3>マナ</keyword3>は共有; 毎ターン{{value2}}枚引き、手札は最大{{value3}}枚"
+    "source": "Your team's shared resource for playing cards; Normally restored to {{value0}} each turn; A <keyword0>Mana Crystal</keyword0> is {{value1}} point of <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "243ac485205aa37127069b00ecd77970ab1d238f450db3729339ac9780ddbad5",
+    "text": "カードを使うためのチーム共有資源; 通常は毎ターン{{value0}}に戻る; <keyword0>マナクリスタル</keyword0>1個は<keyword1>最大マナ</keyword1>{{value1}}に相当する"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
-    "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
-    "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果を意味しない"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "b7964a2a495d5edf7783483d289b813c5b8611bb088f5837bb298e55538eab83",
+    "text": "<keyword0>ブロック</keyword0>に吸収される直接ダメージ; <keyword1>装甲</keyword1>を無視し、状態異常を付与しない"
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "f6ad9038d7e2bdf75d08cf1b0dbaf73391d01ac51aa9d68d053feff9a294c351",
-    "text": "次の攻撃を<keyword1>回避</keyword1>より先に<keyword0>防止</keyword0>し、そのダメージと有害効果を防ぐ; <keyword2>棘</keyword2>は反撃する; 消費されるか<keyword3>強化解除</keyword3>されるまで持続; 重複しない"
+    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "b3012d1d159de88874a40a42309bd772425f60cf6186ed4d273e888db269fd1f",
+    "text": "次に受ける能力の攻撃と自分への有害効果を<keyword0>回避</keyword0>判定前に打ち消す; <keyword1>棘</keyword1>は反撃する; 使用されるか<keyword2>強化解除</keyword2>されるまで続く; 重複しない"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
-    "sourceHash": "1a0b82356ab84b2b309c3aec1f5380bc44d5efcd80a6012085624b5d91488129",
-    "text": "次に受ける有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword0>強化解除</keyword0>されるまで持続; 重複しない"
+    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
+    "sourceHash": "5a47a5fb8c9be2a4d3067a7281548605a68b13135585ac0702b3e43837647b3c",
+    "text": "次の<keyword0>炎上</keyword0>・<keyword1>毒</keyword1>・<keyword2>出血</keyword2>・<keyword3>スタン</keyword3>・<keyword4>凍結</keyword4>・<keyword5>盲目</keyword5>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword6>強化解除</keyword6>されるまで続く; 重複しない"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
-    "sourceHash": "8c26dc2f0a4353eaf59f940495183f56b02427884f500aa0cdbc877ca57aff83",
-    "text": "<keyword0>物理</keyword0>ダメージは<keyword2>ブロック</keyword2>の後に<keyword1>装甲</keyword1>で軽減される; 攻撃は{{value0}}%の確率で<keyword3>クリティカル</keyword3>になり、ダメージが2倍になる"
+    "source": "Damage reduced by <keyword0>Armor</keyword0> after <keyword1>Block</keyword1>",
+    "sourceHash": "162ef9c6fa3e12ed686ee144177ad2d2957b8420207c3ac85230bb2fcabb2a75",
+    "text": "<keyword1>ブロック</keyword1>の後に<keyword0>装甲</keyword0>で軽減されるダメージ"
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
-    "sourceHash": "8c7dc48766f19a269604fb657c867e886c253cedb45ecd2afffdf63a59b06917",
-    "text": "<keyword0>毒</keyword0>の命中は与えたダメージを<keyword1>毒</keyword1>として加算; ターン開始時に蓄積分のダメージを与え、その後{{value0}}%減る（最低{{value1}}）"
+    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
+    "sourceHash": "ab5f8894aa9a6d91524475f8a984d84136a8a16a84d62bf24bb95dc0fcb2becc",
+    "text": "<keyword0>毒</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーのターン開始時にスタック数と同じダメージを与え、その後{{value0}}%のスタックを取り除く; 除去数は四捨五入し、最低{{value1}}"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
-    "source": "Remove beneficial effects from an enemy",
-    "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
-    "text": "敵1体の有益な効果を取り除く"
+    "source": "Remove the stated number of beneficial effect types from an enemy, starting with <keyword0>Block</keyword0> and clearing all stacks of each removed type",
+    "sourceHash": "801686af4816775d861c4964abc3771cd717062fd3007c2c46652101d1f4d4ec",
+    "text": "敵から指定された種類数の有益効果を取り除く; <keyword0>ブロック</keyword0>から順に、各効果の全スタックを消す"
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "c9c4f17eb2fe220ff224dba3b83732cde0ef85ff7d7ed9533f791d0c6ece5c26",
-    "text": "指定された攻撃または有害な状態効果を返す; <keyword0>攻撃反射</keyword0>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword1>反射</keyword1>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword2>反射</keyword2>された攻撃や状態効果は再び<keyword3>反射</keyword3>できない; 回数は重複しない"
+    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
+    "sourceHash": "6497fff49fe22dbcdfb57ccf0204f5c9eec577e17511bae9b62a6119c30e7dcb",
+    "text": "指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword0>攻撃反射</keyword0>は攻撃全体を攻撃者へ返す; <keyword1>反射</keyword1>された効果を再び<keyword2>反射</keyword2>することはできない; チャージは重複しない"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -4549,27 +4561,27 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
-    "sourceHash": "28416d6f7d348038aa256d32208e2e1817040649193aacc64fe7ca59dfcf14b3",
-    "text": "ダメージで<keyword0>スタン</keyword0>が蓄積; 蓄積が最大<keyword1>体力</keyword1>の半分に達すると1ターン行動不能; 回復後は<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の両方に{{value0}}ターン免疫を得る"
+    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
+    "sourceHash": "888301f5d112058ced6eeec0e33fa721c6f36dc577cc465585997046058d7585",
+    "text": "<keyword0>スタン</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージを<keyword2>装甲</keyword2>で軽減した値を蓄積する; 蓄積が最大<keyword3>体力</keyword3>の半分に達すると<keyword4>スタン</keyword4>状態になり、1ターン行動できない; 回復後は<keyword5>スタン</keyword5>と<keyword6>凍結</keyword6>の両方に{{value0}}ターンの耐性を得る"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
-    "sourceHash": "86eb02f3e384d0293bf3b549aaf3795438a115ca85ef3846dc22d987b3e9917b",
-    "text": "被弾すると<keyword0>棘</keyword0>が<keyword1>自然</keyword1>ダメージで反撃する; <keyword2>ブロック</keyword2>越しでも反撃し、その後スタックが{{value0}}減少"
+    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
+    "sourceHash": "6258c698bb17126047da9edda168559ea68364d9bcf12c60528797c4d7ea2013",
+    "text": "攻撃が命中した時や<keyword0>防止</keyword0>された時、<keyword2>棘</keyword2>の数と同じ<keyword1>自然</keyword1>ダメージを返し、{{value0}}スタック失う; <keyword3>ブロック</keyword3>や<keyword4>装甲</keyword4>越しでも発動する; 反撃は別の反撃を誘発しない"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
-    "sourceHash": "6470d41e0dcbbe68deba7a9732a481c7508b38a886ec31e8ae5a29e29ee1fa54",
-    "text": "<keyword0>水</keyword0>ダメージ；<keyword1>ブロック</keyword1>が吸収する；<keyword2>装甲</keyword2>では軽減されない；状態効果は付与されない"
+    "source": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
+    "sourceHash": "b7964a2a495d5edf7783483d289b813c5b8611bb088f5837bb298e55538eab83",
+    "text": "<keyword0>ブロック</keyword0>に吸収される直接ダメージ; <keyword1>装甲</keyword1>を無視し、状態異常を付与しない"
   },
   "content.glossary.knockout.definition.rule": {
     "reviewed": true,
-    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
-    "sourceHash": "356bbf7c6768f80b3417b269413a0c831943860fc8f702093d7adea0b8df5264",
-    "text": "<keyword0>体力</keyword0>が0になると、その戦闘中は行動も<keyword1>回復</keyword1>もできない; そのカードは使用できず、通常は引けない; 生存している控えと交代できる; 所属する全クリーチャーを失うと旅が終わる"
+    "source": "At {{value0}} <keyword0>Health</keyword0>, a creature cannot act or receive ordinary <keyword1>healing</keyword1> in battle; Its cards normally cannot be played or drawn; Choose a living backup to replace it; Losing your entire roster ends the journey",
+    "sourceHash": "c840c7d9b196c405b78d6c5d37e671a90ab21a738efb5883998ca2d28ed01207",
+    "text": "<keyword0>体力</keyword0>{{value0}}では行動も戦闘中の通常の<keyword1>回復</keyword1>もできない; そのクリーチャーのカードは通常、使用もドローもできない; 生存している控えを選んで交代する; 仲間全員を失うと旅が終わる"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -4579,9 +4591,9 @@
   },
   "content.glossary.legendary.definition.rule": {
     "reviewed": true,
-    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
-    "sourceHash": "1252d1bde9c0dcf48670d6bffc7a0b5adb1cef6b964b1c98ecb45a5b686d70e5",
-    "text": "単独で出撃するクリーチャー; 敵としてはボス戦にのみ登場する; 通常どおり仲間にできる; 各能力のカードを2枚ずつデッキに加える"
+    "source": "A creature that deploys alone and adds two copies of each ability to your deck; Can be recruited normally; Enemy Legendaries appear only in Boss encounters",
+    "sourceHash": "353f694f9a5d1c62a70874468a149ec72557ed4635f92e15b4e7c6e9676f6a72",
+    "text": "単独で出撃し、各能力のカードを2枚ずつデッキに加えるクリーチャー; 通常どおり仲間にできる; 敵としてはボス戦にのみ登場する"
   },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
@@ -4591,9 +4603,9 @@
   },
   "content.glossary.minion.definition.rule": {
     "reviewed": true,
-    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
-    "sourceHash": "f1a2cb2b355aed75e0501a5b202e5e3f498d25452377b5608466b02b73fb292a",
-    "text": "戦闘中のみ召喚され、独自の<keyword0>体力</keyword0>を持つ; カードも編成枠も持たない; 召喚者が倒れるか場を離れると消える"
+    "source": "A summoned creature with its own <keyword0>Health</keyword0> but no cards or roster slot; Lasts only for the battle and disappears if its summoner falls or leaves the field",
+    "sourceHash": "8345e149a80f669543d52b9f6ffceb41990c2bc223bd4422c52398fe4c92c087",
+    "text": "独自の<keyword0>体力</keyword0>を持つ召喚クリーチャーで、カードや仲間枠を持たない; 戦闘中のみ存在し、召喚者が倒れるか戦場を離れると消える"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,
@@ -4603,9 +4615,9 @@
   },
   "content.glossary.pearl.definition.rule": {
     "reviewed": true,
-    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
-    "sourceHash": "34211e846ce4fc369ec9727dd6980eb1639aec3f81cfadbf6ae7ed3ee1309092",
-    "text": "戦闘中のみ手札に生成されるカード; コストは<keyword0>マナ</keyword0>{{value0}}; ランダムに<keyword1>ブロック</keyword1>{{value1}}または<keyword2>マナ</keyword2>{{value2}}を付与; 使用後は<keyword3>消費</keyword3>で取り除かれる; 未使用の真珠は通常通り引いたり捨てたりできる"
+    "source": "A temporary card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0> and randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; Consumed when played; Unplayed Pearls discard and recycle normally",
+    "sourceHash": "45bb3a300c008b40104f35fa9d71dac774e07aea9e687bdf3d7c0c0ab9c6c7af",
+    "text": "手札に作られる一時的なカード; <keyword0>マナ</keyword0>{{value0}}を消費し、ランダムに<keyword1>ブロック</keyword1>{{value1}}か<keyword2>マナ</keyword2>{{value2}}を得る; 使用すると戦闘から取り除かれる; 使わなかった真珠は通常どおり捨て札になり、山札に戻る"
   },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
@@ -4615,9 +4627,9 @@
   },
   "content.glossary.starting-lineup.definition.rule": {
     "reviewed": true,
-    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
-    "sourceHash": "627ad2195d7e407f718c5a9b8a7e49caef7975199a51a6860ea04f661060600d",
-    "text": "選択したクリーチャーが初期編成を決める; 戦闘不能時の交代と能力による交代は後の戦闘の編成にも反映される; 新加入は控えに入る前に空いた通常枠を埋める; 編成を手動で変更することはできない"
+    "source": "The creatures deployed at battle start; Your draft sets the initial lineup, and replacements and ability swaps update it for later battles; Recruits fill empty ordinary positions before joining backup; You cannot rearrange the lineup manually",
+    "sourceHash": "11406fffae5084ceefc01afe73d3b4afd252350919795217d21385844c6ee0b5",
+    "text": "戦闘開始時に出撃するクリーチャー; 最初の仲間選びで編成が決まり、交代や交代能力による変更は次の戦闘にも反映される; 新しい仲間は通常の出撃枠が空いていればそこに入り、なければ控えになる; 編成を手動で並べ替えることはできない"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
@@ -4627,9 +4639,9 @@
   },
   "content.glossary.swap-cards.definition.rule": {
     "reviewed": true,
-    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
-    "sourceHash": "967b47c522ad38bb5de032e850e6aea59251a1895bb09443031ec1af352e1400",
-    "text": "生存しているランダムな控えと交代; 退くクリーチャーのカードを手札とすべての山から取り除き、入るクリーチャーのカードをドロー前に山札へ混ぜる; 生存している控えがいなければ生存味方1体とランダムに位置を交換; 1体だけなら交代部分のみ効果がない; 安全な道は代わりに<keyword0>体力</keyword0>が最も低い味方を交代させ、生存している控えが必要; <keyword1>体力</keyword1>と効果は維持される"
+    "source": "Swap the acting creature with a random living backup; Remove its cards from hand and all piles, then shuffle the incoming creature's cards into the draw pile; Without a backup, swap positions with a random living ally; Alone, the swap has no effect; Safe Passage instead swaps the lowest-<keyword0>Health</keyword0> ally and requires a living backup; <keyword1>Health</keyword1> and effects carry through swaps",
+    "sourceHash": "ed681bc4caef412f57cd28220aef039c10290fbfe328385d4cf5afc33cb76108",
+    "text": "行動するクリーチャーをランダムな生存中の控えと交代させる; そのカードを手札とすべての山から取り除き、入るクリーチャーのカードを山札へ混ぜる; 控えがいなければランダムな生存味方と位置を交換する; 1体だけなら交代は無効; 安全な道は<keyword0>体力</keyword0>が最も低い味方を交代させ、生存中の控えを必要とする; 交代しても<keyword1>体力</keyword1>と効果は維持される"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,
@@ -4639,9 +4651,9 @@
   },
   "content.glossary.talents.definition.rule": {
     "reviewed": true,
-    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
-    "sourceHash": "f25c29843dcaef88e09a17debd4e8fda1d66ba97522f2acd44d401672bc36770",
-    "text": "キーワード経験値でそのキーワードのタレントポイントを獲得; 最初のポイントには経験値{{value0}}、次はさらに{{value1}}、その次は{{value2}}必要; 各段を完成させると次の段が開く; タレントは該当するすべてのクリーチャーにすぐ適用; カテゴリーはいつでもリセットでき、経験値を維持したまま全ポイントが戻る"
+    "source": "Keyword XP earns points for that keyword's talents; The first three points cost {{value0}}, {{value1}} and {{value2}} additional XP; Complete a row to unlock the next; Talents immediately affect all matching creatures; Reset a category to refund its points without losing XP",
+    "sourceHash": "bdb52d121a3386875b132219f340364c036edcab0502c4d17cd8aa2f70fe5298",
+    "text": "キーワード経験値で、対応するタレントポイントを得る; 最初の3ポイントにはそれぞれ追加で経験値{{value0}}、{{value1}}、{{value2}}が必要; 列を完成させると次の列が開く; タレントは該当する全クリーチャーに即座に適用される; カテゴリをリセットすると経験値を失わずにポイントを返還できる"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
@@ -4651,9 +4663,9 @@
   },
   "content.glossary.turn.definition.rule": {
     "reviewed": true,
-    "source": "Play cards using shared <keyword0>mana</keyword0>; After playing a card or swapping, Auto-end turn ends the turn if enabled, <keyword1>mana</keyword1> is empty, no cards can be played and no replacement is pending; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore {{value0}} <keyword2>Mana</keyword2> and draw {{value1}} cards for the next turn; The hand normally holds {{value2}}, or {{value3}} with Facet Abacus; overflow waits in order and survives turn changes",
-    "sourceHash": "aaf95007e7d654a25e3c1058228beaccd203a3926dd807d9ad0fbe580115d5f9",
-    "text": "共有の<keyword0>マナ</keyword0>を使ってカードを使う; ターンを自動終了が有効な場合、カードの使用か交代後に<keyword1>マナ</keyword1>がゼロで、使えるカードも交代待ちもなければターンが終了する; いつでも確認なしでターン終了を押せる; 残った手札を捨てる; 次のターンに向けて<keyword2>マナ</keyword2>を{{value0}}回復し、カードを{{value1}}枚引く; 手札は通常{{value2}}枚、多面のそろばんがあれば{{value3}}枚まで; あふれたカードは順番に待機し、ターンをまたいで残る"
+    "source": "Play cards with your team's shared <keyword0>Mana</keyword0>; End turn discards your hand and lets enemies act; Your next turn normally restores {{value0}} <keyword1>Mana</keyword1> and draws {{value1}} cards; The hand holds {{value2}} cards, or {{value3}} with Facet Abacus; Extra drawn cards wait for space in draw order, even across turns",
+    "sourceHash": "be3f019be55fafccd36947a0629359b5f595546a442a037d3a8e1bf8f98ecd82",
+    "text": "チーム共有の<keyword0>マナ</keyword0>でカードを使う; ターン終了で手札を捨て、敵が行動する; 次のターンは通常<keyword1>マナ</keyword1>を{{value0}}に戻し、カードを{{value1}}枚引く; 手札は{{value2}}枚、多面のそろばんがあれば{{value3}}枚まで; あふれたドローは空きを待ち、ターンをまたいでも引いた順番を保つ"
   },
   "content.glossary.turn.term.rule": {
     "reviewed": true,
@@ -6770,157 +6782,157 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "22e42d3c724252b32682cc8f84b49f532234efa5d51e4d87070d728fe7fb17b5",
+    "sourceHash": "dfc41a3a9d7d9bfa63a7b5dc136c79406f4f89fd6e89f0ad4971d56198ff3475",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
-  "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
+  "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "6495557fadb6e17fb0850418b1ee8d5d1f3e19d9aad93e04051196f896d034c4",
-    "text": "<keyword0>攻撃反射</keyword0>：次に受ける攻撃を攻撃者へ返す; その攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃は再び<keyword2>反射</keyword2>できない; 消費されるか<keyword3>強化解除</keyword3>されるまで持続; 重複しない"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "8b15d378a8a096d3948b4aa7cca0bd8bcfb2e73ebd2ea150724d67c9b549408e",
+    "text": "<keyword0>攻撃反射</keyword0>: 次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃を再び<keyword2>反射</keyword2>することはできない; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
-  "content.status.blind.v0b0434b4eb43f4a6.rule": {
+  "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "0ac1bb0cc80017b6e08a2878d1b636a571f51b69aa2b30bea071367f37d8a1c3",
-    "text": "<keyword0>盲目</keyword0>：次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
+    "sourceHash": "3627ecc5e2a5b9749eb4fac15c1d73a50645c6fb8091ed44565e129ee657c876",
+    "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "8487da69948d24f80a3a6769b839006515a234bb072e9fe8b374222b30ba3912",
+    "sourceHash": "24dfdd6305c829ba15e43fb8e8b4d9c888e06a6b099eaeed31d727087748dd21",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "30fed5bd0ac55c7f1b1b9a0a83289f7ff5163f50008ca4c415dbeba937660cb4",
+    "sourceHash": "f8221c9054f68e9d87bd35459a6d25c315bb0a246a9e4eb679ea0d4c4ec63dee",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "b7f237900e19b295e25ccacf78e7a4cd30c3b8bd83b625b443bab50d04da45af",
+    "sourceHash": "cf31cefbc5e5a199e7f1c5b6edc356509b59c04992d8596069511fc8fa2d1140",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "23080703339a0f403474afcb689625f290c74309cc0c1dc4c44344ec7ea330cd",
+    "sourceHash": "457111dc93cf51e07084498efdbb9cd470135b8cef7e99411840b06100ba409c",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "cd4b729de29d8f73752c5d3e77bf85c84e5ca201737cd7e8937baa74e18d1dd1",
+    "sourceHash": "bb0553d1f0b517fc31c97c71d845cbee3686c8a2836040ddd7b88ebde08ec196",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "1268dbb684429dbc307c583560e6856f0e80e41d0996849a63ded874e12c384a",
+    "sourceHash": "6d8867e738af271e4daf0382b960b74bfb1a75dfc65008c5cb00165cbca94830",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "4bf82e4d877713946626841b679c4ea629a4474e780eb0c9cdf7b520f2b76520",
+    "sourceHash": "f77ccdca3428e0ab97bfc3a171e0e585c91539b6ee98a17258a01dfb203f9167",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "bd3489eb8939789f561179fe7a9349a9a410a5e5407f110c673b10705724a689",
+    "sourceHash": "acee4a293167127c27fcce0fee830583c70628375c1d622dff2afa8741d0b2ec",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "b4bb0eb3e7d38a166baebe11887547a734c7466a7be32ae354329e7295c7cc12",
+    "sourceHash": "10dde2ea145804f2250877961100abe3a89c5c92edc39d9458e137146617aa98",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "b289806bb89b217872c809781d1eee6761ecb677ce9dc6223c4d4cc75b1b7832",
+    "sourceHash": "b5ac76acbb154cdb2c0ec632dcaffb478055ea3f68713d1e86424280dc9a7116",
     "text": "死の淵 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "fbf3617d157069a7806f7ff4c62d8469e61c771621c44006c110be23d901c9e9",
+    "sourceHash": "65eba7656347e69eda0da469f0bd419fae8bafd7086093fd4aac315524bfde2b",
     "text": "月の種：次の<keyword0>棘</keyword0>の反撃は2倍のダメージを与える"
   },
-  "content.status.negate.v74a74c8005c653ca.rule": {
+  "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "b21f279a298511c6ca7669973d4cf362131b517a43f6d618ea5bdb107e5a1bcf",
-    "text": "<keyword0>防止</keyword0>：次の攻撃を<keyword2>回避</keyword2>より先に<keyword1>防止</keyword1>し、そのダメージと有害効果を防ぐ; <keyword3>棘</keyword3>は反撃する; 消費されるか<keyword4>強化解除</keyword4>されるまで持続; 重複しない"
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "f69abeab97782ad920a016e2c4c7b5367268dfc0b055aa749c158c745c4e26fa",
+    "text": "<keyword0>防止</keyword0>: 次に受ける能力の攻撃と自分への有害効果を<keyword1>回避</keyword1>判定前に打ち消す; <keyword2>棘</keyword2>は反撃する; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "1961a372fff6eec1664044b5d23809cf69d0dfb25ea898cc2e995220a5cb3e28",
+    "sourceHash": "98495f2a70ce7436c80633a489d642bbf0e7387243aad314d0a9d5e3229251c2",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
-  "content.status.nullify.v31f2b57af0674222.rule": {
+  "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "b943a961f0bddc8a3449c457e943b0d711ace0171f8ea83972c0327ff119d583",
-    "text": "<keyword0>無効化</keyword0>：次の有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword1>強化解除</keyword1>されるまで持続; 重複しない"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
+    "sourceHash": "573926e846dd5f9f493f9c76498f98835c1f9a5620fdbde808196018c4d01666",
+    "text": "<keyword0>無効化</keyword0>: 次の<keyword1>炎上</keyword1>・<keyword2>毒</keyword2>・<keyword3>出血</keyword3>・<keyword4>スタン</keyword4>・<keyword5>凍結</keyword5>・<keyword6>盲目</keyword6>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword7>強化解除</keyword7>されるまで続く; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "fa1d519ff5299da79075e6af0716ce1c706bc5f6152beaefb503cfd9bc5a5f14",
+    "sourceHash": "36468b4b7f095cf4c1d209ff01dc101558084be3c28f9e6d58456a63a41ca79f",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "633d52bb6b1cf1445c8ee027af8f10099209f8e15e007f3353aafc0ecb9cea57",
+    "sourceHash": "660d346b5c443510b645f935c1b633bdc4e40adefa71a7c0e72629660aea93a3",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "ea7085f576fddb059bba03b7fa2f5629bedbb013ca1862009ffd1d0ca755c14d",
+    "sourceHash": "2ff3f2ac01373dbb0ebc72bc9cbf42fdc885c933c32f110fa40375bd0e26531e",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
-  "content.status.reflect.v1f90dd3050df6a1c.rule": {
+  "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "c8aedcd222e1496c01dae67e7bb3c91bd1a7fa41c113ad95485f6adae4920725",
-    "text": "<keyword0>反射</keyword0>：指定された攻撃または有害な状態効果を返す; <keyword1>攻撃反射</keyword1>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword2>反射</keyword2>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword3>反射</keyword3>された攻撃や状態効果は再び<keyword4>反射</keyword4>できない; 回数は重複しない"
+    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "b43a4b5f07447ea4f6076388f6ac39ecd8a4f0121275487f63cff11b12759c18",
+    "text": "<keyword0>反射</keyword0>: 指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword1>攻撃反射</keyword1>は攻撃全体を攻撃者へ返す; <keyword2>反射</keyword2>された効果を再び<keyword3>反射</keyword3>することはできない; チャージは重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "a2d243e5987bf4c78623f608f90826610d90d7b325a01631538097919f98ff4a",
+    "sourceHash": "67ef1f637e81eda86b6d26d93ccb194e048c9d25033d57f7c4ea4630bdaae33d",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "fad2ea1e302ae47481ffb0e7047c731da0edb840ff4e592e0faedecdeb452fe4",
+    "sourceHash": "7bccdcc632e1ffe5ed66a51c9ad219e35383f67962acc61d2bd08a689d20ea9a",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "e339e9315c81b467b33a977f27513dee23e4d2450eefeb7ccaffba1a3594d350",
+    "sourceHash": "ce4c0b448bc9e0c431bd23fc92e69547e10401a6bba78e29eefc419e2a64425e",
     "text": "リボンの糸巻き：<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "d2d22e184b3a02a5d17c4e19b143e40bbb4a5b6535490e17424c8c8987e47b53",
+    "sourceHash": "ea1bb27225efbdef0769c03170c39b6e9d0262ac8ada245abca2e15caf10fa64",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "51f0df9271f2ca0473cd55a7d83ee19be59cee8d58b4d91534a06e81da6271dc",
+    "sourceHash": "1c1847f49d6502bfbcc99be50db3ca3c8944f502bd4b48bcd91ad751df1c22d7",
     "text": "竜のつまようじ：次の攻撃は<keyword0>強化解除</keyword0>も行う"
   },
   "content.talent.armor.armored-surge.name": {
