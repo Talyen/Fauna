@@ -126,9 +126,17 @@ it("requires a real Legendary marker rather than a truthy string or false proper
   }
 });
 
-it("rejects sparse encounter packs instead of counting holes as authored opponents", () => {
+it("requires enough attackers to build encounters after a full roster is excluded", () => {
   const catalog = structuredClone(contentCatalog);
-  Object.assign(catalog, { combatPacks: [Array(1)] });
+  for (const card of catalog.cards) Object.assign(card, { effect: "guard", effects: [] });
+  expect(validateCatalog(catalog)).toContainEqual(
+    expect.objectContaining({ id: "combat", field: "species", severity: "error" }),
+  );
+});
+
+it("rejects sparse boss packs instead of counting holes as opponents", () => {
+  const catalog = structuredClone(contentCatalog);
+  Object.assign(catalog.bosses[0]!, { pack: Array(1) });
   expect(validateCatalog(catalog)).toContainEqual(
     expect.objectContaining({ id: "encounters", field: "packs", severity: "error" }),
   );

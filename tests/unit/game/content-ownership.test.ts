@@ -9,7 +9,7 @@ import {
   BOONS,
   TALENTS,
 } from "../../../src/game/content";
-import { BOSSES, COMBAT_PACKS } from "../../../src/game/encounters";
+import { BOSSES } from "../../../src/game/encounters";
 import { PEARL } from "../../../src/game/content/creatures/memento";
 
 it("resolves every authored identity without changing catalog order or sharing", () => {
@@ -28,7 +28,6 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     [definition("cadenza-resonant-well").effects![0]!, "amount", 999],
     [BOONS[0], "text", "Changed rules"],
     [TALENTS[0], "row", 99],
-    [COMBAT_PACKS[0], "0", "cadenza"],
     [BOSSES[0].pack, "0", "cadenza"],
   ];
   for (const [target, key, replacement] of attempts) {
@@ -38,7 +37,7 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     expect(changed, `Shared rule ${key} must reject mutation`).toBe(false);
     expect(Reflect.get(target, key)).toEqual(original);
   }
-  for (const catalog of [CARDS, SPECIES, BOONS, TALENTS, FIRST_RUN_STARTERS, COMBAT_PACKS, BOSSES])
+  for (const catalog of [CARDS, SPECIES, BOONS, TALENTS, FIRST_RUN_STARTERS, BOSSES])
     expect(Object.isFrozen(catalog)).toBe(true);
 });
 

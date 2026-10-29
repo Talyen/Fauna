@@ -1,91 +1,12 @@
 import { freeze } from "immer";
-import { SPECIES, species, type SpeciesId } from "./content";
+import { SPECIES, species, speciesCards, type CardDefinition, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 import { roll } from "./random";
+import { enemyCanUse, enemyCard } from "./card-rules";
 
 const ACT_COUNT = 3;
 export const ROOMS_PER_ACT = 10;
 export const JOURNEY_LENGTH = ACT_COUNT * ROOMS_PER_ACT;
-export const COMBAT_PACKS = [
-  ["emberback", "pollenmoth", "mossguard"],
-  ["mossguard", "prismram", "pollenmoth"],
-  ["pollenmoth", "emberback", "prismram"],
-  ["prismram", "mossguard", "emberback"],
-  ["emberback", "emberback", "mossguard"],
-  ["pollenmoth", "pollenmoth", "emberback"],
-  ["prismram", "prismram", "emberback"],
-  ["prismram", "emberback", "pollenmoth"],
-  ["dunefox", "mossguard", "pollenmoth"],
-  ["captoad", "dunefox", "prismram"],
-  ["reedstag", "captoad", "pollenmoth"],
-  ["prismram", "reedstag", "emberback"],
-  ["captoad", "mossguard", "pollenmoth"],
-  ["prismram", "captoad", "emberback"],
-  ["chimecricket", "dunefox", "mossguard"],
-  ["prismram", "chimecricket", "captoad"],
-  ["cindernewt", "dunefox", "mossguard"],
-  ["prismram", "cindernewt", "pollenmoth"],
-  ["coralcurl", "reedstag", "prismram"],
-  ["mossguard", "coralcurl", "captoad"],
-  ["dawncall", "reedstag", "prismram"],
-  ["mossguard", "dawncall", "captoad"],
-  ["bloomquail", "emberback", "prismram"],
-  ["mossguard", "bloomquail", "captoad"],
-  ["shadebrim", "emberback", "prismram"],
-  ["mossguard", "shadebrim", "captoad"],
-  ["ringpalm", "dawncall", "prismram"],
-  ["mossguard", "ringpalm", "captoad"],
-  ["glintstride", "dunefox", "prismram"],
-  ["mossguard", "glintstride", "captoad"],
-  ["sternshell", "coralcurl", "prismram"],
-  ["mossguard", "sternshell", "captoad"],
-  ["wickwaltz", "shadebrim", "prismram"],
-  ["mossguard", "wickwaltz", "captoad"],
-  ["neradora", "coralcurl", "prismram"],
-  ["mossguard", "neradora", "captoad"],
-  ["stillara", "emberback", "prismram"],
-  ["mossguard", "stillara", "captoad"],
-  ["rookhaven", "emberback", "prismram"],
-  ["mossguard", "rookhaven", "captoad"],
-  ["cadenza", "emberback", "prismram"],
-  ["mossguard", "cadenza", "captoad"],
-  ["euphera", "emberback", "prismram"],
-  ["mossguard", "euphera", "captoad"],
-  ["tournelle", "emberback", "prismram"],
-  ["mossguard", "tournelle", "captoad"],
-  ["reverie", "emberback", "prismram"],
-  ["mossguard", "reverie", "captoad"],
-  ["oathara", "emberback", "prismram"],
-  ["mossguard", "oathara", "captoad"],
-  ["almanelle", "emberback", "prismram"],
-  ["mossguard", "almanelle", "captoad"],
-  ["orifable", "emberback", "prismram"],
-  ["mossguard", "orifable", "captoad"],
-  ["arabesca", "emberback", "prismram"],
-  ["mossguard", "arabesca", "captoad"],
-  ["skybex", "emberback", "prismram"],
-  ["mossguard", "skybex", "captoad"],
-  ["dulcera", "emberback", "prismram"],
-  ["mossguard", "dulcera", "captoad"],
-  ["parhelion", "stillara", "prismram"],
-  ["mossguard", "parhelion", "captoad"],
-  ["pyrella", "emberback", "prismram"],
-  ["mossguard", "pyrella", "captoad"],
-  ["aerostat", "emberback", "prismram"],
-  ["mossguard", "aerostat", "captoad"],
-  ["wisterelle", "emberback", "prismram"],
-  ["mossguard", "wisterelle", "captoad"],
-  ["brumalyn", "stillara", "prismram"],
-  ["mossguard", "brumalyn", "captoad"],
-  ["cavalleaf", "stillara", "prismram"],
-  ["mossguard", "cavalleaf", "captoad"],
-  ["wendlet", "coralcurl", "prismram"],
-  ["mossguard", "wendlet", "captoad"],
-  ["vitrilo", "coralcurl", "prismram"],
-  ["mossguard", "vitrilo", "captoad"],
-  ["velouria", "brumalyn", "prismram"],
-  ["mossguard", "velouria", "captoad"],
-] as const;
 export const BOSSES = [
   {
     id: "briar-warden",
@@ -110,34 +31,66 @@ const recruitableSpecies = SPECIES.filter((entry) => !entry.legendary);
 const bossesByEncounter = new Map<number, (typeof BOSSES)[number]>(
   BOSSES.map((boss) => [boss.encounter, boss]),
 );
-export function encounterPacks(encounter: number) {
-  const boss = bossesByEncounter.get(encounter);
-  if (!boss) return COMBAT_PACKS;
-  return [
-    boss.pack,
-    ...SPECIES.filter((entry) => entry.legendary && entry.id !== boss.pack[0]).map((entry) => [entry.id]),
-  ];
+const legendarySpecies = SPECIES.filter((entry) => entry.legendary);
+export function dealsDamage(card: CardDefinition): boolean {
+  if (!enemyCanUse(card)) return false;
+  const enemyAbility = enemyCard(card);
+  return (
+    enemyAbility.effect === "attack" ||
+    enemyAbility.effects?.some((effect) => effect.kind === "damage") === true
+  );
 }
+
+const offensiveSpecies = new Set(
+  recruitableSpecies.filter((entry) => speciesCards(entry.id).some(dealsDamage)).map((entry) => entry.id),
+);
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
-  let pack = savedPack;
-  if (!pack) {
-    const packs = encounterPacks(state.encounter);
-    pack = packs[Math.floor(roll(state) * packs.length)]!;
+  const size = bossEncounter(state) ? 1 : Math.min(3, state.encounter + 1);
+  if (bossEncounter(state)) {
+    return savedPack
+      ? savedPack.slice(0, 1)
+      : [legendarySpecies[Math.floor(roll(state) * legendarySpecies.length)]!.id];
   }
-  const selected = pack.slice(0, Math.min(3, state.encounter + 1));
-  if (bossEncounter(state)) return selected;
-  const inRoster = (kind: SpeciesId) =>
-    state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
-  if (!selected.some(inRoster)) return selected;
-  const roster = new Set<SpeciesId>();
-  for (const unit of state.team) roster.add(unit.species);
-  for (const unit of state.reserves) roster.add(unit.species);
+  const roster = new Set([...state.team, ...state.reserves].map((unit) => unit.species));
   const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
-  for (let index = 0; index < selected.length; index++)
-    if (roster.has(selected[index]!))
-      selected[index] = eligible[Math.floor(roll(state) * eligible.length)]!.id;
+  if (savedPack) {
+    return savedPack
+      .slice(0, size)
+      .map((id) => (roster.has(id) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : id));
+  }
+
+  const offensiveCount = eligible.filter((entry) => offensiveSpecies.has(entry.id)).length;
+  const otherCount = eligible.length - offensiveCount;
+  const required = size > 1 ? 2 : 0;
+  if (!eligible.length || (required && !offensiveCount)) throw new Error("No valid encounter pool.");
+  // Weight each choice by its number of valid completions, so every valid lineup is equally likely.
+  function completions(remaining: number, needed: number): number {
+    if (remaining === 0) return needed <= 0 ? 1 : 0;
+    if (needed > remaining) return 0;
+    return (
+      offensiveCount * completions(remaining - 1, needed - 1) +
+      otherCount * completions(remaining - 1, needed)
+    );
+  }
+  const selected: SpeciesId[] = [];
+  let needed = required;
+  for (let index = 0; index < size; index++) {
+    const remaining = size - index - 1;
+    const offensiveWeight = completions(remaining, needed - 1);
+    const otherWeight = completions(remaining, needed);
+    let choice = roll(state) * (offensiveCount * offensiveWeight + otherCount * otherWeight);
+    for (const entry of eligible) {
+      const offensive = offensiveSpecies.has(entry.id);
+      choice -= offensive ? offensiveWeight : otherWeight;
+      if (choice < 0) {
+        selected.push(entry.id);
+        if (offensive) needed--;
+        break;
+      }
+    }
+  }
   return selected;
 }
 
@@ -180,5 +133,4 @@ export function bossEncounter(game: Pick<GameState, "encounter">) {
   return bossesByEncounter.has(game.encounter);
 }
 
-freeze(COMBAT_PACKS, true);
 freeze(BOSSES, true);

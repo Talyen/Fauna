@@ -9,7 +9,6 @@ import { availablePlays, chosenRecipients } from "../../../../src/game/play-quer
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { executeAbility } from "../../../../src/game/combat/abilities";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { accept, requireBattle, teamRun, winBattle } from "../../../support/game";
 import { wisterelleBattle } from "../../../support/wisterelle";
 import { setBattleCards } from "../../../support/cards";
@@ -225,7 +224,7 @@ describe("Wisterelle", () => {
   it("registers a recruitable support kit, exact rules and legal Auto-play targets", () => {
     const game = wisterelleBattle();
     expect(FIRST_RUN_STARTERS).not.toContain("wisterelle");
-    expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "wisterelle"))).toBe(true);
+
     expect(speciesCards("wisterelle").map((card) => card.cost)).toEqual([1, 1, 1]);
     expect(cardText(definition(luggage))).toBe("Draw an ally’s card from your Discard pile / Gain 1 Mana");
     expect(cardText(definition(junction))).toBe("Swap out for a chosen backup / Draw a Card");

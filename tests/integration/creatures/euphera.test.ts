@@ -11,7 +11,7 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { redrawHand, draw } from "../../../src/game/card-zones";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { authoredPack, accept, prepareDestination, teamRun, winBattle } from "../../support/game";

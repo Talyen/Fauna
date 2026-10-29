@@ -8,7 +8,6 @@ import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, removeEffects } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import type { GameEvent, GameState } from "../../../src/game/types";
@@ -47,7 +46,7 @@ it("adds the approved three-card kit to drafts, encounters and current-format sa
   ]);
   expect(kit.map(definitionKeywords)).toEqual([["burn"], ["block"], ["mana"]]);
   expect(FIRST_RUN_STARTERS).toContain("wickwaltz");
-  expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "wickwaltz"))).toBe(true);
+
   for (const card of kit) {
     const game = ready();
     const before = encodeSave(game);

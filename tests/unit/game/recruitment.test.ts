@@ -11,7 +11,7 @@ import {
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 
 describe("recruiting unique creatures", () => {

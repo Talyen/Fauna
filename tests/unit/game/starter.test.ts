@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { starterCount } from "../../../src/game/progression";
 import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../../src/game/content";
-import { encounterPacks } from "../../../src/game/encounters";
+import { encounterPacks } from "../../support/encounter-packs";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { authoredPack, accept, completeRecruitment, winBattle } from "../../support/game";
 

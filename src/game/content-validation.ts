@@ -5,7 +5,7 @@ import { isSupplementalKind } from "./rules/supplemental";
 import { isPrimaryTarget } from "./rules/ability-types";
 import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS } from "./content";
 import { cardText } from "./card-rules";
-import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
+import { BOSSES, JOURNEY_LENGTH, dealsDamage } from "./encounters";
 import { DAMAGE_TYPES, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 import { MAX_FALLEN_CARDS_PER_TURN } from "./state-limits";
 
@@ -14,7 +14,6 @@ export const contentCatalog = freeze(
     cards: [...CARDS, ...FOOD_CARDS],
     species: SPECIES,
     bosses: BOSSES,
-    combatPacks: COMBAT_PACKS,
     boons: BOONS,
     talents: TALENTS,
   },
@@ -63,7 +62,6 @@ type ReportError = (id: string, field: string, message: string) => void;
 
 function validateIds(catalog: Catalog, error: ReportError) {
   for (const [field, entries] of Object.entries(catalog)) {
-    if (field === "combatPacks") continue;
     const ids = new Set<string>();
     for (const entry of entries as readonly { id: string }[]) {
       if (!/^[a-z][a-zA-Z0-9.-]*$/.test(entry.id) || ids.has(entry.id))
@@ -293,7 +291,23 @@ function validateEncounters(
   speciesById: Map<string, Catalog["species"][number]>,
   error: ReportError,
 ) {
-  if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");
+  const attackers = catalog.species.filter(
+    (entry) =>
+      !entry.legendary &&
+      catalog.cards.some(
+        (card) =>
+          card.species === entry.id &&
+          isAbilityKind(card.effect) &&
+          (card.effects === undefined ||
+            (Array.isArray(card.effects) &&
+              card.effects.every(
+                (effect) => effect && typeof effect === "object" && isSupplementalKind(effect.kind),
+              ))) &&
+          dealsDamage(card),
+      ),
+  );
+  // A full roster can exclude five species; duplicates are allowed in enemy groups.
+  if (attackers.length <= 5) error("combat", "species", "Too few damage-dealing species for every roster.");
   const validatePack = (pack: readonly string[]) => {
     if (pack.length < 1 || pack.length > 3) {
       error("encounters", "packs", "Invalid encounter pack.");
@@ -305,11 +319,7 @@ function validateEncounters(
         return;
       }
   };
-  for (const pack of catalog.combatPacks) validatePack(pack);
   for (const boss of catalog.bosses) validatePack(boss.pack);
-  for (const pack of catalog.combatPacks)
-    if (pack.some((id) => speciesById.get(id)?.legendary))
-      error("combat", "packs", "Legendaries only appear in Boss encounters");
   for (const boss of catalog.bosses)
     if (boss.pack.length !== 1 || !speciesById.get(boss.pack[0]!)?.legendary)
       error(boss.id, "packs", "Boss encounters require one Legendary");

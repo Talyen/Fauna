@@ -38,7 +38,7 @@ A journey has three acts of ten rooms each: nine ordinary rooms followed by a ma
 
 ### Saved enemy packs
 
-Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary packs use the shared combat pool. Exclude every roster species, including backup and knockouts, from ordinary combat; replace conflicting slots with seeded ordinary species while retaining pack size. Bosses draw from the full Legendary pool, including owned species. Optional recruitment completes its room and prepares the next room.
+Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary groups are drawn from all ordinary species, excluding every roster species, including backup and knockouts. Repeated species are possible. In groups of two or three, at least two creatures have an enemy-usable ability that directly deals damage; every valid ordered group is equally likely. The single-enemy first room has no damage requirement. Bosses draw from the full Legendary pool, including owned species. Optional recruitment completes its room and prepares the next room.
 
 Menus, canceled Campfire visits and reload preserve packs and consume no pack RNG. Completing a support room prepares a fresh pack for the next room. A Boss room offers only the Boss; ordinary rooms always offer Combat.
 

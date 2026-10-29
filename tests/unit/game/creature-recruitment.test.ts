@@ -9,7 +9,8 @@ import {
   type SpeciesId,
 } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { COMBAT_PACKS, generateEncounterPack } from "../../../src/game/encounters";
+import { generateEncounterPack } from "../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameState } from "../../../src/game/types";
@@ -68,25 +69,12 @@ const cases: {
 it.each(SPECIES.filter((entry) => !entry.legendary))(
   "discovers and recruits $id from an encounter and resumes the complete kit",
   ({ id }) => {
-    const pack = COMBAT_PACKS.find((candidate) => candidate.some((kind) => kind === id));
-    const encounter = pack ? pack.findIndex((kind) => kind === id) : 0;
-    const authored: readonly SpeciesId[] = pack?.slice(0, encounter + 1) ?? [id];
-    const starter = FIRST_RUN_STARTERS.find((kind) => !authored.includes(kind));
-    expect(starter).toBeDefined();
-    if (!starter) throw new Error(`No starter available outside ${id}'s encounter`);
-    // Species without a fixed pack are reachable when an authored pack conflicts with the roster.
-    const conflict = COMBAT_PACKS.find((candidate) => candidate[0] === starter);
-    if (!pack && !conflict) throw new Error(`No authored encounter conflicts with ${starter}`);
+    const starter = FIRST_RUN_STARTERS.find((kind) => kind !== id)!;
+    const eligible = SPECIES.filter((entry) => !entry.legendary && entry.id !== starter);
+    const index = eligible.findIndex((entry) => entry.id === id);
     const ready = produce(starterJourney(7, starter), (draft) => {
-      draft.encounter = encounter;
-      draft.journey!.victories = encounter;
-      if (pack) draft.expedition = { recruit: null, lastRoom: null, pack: [...authored] };
-      else {
-        const eligible = SPECIES.filter((entry) => !entry.legendary && entry.id !== starter);
-        const index = eligible.findIndex((entry) => entry.id === id);
-        observeDecisions(draft, () => (index + 0.5) / eligible.length);
-        draft.expedition = { recruit: null, lastRoom: null, pack: generateEncounterPack(draft, conflict!) };
-      }
+      observeDecisions(draft, () => (index + 0.5) / eligible.length);
+      draft.expedition = { recruit: null, lastRoom: null, pack: generateEncounterPack(draft) };
     });
     const offered = ready.expedition!.pack!;
     expect(offered).toContain(id);

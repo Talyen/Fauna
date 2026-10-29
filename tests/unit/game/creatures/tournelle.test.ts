@@ -15,7 +15,7 @@ import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { cardKeywords } from "../../../../src/game/progression";
 import { freshCombat, hit } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../../support/encounter-packs";
 import type { GameEvent } from "../../../../src/game/types";
 
 function fixture(ability = "tournelle-teamClearBlind") {
