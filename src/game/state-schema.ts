@@ -195,6 +195,7 @@ const finalReceipt = receipt.extend({
   boons: z.array(boonId).length(0),
 });
 const journey = z.object({
+  encounteredEnemies: z.array(speciesId).max(SPECIES.length),
   outcome: z.enum(["victory", "defeat", "returned"]).nullable(),
   victories: z.number().int().min(0).max(JOURNEY_LENGTH),
   currency: natural,

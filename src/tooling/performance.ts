@@ -50,7 +50,7 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
     battle: null,
     reward: null,
     support: null,
-    journey: { outcome: null, victories: 2, currency: 0, xp: {}, lastBattle: null },
+    journey: { encounteredEnemies: [], outcome: null, victories: 2, currency: 0, xp: {}, lastBattle: null },
   } satisfies import("../game/types").Lifecycle);
   fixture.encounter = 2;
   const started = dispatch(fixture, { type: "beginBattle" });

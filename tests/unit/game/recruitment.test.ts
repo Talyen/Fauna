@@ -15,7 +15,7 @@ import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 
 describe("recruiting unique creatures", () => {
-  it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
+  it("offers exactly the three defeated enemies, including roster members", () => {
     for (const pack of COMBAT_PACKS) expect(pack).toHaveLength(3);
     const started = teamRun(7, ["prismram"]);
     const battle = accept(
@@ -29,14 +29,14 @@ describe("recruiting unique creatures", () => {
           lastRoom: null,
           pack: authoredPack(
             d.encounter,
-            COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "prismram"),
+            COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "pollenmoth"),
           ),
         };
       }),
       { type: "beginBattle" },
     );
     const reward = winBattle(battle);
-    expect(reward.reward!.recruits).toEqual(["prismram", "prismram", "emberback"]);
+    expect(reward.reward!.recruits).toEqual(["prismram", "pollenmoth", "emberback"]);
     expect(decodeSave(encodeSave(reward))).toEqual(reward);
     expect(() =>
       decodeSave(

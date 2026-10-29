@@ -1,5 +1,5 @@
 {
-  "version": 75,
+  "version": 76,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -588,7 +588,8 @@
       "water": 5,
       "block": 81
     },
-    "lastBattle": null
+    "lastBattle": null,
+    "encounteredEnemies": ["memento"]
   },
   "expedition": {
     "pack": ["memento"],

@@ -12,6 +12,7 @@ import {
 import { SPECIES, species, speciesCards } from "../../../src/game/content";
 import { observeDecisions } from "../../../src/game/random";
 import { addRecruit } from "../../../src/game/team";
+import { starterCount } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import {
@@ -113,14 +114,94 @@ describe("journey encounters", () => {
     expect([...positions].sort()).toEqual([0, 1, 2]);
   });
 
-  it("can generate repeated creatures without using a fixed lineup", () => {
-    const state = produce(starterJourney(42, "mossguard"), (draft) => {
+  it("never repeats a species within an enemy group", () => {
+    for (let seed = 0; seed < 100; seed++) {
+      produce(starterJourney(seed, "mossguard"), (draft) => {
+        draft.encounter = 2;
+        draft.rng = seed;
+        const pack = generateEncounterPack(draft);
+        expect(new Set(pack).size).toBe(3);
+      });
+    }
+  });
+
+  it("prefers unseen enemies, preserves battle history across reload, and resets it for a new journey", () => {
+    const initial = start();
+    const firstPack = initial.expedition.pack!;
+    expect(initial.journey!.encounteredEnemies).toEqual([]);
+    const battle = enter(decodeSave(encodeSave(initial)));
+    expect(battle.journey!.encounteredEnemies).toEqual(firstPack);
+    const won = dispatch(decodeSave(encodeSave(battle)), { type: "devWinBattle" }, true);
+    expect(won.accepted).toBe(true);
+    const next = accept(won.state, { type: "recruit", species: won.state.reward!.recruits[0]! });
+    expect(next.expedition.pack!.every((id) => !firstPack.includes(id))).toBe(true);
+    expect(decodeSave(encodeSave(next)).journey!.encounteredEnemies).toEqual(firstPack);
+    const abandoned = accept(next, { type: "abandon" });
+    let draft = accept(abandoned, { type: "newRun", seed: 8 });
+    while (draft.selected.length < starterCount(draft))
+      draft = accept(draft, { type: "draft", species: draft.starterOffers[0]! });
+    const restarted = accept(draft, { type: "start" });
+    expect(restarted.journey!.encounteredEnemies).toEqual([]);
+    expect(restarted.discovery.encountered).toContain(firstPack[0]);
+  });
+
+  it("maximizes unseen enemies without sacrificing two distinct attackers", () => {
+    const base = starterJourney(42, "mossguard");
+    const ordinary = SPECIES.filter((entry) => !entry.legendary && entry.id !== "mossguard");
+    const supports = ordinary.filter((entry) => !speciesCards(entry.id).some(dealsDamage));
+    expect(supports.length).toBeGreaterThan(1);
+    for (let seed = 0; seed < 20; seed++) {
+      produce(base, (draft) => {
+        draft.encounter = 2;
+        draft.journey!.encounteredEnemies = ordinary
+          .filter((entry) => !supports.includes(entry))
+          .map((entry) => entry.id);
+        draft.rng = seed;
+        const pack = generateEncounterPack(draft);
+        expect(new Set(pack).size).toBe(3);
+        expect(pack.filter((id) => supports.some((entry) => entry.id === id))).toHaveLength(1);
+        expect(pack.filter((id) => speciesCards(id).some(dealsDamage))).toHaveLength(2);
+      });
+    }
+  });
+
+  it("uses each remaining unseen creature before repeating earlier enemies", () => {
+    const base = starterJourney(42, "mossguard");
+    const attackers = SPECIES.filter(
+      (entry) => !entry.legendary && entry.id !== "mossguard" && speciesCards(entry.id).some(dealsDamage),
+    );
+    const remaining = attackers.slice(0, 2).map((entry) => entry.id);
+    produce(base, (draft) => {
       draft.encounter = 2;
-      observeDecisions(draft, () => 0);
+      draft.journey!.encounteredEnemies = SPECIES.filter((entry) => !remaining.includes(entry.id)).map(
+        (entry) => entry.id,
+      );
       const pack = generateEncounterPack(draft);
-      expect(pack).toEqual([pack[0], pack[0], pack[0]]);
+      expect(pack).toEqual(expect.arrayContaining(remaining));
+      expect(new Set(pack).size).toBe(3);
     });
-    expect(state.encounter).toBe(2);
+  });
+
+  it("rejects duplicate enemy groups in current-format saves", () => {
+    const invalid = produce(start(), (draft) => {
+      draft.encounter = 1;
+      draft.journey!.victories = 1;
+      draft.expedition.pack = ["captoad", "captoad"];
+    });
+    expect(() => decodeSave(encodeSave(invalid))).toThrow();
+  });
+
+  it("avoids previously fought Bosses when another eligible Legendary remains", () => {
+    const base = starterJourney(42, "mossguard");
+    for (const encounter of [9, 19, 29]) {
+      produce(base, (draft) => {
+        draft.encounter = encounter;
+        draft.journey!.encounteredEnemies = ["memento", "chronora"];
+        expect(generateEncounterPack(draft)).toEqual(["velvetmonarch"]);
+        draft.journey!.encounteredEnemies.push("velvetmonarch");
+        expect(["memento", "chronora", "velvetmonarch"]).toContain(generateEncounterPack(draft)[0]);
+      });
+    }
   });
 
   it("excludes the full roster from generated packs, including backups and knocked-out creatures", () => {
@@ -161,7 +242,7 @@ describe("journey encounters", () => {
     const ready = produce(started, (draft) => {
       draft.encounter = encounter;
       draft.journey!.victories = encounter;
-      draft.expedition!.pack = generateEncounterPack(draft, [boss]);
+      draft.expedition!.pack = generateEncounterPack(draft);
       draft.expedition.recruit = null;
       draft.support = null;
     });
@@ -231,7 +312,7 @@ describe("journey encounters", () => {
     const ready = produce(start(), (draft) => {
       draft.encounter = 2;
       draft.journey!.victories = 2;
-      draft.expedition!.pack = ["captoad", "dunefox", "captoad"];
+      draft.expedition!.pack = ["captoad", "dunefox", "pollenmoth"];
       draft.expedition!.recruit = "captoad";
       draft.expedition!.lastRoom = "combat";
     });
@@ -329,6 +410,13 @@ describe("journey encounters", () => {
     for (const mutate of [
       (d: typeof s) => {
         d.expedition!.pack = ["memento"];
+      },
+      (d: typeof s) => {
+        d.journey!.encounteredEnemies.push(d.journey!.encounteredEnemies[0]!);
+      },
+      (d: typeof s) => {
+        const unseen = SPECIES.find((entry) => !d.discovery.encountered.includes(entry.id))!;
+        d.journey!.encounteredEnemies.push(unseen.id);
       },
       (d: typeof s) => {
         d.encounter = 2;

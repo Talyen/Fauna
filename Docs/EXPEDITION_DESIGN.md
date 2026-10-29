@@ -38,7 +38,7 @@ A journey has three acts of ten rooms each: nine ordinary rooms followed by a ma
 
 ### Saved enemy packs
 
-Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary groups are drawn from all ordinary species, excluding every roster species, including backup and knockouts. Repeated species are possible. In groups of two or three, at least two creatures have an enemy-usable ability that directly deals damage; every valid ordered group is equally likely. The single-enemy first room has no damage requirement. Bosses draw from Legendaries outside the roster; if every Legendary is on the roster, they draw from the full Legendary pool. Optional recruitment completes its room and prepares the next room.
+Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary groups are drawn from all ordinary species, excluding every roster species, including backup and knockouts. Species cannot repeat within a group. In groups of two or three, at least two creatures have an enemy-usable ability that directly deals damage; the game selects uniformly among valid groups with the most species not previously fought during this journey. A species counts as fought when its battle starts; saves preserve this history. The single-enemy first room has no damage requirement. Bosses draw from Legendaries outside the roster, preferring ones not previously fought this journey; if every Legendary is on the roster, they draw from the full Legendary pool. Optional recruitment completes its room and prepares the next room.
 
 Menus, canceled Campfire visits and reload preserve packs and consume no pack RNG. Completing a support room prepares a fresh pack for the next room. A Boss room offers only the Boss; ordinary rooms always offer Combat.
 
@@ -87,7 +87,7 @@ Activating Recruit consumes the saved offer and adds a new species at full Healt
 
 ### Victory recruitment
 
-Victories require recruiting one defeated creature, following the [outcome flow](#screen-flow-and-journey-results). Offers preserve defeated entries in battle order, including repeated species and species already owned. A species absent from the roster joins as a new individual with independent identity and battle state; an already rostered species improves Collection rank without adding another individual.
+Victories require recruiting one defeated creature, following the [outcome flow](#screen-flow-and-journey-results). Offers preserve defeated entries in battle order, including species already owned in the Boss fallback. A species absent from the roster joins as a new individual with independent identity and battle state; an already rostered species improves Collection rank without adding another individual.
 
 With roster space, add a new species immediately. A repeat species completes recruitment immediately, even at five creatures, preserving the original roster. For a new species at five creatures, bank Collection progress and show the current team and incoming creature. Activating a team member immediately replaces it; Keep team preserves the original roster. Replacing a deployed member updates the saved formation. Hover and inspection never save, consume RNG or grant progress. Reload restores the pending choice around the saved recruit without collecting twice. Recruitment cannot be canceled after committing it. [Replacement choice](ui/screens.md#replace-a-creature) owns its presentation.
 

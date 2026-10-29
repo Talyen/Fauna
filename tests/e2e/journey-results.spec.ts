@@ -146,7 +146,14 @@ for (const input of ["keyboard", "controller"] as const)
           draft.journey!.victories = draft.encounter;
           prepareDestination(draft);
           draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
-          draft.journey = { outcome: null, victories: 29, currency: 0, xp: {}, lastBattle: null };
+          draft.journey = {
+            encounteredEnemies: [],
+            outcome: null,
+            victories: 29,
+            currency: 0,
+            xp: {},
+            lastBattle: null,
+          };
         }),
         { type: "beginBattle" },
       ),

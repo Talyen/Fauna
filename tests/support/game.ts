@@ -338,6 +338,7 @@ export function prepareDestination(state: GameState) {
       outcome: null,
       victories: state.encounter,
       lastBattle: null,
+      encounteredEnemies: state.journey?.encounteredEnemies ?? [],
     },
   } satisfies Lifecycle;
   return Object.assign(state, next);

@@ -46,52 +46,73 @@ const offensiveSpecies = new Set(
 );
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
-export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
+export function generateEncounterPack(state: GameState): SpeciesId[] {
   const size = bossEncounter(state) ? 1 : Math.min(3, state.encounter + 1);
   const roster = new Set([...state.team, ...state.reserves].map((unit) => unit.species));
+  const seen = new Set(state.journey?.encounteredEnemies ?? []);
   if (bossEncounter(state)) {
     const unowned = legendarySpecies.filter((entry) => !roster.has(entry.id));
     const eligible = unowned.length ? unowned : legendarySpecies;
-    const saved = savedPack?.[0];
-    return saved && eligible.some((entry) => entry.id === saved)
-      ? [saved]
-      : [eligible[Math.floor(roll(state) * eligible.length)]!.id];
-  }
-  const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
-  if (savedPack) {
-    return savedPack
-      .slice(0, size)
-      .map((id) => (roster.has(id) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : id));
+    const unseen = eligible.filter((entry) => !seen.has(entry.id));
+    const choices = unseen.length ? unseen : eligible;
+    return [choices[Math.floor(roll(state) * choices.length)]!.id];
   }
 
-  const offensiveCount = eligible.filter((entry) => offensiveSpecies.has(entry.id)).length;
-  const otherCount = eligible.length - offensiveCount;
+  const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
+  // Counts represent unseen attackers, unseen support, seen attackers, and seen support.
+  const category = (id: SpeciesId) => (seen.has(id) ? 2 : 0) + (offensiveSpecies.has(id) ? 0 : 1);
+  const counts = [0, 0, 0, 0];
+  for (const entry of eligible) counts[category(entry.id)]!++;
   const required = size > 1 ? 2 : 0;
-  if (!eligible.length || (required && !offensiveCount)) throw new Error("No valid encounter pool.");
-  // Weight each choice by its number of valid completions, so every valid lineup is equally likely.
-  function completions(remaining: number, needed: number): number {
-    if (remaining === 0) return needed <= 0 ? 1 : 0;
-    if (needed > remaining) return 0;
-    return (
-      offensiveCount * completions(remaining - 1, needed - 1) +
-      otherCount * completions(remaining - 1, needed)
-    );
+  const memo = new Map<string, { unseen: number; ways: number }>();
+  // Count valid completions that maximize unseen species; retain equal probability for each lineup.
+  function completions(remaining: number, needed: number): { unseen: number; ways: number } {
+    if (!remaining) return { unseen: 0, ways: needed <= 0 ? 1 : 0 };
+    if (needed > remaining) return { unseen: 0, ways: 0 };
+    const key = `${remaining}:${Math.max(0, needed)}:${counts.join(",")}`;
+    const cached = memo.get(key);
+    if (cached) return cached;
+    let best = -1;
+    let ways = 0;
+    for (let group = 0; group < counts.length; group++) {
+      const available = counts[group]!;
+      if (!available) continue;
+      counts[group]!--;
+      const next = completions(remaining - 1, needed - Number(group % 2 === 0));
+      counts[group]!++;
+      if (!next.ways) continue;
+      const unseen = next.unseen + Number(group < 2);
+      if (unseen > best) {
+        best = unseen;
+        ways = 0;
+      }
+      if (unseen === best) ways += available * next.ways;
+    }
+    const result = { unseen: best, ways };
+    memo.set(key, result);
+    return result;
   }
   const selected: SpeciesId[] = [];
   let needed = required;
   for (let index = 0; index < size; index++) {
     const remaining = size - index - 1;
-    const offensiveWeight = completions(remaining, needed - 1);
-    const otherWeight = completions(remaining, needed);
-    let choice = roll(state) * (offensiveCount * offensiveWeight + otherCount * otherWeight);
-    for (const entry of eligible) {
-      const offensive = offensiveSpecies.has(entry.id);
-      choice -= offensive ? offensiveWeight : otherWeight;
+    const best = completions(size - index, needed);
+    if (!best.ways) throw new Error("No valid encounter pool.");
+    let choice = roll(state) * best.ways;
+    for (let position = 0; position < eligible.length; position++) {
+      const entry = eligible[position]!;
+      const group = category(entry.id);
+      counts[group]!--;
+      const next = completions(remaining, needed - Number(group % 2 === 0));
+      const weight = next.unseen + Number(group < 2) === best.unseen ? next.ways : 0;
+      choice -= weight;
       if (choice < 0) {
         selected.push(entry.id);
-        if (offensive) needed--;
+        eligible.splice(position, 1);
+        needed -= Number(group % 2 === 0);
         break;
       }
+      counts[group]!++;
     }
   }
   return selected;

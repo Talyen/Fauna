@@ -1,5 +1,5 @@
 {
-  "version": 75,
+  "version": 76,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -595,7 +595,8 @@
       "armor": 11,
       "light": 24
     },
-    "lastBattle": null
+    "lastBattle": null,
+    "encounteredEnemies": ["memento"]
   },
   "expedition": {
     "pack": ["memento"],

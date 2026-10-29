@@ -133,7 +133,7 @@ it("completes the final Boss reward after removing the former Legendary", () => 
   const ready = produce(starterJourney(7, "captoad"), (draft) => {
     draft.encounter = 29;
     draft.journey!.victories = 29;
-    draft.expedition!.pack = generateEncounterPack(draft, ["chronora"]);
+    draft.expedition!.pack = ["chronora"];
     draft.expedition.recruit = null;
     draft.support = null;
   });
@@ -151,7 +151,7 @@ it("excludes an owned Legendary from the final Boss", () => {
   const ready = produce(starterJourney(7, "chronora"), (draft) => {
     draft.encounter = 29;
     draft.journey!.victories = 29;
-    draft.expedition!.pack = generateEncounterPack(draft, ["chronora"]);
+    draft.expedition!.pack = generateEncounterPack(draft);
     draft.expedition.recruit = null;
     draft.support = null;
   });

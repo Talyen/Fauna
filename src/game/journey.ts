@@ -76,8 +76,11 @@ export function intents(state: BattleState) {
 }
 export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[] = []) {
   const encounter = encounterSource(state);
-  for (const enemy of encounter.enemies)
+  for (const enemy of encounter.enemies) {
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
+    if (!state.journey.encounteredEnemies.includes(enemy.species))
+      state.journey.encounteredEnemies.push(enemy.species);
+  }
   rebuildCards(state);
   for (const row of [state.team, state.reserves])
     for (const c of row) {
@@ -294,7 +297,7 @@ export function startJourney(state: StateAt<"draft">) {
     reward: null,
     support: null,
     expedition: state.expedition,
-    journey: { outcome: null, victories: 0, currency: 0, xp: {}, lastBattle: null },
+    journey: { encounteredEnemies: [], outcome: null, victories: 0, currency: 0, xp: {}, lastBattle: null },
   });
   prepareEncounter(state);
 }

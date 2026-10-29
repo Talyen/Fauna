@@ -114,6 +114,10 @@ function validateCollection(state: GameState) {
 function validateJourney(state: GameState) {
   if (state.journey) {
     const summary = state.journey;
+    invalid(
+      !unique(summary.encounteredEnemies) ||
+        summary.encounteredEnemies.some((kind) => !state.discovery.encountered.includes(kind)),
+    );
     invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (state.keywordXP[keyword] ?? 0)));
     const receipt = summary.lastBattle;
     const justWon = receipt?.encounter === state.encounter && receipt.outcome !== "defeat";
@@ -162,6 +166,7 @@ function validateExpedition(state: GameState) {
     const boss = bossEncounter(state);
     invalid(
       route.pack === null ||
+        !unique(route.pack) ||
         route.pack.length !== (boss ? 1 : Math.min(3, state.encounter + 1)) ||
         (!boss && route.pack.some((kind) => species(kind).legendary)) ||
         (boss &&

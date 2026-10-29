@@ -9,6 +9,8 @@ export const recordedTraceDigest = (value: unknown) =>
         // Presentation metadata does not change the recorded combat facts or text.
         if (key === "announcement" && entry?.kind === "useAbility") return undefined;
         if (key === "version") return 57;
+        // Encounter history postdates this combat-only oracle.
+        if (key === "encounteredEnemies") return undefined;
         if (
           entry &&
           typeof entry === "object" &&

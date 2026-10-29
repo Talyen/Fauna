@@ -306,8 +306,10 @@ function validateEncounters(
           dealsDamage(card),
       ),
   );
-  // A full roster can exclude five species; duplicates are allowed in enemy groups.
-  if (attackers.length <= 5) error("combat", "species", "Too few damage-dealing species for every roster.");
+  // A full roster can exclude five species, leaving three distinct enemies and two attackers.
+  if (catalog.species.filter((entry) => !entry.legendary).length < 8)
+    error("combat", "species", "Too few ordinary species for every roster.");
+  if (attackers.length < 7) error("combat", "species", "Too few damage-dealing species for every roster.");
   const validatePack = (pack: readonly string[]) => {
     if (pack.length < 1 || pack.length > 3) {
       error("encounters", "packs", "Invalid encounter pack.");

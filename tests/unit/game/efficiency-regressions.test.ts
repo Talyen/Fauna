@@ -73,7 +73,6 @@ import {
 } from "../../../src/game/play-queries";
 import { battlefield, cleanseTargets, healingAllies, isDepartedMinion } from "../../../src/game/battlefield";
 import { bossDeck, summonEcho, createPearls } from "../../../src/game/combat/legendary";
-import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions, shuffle } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
@@ -328,27 +327,6 @@ it("preserves chance thresholds and Good Fortune retries in both directions", ()
     expect(chance(state, 1, false, events, above)).toBe(true);
     expect(decisions).toHaveLength(3);
   }
-});
-
-it("preserves saved encounter order and only rolls for roster conflicts", () => {
-  const state = structuredClone(teamRun(42, ["mossguard"]));
-  state.encounter = 2;
-  const decisions: unknown[] = [];
-  observeDecisions(state, (decision) => {
-    decisions.push(decision);
-    return 0;
-  });
-  expect(generateEncounterPack(state, ["prismram", "emberback", "pollenmoth"])).toEqual([
-    "prismram",
-    "emberback",
-    "pollenmoth",
-  ]);
-  expect(decisions).toEqual([]);
-  const pack = generateEncounterPack(state, ["mossguard", "prismram", "mossguard"]);
-  expect(pack[1]).toBe("prismram");
-  expect(pack[0]).not.toBe("mossguard");
-  expect(pack[2]).toBe(pack[0]);
-  expect(decisions).toEqual([undefined, undefined]);
 });
 
 it("does not invent copy draws when the draw pile is empty", () => {
