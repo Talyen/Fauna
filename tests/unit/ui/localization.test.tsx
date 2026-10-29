@@ -29,6 +29,7 @@ import {
 } from "../../../scripts/localization/card-model.mjs";
 import { CARDS } from "../../../src/game/content";
 import { PEARL } from "../../../src/game/content/creatures/memento";
+import { CLOCKWORK_BEE } from "../../../src/game/content/creatures/tinkervale";
 import { abilityRule } from "../../../src/game/rules/abilities";
 import { supplementalRule } from "../../../src/game/rules/supplemental";
 import { KEYWORD_DEFINITIONS, keywordLabel } from "../../../src/game/keywords";
@@ -2164,7 +2165,7 @@ it("reads authored card description functions without executing source", () => {
   const labels = Object.fromEntries(
     Object.entries(KEYWORD_DEFINITIONS).map(([id, entry]) => [id, entry.label]),
   );
-  for (const card of [...CARDS, PEARL]) {
+  for (const card of [...CARDS, PEARL, CLOCKWORK_BEE]) {
     for (const value of [1, 2]) {
       for (const power of [1, 1.7]) {
         const context = { value, level: 0, power, label: keywordLabel };
@@ -2183,8 +2184,10 @@ it("reads authored card description functions without executing source", () => {
 it("reads literal authored cards by identity and rejects unknown builder expressions", () => {
   const files = creatureSources();
   const authored = readAuthoredCards(files);
-  expect(Object.keys(authored).sort()).toEqual([...CARDS, PEARL].map((card) => card.id).sort());
-  for (const card of [...CARDS, PEARL])
+  expect(Object.keys(authored).sort()).toEqual(
+    [...CARDS, PEARL, CLOCKWORK_BEE].map((card) => card.id).sort(),
+  );
+  for (const card of [...CARDS, PEARL, CLOCKWORK_BEE])
     for (const [key, value] of Object.entries(authored[card.id]!))
       expect(card, card.id).toHaveProperty(key, value);
   expect(() =>
@@ -2203,7 +2206,7 @@ it("reads complete authored card rules with changing values and room power", () 
   const labels = Object.fromEntries(
     Object.entries(KEYWORD_DEFINITIONS).map(([id, entry]) => [id, entry.label]),
   );
-  for (const card of [...CARDS, PEARL])
+  for (const card of [...CARDS, PEARL, CLOCKWORK_BEE])
     for (const value of [1, 2])
       for (const power of [1, 1.7])
         for (const level of [0, 1])
@@ -2218,7 +2221,7 @@ it("models enemy card adaptation without changing authored cards", () => {
   const cards = readAuthoredCards(files),
     abilities = readFileSync("src/game/rules/abilities.ts", "utf8"),
     supplemental = readFileSync("src/game/rules/supplemental.ts", "utf8");
-  for (const card of [...CARDS, PEARL]) {
+  for (const card of [...CARDS, PEARL, CLOCKWORK_BEE]) {
     const expected = enemyCard(card);
     const actual = enemyCardModel(cards[card.id]!, abilities, supplemental);
     for (const [key, value] of Object.entries(actual)) expect(expected, card.id).toHaveProperty(key, value);
@@ -2237,7 +2240,7 @@ it("extracts each authored player and enemy rule variant using production text",
   const keywordSource = readFileSync("src/game/keywords.ts", "utf8");
   const rules = extractCardVariants(files, sources, keywordSource);
   const missing: string[] = [];
-  for (const card of [...CARDS, PEARL])
+  for (const card of [...CARDS, PEARL, CLOCKWORK_BEE])
     for (const model of [card, enemyCard(card)])
       for (const value of [card.value, 1, 2])
         for (const power of [1, 1.7])

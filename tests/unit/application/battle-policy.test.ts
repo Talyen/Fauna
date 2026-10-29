@@ -335,7 +335,8 @@ it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
 const rankingConditions = ["ordinary", "injured", "defended", "talented"] as const;
 // The historical ranking oracle predates these kits; their behavior has focused coverage.
 const recordedRankingSpecies = SPECIES.filter(
-  ({ id }) => !["chronora", "velvetmonarch", "cavalleaf", "wendlet", "vitrilo", "velouria"].includes(id),
+  ({ id }) =>
+    !["chronora", "velvetmonarch", "cavalleaf", "wendlet", "vitrilo", "velouria", "tinkervale"].includes(id),
 );
 // Each row retains one ordered choice, including its serialized field order; null denotes an empty ranking.
 const rankingBaseline = new Map<string, string[]>();

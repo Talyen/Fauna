@@ -66,7 +66,7 @@ for (const [width, enlarged, outcome] of [
     }
     await resume(page);
     if (ending.type === "play") {
-      await page.locator(`.app:not([inert]) .hand [data-card-id="${ending.cardId}"]`).click();
+      await step(page, undefined, game, ending);
     } else if (ending.type === "endTurn") {
       await page.getByRole("button", { name: "End turn", exact: true }).click();
     } else {

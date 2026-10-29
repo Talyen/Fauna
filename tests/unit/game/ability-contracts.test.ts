@@ -36,7 +36,15 @@ import type { BattleState, GameEvent } from "../../../src/game/types";
 // properties in a different order. Card digest updated for Undertow Knot and Spark Decoy.
 // Species digest includes Bloomquail's clarification that conversion uses gained Block.
 // Preserve the historical catalog oracle; the six newer kits have focused contracts.
-const newerSpecies = ["chronora", "velvetmonarch", "cavalleaf", "wendlet", "vitrilo", "velouria"];
+const newerSpecies = [
+  "chronora",
+  "velvetmonarch",
+  "cavalleaf",
+  "wendlet",
+  "vitrilo",
+  "velouria",
+  "tinkervale",
+];
 it("preserves the recorded creature, passive tier, card and Pearl catalog", () => {
   const digest = (value: unknown) =>
     createHash("sha256")
