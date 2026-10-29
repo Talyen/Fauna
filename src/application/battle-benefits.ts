@@ -462,9 +462,10 @@ export function battleBenefits(
         selfHealing,
       );
     }
+    case "moonlitWaltz":
     case "dodge": {
       let useful = 0;
-      if (def.target === "allAllies") {
+      if (def.effect === "dodge" && def.target === "allAllies") {
         for (const unit of allies()) useful += Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0));
       } else useful += Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
       const extraBlock =
@@ -523,6 +524,10 @@ export function battleBenefits(
     }
     case "reflectAttack":
       return support(actor.combat?.attackReflection ? "none" : "protection", 1);
+    case "reflectAlly":
+      return allies().map((ally) =>
+        supportOne(ally.combat?.attackReflection ? "none" : "protection", 1, ally.id),
+      );
     case "resurrect": {
       const benefits: BattleBenefit[] = [];
       for (const row of [state.team, state.reserves])

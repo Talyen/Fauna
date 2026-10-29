@@ -121,7 +121,10 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
-    for (const enemy of actionOrder) ensureCombat(enemy).temporaryDodge = 0;
+    for (const enemy of actionOrder) {
+      ensureCombat(enemy).temporaryDodge = 0;
+      ensureCombat(enemy).dodgeFreezeRetaliation = 0;
+    }
     const actingMinions = battle.minions?.length ? battlefield(draft, "enemy") : [];
     let minionCount = 0;
     for (const unit of actingMinions) if (unit.minion && unit.health > 0) actingMinions[minionCount++] = unit;

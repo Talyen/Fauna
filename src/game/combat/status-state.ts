@@ -71,7 +71,10 @@ export function clearSelectedStatus(
 ) {
   const stats = ensureCombat(unit);
   if (status === "armor") return removeArmor(unit, stats.armor);
-  if (status === "dodge") stats.temporaryDodge = 0;
+  if (status === "dodge") {
+    stats.temporaryDodge = 0;
+    stats.dodgeFreezeRetaliation = 0;
+  }
   if (
     status === "reflect" ||
     status === "reflectBurn" ||

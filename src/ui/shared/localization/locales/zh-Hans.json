@@ -4247,6 +4247,42 @@
     "sourceHash": "194fdf29c86d0dc60ab844de503e3c4fff7756bd234edff6556fded266c033b6",
     "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
   },
+  "content.card.velouria-hushed-finale.name": {
+    "reviewed": true,
+    "source": "Hushed Finale",
+    "sourceHash": "9231e407670097231b0c4a245a8fcb9d7748b2076aee090b5f7b335b9985935c",
+    "text": "无声终曲"
+  },
+  "content.card.velouria-hushed-finale.v4db192284ed1f62e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to a random enemy",
+    "sourceHash": "99cc938fcaa5d0d26a301eb620e42b406d6d67854e7ee43f501ff62b61bf2f23",
+    "text": "对随机敌人造成 {{value0}} 点<keyword0>冻结</keyword0>伤害"
+  },
+  "content.card.velouria-moonlit-waltz.name": {
+    "reviewed": true,
+    "source": "Moonlit Waltz",
+    "sourceHash": "9d46bc6d8dbc0dba31e2457af0c262075f172f276f3c969970011a489095e591",
+    "text": "月下华尔兹"
+  },
+  "content.card.velouria-moonlit-waltz.v2e8b4441cbc45441.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn / Retaliate with {{value1}} <keyword1>Freeze</keyword1> damage when you <keyword2>Dodge</keyword2>",
+    "sourceHash": "b3d9408398a9a06731d8c45b6574ddc9d141ee0119b1a050e86efed99e8be033",
+    "text": "获得 {{value0}}% <keyword0>闪避</keyword0>直到你的下回合 / <keyword2>闪避</keyword2>时反击，造成 {{value1}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.card.velouria-velvet-aegis.name": {
+    "reviewed": true,
+    "source": "Velvet Aegis",
+    "sourceHash": "080b58245e008fb3b262ceaa3b1869d375b45565886700dfa7ca3adfaf26fd81",
+    "text": "天鹅绒之盾"
+  },
+  "content.card.velouria-velvet-aegis.v20fdbdebada7be59.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0> against an ally",
+    "sourceHash": "634f0c7fc9e286268dc717b74476cf15e4e5d6b3d55954380f7b24c08868b8c6",
+    "text": "<keyword0>反射下一次攻击</keyword0>，保护一名盟友"
+  },
   "content.card.velvetmonarch-meadow-decree.name": {
     "reviewed": true,
     "source": "Meadow Decree",
@@ -7049,6 +7085,60 @@
     "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
     "text": "侠义"
   },
+  "content.species.velouria.name": {
+    "reviewed": true,
+    "source": "Velouria",
+    "sourceHash": "7ac120fae478536549b6e16454b7190d7996bda9b759b3d0bc1e7d24ed73b8ab",
+    "text": "Velouria"
+  },
+  "content.species.velouria.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "f8c2a4cd4a84f9f2b98891ebf610381d9a9b8a54dc9a19a0c09e3a1b5d3d4763",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "aaf7ac29673b67351b8adb69757fe2345820c3fef9f442212d0e1cb4922abc9b",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "75ac2d475dfbdb3a5e0d53d33c9341be076f011227e8ee0c722fd81444764f53",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "a33868f6e047362650973108e35fc3798ad12388bd9beed93c3b58375b0d71df",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "cfff8c3bc313ac6c026369b5dc67a1afd942340e295b5d7995793de006fac165",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "3c12de0b2125e4b953400b910449705ba8a1eadc27fee8adf43fa30425d5ff24",
+    "text": "当 Velouria 获得临时<keyword0>闪避</keyword0>时，对所有敌人造成 {{value0}} 点<keyword1>冻结</keyword1>伤害"
+  },
+  "content.species.velouria.title": {
+    "reviewed": true,
+    "source": "The winter masquerade",
+    "sourceHash": "3eea8080e009cd9f4cd373c7ded459d71abce0c1672a3dc8da23fe123b88b406",
+    "text": "冬日假面舞会"
+  },
+  "content.species.velouria.trait": {
+    "reviewed": true,
+    "source": "Rimewake",
+    "sourceHash": "9f3d920f53c820f9790401a6d2c030bc1aaecec9ecb2fdfcbafa4f702fe8a3d2",
+    "text": "霜之舞"
+  },
   "content.species.velvetmonarch.name": {
     "reviewed": true,
     "source": "Velvetmonarch",
@@ -7322,163 +7412,163 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "e1a6ce61036fdcad48718d9b8753df0e5a14d28e926a177935371a3f5038b05b",
+    "sourceHash": "1bce523491383517fba295a87c2d7c21c05173107a98b9b68d8b9f403b23889a",
     "text": "杂技陀螺：下一次攻击无法被<keyword0>闪避</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "25a390789b3f9839b9598c941c812e6236344c816ddaf2b86ddeb8797760796f",
+    "sourceHash": "d863f807751e168bcd6d61582dadf05f567db3fbc45ff5a16e96da0a4d765dfd",
     "text": "<keyword0>攻击反射</keyword0>: 将下一次受到的技能攻击返还给攻击者; 防止该攻击对你造成伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "33f8f7bc119d1270362f4cc4a7a115516dbccd3179b1919d17feec5304574ba3",
+    "sourceHash": "0c4ecaa82c0c3a2cda5541947b50e95dd5a6d35ddf8627fa570ef27d96955d41",
     "text": "<keyword0>致盲</keyword0>: 下一次攻击有{{value0}}%概率对所有目标落空; 无论命中与否，该次攻击后结束; 落空视为每个目标都成功<keyword1>闪避</keyword1>; 不叠加"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "f54896e33d402100803c7d96c0c6f45e8412de137d9564b03da6aaac75dbfd44",
+    "sourceHash": "dd42463ca73f9a7cb568aa6c0960b54a5ca6f4e6912a5e66e3bf0e976442e3b3",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "32f71697b06bed670f2496e3c1a7ba8adc87e7180778aeb5029d4a812ec40de1",
+    "sourceHash": "2336a92e4cf81f7a42d8dbbc20ef83ce561e317ed55a73616cdbc2acef7fef20",
     "text": "跳过回合"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "f536fce563bb316e1cea4edc24ced1c5414df3fe713d74998b1edc37f3071e96",
+    "sourceHash": "b22ff39384105c9b06d505f0da87e856a2d5dff95fd1ca053edd424a144cfcb9",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "c8bc21542fa2894f43991ecd563177b225c08c22a33d05304fcda751ee386f91",
+    "sourceHash": "de54bb314d62edecf3763e18036a684906565bf0ac50f6b4e67c54984c5e89c1",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "a79956df9c3ff6f3bfab063976b7340008d61ac8d225ead070ec0f6ad35f117a",
+    "sourceHash": "0f7515e1efab848e8da585eac7c6e164e905d4cd84efbb148fbb1318058177e1",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "5539879c440e103818c355946e10d8414f1ed52109d426ecb21fc78d267ef871",
+    "sourceHash": "0e7b9b836ca2665ecbfad1f55da2105bf763ac38f20cfb36ab38ca35b9c3985f",
     "text": "控制免疫 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "2a151d9dfd337b850cc50a32d7335ee102e23fac12bebbbea123630c722ba669",
+    "sourceHash": "1131c71d3122d64244ff860a8d6797dcaae00eda4b05ceb42c144ad763c79f9c",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "7b90482c8bbeeb5b86a269e085871b0a954f759cf43088f5efac14cb667e0ec7",
+    "sourceHash": "7022b734c96e64af01c07435443ebca45ab9d0d8b26b68704bdf0d55845a19b2",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "5ce6ae817c50159dca15259caa93631665667d9fcbc20ab4f3be47509c702207",
+    "sourceHash": "4cf1a63c3f95fee387a39b16fabf0864dd0a058101d4951d31f6471f48465425",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "05b7b7c3785bd3654522b29c1f429a6aac72989ad3a04fe17b8253f1c48806c6",
+    "sourceHash": "e3c93593fe63545897a0526f9b4f76baa0087f87990f6e061512c92b60cfd535",
     "text": "濒死 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "76e1033dc9552f58ff512f9cfd5c3af1dd73909459ac0cb65536ea69e1bf821e",
+    "sourceHash": "4cb7d9e679c919c038ce72e6eb9a8c5e580d471e15d7c1d939db0353f609b98b",
     "text": "月种：下次<keyword0>荆棘</keyword0>反击造成双倍伤害"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "d39cfc26559072dad1535c69d87b70d63349bfb1f3caf8b779834d787acdc725",
+    "sourceHash": "c3ad1cecf3dc96f9ded1d44f50ceb0f8abfd54732b663b6925d14e0f52c2b0f3",
     "text": "<keyword0>抵消</keyword0>: 在<keyword1>闪避</keyword1>判定前取消下一次受到的技能攻击及其对你的有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "356d40611e396e83ae8595b6221afafa29444428eb64366b6beeda8d946a562a",
+    "sourceHash": "9c202e15dea9060e6c677a80091848a4caa2ebef433079de8a0ac706f173a20b",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "d71e0d21b4808912ab5b95e5bb073e57994857b455b3e22b00853c28d3dcb68e",
+    "sourceHash": "762f8562dc91fa8b97c645816b88d73c85d7395ac7c82fc17a55635985081a02",
     "text": "<keyword0>无效化</keyword0>: 防止下一次施加<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>、<keyword3>流血</keyword3>、<keyword4>眩晕</keyword4>、<keyword5>冻结</keyword5>或<keyword6>致盲</keyword6>; 直接伤害和已有状态不受影响; 持续至使用或被<keyword7>驱散</keyword7>; 不叠加"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "f4103a940df39d7dbd99f0976ff09001b8583e1c70ec8b2ee40e8657c69739a8",
+    "sourceHash": "67d7d9e31c8a5af68cdf86c984ab0a15b9ea445f5949584ca7254dc8b01a6fc6",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "79756a9d43845c8746dbaa6ccf0f7ced4756f606766ca2a141e822ad218543ff",
+    "sourceHash": "52acb75b9ae7d416db60301798a41d3446e5ef7f08d94bd31619ce220aae3f0b",
     "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "b5bd16ab82a127232747e777e50d30a44919ce81b6a1e5088ed4cc08978970f8",
+    "sourceHash": "2a50e240205faf3111b4c1a2fead8fed3dbcaa7ef62092aaa438950462cdb732",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "2d1fb452259314cf3e98bce8e406dde9d9b4f4b5aa5babbd425477e44c51cc6e",
+    "sourceHash": "18d325c0adccaaf2e6a332b72085d577802fba3a6c36bfdfdb209907c753f912",
     "text": "<keyword0>反射</keyword0>: 将指定的有害状态转移给一个随机存活敌人; 直接伤害仍会命中你; <keyword1>攻击反射</keyword1>则将整次攻击返还给攻击者; 被<keyword2>反射</keyword2>的效果不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "b8a3b484efc7966f85b0b38e18a7420124704349bbb54b2df7a8ac94f6cbd5b6",
+    "sourceHash": "6134572960527e3beba7316e3ef737d3cf991e43618cee3a4af676e4071d54ca",
     "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "702af8655692e3d1a764762ffe48f0f1d1c81f1ca7ab737daf033261c8eabb8f",
+    "sourceHash": "9fee2a9bed64b5db9af2c827d1314bc383d321ea6114690c0075fb123ba3d3d2",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "360984c100c714cbd14d0a0a4fc0f8e3c7606d3a1f44d082db6d062e16f0fa04",
+    "sourceHash": "19152d715da11b6d9e5ffdda15096b3af3ce7c4344e9085e5bab279795c0c8d2",
     "text": "缎带线轴：免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "1cdb85c84648de741122f64cffb4ec28e8077673c7a5a8e7efcd7be686c08df6",
+    "sourceHash": "9cb3e2855292b38a2c0c6648a45280ff5d01e796c5a90d14186e44a6e73c95ef",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "8cf7ec1ca74f6a246a113c3550fbf3d908e95fe70803edc7c2183d4a6221f3a7",
+    "sourceHash": "9a2e21d261da821a86347f827ae3a93f4e6458b1279b2a951d7effecda1f798d",
     "text": "龙牙签：下次攻击还会<keyword0>驱散</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "407eb75dea5f8f0b7e93579bca4b03f54ff8912b5833316d39d6f2a2e8b6ee80",
+    "sourceHash": "ef834f70869284ec4664c05df6ee4807ba34ce3651e39035e02e5c54ff44d9b6",
     "text": "逆转时潮：下次攻击可能重复"
   },
   "content.talent.armor.armored-surge.name": {
@@ -10647,6 +10737,12 @@
     "source": "{{count}}% expires at your next turn",
     "sourceHash": "a03e9e168ebe7685291a1169d8a30b2246c13f7ffec5c55e22f4eb4d80e0be12",
     "text": "{{count}}% 在你的下一回合到期"
+  },
+  "status.dodgeFreezeRetaliation": {
+    "reviewed": true,
+    "source": "Retaliate with {{count}} Freeze damage when you Dodge",
+    "sourceHash": "9ecdf4af72f717d1d7e97d1405df3e57776e7a06aaf427a0c3877a0b2370d181",
+    "text": "闪避时反击，造成 {{count}} 点冻结伤害"
   },
   "status.dodgeShared": {
     "reviewed": true,

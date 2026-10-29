@@ -11,6 +11,7 @@ import type { GameState } from "./types";
 const noKeywords: readonly KeywordId[] = [];
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
+  rimewake: ["dodge", "freeze"],
   glassCutter: ["light", "block"],
   courtRemembers: ["water"],
   gardenAnswers: ["nature", "block"],
@@ -59,6 +60,7 @@ const abilityKeywordOverrides: Partial<Record<AbilityKind, readonly KeywordId[]>
   teamCleanse: ["cleanse"],
   createFood: ["food"],
   reflectAttack: ["reflect"],
+  reflectAlly: ["reflect"],
   dreamDouble: ["thorns", "negate"],
   sparkDecoy: ["burn", "negate"],
   teamProtection: ["block", "thorns"],

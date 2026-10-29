@@ -33,6 +33,7 @@ export type Status = {
   text: string;
   count: number;
   temporaryDodge?: number;
+  dodgeFreezeRetaliation?: number;
   sharedDodge?: number;
 };
 export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmunity = 0): Status[] {
@@ -44,8 +45,14 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmu
         .map((id) => ({
           id,
           count: id === "dodge" ? dodge : combat[id],
-          ...(id === "dodge" ? { temporaryDodge: combat.temporaryDodge, sharedDodge } : {}),
-          text: `${KEYWORD_DEFINITIONS[id].label} ${id === "dodge" ? dodge : combat[id]}${id === "dodge" ? "% bonus" : ""}; ${KEYWORD_DEFINITIONS[id].description}${id === "dodge" && combat.temporaryDodge ? `; ${combat.temporaryDodge}% expires at your next turn` : ""}${id === "dodge" && sharedDodge ? `; ${Number(sharedDodge.toFixed(2))}% from Shifting Sands` : ""}`,
+          ...(id === "dodge"
+            ? {
+                temporaryDodge: combat.temporaryDodge,
+                dodgeFreezeRetaliation: combat.dodgeFreezeRetaliation,
+                sharedDodge,
+              }
+            : {}),
+          text: `${KEYWORD_DEFINITIONS[id].label} ${id === "dodge" ? dodge : combat[id]}${id === "dodge" ? "% bonus" : ""}; ${KEYWORD_DEFINITIONS[id].description}${id === "dodge" && combat.temporaryDodge ? `; ${combat.temporaryDodge}% expires at your next turn` : ""}${id === "dodge" && combat.dodgeFreezeRetaliation ? `; retaliate with ${combat.dodgeFreezeRetaliation} Freeze damage when you Dodge` : ""}${id === "dodge" && sharedDodge ? `; ${Number(sharedDodge.toFixed(2))}% from Shifting Sands` : ""}`,
         }))
     : [];
   if (combat?.controlled || combat?.skipped)

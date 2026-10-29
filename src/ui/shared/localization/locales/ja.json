@@ -4247,6 +4247,42 @@
     "sourceHash": "1226a7079741afbf37d1a9f5f6ce70be6f023a26521d6ab5c187f897bdee12c1",
     "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0> / <keyword2>光</keyword2>カードを1枚引く"
   },
+  "content.card.velouria-hushed-finale.name": {
+    "reviewed": true,
+    "source": "Hushed Finale",
+    "sourceHash": "1beffed3db05aa5fcb3f19ab63e36ccd4136c0db69f7daf604c0f9b8a6e2a148",
+    "text": "静かな終幕"
+  },
+  "content.card.velouria-hushed-finale.v4db192284ed1f62e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to a random enemy",
+    "sourceHash": "08cba19229a2854c6f3eb30ec2e859ee216bb7648c742d835c752bac8211c067",
+    "text": "ランダムな敵に<keyword0>凍結</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.velouria-moonlit-waltz.name": {
+    "reviewed": true,
+    "source": "Moonlit Waltz",
+    "sourceHash": "933c6f01b21a4d08a4b407971606193a2432151790f1d4948c89879a2daf1fd3",
+    "text": "月夜のワルツ"
+  },
+  "content.card.velouria-moonlit-waltz.v2e8b4441cbc45441.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn / Retaliate with {{value1}} <keyword1>Freeze</keyword1> damage when you <keyword2>Dodge</keyword2>",
+    "sourceHash": "0ee11fafaa701d338a5b4bf2833cc5cfe8454f136212e37cae534d87df396f64",
+    "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%得る / <keyword2>回避</keyword2>時に<keyword1>凍結</keyword1>ダメージ{{value1}}で反撃"
+  },
+  "content.card.velouria-velvet-aegis.name": {
+    "reviewed": true,
+    "source": "Velvet Aegis",
+    "sourceHash": "53188827993c91e796c1de55367d2c17eda5f608d6fb1b5f5f1a3cad26bceda2",
+    "text": "ビロードの盾"
+  },
+  "content.card.velouria-velvet-aegis.v20fdbdebada7be59.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0> against an ally",
+    "sourceHash": "34486856f467f1866d6540c130df747dea107e21cc2e3705b3eb5ddae7d027d9",
+    "text": "味方への<keyword0>次の攻撃を反射</keyword0>"
+  },
   "content.card.velvetmonarch-meadow-decree.name": {
     "reviewed": true,
     "source": "Meadow Decree",
@@ -7049,6 +7085,60 @@
     "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
     "text": "騎士の心"
   },
+  "content.species.velouria.name": {
+    "reviewed": true,
+    "source": "Velouria",
+    "sourceHash": "1ed9a6e1a22bd430e1549ee59a4443b6a7ddd127a34504b7693eac96e31a3be9",
+    "text": "Velouria"
+  },
+  "content.species.velouria.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "127232c140eb354d74d6dae8f2e38aebbbde2618a1b8bcfefbc2fafbebd7c0fd",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "760cb681940fa7f6f2b5a2e504dfd9f70607edca3fce06f4df87e12c1983163c",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "deab75d3779a47ef0ce490db98806624a845398e1dc6fbc42a1291bb8c2b9a46",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "0503ba97bb7653787e5c21a656f0c7e1390191fb63a12eceb7fbc79b95d5021d",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "2bb174cf8444b9fef98b72adba5de194b0abc4920da059c3bab035207871cad1",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "bc6a9b51260c6f5fc8d34e17fee44cd4e61a46c9ddbc5392504bb442c4358e17",
+    "text": "Velouriaが一時的な<keyword0>回避</keyword0>を得ると、敵全体に<keyword1>凍結</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.velouria.title": {
+    "reviewed": true,
+    "source": "The winter masquerade",
+    "sourceHash": "1d131a7e90e6785f1b1954073dcae8fa437a517a61962f754043ff90bd6b5658",
+    "text": "冬の仮面舞踏"
+  },
+  "content.species.velouria.trait": {
+    "reviewed": true,
+    "source": "Rimewake",
+    "sourceHash": "8ea9fbf55ad6e42cef5dd15bdfa25856115c371c5dd56460a0cfcb7ba920cd45",
+    "text": "霜の軌跡"
+  },
   "content.species.velvetmonarch.name": {
     "reviewed": true,
     "source": "Velvetmonarch",
@@ -7322,163 +7412,163 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "9132d77ad8701d2b9589a1a44f0ebf8474dfceffbb5ae8c07b66364ce33b5649",
+    "sourceHash": "4b37c6274ec21f2109330224fb0c74b85c8674d436b435222f6e23d700b3c38f",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "73d487bc5eaf4691f295e3e8e4e3e9f6164b21956e9b4a89ddea792cb55f7656",
+    "sourceHash": "a040cc37b3a0c3491bf3bda05fb6763636eacef425ac7615bdbf580777012bcd",
     "text": "<keyword0>攻撃反射</keyword0>: 次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃を再び<keyword2>反射</keyword2>することはできない; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "50f476ac3abe7a77af11b337e1f74b789de4f80bf75b1fe54b2259c152ae794a",
+    "sourceHash": "86abfc4b87a2ca7ef94f96d11ad328bf4ef6914bf4f5ca0c72ded633a8c8d401",
     "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "23ff4492e64e996b866939ec944d63c61ebee42e075938fd424d8d6410f5431b",
+    "sourceHash": "d3c864da67bfb6dfcc6413871958725a1df429753d31e540ad2d1814925c984f",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "c49075832bec6e9c0b47e176f42594c9a4f727e11cd0577fa797a0ead66d9d28",
+    "sourceHash": "818642fc238246d0a03f9d82e49db015b4921233a6854c37319a6d7a7a731940",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "d7bbdce86e7be91113a7f61874d5614c401e4ac2378a2374f6ea80fa0e6005e0",
+    "sourceHash": "8ef00af7c59d8b844645f918d608f286855d499beffaa49b377c9bccf25cc1d8",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "925267d5c3d70a8e6b486b649c1f06a5de0c14a32538c1da47f6617de6133861",
+    "sourceHash": "47b041322b1948f1ce5ebe18fa0bdddb31d9426b940c03ac24e4c28c5a203632",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "df397d46de9feea8fd12ff960bc22c3899c29becf7f15cf1fa051180d3eaf6c6",
+    "sourceHash": "f772b6cce9bdc42d10486af1094e4ba3b7d1ef61eea77de27fe956e2776c60bc",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "72a3743187bd091d76f9d523b9a7c66b1e8ac1e704f6e0c9d5623800e80e4ec7",
+    "sourceHash": "06b6a368a7d42da1d4c944b5aee55289cd9eb916e34a2ccd8b5588b288f6c7da",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "4b3c066f7e0bc245df0112cde9694cac19d7369a6c0b5852f0525432dda97e25",
+    "sourceHash": "bb214d370183a6db45f32113de373372107743bb014115c5ebba79df4fb35e87",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "19f359af6559ca88d73e2335bff231d18b309152e37e733385ac6c518c08585b",
+    "sourceHash": "219e005f16ec54a5951a83c32caf79b15d816b6198bd4b0daa306ce9c86328fc",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "734485276f4ee93a907b1c12d92ee483497ee1121172be9a77891898de3a778e",
+    "sourceHash": "8e3001bf415f7e8da24232d28954971fc19962b6f54bc64a3e9c3947027ed001",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "f68bd78a50d0d7374cf036fd560654088189cce033c17140cecf5d98fbcc2efe",
+    "sourceHash": "58631449b94dd95506d17036cf3e7a49cdcfd721cfc5d2e444e206096390db79",
     "text": "死の淵 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "e768a88f636be688cdca1ce5575e0985226669e0b8898a4c86398cd6b31ac74c",
+    "sourceHash": "6a6512d3b8a093601566fa23e5c00711d85487029997c7535d455188e8b48323",
     "text": "月の種：次の<keyword0>棘</keyword0>の反撃は2倍のダメージを与える"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "3f56e047adc1858da28f6a6f2c005bb0933c414c571227841bc26e299ebbabca",
+    "sourceHash": "4ac7af2fa6b267a0c9f93d10a711e20a7c313c73d92785cc341f99eb426bc185",
     "text": "<keyword0>防止</keyword0>: 次に受ける能力の攻撃と自分への有害効果を<keyword1>回避</keyword1>判定前に打ち消す; <keyword2>棘</keyword2>は反撃する; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "03ef55d6e6334fe1530ce5282dd139fa48a45352c73aab15badaae5f32a1fb86",
+    "sourceHash": "345729aab60dc7be4634d5c74421f91bf19682bf67315af05bef0918b6241c29",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "1f3f503c638dcc9559b884218c7611b8adc94084944fba845931f489b072691f",
+    "sourceHash": "f96726ff296ccde36d2dbe0a6decd58737dfc0c5b658dbe9ff93dac18dc83a76",
     "text": "<keyword0>無効化</keyword0>: 次の<keyword1>炎上</keyword1>・<keyword2>毒</keyword2>・<keyword3>出血</keyword3>・<keyword4>スタン</keyword4>・<keyword5>凍結</keyword5>・<keyword6>盲目</keyword6>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword7>強化解除</keyword7>されるまで続く; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "b47dc1f033dfdfa2167cfad76feb4d7a662170390df1fc321b2763914aca3a79",
+    "sourceHash": "466cdfd7bb7b15cf148fd5eb9b069240b4ab44b73b57379b885d9127252d8703",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "e7c084d55caebc5efe8614ed6a769479b5e27ef8eb826e3b6e0b905270010ced",
+    "sourceHash": "cb7ae2d5b467dd6aedb4914b80e576d99418ddd1158f2d284034e8527ab061e9",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "173c10b86f60168ffcb57c72f2578fd4fc917990634ee2e5ca763803b66c614e",
+    "sourceHash": "2a9e391dd91130034a1541354f9cb954e61ac35af0a379f329cf5d795480fb89",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "1472aa1507f17244877d59016aaf7bf80e07af2652a476d1bc65ef1c0a83ef30",
+    "sourceHash": "9230e6d8f2ed506e88eaabeaebaffeceb1a9cf0f373d80772cfcd826f3b5268d",
     "text": "<keyword0>反射</keyword0>: 指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword1>攻撃反射</keyword1>は攻撃全体を攻撃者へ返す; <keyword2>反射</keyword2>された効果を再び<keyword3>反射</keyword3>することはできない; チャージは重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "eab1e76b333df5bfad56bdbae5a184b2e295b997286ca75af4a55e7590e936a5",
+    "sourceHash": "a405278fe490898de9ca818816d6e6917bfb52940c388b00db8df5d88fdacb4d",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "eb15a27a84fbe6144a5bc31d258c0e681bdda064fc7f467c26054b2ff34fca45",
+    "sourceHash": "d3df02af4f2758ec1accdbb3579240fdd9f7fc1215145ed5603b8f5f29148356",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "50674c06d6610160951b6f8842cce39c7704c28f51dcb0c85d39c5fc4a777191",
+    "sourceHash": "5bc1a0a90e5d8435ce0966cf2fd1d37c9095f5142636935db5e26eb1d5cd2719",
     "text": "リボンの糸巻き：<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "ffeb5871ee99cf502b59a6f5078bce445abbb35d524e37da818a545281b49d18",
+    "sourceHash": "97d7b92a657c6fd169b77c5e17da03f658dd934222d7a8ba11ebd12a2fd3d3a1",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "57d91f103d7dfbc375b79d812078cde2b23ff6d23bbf6de04bcbe918db07aac4",
+    "sourceHash": "45a19a20d4764a03d16712bf4989990f3e3f8e624b7441f58f4467c427e9cc3e",
     "text": "竜のつまようじ：次の攻撃は<keyword0>強化解除</keyword0>も行う"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "bd545fd9d9b0746b80e6880e72ea2147bd6b761f94fc325b8635e41b15b54322",
+    "sourceHash": "4e5133b908bf1d153814da5702de0edfea7144cc82bae02f47f8e37e55bb117f",
     "text": "時の流れを戻す：次の攻撃が繰り返されることがある"
   },
   "content.talent.armor.armored-surge.name": {
@@ -10647,6 +10737,12 @@
     "source": "{{count}}% expires at your next turn",
     "sourceHash": "aae3ed7746c07d290bfd1e2f5b65eb84ea1366d6a3f48b9a04966f8aba7d02fc",
     "text": "{{count}}%は次の自分のターンに終了"
+  },
+  "status.dodgeFreezeRetaliation": {
+    "reviewed": true,
+    "source": "Retaliate with {{count}} Freeze damage when you Dodge",
+    "sourceHash": "ceac4e8a494e8ec3bf3bd45b2281197970cc68a62e750694d87dec1eb7a0c569",
+    "text": "回避時に凍結ダメージ{{count}}で反撃"
   },
   "status.dodgeShared": {
     "reviewed": true,

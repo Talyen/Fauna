@@ -16,15 +16,7 @@ import { draw, drawKeyword, recoverBrokenGuard, returnSlipperCard } from "../car
 import { hasTalent, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
-import {
-  ensureCombat,
-  unitName,
-  STACK_LIMIT,
-  gainGold,
-  removeArmor,
-  grantTemporaryDodge,
-  type Combatant,
-} from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
@@ -68,7 +60,7 @@ export function* dodgeResponse(
     if (allies.some((ally) => ally.id === target.id))
       for (const ally of allies)
         if (ally.id !== target.id && ally.health > 0)
-          grantTemporaryDodge(ally, boonRule("echo-ocarina").dodge, events);
+          yield* reaction("grantTemporaryDodge", state, ally, boonRule("echo-ocarina").dodge, events);
   }
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
@@ -176,6 +168,10 @@ export function* dodgeResponse(
       }
   }
   if (retaliate) {
+    if (stats.dodgeFreezeRetaliation && bothAlive(source, target))
+      yield* reaction("hit", state, target, source, stats.dodgeFreezeRetaliation, "freeze", events, {
+        origin: "statusRetaliation",
+      });
     const cinderstep = passiveAmount(alliedTarget ? state : undefined, target.species, "dodgeBurn");
     if (cinderstep)
       yield* reaction("hit", state, target, source, cinderstep, "burn", events, {

@@ -47,6 +47,7 @@ const combatStateSchema = z
     thorns: natural,
     dodge: z.number().int().min(0).max(70),
     temporaryDodge: z.number().int().min(0).max(70),
+    dodgeFreezeRetaliation: z.number().int().min(0).max(3),
     blind: z.boolean(),
     burn: natural,
     poison: natural,

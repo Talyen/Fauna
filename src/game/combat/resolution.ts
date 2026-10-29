@@ -2,6 +2,7 @@ import * as damage from "./damage";
 import * as protection from "./protection";
 import * as statuses from "./statuses";
 import * as lifecycle from "./lifecycle";
+import * as dodge from "./dodge";
 import { previewWork } from "../random";
 import type {
   Operations,
@@ -12,7 +13,7 @@ import type {
   Resolution,
 } from "./operations";
 
-const handlers: Operations = { ...damage, ...protection, ...statuses, ...lifecycle };
+const handlers: Operations = { ...damage, ...protection, ...statuses, ...lifecycle, ...dodge };
 
 function frame(operation: CombatOperation): Resolution<unknown> {
   // The discriminated request ties each argument tuple to this closed handler registry.

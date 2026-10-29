@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "velouria-battle",
+  "velouria-collection",
+  "velouria-rank-five",
   "velvetmonarch-battle",
   "velvetmonarch-collection",
   "chronora-battle",
@@ -137,6 +140,7 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
+  "velouria",
   "vitrilo",
   "wendlet",
   "wisterelle",

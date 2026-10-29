@@ -30,6 +30,19 @@ const automatic = {
 
 const rules: AbilityRuleCatalog = freeze(
   {
+    reflectAlly: {
+      ...automatic,
+      targeting: "ally",
+      scaling: "authored",
+      describe: () => "Reflect the next attack against an ally",
+    },
+    moonlitWaltz: {
+      ...automatic,
+      targeting: "self",
+      keywords: ["dodge", "freeze"],
+      describe: (_card, { value }) =>
+        `Gain ${value}% Dodge until your next turn / Retaliate with 3 Freeze damage when you Dodge`,
+    },
     stealEffect: {
       ...automatic,
       targeting: "enemy",

@@ -196,7 +196,7 @@ it.each([15, 20, 25, 30, 35, 40])(
         ally = game.team[1]!;
       expect(sharedDodgeChance(game, fox)).toBe(0);
       expect(sharedDodgeChance(game, ally)).toBeCloseTo((5 * share) / 100);
-      grantTemporaryDodge(fox, 30, []);
+      grantTemporaryDodge(game, fox, 30, []);
       expect(dodgeChance(game, fox)).toBe(35);
       expect(dodgeChance(game, ally)).toBeCloseTo(5 + (35 * share) / 100);
       expect(combatStatuses(ally.combat, sharedDodgeChance(game, ally))).toContainEqual(
@@ -204,7 +204,7 @@ it.each([15, 20, 25, 30, 35, 40])(
       );
       startAction(fox, [], game);
       expect(dodgeChance(game, ally)).toBeCloseTo(5 + (5 * share) / 100);
-      grantTemporaryDodge(fox, 30, []);
+      grantTemporaryDodge(game, fox, 30, []);
       removeEffects(fox, "purge", 1, [], game);
       expect(fox.combat!.temporaryDodge).toBe(0);
       expect(dodgeChance(game, ally)).toBeCloseTo(5 + (5 * share) / 100);
@@ -218,7 +218,7 @@ it("aura providers in backup are inactive; multiple Dunefoxes share intrinsic Do
   produce(ready(), (game) => {
     const fox = game.team[0]!,
       ally = game.team[1]!;
-    grantTemporaryDodge(fox, 30, []);
+    grantTemporaryDodge(game, fox, 30, []);
     const backup = { ...fox, id: "backup", combat: { ...freshCombat(), dodge: 70 } };
     game.reserves.push(backup);
     expect(dodgeChance(game, ally)).toBeCloseTo(10.25);

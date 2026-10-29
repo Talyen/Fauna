@@ -4680,6 +4680,50 @@
       "aspect": [3, 4],
       "provenance": "Vitrilo artwork from Google Drive: https://drive.google.com/file/d/1RzHd-nQcgJj0JW5gNr0Da_uFGqiBEVmx/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.velouria",
+      "origin": "repository",
+      "source": "public/art/creatures/velouria/portrait.png",
+      "output": "art/velouria/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Selected Velouria artwork from Google Drive: https://drive.google.com/file/d/1HE1_A-hnP7tVZPsQFGP8OraJ_ak9tVla/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.velouria.moonlit-waltz",
+      "origin": "repository",
+      "source": "public/art/creatures/velouria/moonlit-waltz.png",
+      "output": "art/velouria/moonlit-waltz.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Selected Velouria artwork from Google Drive: https://drive.google.com/file/d/1AIeERAhx_IuLdJQ9FTO2DdyEA3XNWWmG/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.velouria.velvet-aegis",
+      "origin": "repository",
+      "source": "public/art/creatures/velouria/velvet-aegis.png",
+      "output": "art/velouria/velvet-aegis.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Selected Velouria artwork from Google Drive: https://drive.google.com/file/d/18UJpWGIUIxqgm4-mscifJvVtibOcc_ip/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.velouria.hushed-finale",
+      "origin": "repository",
+      "source": "public/art/creatures/velouria/hushed-finale.png",
+      "output": "art/velouria/hushed-finale.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Selected Velouria artwork from Google Drive: https://drive.google.com/file/d/1Xzm0kXigfSPvsnShIqYw17vH_vaV2OJd/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

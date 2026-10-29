@@ -170,7 +170,10 @@ export function* startAction(
   resetTemporaryDodge = true,
 ): Resolution<boolean> {
   const stats = ensureCombat(unit);
-  if (resetTemporaryDodge) stats.temporaryDodge = 0;
+  if (resetTemporaryDodge) {
+    stats.temporaryDodge = 0;
+    stats.dodgeFreezeRetaliation = 0;
+  }
   stats.encoreUsed = false;
   stats.cardsPlayedThisTurn = 0;
   stats.fallenCardsPlayedThisTurn = 0;

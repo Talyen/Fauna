@@ -56,3 +56,4 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Cavalleaf](cavalleaf.md) · [implementation](../../../src/game/content/creatures/cavalleaf.ts) — Wild Path, team recovery and protective passage
 - [Wendlet](wendlet.md) · [implementation](../../../src/game/content/creatures/wendlet.ts) — Living Shadow and borrowed backup abilities
 - [Vitrilo](vitrilo.md) · [implementation](../../../src/game/content/creatures/vitrilo.ts) — Glass Cutter and stolen protection
+- [Velouria](velouria.md) · [implementation](../../../src/game/content/creatures/velouria.ts) — Rimewake and the winter masquerade

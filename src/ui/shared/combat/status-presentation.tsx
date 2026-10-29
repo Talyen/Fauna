@@ -65,6 +65,12 @@ export function useStatusPresentation(status: Status): { text: string; content: 
         count: status.temporaryDodge,
       }),
     );
+  if (id === "dodge" && status.dodgeFreezeRetaliation)
+    add(
+      i18n.message("status.dodgeFreezeRetaliation", "Retaliate with {{count}} Freeze damage when you Dodge", {
+        count: status.dodgeFreezeRetaliation,
+      }),
+    );
   if (id === "dodge" && status.sharedDodge)
     add(
       i18n.message("status.dodgeShared", "{{count}}% from {{trait}}", {

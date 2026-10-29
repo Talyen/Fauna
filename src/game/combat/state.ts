@@ -39,6 +39,7 @@ export function freshCombat(): CombatState {
     thorns: 0,
     dodge: 0,
     temporaryDodge: 0,
+    dodgeFreezeRetaliation: 0,
     blind: false,
     burn: 0,
     poison: 0,
@@ -201,17 +202,18 @@ export function dodgeChance(state: GameState, target: Combatant): number {
   const own = ownDodgeChance(state, target);
   return own === 0 ? 0 : Math.min(75, own + sharedDodgeChance(state, target));
 }
-export function grantTemporaryDodge(unit: Combatant, amount: number, events: GameEvent[]) {
-  if (unit.health <= 0) return;
+export function addTemporaryDodge(unit: Combatant, amount: number, events: GameEvent[]) {
+  if (unit.health <= 0) return 0;
   const stats = ensureCombat(unit),
     before = stats.temporaryDodge;
   stats.temporaryDodge = Math.min(70, before + amount);
   const gained = stats.temporaryDodge - before;
-  if (!gained) return;
+  if (!gained) return 0;
   emitStatus(events, unit.id, "dodge", "gain", {
     amount: gained,
     text: `${unitName(unit)} gains ${gained}% Dodge until its next turn`,
   });
+  return gained;
 }
 /** One Blind roll owns the attack, including area targets and authored extra packets. */
 export function beginAttack(state: GameState, source: Combatant, events: GameEvent[] = []): boolean {

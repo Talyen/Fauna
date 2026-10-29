@@ -1,4 +1,5 @@
-export type Operations = Pick<typeof import("./damage"), "bounce" | "hit" | "resolveHit" | "negateAttack"> &
+export type Operations = Pick<typeof import("./dodge"), "grantTemporaryDodge"> &
+  Pick<typeof import("./damage"), "bounce" | "hit" | "resolveHit" | "negateAttack"> &
   Pick<
     typeof import("./protection"),
     | "restoreHealth"

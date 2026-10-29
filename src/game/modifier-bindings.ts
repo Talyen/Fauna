@@ -425,6 +425,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": ["./combat/damage-reactions#damageRewards"],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      rimewake: ["./combat/dodge#grantTemporaryDodge"],
       lostAndFound: ["./card-zones#lostAndFound"],
       lastWarmth: ["./combat/card-modifiers#lastWarmth"],
       sunthaw: ["./combat/statuses#cleanseRewards"],

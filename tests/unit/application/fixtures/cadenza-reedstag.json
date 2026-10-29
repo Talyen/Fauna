@@ -1,5 +1,5 @@
 {
-  "version": 74,
+  "version": 75,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -80,7 +80,8 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
-        "slipperCard": null
+        "slipperCard": null,
+        "dodgeFreezeRetaliation": 0
       }
     }
   ],
@@ -132,7 +133,8 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
-        "slipperCard": null
+        "slipperCard": null,
+        "dodgeFreezeRetaliation": 0
       }
     },
     {
@@ -182,7 +184,8 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
-        "slipperCard": null
+        "slipperCard": null,
+        "dodgeFreezeRetaliation": 0
       }
     },
     {
@@ -232,7 +235,8 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
-        "slipperCard": null
+        "slipperCard": null,
+        "dodgeFreezeRetaliation": 0
       }
     },
     {
@@ -282,7 +286,8 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
-        "slipperCard": null
+        "slipperCard": null,
+        "dodgeFreezeRetaliation": 0
       }
     }
   ],
@@ -407,7 +412,8 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
-          "slipperCard": null
+          "slipperCard": null,
+          "dodgeFreezeRetaliation": 0
         },
         "lastAbility": null,
         "minion": {
@@ -467,7 +473,8 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
-          "slipperCard": null
+          "slipperCard": null,
+          "dodgeFreezeRetaliation": 0
         },
         "lastAbility": null,
         "minion": {
@@ -543,7 +550,8 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
-          "slipperCard": null
+          "slipperCard": null,
+          "dodgeFreezeRetaliation": 0
         },
         "lastAbility": null,
         "deck": {

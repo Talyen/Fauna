@@ -1,6 +1,8 @@
 import type { DamageType } from "../keywords";
 
 export type AbilityKind =
+  | "moonlitWaltz"
+  | "reflectAlly"
   | "stealEffect"
   | "borrowBackup"
   | "swapChosen"

@@ -10,7 +10,6 @@ export {
   sharedDodgeChance,
   sharedControlImmunity,
   dodgeChance,
-  grantTemporaryDodge,
   beginAttack,
   openingCriticalBonus,
   removeArmor,
@@ -27,6 +26,7 @@ export const gainMana = operation("gainMana");
 export const grantArmor = operation("grantArmor");
 export const armorStealRewards = operation("armorStealRewards");
 export const grantStatus = operation("grantStatus");
+export const grantTemporaryDodge = operation("grantTemporaryDodge");
 export const triggerArmorBreak = operation("triggerArmorBreak");
 export const removeControlBuildup = operation("removeControlBuildup");
 export const removeEffects = operation("removeEffects");

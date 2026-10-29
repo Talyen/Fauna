@@ -95,7 +95,7 @@ export function useFood(
         for (const ally of healingAllies(state)) {
           restoreHealth(ally, (healing ??= cornucopiaHealing(state)), events, false, state, true);
           if ((whisk ??= state.boons.includes("velvet-whisk")))
-            grantTemporaryDodge(ally, boonRule("velvet-whisk").dodge, events);
+            grantTemporaryDodge(state, ally, boonRule("velvet-whisk").dodge, events);
         }
       }
     } else {
@@ -122,7 +122,7 @@ export function useFood(
             true,
           );
         if ((whisk ??= state.boons.includes("velvet-whisk")))
-          grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
+          grantTemporaryDodge(state, target, boonRule("velvet-whisk").dodge, events);
       }
     }
     if (state.boons.includes("orchard-ladder-charm"))

@@ -932,6 +932,9 @@
   "status.dodgeExpires": {
     "text": "{{count}}% expires at your next turn"
   },
+  "status.dodgeFreezeRetaliation": {
+    "text": "Retaliate with {{count}} Freeze damage when you Dodge"
+  },
   "status.dodgeShared": {
     "text": "{{count}}% from {{trait}}"
   },

@@ -42,9 +42,11 @@ export type SpeciesId =
   | "cavalleaf"
   | "wendlet"
   | "vitrilo"
-  | "velvetmonarch";
+  | "velvetmonarch"
+  | "velouria";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "rimewake"; amount: number }
   | { kind: "gardenAnswers"; amount: number }
   | { kind: "glassCutter"; amount: number }
   | { kind: "lostAndFound"; amount: number }

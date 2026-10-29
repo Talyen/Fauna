@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "c460fe7ed04265deb6d84c3439544f1b95f03fab476f68b8ca6ab71e7b4bf012",
-  "generation": "353c89a2cd40bd0558ef0a1bf48a54bd48d85f69d77664dc8436a68dae1475aa",
+  "manifestHash": "65e5ce9819fee95c6e5b202730a88e00ec15dac189c2fbcbac6aa7d0bd4aefd5",
+  "generation": "f316e1120217aa7449120394740c50e2411eee5375cc5bda03158826ff454bb1",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -5439,6 +5439,58 @@
       "outputHash": "b139731c99b2517179df00784602f65c7df7050cef511ad655ac1ae89af3ae19",
       "sourceBytes": 2209356,
       "outputBytes": 838200,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.velouria": {
+      "url": "./prepared/objects/2568e6e1dca611b586106fda9de5539eec193eefd8794e050796502fcccd7536/asset.webp",
+      "sourceHash": "bf24275b7f46a0ba35d3f5b0d685362c5b9e2062b43cf9ea60e6018403f4b2e6",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "bba5701071c127ece4c39deea3de8d5b9026f1b71ed8ceace36b40c3ab583b6b",
+      "sourceBytes": 2369078,
+      "outputBytes": 872658,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.velouria.moonlit-waltz": {
+      "url": "./prepared/objects/7e62c11abf328c97331a535d6599b4c0b4c895d5254dfd2ebf54e6604d8f5b92/asset.webp",
+      "sourceHash": "57c309bbfeda3d3fcffd51839fc38c19fe8924ea5badff7d9c3f4837f90e4502",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "3ae4d62547a071faef359f07453741368ed3fcd2cc09d580f5555739b9272e3d",
+      "sourceBytes": 2278499,
+      "outputBytes": 832712,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.velouria.velvet-aegis": {
+      "url": "./prepared/objects/6e91545dbbd7254081e8ad7b611e4ece42f2e039cf84c10b2b31040a653dc90d/asset.webp",
+      "sourceHash": "c46a4513d3b02c9517e37e0620fb77c03e0ee0a43fe1e0a8a582f99f9ec5d1aa",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "9de49609b055fd2877b671f2aaee54e3f6e423d58ca2a9625a95158d8e6c2b47",
+      "sourceBytes": 2136017,
+      "outputBytes": 780462,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.velouria.hushed-finale": {
+      "url": "./prepared/objects/cb583c458f047243631151adb1c2490184518bee896126bdac2857eecfad81c2/asset.webp",
+      "sourceHash": "7b7a4fc46121ec2d651feaa0a726090ef7175490ea145a68b01ffdf96dc1bf31",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "011554ffb1d2f8ad90b4917b87bf29977d07b332e6e57d9d4d2fc1c2f346568a",
+      "sourceBytes": 2209163,
+      "outputBytes": 814928,
       "width": 720,
       "height": 960,
       "alpha": false

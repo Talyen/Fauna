@@ -349,7 +349,7 @@ describe("Arabesca's selected ability contracts", () => {
   it("doubles Springbound, consuming the grant and capping ordinary Dodge", () => {
     const game = produce(arabescaBattle(), (draft) => {
       draft.battle.repeatNext.player = true;
-      grantTemporaryDodge(draft.team[0]!, 25, []);
+      grantTemporaryDodge(draft, draft.team[0]!, 25, []);
     });
     const result = playArabesca(game, spring);
     expect(result.state.team[0]!.combat!.temporaryDodge).toBe(70);

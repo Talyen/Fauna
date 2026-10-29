@@ -284,16 +284,23 @@ export function executePrimary(context: PrimaryContext) {
       return;
     }
     case "reflectAttack":
-      stats.attackReflection = true;
+    case "reflectAlly": {
+      const recipient =
+        def.effect === "reflectAlly"
+          ? findLivingBattlefield(state, action.side, (unit) => unit.id === action.allyTargetId)
+          : actor;
+      if (!recipient) return;
+      ensureCombat(recipient).attackReflection = true;
       events.push({
         kind: "status",
         status: "attackReflection",
         outcome: "apply",
         actorId: actor.id,
-        targetId: actor.id,
-        text: `${name} reflects the next attack`,
+        targetId: recipient.id,
+        text: `${unitName(recipient)} reflects the next attack`,
       });
       return;
+    }
     case "resurrect": {
       const matches = (unit: Combatant) => unit.id === action.allyTargetId && unit.health === 0;
       const recipient = enemy
@@ -416,7 +423,11 @@ export function executePrimary(context: PrimaryContext) {
       return;
     case "dodge":
       for (const unit of def.target === "allAllies" ? livingFriends(state, action) : [actor])
-        grantTemporaryDodge(unit, value, events);
+        grantTemporaryDodge(state, unit, value, events);
+      return;
+    case "moonlitWaltz":
+      stats.dodgeFreezeRetaliation = 3;
+      grantTemporaryDodge(state, actor, value, events);
       return;
     case "raincall":
       if (!enemy) drawKeyword(state, "water", events);
@@ -495,7 +506,7 @@ export function executePrimary(context: PrimaryContext) {
     }
     case "swapDodge": {
       const incoming = swapFromCard(state, actor, events);
-      if (incoming) grantTemporaryDodge(incoming, value, events);
+      if (incoming) grantTemporaryDodge(state, incoming, value, events);
       return;
     }
     case "springbound":
@@ -504,7 +515,7 @@ export function executePrimary(context: PrimaryContext) {
         if (action.actor.health <= 0) break;
         removeControlBuildup(state, unit, "freeze", events, false);
       }
-      if (def.effect === "springbound") grantTemporaryDodge(actor, value, events);
+      if (def.effect === "springbound") grantTemporaryDodge(state, actor, value, events);
       return;
     case "repeatNextCard":
       grantCardRepeat(state, action.side, actor.id, events);

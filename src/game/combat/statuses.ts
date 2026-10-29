@@ -31,7 +31,6 @@ import {
   beneficialStatuses,
   STACK_LIMIT,
   removeArmor,
-  grantTemporaryDodge,
   dodgeChance,
   hasBeneficialEffects,
   type ArmorDepletion,
@@ -497,7 +496,7 @@ export function* removeEffects(
         if (effect.amount > 0)
           yield* reaction("grantStatus", source, effect.status, effect.amount, events, state);
         if (effect.status === "dodge" && effect.temporary)
-          grantTemporaryDodge(source, effect.temporary, events);
+          yield* reaction("grantTemporaryDodge", state, source, effect.temporary, events);
       } else {
         const sourceStats = ensureCombat(source);
         sourceStats[effect.status] = true;

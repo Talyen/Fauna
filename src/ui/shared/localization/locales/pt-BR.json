@@ -4247,6 +4247,42 @@
     "sourceHash": "6b7d5ddfc11776c04dce18587e45878329c78c63515aec18107c14232f026704",
     "text": "<keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados / Compre uma carta de <keyword2>Luz</keyword2>"
   },
+  "content.card.velouria-hushed-finale.name": {
+    "reviewed": true,
+    "source": "Hushed Finale",
+    "sourceHash": "9169cd8b2175e56dcd6e22dbbc076b99ee83a7dfb6dfcdd5dbe18251bc745c44",
+    "text": "Final silencioso"
+  },
+  "content.card.velouria-hushed-finale.v4db192284ed1f62e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to a random enemy",
+    "sourceHash": "e784e02ab052388c409f6a1fec0c5b77525d98d4c74ce62a02f3569a7d06b523",
+    "text": "Cause {{value0}} de dano de <keyword0>Congelamento</keyword0> a um inimigo aleatório"
+  },
+  "content.card.velouria-moonlit-waltz.name": {
+    "reviewed": true,
+    "source": "Moonlit Waltz",
+    "sourceHash": "e7ed051a344b5be98a56f1bb8a270e4894e75740fd24f24d3f76d7900bcfb339",
+    "text": "Valsa ao luar"
+  },
+  "content.card.velouria-moonlit-waltz.v2e8b4441cbc45441.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn / Retaliate with {{value1}} <keyword1>Freeze</keyword1> damage when you <keyword2>Dodge</keyword2>",
+    "sourceHash": "ca1197c6dbdf04ff2a62c8f5d41f08a7b26e434b926cc8a1589f78a8f2d22e8a",
+    "text": "Ganhe {{value0}}% de <keyword0>Esquiva</keyword0> até seu próximo turno / Ao <keyword2>esquivar</keyword2>, revide com {{value1}} de dano de <keyword1>Congelamento</keyword1>"
+  },
+  "content.card.velouria-velvet-aegis.name": {
+    "reviewed": true,
+    "source": "Velvet Aegis",
+    "sourceHash": "fef61557d37c0f97a12b6a4a7c964d1c38b1d73f20c67b587b31f847c3f627fa",
+    "text": "Égide de veludo"
+  },
+  "content.card.velouria-velvet-aegis.v20fdbdebada7be59.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0> against an ally",
+    "sourceHash": "b6c1f725887de44190e9f0fe862d1077f64da525ed1364ce4fadfa90cc766cd5",
+    "text": "<keyword0>Reflita o próximo ataque</keyword0> contra um aliado"
+  },
   "content.card.velvetmonarch-meadow-decree.name": {
     "reviewed": true,
     "source": "Meadow Decree",
@@ -7049,6 +7085,60 @@
     "sourceHash": "81ba6826e459bb4f8a09b087b4e2cfa4658cf4149504310543cdbbbe49336f8a",
     "text": "Galantaria"
   },
+  "content.species.velouria.name": {
+    "reviewed": true,
+    "source": "Velouria",
+    "sourceHash": "86cd44fa93bf6425e42f595a894b719edd472b68c3b1a8cbf488ea5c18a5a536",
+    "text": "Velouria"
+  },
+  "content.species.velouria.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "3a913c9088c346c8eb15652c550773ec2bb4e483c84fa6194f43b8a96882953a",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "39bc58e893fcd5dd18aaca51ccc6b88a1bfd39be8650eefb5bd21c8e8754436d",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "e75a25ecc8fddb64fbfddfec1e739b5dc5505c4c10b9ae032a37984449ac1abb",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "776516ad1be8c51d8658bcb5ff9bdce9b8bd1d20edd226faff3ec79e230ad6ec",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "fbaacc147ae556892dcd1952454587ceddb71dfa962449c79de207e96a7b4820",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Velouria gains temporary <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Freeze</keyword1> damage to all enemies",
+    "sourceHash": "05dcd90fa2d535fb5838a3f3018fa7678fd8eb4db390fa2955462b7f0923f2ad",
+    "text": "Quando Velouria ganha <keyword0>Esquiva</keyword0> temporária, cause {{value0}} de dano de <keyword1>Congelamento</keyword1> a todos os inimigos"
+  },
+  "content.species.velouria.title": {
+    "reviewed": true,
+    "source": "The winter masquerade",
+    "sourceHash": "c00132ade79c493a2f25e288fb6be120710746bdc601c91e3009ad18b7865759",
+    "text": "O baile de máscaras de inverno"
+  },
+  "content.species.velouria.trait": {
+    "reviewed": true,
+    "source": "Rimewake",
+    "sourceHash": "36b387ad0b2d11e96733f1dd2b117c4f7ba7ff9e3803f558ca7c33826c4bec5d",
+    "text": "Rastro de geada"
+  },
   "content.species.velvetmonarch.name": {
     "reviewed": true,
     "source": "Velvetmonarch",
@@ -7322,163 +7412,163 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "1bff42cd260c10c08ec9c6ded0c32934be9edcef6164190fe4e62823565001b3",
+    "sourceHash": "ad0503b20324b2024ecbfabfb9f40c08bd15f5b0c332f7f61cee71a49c680325",
     "text": "Pião acrobata: o próximo ataque não pode ser <keyword0>Esquivado</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "63073354ac5aeec8e002307e6c68383cf385bd731e05bffb6fc2c40a17c96915",
+    "sourceHash": "ef25032ed52f54a782923f382b9c60d99e8063db8703a6b3a2df1e66b606ff48",
     "text": "<keyword0>Reflexão de ataque</keyword0>: Devolve o próximo ataque de habilidade recebido ao atacante; Impede o dano e os efeitos prejudiciais desse ataque sobre você; Ataques <keyword1>Refletidos</keyword1> não podem ser <keyword2>Refletidos</keyword2> novamente; Dura até ser usada ou sofrer <keyword3>Expurgo</keyword3>; Não acumula"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "b56d2e56f733918f6248f90e4393fd3aff6a5b3f14013a9a8dd5f6ff13e6acb1",
+    "sourceHash": "dd0beff7c5c107e825a60f8823d74ec0d7291589325949b9134728362e0aa98d",
     "text": "<keyword0>Cegueira</keyword0>: Seu próximo ataque tem {{value0}}% de chance de errar todos os alvos; Termina após esse ataque, acertando ou não; Um erro conta como <keyword1>Esquiva</keyword1> de cada alvo; Não acumula"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "87b4cedfe7512b02f573663b879fbbe3493f309a08dc95c449779b635126cc69",
+    "sourceHash": "02b1fe2317c2ebf40af6c7ba4268e8ae4824a8666bf2770c4119e591a98e2716",
     "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "b0ab682b2c0f9134bd7408fde3345624e12b9204b4a891a512dae1ba487138c7",
+    "sourceHash": "4c26977bbaaba081ae26da33baad3b00f9bba02a7ef48102283752a3386e0977",
     "text": "Turno perdido"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "795b4df23584e460ee5ac6ca2f0b77c605afe98ce8769719bba9b8fb082e4214",
+    "sourceHash": "01575ff9c697a137265587707e245782b0068a618ba1c6b77edab5e8b5c7ac96",
     "text": "<keyword0>Congelamento</keyword0>: {{value0}} turno"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "1b4f4b4bb7d04078529194e23600adde3a7c351f45166c27e14ebe5415443c43",
+    "sourceHash": "6530c94288d90d33fcd8b9a3692f2c945cc36afa00e9560d80862b8636178864",
     "text": "<keyword0>Congelamento</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "922b527ccf90f247492e2e55b716f575368c481f22a7d841ee15d7919802f8d6",
+    "sourceHash": "87512eefa882ce6636bf3357f2d97dc3ad0451ed96403526e93d4cc89475343a",
     "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turno"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "b94fe394795fcfca8e3165e50aa09eef3d6f4fe3e755e481a1220bf22e0cc281",
+    "sourceHash": "d60d73a01930038ca5e01a168e664c65c0fb93a330b3eb9c782e6d5d0f90a386",
     "text": "Imunidade a controle {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "b5cc80f650dd01592f78ddc61354c70b6d26d122aa5b6d4f6cb611375a82ed03",
+    "sourceHash": "51867e9e5df7a7550adc202e8750c8edabb4d223f56fdbb3909140b00a8faed4",
     "text": "Próxima ação grátis: a próxima carta é gratuita"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "9c00d8cf2a0578be9d07ed3d2db38e7041fe9d546c572dd0ee40017fc5ac0431",
+    "sourceHash": "1bd37a2e69d30d1afbb5e81a0a07c91e0add0f0f6f206b08ffc06739da148134",
     "text": "Favor divino: a próxima carta de <keyword0>Luz</keyword0> é gratuita"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "7fa4d58dbd8a10ac628f28ca5ecde5ef776b43ef177e67d4fd6d619b35172a05",
+    "sourceHash": "3a0e0a582f5d574c1266141349311b736ae4608435ed54004c93b0b8714341b6",
     "text": "Passo do vento: a próxima carta de <keyword0>Natureza</keyword0> é gratuita"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "4c2049aec42ec81508c82a0135bd94e6f25ab23ac41b69407e8b55bd524c1246",
+    "sourceHash": "a577666b2fc6f8da3ae327bdf146ff35904cdec00ff82605861a24693568b6ea",
     "text": "À beira da morte {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "335ce87615158b6f4c6ed21eeef45419d4a74d91d8395bc6f7008b2b9d60dac0",
+    "sourceHash": "09ad5d182925165e5ec1e4a85d1f133266aa80d55966e86b7a74478fa3c1f026",
     "text": "Semente lunar: a próxima retaliação de <keyword0>Espinhos</keyword0> causa o dobro de dano"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "9acf6e7102bea76eccdc7a52b7b1ace4400dc66b17fb067a618f061a6e641ac5",
+    "sourceHash": "4ffe45e608c3992f94c1eee4b1ea5c39e14ab041992e6957bbd016d0c7c08cf1",
     "text": "<keyword0>Negação</keyword0>: Cancela o próximo ataque de habilidade recebido e seus efeitos prejudiciais sobre você antes da <keyword1>Esquiva</keyword1>; <keyword2>Espinhos</keyword2> ainda retaliam; Dura até ser usada ou sofrer <keyword3>Expurgo</keyword3>; Não acumula"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "e8e0491c919a8905fad58e7b6f43ce9385f8b52887a3a2c874babf2d31839daa",
+    "sourceHash": "3927c9dc6bbb4796ae66c55c1f312c3fcd6a613ce24d11e46ebf3da24c4136b4",
     "text": "Flanco aberto: o próximo ataque causa {{value0}} de dano <keyword0>Físico</keyword0> adicional"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "cf59869628e782219e4904630663f58571d7b07bcbbb1f6c4ee3fad404ed6fa3",
+    "sourceHash": "04e94b98c1524fa21998dec7e8bbd766abf00ce6fbecab2831ba5e490effce8b",
     "text": "<keyword0>Anulação</keyword0>: Impede a próxima aplicação de <keyword1>Queimadura</keyword1>, <keyword2>Veneno</keyword2>, <keyword3>Sangramento</keyword3>, <keyword4>Atordoamento</keyword4>, <keyword5>Congelamento</keyword5> ou <keyword6>Cegueira</keyword6>; Não altera o dano direto nem os estados existentes; Dura até ser usada ou sofrer <keyword7>Expurgo</keyword7>; Não acumula"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "d4f9cf3f03da172af63e8604fb262ccc6eccba3d45699b7e4ea0c8e7d09d667a",
+    "sourceHash": "4d9962ccc6b5c719a4ce76692787e566ac37871ec35dae0fa744c16225ccdb4e",
     "text": "<keyword0>Anula</keyword0> o próximo dano de <keyword1>Congelamento</keyword1>; Dura até ser consumida ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "9a283f0ff0b428a3753b28d9b8f37e6b86fdb1dbce8c4b900ac514f6b985bca5",
+    "sourceHash": "e1eaf5a163e1464226c7a0be24e15607f5f31b48d7ebd7392a24d9052e3a7874",
     "text": "Semente do oásis: o próximo ataque tem <keyword0>Drenagem</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "f1ca2ebe3a1c0914a619d0d0b98774dacafad1acde86e78943655523178a0b06",
+    "sourceHash": "2119506260b69c5f99ecd4284f7ca439da4b20025125c1bd77f1b6a88c37c79e",
     "text": "Corte de despedida: o próximo golpe <keyword0>Físico</keyword0> causa metade do seu dano como dano de <keyword1>Sangramento</keyword1> adicional"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "95ae14bb02851984d2a8a09e89e3b9e96accd67df051834640338a46dabf04ab",
+    "sourceHash": "b5b73c4e06b2c67528bdf573d716a79a7f5653872a56e18fcd9dee560a96e857",
     "text": "<keyword0>Reflexão</keyword0>: Redireciona o estado prejudicial indicado para um inimigo vivo aleatório; O dano direto ainda atinge você; <keyword1>Reflexão de ataque</keyword1> devolve o ataque inteiro ao atacante; Efeitos <keyword2>Refletidos</keyword2> não podem ser <keyword3>Refletidos</keyword3> novamente; As cargas não acumulam"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "7c1b9ee226e6db9c8da5d60aaf5a88be96451754c822cde673d1e941f5678d0d",
+    "sourceHash": "00c8fe37f632070822d9a91dbdfd585083fffd469f511095f630549005b9eb24",
     "text": "<keyword0>Reflete</keyword0> a próxima <keyword1>Queimadura</keyword1>; O dano direto ainda atinge; Dura até ser consumida ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "1fbf6a7cfb8097b659b3b0aae498ba0514dd4f386cfc4fbc11241fb4545a2617",
+    "sourceHash": "8ba2586632a57c7114f352d00f5591d417f351916be9424f9320c8b1c9adba23",
     "text": "Encontrar o ritmo: +{{value0}}% de chance de <keyword0>Esquiva</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "de0d81ff30f257f40276d105b23c0c87d8d6da2c67460857f6f64ea8a37af099",
+    "sourceHash": "2f8cbd3b439123226d9b34586276741630b95bcf997af6840a163623e2b349e4",
     "text": "Carretel de fita: imunidade a <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "41e5b0813911ab25512e0f69a876d5605b3702cf2e08d597d399edf6b109c9b3",
+    "sourceHash": "648498d04cda50df26736fa87af7fd43c632f08b87845ac0ed2a4ed899bc1ac2",
     "text": "Contra-ataque: o próximo ataque <keyword0>Físico</keyword0> é um <keyword1>acerto crítico</keyword1> garantido"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "69872dea5b773cbe26ca878d3f0fe55a09f108e1926ca5513abc2cb9e3241cd4",
+    "sourceHash": "6b29a91650c7f4ec9e35ca4a3909720eca3490ef6a025cf640aaf55154df98fb",
     "text": "Palito de dragão: o próximo ataque também causa <keyword0>Expurgo</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "392c75ee98f3edac1fcbb20363ddfa0ea06552d7835a181635f24f6f1296c3e6",
+    "sourceHash": "f647e305c21d150222d1a2742fc9ae3bffe8f70952c6dd8d259d171add386e12",
     "text": "Reverter a maré: o próximo ataque pode se repetir"
   },
   "content.talent.armor.armored-surge.name": {
@@ -10649,6 +10739,12 @@
     "source": "{{count}}% expires at your next turn",
     "sourceHash": "8a0cfe4edc9ff596eba61e2abc51d7ca565052facd42b47c0090f2c5ae433e5c",
     "text": "{{count}}% expira no seu próximo turno"
+  },
+  "status.dodgeFreezeRetaliation": {
+    "reviewed": true,
+    "source": "Retaliate with {{count}} Freeze damage when you Dodge",
+    "sourceHash": "7216d5a051547b72f66605376cde43a22ad95b1d292dfe2734b892b8ab3e8c94",
+    "text": "Ao esquivar, revide com {{count}} de dano de Congelamento"
   },
   "status.dodgeShared": {
     "reviewed": true,
