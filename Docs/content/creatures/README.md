@@ -59,3 +59,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Velouria](velouria.md) · [implementation](../../../src/game/content/creatures/velouria.ts) — Rimewake and the winter masquerade
 
 - [Tinkervale](tinkervale.md) · [implementation](../../../src/game/content/creatures/tinkervale.ts) — Spare Parts and clockwork Bees
+
+- [Selvage](selvage.md) · [implementation](../../../src/game/content/creatures/selvage.ts) — Mend the Broken and the songbird of forgotten things

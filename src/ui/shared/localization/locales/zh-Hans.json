@@ -149,6 +149,12 @@
     "sourceHash": "cfff368e015d7adcd8061fc6a935bcaa86be21cc61900a6673aeb8283cc42589",
     "text": "复活替补{{name}}"
   },
+  "battle.reviveBackup": {
+    "reviewed": true,
+    "source": "Revive {{name}}",
+    "sourceHash": "3eb48588d28a880f94f7f5074b30002ece3a4195d0cad910821ef5a30f5a1d0b",
+    "text": "复活{{name}}"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
@@ -2678,7 +2684,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "b8ec9ceae7182e938e3a0c1ad89e10da575a35a3b488286cfedc3e39670f592c",
+    "sourceHash": "06e0be2e7a108ad69901ed15c11aa5787eb4067c525c289384ff50e7baf424a0",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2708,7 +2714,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "3fb4064c8ba486789b31deb278ce16da083a299183cacb684d42eb6b0f289c49",
+    "sourceHash": "3744fbccbb8c83cb9cba6c02e110948176b49bf9cd6cee20ca71d97a79424742",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2828,7 +2834,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3e863de6524c2ae27e7a591081a368bacaa6eec0f2294b9da3bafd9a752318f3",
+    "sourceHash": "b177c642d00bd0bc8033d54417c1db27458ff44d5a53b5ff1a1d273d91f1fc1a",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2960,7 +2966,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "bfc8a8b9c52ac7d7e8d46475225d76055302fbb57bff7c963e294bc40111a636",
+    "sourceHash": "1000f9b331d35807e222c17264b37f80072fbb8ada6e76966577640a88875d52",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; 恢复{{value1}}点<keyword1>生命</keyword1>"
   },
   "content.card.captoad-swap.name": {
@@ -3152,7 +3158,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "343bf73a80f92e97e1e2d06c1217b668393a6c23025e4c5de02a8472722fb0db",
+    "sourceHash": "b7088b303e79c9c0756017b9ae71b6ccd96079f4aab6b619901af6bc0427b091",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3260,7 +3266,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "1a3aadfb64b5ad1239945a568225923df7aa1889cc5417d3ce20ba8b339d7555",
+    "sourceHash": "b6b311f841f0a905c585906b8ad7a0e2f47fb3360df6f3a3b37ee0683bbc78c7",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3548,7 +3554,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3d77d7a8a73e37b8887c1d72dc5ce2925c1fd5a6b38f017206cb9fd76b60add5",
+    "sourceHash": "fbdea24f975663b3faf4ed0dd0604c41b28c1cd7ed88591c73ac685f4ddebfd1",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3614,7 +3620,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "cccb2d3cb7c3d23eaab91bc1516912375cf0be8ec25aa3703eb2affc1c0510df",
+    "sourceHash": "425f4ab8eca5e31624a972b89a577966de00d14c9b44985316e80c3e5e1152c4",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>净化</keyword1>一个有害效果"
   },
   "content.card.oathara-never-lost.name": {
@@ -3764,7 +3770,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "2eaf6c3d8a138169eb04401d2be664e47a4e920746d1e92789f3467cc52f5cda",
+    "sourceHash": "63f2aa6a23f8559c9d2da7948c3942b5c85b31ce7fe7eb17f8e9a7376c915a9b",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3788,7 +3794,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "779d755db82d5b0a520c0e1c043ed9afe8ef6e20dc95c88126fc62bf59a1bbbd",
+    "sourceHash": "037ecd0a87db3024e287ab58685ad6572b540455f0b559f1eabb66250f88e9f6",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3866,7 +3872,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "f01d5ed2f5c49ed30433438173f43b6ff359124163af09f3969218658f7df623",
+    "sourceHash": "0e83f6a62b2adbd46585d16edf6ea077c8d3e9b80177dea42e0425d406528862",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -4007,6 +4013,42 @@
     "sourceHash": "8f591bf2349a04319426333ac260a1da52afe32984503eccaa9702c7a4a66c98",
     "text": "对所有敌人施加<keyword0>驱散</keyword0>"
   },
+  "content.card.selvage-gust-wing.name": {
+    "reviewed": true,
+    "source": "Gust Wing",
+    "sourceHash": "2e4e409e8e31b3dc25389fbbad6b6c21a78e783a868f01ec1bb83e2691eacb29",
+    "text": "风之翼"
+  },
+  "content.card.selvage-gust-wing.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "12c1cfa9c5265f6159f42b14b5a318a3dd81c38990066d38800b27cefe7839e1",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.selvage-mending-song.name": {
+    "reviewed": true,
+    "source": "Mending Song",
+    "sourceHash": "ebeaddb096556ae38ab75f7b5ed7ba573c096b9d0eae787918bbdbabb3dfffc0",
+    "text": "修复之歌"
+  },
+  "content.card.selvage-mending-song.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "47109cde39e621a537de7edc4f6ee3d6173aa30fcff972a0f5aa95dadfe82ea0",
+    "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.selvage-nest-ward.name": {
+    "reviewed": true,
+    "source": "Nest Ward",
+    "sourceHash": "7141241a709c13eeb9e0af57446f32502cb34fe74aa2ce2cb0af57e150003bc2",
+    "text": "巢之守护"
+  },
+  "content.card.selvage-nest-ward.v9032ba3c489b31e2.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "41478090f8a288e07564b757f5c80db9c73bb2ecab205f16f0e4be404d0ed526",
+    "text": "给予所有盟友 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
     "source": "Coolfront",
@@ -4058,7 +4100,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "c8dbd880ea6e1630a59c685d5f68fbd994dd16dcf313e5c0f1f2b4e2e7c12a11",
+    "sourceHash": "7a3c549cdc11a31a51531ce8d3c67c5919dc2f978415d1a68614ba4a4ed23f9f",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>反射</keyword1>下一次<keyword2>灼烧</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4232,7 +4274,7 @@
   "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "31606c7acb09e18236faa2c2f580ab42213f6d9d7fd808a9afeaf2a89abe7fe1",
+    "sourceHash": "72039c67de6e2d7af744314a91ca760206593b889791c153695308c4665f92ac",
     "text": "所有友方获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.card.tinkervale-gear-mender.name": {
@@ -4490,7 +4532,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "3bf8cbd36ed5c7265d0da4269659aa59b8f1c9f023cd7d83f5496c65d6751813",
+    "sourceHash": "e01aafeb0b3b77e8336f7136526a3f5b417a403fa3567a27c62a9365821131fb",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>无效化</keyword1>下一次<keyword2>冻结</keyword2>伤害"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -6862,6 +6904,60 @@
     "source": "Well Read",
     "sourceHash": "8a16cda6b3188d6d8d92f73fa0ac81d744160eee72640af706ee73319f47724d",
     "text": "博览群书"
+  },
+  "content.species.selvage.name": {
+    "reviewed": true,
+    "source": "Selvage",
+    "sourceHash": "309437abe0a6ed1ead90d65300b46610aa1d9d5198bcec7e9054d85e13d922fe",
+    "text": "塞尔维奇"
+  },
+  "content.species.selvage.passive.0.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "d54b732f2370e62bd395f265e1bc6bdcdbcdc9c6a16c5f417714dcc33b8076c5",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.passive.1.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "886eb7a0b216fc6e0f5c74b0051421c0df3f250a5f759823f2b4fbd2c83b1f18",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.passive.2.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "8548f389dac867e97c05371e99cecbbb65a384855d12f2d1c863a35db00afdc9",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.passive.3.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "e80995b91e18ca021b0be97512c41b94292870fd01a387c0439a2e4c71bf1a45",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.passive.4.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "8e56c61e620e8373a670c392dbf24d971e963dfcfac426f21efa32af75ee50c9",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.passive.5.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "046cd519bcb88dba8f95b9ee2cb72eece80d5cce0268715c2022ac8af93e2a8a",
+    "text": "塞尔维奇的<keyword0>治疗</keyword0>能力可以复活一名盟友，使其拥有最多{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.selvage.title": {
+    "reviewed": true,
+    "source": "The song of broken things",
+    "sourceHash": "c21ba5ea512e8657bc119f6632a5b784c01bb74fc38017d90bfe71d315a5aafb",
+    "text": "破碎之物的歌"
+  },
+  "content.species.selvage.trait": {
+    "reviewed": true,
+    "source": "Mend the Broken",
+    "sourceHash": "925a094e16237117eef8f73d4b6299fc24515ee64a91ea65fc7b4a4799fe56b1",
+    "text": "修复破碎之物"
   },
   "content.species.shadebrim.name": {
     "reviewed": true,

@@ -1,6 +1,10 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "selvage-battle",
+  "selvage-collection",
+  "selvage-targeting",
+  "selvage-interaction",
   "tinkervale-battle",
   "tinkervale-bees",
   "tinkervale-interaction",
@@ -145,6 +149,7 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
+  "selvage",
   "tinkervale",
   "velouria",
   "vitrilo",
@@ -525,6 +530,31 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "almanelle-targeting")
     await page.locator('.hand [data-card-id="ally-0:almanelle-autumn-insight"]').click();
+  if (scenario.name === "selvage-targeting") {
+    await page.locator('.hand [data-card-id="ally-0:selvage-mending-song"]').click();
+  }
+  if (scenario.name === "selvage-interaction") {
+    const song = page.locator('.hand [data-card-id="ally-0:selvage-mending-song"]');
+    await song.focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("button", { name: "Resurrect Mossguard from backup", exact: true }),
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(song).toBeFocused();
+    await song.click();
+    await page.getByRole("button", { name: "Resurrect Mossguard from backup", exact: true }).click();
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            JSON.parse(localStorage.getItem("fauna.save.v1")).reserves.find(
+              (unit) => unit.id === "backup-mossguard",
+            ).health,
+        ),
+      )
+      .toBe(2);
+  }
   if (scenario.name === "wisterelle-targeting") {
     await page.locator('.hand [data-card-id$="wisterelle-forgotten-junction"]').click();
   }

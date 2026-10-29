@@ -1,5 +1,7 @@
+import { hasMendingTargets, playTargeting } from "./mending";
+import { healingAllies } from "./battlefield";
+import { mostInjured } from "./combat/state";
 import { cardActor, unfinishedJourneyLimit } from "./card-actors";
-import { cardTargeting } from "./card-rules";
 import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
 import { controlled, maximumHealth } from "./combat/state";
@@ -8,7 +10,7 @@ import { pendingReplacement } from "./team";
 import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
 
-function recipientPool(state: BattleState, def: CardDefinition, mode = cardTargeting(def, state)) {
+function recipientPool(state: BattleState, def: CardDefinition, mode = playTargeting(def, state)) {
   if (def.effect === "swapChosen") return state.reserves;
   return battlefieldView(state, mode === "enemy" ? "enemy" : "player");
 }
@@ -21,8 +23,16 @@ function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
 
 /** Explicit recipients only; random/group delivery remains live execution work. */
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
-  const mode = cardTargeting(def, state);
+  const mode = playTargeting(def, state);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return [];
+  if (hasMendingTargets(state, def)) {
+    const living = mostInjured(healingAllies(state, "player"));
+    return [
+      ...(living ? [living] : []),
+      ...state.team.filter((unit) => unit.health === 0),
+      ...state.reserves.filter((unit) => unit.health === 0),
+    ];
+  }
   if (def.effect === "resurrect") {
     const recipients: (Creature | Enemy)[] = [];
     for (const unit of state.team) if (recipientEligible(unit, def)) recipients.push(unit);
@@ -36,9 +46,11 @@ function hasChosenRecipient(
   state: BattleState,
   def: CardDefinition,
   targetId?: string,
-  mode = cardTargeting(def, state),
+  mode = playTargeting(def, state),
 ) {
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
+  if (hasMendingTargets(state, def))
+    return chosenRecipients(state, def).some((unit) => targetId === undefined || unit.id === targetId);
   const side = mode === "enemy" ? "enemy" : "player";
   if (
     def.effect !== "resurrect" &&
@@ -55,7 +67,7 @@ function hasChosenRecipient(
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
-  const mode = cardTargeting(def, state);
+  const mode = playTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
     (targetId === undefined || !hasChosenRecipient(state, def, targetId, mode))
@@ -185,7 +197,7 @@ export function hasAvailablePlay(state: BattleState): boolean {
       canRecover,
     );
     if (!play.allowed) continue;
-    const mode = cardTargeting(play.def, state);
+    const mode = playTargeting(play.def, state);
     if ((mode !== "enemy" && mode !== "ally") || hasRecipients(play.def)) return true;
   }
   return false;
@@ -221,7 +233,7 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
       recoverable,
     );
     if (!play.allowed) continue;
-    const mode = cardTargeting(play.def, state);
+    const mode = playTargeting(play.def, state);
     const commands =
       mode === "enemy" || mode === "ally"
         ? recipients(play.def).map((unit) => ({

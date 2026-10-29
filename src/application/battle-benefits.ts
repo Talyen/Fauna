@@ -1,3 +1,5 @@
+import { hasMendingTargets } from "../game/mending";
+import { chosenRecipients } from "../game/play-queries";
 import { foodForAllies } from "../game/card-rules";
 import { boonRule, cornucopiaHealing } from "../game/rules/boons";
 import {
@@ -306,6 +308,16 @@ export function battleBenefits(
       });
     }
     case "heal": {
+      if (hasMendingTargets(state, def)) {
+        const cap = passiveAmount(state, actor.species, "mendTheBroken");
+        return chosenRecipients(state, def).map((unit) => {
+          const restored =
+            unit.health === 0
+              ? Math.min(value, cap, maximumHealth(unit))
+              : healingBenefit(state, unit, value, def.effects).restored;
+          return supportOne(restored > 0 ? "healing" : "none", restored, unit.id);
+        });
+      }
       if (def.target === "allAllies" || foodForAllies(def, state)) {
         const frozen = def.effects?.some((effect) => effect.kind === "thaw")
           ? countMatching(allies(), (unit) => (unit.combat?.freeze ?? 0) > 0)

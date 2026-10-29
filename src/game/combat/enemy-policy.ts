@@ -1,3 +1,4 @@
+import { passiveAmount } from "../progression";
 import { Immer } from "immer";
 import { battlefieldView } from "../battlefield";
 import { cardTargeting } from "../card-rules";
@@ -145,11 +146,13 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
   for (const def of cards) {
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
     const recipients =
-      def.effect === "resurrect"
-        ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
-        : cardTargeting(def) === "ally"
-          ? (livingAllies ??= recipientIds(battlefieldView(state, "enemy"), true))
-          : (self ??= [enemy.id]);
+      def.effect === "heal" && passiveAmount(undefined, enemy.species, "mendTheBroken") > 0
+        ? [enemy.id, ...(fallenAllies ??= recipientIds(state.battle.enemies, false))]
+        : def.effect === "resurrect"
+          ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
+          : cardTargeting(def) === "ally"
+            ? (livingAllies ??= recipientIds(battlefieldView(state, "enemy"), true))
+            : (self ??= [enemy.id]);
     let cardValues = recipients.length ? values?.get(def) : undefined;
     if (recipients.length && values && !cardValues) values.set(def, (cardValues = new Map()));
     for (const allyTargetId of recipients) {

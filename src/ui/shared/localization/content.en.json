@@ -1379,7 +1379,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "180df333b7b6d30eaa07755d7baf968f97a16f4e02925c0419ff63d71b634554"
+    "contextHash": "3fe617e404a2584bbe7487d2a84c01bbcc33ef214e3b81e7e9391233de4d3764"
   },
   "content.card.almanelle-autumn-insight.name": {
     "text": "Autumn Insight"
@@ -1400,7 +1400,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "reference": "Gain 3 Block; Gain 3 Thorns",
-    "contextHash": "870e6cf7cce5c2cabeca8b7ccbd974e457b5bd310f705374c359feb58bdc79aa"
+    "contextHash": "bef154edc471c4aaac0f720679694f5323d3887aeee5d74f169d3e8e40d28e04"
   },
   "content.card.almanelle-spring-current.name": {
     "text": "Spring Current"
@@ -1482,7 +1482,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "9310e2fe41963401d908886816989ec786de5b4d6a827d063b591bbc3b25953a"
+    "contextHash": "7f899cf43af93428ccecae7cec40cd8fbaa7c2a662661289d80b954a94ccbaae"
   },
   "content.card.bloomquail-heal.name": {
     "text": "Petal Veil"
@@ -1574,7 +1574,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
     "reference": "Gain 3 Block; Restore 3 Health",
-    "contextHash": "e8cdf72a1e1eef55dc5e78e9ee34f55bab2ca5db5aba89869e70957d6b8380e2"
+    "contextHash": "cef6a242e1a1a81c53324124e73226cc60426bb94e05345a535175fa85a293db"
   },
   "content.card.captoad-swap.name": {
     "text": "Bogbound Leap"
@@ -1704,7 +1704,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "ff9b75099e7b7e5e8260b755df191eb984d0bdf230334d989bbec7337de9ad9d"
+    "contextHash": "6cf06b70396fa9e89315db3f43b3a8d5f5a8f943bb4611b92b8bb737338ecc7f"
   },
   "content.card.coralcurl-swap.name": {
     "text": "Coral Spiral"
@@ -1780,7 +1780,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Allies gain 2 Block",
-    "contextHash": "bfe49be9f18dd0ea96c51228e35cb239a8d5ba4987d5ec2a53af54eb9e6ab286"
+    "contextHash": "15b6a193c54f7c453ca86d9ddfba791224597f828127886cd72fa1ac88a6a837"
   },
   "content.card.dunefox-attack.name": {
     "text": "Sandburst Pounce"
@@ -1972,7 +1972,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "acfcc45ef4bab2628e347e6e0c1d0943ae3cb465e61241ab90e0b1b31f47d918"
+    "contextHash": "81436399b50854342164653c488f0e5bee1853e0dd1a2c77b9db4741c1b4ba00"
   },
   "content.card.mossguard-heal.name": {
     "text": "Moss Renewal"
@@ -2019,7 +2019,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
     "reference": "Gain 4 Block; Cleanse a harmful effect",
-    "contextHash": "97611627fed7bd983e1e96d42dd2dd949d7b5d81a35ecdaac450fffbefb9c6d3"
+    "contextHash": "e9bbd67567a410df390fcc6063e62a492231e8520759c2e0654ee22f3f188eb1"
   },
   "content.card.oathara-never-lost.name": {
     "text": "Never Lost"
@@ -2120,7 +2120,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Allies gain 2 Block",
-    "contextHash": "1ff396c10f952518acafbddeb5029ccdd00bab91b82c76a16eec6bf7f073389f"
+    "contextHash": "e051339102c10730afa6ed304211d9d71975e0e6c22e58fc6b0ca7a5deea3929"
   },
   "content.card.prismram-attack.name": {
     "text": "Prism Charge"
@@ -2136,7 +2136,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
     "reference": "Gain 3 Block; Reflect the next harmful status effect",
-    "contextHash": "a1290c314309e32df56a0e4b47120f7856719954d863fcace67304d391eae46d"
+    "contextHash": "dbc216e981df0426c433df5c8b64d8ac1529be7c06adb13c1ec3469255c3dada"
   },
   "content.card.prismram-spectrum-lance.name": {
     "text": "Spectrum Lance"
@@ -2189,7 +2189,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "reference": "Gain 3 Block; Gain 3 Thorns",
-    "contextHash": "c1ba47735125b0916c6cb682d0557966ff3d6e2f5f86e2c2fff68b0180d737f5"
+    "contextHash": "fc4f1dd521e04f78c12c0dc5e668c9ddec81e23f08c9d6de369e0fd5b35d6e1d"
   },
   "content.card.reedstag-heal.name": {
     "text": "Mending Spring"
@@ -2286,6 +2286,30 @@
     "reference": "Purge all enemies",
     "contextHash": "47d8eaeda141cf524cb6961eefe80c7f35737460fad2a272774b12f70db8e79d"
   },
+  "content.card.selvage-gust-wing.name": {
+    "text": "Gust Wing"
+  },
+  "content.card.selvage-gust-wing.v564b5e404e6f9cbd.rule": {
+    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "reference": "Deal 2 Physical damage to all enemies",
+    "contextHash": "a283ee2437009b7cadd4608fa256bb5d105e7580aab6b15e93e7a590cf5c40e0"
+  },
+  "content.card.selvage-mending-song.name": {
+    "text": "Mending Song"
+  },
+  "content.card.selvage-mending-song.vb11e8582917748e7.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Restore 6 Health to the most injured ally",
+    "contextHash": "93aef03b211755cdd62e22556577b45293f96b88bf17eca5d43eb0e67e16b0bb"
+  },
+  "content.card.selvage-nest-ward.name": {
+    "text": "Nest Ward"
+  },
+  "content.card.selvage-nest-ward.v9032ba3c489b31e2.rule": {
+    "text": "Give all allies {{value0}} <keyword0>Block</keyword0>",
+    "reference": "Give all allies 2 Block",
+    "contextHash": "39d057a2c4eec32b1abb6550c4cfb882db87a04dd6a421c5ec89d3b47f441779"
+  },
   "content.card.shadebrim-attack.name": {
     "text": "Coolfront"
   },
@@ -2323,7 +2347,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
     "reference": "Gain 4 Block; Reflect the next Burn",
-    "contextHash": "5d2db653c3222e1db1aba1965c7524e48c3af8502412277f0fd6d2168196ef91"
+    "contextHash": "49494e4f613abbeb7fb6a3dbe9e14a290ef243d87f11b5c9b9287b0926441d4a"
   },
   "content.card.skybex-cloudstep.name": {
     "text": "Cloudstep"
@@ -2444,7 +2468,7 @@
   "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
     "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Allies gain 2 Block",
-    "contextHash": "f8b01c483c6f326d06c43455a985d1da2e21aeac1d293b0ec0243d6497a85c8d"
+    "contextHash": "228c032667ef04fdc0089e0dc4d59f71f700cd03db9e467f6fd83734a769a909"
   },
   "content.card.tinkervale-gear-mender.name": {
     "text": "Gear Mender"
@@ -2621,7 +2645,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
     "reference": "Gain 3 Block; Nullify the next Freeze damage",
-    "contextHash": "b9bc441d75c1110905c5d9d3bab15172015f00fe7bcd3811d26dd3b4851dbcfd"
+    "contextHash": "4c3a08716f8298731ec72c19a37d9d457a979d86a47b4f2adea56b900a5b2e00"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "text": "Forgotten Junction"
@@ -4082,6 +4106,39 @@
   },
   "content.species.rookhaven.trait": {
     "text": "Well Read"
+  },
+  "content.species.selvage.name": {
+    "text": "Selvage"
+  },
+  "content.species.selvage.passive.0.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 2 Health"
+  },
+  "content.species.selvage.passive.1.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 3 Health"
+  },
+  "content.species.selvage.passive.2.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 4 Health"
+  },
+  "content.species.selvage.passive.3.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 5 Health"
+  },
+  "content.species.selvage.passive.4.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 6 Health"
+  },
+  "content.species.selvage.passive.5.rule": {
+    "text": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Selvage’s healing abilities can revive an ally with up to 7 Health"
+  },
+  "content.species.selvage.title": {
+    "text": "The song of broken things"
+  },
+  "content.species.selvage.trait": {
+    "text": "Mend the Broken"
   },
   "content.species.shadebrim.name": {
     "text": "Shadebrim"

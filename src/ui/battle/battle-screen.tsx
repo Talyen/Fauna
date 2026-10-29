@@ -1,3 +1,4 @@
+import { hasMendingTargets } from "../../game/mending";
 import { useMessages } from "../shared/localization/message-context";
 import { measurePerformance } from "../../lib/performance";
 import { useBattleArtworkSize } from "./use-battle-artwork-size";
@@ -288,7 +289,7 @@ export function BattleScreen({
                 actor={acting}
                 modifiers={game}
               />
-              {def.effect === "resurrect" || def.effect === "swapChosen"
+              {def.effect === "resurrect" || def.effect === "swapChosen" || hasMendingTargets(game, def)
                 ? game.reserves
                     .filter((unit) => legalTargets.has(unit.id))
                     .map((unit) => (
@@ -296,26 +297,36 @@ export function BattleScreen({
                         key={unit.id}
                         variant="outline"
                         data-backup-target={unit.id}
-                        data-resurrection-target={def.effect === "resurrect" ? unit.id : undefined}
+                        data-resurrection-target={
+                          def.effect === "resurrect" || hasMendingTargets(game, def) ? unit.id : undefined
+                        }
                         aria-label={
                           def.effect === "swapChosen"
                             ? i18n.message("battle.swapBackup", "Swap in {{name}} from backup", {
                                 name: localizedCombatantName(unit, i18n),
                               })
-                            : i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
-                                name: localizedCombatantName(unit, i18n),
-                              })
+                            : unit.health === 0
+                              ? i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
+                                  name: localizedCombatantName(unit, i18n),
+                                })
+                              : i18n.message("battle.target", "Target {{name}}", {
+                                  name: localizedCombatantName(unit, i18n),
+                                })
                         }
                         onFocus={() => setTarget(unit.id)}
                         onMouseEnter={() => setTarget(unit.id)}
                         onMouseLeave={() => leaveTarget(unit.id)}
                         onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
                       >
-                        {def.effect === "resurrect"
-                          ? i18n.message("battle.backupName", "{{name}} (backup)", {
+                        {hasMendingTargets(game, def) && unit.health === 0
+                          ? i18n.message("battle.reviveBackup", "Revive {{name}}", {
                               name: localizedCombatantName(unit, i18n),
                             })
-                          : localizedCombatantName(unit, i18n)}
+                          : def.effect === "resurrect" || hasMendingTargets(game, def)
+                            ? i18n.message("battle.backupName", "{{name}} (backup)", {
+                                name: localizedCombatantName(unit, i18n),
+                              })
+                            : localizedCombatantName(unit, i18n)}
                       </Button>
                     ))
                 : null}

@@ -74,6 +74,9 @@
   "battle.resurrectBackup": {
     "text": "Resurrect {{name}} from backup"
   },
+  "battle.reviveBackup": {
+    "text": "Revive {{name}}"
+  },
   "battle.skipCombat": {
     "text": "Skip combat"
   },

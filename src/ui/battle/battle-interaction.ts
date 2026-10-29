@@ -1,8 +1,8 @@
+import { hasMendingTargets, playTargeting } from "../../game/mending";
 import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
 import { battlefieldView } from "../../game/battlefield";
 import { drawableOwnerIds } from "../../game/card-actors";
 import { chosenRecipients } from "../../game/play-queries";
-import { cardTargeting } from "../../game/card-rules";
 import { definition, species } from "../../game/content";
 import type { BattleState, Command } from "../../game/types";
 import { returnFocus } from "../shared/navigation/focus";
@@ -101,14 +101,14 @@ export function useBattleInteraction({
   });
   const card = selected === null ? undefined : cardsById.get(selected);
   const def = card ? definition(card.definitionId) : null;
-  const mode = def ? cardTargeting(def, game) : "automatic";
+  const mode = def ? playTargeting(def, game) : "automatic";
   const enemyTarget = mode === "enemy",
     allyTarget = mode === "ally";
   const row = enemyTarget
     ? enemyRow
     : def?.effect === "swapChosen"
       ? game.reserves
-      : def?.effect === "resurrect"
+      : def && (def.effect === "resurrect" || hasMendingTargets(game, def))
         ? [...playerRow, ...game.reserves]
         : playerRow;
   // Visual order belongs to the UI; filter legal recipients after ordering the complete row.
@@ -203,7 +203,7 @@ export function useBattleInteraction({
   const chooseCard = (cardId: string) => {
     const chosen = cardsById.get(cardId)!;
     const chosenDef = definition(chosen.definitionId);
-    const mode = cardTargeting(chosenDef, game);
+    const mode = playTargeting(chosenDef, game);
     const recipients = mode === "enemy" || mode === "ally" ? chosenRecipients(game, chosenDef) : [];
     if (recipients.length === 1) {
       update({ type: "prepare" });

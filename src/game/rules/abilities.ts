@@ -213,7 +213,9 @@ const rules: AbilityRuleCatalog = freeze(
       keywords: ["block"],
       describe(card, { value }) {
         return card.target === "allAllies"
-          ? `Allies gain ${value} Block`
+          ? card.id === "selvage-nest-ward"
+            ? `Give all allies ${value} Block`
+            : `Allies gain ${value} Block`
           : card.target === "self"
             ? `Gain ${value} Block`
             : `Give an ally ${value} Block`;

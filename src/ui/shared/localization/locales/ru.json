@@ -149,6 +149,12 @@
     "sourceHash": "41e5a0ef035cc58990e1efa7e91a749704f081176b1a5b47348ae10490bc0581",
     "text": "Воскресить запасного: {{name}}"
   },
+  "battle.reviveBackup": {
+    "reviewed": true,
+    "source": "Revive {{name}}",
+    "sourceHash": "c68e489b7224cbd1009cdb82980442491124bb611b749c160dcf39188ec9cb2e",
+    "text": "Воскресить {{name}}"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
@@ -2678,7 +2684,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "0679b1f000e28f337861a242b8e14b0ae897f463df81ce43e15640915661abb0",
+    "sourceHash": "cbee03b83949c38af72e023bf9f3995344ddf8dc593ab8ba61bb128ad60984a3",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2708,7 +2714,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "bf7ca40daf92dd44f519eafd063ff97b4bc49e68ccbacb093527b2409e7c53f3",
+    "sourceHash": "df8dc1d2f97a67ba7ad9fba2a0fe92a29400f1c65a0a240429e9e9eb17a0d074",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2828,7 +2834,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "fa1ed926bb3f1beeedf4f5c8c74ec246b33352f09285f76631c74f5a6384a28a",
+    "sourceHash": "2336440ad65b5c3e478730868056ecac2a8a66ce3c124a16a53e03cfa02a6bb6",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2960,7 +2966,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "25054195819bd239b6baeb02cddf925fa43787065bd08b41fd0d4bfa09d9e0c3",
+    "sourceHash": "264baec5d410a7ed26d5e8227799625015d72bc826f375fb1d0f3546789c7ad5",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Восстановите {{value1}} <keyword1>здоровья</keyword1>"
   },
   "content.card.captoad-swap.name": {
@@ -3152,7 +3158,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "0af5baa1cb96be38ccdf7bf02f27f8b0c5c2ef9e6d6f491e8169728888746391",
+    "sourceHash": "defb8c1d02061056988fd0113d3aa3b3c05c3ea7ff1f75132c992aaac3abecbb",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3260,7 +3266,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "1cd51b2b13569ba8d50373e9fdd8134983911adbcd9632aa461e0a703ea98022",
+    "sourceHash": "dd3c7923b549b9ee938742b171060a5f936cffdeb8bd72eea9de1aa82466e674",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3548,7 +3554,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "d8690814752f98242451a4ff48a864768701a341170cfb797f4d2f0b991a2909",
+    "sourceHash": "4e30ea7622a6d6014f5edef2125e8bc84f31982256c8246352b773c35bc5485d",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3614,7 +3620,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "f85220e3dc27fb61cc10e82de4ede67f5071597b1a3558d3825fb25306c9f2f3",
+    "sourceHash": "92ab4fd00f2c06eb0dacd453db6463492ff5da0f3d727b95eab77e265a26fecd",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Очистите</keyword1> один вредный эффект"
   },
   "content.card.oathara-never-lost.name": {
@@ -3764,7 +3770,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "b30a6fd7b1de5fc10154b6abd6e65c6ffcf038d827e8fea296640a03166e4800",
+    "sourceHash": "8b7db8199a21feaa9da59dc202b498f25370c4cb131247826463cf87ab4225b2",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3788,7 +3794,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "e35fa09b11ddae27ea46473effbe5ad6555034827b4bf13d28b1ccd62035d847",
+    "sourceHash": "877a08de230b16039d1272e6ec26976da1429967b31b53e18bc4e96e2cda482a",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3866,7 +3872,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "2729c169bf74bb61a59fda74e6845245ca68f2185105d9520699e85a73c3bb04",
+    "sourceHash": "0e9d8932bc35cf1637dd00f67cc7ed318262bfa5a71e39e5504d9c96ccfd9bab",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -4007,6 +4013,42 @@
     "sourceHash": "aef6a6b8ea81198e154008f743cc8759c5ecb651a99ed9dad1f965b18782d3a0",
     "text": "Примените <keyword0>рассеивание</keyword0> ко всем врагам"
   },
+  "content.card.selvage-gust-wing.name": {
+    "reviewed": true,
+    "source": "Gust Wing",
+    "sourceHash": "f4c35c37d70387d37f70964218f308122f130c47f8b6910102f58d4ce19da1e9",
+    "text": "Крыло порыва"
+  },
+  "content.card.selvage-gust-wing.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "57ba349cbada273f3b29cdcd5942e3df775d70f3a212fc9b1fd866a1a9952fce",
+    "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.card.selvage-mending-song.name": {
+    "reviewed": true,
+    "source": "Mending Song",
+    "sourceHash": "24198d9d08397126396297724af11cc5708ef4b85cd1b6cd2b066f8c6a8be62d",
+    "text": "Песня исцеления"
+  },
+  "content.card.selvage-mending-song.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "c95de6facc24ab6ab7332c581bf2be1448c34a707e907577503a6dd3dd9f889d",
+    "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.selvage-nest-ward.name": {
+    "reviewed": true,
+    "source": "Nest Ward",
+    "sourceHash": "ede0a20d13373ab52483904de2e8b139ec6576ff2a4f7dcb7f0ad6a81c8e26ea",
+    "text": "Защита гнезда"
+  },
+  "content.card.selvage-nest-ward.v9032ba3c489b31e2.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "785dfd7329427fc664ff9f7d53868d979e0739c5942bb1d648c0e751fbdec729",
+    "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0>"
+  },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
     "source": "Coolfront",
@@ -4058,7 +4100,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "92ac80bfce3895307d8815ce5ed7e42f1fdf69fce199da5d014936e2891223c7",
+    "sourceHash": "724d7843df89d7fdf309cc0e5ad54417dd96add9fff3e5a2194009dbc23224a6",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Отразите</keyword1> следующее <keyword2>горение</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4232,7 +4274,7 @@
   "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "20982835f2a2e79ecf9b219fc39ff9f97df7557a0e3f452788abd00f3655a916",
+    "sourceHash": "6405499b546ee4fa1032127f0fb369f72c02ffce15856f8cfa2a84616e68842a",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.tinkervale-gear-mender.name": {
@@ -4490,7 +4532,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "ec68bde860865df0ec11ebd91970e5aa2316829da92666d5cefd3519e8ce2bec",
+    "sourceHash": "0e76852316cc774f9509a103cbe228f790292d4268597f7dd3fcb37ba273646e",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Аннулируйте</keyword1> следующий урон от <keyword2>заморозки</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -6862,6 +6904,60 @@
     "source": "Well Read",
     "sourceHash": "0b8be9d20deee3c1a54b6d712e402c2350896275ae8328d5d6eda8a9dd3a3f2a",
     "text": "Начитанность"
+  },
+  "content.species.selvage.name": {
+    "reviewed": true,
+    "source": "Selvage",
+    "sourceHash": "d4d05f3730bbdf0d555725342a600ddd2bcad0eb5af2b75713a522e9b248241e",
+    "text": "Селваж"
+  },
+  "content.species.selvage.passive.0.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "5f73e4f4ac342619e1d8ff7c77437cfe474bbd96c3a3d257d82ac19e25cd1bac",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.passive.1.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "ce24a49c1b08bd26e09baaaa16a223b4ed932bc33ba9495a40aa4795d6b8b4e0",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.passive.2.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "bb75af2cc32fbd6322a9b55e87d05eb326c96a117f2d0cfff416fb9c1c14fd67",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.passive.3.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "7245e4a0520081f875c85fd12a79df5390a41304d4876f371292bc9497ad7c1d",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.passive.4.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "3918e680ebf887a6a128e7d422cf2db58be0b37af678d38902c3c3d9e0c50759",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.passive.5.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "65de373589f9c8e2617c76adaeef0732e46d35fd2150c71c24604b7f872935e2",
+    "text": "<keyword0>Исцеляющие</keyword0> способности Селваж могут воскресить союзника с запасом до {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.selvage.title": {
+    "reviewed": true,
+    "source": "The song of broken things",
+    "sourceHash": "fa482e677175c412f3aa6678d60e862e4cfe437b13a324a84fbe10f8b8fc7623",
+    "text": "Песня сломанных вещей"
+  },
+  "content.species.selvage.trait": {
+    "reviewed": true,
+    "source": "Mend the Broken",
+    "sourceHash": "4099906fb7399cf45def0989a64ed8be0ec2da29a5c8ac5af4bfa006c5aa5ad1",
+    "text": "Починить сломанное"
   },
   "content.species.shadebrim.name": {
     "reviewed": true,

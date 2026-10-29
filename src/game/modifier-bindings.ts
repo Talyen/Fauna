@@ -22,6 +22,7 @@ type Modules = {
   "./ability-rules": typeof import("./ability-rules") & { passiveCardBonus: typeof passiveCardBonus };
   "./card-actors": typeof import("./card-actors");
   "./card-rules": typeof import("./card-rules");
+  "./mending": typeof import("./mending");
   "./card-zones": typeof import("./card-zones") & {
     receiveDraw: typeof receiveDraw;
     lostAndFound: typeof lostAndFound;
@@ -34,6 +35,7 @@ type Modules = {
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/abilities": typeof import("./combat/abilities");
   "./combat/ability-handlers": typeof import("./combat/ability-handlers");
+  "./combat/enemy-policy": typeof import("./combat/enemy-policy");
   "./combat/ability-extras": typeof import("./combat/ability-extras");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
@@ -239,7 +241,7 @@ export const modifierImplementations = freeze(
         "./combat/damage-reactions#dodgeResponse",
         "./combat/ability-modifiers#beforeAbility",
       ],
-      "memory-cairn": ["./combat/ability-handlers#executePrimary"],
+      "memory-cairn": ["./combat/ability-handlers#restoreFallen"],
       "vow-candle": [
         "./combat/abilities#executeAbility",
         "./combat/damage#hit",
@@ -254,7 +256,7 @@ export const modifierImplementations = freeze(
       "treaty-teapot": ["./combat/damage-reactions#thornRetaliation"],
       "dawn-gong": ["./combat/statuses#applyHarmfulStatus"],
       "acrobat-top": ["./combat/damage-reactions#dodgeResponse", "./combat/abilities#executeAbility"],
-      "remembrance-wreath": ["./combat/ability-handlers#executePrimary"],
+      "remembrance-wreath": ["./combat/ability-handlers#restoreFallen"],
       "vanishing-hat": ["./combat/statuses#removeEffects"],
       "rocking-chair-charm": ["./combat/lifecycle#tickStatuses"],
       "asteroid-hammer": ["./combat/damage-values#blockEfficiency"],
@@ -427,6 +429,11 @@ export const modifierImplementations = freeze(
       "lucky-clover": ["./combat/damage-reactions#damageRewards"],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      mendTheBroken: [
+        "./mending#mendTheBroken",
+        "./combat/ability-handlers#executePrimary",
+        "./combat/enemy-policy#chooseEnemyCard",
+      ],
       rimewake: ["./combat/dodge#grantTemporaryDodge"],
       lostAndFound: ["./card-zones#lostAndFound"],
       lastWarmth: ["./combat/card-modifiers#lastWarmth"],
@@ -513,6 +520,11 @@ export const modifierQueries = freeze(
       rainkeeper: ["./ability-rules#manaCapacity"],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
+      mendTheBroken: [
+        "./mending#mendTheBroken",
+        "./combat/ability-handlers#executePrimary",
+        "./combat/enemy-policy#chooseEnemyCard",
+      ],
       cardBonus: ["./boon-offers#passiveBoonKeywords"],
       battleStart: ["./boon-offers#passiveBoonKeywords"],
       bounce: ["./boon-offers#passiveBoonKeywords"],

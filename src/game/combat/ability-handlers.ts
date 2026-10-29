@@ -1,3 +1,4 @@
+import { passiveAmount } from "../progression";
 import { boonRule } from "../rules/boons";
 import { swapFromCard } from "../team";
 import { emitStatus, emitSupport } from "../events";
@@ -64,6 +65,28 @@ import { hasHarmfulEffects, unitName, type Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
+}
+
+export function restoreFallen(context: PrimaryContext, recipient: Combatant, health?: number) {
+  const { state, action, events } = context;
+  const { actor } = action;
+  const enemy = action.side === "enemy";
+  resurrect(recipient, actor, events, health);
+  if (
+    recipient.health > 0 &&
+    (enemy
+      ? state.battle.enemies.some((unit) => unit.id === recipient.id)
+      : state.team.some((unit) => unit.id === recipient.id))
+  ) {
+    summonPendulums(state, recipient, action.side, events);
+    summonRoyalBlooms(state, recipient, action.side, events);
+  }
+  if (!enemy && recipient.health > 0 && hasHarmfulEffects(recipient) && state.boons.includes("memory-cairn"))
+    removeEffects(recipient, "cleanse", 6, events, state, undefined, actor, false);
+  if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
+    ensureCombat(recipient).negate = true;
+    emitStatus(events, recipient.id, "negate", "apply", { text: `${unitName(recipient)} gains Negate` });
+  }
 }
 
 export function executePrimary(context: PrimaryContext) {
@@ -299,13 +322,25 @@ export function executePrimary(context: PrimaryContext) {
       return;
     }
     case "heal": {
+      const amount = passiveAmount(enemy ? undefined : state, actor.species, "mendTheBroken");
+      const chosen = enemy
+        ? state.battle.enemies.find((unit) => unit.id === action.allyTargetId)
+        : [...state.team, ...state.reserves].find((unit) => unit.id === action.allyTargetId);
+      if (amount && chosen?.health === 0) {
+        restoreFallen(context, chosen, Math.min(amount, value));
+        return;
+      }
       const targets =
         def.target === "allAllies"
           ? healingAllies(state, action.side)
           : cardTargeting(def) === "self"
             ? [actor]
             : def.target === "mostInjured"
-              ? [mostInjured(healingAllies(state, action.side))!]
+              ? [
+                  amount && !enemy && chosen?.health
+                    ? chosen
+                    : mostInjured(healingAllies(state, action.side))!,
+                ]
               : battlefieldView(state, action.side).filter(
                   (unit) => unit.id === action.allyTargetId && unit.health > 0,
                 );
@@ -339,31 +374,7 @@ export function executePrimary(context: PrimaryContext) {
       const recipient = enemy
         ? state.battle.enemies.find(matches)
         : (state.team.find(matches) ?? state.reserves.find(matches));
-      if (recipient) {
-        resurrect(recipient, actor, events);
-        if (
-          recipient.health > 0 &&
-          (enemy
-            ? state.battle.enemies.some((unit) => unit.id === recipient.id)
-            : state.team.some((unit) => unit.id === recipient.id))
-        ) {
-          summonPendulums(state, recipient, action.side, events);
-          summonRoyalBlooms(state, recipient, action.side, events);
-        }
-        if (
-          !enemy &&
-          recipient.health > 0 &&
-          hasHarmfulEffects(recipient) &&
-          state.boons.includes("memory-cairn")
-        )
-          removeEffects(recipient, "cleanse", 6, events, state, undefined, actor, false);
-        if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
-          ensureCombat(recipient).negate = true;
-          emitStatus(events, recipient.id, "negate", "apply", {
-            text: `${unitName(recipient)} gains Negate`,
-          });
-        }
-      }
+      if (recipient) restoreFallen(context, recipient);
       return;
     }
     case "dreamDouble":

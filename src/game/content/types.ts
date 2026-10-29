@@ -44,9 +44,11 @@ export type SpeciesId =
   | "vitrilo"
   | "velvetmonarch"
   | "velouria"
-  | "tinkervale";
+  | "tinkervale"
+  | "selvage";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "mendTheBroken"; amount: number }
   | { kind: "spareParts"; amount: number }
   | { kind: "rimewake"; amount: number }
   | { kind: "gardenAnswers"; amount: number }

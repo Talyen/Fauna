@@ -4779,6 +4779,50 @@
       "aspect": [3, 4],
       "provenance": "Generated for Tinkervale using Fauna locked style prompt: https://drive.google.com/file/d/1VODYgwwZO9leeR5xLgc5OoVdbefRiYRv/view; variant 2 selected by user on 2026-10-29",
       "rights": "AI-generated for Fauna using the built-in image generation tool"
+    },
+    {
+      "id": "creature.selvage",
+      "origin": "repository",
+      "source": "public/art/creatures/selvage/portrait.png",
+      "output": "art/selvage/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Selvage artwork from Google Drive: https://drive.google.com/file/d/1cdLv7f3vsRW1VxcvrIhGuHaExiW3I6NC/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.selvage.gust-wing",
+      "origin": "repository",
+      "source": "public/art/creatures/selvage/gust-wing.png",
+      "output": "art/selvage/gust-wing.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Selvage artwork from Google Drive: https://drive.google.com/file/d/1KdMfj2H4br9YTVf-A8fx4_AEPGtUaChW/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.selvage.nest-ward",
+      "origin": "repository",
+      "source": "public/art/creatures/selvage/nest-ward.png",
+      "output": "art/selvage/nest-ward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Selvage artwork from Google Drive: https://drive.google.com/file/d/17i_xZCq-gMC-zCF-Y9C94rDA-3ZlBlXB/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.selvage.mending-song",
+      "origin": "repository",
+      "source": "public/art/creatures/selvage/mending-song.png",
+      "output": "art/selvage/mending-song.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Selvage artwork from Google Drive: https://drive.google.com/file/d/1xtN8NXVLI-PGPzwkI6RUtWm0_t4ESvXy/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

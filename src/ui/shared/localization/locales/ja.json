@@ -149,6 +149,12 @@
     "sourceHash": "7b1f96f6b860e6d45fe1cd16f4e41a19739cba060e97d123e2fce8eb48439dd3",
     "text": "控えの{{name}}を復活"
   },
+  "battle.reviveBackup": {
+    "reviewed": true,
+    "source": "Revive {{name}}",
+    "sourceHash": "d2cc4284e1c662a12e533e0d541dff7c89a2e452d0718de25b44e7faac16ecd1",
+    "text": "{{name}}を復活"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
@@ -2678,7 +2684,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3a0c45936e7808f5be5ffeabd889a71b97e17eb6ff75803cccb392d7ffc3d19c",
+    "sourceHash": "f90b45e5e3e6eec713c5ca308dc51099b8eec6dfb5c6c295b767315ea2ff0ae6",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2708,7 +2714,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "3b3807cd5b7e043e5266a21ac7af69636de6b5eb2d3c2f0744ba46165956bbaf",
+    "sourceHash": "68d8e860b70fd38b189d817e2efca6e68c8102dbd6aede02172a9dec2e40bbc7",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2828,7 +2834,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "74b942c173428c04d666e8b7629849e62d604b54fbcd66a7a9e54f090be87501",
+    "sourceHash": "265c9a9bae23e841d237b8ec9c34e0cc9e08105b60d224253eb80a59ea42903e",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.bloomquail-heal.name": {
@@ -2960,7 +2966,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "a68e8b1644924a35142849351d18dc994cbee03bb1b22e9d5641255ec6884314",
+    "sourceHash": "a2a731ef8ecbc5038068837bf89b852380edf62ff575799d4137b304599acfe8",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>体力</keyword1>を{{value1}}回復"
   },
   "content.card.captoad-swap.name": {
@@ -3152,7 +3158,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "2e8b359bfc92cf9a0b91c257b46d99c46d00a48765e8a89f2953b09c35acb080",
+    "sourceHash": "22c10b4e51b7e483f2d89d128502985682878861a0ef86072e5e0b36a06759be",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.coralcurl-swap.name": {
@@ -3260,7 +3266,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "202970d8294b82c33f10f56119956011b5da3a68a3b86a8ae486da78fb9fb747",
+    "sourceHash": "dbbc73d7deb3a68faf5906a377ce6acf73b02d2f7f9e96d0f934161da312bd1d",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.dunefox-attack.name": {
@@ -3548,7 +3554,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "9498c52164b191bc6474ee89162530aad2dad78919e254cc6fd016256db1ec37",
+    "sourceHash": "46c95c2d2d634b8e0f8419cc5b84735dc84012593fef10a1f785fc3a2b7f609e",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.mossguard-heal.name": {
@@ -3614,7 +3620,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "3c183e862d427e63882dedf16c0fbd3c60f8507a84ad05e0891bd14f69662c5f",
+    "sourceHash": "378fefbcd74e083a0c19abd4225767e5597bebefdb42edb719009597ace84321",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 有害な効果を1つ<keyword1>浄化</keyword1>"
   },
   "content.card.oathara-never-lost.name": {
@@ -3764,7 +3770,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "8aea1c1a9fcf6d6a47513fc197d0cc61e4c15d1699907eedb4d051deded0d6e4",
+    "sourceHash": "3168610999b3b947781eea3ec842d2fe8221570911f2eae0886369b582ea8e04",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.prismram-attack.name": {
@@ -3788,7 +3794,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "87cfd2a49c26db77e321fd17f5234487df08b460dbc8c4eead7de5105ff74341",
+    "sourceHash": "e34623ca44b301719a065bb931816446a25901c0704b857208e57742a8bcd81e",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3866,7 +3872,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "5a5b43d2b6be8a5f8c72f9e4c18fc1b2b1714ee620afb37820909b25a23c93f5",
+    "sourceHash": "be7092f3ba4278dede7967e6e7a962402852c712f41c37708ed786fbcab7cd8a",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
   },
   "content.card.reedstag-heal.name": {
@@ -4007,6 +4013,42 @@
     "sourceHash": "4bacccb7852698566e7b8a977c3459f2a1c7265256347d171145a78b5d559c8a",
     "text": "すべての敵に<keyword0>強化解除</keyword0>を適用"
   },
+  "content.card.selvage-gust-wing.name": {
+    "reviewed": true,
+    "source": "Gust Wing",
+    "sourceHash": "228e064ef9e7c90287e941561c145f666be054b79399ae02f0a8c940fba9431e",
+    "text": "突風の翼"
+  },
+  "content.card.selvage-gust-wing.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "3ce19b5328287119e7dc912acae3c8d5ffe0063adc6b4266a4866ba1d84c77b6",
+    "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+  },
+  "content.card.selvage-mending-song.name": {
+    "reviewed": true,
+    "source": "Mending Song",
+    "sourceHash": "3d306109bec8ded89ec23e8b946aebf8d1a35c127cd767264c261756653f5a26",
+    "text": "回復の歌"
+  },
+  "content.card.selvage-mending-song.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "9c5a20bdd4de0c2812bd5695f18b3c32628e83cc06bd66750d2d379f1e4814f2",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.selvage-nest-ward.name": {
+    "reviewed": true,
+    "source": "Nest Ward",
+    "sourceHash": "6dd8f7e966bb2c417d4035d0d7c527c044755454205f76133f823e51cdeaabe0",
+    "text": "巣の守り"
+  },
+  "content.card.selvage-nest-ward.v9032ba3c489b31e2.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "d6a5feea574faec4bc3f02bf5454bfa7622f57de684a22c18482e3257eef3f33",
+    "text": "すべての味方に<keyword0>ブロック</keyword0>を{{value0}}付与"
+  },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
     "source": "Coolfront",
@@ -4058,7 +4100,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "c9741e33c350d973a97d59304c695e310a3a4e13c58f33e96222243ae47315a4",
+    "sourceHash": "333e953fa058b164fbd044d336d5a19ed20fe05c7588c2c73d7a6a222300cce6",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>炎上</keyword2>を<keyword1>反射</keyword1>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4232,7 +4274,7 @@
   "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "e373d5b25dc4ba96a7b4b1352c9d69027eb91054d7262f6d1aeb6403dd45e740",
+    "sourceHash": "1c5a5538867894c6007785c2de1d1806b27d3331ab3db8505e551cbe9bf6f77e",
     "text": "味方全員が{{value0}}の<keyword0>ブロック</keyword0>を得る"
   },
   "content.card.tinkervale-gear-mender.name": {
@@ -4490,7 +4532,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "9e10443c4bc9776016d951afc742e7f71ec85fb55aa24a053c40a92ea79ef751",
+    "sourceHash": "287c46df8ab99290c118eecb4809d450f242853407ea5c3724e46b2546088026",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>凍結</keyword2>ダメージを<keyword1>無効化</keyword1>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -6862,6 +6904,60 @@
     "source": "Well Read",
     "sourceHash": "1f94917d48a2f25700a7eaeba7982bfb27e9d1071806cffaef99272fcb014975",
     "text": "博覧強記"
+  },
+  "content.species.selvage.name": {
+    "reviewed": true,
+    "source": "Selvage",
+    "sourceHash": "020a56d6fc062d5090cd6577bfe893d77eed8d3a5d28e581a2d0908db6b40e87",
+    "text": "セルヴァージュ"
+  },
+  "content.species.selvage.passive.0.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "46b1897f1b2fdd032c986db9b0867947862e3cb723dfb9a6bbea66239be2c70e",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.passive.1.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "e7aa69c295062e555b93ac204614d27c11568d9c7187cc50f912dfccd12fb41a",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.passive.2.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "4a65939e8c112aba97bb68fd48abe4794c291c5021366f8c0b1bdaf200fc7cac",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.passive.3.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "158e7f2756a43039afda626a81e30039c9dece31021c02f59378aa0f96170220",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.passive.4.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "ae49c1c95d190e7acb15886b06054438cc474495850f252d2eab2f3e703b2252",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.passive.5.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "445cc412ad2817e72264d3c267f39ecb6435c041231e6d03c1646afd6f1a1112",
+    "text": "セルヴァージュの<keyword0>回復</keyword0>能力で、味方を最大{{value0}}の<keyword1>体力</keyword1>で復活させられる"
+  },
+  "content.species.selvage.title": {
+    "reviewed": true,
+    "source": "The song of broken things",
+    "sourceHash": "3a9cae0a6dc0be125e8b511c59d374ddfc8103d3c86f9a929a2275a4fc366f4c",
+    "text": "壊れたものの歌"
+  },
+  "content.species.selvage.trait": {
+    "reviewed": true,
+    "source": "Mend the Broken",
+    "sourceHash": "a4c40e7f31b2576a5fdb4bce917a9e660e0bfa437250fd58f7b1c823c02136da",
+    "text": "壊れたものを直す"
   },
   "content.species.shadebrim.name": {
     "reviewed": true,

@@ -149,6 +149,12 @@
     "sourceHash": "e328a9deb2b6e70c603f3bfcaee83d7ff4a77c232e242fdae4641936fd9cf26a",
     "text": "{{name}} aus der Reserve wiederbeleben"
   },
+  "battle.reviveBackup": {
+    "reviewed": true,
+    "source": "Revive {{name}}",
+    "sourceHash": "f87b8b289fdf64c0b0a13e5b557719091413fe7ba10f1e13eca5b95d5b286836",
+    "text": "{{name}} wiederbeleben"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
@@ -2678,7 +2684,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "7357f3595a913b514111dfe8498974c8af03b6202a609cb4fddf774e6a22b7ed",
+    "sourceHash": "85b884bf62bf9a3e813cae17114e9e3219c998ec15b5a262fc1fadd448852750",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2708,7 +2714,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "5a41facb915baee1c212a8804a45770e778e6b717035ecb49495b12dccbb0569",
+    "sourceHash": "a6c2bac8f35dce203725e871ff03f76d40b9d1b793d97ddddd2cb8402ff5d020",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2828,7 +2834,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "e27e480d81fb8818c97d0c31e05f22018e03b834bd1a31479440c7744e31e511",
+    "sourceHash": "c0896342462f309e8a690180580408d10282254b5273db51589b2921ecefd736",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2960,7 +2966,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "f7de77afe9077e71d4678693ed5a98b67f6fb475b35b0872c52fc0b650dc9bcf",
+    "sourceHash": "cf084db876efc927eeba8780754195677990158b72ef9393a231219114f9517d",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Stelle {{value1}} <keyword1>Gesundheit</keyword1> wieder her"
   },
   "content.card.captoad-swap.name": {
@@ -3152,7 +3158,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3181156e39753ed7145d6387e9784b8a4c48094b1923269b744529e8e020ea88",
+    "sourceHash": "e238f94d766fa66207cf24d9ee008d37bf2c14830e67140b8116284c27fddc60",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3260,7 +3266,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "b17a85f46407d2b83658a723ec463a8e898b66ce6543614becfe778794fefe8b",
+    "sourceHash": "784715954067d3360f9496a4fc766d29d85a9664295c33797378f165e2fd1b41",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3548,7 +3554,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "8b977d97bf2ccafd3d2e06239a10c6be742f9f0305b57e9832eef8c91fb1d782",
+    "sourceHash": "45624d63b0e9206318ccf90cca2e0ed29b7d09401869ec6da3b099eedbfca263",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3614,7 +3620,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "69b22ec8c9f89655df536f75d8c348f2cf7e2575ee6e7c7efc8059ca4b72d8c2",
+    "sourceHash": "b5863012f192dd04c0dcddd20276b998ae65ac15edf89a4b6e22114cc6a5c819",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reinige</keyword1> einen schädlichen Effekt"
   },
   "content.card.oathara-never-lost.name": {
@@ -3764,7 +3770,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "9110d55be992ffabe0b724794a6ed54eb7a6e6782267739a09a1cbe66a3bbf04",
+    "sourceHash": "dc2a0c2ed5e80684a28474aae242b87699febad9ec113d5ae6f082346837e3fc",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3788,7 +3794,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "e4069fbc19d47d1b977b006217ce61648f2f0babd6b0011535e0680e44444a84",
+    "sourceHash": "2aa3d5f697a3ac48b421a4c8d8f2e78379233f01a210053c22a8f23124fc3b53",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten schädlichen Statuseffekt"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3866,7 +3872,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "3011c826eabef77b8c6b57e398ca37993e8418e2fbab3b3d51fe45432cc54a63",
+    "sourceHash": "18db6d2a7f6c159604db8232ad560fe5a4579cb321abea45d9f3ef9f7c65e558",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -4007,6 +4013,42 @@
     "sourceHash": "c50246269555e2547d67016642ace3cf91b59956d610b05f6fc304c386e6c037",
     "text": "Wende <keyword0>Bannen</keyword0> auf alle Gegner an"
   },
+  "content.card.selvage-gust-wing.name": {
+    "reviewed": true,
+    "source": "Gust Wing",
+    "sourceHash": "0ad710671bc2e45c3cc2e84be69dd5a3da3acb235faf284e39749486149b3783",
+    "text": "Windflügel"
+  },
+  "content.card.selvage-gust-wing.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "7eb359ca0dd39d8cb7ace8f5f44f11944809698713285a26b917042aeddec976",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Physisch</keyword0> bei allen Gegnern"
+  },
+  "content.card.selvage-mending-song.name": {
+    "reviewed": true,
+    "source": "Mending Song",
+    "sourceHash": "f22cf759af421e799648de6d2def8fac293aeef886c5151dbe17e5065a42e027",
+    "text": "Heilendes Lied"
+  },
+  "content.card.selvage-mending-song.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "0493db8f70b02ada5cfc1199d70adaafce411c632918b954ae9fcdaf4d3d0fde",
+    "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.selvage-nest-ward.name": {
+    "reviewed": true,
+    "source": "Nest Ward",
+    "sourceHash": "aeef7ab21e9b6596732f3147c0e0ed747d06ed2b2d27634e70a5581110031fe1",
+    "text": "Nestschutz"
+  },
+  "content.card.selvage-nest-ward.v9032ba3c489b31e2.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "807ad4aea13597e0b834daa97c9f30a161a342416f5bdabb3d98cf60e2090ad7",
+    "text": "Gib allen Verbündeten {{value0}} <keyword0>Block</keyword0>"
+  },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
     "source": "Coolfront",
@@ -4058,7 +4100,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "f8f50859cd8dd708d96eb9e2e362a26f873857bb87255c2887a2bed61476e8be",
+    "sourceHash": "a576d0df57bccb530921d6954704b7ff6dac15c4f0f36821aff947158bde8fae",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten <keyword2>Brand</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4232,7 +4274,7 @@
   "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "cfea30ea44c8c59475419618f0d628b0627921994f18552f6112cf74e98e66ce",
+    "sourceHash": "8c423f4eabbdab680c5b0a1e9ee69de54b1b9a2425c89c8810520ebe2f86b283",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
   "content.card.tinkervale-gear-mender.name": {
@@ -4490,7 +4532,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "c8f4244735594a97f69493550d65f4b30be5deb6f292e7471b4a637b7cc026fd",
+    "sourceHash": "1e67f1a06822831c6b0f9aca0b9414dea40280569ec02dfb9d02fd0209d51f91",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Hebe</keyword1> den nächsten <keyword2>Frost</keyword2>-Schaden auf"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -6862,6 +6904,60 @@
     "source": "Well Read",
     "sourceHash": "ad5e4a0ac8d69c091cfac2e148ee8c227f6bce3d40fe8019a84340946eb66955",
     "text": "Belesen"
+  },
+  "content.species.selvage.name": {
+    "reviewed": true,
+    "source": "Selvage",
+    "sourceHash": "3a2ca9bbc66bc392eef2fc9babc1f7240f03322c88e591deceafd4e5c8c3bbbe",
+    "text": "Selvage"
+  },
+  "content.species.selvage.passive.0.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "e5d90a89e61d8a04d40f3ba1461c85099a3d5a4f5f3e849ca5091de824b51362",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.passive.1.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "8003b9c12d4a81e67b6b60267a355361d15c03b3eb04214a02e7626bbd14d989",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.passive.2.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "36c3d78ee32ce55e41faf70444da5bcc7bc79ef7c2261427df07975b6fbd6c88",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.passive.3.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "84b10562137d6fb424711ef2a0f8947da41d28c8a6864ca4a2e7e9ba9b1d409f",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.passive.4.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "3100587dfac86f1f5a54e5447d45901dde8ededad81c520eca024d7e00d318c2",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.passive.5.rule": {
+    "reviewed": true,
+    "source": "Selvage’s <keyword0>healing</keyword0> abilities can revive an ally with up to {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "bba1e74b2e9c2445d527c0a215b19cd2c08a70133f15d6071dc9fe9d82c83336",
+    "text": "Selvages <keyword0>heilende</keyword0> Fähigkeiten können einen Verbündeten mit bis zu {{value0}} <keyword1>Gesundheit</keyword1> wiederbeleben"
+  },
+  "content.species.selvage.title": {
+    "reviewed": true,
+    "source": "The song of broken things",
+    "sourceHash": "23e330bf8de3e0126fcd6b200f8298b669525b62356053fe582d22740ed34af3",
+    "text": "Das Lied der zerbrochenen Dinge"
+  },
+  "content.species.selvage.trait": {
+    "reviewed": true,
+    "source": "Mend the Broken",
+    "sourceHash": "91efa79e7ed8e980cf9c004828eb66e9204dc7af9d444ea4554a5978f0ecbc73",
+    "text": "Zerbrochenes heilen"
   },
   "content.species.shadebrim.name": {
     "reviewed": true,
