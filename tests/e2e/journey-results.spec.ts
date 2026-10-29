@@ -96,6 +96,8 @@ for (const [width, enlarged, outcome] of [
     if (outcome === "victory") {
       expect(game.phase).toBe("recruit");
       expect(game.reward!.recruits).toEqual([defeatedBoss]);
+      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+      await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
       await reloadHome(page);
       await resume(page);
       expect(await state(page)).toEqual(game);
