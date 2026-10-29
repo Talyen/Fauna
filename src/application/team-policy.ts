@@ -35,6 +35,7 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
       card.effect === "nightmareHarvest" ||
       card.effect === "teamCleanse" ||
       card.effect === "teamClearBlind" ||
+      card.effect === "raincall" ||
       card.effect === "teamThaw" ||
       card.effect === "springbound" ||
       card.effects?.some((effect) => effect.kind === "cleanse" || effect.kind === "thaw")

@@ -2981,6 +2981,42 @@
     "sourceHash": "c30207ff39c02fdd08476d31290fc7ed19fc83400b8c6ebb5ca92f9e50397507",
     "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} cartes"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "reviewed": true,
+    "source": "Meadow Return",
+    "sourceHash": "9516202703bf7ac2590200a88d88bad964927c5fd5c123941591aea5e6a2217c",
+    "text": "Retour du pré"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "14facc2799588a083ddd57ca76ea8093456adcb77678783f44e4a5e29aa3f412",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à tous les alliés"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "reviewed": true,
+    "source": "Prairie Leap",
+    "sourceHash": "a19d392d2614ab7ac7649f727b216f3da5ee35d7001c91c1cdd9db5c6b7a513a",
+    "text": "Bond des prairies"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "sourceHash": "227a1025014f1d2f614be1063375ab66b4a1ea56946218367ff970eab8176104",
+    "text": "Échange avec une réserve aléatoire / L’allié entrant gagne {{value0}} <keyword0>Épines</keyword0>"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "reviewed": true,
+    "source": "Raincall",
+    "sourceHash": "ca4780f41f06b1c618d79b8dfd70b75f7f63bc5afb990cd8a2abb7f8ee4873cd",
+    "text": "Appel de la pluie"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "sourceHash": "857eb8ed74622aa283eb94677cb2479a9d8bd20d97d6224d16ae4e264baba1c0",
+    "text": "Pioche une carte <keyword0>Eau</keyword0> / <keyword1>Purifie</keyword1> la <keyword2>Brûlure</keyword2> des alliés"
+  },
   "content.card.chimecricket-attack.name": {
     "reviewed": true,
     "source": "Resonant Leap",
@@ -5338,6 +5374,60 @@
     "source": "Sporecoat",
     "sourceHash": "4894cbe5e09719acddfa800f4474b9994609e19f23be9245cb0eabc706b70f24",
     "text": "Manteau de spores"
+  },
+  "content.species.cavalleaf.name": {
+    "reviewed": true,
+    "source": "Cavalleaf",
+    "sourceHash": "2393967feb6a6469e389fba2b42c11c0d81d2ed2637ed7646ede8aacf9ad8284",
+    "text": "Cavalleaf"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "1d0b985902c142162a3da162ca45fa8bbb4939c4a8253f751dac2752107ca420",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "d55e124ac94a116a1d493502e79e423c2ecf781198e129bd18036b97b9268e50",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "959e59281115c7afccd64d3c9175b153d53b5bfdf09577f3540a1b1d4d5224d2",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "1d3cb32945eaadcdeab35267b7fafaace3796b6bebc88371edf8ad39ca3644fb",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "b7643ec6e6960d8a7df0d3ec56d01c77bc6434432593f73d07c90cafe03e7f06",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "2232d045d6e83d7f14291197d580129ba5cdb8e10ca742e29b6d8fef2ebb6a19",
+    "text": "Rendre de la <keyword0>Santé</keyword0> aux alliés leur confère {{value0}} <keyword1>Épines</keyword1>"
+  },
+  "content.species.cavalleaf.title": {
+    "reviewed": true,
+    "source": "The meadow pathmaker",
+    "sourceHash": "20e067f34acf3ea98ac778f4894950b03301d14365cd8757359aee97cb252088",
+    "text": "L’éclaireur des prés"
+  },
+  "content.species.cavalleaf.trait": {
+    "reviewed": true,
+    "source": "Wild Path",
+    "sourceHash": "a20744489996cb61341aed4a6f0143e1c2f6b15afa05643c345a9257dc2fb3ac",
+    "text": "Sentier sauvage"
   },
   "content.species.chimecricket.name": {
     "reviewed": true,

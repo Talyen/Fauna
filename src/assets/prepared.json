@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "29326aa8ec034405a29e6f8825461c0f04c10cc9b5952891267b5d7e2e605607",
-  "generation": "66222f5fad8189c76c18a289b3ada1a6aa3158bb777cc673a8c85af38e8f4b46",
+  "manifestHash": "09e1b1a0e05dceaf62914d3db6fccee432a6725dd79ba029c94c627d9a86e485",
+  "generation": "fbfdf14f233efb7d6659b3f6ca7e57420daa0cf376a1a27aa9be6a9191a3136b",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -5218,6 +5218,58 @@
       "outputHash": "a2f008ecd10d813a739baf82f88252ace12708beed1d82f4452c41c8d198cda4",
       "sourceBytes": 2035997,
       "outputBytes": 732944,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.cavalleaf": {
+      "url": "./prepared/objects/8b112e663f577203f3cc1a93d0dcea6564205920fe671b78ea9d255098e4250e/asset.webp",
+      "sourceHash": "d7f57e63157e8b52d37fc8ead9d7e547b2b32197d61bc85b84abaed07d8db9cf",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f9a03973ca7826aca4b06df70c906e6cf35c76897e04b436d315269b3d682fec",
+      "sourceBytes": 2537699,
+      "outputBytes": 970708,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.cavalleaf.meadow-return": {
+      "url": "./prepared/objects/35d406c632294bc0b7e4c568c8a735221925ce7f8837ea8c219ab35801b42e87/asset.webp",
+      "sourceHash": "3a0627367425bf7434097fcd3f87f297a7f0162eee2c78f7b08fa675db8dfb92",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "2c7ff0cc9cac10a1147abf7d071bcfda9fdb93e7993d27d1736e810690456641",
+      "sourceBytes": 2472630,
+      "outputBytes": 1005196,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.cavalleaf.raincall": {
+      "url": "./prepared/objects/25957ad81d413ea4e0028fca7649870b5095fe9a1375139dbcce9f20a8359530/asset.webp",
+      "sourceHash": "626637513621a770a3f68b7a3afbd41f11005f61be0e0da735808e1d6ee9c3e1",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "dcb7ecfeafdffe86f441e72c47b26dcd7d659a6552c43e065f7d49d0f735e244",
+      "sourceBytes": 2581983,
+      "outputBytes": 989410,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.cavalleaf.prairie-leap": {
+      "url": "./prepared/objects/6200f9c9e80739871a68af2385979ca2d685b2fe045410033a827a0f572d7c8b/asset.webp",
+      "sourceHash": "83fc87c3444258bfc8451e6e3b0dab1cba6c03c9bf59e8194287ae5385d2bc10",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "1eb9863a2455096a9976b190f44a49f4465812e9b19dede9a15219dac4b1c4a6",
+      "sourceBytes": 2417719,
+      "outputBytes": 980112,
       "width": 720,
       "height": 960,
       "alpha": false

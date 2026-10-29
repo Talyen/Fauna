@@ -16,6 +16,10 @@ export const SCENARIOS = [
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
+  "cavalleaf-battle",
+  "cavalleaf-no-backup",
+  "cavalleaf-collection",
+  "cavalleaf-rank-five",
   "brumalyn-battle",
   "brumalyn-collection",
   "brumalyn-rank-five",
@@ -126,6 +130,7 @@ const creatureFixtures = [
   "wisterelle",
   "alpenglen",
   "aerostat",
+  "cavalleaf",
   "brumalyn",
   "parhelion",
   "dulcera",
@@ -332,6 +337,7 @@ export async function reviewScenario(server, name) {
         ? ["orifable-food", "orifable-targeting"].includes(name)
         : undefined;
     game = argument === undefined ? fixture[`${creature}Battle`]() : fixture[`${creature}Battle`](argument);
+    if (name === "cavalleaf-no-backup") game = { ...game, reserves: [] };
     if (rankFive && !["alpenglen", "aerostat"].includes(creature))
       game = {
         ...game,

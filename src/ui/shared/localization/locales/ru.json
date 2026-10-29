@@ -2981,6 +2981,42 @@
     "sourceHash": "332937c008f1fe46680f8fcd3ed5de7918b7ca491a690fd2bb5e8f3bcca0ad37",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "reviewed": true,
+    "source": "Meadow Return",
+    "sourceHash": "b6dc640190a2c31f139d1d03ddb5206e95f4a400552ad8e7f7f9c2839e44cc84",
+    "text": "Возрождение луга"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "3c394278ed5a4f42d857eeb2beb426377c5082824d8979eef0e2c1141dd9dd9f",
+    "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "reviewed": true,
+    "source": "Prairie Leap",
+    "sourceHash": "7da4412e0e5a6470f19184893cbb25231ea57b518ca72feccb2a3218b6d23a4b",
+    "text": "Прыжок прерии"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "sourceHash": "a0afdbffc03aa899e41d579f7b4839ddff45e31d77d1761f3007edcda605b13f",
+    "text": "Сменитесь со случайным запасным / Вышедший союзник получает {{value0}} <keyword0>шипов</keyword0>"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "reviewed": true,
+    "source": "Raincall",
+    "sourceHash": "67735d7a215f540b3c6681c6781c5320071ba5b4dcab0aefed09f99c07610fb0",
+    "text": "Призыв дождя"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "sourceHash": "d243d7908bf833880fa2da86eb79a07ce1ed2a9149dac8e30f53cb0a1531f8eb",
+    "text": "Возьмите карту <keyword0>Воды</keyword0> / <keyword1>Очистите</keyword1> союзников от <keyword2>Горения</keyword2>"
+  },
   "content.card.chimecricket-attack.name": {
     "reviewed": true,
     "source": "Resonant Leap",
@@ -5338,6 +5374,60 @@
     "source": "Sporecoat",
     "sourceHash": "77de3fc6400c01cd35ae99f690b2500f11c9dd159c0d3919ad3b92798605d18a",
     "text": "Покров спор"
+  },
+  "content.species.cavalleaf.name": {
+    "reviewed": true,
+    "source": "Cavalleaf",
+    "sourceHash": "3157f21fe329e581f7d7d08a4613300303b97d8fdcbcda86bced249dd652e5fe",
+    "text": "Кавалиф"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "c1616e6e472e3ebcf310929b87dc59db93981328f48c41e7f0ee156a6a5837df",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "8c84b7cbe530330a315bda5ff0e2be4ec6ef6c7927605dfda29ea52d88440ea0",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "4854338ed62e4d1dedd4189e58db879df8220cc11cb04247787cc1aa9b4804f9",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "c75c7ea5584ff5eb5360d1f959060eb6c30dfde171c151a747362d4270c8459f",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "7e55aa8ce2802f9b663da53064ffbb55e38cf95b8755a604b2b101c0c8ff402f",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "163cb9f89292031bfcad4c06f036558576f85627e4d1c22ab74d4e00be297322",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзникам даёт им {{value0}} <keyword1>шипов</keyword1>"
+  },
+  "content.species.cavalleaf.title": {
+    "reviewed": true,
+    "source": "The meadow pathmaker",
+    "sourceHash": "67321806297c038bc0671144051862209afd89478f76b52cec65c3fbc590271d",
+    "text": "Первопроходец лугов"
+  },
+  "content.species.cavalleaf.trait": {
+    "reviewed": true,
+    "source": "Wild Path",
+    "sourceHash": "b3000585d7053c8bc6f6d398c288e7f8231647950f6c6b1594ddc82d613b195e",
+    "text": "Дикая тропа"
   },
   "content.species.chimecricket.name": {
     "reviewed": true,

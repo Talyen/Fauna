@@ -2981,6 +2981,42 @@
     "sourceHash": "c942c3e4d29e8e42e73c4483264855825ecc23957485850499197df21a228f4e",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karten"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "reviewed": true,
+    "source": "Meadow Return",
+    "sourceHash": "4061d00f76f87216d12b97bbd03e71ed326b0262e1b8e668632961692f9b6c41",
+    "text": "Rückkehr der Wiese"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "957869e3d1c91a60b673e5a60991d32a1b6faeb6bb4306419a2468631ac4e59b",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "reviewed": true,
+    "source": "Prairie Leap",
+    "sourceHash": "878004a1da412dbd52279dd0de17489e513135c5d48c22ca157121153fe49632",
+    "text": "Präriesprung"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "sourceHash": "91988d4b5dc320321426de03fae89e36e38355be506d653060d8679a9668559b",
+    "text": "Tausche gegen eine zufällige Reserve / Der eintreffende Verbündete erhält {{value0}} <keyword0>Dornen</keyword0>"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "reviewed": true,
+    "source": "Raincall",
+    "sourceHash": "04aa07512dfc00f928a14b34bd1cee6ad63c08e0874fc9ad8add67ea54ed8444",
+    "text": "Regenruf"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "sourceHash": "330bf0538c31432b7951fd4cc193660b5a006377651a5acf898211e96ce49e33",
+    "text": "Ziehe eine <keyword0>Wasser</keyword0>-Karte / <keyword1>Reinige</keyword1> <keyword2>Brand</keyword2> von Verbündeten"
+  },
   "content.card.chimecricket-attack.name": {
     "reviewed": true,
     "source": "Resonant Leap",
@@ -5338,6 +5374,60 @@
     "source": "Sporecoat",
     "sourceHash": "0f8b8f34a8b127faa858ea6969253be828e4d49c9101b9f98ea5a39a27bf8dd4",
     "text": "Sporenmantel"
+  },
+  "content.species.cavalleaf.name": {
+    "reviewed": true,
+    "source": "Cavalleaf",
+    "sourceHash": "b0e53ad581756ba71d26f8bce924932e8e4520cefb24334f09533d2587886818",
+    "text": "Cavalleaf"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "b171240e08742e1cc1fd00ca4d192c96fa7e6a4527e14005f7c22a6204afb19e",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "7f9abdf9e84db6ec62a2ffd19a56c4cc3e5914e0cc16347efef78551924bb255",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "5ff152d43a3e2cdcbfcc61928e5cd0882c417aa83761111cd8c85a541ad239f8",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "e480f4d5c85bccbcc2f4a69e96d8484a287d0dfbf8f1a00ed95c8d1dd1234e99",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "98336964e8a1cf2f07bdaf1fb70f9c1fd8e1af1bf2de4c111ddd2e58ae05cc09",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "6f5edebd1b8bf58725db08ec4b320c5205c5977a6ebfa2aeb650a197f00b9600",
+    "text": "Das Wiederherstellen von <keyword0>Gesundheit</keyword0> bei Verbündeten gewährt ihnen {{value0}} <keyword1>Dornen</keyword1>"
+  },
+  "content.species.cavalleaf.title": {
+    "reviewed": true,
+    "source": "The meadow pathmaker",
+    "sourceHash": "ffb1166d92b9bf8f0a4a54ab67f400337dd606e0e1803c3f8461000891122bc5",
+    "text": "Der Wegbereiter der Wiese"
+  },
+  "content.species.cavalleaf.trait": {
+    "reviewed": true,
+    "source": "Wild Path",
+    "sourceHash": "94202dcd793c24578c91e2655094de2dcd8c89766019778f609f8f5a6cb4f990",
+    "text": "Wilder Pfad"
   },
   "content.species.chimecricket.name": {
     "reviewed": true,

@@ -37,7 +37,7 @@ import {
   removeControlBuildup,
 } from "./index";
 import { roll } from "../random";
-import { drawDiscard, draw, redrawHand } from "../card-zones";
+import { drawDiscard, draw, drawKeyword, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
 import { actorPower, livingFriends, livingOpponents, type PrimaryContext } from "./ability-context";
@@ -357,6 +357,14 @@ export function executePrimary(context: PrimaryContext) {
       for (const unit of def.target === "allAllies" ? livingFriends(state, action) : [actor])
         grantTemporaryDodge(unit, value, events);
       return;
+    case "raincall":
+      if (!enemy) drawKeyword(state, "water", events);
+      for (const unit of livingFriends(state, action)) {
+        if (actor.health <= 0) break;
+        if (ensureCombat(unit).burn > 0)
+          removeEffects(unit, "cleanse", 1, events, state, "burn", actor, false);
+      }
+      return;
     case "teamClearBlind":
       if (def.draw) {
         if (action.side === "player") draw(state, value, events);
@@ -419,6 +427,11 @@ export function executePrimary(context: PrimaryContext) {
       if (action.side === "player" && action.allyTargetId)
         swapFromCard(state, actor, events, true, action.allyTargetId);
       return;
+    case "swapThorns": {
+      const incoming = swapFromCard(state, actor, events, true);
+      if (incoming && incoming.health > 0) grantStatus(incoming, "thorns", value, events, state);
+      return;
+    }
     case "swapDodge": {
       const incoming = swapFromCard(state, actor, events);
       if (incoming) grantTemporaryDodge(incoming, value, events);

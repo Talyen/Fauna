@@ -2981,6 +2981,42 @@
     "sourceHash": "2e8f07b444ffdb7dc54146a59dccfdd313f0f485a98083905c5891144ca6cb06",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "reviewed": true,
+    "source": "Meadow Return",
+    "sourceHash": "ef1ecf841929f9fe2ee5fa83a52409ec78ae6862534f693fd10400d7108bb5f9",
+    "text": "草甸回归"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "68a3fbbf3916a43cc9d8c5564b75f04d28462af939034069083f9ab25f2cca79",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "reviewed": true,
+    "source": "Prairie Leap",
+    "sourceHash": "241f106a50f62da6bf4df52f4cd556b3429521f7cd0e580fb0a58f2496f0858a",
+    "text": "草原跃迁"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "sourceHash": "312deb3132cfc5f558d00aee1fbecd2d08e74f6642c47f46525a2fe7bc15d314",
+    "text": "与随机一名后备队员交换 / 入场盟友获得{{value0}}层<keyword0>荆棘</keyword0>"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "reviewed": true,
+    "source": "Raincall",
+    "sourceHash": "9bee69e75709ed34181e2b8852400caffe219d0afecd5ce040f3f291f1c2ac99",
+    "text": "唤雨"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "sourceHash": "8adf2fe50f9f01a412c2efe82170725b1d8ff373a7b23cf048cd0c1114d07deb",
+    "text": "抽取一张<keyword0>水</keyword0>卡牌 / <keyword1>净化</keyword1>盟友的<keyword2>灼烧</keyword2>"
+  },
   "content.card.chimecricket-attack.name": {
     "reviewed": true,
     "source": "Resonant Leap",
@@ -5338,6 +5374,60 @@
     "source": "Sporecoat",
     "sourceHash": "b10772ce2de53e1e34f8cf09ae23e8f6f63c54943234ae0453357860e9b3ffd0",
     "text": "孢子外衣"
+  },
+  "content.species.cavalleaf.name": {
+    "reviewed": true,
+    "source": "Cavalleaf",
+    "sourceHash": "80cb9299c5b1e88499cc2b8b2cefc202e724ce411316b1e17f9dfe3dd7d55ffa",
+    "text": "叶鬃马"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "6584d767f74afb20b2da972bf38359a1522e1347931a39a7f048f7c142418779",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "ab79b5582868df0f905529180a7f471857e667dfbdd05f82ddf83fcb7e000c2c",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "f638686c45c46ffbc240c43a46e3093a26638a51cc6ed1dc5ab29582c27fb63e",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "9b929b427db18a204adec030022023fcc5924388c9f567c837fb9cf2370fa54a",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "e846f727d0c92644c4730e8d1a1d9f6effc225e8f9372cee2fb5dce015b4b18f",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "10698449eec0c35b3f01d223711e36b763dd62c59a75bf0023b2ff7be0b45c55",
+    "text": "为盟友恢复<keyword0>生命</keyword0>时，给予其{{value0}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.species.cavalleaf.title": {
+    "reviewed": true,
+    "source": "The meadow pathmaker",
+    "sourceHash": "e162aa61fb0690ad0d300aa57f618bbb8cfb9fd447f4823ab2c0b09baddbb033",
+    "text": "草甸开路者"
+  },
+  "content.species.cavalleaf.trait": {
+    "reviewed": true,
+    "source": "Wild Path",
+    "sourceHash": "ec0577c264ee2da18279e5f370be081ae0ff990ae34c0f0f37f3aac59efdd2b4",
+    "text": "荒野之路"
   },
   "content.species.chimecricket.name": {
     "reviewed": true,

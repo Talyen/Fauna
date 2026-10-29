@@ -123,7 +123,10 @@ function inspectCard(
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
   if (def.effect === "resurrect" && !hasRecipients(def))
     return { allowed: false, reason: "There are no knocked-out allies." };
-  if (def.effect === "swapChosen" && !hasRecipients(def))
+  if (
+    (def.effect === "swapChosen" && !hasRecipients(def)) ||
+    (def.effect === "swapThorns" && !state.reserves.some((unit) => unit.health > 0))
+  )
     return { allowed: false, reason: "There are no living backups." };
   if (def.effect === "heal" && def.target === "injured" && !hasRecipients(def))
     return { allowed: false, reason: "There are no injured allies." };

@@ -387,6 +387,16 @@ export function battleBenefits(
                 : 0,
       );
     }
+    case "raincall": {
+      const burning = countMatching(allies(), (unit) => (unit.combat?.burn ?? 0) > 0);
+      return burning > 0
+        ? controlRemoval(burning)
+        : support(
+            facts.drawAvailable(play, { kind: "drawKeyword", keyword: "water", amount: 1 })
+              ? "standardUtility"
+              : "none",
+          );
+    }
     case "teamClearBlind": {
       const blinded = countMatching(allies(), (unit) => unit.combat?.blind);
       return blinded > 0
@@ -562,6 +572,8 @@ export function battleBenefits(
       const useful = countMatching(allies(), (unit) => !unit.combat?.nullify);
       return support(useful > 0 ? "utility" : "none", useful);
     }
+    case "swapThorns":
+      return support(state.reserves.some((unit) => unit.health > 0) ? "utility" : "none");
     case "swapDodge":
       return support(
         state.reserves.some((unit) => unit.health > 0) || allies().some((unit) => unit.id !== actor.id)

@@ -2981,6 +2981,42 @@
     "sourceHash": "28f53cd79f58dd8dcee67caadb9a187548f4703e096c41e8ea861926d092fd51",
     "text": "Troque por um aliado aleatório da reserva; Compre {{value0}} cartas"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "reviewed": true,
+    "source": "Meadow Return",
+    "sourceHash": "f50d131378b3818d577c0e915d786b731c316a8a55c00ba78fc07e146c98a433",
+    "text": "Retorno do prado"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "67fe08ba4834eb4534c841a583a9d82f2d4c8edb7b6188420a66b4ae78f9b295",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "reviewed": true,
+    "source": "Prairie Leap",
+    "sourceHash": "bd4cab11ef5123d5e4e31f02adfa9047e67697711114662f972245891ac07597",
+    "text": "Salto da pradaria"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "sourceHash": "91e8f68f4ecb86887e77e127858a9613e5a0f917232b14aaa26739b50900ddea",
+    "text": "Troque por uma reserva aleatória / O aliado que entra recebe {{value0}} <keyword0>Espinhos</keyword0>"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "reviewed": true,
+    "source": "Raincall",
+    "sourceHash": "77bd8f7d8f948c0f7315b1e7037066c5be1b44bb9ee4bdcd8823ee59fc3bf11f",
+    "text": "Chamado da chuva"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "sourceHash": "ea03dd7bec82ca7563e0bbfeacb8ae88433ad32b84dab42599de86d447209bb1",
+    "text": "Compre uma carta de <keyword0>Água</keyword0> / <keyword1>Purifique</keyword1> a <keyword2>Queimadura</keyword2> dos aliados"
+  },
   "content.card.chimecricket-attack.name": {
     "reviewed": true,
     "source": "Resonant Leap",
@@ -5338,6 +5374,60 @@
     "source": "Sporecoat",
     "sourceHash": "600c28d9878f7c778559783d515bb1d27244d2c1680193028c9897eb91f79d16",
     "text": "Manto de esporos"
+  },
+  "content.species.cavalleaf.name": {
+    "reviewed": true,
+    "source": "Cavalleaf",
+    "sourceHash": "ca3a81abb6a1c37218ff11639dbefa40acbff350b658a5e8eec4287efe58c9f6",
+    "text": "Cavalleaf"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "b65c255d59f9f5f3e7f36c62987424c5f2a444372a2d09bb850849dcbed34d52",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "02b2c3e6ab936b840f0b197db09e634e4878690908719bbe27f570a1aea8394a",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "309b40a844402cf9a4981dcaee9f320e4d15fe51786b9222cc533deae9a640f7",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "36037c43f9804a9d84f2cffbe2ebe9d0245f5bb49a41b4a0d77c091b525ff625",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "edc7cbcae28dac8ae1ae3bfabc48e238e1f60035d3b4acd9cdceb9f3278d24f0",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "5c418d4d6f26291d948f44b85f467724562cbf6284b030e5204f46eddb29eb94",
+    "text": "Restaurar <keyword0>Saúde</keyword0> aos aliados concede a eles {{value0}} <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.cavalleaf.title": {
+    "reviewed": true,
+    "source": "The meadow pathmaker",
+    "sourceHash": "af109426ce2a19c287cba8cea76b5ed4964bd179a82580f70e1fff060830f8e5",
+    "text": "O desbravador do prado"
+  },
+  "content.species.cavalleaf.trait": {
+    "reviewed": true,
+    "source": "Wild Path",
+    "sourceHash": "e8fc491d25296490ff42273e3156d015acb5a11e61adf3fd0a084883ea4c2f1e",
+    "text": "Caminho selvagem"
   },
   "content.species.chimecricket.name": {
     "reviewed": true,

@@ -52,3 +52,4 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Alpenglen](alpenglen.md) · [implementation](../../../src/game/content/creatures/alpenglen.ts) — Last Warmth, attack reflection and a last-card Critical Hit
 - [Wisterelle](wisterelle.md) · [implementation](../../../src/game/content/creatures/wisterelle.ts) — Lost and Found and the flowering station
 - [Brumalyn](brumalyn.md) · [implementation](../../../src/game/content/creatures/brumalyn.ts) — Winter’s Reprieve and the winter guide
+- [Cavalleaf](cavalleaf.md) · [implementation](../../../src/game/content/creatures/cavalleaf.ts) — Wild Path, team recovery and protective passage

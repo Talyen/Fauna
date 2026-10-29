@@ -1589,6 +1589,30 @@
     "reference": "Swap out for a random backup; Draw 2 cards",
     "contextHash": "c8981f1d0f5c22890835165e04f947683660ca33a8d724bf88f3117bf93dc412"
   },
+  "content.card.cavalleaf-meadow-return.name": {
+    "text": "Meadow Return"
+  },
+  "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "reference": "Restore 2 Health to all allies",
+    "contextHash": "c47fc96407ae7b9e38268837d9fadd8931ee7aabbee53d879784342cdcf626d5"
+  },
+  "content.card.cavalleaf-prairie-leap.name": {
+    "text": "Prairie Leap"
+  },
+  "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
+    "text": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
+    "reference": "Swap out for a random backup / Incoming ally gains 4 Thorns",
+    "contextHash": "d349e6c926fd54124021e411443ffda4b313a832573418d195ed53852c4ae439"
+  },
+  "content.card.cavalleaf-raincall.name": {
+    "text": "Raincall"
+  },
+  "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
+    "text": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
+    "reference": "Draw a Water card / Cleanse Burn from allies",
+    "contextHash": "8b36fc91187e385f4ef1d467aa29c7eb082f6caa8ec272d672a2475344f98d62"
+  },
   "content.card.chimecricket-attack.name": {
     "text": "Resonant Leap"
   },
@@ -3138,6 +3162,39 @@
   },
   "content.species.captoad.trait": {
     "text": "Sporecoat"
+  },
+  "content.species.cavalleaf.name": {
+    "text": "Cavalleaf"
+  },
+  "content.species.cavalleaf.passive.0.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 1 Thorns"
+  },
+  "content.species.cavalleaf.passive.1.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 2 Thorns"
+  },
+  "content.species.cavalleaf.passive.2.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 3 Thorns"
+  },
+  "content.species.cavalleaf.passive.3.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 4 Thorns"
+  },
+  "content.species.cavalleaf.passive.4.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 5 Thorns"
+  },
+  "content.species.cavalleaf.passive.5.rule": {
+    "text": "Restoring <keyword0>Health</keyword0> to allies grants them {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "Restoring Health to allies grants them 6 Thorns"
+  },
+  "content.species.cavalleaf.title": {
+    "text": "The meadow pathmaker"
+  },
+  "content.species.cavalleaf.trait": {
+    "text": "Wild Path"
   },
   "content.species.chimecricket.name": {
     "text": "Chimecricket"

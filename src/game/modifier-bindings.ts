@@ -429,6 +429,7 @@ export const modifierImplementations = freeze(
       lastWarmth: ["./combat/card-modifiers#lastWarmth"],
       sunthaw: ["./combat/statuses#cleanseRewards"],
       wintersReprieve: ["./combat/statuses#controlRewards"],
+      wildPath: ["./combat/protection#restoreHealth"],
       wellProvisioned: ["./combat/food#wellProvisioned"],
       gentlePassage: ["./team#gentlePassage"],
       passingFlame: ["./combat/damage-reactions#passingFlame"],

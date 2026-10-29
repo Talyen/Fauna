@@ -80,6 +80,14 @@ export function* restoreHealth(
     if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("groves-favor"))
       yield* reaction("grantStatus", unit, "thorns", boonRule("groves-favor").thorns, events, state);
   }
+  if (gain > 0 && state?.phase === "battle") {
+    const side = isEnemy(unit) ? "enemy" : "player";
+    for (const guide of battlefield(state, side)) {
+      if (guide.health <= 0 || ("minion" in guide && guide.minion)) continue;
+      const thorns = passiveAmount(side === "player" ? state : undefined, guide.species, "wildPath");
+      if (thorns) yield* reaction("grantStatus", unit, "thorns", thorns, events, state);
+    }
+  }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
     if (

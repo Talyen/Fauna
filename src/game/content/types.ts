@@ -38,7 +38,8 @@ export type SpeciesId =
   | "aerostat"
   | "alpenglen"
   | "wisterelle"
-  | "brumalyn";
+  | "brumalyn"
+  | "cavalleaf";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "lostAndFound"; amount: number }
@@ -47,6 +48,7 @@ type PassiveEffect =
   | { kind: "passingFlame"; amount: number }
   | { kind: "sunthaw"; amount: number }
   | { kind: "wintersReprieve"; amount: number }
+  | { kind: "wildPath"; amount: number }
   | { kind: "gentlePassage"; amount: number }
   | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }

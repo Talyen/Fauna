@@ -30,6 +30,17 @@ const automatic = {
 
 const rules: AbilityRuleCatalog = freeze(
   {
+    raincall: {
+      ...automatic,
+      scaling: "authored",
+      keywords: ["health"],
+      describe: () => "Draw a Water card / Cleanse Burn from allies",
+    },
+    swapThorns: {
+      ...automatic,
+      keywords: ["nature"],
+      describe: (_card, { value }) => `Swap out for a random backup / Incoming ally gains ${value} Thorns`,
+    },
     springbound: {
       ...automatic,
       keywords: ["health", "dodge"],

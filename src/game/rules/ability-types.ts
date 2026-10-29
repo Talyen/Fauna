@@ -3,6 +3,8 @@ import type { DamageType } from "../keywords";
 export type AbilityKind =
   | "swapChosen"
   | "swapDodge"
+  | "swapThorns"
+  | "raincall"
   | "springbound"
   | "repeatNextCard"
   | "procession"

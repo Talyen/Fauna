@@ -76,6 +76,7 @@ export function controlled(unit: Combatant, state?: GameState, card?: CardDefini
           (card.effect === "swap" ||
             card.effect === "swapChosen" ||
             card.effect === "swapDodge" ||
+            card.effect === "swapThorns" ||
             card.effect === "swapLowest")))
     )
   );

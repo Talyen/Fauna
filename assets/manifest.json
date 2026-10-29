@@ -4493,6 +4493,50 @@
       "aspect": [3, 4],
       "provenance": "User-selected Google Drive Boon artwork: Nightbloom Bell.png; https://drive.google.com/file/d/1IkHGoDLpdTeQH3xJ1pY27huhVSpXmzDO/view; original PNG preserved unchanged",
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "creature.cavalleaf",
+      "origin": "repository",
+      "source": "public/art/creatures/cavalleaf/portrait.png",
+      "output": "art/cavalleaf/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Cavalleaf artwork from Google Drive: https://drive.google.com/file/d/1KBEBqne0jHUe8iKN3Vh-LYP7nN0h2OSF/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cavalleaf.meadow-return",
+      "origin": "repository",
+      "source": "public/art/creatures/cavalleaf/meadow-return.png",
+      "output": "art/cavalleaf/meadow-return.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cavalleaf artwork from Google Drive: https://drive.google.com/file/d/16VZCLwUwouJxf8RTKz7iT55KmF_wBm9U/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cavalleaf.raincall",
+      "origin": "repository",
+      "source": "public/art/creatures/cavalleaf/raincall.png",
+      "output": "art/cavalleaf/raincall.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cavalleaf artwork from Google Drive: https://drive.google.com/file/d/1Rw3glFE2tVF5B_QI96Ql-h03p11mTdJt/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cavalleaf.prairie-leap",
+      "origin": "repository",
+      "source": "public/art/creatures/cavalleaf/prairie-leap.png",
+      "output": "art/cavalleaf/prairie-leap.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cavalleaf artwork from Google Drive: https://drive.google.com/file/d/1wjlWJepzFSk7YK43ztFD8N5_Q91wo_bx/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }
