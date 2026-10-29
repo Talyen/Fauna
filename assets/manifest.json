@@ -2794,13 +2794,13 @@
     {
       "id": "minion.royal-bloom",
       "origin": "repository",
-      "source": "public/art/velvetmonarch/royal-bloom.png",
+      "source": "public/art/velvetmonarch/royal-bloom-crown.png",
       "output": "art/velvetmonarch/royal-bloom.webp",
       "recipe": "card-webp",
       "kind": "art",
       "aspect": [4, 3],
-      "provenance": "Generated with built-in ImageGen using Velvetmonarch portrait and Meadow Decree as references",
-      "rights": "User-provided Fauna references; project artwork"
+      "provenance": "Generated fresh with built-in ImageGen using Fauna Locked Art Style Prompt: https://drive.google.com/file/d/1VODYgwwZO9leeR5xLgc5OoVdbefRiYRv/view; user selected crowned cup option on 2026-10-29",
+      "rights": "Generated project artwork; user-provided Fauna style prompt"
     },
     {
       "id": "action.velvetmonarch.royal-repose",

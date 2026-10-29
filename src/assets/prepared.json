@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "79f9bd5cd2eb3bdfd6e3655b34303b6991df42c987b280519e9fda89f68e9631",
-  "generation": "a7e4ae222cdf0d7194005a8b9190c77c50e8545bced7ef1d4d91a67c5de214e4",
+  "manifestHash": "c460fe7ed04265deb6d84c3439544f1b95f03fab476f68b8ca6ab71e7b4bf012",
+  "generation": "353c89a2cd40bd0558ef0a1bf48a54bd48d85f69d77664dc8436a68dae1475aa",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -3208,14 +3208,14 @@
       "alpha": false
     },
     "minion.royal-bloom": {
-      "url": "./prepared/objects/0c3d07ba0fe1d63b63823147c05e0ad923388006ecd72048f33ca8d2a31decd9/asset.webp",
-      "sourceHash": "f44903d0becbe2bb5dd7aafc8df1784836ef005f6d45211c0b725895785735d1",
+      "url": "./prepared/objects/452a1fcbbecd278aec3e1a4137b07fb4e934f0f2cea49af0432b1b35c1cbce16/asset.webp",
+      "sourceHash": "380829c261844a3ad1ceaad8c1b86cc5789088f0a08a5e0954382569e8b916e0",
       "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
       "recipe": "card-webp",
       "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
-      "outputHash": "3fec01cb9c4bdd1096fe662fd7b41ac1b985dd3835f27d55b5f732a61e62c553",
-      "sourceBytes": 2298008,
-      "outputBytes": 919792,
+      "outputHash": "12e022d12f661738d84ed3aa95b5447a22943f6636dd88b9fd677469bbee1cb9",
+      "sourceBytes": 2427018,
+      "outputBytes": 905478,
       "width": 960,
       "height": 720,
       "alpha": false
