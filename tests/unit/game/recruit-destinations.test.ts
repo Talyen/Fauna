@@ -21,31 +21,28 @@ function offer(size = 1) {
   });
 }
 
-it.each([1, 2, 3, 4])(
-  "recruits directly into a %s-creature roster without advancing or rerolling",
-  (size) => {
-    const before = offer(size);
-    const command = { type: "recruitDestination", species: "cadenza" } as const;
-    const result = dispatch(decodeSave(encodeSave(before)), command);
-    expect(result.accepted).toBe(true);
-    const next = result.state;
-    expect(next.phase).toBe("teamSelection");
-    expect(next.encounter).toBe(before.encounter);
-    expect(next.rng).toBe(before.rng);
-    expect(next.expedition).toEqual({ ...before.expedition, recruit: null, lastRoom: "recruit" });
-    expect(next.currency).toBe(before.currency);
-    expect(next.journey).toEqual(before.journey);
-    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toHaveLength(size + 1);
-    expect(next.team.map((unit) => unit.id)).toHaveLength(Math.min(size + 1, 3));
-    const newcomer = [...next.team, ...next.reserves].find((creature) => creature.species === "cadenza")!;
-    expect(newcomer.health).toBe(species("cadenza").health);
-    expect(next.discovery.recruited.cadenza).toBe(1);
-    expect(next.discovery.encountered).toContain("cadenza");
-    expect(result.events.some((event) => event.kind === "reward")).toBe(true);
-    expect(decodeSave(encodeSave(next))).toEqual(next);
-    expect(dispatch(next, command).state).toBe(next);
-  },
-);
+it.each([1, 2, 3, 4])("recruits directly into a %s-creature roster and advances the room", (size) => {
+  const before = offer(size);
+  const command = { type: "recruitDestination", species: "cadenza" } as const;
+  const result = dispatch(decodeSave(encodeSave(before)), command);
+  expect(result.accepted).toBe(true);
+  const next = result.state;
+  expect(next.phase).toBe("teamSelection");
+  expect(next.encounter).toBe(before.encounter + 1);
+  expect(next.expedition!.lastRoom).toBe("recruit");
+  expect(next.expedition!.recruit).toBeNull();
+  expect(next.currency).toBe(before.currency);
+  expect(next.journey).toEqual(before.journey);
+  expect([...next.team, ...next.reserves].map((unit) => unit.species)).toHaveLength(size + 1);
+  expect(next.team.map((unit) => unit.id)).toHaveLength(Math.min(size + 1, 3));
+  const newcomer = [...next.team, ...next.reserves].find((creature) => creature.species === "cadenza")!;
+  expect(newcomer.health).toBe(species("cadenza").health);
+  expect(next.discovery.recruited.cadenza).toBe(1);
+  expect(next.discovery.encountered).toContain("cadenza");
+  expect(result.events.some((event) => event.kind === "reward")).toBe(true);
+  expect(decodeSave(encodeSave(next))).toEqual(next);
+  expect(dispatch(next, command).state).toBe(next);
+});
 
 it("rejects other species, full rosters and recruitment during combat without changing state or RNG", () => {
   const game = offer();
@@ -62,19 +59,22 @@ it("rejects other species, full rosters and recruitment during combat without ch
   expect(canRecruitDestination(next)).toBe(false);
 });
 
-it("preserves offers through Campfire and reload, then suppresses consecutive Campfires", () => {
+it("advances after Campfire and reload, then suppresses consecutive Campfires", () => {
   const before = produce(offer(), (draft) => {
     draft.team[0]!.health = 1;
   });
   const visiting = accept(before, { type: "visitCampfire" });
   const rested = accept(decodeSave(encodeSave(visiting)), { type: "rest" });
-  expect(rested.expedition!.recruit).toBe(before.expedition!.recruit);
-  expect(rested.expedition!.pack).toEqual(before.expedition!.pack);
-  expect(rested.rng).toBe(before.rng);
+  expect(rested.encounter).toBe(before.encounter + 1);
+  expect(rested.expedition!.lastRoom).toBe("campfire");
   expect(canVisitCampfire(rested)).toBe(false);
   expect(dispatch(rested, { type: "visitCampfire" }).state).toBe(rested);
-  expect(canRecruitDestination(rested)).toBe(true);
-  const recruited = accept(rested, { type: "recruitDestination", species: "cadenza" });
+  const recruited = accept(
+    produce(rested, (draft) => {
+      draft.expedition!.recruit = "cadenza";
+    }),
+    { type: "recruitDestination", species: "cadenza" },
+  );
   expect(canVisitCampfire(recruited)).toBe(true);
   expect(decodeSave(encodeSave(accept(recruited, { type: "abandon" })))).toBeTruthy();
 });

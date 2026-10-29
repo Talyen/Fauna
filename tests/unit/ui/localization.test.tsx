@@ -2428,6 +2428,7 @@ it("extracts and presents transient combat status variants without changing thei
     freeLight: true,
     freeCard: true,
     oasisLeech: true,
+    turnBackReady: true,
     blind: true,
     nullifyFreeze: true,
     attackReflection: true,

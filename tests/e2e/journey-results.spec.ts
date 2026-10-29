@@ -39,6 +39,11 @@ for (const [width, enlarged, outcome] of [
               : completeRecruitment(game);
         if (game.phase === "boon") game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
       }
+      game = produce(game, (draft) => {
+        draft.encounter = 29;
+        draft.expedition = { pack: authoredPack(29), recruit: null, lastRoom: "combat" };
+        draft.support = null;
+      });
       game = victoryReady(accept(game, { type: "beginBattle" }));
       ending = { type: "play", cardId: game.battle!.hand[0]!, targetId: "enemy-0" };
     } else {
@@ -91,6 +96,8 @@ for (const [width, enlarged, outcome] of [
     if (outcome === "victory") {
       expect(game.phase).toBe("recruit");
       expect(game.reward!.recruits).toEqual([defeatedBoss]);
+      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+      await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
       await reloadHome(page);
       await resume(page);
       expect(await state(page)).toEqual(game);

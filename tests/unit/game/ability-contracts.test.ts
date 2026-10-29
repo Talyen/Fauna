@@ -35,8 +35,9 @@ import type { BattleState, GameEvent } from "../../../src/game/types";
 // Preserve values and array order while allowing builders to assemble object
 // properties in a different order. Card digest updated for Undertow Knot and Spark Decoy.
 // Species digest includes Bloomquail's clarification that conversion uses gained Block.
-// Catalog hashes include Brumalyn's appended kit; its behavior has focused contracts.
-it("preserves every authored creature, passive tier, card and Pearl", () => {
+// Preserve the historical catalog oracle; the six newer kits have focused contracts.
+const newerSpecies = ["chronora", "velvetmonarch", "cavalleaf", "wendlet", "vitrilo", "velouria"];
+it("preserves the recorded creature, passive tier, card and Pearl catalog", () => {
   const digest = (value: unknown) =>
     createHash("sha256")
       .update(
@@ -48,8 +49,8 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
       )
       .digest("hex");
   expect({
-    cards: digest(CARDS),
-    species: digest(SPECIES),
+    cards: digest(CARDS.filter((card) => !newerSpecies.includes(card.species ?? ""))),
+    species: digest(SPECIES.filter((entry) => !newerSpecies.includes(entry.id))),
     pearl: digest(PEARL),
   }).toMatchInlineSnapshot(`
     {
@@ -82,7 +83,9 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   const cards = [
     ...CARDS.filter(
       (card) =>
-        !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen", "brumalyn"].includes(card.species ?? ""),
+        !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen", "brumalyn", ...newerSpecies].includes(
+          card.species ?? "",
+        ),
     ),
     PEARL,
     ...FOOD_CARDS,

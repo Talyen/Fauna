@@ -17,7 +17,7 @@ it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id
   const game = requireBattle(
     produce(teamRun(42, [id]), (state) => {
       state.team[0]!.health--;
-      if (id === "wisterelle")
+      if (id === "wisterelle" || id === "cavalleaf")
         addReserve(state, "living-backup", "coralcurl", species("coralcurl").health, freshCombat());
       state.battle!.hand = state.cards.map((card) => card.id);
       state.battle!.draw = [];
@@ -83,6 +83,8 @@ it.each(CARDS.filter((card) => card.species !== null && enemyCanUse(card) && car
   (authored) => {
     const game = produce(teamRun(1, [authored.species!, "prismram", "mossguard"]), (draft) => {
       draft.rng = 1;
+      // Compare each side from the same battlefield; entry summons are covered separately.
+      draft.battle!.minions = [];
       draft.team.forEach((unit) => {
         unit.health = species(unit.species).health - 5;
         unit.block = 0;
