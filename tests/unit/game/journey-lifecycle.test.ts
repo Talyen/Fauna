@@ -147,7 +147,7 @@ it("completes the final Boss reward after removing the former Legendary", () => 
   expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
 });
 
-it("allows an owned Legendary as the final Boss", () => {
+it("excludes an owned Legendary from the final Boss", () => {
   const ready = produce(starterJourney(7, "chronora"), (draft) => {
     draft.encounter = 29;
     draft.journey!.victories = 29;
@@ -155,7 +155,7 @@ it("allows an owned Legendary as the final Boss", () => {
     draft.expedition.recruit = null;
     draft.support = null;
   });
-  expect(ready.expedition!.pack).toEqual(["chronora"]);
+  expect(ready.expedition!.pack).not.toContain("chronora");
   const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
   const result = dispatch(battle, { type: "devWinBattle" }, true);
   expect(result.accepted).toBe(true);

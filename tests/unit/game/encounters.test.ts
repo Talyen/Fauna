@@ -11,6 +11,7 @@ import {
 } from "../../../src/game/encounters";
 import { SPECIES, species, speciesCards } from "../../../src/game/content";
 import { observeDecisions } from "../../../src/game/random";
+import { addRecruit } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import {
@@ -140,12 +141,11 @@ describe("journey encounters", () => {
           });
           const pack = state.expedition!.pack!;
           expect(pack).toHaveLength(bossEncounter(state) ? 1 : Math.min(3, encounter + 1));
-          if (!bossEncounter(state))
-            expect(
-              pack.every(
-                (kind) => ![...state.team, ...state.reserves].map((unit) => unit.species).includes(kind),
-              ),
-            ).toBe(true);
+          expect(
+            pack.every(
+              (kind) => ![...state.team, ...state.reserves].map((unit) => unit.species).includes(kind),
+            ),
+          ).toBe(true);
           expect(enter(state).battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
         }
       }
@@ -156,7 +156,7 @@ describe("journey encounters", () => {
     [9, "memento"],
     [19, "velvetmonarch"],
     [29, "chronora"],
-  ] as const)("keeps an owned Legendary as the Boss at encounter %s", (encounter, boss) => {
+  ] as const)("excludes an owned Legendary from the Boss at encounter %s", (encounter, boss) => {
     const started = starterJourney(7, boss);
     const ready = produce(started, (draft) => {
       draft.encounter = encounter;
@@ -168,7 +168,7 @@ describe("journey encounters", () => {
     const source = encounterSource(ready);
     expect(source.name).toBe("Boss");
     expect(source.enemies).toHaveLength(1);
-    expect(source.enemies[0]!.species).toBe(boss);
+    expect(source.enemies[0]!.species).not.toBe(boss);
     expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
     const battle = enter(decodeSave(encodeSave(ready)));
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
@@ -178,6 +178,53 @@ describe("journey encounters", () => {
     expect(reward.reward!.currency).toBe(40);
     expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
     expect(decodeSave(encodeSave(reward))).toEqual(reward);
+  });
+
+  it("uses an unowned Boss if available and falls back to all Bosses only when the roster has them all", () => {
+    for (const encounter of [9, 19, 29]) {
+      for (const owned of [
+        ["memento", "chronora"],
+        ["memento", "chronora", "velvetmonarch"],
+      ] as const) {
+        const found = new Set<string>();
+        for (const decision of [0.1, 0.5, 0.9]) {
+          produce(teamRun(42, [...owned]), (draft) => {
+            prepareDestination(draft);
+            draft.reserves = draft.team.splice(1);
+            draft.reserves[0]!.health = 0;
+            draft.encounter = encounter;
+            observeDecisions(draft, () => decision);
+            found.add(generateEncounterPack(draft)[0]!);
+          });
+        }
+        expect([...found].sort()).toEqual(
+          owned.length === 2 ? ["velvetmonarch"] : ["chronora", "memento", "velvetmonarch"],
+        );
+      }
+    }
+  });
+
+  it("saves and plays the fallback Boss when all Legendaries are on the roster", () => {
+    const ready = produce(starterJourney(7, "memento"), (draft) => {
+      for (const kind of ["chronora", "velvetmonarch"] as const) {
+        addRecruit(draft, kind);
+        draft.discovery.encountered.push(kind);
+        draft.discovery.recruited[kind] = 1;
+      }
+      draft.encounter = 9;
+      draft.journey!.victories = 9;
+      draft.expedition.pack = generateEncounterPack(draft);
+      draft.expedition.recruit = null;
+      draft.support = null;
+    });
+    const battle = enter(decodeSave(encodeSave(ready)));
+    const enemy = battle.battle!.enemies[0]!.species;
+    expect([...battle.team, ...battle.reserves].some((unit) => unit.species === enemy)).toBe(true);
+    const result = dispatch(battle, { type: "devWinBattle" }, true);
+    expect(result.accepted).toBe(true);
+    const recruited = accept(result.state, { type: "recruit", species: enemy });
+    expect(recruited.discovery.recruited[enemy]).toBe(2);
+    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
   });
 
   it("advances after an optional recruit and persists the next pack", () => {
