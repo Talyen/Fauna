@@ -146,7 +146,7 @@ it(
       expect(after.currency).toBe(before.currency);
       expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
       expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(after);
-      await user.click(screen.getByRole("button", { name: "Combat", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Combat" }));
       expect(session.store.getState().game.phase).toBe("battle");
       expect(screen.queryByRole("status", { name: "Rest recovery" })).toBeNull();
     } finally {
