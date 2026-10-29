@@ -289,7 +289,9 @@ export function BattleScreen({
                 actor={acting}
                 modifiers={game}
               />
-              {def.effect === "resurrect" || def.effect === "swapChosen" || hasMendingTargets(game, def)
+              {def.effect === "resurrect" ||
+              def.effect === "swapChosen" ||
+              hasMendingTargets(game, def, acting)
                 ? game.reserves
                     .filter((unit) => legalTargets.has(unit.id))
                     .map((unit) => (
@@ -298,7 +300,9 @@ export function BattleScreen({
                         variant="outline"
                         data-backup-target={unit.id}
                         data-resurrection-target={
-                          def.effect === "resurrect" || hasMendingTargets(game, def) ? unit.id : undefined
+                          def.effect === "resurrect" || hasMendingTargets(game, def, acting)
+                            ? unit.id
+                            : undefined
                         }
                         aria-label={
                           def.effect === "swapChosen"
@@ -318,11 +322,11 @@ export function BattleScreen({
                         onMouseLeave={() => leaveTarget(unit.id)}
                         onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
                       >
-                        {hasMendingTargets(game, def) && unit.health === 0
+                        {hasMendingTargets(game, def, acting) && unit.health === 0
                           ? i18n.message("battle.reviveBackup", "Revive {{name}}", {
                               name: localizedCombatantName(unit, i18n),
                             })
-                          : def.effect === "resurrect" || hasMendingTargets(game, def)
+                          : def.effect === "resurrect" || hasMendingTargets(game, def, acting)
                             ? i18n.message("battle.backupName", "{{name}} (backup)", {
                                 name: localizedCombatantName(unit, i18n),
                               })

@@ -1,7 +1,7 @@
 import { hasMendingTargets, playTargeting } from "../../game/mending";
 import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
 import { battlefieldView } from "../../game/battlefield";
-import { drawableOwnerIds } from "../../game/card-actors";
+import { cardActor, drawableOwnerIds } from "../../game/card-actors";
 import { chosenRecipients } from "../../game/play-queries";
 import { definition, species } from "../../game/content";
 import type { BattleState, Command } from "../../game/types";
@@ -101,14 +101,15 @@ export function useBattleInteraction({
   });
   const card = selected === null ? undefined : cardsById.get(selected);
   const def = card ? definition(card.definitionId) : null;
-  const mode = def ? playTargeting(def, game) : "automatic";
+  const actor = card ? cardActor(game, card) : undefined;
+  const mode = def ? playTargeting(def, game, actor) : "automatic";
   const enemyTarget = mode === "enemy",
     allyTarget = mode === "ally";
   const row = enemyTarget
     ? enemyRow
     : def?.effect === "swapChosen"
       ? game.reserves
-      : def && (def.effect === "resurrect" || hasMendingTargets(game, def))
+      : def && (def.effect === "resurrect" || hasMendingTargets(game, def, actor))
         ? [...playerRow, ...game.reserves]
         : playerRow;
   // Visual order belongs to the UI; filter legal recipients after ordering the complete row.
@@ -118,7 +119,7 @@ export function useBattleInteraction({
       ? [row[1]!, row[0]!, ...row.slice(2)]
       : row;
   const legal = new Set<string>();
-  if (def) for (const unit of chosenRecipients(game, def)) legal.add(unit.id);
+  if (def) for (const unit of chosenRecipients(game, def, actor)) legal.add(unit.id);
   const targets: string[] = [];
   for (const unit of ordered) if (legal.has(unit.id)) targets.push(unit.id);
   const last = enemyTarget ? remembered.enemy : remembered.ally;
@@ -203,8 +204,10 @@ export function useBattleInteraction({
   const chooseCard = (cardId: string) => {
     const chosen = cardsById.get(cardId)!;
     const chosenDef = definition(chosen.definitionId);
-    const mode = playTargeting(chosenDef, game);
-    const recipients = mode === "enemy" || mode === "ally" ? chosenRecipients(game, chosenDef) : [];
+    const chosenActor = cardActor(game, chosen);
+    const mode = playTargeting(chosenDef, game, chosenActor);
+    const recipients =
+      mode === "enemy" || mode === "ally" ? chosenRecipients(game, chosenDef, chosenActor) : [];
     if (recipients.length === 1) {
       update({ type: "prepare" });
       play({ type: "play", cardId, targetId: recipients[0]!.id });

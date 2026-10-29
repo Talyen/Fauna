@@ -8,6 +8,9 @@ import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { availablePlays, chosenRecipients } from "../../../../src/game/play-queries";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { battleChoices } from "../../../../src/application/battle-policy";
+import { executeAbility } from "../../../../src/game/combat/abilities";
+import { observeDecisions } from "../../../../src/game/random";
+import { dispatch } from "../../../../src/game/engine";
 import { chooseEnemyCard } from "../../../../src/game/combat/enemy-policy";
 import { enemyCard } from "../../../../src/game/card-rules";
 import { addReserve, enemyPlay, requireBattle, teamRun } from "../../../support/game";
@@ -88,6 +91,41 @@ describe("Selvage", () => {
     expect(result.state.reserves[0]!.health).toBe(6);
     expect(result.state.reserves[0]!.combat!.poison).toBe(0);
     expect(result.state.reserves[0]!.combat!.negate).toBe(true);
+  });
+
+  it("keeps Wendlet's borrowed song automatic after Selvage joins the team", () => {
+    const game = produce(requireBattle(teamRun(42, ["wendlet", "emberback", "prismram"])), (draft) => {
+      addReserve(draft, "selvage-backup", "selvage", 20, freshCombat());
+      observeDecisions(draft, () => 0.9);
+      executeAbility(
+        draft,
+        {
+          side: "player",
+          actor: draft.team[0]!,
+          def: definition("wendlet-borrowed-silhouette"),
+          value: 1,
+        },
+        [],
+      );
+      const copy = draft.cards.find((card) => card.borrowedFrom === "selvage")!;
+      expect(copy.definitionId).toBe(song);
+      const singer = draft.reserves.pop()!;
+      const fallen = draft.team.pop()!;
+      fallen.health = 0;
+      draft.reserves.push(fallen);
+      draft.team.push(singer);
+      draft.team[1]!.health = 10;
+      draft.battle.hand = [copy.id];
+    });
+    const copy = game.cards.find((card) => card.borrowedFrom === "selvage")!;
+    const play = availablePlays(game).find((entry) => entry.card.id === copy.id)!;
+    expect(play.actor.species).toBe("wendlet");
+    expect(play.commands.map((command) => command.targetId)).toEqual([undefined]);
+    const result = dispatch(game, { type: "play", cardId: copy.id, autoEndTurn: false });
+    expect(result.accepted).toBe(true);
+    expect(result.state.reserves[0]!.health).toBe(0);
+    expect(result.state.team[1]!.health).toBe(16);
+    expect(previewCard(game, copy.id)).toEqual(result);
   });
 
   it("lets enemy Selvage choose a fallen ally at the base tier", () => {

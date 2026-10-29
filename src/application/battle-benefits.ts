@@ -308,9 +308,9 @@ export function battleBenefits(
       });
     }
     case "heal": {
-      if (hasMendingTargets(state, def)) {
+      if (hasMendingTargets(state, def, actor)) {
         const cap = passiveAmount(state, actor.species, "mendTheBroken");
-        return chosenRecipients(state, def).map((unit) => {
+        return chosenRecipients(state, def, actor).map((unit) => {
           const restored =
             unit.health === 0
               ? Math.min(value, cap, maximumHealth(unit))

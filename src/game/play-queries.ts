@@ -22,10 +22,10 @@ function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
 }
 
 /** Explicit recipients only; random/group delivery remains live execution work. */
-export function chosenRecipients(state: BattleState, def: CardDefinition) {
-  const mode = playTargeting(def, state);
+export function chosenRecipients(state: BattleState, def: CardDefinition, actor?: Creature) {
+  const mode = playTargeting(def, state, actor);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return [];
-  if (hasMendingTargets(state, def)) {
+  if (hasMendingTargets(state, def, actor)) {
     const living = mostInjured(healingAllies(state, "player"));
     return [
       ...(living ? [living] : []),
@@ -46,11 +46,12 @@ function hasChosenRecipient(
   state: BattleState,
   def: CardDefinition,
   targetId?: string,
-  mode = playTargeting(def, state),
+  actor?: Creature,
+  mode = playTargeting(def, state, actor),
 ) {
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
-  if (hasMendingTargets(state, def))
-    return chosenRecipients(state, def).some((unit) => targetId === undefined || unit.id === targetId);
+  if (hasMendingTargets(state, def, actor))
+    return chosenRecipients(state, def, actor).some((unit) => targetId === undefined || unit.id === targetId);
   const side = mode === "enemy" ? "enemy" : "player";
   if (
     def.effect !== "resurrect" &&
@@ -67,10 +68,11 @@ function hasChosenRecipient(
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
-  const mode = playTargeting(def, state);
+  const actor = state.team.find((unit) => unit.id === actorId);
+  const mode = playTargeting(def, state, actor);
   if (
     (mode === "enemy" || mode === "ally") &&
-    (targetId === undefined || !hasChosenRecipient(state, def, targetId, mode))
+    (targetId === undefined || !hasChosenRecipient(state, def, targetId, actor, mode))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."
@@ -100,14 +102,14 @@ export function inspectCardPlay(
   return inspectCard(
     state,
     state.cards.find((entry) => entry.id === cardId),
-    (def) => hasChosenRecipient(state, def),
+    (def, actor) => hasChosenRecipient(state, def, undefined, actor),
   );
 }
 
 function inspectCard(
   state: BattleState,
   card: Card | undefined,
-  hasRecipients: (def: CardDefinition) => boolean,
+  hasRecipients: (def: CardDefinition, actor: Creature) => boolean,
   inHand = false,
   recoverable?: (actorId: string) => boolean,
 ): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
@@ -133,14 +135,14 @@ function inspectCard(
     !(recoverable?.(actor.id) ?? hasDiscardDrawCard(state, actor.id))
   )
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
-  if (def.effect === "resurrect" && !hasRecipients(def))
+  if (def.effect === "resurrect" && !hasRecipients(def, actor))
     return { allowed: false, reason: "There are no knocked-out allies." };
   if (
-    (def.effect === "swapChosen" && !hasRecipients(def)) ||
+    (def.effect === "swapChosen" && !hasRecipients(def, actor)) ||
     (def.effect === "swapThorns" && !state.reserves.some((unit) => unit.health > 0))
   )
     return { allowed: false, reason: "There are no living backups." };
-  if (def.effect === "heal" && def.target === "injured" && !hasRecipients(def))
+  if (def.effect === "heal" && def.target === "injured" && !hasRecipients(def, actor))
     return { allowed: false, reason: "There are no injured allies." };
   if (state.battle.mana < cardCost(card, state, def, actor))
     return { allowed: false, reason: "Not enough Mana." };
@@ -155,18 +157,20 @@ export interface AvailablePlay extends PlayableCard {
 export function hasAvailablePlay(state: BattleState): boolean {
   if (!state.battle.hand.length || pendingReplacement(state)) return false;
   let cards: Map<string, Card> | undefined;
-  let firstDefinition: CardDefinition | undefined;
+  let firstKey: string | undefined;
   let firstRecipients = false;
-  let otherRecipients: Map<CardDefinition, boolean> | undefined;
-  const hasRecipients = (def: CardDefinition) => {
-    if (!firstDefinition) {
-      firstDefinition = def;
-      return (firstRecipients = hasChosenRecipient(state, def));
+  let otherRecipients: Map<string, boolean> | undefined;
+  const hasRecipients = (def: CardDefinition, actor: Creature) => {
+    const key = `${def.id}:${actor.id}`;
+    if (firstKey === undefined) {
+      firstKey = key;
+      return (firstRecipients = hasChosenRecipient(state, def, undefined, actor));
     }
-    if (firstDefinition === def) return firstRecipients;
+    if (firstKey === key) return firstRecipients;
     otherRecipients ??= new Map();
-    let result = otherRecipients.get(def);
-    if (result === undefined) otherRecipients.set(def, (result = hasChosenRecipient(state, def)));
+    let result = otherRecipients.get(key);
+    if (result === undefined)
+      otherRecipients.set(key, (result = hasChosenRecipient(state, def, undefined, actor)));
     return result;
   };
   let firstActorId: string | undefined;
@@ -197,8 +201,8 @@ export function hasAvailablePlay(state: BattleState): boolean {
       canRecover,
     );
     if (!play.allowed) continue;
-    const mode = playTargeting(play.def, state);
-    if ((mode !== "enemy" && mode !== "ally") || hasRecipients(play.def)) return true;
+    const mode = playTargeting(play.def, state, play.actor);
+    if ((mode !== "enemy" && mode !== "ally") || hasRecipients(play.def, play.actor)) return true;
   }
   return false;
 }
@@ -208,14 +212,15 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
   if (!state.battle.hand.length || pendingReplacement(state)) return [];
   const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
   if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  let recipientsByDefinition: Map<CardDefinition, ReturnType<typeof chosenRecipients>> | undefined;
-  const recipients = (def: CardDefinition) => {
-    recipientsByDefinition ??= new Map();
-    let result = recipientsByDefinition.get(def);
-    if (!result) recipientsByDefinition.set(def, (result = chosenRecipients(state, def)));
+  let recipientsByActor: Map<string, ReturnType<typeof chosenRecipients>> | undefined;
+  const recipients = (def: CardDefinition, actor: Creature) => {
+    const key = `${def.id}:${actor.id}`;
+    recipientsByActor ??= new Map();
+    let result = recipientsByActor.get(key);
+    if (!result) recipientsByActor.set(key, (result = chosenRecipients(state, def, actor)));
     return result;
   };
-  const hasRecipients = (def: CardDefinition) => recipients(def).length > 0;
+  const hasRecipients = (def: CardDefinition, actor: Creature) => recipients(def, actor).length > 0;
   let recoverableByActor: Map<string, boolean> | undefined;
   const recoverable = (actorId: string) => {
     recoverableByActor ??= new Map();
@@ -233,10 +238,10 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
       recoverable,
     );
     if (!play.allowed) continue;
-    const mode = playTargeting(play.def, state);
+    const mode = playTargeting(play.def, state, play.actor);
     const commands =
       mode === "enemy" || mode === "ally"
-        ? recipients(play.def).map((unit) => ({
+        ? recipients(play.def, play.actor).map((unit) => ({
             type: "play" as const,
             cardId,
             targetId: unit.id,
