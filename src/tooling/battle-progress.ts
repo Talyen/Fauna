@@ -25,6 +25,7 @@ export function createBattleProgress() {
       const active = state.team
         .filter((unit) => unit.health > 0)
         .map((unit) => unit.id)
+        .sort()
         .join("\0");
       if (!current || current.encounter !== state.encounter || turn < current.turn) {
         lastProgressTurn = turn;

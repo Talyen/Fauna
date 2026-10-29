@@ -246,6 +246,19 @@ it("reports long absence of enemy Health progress without mistaking Minion damag
   expect(progress.snapshot()).toBeNull();
 });
 
+it("does not reset the stall clock when the same living allies change order", () => {
+  const initial = teamRun(42, ["mossguard", "emberback"]);
+  const progress = createBattleProgress();
+  progress.observe(initial);
+  progress.observe(
+    produce(initial, (game) => {
+      game.battle!.turn += 10;
+      game.team.reverse();
+    }),
+  );
+  expect(progress.snapshot()).toMatchObject({ stalled: true, turnsWithoutHealthProgress: 10 });
+});
+
 it("improves a reserve instead of replacing a healthy Legendary with weaker solo damage", () => {
   const base = winBattle(teamRun(42, ["prismram"]));
   const state = produce(base, (game) => {
