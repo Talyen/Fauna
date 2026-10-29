@@ -11,7 +11,7 @@ export default {
     "scripts/{agent,assets,balance,checks,ci,dev,performance,release}/*.mjs",
     "src/tooling/{playthrough,balance,performance}.ts",
     "design/**/*.tsx",
-    "tests/support/{cavalleaf,velouria,vitrilo,wendlet}.ts", // Loaded dynamically by the visual review harness.
+    "tests/support/{cavalleaf,tinkervale,velouria,vitrilo,wendlet}.ts", // Loaded dynamically by the visual review harness.
   ],
   project: [
     "src/**/*.{ts,tsx,css}",
