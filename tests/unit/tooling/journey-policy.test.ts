@@ -224,6 +224,7 @@ it("reports long absence of enemy Health progress without mistaking Minion damag
   });
   progress.observe(later);
   expect(progress.snapshot()).toMatchObject({ stalled: true, turnsWithoutHealthProgress: 10 });
+  expect(actor()(later, true)).toMatchObject({ command: { type: "abandon" } });
   const damaged = produce(later, (game) => {
     game.battle!.enemies[0]!.health--;
   });
@@ -235,6 +236,12 @@ it("reports long absence of enemy Health progress without mistaking Minion damag
   });
   progress.observe(healed);
   expect(progress.snapshot()).toMatchObject({ turnsWithoutHealthProgress: 1 });
+  const changedTeam = produce(healed, (game) => {
+    game.battle!.turn += 10;
+    game.team[0]!.health = 0;
+  });
+  progress.observe(changedTeam);
+  expect(progress.snapshot()).toMatchObject({ stalled: false, turnsWithoutHealthProgress: 0 });
   progress.observe(winBattle(initial));
   expect(progress.snapshot()).toBeNull();
 });

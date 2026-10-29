@@ -508,7 +508,7 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
     rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
     return items[Math.floor((rng / 4294967296) * items.length)]!;
   };
-  return (state: GameState): JourneyDecision => {
+  return (state: GameState, stalled = false): JourneyDecision => {
     const decision = (command: Command, reason: string) => ({ command, reason });
     const talent = TALENTS.find((entry) => canBuyTalent(state, entry.id));
     if (talent)
@@ -631,6 +631,11 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
           "Begin the next requested journey",
         );
       case "battle": {
+        if (stalled)
+          return decision(
+            { type: "abandon" },
+            "Return home after ten turns without reaching a new low in enemy Health",
+          );
         if (config.policy !== "random") return battle.choose(state);
         const choices = rankedBattleChoices(state);
         return choices.length

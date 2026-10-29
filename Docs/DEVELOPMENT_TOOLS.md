@@ -118,6 +118,8 @@ The JSON defines `baseline` and `treatment`, each with explicit `talents` and `b
 
 Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay, application, platform and headless tooling source, balance scripts, the runtime/worker helpers and dependency manifests, including save-format JSON; changing these inputs requires fresh journals. Balance workers and the suite verify source identity, consistent settings and completed-case metrics before compacting successful evidence. Affected cases keep full case files and journals; mismatches mark the suite incomplete. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. Both runners use [recorded-session.ts](../src/tooling/recorded-session.ts) to order attempts, save acknowledgements, completion records, replay checks and resume. All output stays under ignored `reports/`.
 
+The automated journey policy returns home after ten battle turns without reaching a new low in total enemy Health. A change in the living deployed team resets that clock. This is a recorded `abandon` command and a `returned` outcome, not a victory or a defeat; it does not change player combat. Exhausting an action or turn budget still produces incomplete evidence. Single-battle experiments retain their existing incomplete-stall behavior.
+
 Balance runs default to `--evidence failures`: completed cases keep compact metrics
 and diagnostics, while failed or interrupted cases retain full checkpoints and
 attempt journals. Use `--evidence full` for an intentional exact-replay or timing

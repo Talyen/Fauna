@@ -97,7 +97,7 @@ export async function runJourney(
       }
       const selected = replay
         ? { command: replay.steps[index]!.command, reason: replay.steps[index]!.decision }
-        : decide(before);
+        : decide(before, progress.snapshot()?.stalled ?? false);
       const command = selected.command;
       const { after, step } = await recording.step(index, command, selected.reason, replay?.steps[index]);
       progress.observe(after);
@@ -114,7 +114,12 @@ export async function runJourney(
           encounter: before.encounter,
           turns: before.battle!.turn,
           roster: [...before.team, ...before.reserves].map((unit) => unit.species),
-          outcome: after.phase === "defeat" ? "defeat" : "victory",
+          outcome:
+            after.journey?.outcome === "returned"
+              ? "returned"
+              : after.phase === "defeat"
+                ? "defeat"
+                : "victory",
         });
       if (!step.accepted) {
         bundle.reason = `Rejected ${command.type}: ${recording.session.store.getState().error}`;

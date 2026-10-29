@@ -19,7 +19,7 @@ export function soleReplacement(state: GameState, autoEndTurn: boolean): Command
   return living ? { type: "swap", activeId: outgoing.id, reserve: living.id, autoEndTurn } : null;
 }
 
-export const BATTLE_POLICY_VERSION = 43;
+export const BATTLE_POLICY_VERSION = 44;
 
 export interface BattleChoice {
   command: Command;

@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { produce } from "immer";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough";
 import { teamRun } from "../../support/game";
-import { encodeSave } from "../../../src/game/save";
+import { decodeSave, encodeSave } from "../../../src/game/save";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
@@ -15,6 +16,36 @@ const config: JourneyConfig = {
   resumeEvery: 7,
 };
 describe("headless production sessions", () => {
+  it("returns home after a sustained stalled battle and replays the recorded outcome", async () => {
+    const initial = produce(teamRun(42, ["bloomquail"]), (draft) => {
+      draft.team[0]!.block = 1_000_000;
+    });
+    const settings = { ...config, runs: 1, resumeEvery: 1 };
+    const journey = await runJourney(settings, "stall-fixture", encodeSave(initial));
+    expect(journey.complete, journey.reason).toBe(true);
+    expect(journey.results).toMatchObject([{ outcome: "returned" }]);
+    expect(journey.battles).toMatchObject([{ outcome: "returned" }]);
+    expect(journey.steps.at(-1)).toMatchObject({
+      accepted: true,
+      command: { type: "abandon" },
+      decision: "Return home after ten turns without reaching a new low in enemy Health",
+    });
+    const ended = decodeSave(journey.steps.at(-1)!.checkpoint);
+    expect(ended.journey!.outcome).toBe("returned");
+    expect(ended.journey!.victories).toBe(initial.journey!.victories);
+    const replay = await runJourney(
+      { ...settings, resumeEvery: 0 },
+      "stall-fixture",
+      journey.initial,
+      journey,
+    );
+    expect(replay.steps).toEqual(journey.steps);
+    expect(replay.results).toEqual(journey.results);
+    const bounded = await runJourney({ ...settings, maxTurns: 5 }, "stall-fixture", journey.initial);
+    expect(bounded.complete).toBe(false);
+    expect(bounded.reason).toBe("Turn budget exhausted");
+    expect(bounded.results).toEqual([]);
+  });
   // Several full simulations and checkpoint replays need headroom on shared hosted CPUs
   it(
     "replays journeys exactly across serialized save/resume without leaking policy randomness",
