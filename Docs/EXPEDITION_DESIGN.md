@@ -34,11 +34,11 @@ If the deployed row falls, stop remaining enemy attacks and begin the next playe
 
 ## Encounters
 
-A journey has three acts of ten rooms each: nine ordinary rooms followed by a mandatory Boss in rooms 10, 20 and 30. Completing any room advances to the next; only the third Boss completes the journey. Ordinary combat has one enemy in room 1, two in room 2 and three thereafter. Each Boss is one randomly selected Legendary, including species already on the roster.
+A journey has three acts of ten rooms each: nine ordinary rooms followed by a mandatory Boss in rooms 10, 20 and 30. Completing any room advances to the next; only the third Boss completes the journey. Ordinary combat has one enemy in room 1, two in room 2 and three thereafter. Each Boss is one randomly selected Legendary, excluding roster species whenever possible.
 
 ### Saved enemy packs
 
-Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary groups are drawn from all ordinary species, excluding every roster species, including backup and knockouts. Repeated species are possible. In groups of two or three, at least two creatures have an enemy-usable ability that directly deals damage; every valid ordered group is equally likely. The single-enemy first room has no damage requirement. Bosses draw from the full Legendary pool, including owned species. Optional recruitment completes its room and prepares the next room.
+Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary groups are drawn from all ordinary species, excluding every roster species, including backup and knockouts. Repeated species are possible. In groups of two or three, at least two creatures have an enemy-usable ability that directly deals damage; every valid ordered group is equally likely. The single-enemy first room has no damage requirement. Bosses draw from Legendaries outside the roster; if every Legendary is on the roster, they draw from the full Legendary pool. Optional recruitment completes its room and prepares the next room.
 
 Menus, canceled Campfire visits and reload preserve packs and consume no pack RNG. Completing a support room prepares a fresh pack for the next room. A Boss room offers only the Boss; ordinary rooms always offer Combat.
 
@@ -160,4 +160,4 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-Each Boss encounter randomly selects from the full Legendary pool, including creatures already on the roster. The selected pack is committed before battle; recruiting an already-owned Boss raises its Collection rank. The current pool contains [Memento](content/creatures/memento.md), [Chronora](content/creatures/chronora.md) and [Velvetmonarch](content/creatures/velvetmonarch.md).
+Each Boss encounter randomly selects a Legendary outside the roster, or from the full Legendary pool if all are on the roster. The selected pack is committed before battle; recruiting an already-owned Boss in that fallback raises its Collection rank. The current pool contains [Memento](content/creatures/memento.md), [Chronora](content/creatures/chronora.md) and [Velvetmonarch](content/creatures/velvetmonarch.md).

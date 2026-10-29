@@ -48,12 +48,15 @@ const offensiveSpecies = new Set(
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
   const size = bossEncounter(state) ? 1 : Math.min(3, state.encounter + 1);
-  if (bossEncounter(state)) {
-    return savedPack
-      ? savedPack.slice(0, 1)
-      : [legendarySpecies[Math.floor(roll(state) * legendarySpecies.length)]!.id];
-  }
   const roster = new Set([...state.team, ...state.reserves].map((unit) => unit.species));
+  if (bossEncounter(state)) {
+    const unowned = legendarySpecies.filter((entry) => !roster.has(entry.id));
+    const eligible = unowned.length ? unowned : legendarySpecies;
+    const saved = savedPack?.[0];
+    return saved && eligible.some((entry) => entry.id === saved)
+      ? [saved]
+      : [eligible[Math.floor(roll(state) * eligible.length)]!.id];
+  }
   const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
   if (savedPack) {
     return savedPack

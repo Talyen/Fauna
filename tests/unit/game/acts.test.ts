@@ -1,7 +1,6 @@
 import { encounterPacks } from "../../support/encounter-packs";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import {
   generateEncounterPack,
@@ -21,7 +20,7 @@ import {
 } from "../../support/game";
 
 describe("three-act journey", () => {
-  it("draws every Legendary in every Boss room, including an owned species", () => {
+  it("draws every eligible Legendary in every Boss room", () => {
     for (const encounter of [9, 19, 29]) {
       const found = new Set<string>();
       for (const roll of [0.1, 0.5, 0.9]) {
@@ -42,7 +41,7 @@ describe("three-act journey", () => {
         observeDecisions(draft, () => roll);
         choices.add(generateEncounterPack(draft)[0]!);
       });
-    expect(choices.has("memento")).toBe(true);
+    expect([...choices].sort()).toEqual(["chronora", "velvetmonarch"]);
     expect(JOURNEY_LENGTH).toBe(30);
   });
 
@@ -101,24 +100,6 @@ describe("three-act journey", () => {
     if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
     expect(state.encounter).toBe(bossRoom + 1);
     expect(state.journey!.victories).toBe(Math.floor(bossRoom / 10) + 1);
-    expect(decodeSave(encodeSave(state))).toEqual(state);
-  });
-
-  it("allows an owned Legendary as a Boss and ranks it up without duplicating the roster", () => {
-    let state = produce(starterJourney(42, "memento"), (draft) => {
-      draft.encounter = 9;
-      draft.expedition = { pack: ["memento"], recruit: null, lastRoom: "combat" };
-      draft.support = null;
-    });
-    state = accept(state, { type: "beginBattle" });
-    expect(state.battle!.enemies[0]!.species).toBe("memento");
-    expect(decodeSave(encodeSave(state))).toEqual(state);
-    const victory = dispatch(state, { type: "devWinBattle" }, true);
-    expect(victory.accepted).toBe(true);
-    state = victory.state;
-    state = accept(state, { type: "recruit", species: "memento" });
-    expect(state.discovery.recruited.memento).toBe(2);
-    expect([...state.team, ...state.reserves].filter((unit) => unit.species === "memento")).toHaveLength(1);
     expect(decodeSave(encodeSave(state))).toEqual(state);
   });
 
