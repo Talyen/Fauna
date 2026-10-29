@@ -76,6 +76,10 @@ export function executePrimary(context: PrimaryContext) {
   const enemy = action.side === "enemy";
   const power = actorPower(action);
   switch (def.effect) {
+    case "stealEffect":
+      if (target && target.health > 0)
+        removeEffects(target, "purge", 1, events, state, undefined, actor, true, false, true);
+      return;
     case "borrowBackup": {
       if (action.side !== "player") return;
       const choices = state.reserves
@@ -201,6 +205,7 @@ export function executePrimary(context: PrimaryContext) {
             events,
             {
               origin: "ability",
+              attackAbility: true,
               delivery: reflected ? "reflection" : undefined,
               interceptionChecked: true,
               blindMiss: reflected ? false : blindMiss,

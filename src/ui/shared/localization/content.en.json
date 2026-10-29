@@ -1363,7 +1363,7 @@
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "text": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "reference": "Add 2 Food to your hand",
-    "contextHash": "618dcc27444c589ea31191aa48a99d7f9b2f4ff5eac110515ff14b94dd02ba81"
+    "contextHash": "e4346e1f8962abec35a41563f56f0969ecc8f624aa97b4c138e0e693743a9748"
   },
   "content.card.aerostat-true-bearing.name": {
     "text": "True Bearing"
@@ -1371,7 +1371,7 @@
   "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
     "text": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
     "reference": "Draw 2 cards / Cleanse Blind from allies",
-    "contextHash": "9cfaec0041a3de0b31873a81880489cbd004fad8c1edcd361a8654d438ab6b19"
+    "contextHash": "0874e825e409b020425871f67938ecb3bf7c7ecc93928c1c8e06a3dbb7164104"
   },
   "content.card.aerostat-voyagers-rest.name": {
     "text": "Voyager’s Rest"
@@ -1379,7 +1379,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "56d66740c378a6f6d1a2b66603ba684aab683b932099b81e0df9393abe674694"
+    "contextHash": "180df333b7b6d30eaa07755d7baf968f97a16f4e02925c0419ff63d71b634554"
   },
   "content.card.almanelle-autumn-insight.name": {
     "text": "Autumn Insight"
@@ -1387,12 +1387,12 @@
   "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
     "text": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
     "reference": "Return a random discarded card to your hand; Restore 3 Health to an injured ally",
-    "contextHash": "59565c4cb065e4a87883c18bbb16fba454f16a61aed4169551fc419d380dad25"
+    "contextHash": "e98a348e19ec9a359a3eb8f0eba549fa7f278e058f2e29e5ed17e1df67d498ba"
   },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
     "reference": "Restore 1 Health to a living ally",
-    "contextHash": "59565c4cb065e4a87883c18bbb16fba454f16a61aed4169551fc419d380dad25"
+    "contextHash": "e98a348e19ec9a359a3eb8f0eba549fa7f278e058f2e29e5ed17e1df67d498ba"
   },
   "content.card.almanelle-rooted-year.name": {
     "text": "Rooted Year"
@@ -1400,7 +1400,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "reference": "Gain 3 Block; Gain 3 Thorns",
-    "contextHash": "29804071e116befbdc529b6e8a1da7e6c5cc3ff6207c162d14587fb193e5820c"
+    "contextHash": "870e6cf7cce5c2cabeca8b7ccbd974e457b5bd310f705374c359feb58bdc79aa"
   },
   "content.card.almanelle-spring-current.name": {
     "text": "Spring Current"
@@ -1408,7 +1408,7 @@
   "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
     "text": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
     "reference": "Deal 4 Water damage; Cleanse acting creature: remove 1 effect",
-    "contextHash": "be93e2e010126712916e6a833f36fff054864a1e9c932efc9582ae466e96c27e"
+    "contextHash": "87fc9dae75e88c83788dc44ba473192bd865af2775fc6aa1aac72f73068ebff9"
   },
   "content.card.alpenglen-ember-of-evening.name": {
     "text": "Ember of Evening"
@@ -1416,7 +1416,7 @@
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "text": "Your next card is played twice",
     "reference": "Your next card is played twice",
-    "contextHash": "55f65f2b010f48d88707eaa750727cc9cd80efc21635eaadbdf383d241208326"
+    "contextHash": "7f6400583b989a9777e26ab1c715143c826fd1c313027645c33a1f01aa9b7aa0"
   },
   "content.card.alpenglen-last-light-charge.name": {
     "text": "Last Light Charge"
@@ -1424,7 +1424,7 @@
   "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
     "reference": "Deal 4 Light damage / If this is the last card in your hand, it Critically Hits",
-    "contextHash": "2efd9bba8c60c6507e2d0351983b99904b4fc6db33536549a6761aec2d72d369"
+    "contextHash": "e7f1640a2f10b74c10fd249688bd729c9a82e9d0737b37cd23a98e24a0d5871b"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "text": "Sunset Reversal"
@@ -1432,7 +1432,7 @@
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "text": "<keyword0>Reflect the next attack</keyword0>",
     "reference": "Reflect the next attack",
-    "contextHash": "1bc999a42f916ceff345c08bd37fd16aceb6bef5e0cf3c3d942cd605573e26e8"
+    "contextHash": "fabb65928753cede89c504db22ca096ddf0dbcd8263a84199ac39e7bff815afa"
   },
   "content.card.arabesca-dancing-double.name": {
     "text": "Dancing Double"
@@ -1440,7 +1440,7 @@
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "text": "Your next card is played twice",
     "reference": "Your next card is played twice",
-    "contextHash": "9dca839dc9dac3fcde59101808176cced411a4c25661f143da48bf0bd2f784ad"
+    "contextHash": "4c29a98efc75d33c12252ac0fa2c32628d010d3fd415be038d5ad3bfc1397601"
   },
   "content.card.arabesca-ribbon-snare.name": {
     "text": "Ribbon Snare"
@@ -1448,7 +1448,7 @@
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "reference": "Deal 6 Stun damage",
-    "contextHash": "0090bbdba87b84f47accc91064f208db73dc520a2bccfe13b198175ca9109ca2"
+    "contextHash": "02943a156972e32380808ca721550110c3fff6b504b7250adf96ac9589b88288"
   },
   "content.card.arabesca-springbound.name": {
     "text": "Springbound"
@@ -1456,7 +1456,7 @@
   "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
     "text": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
     "reference": "Cleanse all Freeze build-up from allies / Gain 30% Dodge until next turn",
-    "contextHash": "16c9acb030abf00069bc9c9edafefdd30af3e8ef03a4c1088a0d292568d9b46a"
+    "contextHash": "9afc9d5a27b23b53ca8a4f92911164bd38dea67ae6187c60255016ac9e9dbcca"
   },
   "content.card.bloomquail-draw.name": {
     "text": "Bloom Cradle"
@@ -1464,17 +1464,17 @@
   "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
     "text": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
     "reference": "Draw 2 cards; Restore 2 Health",
-    "contextHash": "83468f9e081014fb9633e16c6ec13d13ba3b5a1966ce4616974cf9dc15fee0f1"
+    "contextHash": "e91d54b6541050eaf025e00034063e26764fed3f19aa6a10ccbd6c5ffedb595b"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "text": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
     "reference": "Draw 1 card; Restore 2 Health",
-    "contextHash": "83468f9e081014fb9633e16c6ec13d13ba3b5a1966ce4616974cf9dc15fee0f1"
+    "contextHash": "e91d54b6541050eaf025e00034063e26764fed3f19aa6a10ccbd6c5ffedb595b"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0>",
     "reference": "Restore 2 Health",
-    "contextHash": "83468f9e081014fb9633e16c6ec13d13ba3b5a1966ce4616974cf9dc15fee0f1"
+    "contextHash": "e91d54b6541050eaf025e00034063e26764fed3f19aa6a10ccbd6c5ffedb595b"
   },
   "content.card.bloomquail-guard.name": {
     "text": "Petal Rampart"
@@ -1482,7 +1482,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "01a72087a4149cea47124ce9d330f1e31aca2944a4cb520d310671c386b08a08"
+    "contextHash": "9310e2fe41963401d908886816989ec786de5b4d6a827d063b591bbc3b25953a"
   },
   "content.card.bloomquail-heal.name": {
     "text": "Petal Veil"
@@ -1490,7 +1490,7 @@
   "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
     "reference": "Restore 2 Health to all allies; Blind all enemies",
-    "contextHash": "f5b326b327c1a98f0788b9669e92cad9d5a802da57a0174b0aa06f5bd329f4ae"
+    "contextHash": "940074fc8567d302a8ddc407116074e6e98c67c73113dfbe6de82a1576c31fb0"
   },
   "content.card.brumalyn-frost-howl.name": {
     "text": "Frost Howl"
@@ -1498,7 +1498,7 @@
   "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
     "text": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
     "reference": "Deal 2 Freeze or Stun damage at random to all enemies",
-    "contextHash": "b04d471c9b9af13ebc7cd2165a59f69ff436aa4a108e63509a8c2a19f47ecc36"
+    "contextHash": "b66e6eb35bea787f9c0ac44e59a19d9959f828cb2d95d9816622b033ffee143e"
   },
   "content.card.brumalyn-rime-pounce.name": {
     "text": "Rime Pounce"
@@ -1506,7 +1506,7 @@
   "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
     "text": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
     "reference": "Deal 6 Freeze damage",
-    "contextHash": "75297e80c25d603763b3f81bf6b85fd62f744e973827e7f3018fc1a600bc01df"
+    "contextHash": "9775970f420005a16287d960787cefe0934bb5bc6b8c71d3e6a06e2517933b00"
   },
   "content.card.brumalyn-warmth-ward.name": {
     "text": "Warmth Ward"
@@ -1514,7 +1514,7 @@
   "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
     "reference": "Restore 1 Health to all allies; Cleanse Freeze build-up from all allies",
-    "contextHash": "098ca79ca52defddf333125244553f83aa282a02c5d64b14bbd727da0a89f4e4"
+    "contextHash": "169a3d0661d9c41eeb99f21ccc1a6b67f205440ad5242a91a2abd5c7a0b270a7"
   },
   "content.card.cadenza-echoes-remember.name": {
     "text": "Echoes Remember"
@@ -1522,7 +1522,7 @@
   "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
     "text": "Return a random discarded card from a living ally to your hand",
     "reference": "Return a random discarded card from a living ally to your hand",
-    "contextHash": "afc19b04136beb1a245baafbadc1348a872a2fc7523fb3459b57c5d27a368159"
+    "contextHash": "85f96aa722f14404f59b161fb2e5ebd39a4d103d3d02b6e9cc2741e80c36e142"
   },
   "content.card.cadenza-resonant-well.name": {
     "text": "Resonant Well"
@@ -1530,22 +1530,22 @@
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "09e60a78cc950b7913c0de86f75c8791046f6dc9ae7a28a890769c147ee40117"
+    "contextHash": "f855cfdf2afffa06a4d5beb99eb4c3bd35c4043ae75b4820d2a95d23f84cf390"
   },
   "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "09e60a78cc950b7913c0de86f75c8791046f6dc9ae7a28a890769c147ee40117"
+    "contextHash": "f855cfdf2afffa06a4d5beb99eb4c3bd35c4043ae75b4820d2a95d23f84cf390"
   },
   "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
     "text": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 2 cards; Gain 1 Mana",
-    "contextHash": "09e60a78cc950b7913c0de86f75c8791046f6dc9ae7a28a890769c147ee40117"
+    "contextHash": "f855cfdf2afffa06a4d5beb99eb4c3bd35c4043ae75b4820d2a95d23f84cf390"
   },
   "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
     "text": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 1 card; Gain 1 Mana",
-    "contextHash": "09e60a78cc950b7913c0de86f75c8791046f6dc9ae7a28a890769c147ee40117"
+    "contextHash": "f855cfdf2afffa06a4d5beb99eb4c3bd35c4043ae75b4820d2a95d23f84cf390"
   },
   "content.card.cadenza-rousing-refrain.name": {
     "text": "Rousing Refrain"
@@ -1553,12 +1553,12 @@
   "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
     "text": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
     "reference": "Give all allies 20% Dodge until your next turn",
-    "contextHash": "87cfe8f01dc6b3822fcdce238a48656f7cc2d7312349600e55d0028b0aa3ac5b"
+    "contextHash": "b2cbda04e26e4e52e4237c51cc3f876c5cdee4597b4af0c54cf312a51fc9bc1d"
   },
   "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
     "text": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "reference": "Give all allies 20% Dodge until your next turn; Draw 1 card",
-    "contextHash": "87cfe8f01dc6b3822fcdce238a48656f7cc2d7312349600e55d0028b0aa3ac5b"
+    "contextHash": "b2cbda04e26e4e52e4237c51cc3f876c5cdee4597b4af0c54cf312a51fc9bc1d"
   },
   "content.card.captoad-attack.name": {
     "text": "Spore Puff"
@@ -1566,7 +1566,7 @@
   "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
     "text": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
     "reference": "Deal 2 Poison damage to all enemies",
-    "contextHash": "b6844ac6246a3e7b5247ed9c9b1865cb761b976ee64b20d2c8d47b13e551cd40"
+    "contextHash": "83cd15949a0b802a2a98779e66929b60397e108f4c982d85447097838e4b2a11"
   },
   "content.card.captoad-guard.name": {
     "text": "Mushroom Guard"
@@ -1574,7 +1574,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
     "reference": "Gain 3 Block; Restore 3 Health",
-    "contextHash": "245b4153eff37370becfeb9fd30f1c30b9b57ca795b779ae6de39309a9dd9003"
+    "contextHash": "e8cdf72a1e1eef55dc5e78e9ee34f55bab2ca5db5aba89869e70957d6b8380e2"
   },
   "content.card.captoad-swap.name": {
     "text": "Bogbound Leap"
@@ -1582,12 +1582,12 @@
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "text": "Swap out for a random backup",
     "reference": "Swap out for a random backup",
-    "contextHash": "c8981f1d0f5c22890835165e04f947683660ca33a8d724bf88f3117bf93dc412"
+    "contextHash": "2e2aca406895e47d2e3714634ef223289a3151b1483c3ff21d7bef5e09aef930"
   },
   "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
     "text": "Swap out for a random backup; Draw {{value0}} cards",
     "reference": "Swap out for a random backup; Draw 2 cards",
-    "contextHash": "c8981f1d0f5c22890835165e04f947683660ca33a8d724bf88f3117bf93dc412"
+    "contextHash": "2e2aca406895e47d2e3714634ef223289a3151b1483c3ff21d7bef5e09aef930"
   },
   "content.card.cavalleaf-meadow-return.name": {
     "text": "Meadow Return"
@@ -1595,7 +1595,7 @@
   "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "reference": "Restore 2 Health to all allies",
-    "contextHash": "c47fc96407ae7b9e38268837d9fadd8931ee7aabbee53d879784342cdcf626d5"
+    "contextHash": "8e47686cf1ad4ffb51b70aff2d5b180e3ea591764569c15463a5a2d52c7c21bb"
   },
   "content.card.cavalleaf-prairie-leap.name": {
     "text": "Prairie Leap"
@@ -1603,7 +1603,7 @@
   "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
     "text": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
     "reference": "Swap out for a random backup / Incoming ally gains 4 Thorns",
-    "contextHash": "d349e6c926fd54124021e411443ffda4b313a832573418d195ed53852c4ae439"
+    "contextHash": "d40418039c2079d0e2ead4724b657298a1667a356995c1cc861e56fe50346fad"
   },
   "content.card.cavalleaf-raincall.name": {
     "text": "Raincall"
@@ -1611,7 +1611,7 @@
   "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
     "text": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
     "reference": "Draw a Water card / Cleanse Burn from allies",
-    "contextHash": "8b36fc91187e385f4ef1d467aa29c7eb082f6caa8ec272d672a2475344f98d62"
+    "contextHash": "590693554884293f6c3337842eb838a6a455038a43d50f8e3fe6b6bd1be12c76"
   },
   "content.card.chimecricket-attack.name": {
     "text": "Resonant Leap"
@@ -1619,12 +1619,12 @@
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
     "reference": "Deal 4 Stun damage; Draw 1 card",
-    "contextHash": "ba708af30b672b40508a2d0084b899e5fefdc624751621d6574c2e39aa0ea67b"
+    "contextHash": "32673e9f06b94d873d51a852361a6056ea39e0d3b431e6307736a7a33cd3778e"
   },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "reference": "Deal 4 Stun damage",
-    "contextHash": "ba708af30b672b40508a2d0084b899e5fefdc624751621d6574c2e39aa0ea67b"
+    "contextHash": "32673e9f06b94d873d51a852361a6056ea39e0d3b431e6307736a7a33cd3778e"
   },
   "content.card.chimecricket-heal.name": {
     "text": "Lullaby Drift"
@@ -1632,7 +1632,7 @@
   "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
     "reference": "Restore 4 Health to the most injured ally; Cleanse the healed ally",
-    "contextHash": "10f4f0af65a15ebae4be8b09f1bde9a8b39751ee04b31353b073d255f19e45f8"
+    "contextHash": "0f6d7c3c0d398f4a101cc5ce620a56896c6e399d1b14ada19e4e6a9e7c93bda6"
   },
   "content.card.chimecricket-nullify.name": {
     "text": "Hush Dome"
@@ -1640,7 +1640,7 @@
   "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
     "text": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
     "reference": "Nullify the next harmful status effect on each ally",
-    "contextHash": "9f633b7cd622a1168a19e741af8384dadd85576906b480189f8a0961b32186fb"
+    "contextHash": "3a20118537fd30c9f45b0370bfdaf90386d321581d23adac6882f21c8faa78c8"
   },
   "content.card.chronora-borrowed-moment.name": {
     "text": "Borrowed Moment"
@@ -1648,7 +1648,7 @@
   "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
     "text": "Give all allies <keyword0>Negate</keyword0>",
     "reference": "Give all allies Negate",
-    "contextHash": "7bb87a0c30d8244672b33a0b2b9c0b07ac81b3106687d953cc5a4ea601946acb"
+    "contextHash": "613d8a2a6e120fb8e55db8b98d87e0335b1673f0c87b6118890ce24b24e47be4"
   },
   "content.card.chronora-bridge-rewind.name": {
     "text": "Bridge Rewind"
@@ -1656,7 +1656,7 @@
   "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
     "reference": "Restore 4 Health; restore a broken Pendulum",
-    "contextHash": "5c478d3eec9cca6f22b10452ea3add23e782c51525d6df59cb130a877b0e19a8"
+    "contextHash": "08301181376327c9d7e1b169dd7fd2aaf8e51b4fbcec916d76e1f57798704b8e"
   },
   "content.card.chronora-pendulum-break.name": {
     "text": "Pendulum Break"
@@ -1664,7 +1664,7 @@
   "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "reference": "Deal 4 Stun damage",
-    "contextHash": "f34248d2aa8065acf2b61677bb9c31b8c3b0c20fb5db9075da43440b36534382"
+    "contextHash": "f94bf367c5dcc90b47b9f0f50deb6472b4aef26c28dffdcad76f601504d8143f"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "text": "Ashen Veil"
@@ -1672,7 +1672,7 @@
   "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
     "text": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
     "reference": "Deal 1 Burn damage to all enemies; Blind all enemies",
-    "contextHash": "e153d91a5ce1400ba3218bdba506984445b310587d53b9731bf8be3eafc5ae4f"
+    "contextHash": "4c8dfd37da970c94d493ff4bf73232a40e88d8dd87b6c5c9c836292be4149e36"
   },
   "content.card.cindernewt-attack.name": {
     "text": "Cinder Lash"
@@ -1680,7 +1680,7 @@
   "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
     "reference": "Deal 6 Physical or Burn damage at random",
-    "contextHash": "8e2bbdf9a7dad2de2637d4fe2024a493af38ccf1d0aa5dc8662ca527de187f18"
+    "contextHash": "5b9e880cb7ff57011ab402eaf302ed1cb9dcabd68f2fdc0487d791ca8b233ce5"
   },
   "content.card.cindernewt-ember-breath.name": {
     "text": "Ember Breath"
@@ -1688,7 +1688,7 @@
   "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
     "text": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
     "reference": "Deal 1 Burn damage to all enemies; Remove 50% of all enemies’ Armor, rounded up",
-    "contextHash": "321a1db8c87ab9bd9beef8bc7246262e5955e107a4e7054379608fe3b37243a4"
+    "contextHash": "7526ae071b65ffa295cc68af283ca8795fd9a4957c073f16f31c89640ab4ba09"
   },
   "content.card.coralcurl-attack.name": {
     "text": "Reef Jet"
@@ -1696,7 +1696,7 @@
   "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
     "text": "Deal {{value0}} <keyword0>Water</keyword0> damage",
     "reference": "Deal 6 Water damage",
-    "contextHash": "9aba7952308e4dcb591d942ecdc7fe5f2de64155e29317ebb3e8d0f08bdf68f2"
+    "contextHash": "af10a81ca68afde20842f522283fc0efb695f651dd8826fbdd9a954d28ab3db0"
   },
   "content.card.coralcurl-guard.name": {
     "text": "Bubble Ward"
@@ -1704,7 +1704,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "99d987c492b1fcc0feb9fa157f3b46dee9ad9764568ad5dfc14e8497fc56409a"
+    "contextHash": "ff9b75099e7b7e5e8260b755df191eb984d0bdf230334d989bbec7337de9ad9d"
   },
   "content.card.coralcurl-swap.name": {
     "text": "Coral Spiral"
@@ -1712,7 +1712,7 @@
   "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
     "text": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
     "reference": "Swap out for a random backup; Blind all enemies",
-    "contextHash": "b29232431d772f806af9c8d5c52daba290ff9a64eb1aeda5f90e1c463bd5f2bb"
+    "contextHash": "2447585828fa5a3b0043d9a289c636d664ffda8eb3da70f223ac655b58597c39"
   },
   "content.card.dawncall-attack.name": {
     "text": "Sunwing Sweep"
@@ -1720,7 +1720,7 @@
   "content.card.dawncall-attack.v207aea3bff659874.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
     "reference": "Deal 2 Light damage to all enemies",
-    "contextHash": "ed0ce72d91e96f89d5c64c427c95dc1d29fce981ee6a63b958c3354116d2ff2b"
+    "contextHash": "b272a788d8c5d181ed30b8cf53e02663131b61379cedeac8a021df8955a2d553"
   },
   "content.card.dawncall-heal.name": {
     "text": "Morning Bloom"
@@ -1728,7 +1728,7 @@
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "reference": "Restore 2 Health to all allies",
-    "contextHash": "03d73e98cd3e17d5516e5e855362002709cad57ab5e8f7e893065827405de16a"
+    "contextHash": "0567340be3597e1e530842976a5b2d1eb6ad3adc92d89b24647184ce78201073"
   },
   "content.card.dawncall-teamCleanse.name": {
     "text": "Dawn Cry"
@@ -1736,22 +1736,22 @@
   "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
     "text": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "reference": "Cleanse 1 harmful effect from all allies; Draw 1 card",
-    "contextHash": "63c63f6c475d8f5988129db644d834c5efa5ed166ca16f1d243dc46c3df3d7ff"
+    "contextHash": "8297de14290d41cd3d98da612d83b8fcca74b6b24d0b00940c0926a21f600391"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "text": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "reference": "Cleanse 1 harmful effect from all allies",
-    "contextHash": "63c63f6c475d8f5988129db644d834c5efa5ed166ca16f1d243dc46c3df3d7ff"
+    "contextHash": "8297de14290d41cd3d98da612d83b8fcca74b6b24d0b00940c0926a21f600391"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "text": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "reference": "Cleanse 2 harmful effects from all allies; Draw 1 card",
-    "contextHash": "63c63f6c475d8f5988129db644d834c5efa5ed166ca16f1d243dc46c3df3d7ff"
+    "contextHash": "8297de14290d41cd3d98da612d83b8fcca74b6b24d0b00940c0926a21f600391"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "text": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "reference": "Cleanse 2 harmful effects from all allies",
-    "contextHash": "63c63f6c475d8f5988129db644d834c5efa5ed166ca16f1d243dc46c3df3d7ff"
+    "contextHash": "8297de14290d41cd3d98da612d83b8fcca74b6b24d0b00940c0926a21f600391"
   },
   "content.card.dulcera-chapel-light.name": {
     "text": "Chapel Light"
@@ -1759,12 +1759,12 @@
   "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
     "reference": "Restore 3 Health / Gain 1 Mana",
-    "contextHash": "df1356841f87efc4a6f19760b9b8a0870ec7354d38206dfa6a25acd7fc5de940"
+    "contextHash": "f319ecffa4b66142306b0f712a17cc01223fff4ea0cbaef7110c6af3aeec4638"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0>",
     "reference": "Restore 3 Health",
-    "contextHash": "df1356841f87efc4a6f19760b9b8a0870ec7354d38206dfa6a25acd7fc5de940"
+    "contextHash": "f319ecffa4b66142306b0f712a17cc01223fff4ea0cbaef7110c6af3aeec4638"
   },
   "content.card.dulcera-hushed-waters.name": {
     "text": "Hushed Waters"
@@ -1772,7 +1772,7 @@
   "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
     "text": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
     "reference": "Swap out for a random backup / Cleanse all allies",
-    "contextHash": "31cc4ee2a38aeb6e490c57b6fc8707bcd0239cb51929aed8c4cc66bde7318138"
+    "contextHash": "6314fe4541ee753193baf179448c68400147f406695b0164acabc357f5e4ffad"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "text": "Meadow Shelter"
@@ -1780,7 +1780,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Allies gain 2 Block",
-    "contextHash": "0e65824df50cbdea18470317e93f7f0105a29ea9a0d22fff32f60e2113a33d9a"
+    "contextHash": "bfe49be9f18dd0ea96c51228e35cb239a8d5ba4987d5ec2a53af54eb9e6ab286"
   },
   "content.card.dunefox-attack.name": {
     "text": "Sandburst Pounce"
@@ -1788,7 +1788,7 @@
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "reference": "Deal 6 Physical damage",
-    "contextHash": "76ec9d5cd3f182ad038fc66789a1bbc3780ae50b02712114f6f4d9a66d1f7c2f"
+    "contextHash": "27b06761eed4cf9dddbc60003f75604135476a9ec1ba0af08d106cc4f5465477"
   },
   "content.card.dunefox-dodge.name": {
     "text": "Mirage Step"
@@ -1796,12 +1796,12 @@
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
     "reference": "Gain 30% Dodge until your next turn",
-    "contextHash": "385cf7695a86cd94f98af5faa71318382a1a18192a6c97019eab9b08f40abbbb"
+    "contextHash": "f68c961604b7ca698624fe2ce839bc60e10f4b8aee2af55b5b2d70ad98d16dfb"
   },
   "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
     "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "reference": "Gain 30% Dodge until your next turn; Draw 1 card",
-    "contextHash": "385cf7695a86cd94f98af5faa71318382a1a18192a6c97019eab9b08f40abbbb"
+    "contextHash": "f68c961604b7ca698624fe2ce839bc60e10f4b8aee2af55b5b2d70ad98d16dfb"
   },
   "content.card.dunefox-dune-whirl.name": {
     "text": "Dune Whirl"
@@ -1809,7 +1809,7 @@
   "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
     "reference": "Deal 1 Physical damage to all enemies; Blind all enemies",
-    "contextHash": "853f9a96379f02d1bcc7475da8c97c4e24711d36a3008165321c326faaecf1bd"
+    "contextHash": "bb9690e4979b1ed4cf7922489804cce6e6ab2a6fa2cf59b47bd8db1f567b8bc9"
   },
   "content.card.emberback-attack.name": {
     "text": "Ember Charge"
@@ -1817,7 +1817,7 @@
   "content.card.emberback-attack.v49693240c378631b.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
     "reference": "Deal 4 Physical damage; Gain 2 Armor",
-    "contextHash": "6a0a1d3a987072f5432bd8853cb2a12abb9b7f1afaff9d709e8fa7147b12ab80"
+    "contextHash": "5b8fbaa3dae2384e0a6089cbf5b7fe5275f427cd60b6a9149432ed0fc8a6b94e"
   },
   "content.card.emberback-furnace-breath.name": {
     "text": "Furnace Breath"
@@ -1825,7 +1825,7 @@
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "text": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "reference": "Deal 2 Burn damage to all enemies",
-    "contextHash": "f7686b5fd6ab4e5a5af38ebcdf976c8a05b10d697f50fa6c3fc8772f1239aa03"
+    "contextHash": "696a65a99269bf087353046984647d22dce63eea62b388e9107d564853eac86e"
   },
   "content.card.emberback-magma-stomp.name": {
     "text": "Magma Stomp"
@@ -1833,7 +1833,7 @@
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
     "reference": "Deal 2 Stun damage to all enemies",
-    "contextHash": "2e65029406331fe3e34799f34deab355f935c10a7bca1537db9dd83de7295922"
+    "contextHash": "a488cf797054548189aec67cf4707c33eb38e9a97cb2eea623a1a1fc1b428f24"
   },
   "content.card.euphera-possible-path.name": {
     "text": "Possible Path"
@@ -1841,7 +1841,7 @@
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "text": "Shuffle your hand into your deck; Draw that many cards",
     "reference": "Shuffle your hand into your deck; Draw that many cards",
-    "contextHash": "1108fb8f912e4f0369d7989d74bcc379aee9cad87e4a25ee593f14806c55ddc5"
+    "contextHash": "0de78e1f1da61033490888f4a82996f2cf1ec4ad992fdbb289a61b6e6468add7"
   },
   "content.card.euphera-twilight-lance.name": {
     "text": "Twilight Lance"
@@ -1849,7 +1849,7 @@
   "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
     "text": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
     "reference": "Purge enemy Thorns; Deal 5 Light damage",
-    "contextHash": "52c06103d9cf383b1c521280c72637c47433bf5eb72e7f0dbed20152610206ae"
+    "contextHash": "ff208cb5cbfe43a8ad52d476ca1c23a325234e96e92580b1b67cf801a864986d"
   },
   "content.card.euphera-wish-exchange.name": {
     "text": "Wish Exchange"
@@ -1857,7 +1857,7 @@
   "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
     "text": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
     "reference": "Redistribute allied Block evenly; Allies gain 1 Block",
-    "contextHash": "dd6a0f03d1baea6bcd7bac1338bb28cd74361c7c0ebcba7e35c12297b758e638"
+    "contextHash": "1b0b9b99150e09994840ca102d4fe6c08b0d9ac21dba636b94e9855637bb7f2b"
   },
   "content.card.food-apple.all.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -1898,7 +1898,7 @@
   "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage",
     "reference": "Deal 6 Light damage",
-    "contextHash": "c230fbfc1154afa790fd8c174fcf6b69a19ccd4508bac643b47dbf7e834c99eb"
+    "contextHash": "b5d5281306c59f1fe29b816f28384ca885d61b8549e8c0570bd88df3612cbbcc"
   },
   "content.card.glintstride-dodge.name": {
     "text": "Mirage Run"
@@ -1906,12 +1906,12 @@
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
     "reference": "Gain 30% Dodge until your next turn",
-    "contextHash": "b0206870e0cf1f64015b1e01142336898cb14f4db53811e1f654e7a1119b15c7"
+    "contextHash": "04475082d3053cef7e4cf47ee67bc19681be56bc17dd8b2ed6b809ddb3f50988"
   },
   "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
     "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "reference": "Gain 30% Dodge until your next turn; Draw 1 card",
-    "contextHash": "b0206870e0cf1f64015b1e01142336898cb14f4db53811e1f654e7a1119b15c7"
+    "contextHash": "04475082d3053cef7e4cf47ee67bc19681be56bc17dd8b2ed6b809ddb3f50988"
   },
   "content.card.glintstride-teamBlind.name": {
     "text": "False Horizon"
@@ -1919,7 +1919,7 @@
   "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
     "text": "<keyword0>Blind</keyword0> all enemies",
     "reference": "Blind all enemies",
-    "contextHash": "e832a8c09b88ae621a920b7505c6c2e7e503a7d84c1a76039d7031202f7bbd59"
+    "contextHash": "b1efd14d66de4b2653991e3b50593622d522a3d854707855c21a0f7b860dbe8b"
   },
   "content.card.memento-drowned-revelation.name": {
     "text": "Drowned Revelation"
@@ -1927,12 +1927,12 @@
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "cb1fa33c4586bd55f9fd96ad0370f608eeb36c33cf9614e76356ac57cea44821"
+    "contextHash": "d59ec6aa4e51d63b53a4a58ef54c94eb041c284b7a5c3c4c70aa749985fbf9fc"
   },
   "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "cb1fa33c4586bd55f9fd96ad0370f608eeb36c33cf9614e76356ac57cea44821"
+    "contextHash": "d59ec6aa4e51d63b53a4a58ef54c94eb041c284b7a5c3c4c70aa749985fbf9fc"
   },
   "content.card.memento-lost-procession.name": {
     "text": "Lost Procession"
@@ -1940,7 +1940,7 @@
   "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
     "text": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
     "reference": "Summon an Echo / Restore your Minions to full Health",
-    "contextHash": "3ac228af154680b6e97495d0f8726e4bc1442276660f0d5c0555bce86820ce2d"
+    "contextHash": "e7a9f9fa653b9a372d83c123ebdc4d7e15e8d41c37e747a77dcd7ae836946af6"
   },
   "content.card.memento-pearl.name": {
     "text": "Pearl"
@@ -1948,7 +1948,7 @@
   "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
     "text": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
     "reference": "Consume; Gain 2 Block or 2 Mana at random",
-    "contextHash": "050cebcabd84c2a1fc18d7401b82916527b058b37bf8bd6fd98b6799d4a2bfd6"
+    "contextHash": "0cb1d12b6bd9d11b614dc912718b16899d5704ffdaf7b42f40368ed8229773de"
   },
   "content.card.memento-treasury-echo.name": {
     "text": "Treasury Echo"
@@ -1956,7 +1956,7 @@
   "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
     "text": "Create {{value0}} Pearls",
     "reference": "Create 2 Pearls",
-    "contextHash": "3941f52335985b09cf53b492e5551871f1313e1e94df0999d5eb813debd31fe2"
+    "contextHash": "f5be73c5c83f075df4a36098182f5c40041ef22719a1707cc6b9f91704ed1506"
   },
   "content.card.mossguard-attack.name": {
     "text": "Rooted Stomp"
@@ -1964,7 +1964,7 @@
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
     "reference": "Deal 2 Stun damage to all enemies",
-    "contextHash": "5c8c193a485503158cadfca30df7b382c74c1fb28706c21462fe488f02115111"
+    "contextHash": "2a3b37f651cc0c338c26b2a91e9c1639dbbff545a60ce0fc1485c4b44d9cc322"
   },
   "content.card.mossguard-guard.name": {
     "text": "Boulder Brace"
@@ -1972,7 +1972,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Gain 6 Block",
-    "contextHash": "c52c9702dd804d95298fc3ded537bcc1e56cf73b4b5d54d16eb3d0b4e03211e0"
+    "contextHash": "acfcc45ef4bab2628e347e6e0c1d0943ae3cb465e61241ab90e0b1b31f47d918"
   },
   "content.card.mossguard-heal.name": {
     "text": "Moss Renewal"
@@ -1980,7 +1980,7 @@
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "reference": "Restore 2 Health to all allies",
-    "contextHash": "6748cf1df9c183b24c014e263353627e6a5ee6221eeecb90d38dcb75a1940963"
+    "contextHash": "cf511c16382b2cc3842d6936491211e56eb10881772e107eb89616d1e60a3cc4"
   },
   "content.card.neradora-bloom-shelter.name": {
     "text": "Bloom Shelter"
@@ -1988,7 +1988,7 @@
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "reference": "Restore 2 Health to all allies",
-    "contextHash": "720909239fde2227138e0d9948e657e66f2d75c5104846e3dbbd25bdfb55911e"
+    "contextHash": "34a4c20f261b356dd440858179a56bad3f7cb2c7a09271d1065c4980d30d1ce1"
   },
   "content.card.neradora-tide-cup.name": {
     "text": "Tide Cup"
@@ -1996,22 +1996,22 @@
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "ff6db13eb7e38b49eeada41a6885d366240f51e68f436ce3c9d19b85055e7312"
+    "contextHash": "29ea586e5a14c277a16fa0ef0ff8583b115007830d46fc46dcdd933863cd2692"
   },
   "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "ff6db13eb7e38b49eeada41a6885d366240f51e68f436ce3c9d19b85055e7312"
+    "contextHash": "29ea586e5a14c277a16fa0ef0ff8583b115007830d46fc46dcdd933863cd2692"
   },
   "content.card.neradora-tide-cup.vce386818937868ab.rule": {
     "text": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 2 cards; Gain 1 Mana",
-    "contextHash": "ff6db13eb7e38b49eeada41a6885d366240f51e68f436ce3c9d19b85055e7312"
+    "contextHash": "29ea586e5a14c277a16fa0ef0ff8583b115007830d46fc46dcdd933863cd2692"
   },
   "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
     "text": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 1 card; Gain 1 Mana",
-    "contextHash": "ff6db13eb7e38b49eeada41a6885d366240f51e68f436ce3c9d19b85055e7312"
+    "contextHash": "29ea586e5a14c277a16fa0ef0ff8583b115007830d46fc46dcdd933863cd2692"
   },
   "content.card.neradora-undertow-knot.name": {
     "text": "Undertow Knot"
@@ -2019,7 +2019,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
     "reference": "Gain 4 Block; Cleanse a harmful effect",
-    "contextHash": "20fbf71998e4e69161e076e748eb05b5ab3edcb7ce7a516bd87ca95438c52b7e"
+    "contextHash": "97611627fed7bd983e1e96d42dd2dd949d7b5d81a35ecdaac450fffbefb9c6d3"
   },
   "content.card.oathara-never-lost.name": {
     "text": "Never Lost"
@@ -2027,7 +2027,7 @@
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "text": "Shuffle your hand into your deck; Draw that many cards",
     "reference": "Shuffle your hand into your deck; Draw that many cards",
-    "contextHash": "b13a7cc38ab2b252dd8e62de1f27ae281749996f2e9bd0c9caf40925af9cd157"
+    "contextHash": "e7d8930bbc8de66c36926254b544876b9240bf267f831fd37d0a1bf82c9a12a7"
   },
   "content.card.oathara-travelers-ward.name": {
     "text": "Traveler’s Ward"
@@ -2035,7 +2035,7 @@
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "text": "<keyword0>Reflect the next attack</keyword0>",
     "reference": "Reflect the next attack",
-    "contextHash": "21166e186bdaa8c1a04fa383943e8e0e534517897af14bb077d1ac815f331b72"
+    "contextHash": "8eaa4329876b0080cbeee5c2a92ae713390233a03350cff32f10768cbc492c93"
   },
   "content.card.oathara-vow-of-return.name": {
     "text": "Vow of Return"
@@ -2043,7 +2043,7 @@
   "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
     "text": "<keyword0>Resurrect</keyword0> an ally",
     "reference": "Resurrect an ally",
-    "contextHash": "c438f497146b87036f15a83ecb46398a8fa49b4ff1fc3826a0f66dc00340aab4"
+    "contextHash": "ad349ce1242f6f525a4272240b9afec8b931255e1be558efc503d3c436a66986"
   },
   "content.card.orifable-attack.name": {
     "text": "Postal Swarm"
@@ -2051,7 +2051,7 @@
   "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
     "reference": "Deal 2 Physical damage to all enemies",
-    "contextHash": "c560974ae6136ead240895fbc103e6df7f8a0458108535a92ac4d6ded0b98fd3"
+    "contextHash": "7dbadf95a508d701d461676a016299c62faccc44a8cffb2d5eaff2886bf5a91f"
   },
   "content.card.orifable-createFood.name": {
     "text": "Care Package"
@@ -2059,7 +2059,7 @@
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "text": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "reference": "Add 2 Food to your hand",
-    "contextHash": "b9d4b5edf778b82ec32076c96741ce0d11a9886d646023892a4cb772f962c500"
+    "contextHash": "255ff16fc3836175c05e2eb448c2705748f404c33f6f5e63b74bba36399cc207"
   },
   "content.card.orifable-heal.name": {
     "text": "Good Tidings"
@@ -2067,7 +2067,7 @@
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "reference": "Restore 6 Health to the most injured ally",
-    "contextHash": "67da4caf6f0736a91f689148281add1084c32a5ee28c58cd6bbfcfe7f6e11ad9"
+    "contextHash": "596ef2e277174b894e8b832be5d5d9ab192f7a910821afcbbc79cbb2ae9891c6"
   },
   "content.card.parhelion-polar-reprieve.name": {
     "text": "Polar Reprieve"
@@ -2075,12 +2075,12 @@
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "text": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
     "reference": "Cleanse all Freeze build-up from allies; Draw 1 card",
-    "contextHash": "bc9eb309a08479b39c70069419ec457a1721c06cd035db17c565440a234679ac"
+    "contextHash": "8f40b1c40255fb37e0e0c82624ff114680d623d7215a3595939bca3da8b0b8c0"
   },
   "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
     "text": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "reference": "Cleanse all Freeze build-up from allies",
-    "contextHash": "bc9eb309a08479b39c70069419ec457a1721c06cd035db17c565440a234679ac"
+    "contextHash": "8f40b1c40255fb37e0e0c82624ff114680d623d7215a3595939bca3da8b0b8c0"
   },
   "content.card.parhelion-sundog-reservoir.name": {
     "text": "Sundog Reservoir"
@@ -2088,7 +2088,7 @@
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "text": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "reference": "Gain 2 Mana",
-    "contextHash": "3c0076c3699194d9c224ad3383d552071c05ffcbf7cfa12ab2f05e23ae4b902b"
+    "contextHash": "b11b24ab96f7820803fce9a7840bd32d232978d04e54bf8bee5bce7c44eb62fb"
   },
   "content.card.parhelion-whiteout-waltz.name": {
     "text": "Whiteout Waltz"
@@ -2096,7 +2096,7 @@
   "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
     "text": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
     "reference": "Deal 1 Freeze damage; Blind all enemies",
-    "contextHash": "80c116506850741e1d7159c661579c4c7b66942dd6f3b2c2165da61a690b1734"
+    "contextHash": "872a6eeb196dae61809b4b6d8a77ed0ac43733710853e018e7084a0039d23bed"
   },
   "content.card.pollenmoth-attack.name": {
     "text": "Dazzle Burst"
@@ -2104,7 +2104,7 @@
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
     "reference": "Deal 3 Light damage to a random enemy",
-    "contextHash": "5bf0ef4a06b342290b7c63b4d2910c41043f1837f4c68ee3d4d1de3708b85095"
+    "contextHash": "c9f1a81366f923efcea456faeb1ff7ec4477fc713b47702e01884fc19e30411c"
   },
   "content.card.pollenmoth-heal.name": {
     "text": "Bloomwake"
@@ -2112,7 +2112,7 @@
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "reference": "Restore 3 Health to the most injured ally",
-    "contextHash": "d7ac22263387d51bdaa09d16adb8f8b049f83db3d25bc70c7bf13c4f0a844fc2"
+    "contextHash": "373f152e98140e8effaf93badf95bdb2d10b99cdaaf6409a17e85def24508bc9"
   },
   "content.card.pollenmoth-teamGuard.name": {
     "text": "Petal Shelter"
@@ -2120,7 +2120,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "reference": "Allies gain 2 Block",
-    "contextHash": "23d80c59b690d98637f130d303e2ab6602510fdeebd416864de1285c389e0237"
+    "contextHash": "1ff396c10f952518acafbddeb5029ccdd00bab91b82c76a16eec6bf7f073389f"
   },
   "content.card.prismram-attack.name": {
     "text": "Prism Charge"
@@ -2128,7 +2128,7 @@
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "reference": "Deal 6 Physical damage",
-    "contextHash": "96bc34be2abfea4aec808c23686820fb19baaa89e1314b7fd9958534b88ae75e"
+    "contextHash": "a7936ac59a4d54b0fcaf70d12e915dc9c9b2be85c7ee0fe299136a4f2d67f504"
   },
   "content.card.prismram-guard.name": {
     "text": "Faceted Ward"
@@ -2136,7 +2136,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
     "reference": "Gain 3 Block; Reflect the next harmful status effect",
-    "contextHash": "8147dadd24397e81a2d908c378bfc1fd2c2ccba94e7a4c6f243f35ded5bf1a20"
+    "contextHash": "a1290c314309e32df56a0e4b47120f7856719954d863fcace67304d391eae46d"
   },
   "content.card.prismram-spectrum-lance.name": {
     "text": "Spectrum Lance"
@@ -2144,7 +2144,7 @@
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "reference": "Deal 4 Light damage; Purge target: remove 1 effect",
-    "contextHash": "82c7887f1a9f18e8a003d4b4adacf20d7778da1d6e4f87229bbfd106f5dc0342"
+    "contextHash": "e9046778d3eb104622d0a939e4805e2b6d5192c18990fe5ed818b663ca99dda1"
   },
   "content.card.pyrella-ember-harvest.name": {
     "text": "Ember Harvest"
@@ -2152,12 +2152,12 @@
   "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
     "text": "Restore {{value0}} <keyword0>Mana</keyword0>",
     "reference": "Restore 1 Mana",
-    "contextHash": "5fc50deb5c00b4af57b583ad4e41bd18d77f99f0c900883d759689bdb3c7437c"
+    "contextHash": "be63c7d572f9f31485274258e60340d35438d0ce242095d62586f83ec444a346"
   },
   "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
     "text": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
     "reference": "Restore 1 Mana / Draw a Burn card",
-    "contextHash": "5fc50deb5c00b4af57b583ad4e41bd18d77f99f0c900883d759689bdb3c7437c"
+    "contextHash": "be63c7d572f9f31485274258e60340d35438d0ce242095d62586f83ec444a346"
   },
   "content.card.pyrella-festival-burst.name": {
     "text": "Festival Burst"
@@ -2165,7 +2165,7 @@
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "text": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "reference": "Deal 2 Burn damage to all enemies",
-    "contextHash": "5fc459afe771f605c1ca603a1167669287c3420c6a4fc811d2e8d83b007f135f"
+    "contextHash": "db2a6926b0e8c7dc86a85882b092adbba9f46efce9330d6af3c3b46fdaf0bd4c"
   },
   "content.card.pyrella-spark-decoy.name": {
     "text": "Spark Decoy"
@@ -2173,7 +2173,7 @@
   "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
     "text": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
     "reference": "Apply 2 Burn to all enemies / Gain Negate",
-    "contextHash": "1bd23631bc27c1b5bf972c32c2b503cf84455cc2e15ae7377a939754d249d0cb"
+    "contextHash": "809e83cebf4175cf54146c03f25c9f5c8c2f01ba8a41d9bf1cc096434ec73be9"
   },
   "content.card.reedstag-attack.name": {
     "text": "Reed Rush"
@@ -2181,7 +2181,7 @@
   "content.card.reedstag-attack.vaf3db517079be41f.rule": {
     "text": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
     "reference": "Deal 6 Nature damage",
-    "contextHash": "e544dc047268159806141cc0ef907ba1b1182b9fd4f884d2b470fa157281f428"
+    "contextHash": "6722c9341119ecabd2b35989fa36f86cbb0262717945ba8f14decb474bcf69ea"
   },
   "content.card.reedstag-guard.name": {
     "text": "Reed Shelter"
@@ -2189,7 +2189,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "reference": "Gain 3 Block; Gain 3 Thorns",
-    "contextHash": "671fb6c43f3de5058033ece48030a6e029edb54d8abbe41dbdd938fa46a2ae2c"
+    "contextHash": "c1ba47735125b0916c6cb682d0557966ff3d6e2f5f86e2c2fff68b0180d737f5"
   },
   "content.card.reedstag-heal.name": {
     "text": "Mending Spring"
@@ -2197,7 +2197,7 @@
   "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
     "reference": "Restore 4 Health to the most injured ally; Cleanse the healed ally",
-    "contextHash": "545bf7ed23dd30f2565f99fd3cca3693f57245107059c5c18d715545c455f884"
+    "contextHash": "c29585c1f6c8e0d04e1d663f2fb2bd0138f6867065c65a23048f379100161c87"
   },
   "content.card.reverie-dream-double.name": {
     "text": "Dream Double"
@@ -2205,7 +2205,7 @@
   "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
     "text": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
     "reference": "Gain 3 Thorns / Negate the next attack against you",
-    "contextHash": "257d40a69a1e451515eedc1f574b7aab119e1f4ead0f7de88c8423f398953dad"
+    "contextHash": "c580e631a4a3b403463078ece8d0b96b42e5d356b61f4fc2051e505a37b83a01"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "text": "Nightmare Harvest"
@@ -2213,7 +2213,7 @@
   "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
     "text": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
     "reference": "Cleanse all allies / Gain 1 Mana per effect removed",
-    "contextHash": "7be936b43ef56dbc6f9215f50a4aa13ae9c82f3f638aabce4a18defdd960fab8"
+    "contextHash": "f296d3590da8b7d15e2d4b3f9f9dad7ce9162b8778c7cf705fbf53b78a641bf6"
   },
   "content.card.reverie-waking-wonder.name": {
     "text": "Waking Wonder"
@@ -2221,12 +2221,12 @@
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "cb4c303c2236f641fce705a3d470b0dd94b535f499e441f356808f9a30fecb11"
+    "contextHash": "2bdadadf9e5be1aae148368cda33a18724dd51e662f0a6a3ef1d3307be4655aa"
   },
   "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "cb4c303c2236f641fce705a3d470b0dd94b535f499e441f356808f9a30fecb11"
+    "contextHash": "2bdadadf9e5be1aae148368cda33a18724dd51e662f0a6a3ef1d3307be4655aa"
   },
   "content.card.ringpalm-attack.name": {
     "text": "Ringclap"
@@ -2234,7 +2234,7 @@
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "reference": "Deal 6 Stun damage",
-    "contextHash": "86d0615d908fbe5d943f9b377b0d52c05874c14da1c974a24be0c7d59bee38e3"
+    "contextHash": "15af0c1b1e3952cddadd63ebf3a22ab73d6f74382b83e1bcc7acf49fa462de7f"
   },
   "content.card.ringpalm-harmonic-set.name": {
     "text": "Harmonic Set"
@@ -2242,7 +2242,7 @@
   "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
     "reference": "Deal 1 Stun damage to all enemies; Gain 1 Armor; 20% chance to repeat",
-    "contextHash": "7054a5d885d450c7bb453564aa35d2bfd1dd3bc1fcbe301f93d07c0e05cf9f35"
+    "contextHash": "d417af425478cc3c90e6a41dec5184835a1bfe7e96c6bdd605c40c0dfed3fb90"
   },
   "content.card.ringpalm-teamProtection.name": {
     "text": "Seedling Circle"
@@ -2250,12 +2250,12 @@
   "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
     "text": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
     "reference": "Grant all allies 3 Block or 2 Thorns",
-    "contextHash": "37e2ac21f9d5830df7dce6b1502fafd95a0fbd4716dda3da79afd925eb35a6c4"
+    "contextHash": "9b311fbd884a2f072039028edcb01735c83dfb7aba4856d9241a4eb044fc2a62"
   },
   "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
     "text": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
     "reference": "Grant all allies 2 Block or Thorns",
-    "contextHash": "37e2ac21f9d5830df7dce6b1502fafd95a0fbd4716dda3da79afd925eb35a6c4"
+    "contextHash": "9b311fbd884a2f072039028edcb01735c83dfb7aba4856d9241a4eb044fc2a62"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "text": "Borrowed Brilliance"
@@ -2263,7 +2263,7 @@
   "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
     "reference": "Deal 1 Light damage to all enemies; Blind all enemies",
-    "contextHash": "05a25d167683305732d9bff0e143ad360dd7bf58c21458745a72230f32f483fb"
+    "contextHash": "33e8b4a8a69e0c251817e58d4da97cc3b5a90642cd5a2bc6222c289ed5bc28de"
   },
   "content.card.rookhaven-margin-of-possibility.name": {
     "text": "Margin of Possibility"
@@ -2271,12 +2271,12 @@
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "33663770ed27bb4c002ec6590d00a51b26efda9d783ce412591f48f5f661fe3b"
+    "contextHash": "909facce4686e3dc03bdf41bc3f5d4ce978f26f6538c1a775267a16aa3de3cfb"
   },
   "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "33663770ed27bb4c002ec6590d00a51b26efda9d783ce412591f48f5f661fe3b"
+    "contextHash": "909facce4686e3dc03bdf41bc3f5d4ce978f26f6538c1a775267a16aa3de3cfb"
   },
   "content.card.rookhaven-unwritten-ending.name": {
     "text": "Unwritten Ending"
@@ -2284,7 +2284,7 @@
   "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
     "text": "<keyword0>Purge</keyword0> all enemies",
     "reference": "Purge all enemies",
-    "contextHash": "6150048681071ad0453bdebd125fa488ccefc0c7ed1a7628a7059c5311861048"
+    "contextHash": "47d8eaeda141cf524cb6961eefe80c7f35737460fad2a272774b12f70db8e79d"
   },
   "content.card.shadebrim-attack.name": {
     "text": "Coolfront"
@@ -2292,7 +2292,7 @@
   "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
     "text": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
     "reference": "Deal 1 Freeze damage to all enemies; Cleanse all allies",
-    "contextHash": "a31ea2ac67767b4265127c01ae7e4825337b9367ed3d75712270e0aec4075bfa"
+    "contextHash": "b40c0f4cabdf9818f51d94bcf30872be7b38ddb5283e3fc0606060828458eede"
   },
   "content.card.shadebrim-draw.name": {
     "text": "Noon Bloom"
@@ -2300,22 +2300,22 @@
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "435e4661ab8e8b313b7b4539d57cb27cb655c64d70e3a81c6636fcb6e666bb3d"
+    "contextHash": "948eeae8eab6f076789e55a6ee2514b4deca5aeab7c2a7cc9ab058e7d2499c7a"
   },
   "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "435e4661ab8e8b313b7b4539d57cb27cb655c64d70e3a81c6636fcb6e666bb3d"
+    "contextHash": "948eeae8eab6f076789e55a6ee2514b4deca5aeab7c2a7cc9ab058e7d2499c7a"
   },
   "content.card.shadebrim-draw.vce386818937868ab.rule": {
     "text": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 2 cards; Gain 1 Mana",
-    "contextHash": "435e4661ab8e8b313b7b4539d57cb27cb655c64d70e3a81c6636fcb6e666bb3d"
+    "contextHash": "948eeae8eab6f076789e55a6ee2514b4deca5aeab7c2a7cc9ab058e7d2499c7a"
   },
   "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
     "text": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 1 card; Gain 1 Mana",
-    "contextHash": "435e4661ab8e8b313b7b4539d57cb27cb655c64d70e3a81c6636fcb6e666bb3d"
+    "contextHash": "948eeae8eab6f076789e55a6ee2514b4deca5aeab7c2a7cc9ab058e7d2499c7a"
   },
   "content.card.shadebrim-guard.name": {
     "text": "Noonward"
@@ -2323,7 +2323,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
     "reference": "Gain 4 Block; Reflect the next Burn",
-    "contextHash": "b5a705e5f86b3b52bc7200d39fa7923c9dbea5e321b72409b268ef2d2927850e"
+    "contextHash": "5d2db653c3222e1db1aba1965c7524e48c3af8502412277f0fd6d2168196ef91"
   },
   "content.card.skybex-cloudstep.name": {
     "text": "Cloudstep"
@@ -2331,7 +2331,7 @@
   "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
     "text": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
     "reference": "Swap out for a random ally / Incoming ally gains 20% Dodge until next turn",
-    "contextHash": "bac0d7b1b6e553a8be8dce6fffa7106766eb9e8c7ca388d926513c805f243ca8"
+    "contextHash": "e75d45caf1b46e7f905e1244f39b41bb5e9ead11ae698b2901fce42713bcf0cd"
   },
   "content.card.skybex-draw.name": {
     "text": "Far Horizon"
@@ -2339,12 +2339,12 @@
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "341cc206e825375fe040cf7f1a5217d90887e7935ffc27c9f2777eb3da4e0171"
+    "contextHash": "05622ef2d79baa35aa5524a8037a2b651ec10c69c327469a83be1a34a16cb906"
   },
   "content.card.skybex-draw.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "341cc206e825375fe040cf7f1a5217d90887e7935ffc27c9f2777eb3da4e0171"
+    "contextHash": "05622ef2d79baa35aa5524a8037a2b651ec10c69c327469a83be1a34a16cb906"
   },
   "content.card.skybex-sky-shepherd.name": {
     "text": "Sky Shepherd"
@@ -2352,7 +2352,7 @@
   "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
     "text": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
     "reference": "Deal 2 Nature damage to all enemies",
-    "contextHash": "9afeff52b82263dae85c1d3d7801add5fb97c444d9b98ed587d3e7648907889f"
+    "contextHash": "8290ccba7f9c89a77b489065acf5675ad2eb3eb8763386637922635fd28610d3"
   },
   "content.card.sternshell-attack.name": {
     "text": "Surge Ram"
@@ -2360,7 +2360,7 @@
   "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
     "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
     "reference": "Deal 3 Physical damage; Doubled if you have Armor",
-    "contextHash": "788c9a5684071e2b8d484bb29c1fe1f342c2661a9a82851e62b888a7d71e23c7"
+    "contextHash": "7bd70ffda292176b09b11323ef366593f125f5f3857641953f66db3608484490"
   },
   "content.card.sternshell-spiral-return.name": {
     "text": "Spiral Return"
@@ -2368,12 +2368,12 @@
   "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
     "text": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "reference": "Deal 1 Water damage to all enemies",
-    "contextHash": "43c820737a2e22b03792714a55c1c3608e4c7962a3d3cc9816e73f34fffa1c9b"
+    "contextHash": "e6464ad806cd047b91a75f4d50ccbce6f190ab8e09bb34dc2d3c6ff6e9794291"
   },
   "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
     "text": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
     "reference": "Deal 1 Water damage to all enemies; Gain 1 Mana",
-    "contextHash": "43c820737a2e22b03792714a55c1c3608e4c7962a3d3cc9816e73f34fffa1c9b"
+    "contextHash": "e6464ad806cd047b91a75f4d50ccbce6f190ab8e09bb34dc2d3c6ff6e9794291"
   },
   "content.card.sternshell-swap.name": {
     "text": "Siphon Vault"
@@ -2381,12 +2381,12 @@
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "text": "Swap out for a random backup",
     "reference": "Swap out for a random backup",
-    "contextHash": "8a6d0fbbfa98d12aefba8baa64d0b09addc5abaede840f63a4d37cc97e17a0b2"
+    "contextHash": "46f73a242dbb2af2abe69a6b25026f1d2ef32b3c9d7e7006c78296685937bfe8"
   },
   "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
     "text": "Swap out for a random backup; Draw {{value0}} card",
     "reference": "Swap out for a random backup; Draw 1 card",
-    "contextHash": "8a6d0fbbfa98d12aefba8baa64d0b09addc5abaede840f63a4d37cc97e17a0b2"
+    "contextHash": "46f73a242dbb2af2abe69a6b25026f1d2ef32b3c9d7e7006c78296685937bfe8"
   },
   "content.card.stillara-reed-reservoir.name": {
     "text": "Reed Reservoir"
@@ -2394,7 +2394,7 @@
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "text": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "reference": "Gain 2 Mana",
-    "contextHash": "ed1a47e358ce119601b7104ee391537523849e4d1aef0e0a257dfec36ca53a00"
+    "contextHash": "186a7148046c2fa96f984711b2599cd3d4d539cf89a3c604ce68437bc72181d5"
   },
   "content.card.stillara-thaw-path.name": {
     "text": "Thaw Path"
@@ -2402,12 +2402,12 @@
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "text": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
     "reference": "Cleanse all Freeze build-up from allies; Draw 1 card",
-    "contextHash": "2677b3480bcbc911bc4c635b2066eb474cb5e97fd7b6bb3dd47d23560240c4d4"
+    "contextHash": "87082212580fcc96006cdfa57badaf463ca77773508fb8e2ae6467744fce94a4"
   },
   "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
     "text": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "reference": "Cleanse all Freeze build-up from allies",
-    "contextHash": "2677b3480bcbc911bc4c635b2066eb474cb5e97fd7b6bb3dd47d23560240c4d4"
+    "contextHash": "87082212580fcc96006cdfa57badaf463ca77773508fb8e2ae6467744fce94a4"
   },
   "content.card.stillara-water-remembers.name": {
     "text": "Water Remembers"
@@ -2415,12 +2415,12 @@
   "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
     "reference": "Restore 1 Health to all allies; Draw 1 card",
-    "contextHash": "f7acd9a3f9be70153b867e8bebbe7fc46710e7dff2613af77eedeb316409b164"
+    "contextHash": "9d3d7fd44a621f95ae48a2e9029f96b9df996574df071fecd6c52384de2482c0"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "reference": "Restore 1 Health to all allies",
-    "contextHash": "f7acd9a3f9be70153b867e8bebbe7fc46710e7dff2613af77eedeb316409b164"
+    "contextHash": "9d3d7fd44a621f95ae48a2e9029f96b9df996574df071fecd6c52384de2482c0"
   },
   "content.card.tournelle-attack.name": {
     "text": "Valiant Challenge"
@@ -2428,7 +2428,7 @@
   "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
     "text": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
     "reference": "Deal 4 Light damage / Doubled against enemies with more Health than you",
-    "contextHash": "3dad8c84f487688cd264a536a127811a99eb225e4faeab0a6cf5269c5ee469f4"
+    "contextHash": "c48a324fc9a881c8146d075cf142e7c5916a423723a964c8be7e5da486687764"
   },
   "content.card.tournelle-swapLowest.name": {
     "text": "Safe Passage"
@@ -2436,12 +2436,12 @@
   "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
     "text": "Swap out the lowest <keyword0>Health</keyword0> ally",
     "reference": "Swap out the lowest Health ally",
-    "contextHash": "439fa2279be35d78ad33660d5233be9e40bbdcc256b804428187c1432d8d2059"
+    "contextHash": "5fbd61a1ef623d9b6084f8ef755e8fc1fef8e898218a1a94eaea300b8283fc94"
   },
   "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
     "text": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
     "reference": "Swap out the lowest Health ally / Draw a Card",
-    "contextHash": "439fa2279be35d78ad33660d5233be9e40bbdcc256b804428187c1432d8d2059"
+    "contextHash": "5fbd61a1ef623d9b6084f8ef755e8fc1fef8e898218a1a94eaea300b8283fc94"
   },
   "content.card.tournelle-teamClearBlind.name": {
     "text": "Kindled Courage"
@@ -2449,12 +2449,36 @@
   "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
     "text": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
     "reference": "Cleanse allies Blind",
-    "contextHash": "8f0556a17791958278f3a8315af6cdc97592d9aa7492c8af9cf357d866b7330e"
+    "contextHash": "2d942dad52f17bdf143c4e65f9b59e6e81d0f45ffc449d8c9fb0c58304807026"
   },
   "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
     "text": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
     "reference": "Cleanse allies Blind / Draw a Light card",
-    "contextHash": "8f0556a17791958278f3a8315af6cdc97592d9aa7492c8af9cf357d866b7330e"
+    "contextHash": "2d942dad52f17bdf143c4e65f9b59e6e81d0f45ffc449d8c9fb0c58304807026"
+  },
+  "content.card.vitrilo-kilnheart.name": {
+    "text": "Kilnheart"
+  },
+  "content.card.vitrilo-kilnheart.v8550d6fc467780eb.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0>; Gain {{value1}} <keyword1>Block</keyword1>",
+    "reference": "Restore 3 Health; Gain 3 Block",
+    "contextHash": "061b48c29b10a6dd98f14bbcec847c658dad7f894a18d788e935941722607daf"
+  },
+  "content.card.vitrilo-prism-key.name": {
+    "text": "Prism Key"
+  },
+  "content.card.vitrilo-prism-key.v256f8f9c4afa4e50.rule": {
+    "text": "<keyword0>Purge</keyword0> an enemy / Steal the effect <keyword1>purged</keyword1>",
+    "reference": "Purge an enemy / Steal the effect purged",
+    "contextHash": "9eb4fb9cdaefd69845d1f8541fecfd50541bee7a5993bc33825361c5ae2f228e"
+  },
+  "content.card.vitrilo-sunflare-cast.name": {
+    "text": "Sunflare Cast"
+  },
+  "content.card.vitrilo-sunflare-cast.vd1159d075d6fff86.rule": {
+    "text": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "reference": "Deal 6 Light damage",
+    "contextHash": "2f8f2147a050b8a0e1b426d7f0f38178738c14bef3ba67efc80095aa2685253b"
   },
   "content.card.wendlet-borrowed-silhouette.name": {
     "text": "Borrowed Silhouette"
@@ -2462,7 +2486,7 @@
   "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
     "text": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
     "reference": "Draw a copy of a random backup ally ability / Gain 1 Mana",
-    "contextHash": "bb88c6dbcd0102b49390e424645c520d38870ba3eb321f148eeba479b7179387"
+    "contextHash": "ccf68d09968d124fe6304e224a1076a2962ac0db86540dbfa22d0db83f7e7a43"
   },
   "content.card.wendlet-midnight-mantle.name": {
     "text": "Midnight Mantle"
@@ -2470,7 +2494,7 @@
   "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
     "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
     "reference": "Gain 20% Dodge until your next turn; Gain 3 Block",
-    "contextHash": "d6ed030142231803d9c5881a1b54e68845bfbe51466b1000f083b5c9ced99c3a"
+    "contextHash": "ec8ea13060ad56fbf765cf44960490c802c158227a216fd6e9609fee23e1912e"
   },
   "content.card.wendlet-umbra-snare.name": {
     "text": "Umbra Snare"
@@ -2478,7 +2502,7 @@
   "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
     "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "reference": "Deal 6 Stun damage",
-    "contextHash": "414cce39554b8e414cc377a0ffd77c1521a4ae6b75aeab8f602434a7bf359ef3"
+    "contextHash": "1827d3d373955a71cb0b3dc84800c5c7861b773208387181cceab82bb855f5d2"
   },
   "content.card.wickwaltz-attack.name": {
     "text": "Ember Pirouette"
@@ -2486,7 +2510,7 @@
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "text": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "reference": "Deal 2 Burn damage to all enemies",
-    "contextHash": "eb8c95b59bfe46faf2d3ea69fb273105e427e3db08694a573eae0708648b11f5"
+    "contextHash": "35a03c867ae9fb34af1299171d3715051d4c6015a1bbb3e7096c4d8075e2f39e"
   },
   "content.card.wickwaltz-draw.name": {
     "text": "Thermal Rise"
@@ -2494,22 +2518,22 @@
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "text": "Draw {{value0}} cards",
     "reference": "Draw 2 cards",
-    "contextHash": "c6c9babda681acf342f645d58f9fdf8b46bd01a717efca526fa19d6ced82c539"
+    "contextHash": "4553a24260bed7b798c01db0aa0b8fe7be28b711318375e0b7dc5e4cf043b786"
   },
   "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
     "text": "Draw {{value0}} card",
     "reference": "Draw 1 card",
-    "contextHash": "c6c9babda681acf342f645d58f9fdf8b46bd01a717efca526fa19d6ced82c539"
+    "contextHash": "4553a24260bed7b798c01db0aa0b8fe7be28b711318375e0b7dc5e4cf043b786"
   },
   "content.card.wickwaltz-draw.vce386818937868ab.rule": {
     "text": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 2 cards; Gain 1 Mana",
-    "contextHash": "c6c9babda681acf342f645d58f9fdf8b46bd01a717efca526fa19d6ced82c539"
+    "contextHash": "4553a24260bed7b798c01db0aa0b8fe7be28b711318375e0b7dc5e4cf043b786"
   },
   "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
     "text": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "reference": "Draw 1 card; Gain 1 Mana",
-    "contextHash": "c6c9babda681acf342f645d58f9fdf8b46bd01a717efca526fa19d6ced82c539"
+    "contextHash": "4553a24260bed7b798c01db0aa0b8fe7be28b711318375e0b7dc5e4cf043b786"
   },
   "content.card.wickwaltz-guard.name": {
     "text": "Saffron Screen"
@@ -2517,7 +2541,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
     "reference": "Gain 3 Block; Nullify the next Freeze damage",
-    "contextHash": "b13dc0a51e84ff14214a8259627e447fbbc80613ea0c120ce62b332b359fae79"
+    "contextHash": "b9bc441d75c1110905c5d9d3bab15172015f00fe7bcd3811d26dd3b4851dbcfd"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "text": "Forgotten Junction"
@@ -2525,12 +2549,12 @@
   "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
     "text": "Swap out for a chosen backup / Draw a Card",
     "reference": "Swap out for a chosen backup / Draw a Card",
-    "contextHash": "2a61505031ccdcbdd9e0ba0a789bbea76e6960f4bf871716dbc1fa6e9dda13e7"
+    "contextHash": "d873b93526ce8171fb34afd522649787e22f7d5741eaca923a21182edb1a2533"
   },
   "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
     "text": "Swap out for a chosen backup",
     "reference": "Swap out for a chosen backup",
-    "contextHash": "2a61505031ccdcbdd9e0ba0a789bbea76e6960f4bf871716dbc1fa6e9dda13e7"
+    "contextHash": "d873b93526ce8171fb34afd522649787e22f7d5741eaca923a21182edb1a2533"
   },
   "content.card.wisterelle-lantern-fare.name": {
     "text": "Lantern Fare"
@@ -2538,12 +2562,12 @@
   "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
     "reference": "Restore 3 Health to an injured ally / Gain 1 Mana",
-    "contextHash": "f5ff92996dd305aaace3cfe59514bf830a29bbfabbc9160eb2c759f13075c4a8"
+    "contextHash": "fdc14cd1d2193eb300b816ac6005ad6698d0618ed17eac9c2f0ff35794837557"
   },
   "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
     "text": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
     "reference": "Restore 3 Health to an injured ally",
-    "contextHash": "f5ff92996dd305aaace3cfe59514bf830a29bbfabbc9160eb2c759f13075c4a8"
+    "contextHash": "fdc14cd1d2193eb300b816ac6005ad6698d0618ed17eac9c2f0ff35794837557"
   },
   "content.card.wisterelle-left-luggage.name": {
     "text": "Left Luggage"
@@ -2551,12 +2575,12 @@
   "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
     "text": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
     "reference": "Draw an ally’s card from your Discard pile / Gain 1 Mana",
-    "contextHash": "4543aa6700ca6a6e7c0d8ed8414627a83c83e290e99e10a9da05927322952bcc"
+    "contextHash": "1014039d749ae2a404796069d02d0feda1588c5b6453cfe118af8b09f25034f0"
   },
   "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
     "text": "Draw an ally’s card from your Discard pile",
     "reference": "Draw an ally’s card from your Discard pile",
-    "contextHash": "4543aa6700ca6a6e7c0d8ed8414627a83c83e290e99e10a9da05927322952bcc"
+    "contextHash": "1014039d749ae2a404796069d02d0feda1588c5b6453cfe118af8b09f25034f0"
   },
   "content.glossary.action-card.definition.rule": {
     "text": "A creature's ability card; Playing it makes that creature act and spends your team's shared <keyword0>Mana</keyword0>",
@@ -4143,6 +4167,39 @@
   },
   "content.species.tournelle.trait": {
     "text": "Gallantry"
+  },
+  "content.species.vitrilo.name": {
+    "text": "Vitrilo"
+  },
+  "content.species.vitrilo.passive.0.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 1 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.passive.1.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 2 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.passive.2.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 3 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.passive.3.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 4 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.passive.4.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 5 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.passive.5.rule": {
+    "text": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "reference": "Light attacks steal 6 Block from the target before dealing damage"
+  },
+  "content.species.vitrilo.title": {
+    "text": "The traveling glassmaker"
+  },
+  "content.species.vitrilo.trait": {
+    "text": "Glass Cutter"
   },
   "content.species.wendlet.name": {
     "text": "Wendlet"

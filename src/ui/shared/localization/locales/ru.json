@@ -2654,7 +2654,7 @@
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "45009d89e4ac84080b9b87aa8e438b99fcf947e33854de356c64cf1c07092fda",
+    "sourceHash": "29c4cbd4bb1b2cd7e3fd89b3e688cc623ecf32a1042c07c37d982ac4096a9205",
     "text": "Добавьте в руку <keyword0>еду</keyword0>: {{value0}}"
   },
   "content.card.aerostat-true-bearing.name": {
@@ -2666,7 +2666,7 @@
   "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
-    "sourceHash": "46658f03780362dc88f467a6996e2908d9e7d56c259f026d5108a4d2d10faea4",
+    "sourceHash": "5236b45a0736c8cac9540b31d691412b011cd53801f45681d7b73315c88f4f12",
     "text": "Взять карт: {{value0}} / <keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников"
   },
   "content.card.aerostat-voyagers-rest.name": {
@@ -2678,7 +2678,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "50fb6249f3fdede2521d1cb3b3fbfca29cca779519853adf273f89b4bb9b631a",
+    "sourceHash": "0679b1f000e28f337861a242b8e14b0ae897f463df81ce43e15640915661abb0",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2690,13 +2690,13 @@
   "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
     "reviewed": true,
     "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "bbdd70c43a6986983f0b51e08debac0abe4842810ef2aa4bcc690f23e5d89f4a",
+    "sourceHash": "9c2cc2103a8714c661691b184b201e3005c24cd0a2151bc0552752ce27ba38c9",
     "text": "Верните случайную сброшенную карту в руку; Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
-    "sourceHash": "458e376b6e7699448fe5761506672f3e29a82768939c3695006cb2033587f936",
+    "sourceHash": "c86a854a0090c8fb23cb93d5de9b3ddd2bb3e107921969c212f0ba8f7dcc7f02",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> живому союзнику"
   },
   "content.card.almanelle-rooted-year.name": {
@@ -2708,7 +2708,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "cda482ed7beb3887f3d879a6fbb7faa6f5dfedfbd517e6e655de5084972116bc",
+    "sourceHash": "bf7ca40daf92dd44f519eafd063ff97b4bc49e68ccbacb093527b2409e7c53f3",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2720,7 +2720,7 @@
   "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
-    "sourceHash": "02baad0977aecdc4e969e57f2fdb9d776c4864189ca7d693d5627de81f9a2798",
+    "sourceHash": "844b87a1b06de9d7f97ee0b15c11322897982bfd431ae7a4fbeab95aef20b1b0",
     "text": "Нанесите {{value0}} урона <keyword0>водой</keyword0>; <keyword1>Очистите</keyword1> действующее существо: удалить эффектов {{value1}}"
   },
   "content.card.alpenglen-ember-of-evening.name": {
@@ -2732,7 +2732,7 @@
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "8903db8ecbdc5345733b6912577bd63314f652c49792f996e2fe68ff1c1b6ba5",
+    "sourceHash": "889d3cceae789adc9654f61998bbc1a83c6d29f295c5d1b3c3cc4134947a0284",
     "text": "Ваша следующая карта разыгрывается дважды"
   },
   "content.card.alpenglen-last-light-charge.name": {
@@ -2744,7 +2744,7 @@
   "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
-    "sourceHash": "75b0c61331a92ff2668e784de495f4c74c4570b375f93785cd1401830a3a1efc",
+    "sourceHash": "8be6668b7e78ad2a443d7aac0f99e1ed24d7ccbeb8b032fb24b112795b32cd3b",
     "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Если это последняя карта в руке, она наносит <keyword1>критический удар</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
@@ -2756,7 +2756,7 @@
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "85c825b78cc8ea26e4924c3ef8824f43fe88ea51d1843b42ba81d431d995b9f4",
+    "sourceHash": "4b7f2a0e6cca18215244895c94132979e4df0269fbf541d6e836655ff68dfbb8",
     "text": "<keyword0>Отразите следующую атаку</keyword0>"
   },
   "content.card.arabesca-dancing-double.name": {
@@ -2768,7 +2768,7 @@
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "bac93b069c3a8eff2c55f30fb131d692416acd36c4ac0ca6366879d2a6654759",
+    "sourceHash": "b0d74a3aaaed72268c050a51260380272acbc9edba8e0b3c490a43e8b76466fc",
     "text": "Ваша следующая карта разыгрывается дважды"
   },
   "content.card.arabesca-ribbon-snare.name": {
@@ -2780,7 +2780,7 @@
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "332d922787b276219cea0510d795fa498b3c5fa4241ac44031549ff9b40d3086",
+    "sourceHash": "23bb961741e2b1294164b305adbcc974a6e4ea1324e0cd6956d695528ab76173",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
   "content.card.arabesca-springbound.name": {
@@ -2792,7 +2792,7 @@
   "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
-    "sourceHash": "fbd078dfe407e4aaa09cdd1d87bfcf418a7aed6b226cb6522ad4937b29ab3f75",
+    "sourceHash": "9611c2f6143240331377b09a8a870ec88be8c4a2098a2573fada02dad41dc1c5",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> союзников / Получите {{value0}}% <keyword2>уклонения</keyword2> до следующего хода"
   },
   "content.card.bloomquail-draw.name": {
@@ -2804,19 +2804,19 @@
   "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "887087f79f81d12d02ebc46e99fedeab422713582fa411791d2cbaae24ddd525",
+    "sourceHash": "36517a785fb0ee84a14daca0d589a75d1a342529407653863d36bfbd632127f9",
     "text": "Взять карт: {{value0}}; Восстановить {{value1}} <keyword0>здоровья</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "167e40063b0dfec267820c2bb4a27ec8f7e91dd14d45b6c36acccb865a91b746",
+    "sourceHash": "db6f324984711e9246d97c3b9b0ee812c4dbc0c0b660563be95d63fd6b1480c1",
     "text": "Взять карт: {{value0}}; Восстановить {{value1}} <keyword0>здоровья</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "c31b7819a1aede29addf7eb28993819c4284f0ad05a635c03b2fc931d1e76cd8",
+    "sourceHash": "80820e742b38b2255e36cf92576f4e7642203e7a28c1832b228253105b15b66d",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.bloomquail-guard.name": {
@@ -2828,7 +2828,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "aeb7e9208209e5477158b8543a37fe51cc933dd1991ef162e02d8ef12ab475f4",
+    "sourceHash": "fa1ed926bb3f1beeedf4f5c8c74ec246b33352f09285f76631c74f5a6384a28a",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2840,7 +2840,7 @@
   "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "be89f0e5ad986f6c0d60a20dfed522bbfeb0e881a88f4a8d70df4641ff4081c7",
+    "sourceHash": "1f4c94654f87e4fff7443d1f8558062b3f6add2587f9bd759fd285899476334f",
     "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
   },
   "content.card.brumalyn-frost-howl.name": {
@@ -2852,7 +2852,7 @@
   "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
-    "sourceHash": "f705f8a1c6d7d77b635db027f4475bde7cb5fd6e961bb8784fec47eecac0c1dc",
+    "sourceHash": "806e0291da29676a397dd96bb58f910c1169523f5348826d9963448d03be39ea",
     "text": "Нанесите всем врагам {{value0}} урона случайно выбранной <keyword0>заморозкой</keyword0> или <keyword1>оглушением</keyword1>"
   },
   "content.card.brumalyn-rime-pounce.name": {
@@ -2864,7 +2864,7 @@
   "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
-    "sourceHash": "127862d19b0cb16621edf142de4f6219c37034d3ae08e31d315940829e34ff79",
+    "sourceHash": "1216a85733268eefc0d1816d9b6b5b26e4bfb429dd21b5b395e7ee5b9c6b761a",
     "text": "Нанесите {{value0}} урона <keyword0>заморозкой</keyword0>"
   },
   "content.card.brumalyn-warmth-ward.name": {
@@ -2876,7 +2876,7 @@
   "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
-    "sourceHash": "d67eb7ce03ec6d3a14e1fb176120cb45e434b51b436b1cc11abb818eb651c963",
+    "sourceHash": "a1a3daddfc082cfaebbce5b640855d58a2d556273aa7653bc443d3a431cd26f9",
     "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; <keyword1>Очистите</keyword1> накопление <keyword2>заморозки</keyword2> у всех союзников"
   },
   "content.card.cadenza-echoes-remember.name": {
@@ -2888,7 +2888,7 @@
   "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
     "reviewed": true,
     "source": "Return a random discarded card from a living ally to your hand",
-    "sourceHash": "7878d25975f40aa8b36fbd80ecdb13f67a3e9942437cb2b7dc3bc5ee2d32e642",
+    "sourceHash": "5801217e279fe1af8365b43b0992a2bfe81eae7122b9f1e5421cdab6de5939ff",
     "text": "Верните в руку случайную сброшенную карту живого союзника"
   },
   "content.card.cadenza-resonant-well.name": {
@@ -2900,25 +2900,25 @@
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "2a26f35449c2b12465727809eb3b05143561fb8ca039f8e0eb699b096c1fc2c8",
+    "sourceHash": "187025f0a7eb26e65731c463d33e70a34e4612f9a8627212f526071714bb3788",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "2c5048c4405c7c82eebc0bd59dec1a353307f528c35fa4b50a2acaa3f4eee58a",
+    "sourceHash": "aea3717778d2e754e5bda1248ac7709112a007f367e55be262387a810b35b8b3",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "913cfab4202a832305d7423ac7084454f060953b527774f64d49a973e9151d56",
+    "sourceHash": "67bbe362b29c0deb7fd92eacf8dd1df42f9b1fd6b7c8e9012ba69419aeed0a3e",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "982c0a48fd7d088eae7b11e5ecef06d215fbf02c91cba6e521e65b68cc120a3e",
+    "sourceHash": "f7428a548f3357288f1ed183b4b21e1144b16d31bcc37e510047ab5843733fb0",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.cadenza-rousing-refrain.name": {
@@ -2930,13 +2930,13 @@
   "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "240c794408e17317f58095f33d2ff64b34da55991afac831e5326b73f4bd0de6",
+    "sourceHash": "87f0cccb310ccb2c3605afdffd355fa2a19ec01349877f705ceb44795658ca11",
     "text": "Дайте всем союзникам {{value0}}% <keyword0>уклонения</keyword0> до вашего следующего хода"
   },
   "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "53fbf4f27c5d0b535549a1da186ed74136f99e929c2ba5946b6586002cb3b5f0",
+    "sourceHash": "be45df35f4562c25803010c811e3f14490e84fda8b2e411346a720eace829eb7",
     "text": "Дайте всем союзникам {{value0}}% <keyword0>уклонения</keyword0> до вашего следующего хода; Взять карт: {{value1}}"
   },
   "content.card.captoad-attack.name": {
@@ -2948,7 +2948,7 @@
   "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
-    "sourceHash": "b728742fe0d4729bec296bec72791cbaf9e7fb53b228090f490a18d312c6a461",
+    "sourceHash": "d9687d79acd96415a849044a946dbe12ca90cf7474bb1ff54ce0708d650f4d6a",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>ядом</keyword0>"
   },
   "content.card.captoad-guard.name": {
@@ -2960,7 +2960,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "cb6f58ae526dcbd32776d88b2622e78ab2a0e8e5c3369b78d1423b7d614343b4",
+    "sourceHash": "25054195819bd239b6baeb02cddf925fa43787065bd08b41fd0d4bfa09d9e0c3",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Восстановите {{value1}} <keyword1>здоровья</keyword1>"
   },
   "content.card.captoad-swap.name": {
@@ -2972,13 +2972,13 @@
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "63a942d86aaa6a1ad18a87d633529e805dccf535a7b7607c63782553f01b950b",
+    "sourceHash": "9a8010e60f13a63511c865d77e4011812ea8c72d4cc7f6bc1da70c2325b84a15",
     "text": "Сменитесь со случайным союзником из запаса"
   },
   "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} cards",
-    "sourceHash": "332937c008f1fe46680f8fcd3ed5de7918b7ca491a690fd2bb5e8f3bcca0ad37",
+    "sourceHash": "bd81a1a3244063fa54c6a919d6cd27f96c848f1eae5833d9c049d4371e74c6f4",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
   "content.card.cavalleaf-meadow-return.name": {
@@ -2990,7 +2990,7 @@
   "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "3c394278ed5a4f42d857eeb2beb426377c5082824d8979eef0e2c1141dd9dd9f",
+    "sourceHash": "289646fe8a1cb7b2b0c37401741e32a2b448cc9cb14190b2b8cb98af18bb1470",
     "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.cavalleaf-prairie-leap.name": {
@@ -3002,7 +3002,7 @@
   "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
-    "sourceHash": "a0afdbffc03aa899e41d579f7b4839ddff45e31d77d1761f3007edcda605b13f",
+    "sourceHash": "7c85d0af962b00794a6180f5b55eaa354eb00c409aebdd734cacd150e8fc767a",
     "text": "Сменитесь со случайным запасным / Вышедший союзник получает {{value0}} <keyword0>шипов</keyword0>"
   },
   "content.card.cavalleaf-raincall.name": {
@@ -3014,7 +3014,7 @@
   "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
     "reviewed": true,
     "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
-    "sourceHash": "d243d7908bf833880fa2da86eb79a07ce1ed2a9149dac8e30f53cb0a1531f8eb",
+    "sourceHash": "62e3d4c8628ac4c4c01b86bcba9f456d3551bc9c3049c6d515f8ff866fd317a1",
     "text": "Возьмите карту <keyword0>Воды</keyword0> / <keyword1>Очистите</keyword1> союзников от <keyword2>Горения</keyword2>"
   },
   "content.card.chimecricket-attack.name": {
@@ -3026,13 +3026,13 @@
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
-    "sourceHash": "03c1cb05d46994115b5e07841bbcc6c78712a788c65922058baa795e9029e163",
+    "sourceHash": "20aae430eb089c39582ba29d805b469960f911fe62dbf0cc9760ecfef5673d8b",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>; Добор карт: {{value1}}"
   },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "d0eabe7155bafc96579800bdca136ca9d526b1bddf6c6d387a68e0111b024c2d",
+    "sourceHash": "55cfbacc6fb22ec30d475be81b6f2e4a9d5842ddb5d70303c12a0ee93b0ccf79",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
   "content.card.chimecricket-heal.name": {
@@ -3044,7 +3044,7 @@
   "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "88a9c9284bdbc865d01acce11351f409fc70f2c314f169a4e1e57917a71d5981",
+    "sourceHash": "74b99d66fa1523a99bf558437c319988a4d9078fee1a5e900dc304f02e284822",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику; <keyword1>Очистите</keyword1> <keyword2>исцелённого</keyword2> союзника"
   },
   "content.card.chimecricket-nullify.name": {
@@ -3056,7 +3056,7 @@
   "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
-    "sourceHash": "77eac15dd0b5a746c37ee49cc8b89a948175e80ed4735eeb876e94e597546a82",
+    "sourceHash": "4b5bb96bf2bc8627c76cf296e4c79aece2efe240ece689b9cc958ff040f77d43",
     "text": "<keyword0>Аннулируйте</keyword0> следующий вредный статусный эффект каждого союзника"
   },
   "content.card.chronora-borrowed-moment.name": {
@@ -3068,7 +3068,7 @@
   "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
     "reviewed": true,
     "source": "Give all allies <keyword0>Negate</keyword0>",
-    "sourceHash": "6d9bc55c9532a95a12c1c68ec2f52d13a4cdde40c006850c39b66931c402ee1f",
+    "sourceHash": "9f5ee11dc2a6e6b0b3b66def1fbf7b0ea276e9ce00304e3c233fb192ec62de0e",
     "text": "Даруйте всем союзникам <keyword0>Отведение</keyword0>"
   },
   "content.card.chronora-bridge-rewind.name": {
@@ -3080,7 +3080,7 @@
   "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
-    "sourceHash": "78f04d7e2ac2d949748fdfd01846f65627b232b35e55d8f80fa69b89b36df20c",
+    "sourceHash": "3f5bf1d40facba1c1f0a065a41f352e96a95acc5771c69fa23105690726cbe01",
     "text": "Восстановите {{value0}} ед. <keyword0>Здоровья</keyword0>; восстановите разрушенный маятник"
   },
   "content.card.chronora-pendulum-break.name": {
@@ -3092,7 +3092,7 @@
   "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "76b69b0e586606c51bc1056e5e4650b49c5b608889e8272843df7562e4e23126",
+    "sourceHash": "fa2bffdb22077b9396921d5c3b2bf753c96cfbd40e7212d82188a5f91303f871",
     "text": "Нанесите {{value0}} ед. урона <keyword0>Оглушением</keyword0>"
   },
   "content.card.cindernewt-ashen-veil.name": {
@@ -3104,7 +3104,7 @@
   "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "eb38693fd401d949477d316d822ac308f243bc9c03fc85af871eda0588a2e41d",
+    "sourceHash": "b86c9d9d70ebaf2c26c7b09cb5d817408a19fa8f04ef67d18acf33955bd89860",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>горением</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
   },
   "content.card.cindernewt-attack.name": {
@@ -3116,7 +3116,7 @@
   "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
-    "sourceHash": "5a9517ee5c8946b26af70a3d132eb5557bd7994a68a5152cf0ca98e0f1ef2c0c",
+    "sourceHash": "3a9f15315efa9478fc5cbabb454435615de20393ca2ca766bb57384c78336489",
     "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона или урона <keyword1>горением</keyword1> случайным образом"
   },
   "content.card.cindernewt-ember-breath.name": {
@@ -3128,7 +3128,7 @@
   "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
-    "sourceHash": "b5820b8d69d691278f0b7ea7368d17d2bf9dcfaec23589b3a17ec962e2fbc8c1",
+    "sourceHash": "bb5040938da9a87741e977138b182479a86c2ddad1126d1971bc14b343b01c82",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>горением</keyword0>; Удалите {{value1}}% <keyword1>брони</keyword1> всех врагов с округлением вверх"
   },
   "content.card.coralcurl-attack.name": {
@@ -3140,7 +3140,7 @@
   "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
-    "sourceHash": "5bd0c6c7e6345ed8d03710069fdc71a7d1a90af3790ae324cb428af5180a676f",
+    "sourceHash": "ad160b391835e95f8543ec0dc41aae803d73e193a6f27ebf4952c627a9a1f491",
     "text": "Нанесите {{value0}} урона <keyword0>водой</keyword0>"
   },
   "content.card.coralcurl-guard.name": {
@@ -3152,7 +3152,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "6519a23552da8ba1db4e523d676ec2285f2cf097ad85eb650d7ff02a69e96913",
+    "sourceHash": "0af5baa1cb96be38ccdf7bf02f27f8b0c5c2ef9e6d6f491e8169728888746391",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3164,7 +3164,7 @@
   "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "7a0362595adaf43606840cc4feed6684bf1b1bc6024c5625c3d912ec759ad7e9",
+    "sourceHash": "11d96f43c07fddc24d971392a458d76a902bb3c01ebe65539fe3652538465849",
     "text": "Сменитесь со случайным существом из резерва; <keyword0>Ослепите</keyword0> всех врагов"
   },
   "content.card.dawncall-attack.name": {
@@ -3176,7 +3176,7 @@
   "content.card.dawncall-attack.v207aea3bff659874.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
-    "sourceHash": "cfa5a4a704147a288433a14be369a71de236b6d132f587d19d572d4274f21e39",
+    "sourceHash": "2de4ed338bc4e92ce0ecaa5d89028ed298191e50e213c1c8617c0a19312dde58",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>светом</keyword0>"
   },
   "content.card.dawncall-heal.name": {
@@ -3188,7 +3188,7 @@
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "ec0dedbb718ec6f24860e1ca70700a2c7a76a1713903e7125ec19596044262ed",
+    "sourceHash": "6fa56b9207fda814436661c3cfc4705cdde9fc07c5e15bb46e12eb339175ecef",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.dawncall-teamCleanse.name": {
@@ -3200,25 +3200,25 @@
   "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
-    "sourceHash": "9d2a426f990f96046370d948a668301d7d55d4361ebf245332a65095f36dd395",
+    "sourceHash": "ee12d84961d9949741739609902affee43d2d7f9056aa4738dd039503df13f2e",
     "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}; Взять карт: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
-    "sourceHash": "a53031d1651bc9f33133c581a501ffe8b25a902dfdb06061486a19e01853daa5",
+    "sourceHash": "327225f1469d0c05e13a186f9440af28028c80306aa121d3b5e6b69ea22fe742",
     "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
-    "sourceHash": "586fca66134be5aa2f5a629635c6d56ffc1e47645a9ff44313145507500709e4",
+    "sourceHash": "640633ff22268db2d05c5fa2c7cbbf60f1e9fb69bc6abb9a6641be459495acf1",
     "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}; Взять карт: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
-    "sourceHash": "ab9b9c548289e680e8bb6e2824e996cae6673c6181abcc8c4524fd67a542b5f5",
+    "sourceHash": "db956911405b0644a1e73f564e5698cb857b2e2f6d2ba9a7e9589c1e419613c6",
     "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
@@ -3230,13 +3230,13 @@
   "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "17e7ab67c7d1391be0cc9488a64b58046b81ddd02c9ff64c9c58ac860c07eb22",
+    "sourceHash": "06dcffff7eba466e4b4133148674c480d05f167c59c20113fe10727a47d1de18",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> / Получите {{value1}} <keyword1>маны</keyword1>"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "01cc45d81ef6d386e86d58d0fc988ff9b61fc5cc3de1be14a7360e40e8bbb3f3",
+    "sourceHash": "451a8c1b18dd5e721a4e6daab4af2275018d3e7c747ac12f657fad938aec84ce",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.dulcera-hushed-waters.name": {
@@ -3248,7 +3248,7 @@
   "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
-    "sourceHash": "9fd369073cf3897df133b0e85ea4249d267a2010dd279826d8ff66c83cc403ef",
+    "sourceHash": "c96582cf664b72fec3765e2687a61e03319153b5f7dc60213162fd2d387eb0cb",
     "text": "Сменитесь со случайным существом из резерва / <keyword0>Очистите</keyword0> всех союзников"
   },
   "content.card.dulcera-meadow-shelter.name": {
@@ -3260,7 +3260,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "aeca3d01a78687b3093adf49cf837563524e389f5fd0d57231723119c1a312a7",
+    "sourceHash": "1cd51b2b13569ba8d50373e9fdd8134983911adbcd9632aa461e0a703ea98022",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3272,7 +3272,7 @@
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "c361afb4c6469c61093babf125f69b873f61f5ed8dee4961a1534a28e7b9e392",
+    "sourceHash": "e6bdf2df7a728e5934fe5dcd37555b075bab2b3ccefb3cf18a0e49437f620601",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.card.dunefox-dodge.name": {
@@ -3284,13 +3284,13 @@
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "47c689b9c2ebdfe57b5d46bbf94b5afa75db75e2df73dafd1a36c495d1ae9e84",
+    "sourceHash": "0e1b54aaa4b341d4885c06174ddadc47874f4ff508a02afe1f46f2982e942fe8",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
   },
   "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "458a7cf99cc05352e1763c9ee4e35fd409bd2b2f9d3931a4f8315bc75957e561",
+    "sourceHash": "74fec014193c24769d24f1153ab60b4ea027cfd781d5ec3748d7ca472dec8446",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
   "content.card.dunefox-dune-whirl.name": {
@@ -3302,7 +3302,7 @@
   "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "8065072cf165c85a68101922190dad8821decadc7d8baa181ab8e4dddd5db31a",
+    "sourceHash": "818d6fd8270fdb84d780d6e142bc94b230755edfff3fc41c236d82eb214cc55b",
     "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона; <keyword1>Ослепите</keyword1> всех врагов"
   },
   "content.card.emberback-attack.name": {
@@ -3314,7 +3314,7 @@
   "content.card.emberback-attack.v49693240c378631b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
-    "sourceHash": "d4f7e739e9dfd1262aec7bb910d582b4d09aa43f70df11aa43256e39c78a9ed4",
+    "sourceHash": "24cdbf5a64780d0cc4bced9aeae85b086d795afd003d37046c634a9a4d981ab8",
     "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона; Получите {{value1}} <keyword1>брони</keyword1>"
   },
   "content.card.emberback-furnace-breath.name": {
@@ -3326,7 +3326,7 @@
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "0ac642384af020786ab33de5d9c03a3b0e3bdd347672780b17e31667fa754e22",
+    "sourceHash": "4edeef167b6a7a7587248b4cfad5fd31d7398021ead9e21fcf8519b15f5fe07d",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
   },
   "content.card.emberback-magma-stomp.name": {
@@ -3338,7 +3338,7 @@
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "97d1fd360ce4232cfc870ee88d7dd0564b2487d56c93dc9a78877ef6633f5eb7",
+    "sourceHash": "18e9385597fe547796bf5e391a84f7be2ed44beac9a530fbf586feaaec1e53f4",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
   "content.card.euphera-possible-path.name": {
@@ -3350,7 +3350,7 @@
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "822c0186c7c62ce9a7249f827770d17d9a09a24cd3f5abde0b1595b314d94f05",
+    "sourceHash": "39bf2db337d85c4e4669e9cd7afb93f6fc33f5e4e12796f2dcc6b0f03d654a82",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
   },
   "content.card.euphera-twilight-lance.name": {
@@ -3362,7 +3362,7 @@
   "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
-    "sourceHash": "3855f6b52cecfc3ec2c89f439625bfa35c3edd4385751e9e51fa21d3c933331f",
+    "sourceHash": "1e178a73f1b78cb6eeb27a0d0ebcdafbfb915be1b7a5f3d421f656767eff57d2",
     "text": "<keyword0>Рассеяйте</keyword0> вражеские <keyword1>шипы</keyword1>; Нанесите {{value0}} урона <keyword2>светом</keyword2>"
   },
   "content.card.euphera-wish-exchange.name": {
@@ -3374,7 +3374,7 @@
   "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
     "reviewed": true,
     "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
-    "sourceHash": "92a5ef822de1c0990b94af95b9eb1ec90c0094c834448cf9bb329f7921aa3583",
+    "sourceHash": "1ba9abcf62a648a77752e588b5f20e7c05a8d338d528a5649fe0e98225b4a997",
     "text": "Поровну перераспределите <keyword0>блок</keyword0> союзников; Союзники получают {{value0}} <keyword1>блока</keyword1>"
   },
   "content.card.food-apple.all.rule": {
@@ -3440,7 +3440,7 @@
   "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
-    "sourceHash": "a5cb8b3502fc8bd439ff87a172839d3d0b68029003eff1867a20e4b043f6f12f",
+    "sourceHash": "17d31ab7f71a85b2d691564e942e8b006fd5f6170e29b8ce142e979b8dfd082d",
     "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0>"
   },
   "content.card.glintstride-dodge.name": {
@@ -3452,13 +3452,13 @@
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "9c9d322e0dd116a64435a3821f00a5bc4ea5787075e09924bc4b6fb3fd2fb927",
+    "sourceHash": "de3aa9d5c091934056589497b64027cbf041268e72b1885a3e19ac74a3ad8dd8",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
   },
   "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "169b5787a2f3ac4c9acdcb1c8bd0fdaec648af947974a80986dd036775e9f8d8",
+    "sourceHash": "ad67fcf71cfa655ccad0355c9a0f614f2b7eeaf751366a54ce403b87858e0f57",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
   "content.card.glintstride-teamBlind.name": {
@@ -3470,7 +3470,7 @@
   "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "c97d9e71b249b24896ced6913163bbe592e520e2c74e579c186761ef79ce9a4d",
+    "sourceHash": "fc978dfb57de1f7176ff6d2824d34cc456e83e0ee49644e4b33142b97de3fe22",
     "text": "<keyword0>Ослепите</keyword0> всех врагов"
   },
   "content.card.memento-drowned-revelation.name": {
@@ -3482,13 +3482,13 @@
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "b2307b2d8889071d52d1c450d22cca492777e3cf30ffa75bf91a01255a61c7b4",
+    "sourceHash": "17c9c922ff8c91c52fa625e51388c508e20021b89d472f0d876b257a7289eb8c",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "f4f516a0dc4bad36b36c718fee0906c3092f3a30d3920f3df5b55fe2315eb9ff",
+    "sourceHash": "ad532a6612ef150cea279e45f3b0dfdaf074ae0044f9f787c744ea0b5f44bbed",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.memento-lost-procession.name": {
@@ -3500,7 +3500,7 @@
   "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
     "reviewed": true,
     "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
-    "sourceHash": "3810a9090b7d3c103eaa82ec2cee96e5b63304d915146fd2823801c9a0171344",
+    "sourceHash": "3cc10aee938a1b2ea3c38a4b45ac2a13172fdae629b00a11849d93f75fc7b1d7",
     "text": "Призовите Эхо / Полностью восстановите <keyword0>здоровье</keyword0> своих прислужников"
   },
   "content.card.memento-pearl.name": {
@@ -3512,7 +3512,7 @@
   "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
     "reviewed": true,
     "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
-    "sourceHash": "774fa49b2b122dc0c17cb2698358270eccc83206ca82dfea542cfaab35b95b5d",
+    "sourceHash": "ba755f915a486f1b28f387ba82ba6c8ece7853a841cc312ddd1022a214d117f1",
     "text": "<keyword0>Расходуется</keyword0>; Случайно получите {{value0}} <keyword1>блока</keyword1> или {{value1}} <keyword2>маны</keyword2>"
   },
   "content.card.memento-treasury-echo.name": {
@@ -3524,7 +3524,7 @@
   "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
     "reviewed": true,
     "source": "Create {{value0}} Pearls",
-    "sourceHash": "df347a6714232e6e8d5b01337a0602d45eee339636d369532f96bae10cf80595",
+    "sourceHash": "a07e17ab8f5228622b910b3e3def73ee4631d9ed2a9bb72a977b4bc15064a765",
     "text": "Создано жемчужин: {{value0}}"
   },
   "content.card.mossguard-attack.name": {
@@ -3536,7 +3536,7 @@
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "e8d6b705b038505ecda534788cfb2577a0e53b6e9baf3936e14d692bc9a99fc0",
+    "sourceHash": "6e4a2bcf9e317da5b8e5a55872fee31b636b1a959b2136f95645b0bba49aea81",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
   "content.card.mossguard-guard.name": {
@@ -3548,7 +3548,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "130fcfc1f9d0768442aa0f39242d03fcef276fccfd5cb05e041604b98992a476",
+    "sourceHash": "d8690814752f98242451a4ff48a864768701a341170cfb797f4d2f0b991a2909",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3560,7 +3560,7 @@
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "b56cfc5af92aafed244515342d58c8305d63bd2934bec91ddcbefeacfad67aab",
+    "sourceHash": "f96c0c41ffea788d802e68beee31db8569b03b252870e892ae42ddefc23493d7",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.neradora-bloom-shelter.name": {
@@ -3572,7 +3572,7 @@
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "6f20fa16637dd0a23037ecbd408bebf77b7c8503efbc8bceab05f49c72ba1f65",
+    "sourceHash": "b3722d646b6429785947366a7bf287be8f69f8f7cce7301afe23017b9371743e",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.neradora-tide-cup.name": {
@@ -3584,25 +3584,25 @@
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "f8786d128cef8ae5244405268255d8250cf8d8dd2728944c494f4fec0cb0cdd7",
+    "sourceHash": "e1dc125eb0329df8c780f0d65a723b6f11b5d80931644eb90b2ba4b975f09add",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "5714d53df629142f58189021d48505af51fb47abddc1bca4a9fda6899a7892b5",
+    "sourceHash": "0e05eb7642c6db91ed23e5961f788336e4148bf84dd8d28f4b78f45e4aeeb080",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.neradora-tide-cup.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "45bc566dba81a25615c970d31cc381a9173602b2f2e1fa2bbe56ac21d069624a",
+    "sourceHash": "7d0d47f8b0531febed980a39873be5534d5ae859d526235d9e6d1bd7a617168a",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "7435885c9d3ee0f19ce53e79879d8939330a44eafb45e9c3c0d7ae0368716838",
+    "sourceHash": "9cb5653c2d4b8d715c328d98aef64d55006988f8e5da4e2afbcc4d7838451a59",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.neradora-undertow-knot.name": {
@@ -3614,7 +3614,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "f5c53c0a264a6cd2ef472edacebe7349b1052ad8a729da7fc3ec65097daa3d43",
+    "sourceHash": "f85220e3dc27fb61cc10e82de4ede67f5071597b1a3558d3825fb25306c9f2f3",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Очистите</keyword1> один вредный эффект"
   },
   "content.card.oathara-never-lost.name": {
@@ -3626,7 +3626,7 @@
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "d70780ada7e3ccfcada240692124b1605316bcde5a459edb7f3709ff551a606b",
+    "sourceHash": "ad477d86589132718241c815810347d5808fabe4e65b3b366c9606eeb663c857",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
   },
   "content.card.oathara-travelers-ward.name": {
@@ -3638,7 +3638,7 @@
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "04c606880ea098f349032fc4e3cdcfad22e19c8920c76b91eb17c8447ecbaeee",
+    "sourceHash": "6d14028f693354673ecc2bb628a80e5a3edd05e2dd2672afacc1a47808fc3967",
     "text": "<keyword0>Отразите следующую атаку</keyword0>"
   },
   "content.card.oathara-vow-of-return.name": {
@@ -3650,7 +3650,7 @@
   "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
     "reviewed": true,
     "source": "<keyword0>Resurrect</keyword0> an ally",
-    "sourceHash": "28dd20aedaf44ad9be8a504cae9d55c5e8acd1791da53bf532c09a9fd2f52500",
+    "sourceHash": "1b6f2a33af23737ee9f5c36444ed65866dcc2d71aeeb9b6cb02e04445e359c1b",
     "text": "<keyword0>Воскресите</keyword0> союзника"
   },
   "content.card.orifable-attack.name": {
@@ -3662,7 +3662,7 @@
   "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "93c9d65aff498e7e5093ba0bc64bcc5562d7663db1fea226dab6d594a7da238c",
+    "sourceHash": "ccf6b83344b9e7abefeb9faf4a392acea761ac472739d9fd379d78647cd6d7fb",
     "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.card.orifable-createFood.name": {
@@ -3674,7 +3674,7 @@
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "13e82e35618b76f7a6f10865b0ef96a43cef38954d90966a4a8edd4c2138bfa2",
+    "sourceHash": "9e72d4068f6bcfd3d97a505df939b94a0ce8fb36defac0efa95c53b04a80fca2",
     "text": "Добавьте в руку <keyword0>еду</keyword0>: {{value0}}"
   },
   "content.card.orifable-heal.name": {
@@ -3686,7 +3686,7 @@
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "5ffeeb748687fe5762e02566d54cd3eb604dd4ef7e634e48bf27e76823ea830a",
+    "sourceHash": "92f8163448d36a75c17e4384527ecc83aaab8c74c3c9334ce519ca0bb9ac12aa",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.parhelion-polar-reprieve.name": {
@@ -3698,13 +3698,13 @@
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "8445ab01c8ae78c5a5b4f1054a29805b4fbda4224613e950b88d7e0d171899cd",
+    "sourceHash": "c5fba2c8f14bac47780982261b0be1fc2acda0d794eb4547745b6f31c627c508",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников; Добор карт: {{value0}}"
   },
   "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "02369c2a46bb5fbca0a8619ed6e3a4dca6637f34718a0d40a0588d1a55d356b5",
+    "sourceHash": "8dc7ae35b26561ef89621fe878e31bcbea617b52419ff9336b9b87067615e87b",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
   "content.card.parhelion-sundog-reservoir.name": {
@@ -3716,7 +3716,7 @@
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "24928e79b8adc3bd7f0b205b769a8d767383645f8c7410a542af3e688a90cfb2",
+    "sourceHash": "129ac3ab43fec640fb973a4b41592e3bc039bef6134cfaf831f59eb4428e023c",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
   },
   "content.card.parhelion-whiteout-waltz.name": {
@@ -3728,7 +3728,7 @@
   "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "4db10079bba5639ba9f2846d2b6edd944ec6e9bcddb077d308ac081d1f71e8a3",
+    "sourceHash": "ff10829272b2927b87be792ba935a366321e152ecc4f5c50111b4681c448593f",
     "text": "Нанесите {{value0}} урона <keyword0>заморозкой</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
   },
   "content.card.pollenmoth-attack.name": {
@@ -3740,7 +3740,7 @@
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
-    "sourceHash": "234160f27da9cdf8785f6606d3a7cb24c8c46fb6e5390dd19d1c01b7db35e494",
+    "sourceHash": "c4206def33ed8cb2a0a8acb1a93cc30167d7226b9d12480ccca5d27eb78c1558",
     "text": "Нанести случайному врагу {{value0}} ед. урона <keyword0>светом</keyword0>"
   },
   "content.card.pollenmoth-heal.name": {
@@ -3752,7 +3752,7 @@
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "c8556f1b5c383dbb34aa195a68f01843315a57598813262e52dc3d8fbfda69c1",
+    "sourceHash": "0bd9a58b2dd60b365ff43819a71d89cef57bd48b9c5c4216cc3199408bec724c",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.pollenmoth-teamGuard.name": {
@@ -3764,7 +3764,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "539f4d39baad941a940cace2364e840c08309517b286673c9ff46305316cf6c9",
+    "sourceHash": "b30a6fd7b1de5fc10154b6abd6e65c6ffcf038d827e8fea296640a03166e4800",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3776,7 +3776,7 @@
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "8ba25cf95b8fd19e8f256a210480f523dc8cd926ffa82e3941647d57cdaf671e",
+    "sourceHash": "2d64837c45f631404ef85c0d234eaf3bd1f8e947dbe3ce2552abb00aea831c99",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.card.prismram-guard.name": {
@@ -3788,7 +3788,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "039ad679c5e85a1b10676c3d1745da22b7230618fe8f88a09ab8746062cb9055",
+    "sourceHash": "e35fa09b11ddae27ea46473effbe5ad6555034827b4bf13d28b1ccd62035d847",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3800,7 +3800,7 @@
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
-    "sourceHash": "7b6190b38fcd55fab1b37a06d1e4c55a69101b30ac71226026198a1a1cf30f39",
+    "sourceHash": "91831cafd1e343ecc4beb5d05b86ba157da96bac4684163033ceca2f9c0ad8d0",
     "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
   },
   "content.card.pyrella-ember-harvest.name": {
@@ -3812,13 +3812,13 @@
   "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "b7ef74d73c281810c6eea3346522572aa7db92d15744bba836158223704a84bb",
+    "sourceHash": "3e102cb0a96f03a999b388b9090c097fc0106be457ca3e6db1b1ee12a209d7f8",
     "text": "Восстановите {{value0}} <keyword0>маны</keyword0>"
   },
   "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
-    "sourceHash": "c7173d869b4a1634ed6f4bf985954970f8c84ad58911dde7a656b4e9391f4675",
+    "sourceHash": "aba4140dd221069823a080c211839f3b1c65b67622971c532504dbcc1bb01c66",
     "text": "Восстановите {{value0}} <keyword0>маны</keyword0> / Возьмите карту <keyword1>горения</keyword1>"
   },
   "content.card.pyrella-festival-burst.name": {
@@ -3830,7 +3830,7 @@
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "7b56b29272a0ce0a8e9d5a0ea45b3c17db4f0216f8bf2eddade9cd026ddcff97",
+    "sourceHash": "f4510d0824071e0e19d8e37a4f99b8463c5aa6c42c099098e7944ad73f00cc9c",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
   },
   "content.card.pyrella-spark-decoy.name": {
@@ -3842,7 +3842,7 @@
   "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
     "reviewed": true,
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
-    "sourceHash": "6ecc2464c8461e0ddf72171451ed93c2bf8e9eb70813b1e9cee9e162ae8780ea",
+    "sourceHash": "aa33b96c4526a15bfc60b6803f80d9023fec3df1675e0ac5cfe12774b196560c",
     "text": "Наложите {{value0}} <keyword0>горения</keyword0> на всех врагов / Получите <keyword1>отведение</keyword1>"
   },
   "content.card.reedstag-attack.name": {
@@ -3854,7 +3854,7 @@
   "content.card.reedstag-attack.vaf3db517079be41f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
-    "sourceHash": "05738452d3444aa774f4efb94520bac316c460740af1e02f4730edce2c9ab7d9",
+    "sourceHash": "c41e4d39303582edfbf9316edc8be449af1f29c7d9eba26a7fb72d6c683cdfe5",
     "text": "Нанесите {{value0}} урона <keyword0>природой</keyword0>"
   },
   "content.card.reedstag-guard.name": {
@@ -3866,7 +3866,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "100686ebb695d5cd18a19fb83a7b5bddb3270bc36f2eff3ea49b9eef819ad607",
+    "sourceHash": "2729c169bf74bb61a59fda74e6845245ca68f2185105d9520699e85a73c3bb04",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -3878,7 +3878,7 @@
   "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "3d5f627374aadc837a8ac34c9951b9913072c6af834b11926fb39c579abcfd97",
+    "sourceHash": "69ed22a0ba7e1908ea7287a1ba9e668e3facfbd92635221ebd67b0957706a31f",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику; <keyword1>Очистите</keyword1> <keyword2>исцелённого</keyword2> союзника"
   },
   "content.card.reverie-dream-double.name": {
@@ -3890,7 +3890,7 @@
   "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
-    "sourceHash": "89bc6e9d90539d59f1d5e684d76160aa2d01bdafe24d48de152430ca02878eb0",
+    "sourceHash": "4f1e62bca9951cbc9f85d5369bf796a00a269b56371e816008fa786d90f6d23b",
     "text": "Получите {{value0}} <keyword0>шипов</keyword0> / <keyword1>Отведите</keyword1> следующую атаку против вас"
   },
   "content.card.reverie-nightmare-harvest.name": {
@@ -3902,7 +3902,7 @@
   "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
-    "sourceHash": "ff791fa397b2ebed83b03fd2f9ce05d5f3a9ac4b526277e3213bbd0ff197a402",
+    "sourceHash": "e03b5a6a151329a91ae568b3b800318b7714fd86193b135675d5e5cd16f84c75",
     "text": "<keyword0>Очистите</keyword0> всех союзников / Получите {{value0}} <keyword1>маны</keyword1> за каждый удалённый эффект"
   },
   "content.card.reverie-waking-wonder.name": {
@@ -3914,13 +3914,13 @@
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "0aeb7e9389485919888d1c2e81f742186f2340d94848ab26e6dac698d7158d3a",
+    "sourceHash": "3d791907121fd9890004f638f78124527fd0ee39eeec54aa660a58f106b42413",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "37dd5451aa673dba03384896f3d070f8651951c5b13e9da825e012d8a0108fd7",
+    "sourceHash": "95034e291dc42549ee10f933a13683e796efeb972c3e2b4274666725fe40478f",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.ringpalm-attack.name": {
@@ -3932,7 +3932,7 @@
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "b69571d600b9e76be995d4e3d066e99ad6a8213c9ed4acffa1a8c15f7787c0e3",
+    "sourceHash": "30755a157e17b5771099ee19899df02fafe416eb839229c7b916945c0af0e52d",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
   "content.card.ringpalm-harmonic-set.name": {
@@ -3944,7 +3944,7 @@
   "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
-    "sourceHash": "32d802ae7c4fe2207ab63d453a9bd2b8c5f2ccf15fdb0e846b78ec66d18ed97e",
+    "sourceHash": "7a266d5277375bd606398e3df567d77fa72a571020f362510d7ce3f0c7cc15f6",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>оглушением</keyword0>; Получите {{value1}} <keyword1>брони</keyword1>; {{value2}}% шанс повтора"
   },
   "content.card.ringpalm-teamProtection.name": {
@@ -3956,13 +3956,13 @@
   "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "e5784e329b47b622daa2128fca0fd90f3951bbb6e255d092af9dda58ecfba071",
+    "sourceHash": "da49268bf4cbe82e096adcf5e1501b0c9234833ce8749673d7b1e93e705f41d2",
     "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или {{value1}} <keyword1>шипов</keyword1>"
   },
   "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
-    "sourceHash": "c710c420cb767a4b9d7c8526695ab598b723b17b0783a25c7ffc699b62a96550",
+    "sourceHash": "28e3db56fa0335000f2cf4606d99794c82a3e904c97f639c27d5011ba5083771",
     "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или <keyword1>шипов</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
@@ -3974,7 +3974,7 @@
   "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "437cdc3eac2d69192e9c8b374bfa161e8d7c582907b7df5d55beeb7a080bb916",
+    "sourceHash": "f2a0aa196c3c5df31936d75235915a91b0132b9f0b893ff6513a2cc7ee2e9111",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>светом</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
   },
   "content.card.rookhaven-margin-of-possibility.name": {
@@ -3986,13 +3986,13 @@
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "b42c096008b2c99ed083a70756a1192babfc65369266192210bf5be39dfa4bc3",
+    "sourceHash": "8d49b3c3e56dfb29ad4c5feb345e842a6bc15dfbc45f178b9763b5c23b918716",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "3460835f05a4b78594000a2f183835f28b02f023edd6297a0d7b025686ff0bcd",
+    "sourceHash": "cac54a273714c7e2fe9238f7f0d51edfc01a7d43341a7bb287b7604dd1a53635",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.rookhaven-unwritten-ending.name": {
@@ -4004,7 +4004,7 @@
   "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
-    "sourceHash": "1c72b15ac98809090aa2f820a33793f8df581c1961ff997624fc7a9b70705733",
+    "sourceHash": "aef6a6b8ea81198e154008f743cc8759c5ecb651a99ed9dad1f965b18782d3a0",
     "text": "Примените <keyword0>рассеивание</keyword0> ко всем врагам"
   },
   "content.card.shadebrim-attack.name": {
@@ -4016,7 +4016,7 @@
   "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
-    "sourceHash": "47ab7670b31f9eb5b2f2028f909c68a430c814ace286cea513549b625d723611",
+    "sourceHash": "efd4f8deb11d1d09bd3371e12531eedcae605b4824769f29c433b0ac132713a8",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>заморозкой</keyword0>; <keyword1>Очистите</keyword1> всех союзников"
   },
   "content.card.shadebrim-draw.name": {
@@ -4028,25 +4028,25 @@
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "d90a08aac3b1f03f5fce55ac377b7fe067f9340250ab0acf10c653a92ffc9adb",
+    "sourceHash": "0b9fd0cde2c5572ae38267cd8604346a12c0e92c98909f64969b4f55a929aafd",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "56fa81d9841ce3b09496ce4eee6294cab5b41f7386e9c4dda16c7ea468be9c71",
+    "sourceHash": "da8e37c19c5ab96186bb8405a86af868bf81e9c659f02d804092a50d2a00f5bf",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.shadebrim-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "c03c559e74a998e6bfa090d16c4cae9ac39954c0371ae26dacf7944909fa2b44",
+    "sourceHash": "f4a5316623a0985a4d0d78e615f92c98ea02832ec0e056893d4d94d94be2a423",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "51743763f77da5cfa41a7b7a8867217f9dd4f9de93904015b4c9e1189199e131",
+    "sourceHash": "42a782f968f0c26b0335af4666f4bf3fb69d5d7f02718f9e207869df1e1af71c",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.shadebrim-guard.name": {
@@ -4058,7 +4058,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "42b094c05016960fa16bdae71ed039fa8b9cb6866837115328e302aed46653cc",
+    "sourceHash": "92ac80bfce3895307d8815ce5ed7e42f1fdf69fce199da5d014936e2891223c7",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Отразите</keyword1> следующее <keyword2>горение</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4070,7 +4070,7 @@
   "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
     "reviewed": true,
     "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
-    "sourceHash": "04345c45bbb230fd45180cd5f7d12ab857e3266fc3fa996b01612540d665dd8b",
+    "sourceHash": "0c71dccb90bc7215a2539e7370b4e0be1de91b58c75d77e3d71920cfbfa23083",
     "text": "Сменитесь со случайным союзником / Входящий союзник получает {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
   },
   "content.card.skybex-draw.name": {
@@ -4082,13 +4082,13 @@
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "ae055cdc35b648ad63265839dcede06b8f81c087314f4883ce7901be7fdacb1d",
+    "sourceHash": "aa91b3132147a1414541a9b58387a738d14286b52d130fe83c22e7a1d696bf0f",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.skybex-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "441361a8addd70702847bf58fa1c7f050eee586c06fa5a432fdb9bf2a8fddba4",
+    "sourceHash": "2df620bc675a87fa7c4af330137094b4b1d5bcc55e07066b8a0cccbc8bd61f53",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.skybex-sky-shepherd.name": {
@@ -4100,7 +4100,7 @@
   "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
-    "sourceHash": "b36d0dec245aeb7a04f14e178f1bc550baeb427d833e8279e2efcc9b6a7453e2",
+    "sourceHash": "761baaa14bb82711f14f593037b8371caa105bace5ed02160fd32a6a538f44f1",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>природой</keyword0>"
   },
   "content.card.sternshell-attack.name": {
@@ -4112,7 +4112,7 @@
   "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
-    "sourceHash": "12b7aa86b028b56c264a8306db266de80d6caceb066ec0eacb7dd9b2b8fff540",
+    "sourceHash": "89625378d69aa4948bab3479c3690db6ac1f519641b27b9201465557e596cbad",
     "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона; Урон удваивается при наличии <keyword1>брони</keyword1>"
   },
   "content.card.sternshell-spiral-return.name": {
@@ -4124,13 +4124,13 @@
   "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
-    "sourceHash": "65c10935e8699891ae57619d00a9dab38e49d0d6b9c994750a8a902baaef7cea",
+    "sourceHash": "c019666635d0e124ca73ee9ceb4375d12dc3f3ad9963b4f9d390524e74ed116e",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>водой</keyword0>"
   },
   "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "e367b514de562814afc377759c0ecf1e219e426c486e28c43d6fe3c0918fcd4e",
+    "sourceHash": "157a2d23435c68b0a08691c46c7719ee2e0b06a79e34118c2e2f5d0bc931a1dc",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>водой</keyword0>; Получите {{value1}} <keyword1>маны</keyword1>"
   },
   "content.card.sternshell-swap.name": {
@@ -4142,13 +4142,13 @@
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "4c8b7e84f5cdb6156b09843b1858d47ad384e374354e5892992c533d11bf4e89",
+    "sourceHash": "3efd4716ba40b2c0c4daacb9bed8d7061b7116a649aaf2f45c67164ef4207d51",
     "text": "Сменитесь со случайным союзником из запаса"
   },
   "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} card",
-    "sourceHash": "69488caa81a66a10962c804b0fbeb8a2c55efbe6938093cfa16160c5c3003c6e",
+    "sourceHash": "339cc3032c16b60925bce8743bc52da3da0d189181fcc2f685575e546ec98135",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
   "content.card.stillara-reed-reservoir.name": {
@@ -4160,7 +4160,7 @@
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "1341c939ba05a09003b0d3e36bbf98b6667eeed36c60f18dbc24b6dd1909d520",
+    "sourceHash": "acbf4826053921cfd9e72cfce2eccbe23f67652ce70e60eac310077176cd805d",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
   },
   "content.card.stillara-thaw-path.name": {
@@ -4172,13 +4172,13 @@
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "111968503101f16bbd0ca4de245738b37d7ec15186be2b37e37ff6e619ddcf4b",
+    "sourceHash": "19aa36cbb04cee12d7c82b70c1b62e59214206bdccfdc7e93f7649d5f11ed1da",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников; Добор карт: {{value0}}"
   },
   "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "a15e404c4c4e83a453fbe74340e0e3177c9af40af42a3f61e939948654df9c4c",
+    "sourceHash": "fdb81f3ea38911d5507b9b226753d6d88288de3dc061f5d740e0018c6e77fa10",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
   "content.card.stillara-water-remembers.name": {
@@ -4190,13 +4190,13 @@
   "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
-    "sourceHash": "fedf80a306f351625cca9dba833b09daf51fcf7118b4bd602dffbf7bf4ec2d54",
+    "sourceHash": "33df5954077b02312b47680df37d02995cd1f7469ae5010caf38a22ab4bf085f",
     "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; Взять карт: {{value1}}"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "4ff0cb334a4c7bd08125d438faa01a1a4e03f97229903856a64a3362f5a8cad0",
+    "sourceHash": "9d0956466b6517314752cd9a26403e6e8ca587f8486c68142769de6094397b82",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.tournelle-attack.name": {
@@ -4208,7 +4208,7 @@
   "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
-    "sourceHash": "87d2390b80400f07b94016df72ee2486231d6be69f14d065ea02368cf3fb724f",
+    "sourceHash": "1bdd6862d96088a280dac7b55bbd2e4eb3f27486ce87fc03975a159edef5926c",
     "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Урон удваивается против врагов с большим <keyword1>здоровьем</keyword1>, чем у вас"
   },
   "content.card.tournelle-swapLowest.name": {
@@ -4220,13 +4220,13 @@
   "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
-    "sourceHash": "06c7c4350f65e724c605e665916b99c5f9f4c3463e9e4404f4bd4b6e5bce67b0",
+    "sourceHash": "1e73be0a61c8f53fb4c81e425b3fd85c8bc0f9692599304b43de071238b1cecb",
     "text": "Замените союзника с наименьшим <keyword0>здоровьем</keyword0>"
   },
   "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
-    "sourceHash": "d24a9f3b8d59991dd51238c64828fd989570a38ab2e19dc5801b8c3ecc3ab66a",
+    "sourceHash": "8edcaf4dddbfc6e866c49c74059b16a31a80078a0b786c22c75a6dfd8c565118",
     "text": "Замените союзника с наименьшим <keyword0>здоровьем</keyword0> / Возьмите карту"
   },
   "content.card.tournelle-teamClearBlind.name": {
@@ -4238,14 +4238,50 @@
   "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
-    "sourceHash": "18d301d30aed897ef841fbeb7fa6af686649e1dec7d0d1bf6260e26cf5d18b50",
+    "sourceHash": "3d39e81e0b09de8d922c92aac0bb593c1b3c6ccb7a0cc74c22f091b3b63f4987",
     "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников"
   },
   "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
-    "sourceHash": "59cfc5aec91f68921603d189587649c6d16cd43602057d3b83613b5d2914fdad",
+    "sourceHash": "5a181faddb5ff39fa3a491a8e564402956254643cc47266d9d2a8ba635eec9d4",
     "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников / Возьмите карту <keyword2>света</keyword2>"
+  },
+  "content.card.vitrilo-kilnheart.name": {
+    "reviewed": true,
+    "source": "Kilnheart",
+    "sourceHash": "1b403e034680a958bbd4f0773f27e0173632c41a43387796645ad588c5a8224b",
+    "text": "Сердце печи"
+  },
+  "content.card.vitrilo-kilnheart.v8550d6fc467780eb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "2692087db8fe9933d2310b82ad615f89bbcb3a3c436bc61889ce35f3b727b1a6",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>; получите {{value1}} <keyword1>блока</keyword1>"
+  },
+  "content.card.vitrilo-prism-key.name": {
+    "reviewed": true,
+    "source": "Prism Key",
+    "sourceHash": "6c78fb5ed4b0268e34ee92fc109ced153503aa11112f4cd6ce7b88accb5c35b3",
+    "text": "Призматический ключ"
+  },
+  "content.card.vitrilo-prism-key.v256f8f9c4afa4e50.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> an enemy / Steal the effect <keyword1>purged</keyword1>",
+    "sourceHash": "12a7975bfa6841c64bf23e8b17e0f3f46017ad1306c6b1969a25f015bac334e7",
+    "text": "<keyword0>Рассеять</keyword0> эффект врага / Украсть <keyword1>рассеянный</keyword1> эффект"
+  },
+  "content.card.vitrilo-sunflare-cast.name": {
+    "reviewed": true,
+    "source": "Sunflare Cast",
+    "sourceHash": "8ae1d8778bb0f1b0007646e17ed5383c5b638dd09e667272a847b16f339e1028",
+    "text": "Солнечная отливка"
+  },
+  "content.card.vitrilo-sunflare-cast.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "962c894076c7dc1840e36f9dd28a822a622734c20ddb305c8055a228dfc00a7e",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0>"
   },
   "content.card.wendlet-borrowed-silhouette.name": {
     "reviewed": true,
@@ -4256,7 +4292,7 @@
   "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
     "reviewed": true,
     "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "dfed14fc500046813869edd5ed5b62ac7c250a504d231fff01329b737ab3c10d",
+    "sourceHash": "dbae32aac1284f5f241e837d95e3709c16dcaba5a72a5fc15d4cf4e5ab3e7757",
     "text": "Возьмите копию случайной способности союзника в запасе / Получите {{value0}} <keyword0>маны</keyword0>"
   },
   "content.card.wendlet-midnight-mantle.name": {
@@ -4268,7 +4304,7 @@
   "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
-    "sourceHash": "0dd867546e1e3439ba68b5ffad3b0755ce6ee4546723bf0b1cb68ec8ad4ee9ac",
+    "sourceHash": "60b7d3b456f368bb1e5b5690da941c687893cb4e98802ea15ac07abeb51c4201",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Получите {{value1}} <keyword1>блока</keyword1>"
   },
   "content.card.wendlet-umbra-snare.name": {
@@ -4280,7 +4316,7 @@
   "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "eabb595ae401bf829af664429cfc1dfae490a1327dcb5e503596816fd18af96a",
+    "sourceHash": "f5f7266d932256b3ea5dc83ffa7e2388adbd3498906fdd12fef5359496478aed",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
   "content.card.wickwaltz-attack.name": {
@@ -4292,7 +4328,7 @@
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "918b828f41f40bd7d05fd0d43084aa8c20fd1d9ec0f3ccd8ef4b0c4817b4f94e",
+    "sourceHash": "f1fec40bf31c1a29a626a51938e6e1cb618d80cd871616c3456a56e4660ca946",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
   },
   "content.card.wickwaltz-draw.name": {
@@ -4304,25 +4340,25 @@
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "fd8569aa0d2a65e71e07c99cb7a1a09224283ae8e33bec57ab3535ca6cb66e59",
+    "sourceHash": "a5a6b5bd527be0f24ea6c2e8d350ee4f911394ebd5b14def580a1a2a78d5f57d",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "d4dd46e023a251eb962506ec889dd2b96dcbda6e7e714f78a63c7a668efe924d",
+    "sourceHash": "88955b6604be1e9b559d99e2867289e90c9c53a0a85a217d42855b0a4b6a3454",
     "text": "Добор карт: {{value0}}"
   },
   "content.card.wickwaltz-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "4bba9118b85b0b5f097bd01be51b45a13337d02cd8f507ff024ebe39da95089e",
+    "sourceHash": "b3c40a3fe290d0d5ed0ea112cce1f3a3ff12c2b09aa14f9df0755aa6569f1559",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "d73743058d3f5cf2badf20b229c00f9bcd2c12061fbbbe9eab6f5859dbd664c1",
+    "sourceHash": "4eec55c52d4b925f9295fd88e5ffa8a76c644bd1454f040a61730dcc1586d4ed",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.wickwaltz-guard.name": {
@@ -4334,7 +4370,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "d9778b3d93b4ee8814f48638f1a1c7739e3a86f3498e71943fa0bb578b4b0b22",
+    "sourceHash": "ec68bde860865df0ec11ebd91970e5aa2316829da92666d5cefd3519e8ce2bec",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Аннулируйте</keyword1> следующий урон от <keyword2>заморозки</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -4346,13 +4382,13 @@
   "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup / Draw a Card",
-    "sourceHash": "0ad70fa35fadbcfa987a58da49fe64158e391bec46479b3e7ec1c52e343a8431",
+    "sourceHash": "802af76c349177f60db5ba118a993c66508a8b0f134c484f34a5d6795a6b39bf",
     "text": "Сменитесь с выбранным существом из резерва / Возьмите карту"
   },
   "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup",
-    "sourceHash": "4f4fc07c4629e4d348d41050645372a509e6ea64be2271acf95c1d8274343773",
+    "sourceHash": "6aae1357047594a73e7a90f1d96428682279306a15ab8a9b49040cf22e4655f7",
     "text": "Сменитесь с выбранным существом из резерва"
   },
   "content.card.wisterelle-lantern-fare.name": {
@@ -4364,13 +4400,13 @@
   "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "c6ebe4fd80d3b13182328df92628859b8e13d53b5de04d6bfc8aa71b14f5b2a6",
+    "sourceHash": "0a333b605d31a0f669c051f81e46786042a4ed3086adfb5ba3490459b562f6fd",
     "text": "Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0> / Получите {{value1}} <keyword1>маны</keyword1>"
   },
   "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "95f463feb97e76adcacecc228a83da2fb0610527d4692c92f4f1f2d1cb8babdb",
+    "sourceHash": "c9e3d2e8fe867c29f275e083393ea583b381d3773e00fc6119dab775a3c386e2",
     "text": "Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.wisterelle-left-luggage.name": {
@@ -4382,13 +4418,13 @@
   "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "806b21248aa6366d6a39d1be3dc886fc55e32c6e2f10e2cba89c796f6d30640c",
+    "sourceHash": "e2ab12ba1fdc9572db9eaaf0a799fed54fcf9a993fe010ac12beb8ef413047fd",
     "text": "Возьмите карту союзника из сброса / Получите {{value0}} <keyword0>маны</keyword0>"
   },
   "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile",
-    "sourceHash": "b7c2e920dcac25fb68b588029e55032a279f6e4f75aa517a747345b4421019e1",
+    "sourceHash": "c1bcf97d70572a0a2372c6108dfa8277ce69262a903f405c2097e3d895e58f5a",
     "text": "Возьмите карту союзника из сброса"
   },
   "content.glossary.action-card.definition.rule": {
@@ -6976,6 +7012,60 @@
     "source": "Gallantry",
     "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
     "text": "Галантность"
+  },
+  "content.species.vitrilo.name": {
+    "reviewed": true,
+    "source": "Vitrilo",
+    "sourceHash": "5e7e0066ab144fb2faa79fea03777864c42de709074891cafa7f611d768e4f8f",
+    "text": "Vitrilo"
+  },
+  "content.species.vitrilo.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "cebcf746cd156fbaa9f05654cef7391e203d6625cea169d2e71b2fccc92bd7de",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "7912a24bf1c7303523ae2ee4c00b9239a072d03e7b2a1b5690c44b07ebcd0162",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "efff3cdaf348d02d782baf4aa4ecb55be6a9cf8abc0a46968871e4dd31d529d4",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "f4bb02b82e053075c4658eb2cef241a4a15a945460bd6eaa3c61c2b18d47ebac",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "d15722b1c88359d2d83a20f086fbe00f6a162b879bd52564924f13cde9be02bb",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "214c61cfb933f13268b8bf92e0cccde61e4e35b4ef08d321171bd5658b47cb52",
+    "text": "Атаки <keyword0>светом</keyword0> крадут {{value0}} <keyword1>блока</keyword1> у цели перед нанесением урона"
+  },
+  "content.species.vitrilo.title": {
+    "reviewed": true,
+    "source": "The traveling glassmaker",
+    "sourceHash": "b2bf5833ae576d90deb69ca5cebe7ec12fc721e52064a4d051e95514bfc27050",
+    "text": "Странствующий стеклодув"
+  },
+  "content.species.vitrilo.trait": {
+    "reviewed": true,
+    "source": "Glass Cutter",
+    "sourceHash": "acb26aac0567446279bfcaaf262b2c50d6ed81c53d172a69852505590ca54e47",
+    "text": "Стеклорез"
   },
   "content.species.wendlet.name": {
     "reviewed": true,

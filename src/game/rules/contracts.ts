@@ -10,7 +10,7 @@ interface DescriptionContext {
   label: (keyword: KeywordId) => string;
 }
 export interface AbilityRule<K extends AbilityKind = AbilityKind> {
-  targeting: "attack" | "guard" | "heal" | "recover" | "self" | "ally" | "automatic";
+  targeting: "attack" | "guard" | "heal" | "recover" | "self" | "ally" | "enemy" | "automatic";
   scaling: "authored" | "power" | "level";
   enemy: "supported" | "unsupported" | "legendaryDraw";
   adaptation: "extras" | "healingExtra";

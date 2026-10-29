@@ -4581,6 +4581,50 @@
       "aspect": [3, 4],
       "provenance": "User-selected Wendlet artwork from Google Drive: https://drive.google.com/file/d/1u83EdHgXwgeYOxPGoyz_8WSf83Dzr-4T/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.vitrilo",
+      "origin": "repository",
+      "source": "public/art/creatures/vitrilo/portrait.png",
+      "output": "art/vitrilo/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Vitrilo artwork from Google Drive: https://drive.google.com/file/d/13zIB1xY0eqA5ZyzSMhlJV4PWOjFc05gV/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.vitrilo.sunflare-cast",
+      "origin": "repository",
+      "source": "public/art/creatures/vitrilo/sunflare-cast.png",
+      "output": "art/vitrilo/sunflare-cast.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Vitrilo artwork from Google Drive: https://drive.google.com/file/d/1pgiN1wQGOqiAFG-ss1brIKJEqUR8yQ5U/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.vitrilo.prism-key",
+      "origin": "repository",
+      "source": "public/art/creatures/vitrilo/prism-key.png",
+      "output": "art/vitrilo/prism-key.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Vitrilo artwork from Google Drive: https://drive.google.com/file/d/13BTspKJDnd_qqv4JowzNrLFm6v5HUzvO/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.vitrilo.kilnheart",
+      "origin": "repository",
+      "source": "public/art/creatures/vitrilo/kilnheart.png",
+      "output": "art/vitrilo/kilnheart.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Vitrilo artwork from Google Drive: https://drive.google.com/file/d/1RzHd-nQcgJj0JW5gNr0Da_uFGqiBEVmx/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

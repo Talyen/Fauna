@@ -54,6 +54,7 @@ export function applyExtras(
         if (target && !options.negated?.has(target.id))
           hit(state, actor, target, effect.amount, effect.damageType, events, {
             origin: "ability",
+            attackAbility: def.effect === "attack",
             interceptionChecked: true,
             blindMiss,
             cannotDodge: options.cannotDodge,
@@ -181,6 +182,7 @@ export function reflectExtras(
         hit(state, reflectedBy, actor, effect.amount, effect.damageType, events, {
           origin: "ability",
           delivery: "reflection",
+          attackAbility: action.def.effect === "attack",
           interceptionChecked: true,
           blindMiss: false,
           leech: effect.leech,

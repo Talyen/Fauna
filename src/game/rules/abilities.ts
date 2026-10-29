@@ -30,6 +30,13 @@ const automatic = {
 
 const rules: AbilityRuleCatalog = freeze(
   {
+    stealEffect: {
+      ...automatic,
+      targeting: "enemy",
+      scaling: "authored",
+      keywords: ["light"],
+      describe: () => "Purge an enemy / Steal the effect purged",
+    },
     borrowBackup: {
       ...automatic,
       scaling: "authored",

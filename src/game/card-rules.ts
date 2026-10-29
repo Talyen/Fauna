@@ -38,6 +38,7 @@ export function cardTargeting(
     case "self":
       return card.target === "allAllies" ? "automatic" : "self";
     case "ally":
+    case "enemy":
     case "automatic":
       return policy;
     default: {

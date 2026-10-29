@@ -31,6 +31,7 @@ import {
   beneficialStatuses,
   STACK_LIMIT,
   removeArmor,
+  grantTemporaryDodge,
   dodgeChance,
   hasBeneficialEffects,
   type ArmorDepletion,
@@ -257,6 +258,7 @@ export function* removeEffects(
   source?: Combatant,
   spread = true,
   linked = false,
+  steal = false,
 ): Resolution<number> {
   if (state && isDepartedMinion(state, unit)) return 0;
   if (kind === "cleanse" && spread && canSpreadCleanse(state, unit)) {
@@ -295,6 +297,11 @@ export function* removeEffects(
   const hadFreezeBuildup = stats.freeze > 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
   const purgedKinds: ((typeof beneficialStatuses)[number] | "block")[] = [];
+  const stolen: {
+    status: (typeof beneficialStatuses)[number] | "block";
+    amount: number;
+    temporary?: number;
+  }[] = [];
   const returned: {
     status: (typeof harmfulStatuses)[number];
     amount: number;
@@ -370,7 +377,19 @@ export function* removeEffects(
       targetId: source.id,
       text: `${unitName(unit)} reflects Purge to ${unitName(source)}`,
     });
-    yield* reaction("removeEffects", source, "purge", count, events, state, onlyStatus, unit);
+    yield* reaction(
+      "removeEffects",
+      source,
+      "purge",
+      count,
+      events,
+      state,
+      onlyStatus,
+      unit,
+      true,
+      false,
+      steal,
+    );
     return 0;
   }
   const shelter =
@@ -378,6 +397,7 @@ export function* removeEffects(
   if (shelter && onlyStatus && onlyStatus !== "block") count = 0;
   if (kind === "purge" && (!onlyStatus || onlyStatus === "block") && unit.block > 0 && count > 0) {
     purgedBlock = unit.block;
+    if (steal) stolen.push({ status: "block", amount: unit.block });
     unit.block = 0;
     removedStatuses.push("block");
     purgedKinds.push("block");
@@ -411,6 +431,12 @@ export function* removeEffects(
       ) &&
       (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))
     ) {
+      if (steal && kind === "purge")
+        stolen.push({
+          status: status as (typeof beneficialStatuses)[number],
+          amount: Number(stats[status]),
+          temporary: status === "dodge" ? stats.temporaryDodge : undefined,
+        });
       if (kind === "cleanse" && harmfulStatuses.includes(status as (typeof harmfulStatuses)[number]))
         remember(status as (typeof harmfulStatuses)[number]);
       const removal = clearSelectedStatus(unit, status);
@@ -460,6 +486,38 @@ export function* removeEffects(
       ? removedStatuses.length
       : distinctRemovedStatuses.size;
   if (!state) return removedCount;
+  if (steal && source && source.health > 0) {
+    for (const effect of stolen) {
+      if (source.health <= 0) break;
+      if (effect.status === "block") yield* reaction("grantBlock", state, source, effect.amount, events);
+      else if (effect.status === "armor") {
+        yield* reaction("grantArmor", state, source, effect.amount, events);
+        yield* reaction("armorStealRewards", state, source, effect.amount, events);
+      } else if (effect.status === "thorns" || effect.status === "dodge") {
+        if (effect.amount > 0)
+          yield* reaction("grantStatus", source, effect.status, effect.amount, events, state);
+        if (effect.status === "dodge" && effect.temporary)
+          grantTemporaryDodge(source, effect.temporary, events);
+      } else {
+        const sourceStats = ensureCombat(source);
+        sourceStats[effect.status] = true;
+        emitStatus(
+          events,
+          source.id,
+          effect.status === "reflectBurn"
+            ? "reflect"
+            : effect.status === "nullifyFreeze"
+              ? "nullify"
+              : effect.status,
+          "apply",
+          {
+            actorId: source.id,
+            text: `${unitName(source)} steals ${effect.status}`,
+          },
+        );
+      }
+    }
+  }
   if (cleansed > 0)
     yield* reaction(
       "cleanseRewards",
@@ -479,6 +537,7 @@ export function* removeEffects(
     yield* reaction("grantArmor", state, unit, boonRule("sail-needle").armor, events);
   if (
     playerPurge &&
+    !steal &&
     source.health > 0 &&
     thornsBefore > stats.thorns &&
     state.boons.includes("pruning-crescent")

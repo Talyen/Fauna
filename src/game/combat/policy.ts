@@ -8,6 +8,7 @@ interface AttackValues {
   sharedNegate?: SharedNegate;
   leech?: boolean;
   cardLeech?: boolean;
+  attackAbility?: boolean;
 }
 export type DamagePacket =
   | (AttackValues & {

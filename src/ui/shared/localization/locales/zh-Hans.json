@@ -2654,7 +2654,7 @@
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "e859376b769c7d794a6f9d5b620c56ea2906766fa7bd2740647df9974ab1c00c",
+    "sourceHash": "03802af827271dde95f43fc2d5b4342d4179af845ef934360d9ff05006601dc1",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
   },
   "content.card.aerostat-true-bearing.name": {
@@ -2666,7 +2666,7 @@
   "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
-    "sourceHash": "6e03694d51fa05166b00a2d73da82a60bd94ea3eb697e47cc3fc727b38d7b277",
+    "sourceHash": "6450406d4ffde478af2051dd2cdb3636f73a446f9515bcde64183b7914fc8015",
     "text": "抽取卡牌：{{value0}}张 / <keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
   },
   "content.card.aerostat-voyagers-rest.name": {
@@ -2678,7 +2678,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "86a1b4386960cfd4e3f8ca1d4ded2e3ef4c7fc227da7c56b4588bd1cfeebb261",
+    "sourceHash": "b8ec9ceae7182e938e3a0c1ad89e10da575a35a3b488286cfedc3e39670f592c",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2690,13 +2690,13 @@
   "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
     "reviewed": true,
     "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "cc962d9502c771215ce7955e9fd89b2b5cab447ad828656adde33ca9041046f1",
+    "sourceHash": "c9eaa8ae52a660adf45054f5cfe3c5381bccbfc448ce1b499857c1b4525e904a",
     "text": "将一张随机弃牌移回手牌; 为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
-    "sourceHash": "a5cf1c4f169124a7e92955c5102c9f700e3c03522a4818388fd2fc3d6feb5a35",
+    "sourceHash": "5b2344ffbb829f2cbbfced6cdb20107bc40692367ec2c4a68e47e56dcc36d1dc",
     "text": "为一名存活盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.almanelle-rooted-year.name": {
@@ -2708,7 +2708,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "bd4c6d8ab9df791415e00b135b99be316d92cf9377323ee411c523e87f837e84",
+    "sourceHash": "3fb4064c8ba486789b31deb278ce16da083a299183cacb684d42eb6b0f289c49",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2720,7 +2720,7 @@
   "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
-    "sourceHash": "493e91679309027fb9339cdc88456a674f5215f9aa6024f7eb5025d3b6b01228",
+    "sourceHash": "fc5e2f1d62c769778d3e50e1e5ae31341f4c200e3a4dd4afc4f7727973798bb7",
     "text": "造成{{value0}}点<keyword0>水</keyword0>伤害; <keyword1>净化</keyword1>行动生物：移除{{value1}}个效果"
   },
   "content.card.alpenglen-ember-of-evening.name": {
@@ -2732,7 +2732,7 @@
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "d94b138d456f5d8294fa10001f9dfcf53ea87740844441cbf6c2d1fa2d9dc17d",
+    "sourceHash": "600d160e4b9ff2b431ffc4a911d00d9b5c9477abe22c1e5ba0b47d42c97129ba",
     "text": "下一张牌打出两次"
   },
   "content.card.alpenglen-last-light-charge.name": {
@@ -2744,7 +2744,7 @@
   "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
-    "sourceHash": "210b417934bc02aa2ae7dc064c8ff9c1c6db61d578e7980e129ebf5999d1d6d5",
+    "sourceHash": "e85228f1bedf0e168604f8be6ae208f074c6696e16fef7b6e9ddca46117ec19c",
     "text": "造成{{value0}}点<keyword0>光</keyword0>伤害 / 若这是手中最后一张卡牌，则必定<keyword1>暴击</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
@@ -2756,7 +2756,7 @@
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "0a6ee776ada44f0bb72adffd30c82c865c1b89bd361093dcf27bcd40612a1ef4",
+    "sourceHash": "cd44d97c62ee9c5083912ab4df849754b4e89a658c73eae5e0ba94d71a88c0a9",
     "text": "<keyword0>反射下一次攻击</keyword0>"
   },
   "content.card.arabesca-dancing-double.name": {
@@ -2768,7 +2768,7 @@
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "9a51f5336a976ec00ce800caf244573ea1a2f61dc331ba8ebfee0a46c6fa2096",
+    "sourceHash": "3d20612b561ece3cef2d38d14fe3913ec7b1ca128b8f371eb88e692e539b65d0",
     "text": "下一张牌打出两次"
   },
   "content.card.arabesca-ribbon-snare.name": {
@@ -2780,7 +2780,7 @@
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "9fc799d8b593e320ffb676012aa34b8721c4d80a6d5a21e405ba6102930b6f47",
+    "sourceHash": "df8e2676cfe621b2411c7ec39f406d902a7fbc5270857221728525e35d88dbcc",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.arabesca-springbound.name": {
@@ -2792,7 +2792,7 @@
   "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
-    "sourceHash": "230e50cb4fe45b6ca061b0783a3b78d186a2cdf4a6e07b780e2f51b4d25c7716",
+    "sourceHash": "326504314759dfb4a9f0f2b9ad8457738c435a909965fb7b370a746896583014",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累 / 获得{{value0}}%<keyword2>闪避</keyword2>直至下一回合"
   },
   "content.card.bloomquail-draw.name": {
@@ -2804,19 +2804,19 @@
   "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "3aba02c05fb95e086bf065f239933b77a0a09fd6807c3af21ebc9ef37aac1fc5",
+    "sourceHash": "566be84e57e2ebca986ddcb02fa3d47a3dc5de57f62797ebbfc3cb73c48a381f",
     "text": "抽取卡牌：{{value0}}张; 恢复{{value1}}点<keyword0>生命</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "fbea6e7e2b22b07ef6023c5e21dc317f5522c21b4ae1891016998effc679fd27",
+    "sourceHash": "48f594c923b270494adad29db95284e2601484382f6a3f5000a925058f7871fc",
     "text": "抽取卡牌：{{value0}}张; 恢复{{value1}}点<keyword0>生命</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "360dadbc30bb4707a98393a67e2f0603ed8624eff497845fd8d71abf6e46b0b0",
+    "sourceHash": "ae9ae4a6d741783be05ff524372b3c4edd617df0d1ecbf4d0d90255e61c88724",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.bloomquail-guard.name": {
@@ -2828,7 +2828,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "f82e444b73075424912078db4580ed85fafd8b0bb375efda28db7ff8c11c4fd6",
+    "sourceHash": "3e863de6524c2ae27e7a591081a368bacaa6eec0f2294b9da3bafd9a752318f3",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2840,7 +2840,7 @@
   "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "69ca0bad07c64d19a594787e19eea5a6de95fe99212111ad6bb8fd650da30c08",
+    "sourceHash": "28210fb10786d6eb729490852682ddb9e5bd3c789268489724832f2f926aaea4",
     "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.brumalyn-frost-howl.name": {
@@ -2852,7 +2852,7 @@
   "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
-    "sourceHash": "01e6a60ace2e0112e400f8a6e2d36b0407c57ccd40943f7b3d303f2f5496c0f4",
+    "sourceHash": "5ee2eb60e552cf92755863137aa4db858834f90ba5173c260e2313e7546f4300",
     "text": "随机对所有敌人造成{{value0}}点<keyword0>冻结</keyword0>或<keyword1>眩晕</keyword1>伤害"
   },
   "content.card.brumalyn-rime-pounce.name": {
@@ -2864,7 +2864,7 @@
   "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
-    "sourceHash": "c7b03753a3daba21edb9c56afd3ab31f0beeb40613f0c08120bcbf3b5a751af4",
+    "sourceHash": "36a92e57c8ed139734d6aa52b37b95127bd15a0b19b2fce053be787cb6d77ab0",
     "text": "造成{{value0}}点<keyword0>冻结</keyword0>伤害"
   },
   "content.card.brumalyn-warmth-ward.name": {
@@ -2876,7 +2876,7 @@
   "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
-    "sourceHash": "77127608a6e5ec5a4c289143603c19fbd62b9b3ed227fbfb54de59fffccecf39",
+    "sourceHash": "30d4617008a89a69003e64531419bda64d3551ea625d40d8b67e06dd7515b1e1",
     "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>；<keyword1>净化</keyword1>所有盟友的<keyword2>冻结</keyword2>积累"
   },
   "content.card.cadenza-echoes-remember.name": {
@@ -2888,7 +2888,7 @@
   "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
     "reviewed": true,
     "source": "Return a random discarded card from a living ally to your hand",
-    "sourceHash": "9cb4bbfaad9a9bd1a74f7f9e47cf97ceae15f04bc7bf57c5f2ca6e2fe6ab54d0",
+    "sourceHash": "1a3712ff9f49012de0dc6523125c89c74f3ffee10f4b5fc5c9e0c1788e88bf15",
     "text": "将一名存活盟友的随机弃牌移回手牌"
   },
   "content.card.cadenza-resonant-well.name": {
@@ -2900,25 +2900,25 @@
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "0336deb136a2f5c721c943fee7f8a5c1ff7a96b9853bbae90fe380af913cadfd",
+    "sourceHash": "188bc1d6a305e7d6e1d6e1132a13661805cacbd34e8f9a971b5de4a504d065c9",
     "text": "抽{{value0}}张牌"
   },
   "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "8c32ac1a0b2c49371f3a97f31fe9cf9a6ac878cc4c817df289cf8ab0869cc8ca",
+    "sourceHash": "392190d417cb1d9bc29365f1d7baec175903525ea6d0ba273495c9fb669ff945",
     "text": "抽{{value0}}张牌"
   },
   "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "dab468704575bad935e3922cf7655574df6505d117f533e0096f356f8cdfb8ad",
+    "sourceHash": "1595507fd43045e9ea602ec9099b1f47773f06fcd38a7ad5a56cd8d60bb5b8d5",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "4797143dbd3b465bec729bb248e481dddb1c9150f204006e5d61c34b225658ab",
+    "sourceHash": "7c2cc300e474aec4efa998f150b65df207b21f939c2865c55100102d3fd0b175",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.cadenza-rousing-refrain.name": {
@@ -2930,13 +2930,13 @@
   "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "6d7005fd954f90675dd047ee0c7e3435837318e7bfad129b08bb99d092aa6efa",
+    "sourceHash": "41b892094e53757ee74cfb9c0b182d1a07187b383e130557701b6c167a513b24",
     "text": "所有盟友获得{{value0}}%<keyword0>闪避</keyword0>，持续至你的下一回合"
   },
   "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "89dde660041c4a660a4c89776f089136bd245ee3e9973f4c5cfef2bbbc691eb7",
+    "sourceHash": "593720890d179cf6aada7878ecfa96705868d2b09db4081edbacf44f9ce569a8",
     "text": "所有盟友获得{{value0}}%<keyword0>闪避</keyword0>，持续至你的下一回合; 抽取{{value1}}张卡牌"
   },
   "content.card.captoad-attack.name": {
@@ -2948,7 +2948,7 @@
   "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
-    "sourceHash": "c39112d325dd8261c3daf1f0975cec291559db64c72196b01f52d717fd738383",
+    "sourceHash": "62929557ad090fcfcb6e4e9e10e6553b84d1a291c8bf7f8e17a92a0556d4d320",
     "text": "对所有敌人造成{{value0}}点<keyword0>中毒</keyword0>伤害"
   },
   "content.card.captoad-guard.name": {
@@ -2960,7 +2960,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "f78e81359b3a1408bda985daca6b7acf0693daf824c9b35b22a8097f9e902568",
+    "sourceHash": "bfc8a8b9c52ac7d7e8d46475225d76055302fbb57bff7c963e294bc40111a636",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; 恢复{{value1}}点<keyword1>生命</keyword1>"
   },
   "content.card.captoad-swap.name": {
@@ -2972,13 +2972,13 @@
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "e7d44d245475c3d9cb12420ad6e2f71989eef29daaaf1953ad95b6a54a72fa30",
+    "sourceHash": "0cdf303bfc4e27311dfb9c16dbfc6aa8c58e497f05e60173c398227bd21fba4a",
     "text": "与随机后备盟友交换"
   },
   "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} cards",
-    "sourceHash": "2e8f07b444ffdb7dc54146a59dccfdd313f0f485a98083905c5891144ca6cb06",
+    "sourceHash": "5ea3833f8522d68083ad2487a1ed4fec21230acad535340f8e65562b58c3b49d",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
   "content.card.cavalleaf-meadow-return.name": {
@@ -2990,7 +2990,7 @@
   "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "68a3fbbf3916a43cc9d8c5564b75f04d28462af939034069083f9ab25f2cca79",
+    "sourceHash": "f300b36802fd5f1ba190e6726b31d7b778e02ed0da2c653820c7f3327b2d1e50",
     "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.cavalleaf-prairie-leap.name": {
@@ -3002,7 +3002,7 @@
   "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
-    "sourceHash": "312deb3132cfc5f558d00aee1fbecd2d08e74f6642c47f46525a2fe7bc15d314",
+    "sourceHash": "67803e5004d448efb93022b4ba2e6d88f11149db19f44539a804a8db43f0388b",
     "text": "与随机一名后备队员交换 / 入场盟友获得{{value0}}层<keyword0>荆棘</keyword0>"
   },
   "content.card.cavalleaf-raincall.name": {
@@ -3014,7 +3014,7 @@
   "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
     "reviewed": true,
     "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
-    "sourceHash": "8adf2fe50f9f01a412c2efe82170725b1d8ff373a7b23cf048cd0c1114d07deb",
+    "sourceHash": "89abc908a75582a51a48c8ada8443cda53c0f21361601772d5697a48b202017b",
     "text": "抽取一张<keyword0>水</keyword0>卡牌 / <keyword1>净化</keyword1>盟友的<keyword2>灼烧</keyword2>"
   },
   "content.card.chimecricket-attack.name": {
@@ -3026,13 +3026,13 @@
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
-    "sourceHash": "99a331b685466b3377d7ddf9dad0a86a6a2b5bc9d1ba6343930ae7bd2b1ef3b9",
+    "sourceHash": "52de85589df5aaf9a2cacf413c8f66847a19cb79a1a0e615bd87b95cb5e35f94",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害；抽{{value1}}张牌"
   },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "7b92d0dfaa4f160b7eed863ec5de806b0ce999424c7574144c7854ff7dd19361",
+    "sourceHash": "ca69b39cacd9e20fb0806f5818e800dde73e36752235d23913b6ef173d6bae01",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.chimecricket-heal.name": {
@@ -3044,7 +3044,7 @@
   "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "07fe9f935be4fcbec4ba8d741e6026b4d7d895295ab4c45a8616105de7bcf33e",
+    "sourceHash": "a27b067056e72c9540cf24f8f89bce7e65bffb030cdbbb7323ce94d40607288c",
     "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
   },
   "content.card.chimecricket-nullify.name": {
@@ -3056,7 +3056,7 @@
   "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
-    "sourceHash": "e6845d43bce6521c88fc57bc42e020550bfe6dbe168b8bd78fb7c343b87a52b1",
+    "sourceHash": "b4da10c5ca475d5e68b7f9c5ca74e9660b5690188fccc6db2ebb19e61d39798d",
     "text": "<keyword0>无效化</keyword0>每名盟友受到的下一个有害状态效果"
   },
   "content.card.chronora-borrowed-moment.name": {
@@ -3068,7 +3068,7 @@
   "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
     "reviewed": true,
     "source": "Give all allies <keyword0>Negate</keyword0>",
-    "sourceHash": "9c816de846c82ec82b2729aebbb9ce54ad59b8c780be04aa291ada2254f9f287",
+    "sourceHash": "8506d13f9ea18d5778bee6cea1fd392d8e96d80b0acd4c819a964cfb89bfc771",
     "text": "使所有友方获得<keyword0>抵消</keyword0>"
   },
   "content.card.chronora-bridge-rewind.name": {
@@ -3080,7 +3080,7 @@
   "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
-    "sourceHash": "27fc927d786ee865cc7ae4558ffc5b7ab0d5f2d597f7d4d65b6570731acf94a3",
+    "sourceHash": "e25c26018a0c0000139d112ba2b122d1098fdcaa5110febc41aab3d9015efdd7",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>；恢复一个被摧毁的钟摆"
   },
   "content.card.chronora-pendulum-break.name": {
@@ -3092,7 +3092,7 @@
   "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "712c469c212d35b5199027028d680a57d919341bb74d33624c9cb99281605e75",
+    "sourceHash": "4e7f8bc5ba681cb6a38b83baca49ba2338d1805ef0893af02e57a297f6f19c15",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.cindernewt-ashen-veil.name": {
@@ -3104,7 +3104,7 @@
   "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "58839b93f6eb6ff149c2aa25aa16a5ff2b35ef69303fc942db22af7fbd6ccd86",
+    "sourceHash": "e576d202be9b650a4f7add29adc8b192c95eb1ddf788b491a0804f962fdb0358",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.cindernewt-attack.name": {
@@ -3116,7 +3116,7 @@
   "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
-    "sourceHash": "0b74476f645a77651ccefa8b1e4b0a0c8a8466d2fb6b40732227b4a2ccbf97b7",
+    "sourceHash": "44afc88b598d051800ceb73d480ab1b22a20a28453d3b2c13815051205f726aa",
     "text": "随机造成{{value0}}点<keyword0>物理</keyword0>或<keyword1>灼烧</keyword1>伤害"
   },
   "content.card.cindernewt-ember-breath.name": {
@@ -3128,7 +3128,7 @@
   "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
-    "sourceHash": "ce2df602ebe0345b3b02f3f11a75de929d382ad831b5973b22323e93dce45d4e",
+    "sourceHash": "8bfe76eade3a3cd59324a52b340b7c87f7f57c0971b0f207f5f678eb2ba9c9a7",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; 移除所有敌人{{value1}}%的<keyword1>护甲</keyword1>，向上取整"
   },
   "content.card.coralcurl-attack.name": {
@@ -3140,7 +3140,7 @@
   "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
-    "sourceHash": "6edfec5ff4bf317c5bc86b0f84f7dd76fbd9ff4ca90331cb459b4fcaf81e57db",
+    "sourceHash": "fa6fbe59be5e9d9249bc43d884994c4fc01bda3e9ca33f1cc31f6b524a1bbc1c",
     "text": "造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
   "content.card.coralcurl-guard.name": {
@@ -3152,7 +3152,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3c49b32905b7b74bd1acfeb3eb71af44de62588f4ddeb1e514999d574701a3c2",
+    "sourceHash": "343bf73a80f92e97e1e2d06c1217b668393a6c23025e4c5de02a8472722fb0db",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3164,7 +3164,7 @@
   "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "e423920ae534bda21581c00acbf4b7ddbaaf80005126e9dd922f4a018c9f96ac",
+    "sourceHash": "877640c2773cbf1ba35ecc05155edf77bd6a2c5e22a745cde653ebbbce3c5f6a",
     "text": "与一名随机后备交换; <keyword0>致盲</keyword0>所有敌人"
   },
   "content.card.dawncall-attack.name": {
@@ -3176,7 +3176,7 @@
   "content.card.dawncall-attack.v207aea3bff659874.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
-    "sourceHash": "d74d8e967ee320f96493df2294bac0572ce04353548435d7c88eece4993bc2b2",
+    "sourceHash": "29cf383560f5fd3e3b73bb89308310f7f1998a91b067a053b2be22eb9ae719d1",
     "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.card.dawncall-heal.name": {
@@ -3188,7 +3188,7 @@
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "b3fd61d1eae446c99415ed11a3b8864d67155f6d249ecf3a46005c8f90daf790",
+    "sourceHash": "45dfb0289794f105815bf3347820e16c10a7f0cba4b2cc694b9c76c3f165b9db",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.dawncall-teamCleanse.name": {
@@ -3200,25 +3200,25 @@
   "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
-    "sourceHash": "2944cbde6f70d31e9b25a0ec82e15ee6a15171fa3c735817b68ec73208a66ae1",
+    "sourceHash": "7b3092c4db648e8619574fcbd09a15ce2419fd54248b4c59a1c63e75cee1f4ca",
     "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
-    "sourceHash": "269c9faff9e8d1a1cc278ebe1e8bfc752013d4dae964b1e5ccb202f12f439fbf",
+    "sourceHash": "f07c40d1b8d27c9e0c71226f0169c8514eba61e65216458a0f9af0ebf38b45d4",
     "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
-    "sourceHash": "6638fb3f4ece6a0aea0a36582404a416e38107266bc42e0d4d45edded3d06047",
+    "sourceHash": "9aeddb290ec2abaa2c335ea9f7eff237901348d5b77bb25cb1ab654624fbd4ce",
     "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
-    "sourceHash": "b3a2a44bee189fc08f3919f08142884512014644c700ac9d5a0cb3e3b13860f2",
+    "sourceHash": "d3887cda68e8b9688d5816ced928a4c7246104177d45cedfe90640bc5a2c8eb8",
     "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
   },
   "content.card.dulcera-chapel-light.name": {
@@ -3230,13 +3230,13 @@
   "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "eee0e6d0bfe95ad15d1baff9ad5ecbaf9d5f90d1d51ac84dba2e895d489950ca",
+    "sourceHash": "5ffcf49fd6b06ba80933755a4bc721b1f435e02266411a852f5f027d37943595",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "ab26ecda009f6556640fc9cdc4a48d5a0fc2a898d99e98b0d431bc228eff5d21",
+    "sourceHash": "354d2ccff803f2eba8cae535031c0b3ac9edc2cd7a4fa3fbc9b78a42fea79bd5",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.dulcera-hushed-waters.name": {
@@ -3248,7 +3248,7 @@
   "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
-    "sourceHash": "2b1623ef16945cdb5cdab0f10d78568e2235f77c7bb2cc878b153430c9631a59",
+    "sourceHash": "0b3f03a0069a9a23411f8e1974721163aef26df9254eb7856168bcd347090600",
     "text": "与一名随机后备交换 / <keyword0>净化</keyword0>所有盟友"
   },
   "content.card.dulcera-meadow-shelter.name": {
@@ -3260,7 +3260,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "a3124eb1934acba191859eccda424dba9d5bb9c71c1e35beb6e26b8998ac2a83",
+    "sourceHash": "1a3aadfb64b5ad1239945a568225923df7aa1889cc5417d3ce20ba8b339d7555",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3272,7 +3272,7 @@
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "24a254566e1dce393bcf6db1e5fbab55837f7ee6b7fe115dc26ef0d6cc7d4f8f",
+    "sourceHash": "4b4c4a60cce8e4bc71495f6107f487425994856f01e06df27f2070feeb82b0e7",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
   },
   "content.card.dunefox-dodge.name": {
@@ -3284,13 +3284,13 @@
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "00be8acc331850d134dcd56e3ce4c6b1bb9a24c2c4d5932d2fecb83e496c77ed",
+    "sourceHash": "a467c82652c6995121c9b706d6bcce6a920927f124281647903a9733b67bc5d2",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合"
   },
   "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "c70001858979b16ac3c03942cf68e7dc4b9ad501afcc04162a57d3bec2f79c21",
+    "sourceHash": "f66a925c89799db41bfb9e7123a88effe5c3a4ed546f98b6b91d1f8088194389",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
   "content.card.dunefox-dune-whirl.name": {
@@ -3302,7 +3302,7 @@
   "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "fae0f530e477abe0fa26741c52f77ec79ee1f04c118b9b1396edad316e8a5df5",
+    "sourceHash": "95957da086cc747d3bdd74ec8e1394af5e2d84a3a8d9ec7b0184d4ed30354b6b",
     "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.emberback-attack.name": {
@@ -3314,7 +3314,7 @@
   "content.card.emberback-attack.v49693240c378631b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
-    "sourceHash": "576d04fdea0007cadbf649d509e01008180e24888b236732f55b66a3c899fa5f",
+    "sourceHash": "58cc31d787e80fd861ef6f12a0e056d9d4f3a04020408fc4e8eff4396f5f35d2",
     "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 获得{{value1}}点<keyword1>护甲</keyword1>"
   },
   "content.card.emberback-furnace-breath.name": {
@@ -3326,7 +3326,7 @@
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "584d4c184e45cd77dfa4b691b783ee181aa72f77b35b6fe52e146284f9144999",
+    "sourceHash": "b2fc9fd86a1d0345a78336b9a8093f2c690c1c55c06e4a59d2ac9d375664e09d",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
   },
   "content.card.emberback-magma-stomp.name": {
@@ -3338,7 +3338,7 @@
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "4639329f5952f9ab7bd500fadc1618c6b6b6798f147312d57e9551a990a533cd",
+    "sourceHash": "840883d4637ba6b7fb0cda8d47f95993f1804ba2207d1cbb05571aad4815860a",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.euphera-possible-path.name": {
@@ -3350,7 +3350,7 @@
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "bfec29b5cb57f9ae622e1a9185267773bd429acf0598142d349891b5754bab43",
+    "sourceHash": "4cc46ec9181e75c71c153a7b1a18ccb038d6ecb95488f908438c972004bcf1ea",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
   },
   "content.card.euphera-twilight-lance.name": {
@@ -3362,7 +3362,7 @@
   "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
-    "sourceHash": "6cf3794d8050184d0e50cb67281ce24e46499c4049c00767a6d5d64806e2a673",
+    "sourceHash": "79959f9cd546d22c5eedb65b1947ecf0cfae34f3baee67c97cad7fd15b007c5f",
     "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>; 造成{{value0}}点<keyword2>光</keyword2>伤害"
   },
   "content.card.euphera-wish-exchange.name": {
@@ -3374,7 +3374,7 @@
   "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
     "reviewed": true,
     "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
-    "sourceHash": "dcb8b4b85f6bc53d1832e2597e2dba3cba1391946f2d1c048a2e28ec09e5a707",
+    "sourceHash": "c52ac190bbe2a59ab4fc476690c2b178373e31c51cc3986bdb890db595db5a89",
     "text": "均分盟友的<keyword0>格挡</keyword0>; 盟友获得{{value0}}点<keyword1>格挡</keyword1>"
   },
   "content.card.food-apple.all.rule": {
@@ -3440,7 +3440,7 @@
   "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
-    "sourceHash": "7355d53fa4f23acfc997ae3ce6a862b47d652741302f7624d273bdb9f1e49bc7",
+    "sourceHash": "c7f5bd101288c830edce47a56ab59596c59d2dd048d11bfd482f4c25efaaf334",
     "text": "造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.card.glintstride-dodge.name": {
@@ -3452,13 +3452,13 @@
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "12e4f0fd3e748d28680d4cdd49b53de3c629276464e17a6cc329cabddd75ae3c",
+    "sourceHash": "cf623a444776bf883a33fe657161959e9be2a806ed0eda5eb0cee2c198168dee",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合"
   },
   "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "c132f255fbbe5bb1df9d6f2754c71f493efab936b3b2f4ac79224ca40fd6eca7",
+    "sourceHash": "330e47f2be0ec4b96ac73a4364af0b1ea1b9c91343f61246b854e6af03cc9ddb",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
   "content.card.glintstride-teamBlind.name": {
@@ -3470,7 +3470,7 @@
   "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "d8bd802dd51a5e67c4928c628aa09424ad42ca7051113829e0d548ad6b105d6b",
+    "sourceHash": "289ec07d0e34f00ca86c57809fb08c3e99b46be907f30b4b408de475a9a43c55",
     "text": "<keyword0>致盲</keyword0>所有敌人"
   },
   "content.card.memento-drowned-revelation.name": {
@@ -3482,13 +3482,13 @@
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "591bd0f376799bb291a3785d9c0e016dfc1b1466cb119f3b23da3a503075a1bd",
+    "sourceHash": "a1067e1752ca9b7fe5306392236a41d4eb95fc39c5be064159c59873428f5f3f",
     "text": "抽{{value0}}张牌"
   },
   "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "36a7eb13ad1536e80f6afc1a3d523ee74000cb594d4dc814a4f4ba0f56618ebd",
+    "sourceHash": "ebb588ec30c9bb7ff5c6f060841b4b9bbf1b43442d0d3e10cbdaa6f81c800bfd",
     "text": "抽{{value0}}张牌"
   },
   "content.card.memento-lost-procession.name": {
@@ -3500,7 +3500,7 @@
   "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
     "reviewed": true,
     "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
-    "sourceHash": "418e32dcb43675f3ce8336a5b7634f078bcfc033cc4ff69e1ec810e3f704a81f",
+    "sourceHash": "a47bd212aebc01b41aa48ceb66e3a8489d6588122f46c949621d6376df58e2d4",
     "text": "召唤一个回响 / 将你的召唤物<keyword0>生命</keyword0>恢复至满值"
   },
   "content.card.memento-pearl.name": {
@@ -3512,7 +3512,7 @@
   "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
     "reviewed": true,
     "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
-    "sourceHash": "2d410072be0cb5fd7ec50958f5b516e2c7b5ae52f149820605e91ab32e937ecf",
+    "sourceHash": "555e85b42830523e82f17e76947d77d90ab871a6fbdd749fa9957bef8cfd9abb",
     "text": "<keyword0>消耗</keyword0>; 随机获得{{value0}}点<keyword1>格挡</keyword1>或{{value1}}点<keyword2>法力</keyword2>"
   },
   "content.card.memento-treasury-echo.name": {
@@ -3524,7 +3524,7 @@
   "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
     "reviewed": true,
     "source": "Create {{value0}} Pearls",
-    "sourceHash": "b3a8061de17d8b93fc3dc49302dcae25a8317856df3822da8bdf323c79adff75",
+    "sourceHash": "a50be32cde51f8c713c90d58462d8557cb79e481b311e84b15282cedf7dec8f4",
     "text": "创建珍珠：{{value0}}个"
   },
   "content.card.mossguard-attack.name": {
@@ -3536,7 +3536,7 @@
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "11d3055c58dfb420c0ae56422a52651a7590100a6493c95c888b71e5cce8cc3e",
+    "sourceHash": "f20f39d4b47ebc7988c9ca835c089ddb4516ed6491c7aa4447f9f5da53ffadda",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.mossguard-guard.name": {
@@ -3548,7 +3548,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "7f9bb26650c0a1908f7e43da7166d51ccea90365e0c6ebb7d05a0f44da7b89ef",
+    "sourceHash": "3d77d7a8a73e37b8887c1d72dc5ce2925c1fd5a6b38f017206cb9fd76b60add5",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3560,7 +3560,7 @@
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "8685bb26e42164a139569b84460434433ae3d3313fbf5f8eed63cf91e5dfb751",
+    "sourceHash": "b1fd8b648506d4d17952509a2989d31f7f9d3c4f887b1073ab2794e9022998a4",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.neradora-bloom-shelter.name": {
@@ -3572,7 +3572,7 @@
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "06da2f61f07bbd4e2407d350065f3722e0ecc9b919d2b5cdc2b33b14bc15cb3a",
+    "sourceHash": "e228318b5045be1ab2653eb105e43ae3c819d46c6ba7f172ab163f6eda4d478b",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.neradora-tide-cup.name": {
@@ -3584,25 +3584,25 @@
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "db817c021537c54ead84c8e0300586eacc751cf6ecb7fe1ad6368d931bc397f1",
+    "sourceHash": "ed5975750473ea1c60584bbda0a147108744a71bb540fd07f21f17b5325826f4",
     "text": "抽{{value0}}张牌"
   },
   "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "2cd01a844c0f437ec9838b66a979076cdd2886028647b827e05901172aef84c9",
+    "sourceHash": "a114df9ff18553637fb55b22e1da2a03bfdd4c41ccc9168cb440ddd164a88eb4",
     "text": "抽{{value0}}张牌"
   },
   "content.card.neradora-tide-cup.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "90365e2e9898ca2c8bf2c09f87e81306687b2c7adea85c3288697c54cf46b2fc",
+    "sourceHash": "94f56e5b993a43b52763f951c61ecb8d87e22e3327fe806d7209aed1746c7d3f",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "67abb3e2349dbd39fcdaec41fa3c260ec5d775c9146d6c8e4cc6467faafa7816",
+    "sourceHash": "9959536b71f65b94497f8eaf15dee23c3140f10471913af8981cf7b020326130",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.neradora-undertow-knot.name": {
@@ -3614,7 +3614,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "bb7599e7dbf1bd8dd7d700d362929df95d7027d1cbfc6bb9d14d839c4468d5b2",
+    "sourceHash": "cccb2d3cb7c3d23eaab91bc1516912375cf0be8ec25aa3703eb2affc1c0510df",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>净化</keyword1>一个有害效果"
   },
   "content.card.oathara-never-lost.name": {
@@ -3626,7 +3626,7 @@
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "f009830617ddd1970174f9041506317c9647c779c44a3d55fe6493f0fccb24b4",
+    "sourceHash": "8919e66a8f89a362de5c78de9b4172f6fb959e5f01491e5de8830ded8ed1b458",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
   },
   "content.card.oathara-travelers-ward.name": {
@@ -3638,7 +3638,7 @@
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "07fed0265b10b9e7f59327c9577af9b116851d6cc23f74a989f84c3ca6331026",
+    "sourceHash": "935dcee9f359d3b06abb54ee593e0799de16962e3747f49ef16501ab9ea9b1b2",
     "text": "<keyword0>反射下一次攻击</keyword0>"
   },
   "content.card.oathara-vow-of-return.name": {
@@ -3650,7 +3650,7 @@
   "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
     "reviewed": true,
     "source": "<keyword0>Resurrect</keyword0> an ally",
-    "sourceHash": "71fafea494470a98fee00dbe18a3d4fe756dc40f240b6c9896db3919f2f09a10",
+    "sourceHash": "ff7d9734e8809fbd39f1b5b6c97c75e4cedd17023f9968e384613a7b36956a58",
     "text": "<keyword0>复活</keyword0>一名盟友"
   },
   "content.card.orifable-attack.name": {
@@ -3662,7 +3662,7 @@
   "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "d0ec8d3ba9b65155d6c7782fa2c1253d46debe5ce2e8c95de10ba324fb00727e",
+    "sourceHash": "7dd55e63d10b2fb0263a6ddb347eab30f8e14be3f41a1847c211488c5536a03b",
     "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.card.orifable-createFood.name": {
@@ -3674,7 +3674,7 @@
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "749418df6095aac4e3dac292c355d6819ed64d050928b5c08e2d3341142262bc",
+    "sourceHash": "8b9e4b617a9ee0f84ee1b16ce9e5b9188d0451b854a4f724833a1d0928d6f44f",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
   },
   "content.card.orifable-heal.name": {
@@ -3686,7 +3686,7 @@
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "2bf6862d238895c8d5e5a4319ec6129867af45b0848789ce60b332231e91c0ca",
+    "sourceHash": "068c4714ce09532af479b46edce89624ae5d0e38678007d308101b3a8b2c3bc5",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.parhelion-polar-reprieve.name": {
@@ -3698,13 +3698,13 @@
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "74657caccd9de58342e8c90b17f469c9d7158bbee017ed02e5973f3a54c294d8",
+    "sourceHash": "a6d472e350754bdd5054ccb0c7e2ccd5a92a8409584a3f33114494661ce56f8b",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累；抽{{value0}}张牌"
   },
   "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "dbfedda030603038f4731927803e48ee9fb76712963e5c16115d6ed918e69009",
+    "sourceHash": "cd4de329806c3bcea454709875ae506e8415739243ad722d18f9ec04bebd3b7b",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
   "content.card.parhelion-sundog-reservoir.name": {
@@ -3716,7 +3716,7 @@
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "4bcb36c6db6c585cb12e01312160c3f462991dc9eda8d02441efbddff0344e27",
+    "sourceHash": "6083f47ec0e502ce01c11464fcbd22d741bdc694d943d962092b49b00091c2f7",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.card.parhelion-whiteout-waltz.name": {
@@ -3728,7 +3728,7 @@
   "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "6fbab654e97cc6ea13b607588616231dcbafaf55c2a7614562cd733c8b2f57ab",
+    "sourceHash": "b26500ecd167630f593c6d388e3f8272af06692be99a67f6399bca9d25a9f2c8",
     "text": "造成{{value0}}点<keyword0>冻结</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.pollenmoth-attack.name": {
@@ -3740,7 +3740,7 @@
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
-    "sourceHash": "6b370f1d52e8092bd11ea6754b3f3f6229664527a89a20e28c9240d81ecf7f56",
+    "sourceHash": "3925a3367de1b97e3339c47a67602778260a50e92956af4f379c3c6813db51dd",
     "text": "对随机敌人造成 {{value0}} 点<keyword0>光</keyword0>伤害"
   },
   "content.card.pollenmoth-heal.name": {
@@ -3752,7 +3752,7 @@
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "da0753881d9905091e8dd2f337d687ed4e934d5bf80f49fe234e29811bb601db",
+    "sourceHash": "56cae3973db6da25e0e8a74efd1ad34a5b022c10024671c1fdc27fcab9d48e25",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.pollenmoth-teamGuard.name": {
@@ -3764,7 +3764,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "e257d32c7f15a4c7164fe9cd257cbaeb62c6db9c14ec2e5e9987ebc7d19d7e38",
+    "sourceHash": "2eaf6c3d8a138169eb04401d2be664e47a4e920746d1e92789f3467cc52f5cda",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3776,7 +3776,7 @@
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "762822115929cf66bf65a977c929b168d08c694976144fc8e1f5f0d0e9c20569",
+    "sourceHash": "2f17bddffabd225461712df4d9620a086b8a9f9b4fd3ecd9285d540617ed30b5",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
   },
   "content.card.prismram-guard.name": {
@@ -3788,7 +3788,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "e6ab240af885e2d9211409ebdfbd682e579f403498eac7d6653cfdcaa67b7ce4",
+    "sourceHash": "779d755db82d5b0a520c0e1c043ed9afe8ef6e20dc95c88126fc62bf59a1bbbd",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3800,7 +3800,7 @@
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
-    "sourceHash": "0119132e3f29c94a12b8cf5f2701fc5056fc0bf6183e97a2ca916eb8ff7b5a69",
+    "sourceHash": "071b072d2beed1a9a116e1096ef0e1a1c4020cbc2851445e1b87154930128599",
     "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
   },
   "content.card.pyrella-ember-harvest.name": {
@@ -3812,13 +3812,13 @@
   "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "cd2b43fac33feba1daa0ba2a5874ae70c8f6a1f546a513919027e66a214fd498",
+    "sourceHash": "e6e508e1b6141f1de2989ff860dbdc6aa9f3b347b1dcb0c642983972d105dc6a",
     "text": "恢复{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
-    "sourceHash": "27bc1bc9fcb4e03700f100bef3463f0cc7c0ef68b9969a3464dfba13aff1cb55",
+    "sourceHash": "a237c9e65e8e1ff0ef0afeca5eae516d905f84921f449d6cbeb9efcd43020487",
     "text": "恢复{{value0}}点<keyword0>法力</keyword0> / 抽取一张<keyword1>灼烧</keyword1>卡牌"
   },
   "content.card.pyrella-festival-burst.name": {
@@ -3830,7 +3830,7 @@
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "b8740a4c2478339cb88f67cc61beb08e8605896e26fb01da61769c315841006d",
+    "sourceHash": "9f141a54e6ef4139200fc5338cd886e822e7dfb78ae4d0ef745761879fdea623",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
   },
   "content.card.pyrella-spark-decoy.name": {
@@ -3842,7 +3842,7 @@
   "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
     "reviewed": true,
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
-    "sourceHash": "40d8f4b18727178ee72ff2ae5cb847a00757176985a089e6c47aee8140d0eb5d",
+    "sourceHash": "17b12d25083fe28a56b6464ab83bb5558fa3925d54788c0e07cdcb02e8e84fd9",
     "text": "对所有敌人施加{{value0}}点<keyword0>灼烧</keyword0> / 获得<keyword1>抵消</keyword1>"
   },
   "content.card.reedstag-attack.name": {
@@ -3854,7 +3854,7 @@
   "content.card.reedstag-attack.vaf3db517079be41f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
-    "sourceHash": "a6dd192ec75e6ad3d115155323686f33fc15692f3f5ea141da0df7845705f573",
+    "sourceHash": "a48fbbedf67f06c18c7b05f8d455ad9b4c40f1e05dee210833c2d6c38f594a3d",
     "text": "造成{{value0}}点<keyword0>自然</keyword0>伤害"
   },
   "content.card.reedstag-guard.name": {
@@ -3866,7 +3866,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "ba2088c5bc72fea7580e1a3aeb5a63e11f904d4050f725b3687e66e4ff1c4557",
+    "sourceHash": "f01d5ed2f5c49ed30433438173f43b6ff359124163af09f3969218658f7df623",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -3878,7 +3878,7 @@
   "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "1d851eee4283d1aa17af0c3adce60cd644e08492381e714d5685d6ce0a5b5862",
+    "sourceHash": "3916f227e692361e056249537b013353ba19f110d2e09cf824fdaefc7085165c",
     "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
   },
   "content.card.reverie-dream-double.name": {
@@ -3890,7 +3890,7 @@
   "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
-    "sourceHash": "3f76fa04b181fbed60558c390948a5eac6aee2d2069447c10cefb369b0948532",
+    "sourceHash": "08eeca2dd2467fb454b06c8df831e56c3c370ef5b4a6334e6bec94cd2d643899",
     "text": "获得{{value0}}点<keyword0>荆棘</keyword0> / <keyword1>抵消</keyword1>下一次受到的攻击"
   },
   "content.card.reverie-nightmare-harvest.name": {
@@ -3902,7 +3902,7 @@
   "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
-    "sourceHash": "8d07fd4f8790949da56c6b75b4e23498f76f657b2937b82ad986256a2192db92",
+    "sourceHash": "bd8494bcf34b5f0a95ac65ee3339f8396e7140b65e5331187b28f6258bae0fff",
     "text": "<keyword0>净化</keyword0>所有盟友 / 每移除一个效果获得{{value0}}点<keyword1>法力</keyword1>"
   },
   "content.card.reverie-waking-wonder.name": {
@@ -3914,13 +3914,13 @@
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "7a76c47bb5270f0f61902fdc1934d7db5deb7cf885b4f88cab95275c88b076df",
+    "sourceHash": "5e3439340fed1f200c8ea567b78f1d214cf9deb4e9e1a799b0022f1a84160cae",
     "text": "抽{{value0}}张牌"
   },
   "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "39de1b40ecb52b2180960171c5cae4bfe531daf81ff7fdc9e5a0495134653a5b",
+    "sourceHash": "b763f53e2bb7d98c711c28b1c0f5de4a4d1b45b4d5f5a6025165c2fe65ce03cf",
     "text": "抽{{value0}}张牌"
   },
   "content.card.ringpalm-attack.name": {
@@ -3932,7 +3932,7 @@
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "ae47e236ca42d6d64ff0edc42447cd15a99c1213832faf46c6d8a24b77fdd992",
+    "sourceHash": "67bff0df0f599cb9c4d90576065db1c8641b3ee2e2f977913899af4257a9306b",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.ringpalm-harmonic-set.name": {
@@ -3944,7 +3944,7 @@
   "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
-    "sourceHash": "3feb679c5a40c9a78beedafa19876d6070f1f6cf2e06a4683de51e83dfd8ef9c",
+    "sourceHash": "280e446c773215a111caffa41cc75b45e93c7434dd40500d1cb14960314e2ed2",
     "text": "对所有敌人造成{{value0}}点<keyword0>眩晕</keyword0>伤害; 获得{{value1}}点<keyword1>护甲</keyword1>; {{value2}}%概率重复"
   },
   "content.card.ringpalm-teamProtection.name": {
@@ -3956,13 +3956,13 @@
   "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "f6f9502bafc9f050bafa8d63cb948a31b8b0476be807690c1280a70dc5ce92d1",
+    "sourceHash": "f453a2b811b56af93c46e13e56ee5890e26b30745273dbffce6b7b3fc94c66a6",
     "text": "给予所有盟友{{value0}}点<keyword0>格挡</keyword0>或{{value1}}点<keyword1>荆棘</keyword1>"
   },
   "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
-    "sourceHash": "7140d0da3a1dcb7399ec847ac0ee4614a9c237beb7448d1025ebb1ab19db7e00",
+    "sourceHash": "63c32fe0d31b88eb8ba4c1f4e8949c301a82174734a65c77b4fdfc74f5965d11",
     "text": "给予所有盟友{{value0}}点<keyword0>格挡</keyword0>或<keyword1>荆棘</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
@@ -3974,7 +3974,7 @@
   "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "6cfe3191631db9ffc955c35f751155375eda36d627b3aa0e601c5b5b9c562b91",
+    "sourceHash": "27110b2ed988d2dc99e0523bec061e185abb0a29aa32132d4f4bec5112864251",
     "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.rookhaven-margin-of-possibility.name": {
@@ -3986,13 +3986,13 @@
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "b1fe1bb3b2cbf4eccc40486e198c2752f5a9974dff13ba84efc94dbc08a74874",
+    "sourceHash": "7115c31538148c6c4b1571a5b4b41c732853ec482bfced89db92e63a2b36d131",
     "text": "抽{{value0}}张牌"
   },
   "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "960ed1ce12d6afad495f0a2224d93466f176ab6c26b82de836c7788f7d6e39d9",
+    "sourceHash": "1ed3e85e5c1d50d7f7519182129b60b7c2a10e255469ec10e0e479ddfe157c5e",
     "text": "抽{{value0}}张牌"
   },
   "content.card.rookhaven-unwritten-ending.name": {
@@ -4004,7 +4004,7 @@
   "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
-    "sourceHash": "b435ef940d32b8baf0f032eaf694dee35e817a9b0cdec8758f5c6b49f07ba250",
+    "sourceHash": "8f591bf2349a04319426333ac260a1da52afe32984503eccaa9702c7a4a66c98",
     "text": "对所有敌人施加<keyword0>驱散</keyword0>"
   },
   "content.card.shadebrim-attack.name": {
@@ -4016,7 +4016,7 @@
   "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
-    "sourceHash": "3a20c50faa8e0969e2c7cfc45d99a9dd508c956c62b4bf3f457d9ee0e3b4231c",
+    "sourceHash": "d55c1519400b5adfd9bb7c1b3a4e52be117ed1d83d735cbf6b92de9372a87146",
     "text": "对所有敌人造成{{value0}}点<keyword0>冻结</keyword0>伤害; <keyword1>净化</keyword1>所有盟友"
   },
   "content.card.shadebrim-draw.name": {
@@ -4028,25 +4028,25 @@
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "d8ceba4e5cf633f6eba876d95f35c833824bccffeb6737a92fafec8c8427654a",
+    "sourceHash": "cded1a39e2d35fc47a33eeaefb2401487a1100851ec4f0716f0faf93bd900a0d",
     "text": "抽{{value0}}张牌"
   },
   "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "07b6c28f3fad3c21303595eadf2542ce6a4f3bc0036de72def3e7386fcf4fbd8",
+    "sourceHash": "56636401d11eee187dbfaa0a12394096ee3d5212f08bac837b8e4867525a1335",
     "text": "抽{{value0}}张牌"
   },
   "content.card.shadebrim-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "807ef29f9bb9ee4bb2cd0448dacc7568dc292e66c3827baaa115125e750f37e0",
+    "sourceHash": "9a636a00fa9e589ec6a4c9c0245c59677894370ebbb9f2e2db53844bf0c0e6f8",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "741e20b1220c9ecba51f3e54f67c573e5424d38114539ee794e102e84319a8eb",
+    "sourceHash": "297ee45d3ff3276775883b759e6c649ec097224112f098461469b079f05789ce",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.shadebrim-guard.name": {
@@ -4058,7 +4058,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "b3d082daf6eeeda22cb851d09b8e90026b82809dec3f0aa732af6c807e752d1b",
+    "sourceHash": "c8dbd880ea6e1630a59c685d5f68fbd994dd16dcf313e5c0f1f2b4e2e7c12a11",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>反射</keyword1>下一次<keyword2>灼烧</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4070,7 +4070,7 @@
   "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
     "reviewed": true,
     "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
-    "sourceHash": "8bcf29a9b1c71c3408137c1876ca076977bf28f0a872a98eb693c7ea5ef50457",
+    "sourceHash": "ce475703155900a60906441c4be9fe1e8012d1035374d9b398a097a112ea581b",
     "text": "与一名随机盟友交换 / 换入的盟友获得{{value0}}%<keyword0>闪避</keyword0>直至下一回合"
   },
   "content.card.skybex-draw.name": {
@@ -4082,13 +4082,13 @@
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "c004a7d58f2e53136c75b4011159216b82d979aa1c3384ced6e004bb9c442835",
+    "sourceHash": "80e915378efeaf3f0dc679c8d76630beaa3d14f4e9e4c895f0b987be748aa00e",
     "text": "抽{{value0}}张牌"
   },
   "content.card.skybex-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "6833bb50e19e8a4bba09a26d27fabfefb21c9138564b8c0dcfa7757e36808ef9",
+    "sourceHash": "ea411704de31d60acd44072d64585d7901706587b3410b4dabe4190f501e41fd",
     "text": "抽{{value0}}张牌"
   },
   "content.card.skybex-sky-shepherd.name": {
@@ -4100,7 +4100,7 @@
   "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
-    "sourceHash": "73408b3a6e7292c803a78c2eb52f358fcd1e8688ac194e9b0e68a2a9edef4839",
+    "sourceHash": "f2ae0158c5e1fe31931431ce84b593b7c9b8d8c783e2b780f2803b6e3dbba555",
     "text": "对所有敌人造成{{value0}}点<keyword0>自然</keyword0>伤害"
   },
   "content.card.sternshell-attack.name": {
@@ -4112,7 +4112,7 @@
   "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
-    "sourceHash": "69001e610549abed2dfffe50991b6e674783d17fb3ba1a9cf74f1ea13b2dcc0f",
+    "sourceHash": "602aa58ad0e143b309c1271f7cdf969680589303fc7d3199c90308ea5e4f643e",
     "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 拥有<keyword1>护甲</keyword1>时伤害翻倍"
   },
   "content.card.sternshell-spiral-return.name": {
@@ -4124,13 +4124,13 @@
   "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
-    "sourceHash": "6e1d197dcb70c1620ac8cc15db11a934ce3b71d5dcfe491784a1749d7afd7e5d",
+    "sourceHash": "ae912407e6099d7d89a64b04a3b2f003524751a7f4771e99078db3b078d026b7",
     "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
   "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "e6f711f875222b351d454d4b1dd1663e676618e6ba0452dbda9794b72adc9a1c",
+    "sourceHash": "e306f7299c21c0bd03947691eadf0c710be6c4fc7715285b990ffe4791ff1385",
     "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害; 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.sternshell-swap.name": {
@@ -4142,13 +4142,13 @@
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "b1209d4ea599fd18b07bee30bf607bbf109a9cfd33999ff2c5e87d3ede9d9681",
+    "sourceHash": "f78e05c07a6fee99140b28b17c8c0f5929683e4413e1efeb1a3493f8fcbb90f9",
     "text": "与随机后备盟友交换"
   },
   "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} card",
-    "sourceHash": "e2c3795bad86698ecce467ddf478ff9e867533c2c43b58d33c05191d2dc14d6e",
+    "sourceHash": "af11d1b6524c7f64d52de2d788714be7dfe0d26073cfbf27cd9e984c5ae43318",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
   "content.card.stillara-reed-reservoir.name": {
@@ -4160,7 +4160,7 @@
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "256cf5e5413cbf0bedf3e501f438386e23c6a87f31efda611e4821598df97863",
+    "sourceHash": "dddd2f0782ebe08ab79c363592fb2c590c85bb2bc5c45a0a5c92424fc9ea398a",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.card.stillara-thaw-path.name": {
@@ -4172,13 +4172,13 @@
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "cc5bdee6026421f9ee692ccd43d408efe59d461a42f8d5ff7efaa9c9a075918c",
+    "sourceHash": "19f60dd58b5406ffaf9ae6bc64303125bda78c7e1122826ebd06a99c79ff31cf",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累；抽{{value0}}张牌"
   },
   "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "ea731d0e2f2f98a24479be5d0156143264ace80f69f29d3753fc7c087ef81aaf",
+    "sourceHash": "f73c88b294896ae4a49495be1f87b15081c39ac12cf055d59577e4aa3b628a63",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
   "content.card.stillara-water-remembers.name": {
@@ -4190,13 +4190,13 @@
   "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
-    "sourceHash": "30eb0ef7bbca56150ae0ca9f76b232454fa1cf9c7e4b7ba4e063ca967781326d",
+    "sourceHash": "3b0224285375c649d9695fba870ec2ec4ee4befc4dbbee15077e8299dcccbd39",
     "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; 抽取{{value1}}张卡牌"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "7fd266c29cd3666a91416f5af4c3d9276a0951e395d3b213b636c5947ee4b6cb",
+    "sourceHash": "d99055f926f2a097d38dc8af0e966124ed65a1df7e0b878e037296a912bb1a01",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.card.tournelle-attack.name": {
@@ -4208,7 +4208,7 @@
   "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
-    "sourceHash": "126bfd14c22137eb470ae08a94019883424505e903189d7405376a2d33bc8853",
+    "sourceHash": "29643d99055318bbf2107c17272ae93490ce0cfa90223fd560061145fa6f791b",
     "text": "造成{{value0}}点<keyword0>光</keyword0>伤害 / 对<keyword1>生命</keyword1>高于你的敌人伤害翻倍"
   },
   "content.card.tournelle-swapLowest.name": {
@@ -4220,13 +4220,13 @@
   "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
-    "sourceHash": "e371390bad9088a8dcb8f0401b290979ba1e2ef318dde42e64d1b8ab7f19e056",
+    "sourceHash": "e635958632cfec2120397b35b74b3ece32d7b641b09827c4475930b2a8adb643",
     "text": "换出<keyword0>生命</keyword0>最低的盟友"
   },
   "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
-    "sourceHash": "6b68deea35fbc51c3e40b48b9f09beef4716c72b9449ab153dff3350cfe6c5c5",
+    "sourceHash": "fe47eb77962acefb0c6f06b8bc22f2622d0e96aa92b0a82611eb46bbe927ae5d",
     "text": "换出<keyword0>生命</keyword0>最低的盟友 / 抽取一张卡牌"
   },
   "content.card.tournelle-teamClearBlind.name": {
@@ -4238,14 +4238,50 @@
   "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
-    "sourceHash": "7db78ccb8b5ed0c0fcedf8b07d5f171a30223329fab6599507f2a3defd753015",
+    "sourceHash": "c5b5e7cd3351a44bdc50415b5a5dc69d9ff3e0fedcc4c298e553d8f70747a7ed",
     "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
   },
   "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
-    "sourceHash": "bb9ce074828665479cfdb156eb42be4c20c15c22cffdf6fdadd89d576984bea2",
+    "sourceHash": "194fdf29c86d0dc60ab844de503e3c4fff7756bd234edff6556fded266c033b6",
     "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
+  },
+  "content.card.vitrilo-kilnheart.name": {
+    "reviewed": true,
+    "source": "Kilnheart",
+    "sourceHash": "00aacb5d84e61be159544e93cd7a189800511091e7469647b5518d820c9c62f6",
+    "text": "窑心"
+  },
+  "content.card.vitrilo-kilnheart.v8550d6fc467780eb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "6bc3c58dbeb8e255737ad3d3f4760529d5e06cb2066ca1a9193865425f7336a8",
+    "text": "恢复{{value0}}点<keyword0>生命</keyword0>；获得{{value1}}点<keyword1>格挡</keyword1>"
+  },
+  "content.card.vitrilo-prism-key.name": {
+    "reviewed": true,
+    "source": "Prism Key",
+    "sourceHash": "c3ec8e610f70517488efea80612af9f25e2f56f811de542bcae24f45c1b99ca5",
+    "text": "棱镜钥匙"
+  },
+  "content.card.vitrilo-prism-key.v256f8f9c4afa4e50.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> an enemy / Steal the effect <keyword1>purged</keyword1>",
+    "sourceHash": "851eac7a84370c273ea84b174b918241b37a07312a02cd7bebe2cd8e0696d47b",
+    "text": "<keyword0>驱散</keyword0>一名敌人 / 窃取被<keyword1>驱散</keyword1>的效果"
+  },
+  "content.card.vitrilo-sunflare-cast.name": {
+    "reviewed": true,
+    "source": "Sunflare Cast",
+    "sourceHash": "42c9ab596cc05e6240efe079ff982174c3388892ed43d042193c2a861264b71d",
+    "text": "日耀浇铸"
+  },
+  "content.card.vitrilo-sunflare-cast.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "5a91651d99424cd9fc13fd40fa139880c1c2a55e083fe30915d6923acae4ae1b",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.card.wendlet-borrowed-silhouette.name": {
     "reviewed": true,
@@ -4256,7 +4292,7 @@
   "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
     "reviewed": true,
     "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "7a74fc1450d7eb725529e53e856d1412d39934fa58b60e81763206d99f97d7c8",
+    "sourceHash": "92946b8d56a2c5c151e8a450e7a3c2b7b73ea5a21cb5e76e9fba2a7d20bb055c",
     "text": "抽取一张随机后备队友能力的复制牌 / 获得{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.card.wendlet-midnight-mantle.name": {
@@ -4268,7 +4304,7 @@
   "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
-    "sourceHash": "87db219d624ce8047b4ff6b35700eb8d3dd850d36dead62ab0adb21ebc97258a",
+    "sourceHash": "0dfcc886829fe0653a1851a509ef0dddd5799200802be8c7c26cade5a7440e38",
     "text": "在下回合前获得{{value0}}%<keyword0>闪避</keyword0>；获得{{value1}}点<keyword1>格挡</keyword1>"
   },
   "content.card.wendlet-umbra-snare.name": {
@@ -4280,7 +4316,7 @@
   "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "f7f7d5e4a05ec0ca5e989822da2b9f825543fb16688972afa7d938c4a43fad32",
+    "sourceHash": "1c934bae15837f7cf14646a45477747deab74558e81aaa0502cdb0e838e21fc0",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
   "content.card.wickwaltz-attack.name": {
@@ -4292,7 +4328,7 @@
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "295e617650d59976e8c738173cddd1684d52d9c6811362fa1ab30473a921302b",
+    "sourceHash": "d26ffb6de37db54c0c237e46740e1b057cf3424ee5538d5429eab6b9cca7bdcb",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
   },
   "content.card.wickwaltz-draw.name": {
@@ -4304,25 +4340,25 @@
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "def068c08f82341c4adea6b11de4d9272b05cfec9521f8012e8527db27a4b5cc",
+    "sourceHash": "d6666958315a29ce4ad3d534f6e05effb95239aad0efcb35be68d51141419177",
     "text": "抽{{value0}}张牌"
   },
   "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "0946fceabf0187a37637f83a8b5ec19df1a85526cc32426dc6c559ffdfa84dc3",
+    "sourceHash": "bb9b22e34496746e4d067ce97d1d20ecdf2b1df043d413490310bc5e9a9fad16",
     "text": "抽{{value0}}张牌"
   },
   "content.card.wickwaltz-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "0d6947dbdc246fcea0f0792bab092137dc06df914f824c26a6aed27776a4eb25",
+    "sourceHash": "66abe1163d6c7d5fadb87f1c2da4c409570127be361c15a421f7c7d459a2f168",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "7a20e94a545fe4aa1b66326e3b6fd5d000900b621cc0b0b7ca6ce09987e1b7e7",
+    "sourceHash": "da28ad2599aa8ba55218fe50d330124ab5178009e171286bc6a2c01272025b7b",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.wickwaltz-guard.name": {
@@ -4334,7 +4370,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "190aca48ff84e90decaa6bf0953aa6b6dc6d4a28efe3f4ff31807acef9151d2e",
+    "sourceHash": "3bf8cbd36ed5c7265d0da4269659aa59b8f1c9f023cd7d83f5496c65d6751813",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>无效化</keyword1>下一次<keyword2>冻结</keyword2>伤害"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -4346,13 +4382,13 @@
   "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup / Draw a Card",
-    "sourceHash": "68902760251445609de339f95cfbd3be33389d5914aa7f2e5604d0073bc814a5",
+    "sourceHash": "aeb7ef438d5af7194bf427e5ba41d812329a15485bef740f5bef96c072c7e42d",
     "text": "与选定的后备交换 / 抽取一张卡牌"
   },
   "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup",
-    "sourceHash": "8f9ef069ef53e3552bb29500f04f65194a82ab700def32587449fcdc9ab9c993",
+    "sourceHash": "e6d67e0f2d4c09509e4ebd4d96252382140a5a5516e83bacfcc084908b4f076b",
     "text": "与选定的后备交换"
   },
   "content.card.wisterelle-lantern-fare.name": {
@@ -4364,13 +4400,13 @@
   "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "dad954ea1c3e887d3b7e7f16f9aeb4319a72ab1dfa6271479c9c3e81ccab06e3",
+    "sourceHash": "2e71b6a554c7000e1da23eb8c15cfe5ada2dc80ee8eee9c34a3a0f27343339e3",
     "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "39284de5fa0628ef27ed1acfdf0462f121cc4ab2cec79f0cece502a6f8855647",
+    "sourceHash": "84864fe90e2a97f43e65cb67c86f8b29658025364cadcaf2c395fa928dbeb2be",
     "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.wisterelle-left-luggage.name": {
@@ -4382,13 +4418,13 @@
   "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "7dc3cf1dc551a7c79477ca5e43f936126a47629367ccb8bca9095284ed235546",
+    "sourceHash": "9027683076aed2a33c8dc469088304dcd1e927135007101a8d4ba8634f8a40e9",
     "text": "从弃牌堆抽取一张盟友的卡牌 / 获得{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile",
-    "sourceHash": "cc1a37ce86d6babfbb82276577352480a2653c46d7a60ae54289495c80c58ff0",
+    "sourceHash": "b3f3d31474b1866983e20420d6d2852d2c538ec128ed21ef456eb881947de9fa",
     "text": "从弃牌堆抽取一张盟友的卡牌"
   },
   "content.glossary.action-card.definition.rule": {
@@ -6976,6 +7012,60 @@
     "source": "Gallantry",
     "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
     "text": "侠义"
+  },
+  "content.species.vitrilo.name": {
+    "reviewed": true,
+    "source": "Vitrilo",
+    "sourceHash": "e78afa8b0e05025300691b4d437ae22808dbec473402c2b9ce57e7d1cabfe23d",
+    "text": "Vitrilo"
+  },
+  "content.species.vitrilo.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "7720d98e7dca0e3056fc2a9f333039056110f928d25ecc12bc2bed5022dff6f9",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "04a0b54196a4f5a8d414feb737c9352302fc670af80f59e1b696f3c2acf162f3",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "dd43c8545586f7aab7d8b4307d4c1619d4f7c97f7fdf75286e6b6138a61b932b",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "50bac1e9bbe438c0d4c20ee707d6c60e2838f9a1c676b33f68fb460d0598554e",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "d8c7f074fd19402b3349ee39ef8e48d61645f5daee18f6d8d3f1425033ce199d",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "b412529cb18c1b6e806acf70ecdaafcaebf9182152da1af6fb3ed0f39e1f479c",
+    "text": "<keyword0>光</keyword0>攻击造成伤害前，从目标窃取{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.vitrilo.title": {
+    "reviewed": true,
+    "source": "The traveling glassmaker",
+    "sourceHash": "d9f7b4ce4f0ccfd79d8c0912428f3ad0bd34855335ff030253326b2459e1e613",
+    "text": "旅行的玻璃匠"
+  },
+  "content.species.vitrilo.trait": {
+    "reviewed": true,
+    "source": "Glass Cutter",
+    "sourceHash": "ef56fe25e604a8519337fff03192c0bc76ecfcf8b3084f5722ee182dfe006f65",
+    "text": "玻璃切割"
   },
   "content.species.wendlet.name": {
     "reviewed": true,

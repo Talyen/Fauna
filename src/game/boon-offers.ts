@@ -11,6 +11,7 @@ import type { GameState } from "./types";
 const noKeywords: readonly KeywordId[] = [];
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
+  glassCutter: ["light", "block"],
   courtRemembers: ["water"],
   lostAndFound: ["health"],
   lastWarmth: ["health"],
@@ -46,6 +47,7 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
 // Progression groups some distinct effects under broader XP categories; offer matching uses
 // the actual keyword instead (for example, Thorns is not Nature damage).
 const abilityKeywordOverrides: Partial<Record<AbilityKind, readonly KeywordId[]>> = {
+  stealEffect: ["purge"],
   springbound: ["cleanse", "freeze", "dodge"],
   resurrect: ["resurrect"],
   nightmareHarvest: ["cleanse", "mana"],

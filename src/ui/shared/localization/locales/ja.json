@@ -2654,7 +2654,7 @@
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "ebd4ff9a599e4696d9ef0170c399eb50d3dd57bac350b4cf8d8c37b7c0b3e4d5",
+    "sourceHash": "c2430fa1d98820f6575e909844bcbec7cf2818f882b495ddaab10a49fcef01b1",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
   },
   "content.card.aerostat-true-bearing.name": {
@@ -2666,7 +2666,7 @@
   "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
-    "sourceHash": "d3a8b38582dae0ea5913d8b08b0f3303f39284d594d8f1ee4e671458b5fcb7a9",
+    "sourceHash": "2504d4a2c87bb9948042fb292f0a40fd8bb2b18c0ae9c4992abe485b4af91be3",
     "text": "引くカード：{{value0}}枚 / 味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0>"
   },
   "content.card.aerostat-voyagers-rest.name": {
@@ -2678,7 +2678,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "3eb127272970326540f01433bac515fc8ac5e37444f00984b979abf01a9af50c",
+    "sourceHash": "3a0c45936e7808f5be5ffeabd889a71b97e17eb6ff75803cccb392d7ffc3d19c",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2690,13 +2690,13 @@
   "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
     "reviewed": true,
     "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "736209b63e25721147610cfe5f5a0ffed786be20875a53048a81128a14b80483",
+    "sourceHash": "15ac87b7f00d4f65b5f9f99a78bcea07aff3a1e2f45110460b85ba0de340f5ff",
     "text": "ランダムな捨て札を1枚手札に戻す; 傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
-    "sourceHash": "a3cad6793ec3b27ce48ae17910e8cb48ab30e33606c6a24733f17c5096776689",
+    "sourceHash": "cb335f133ddea25a70d62c4f3e2b212197e32c3ac8926ae7d93e0c52e22eea5e",
     "text": "生存中の味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.almanelle-rooted-year.name": {
@@ -2708,7 +2708,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "67fcff8d00f0dcd7930d7445964418646df7e4b2712b576222cf723cd3db1d68",
+    "sourceHash": "3b3807cd5b7e043e5266a21ac7af69636de6b5eb2d3c2f0744ba46165956bbaf",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2720,7 +2720,7 @@
   "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
-    "sourceHash": "30f214e1ff6f1208ebb2d1c99237d9d7da608b2606a39f0b3e986ff9b82045dd",
+    "sourceHash": "b22459c6df61111d914223dc20ea0ef9b57a9a4fe7b9bc77d7b804cfcc13d5da",
     "text": "{{value0}}の<keyword0>水</keyword0>ダメージを与える; 行動するクリーチャーを<keyword1>浄化</keyword1>：除去する効果{{value1}}個"
   },
   "content.card.alpenglen-ember-of-evening.name": {
@@ -2732,7 +2732,7 @@
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "b618939a8984c5cd196785b78120d724dc148e4091f6fa027efa67827596971b",
+    "sourceHash": "641f28981083fedd8344cd6277877e4f73934f47517e41ece556397d94b16f82",
     "text": "次のカードを2回使用する"
   },
   "content.card.alpenglen-last-light-charge.name": {
@@ -2744,7 +2744,7 @@
   "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
-    "sourceHash": "9a94b337f4d4e24c9c1c2a8041b941ea0aebe93d30a3ca8ff511ab82fcb7a2a7",
+    "sourceHash": "47113c681d4ae5b7ae3f88dcc916539e9d544a2048de322e6711f4c5238510f2",
     "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える / 手札最後のカードなら<keyword1>クリティカル</keyword1>になる"
   },
   "content.card.alpenglen-sunset-reversal.name": {
@@ -2756,7 +2756,7 @@
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "5f92782a0ba38b5bf70189c8ccd8ca05ca4db825c4a6c84e909e78e8a83c57da",
+    "sourceHash": "d606b7bc8444b5c448fc9b8bb7179cfa8c3de525274b1ed82d28ac40fef020db",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
   },
   "content.card.arabesca-dancing-double.name": {
@@ -2768,7 +2768,7 @@
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "844558227abd0def00f975d5470eda1bde026e37f375fa51ba98981e6512f57b",
+    "sourceHash": "0200c3adec82a90c49b6c85167ee91c10ae8f8e7db4f551249fc2f9dc573452c",
     "text": "次のカードを2回使用する"
   },
   "content.card.arabesca-ribbon-snare.name": {
@@ -2780,7 +2780,7 @@
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "2a07db4c038a05844da8299ea5695e758376b72a28851ddaef90a0517a72f356",
+    "sourceHash": "a5e5173253c19375d16883654ac6b345ec477ea7784263c225744f2a899442e9",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.arabesca-springbound.name": {
@@ -2792,7 +2792,7 @@
   "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
-    "sourceHash": "616d3dc83016179cce535ebb548d86ac166636350698a5b95ad0a58913fc535c",
+    "sourceHash": "fea6b6dd6ed3901e7b5d08404f723e40b26b1a78f2f5797934cdbfd9af31c6b6",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0> / 次のターンまで{{value0}}%の<keyword2>回避</keyword2>を獲得"
   },
   "content.card.bloomquail-draw.name": {
@@ -2804,19 +2804,19 @@
   "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "84827d110aac95cc9a6081d172abdd355e1e8a8e30bd8506212ac62b01e2d0ac",
+    "sourceHash": "451f3248e7e6e4e0217f6605e4988c17d36ae35971095b63cbf8aa7dd1a191d2",
     "text": "引くカード：{{value0}}枚; <keyword0>体力</keyword0>を{{value1}}回復"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "0a024e43b43dc32942c93011f745a8fa8ca7be6956ac163219400977f2b873eb",
+    "sourceHash": "50c55b31ec862782bede2609254a41ad0f940b01699464167503312e6a6e0180",
     "text": "引くカード：{{value0}}枚; <keyword0>体力</keyword0>を{{value1}}回復"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "e0d9b5338f174367863ae31862ab56387fd36f268fae0874ff6b242dc0aace38",
+    "sourceHash": "f5a5596f855a76abffe8f83cb204afe451febb2ec4da53e226df1901b75e3af0",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.bloomquail-guard.name": {
@@ -2828,7 +2828,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "ce4eafd54a8d612bf4d59c4d7658d960754a9f675f2abb9c76a5371adf11be52",
+    "sourceHash": "74b942c173428c04d666e8b7629849e62d604b54fbcd66a7a9e54f090be87501",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.bloomquail-heal.name": {
@@ -2840,7 +2840,7 @@
   "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "c2f5624e02323f2852fd1a46ad2693bb4db9c871d9f893bcd1ccc41dfe086b60",
+    "sourceHash": "1a57a56eef4307f6b3ef6e84ebb9e3f88727c95231b7439cc3e464633e4bf447",
     "text": "すべての味方の<keyword0>体力</keyword0>を{{value0}}回復; すべての敵を<keyword1>盲目</keyword1>にする"
   },
   "content.card.brumalyn-frost-howl.name": {
@@ -2852,7 +2852,7 @@
   "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
-    "sourceHash": "e92ea32cd5bacc71376920694443a5b2734fed2dd1157247d074b602ed74beda",
+    "sourceHash": "9106a48d091b489bb7a4ca3dbd4295405b864127814991b3f17b31f2ef2cd3a0",
     "text": "すべての敵に<keyword0>凍結</keyword0>または<keyword1>スタン</keyword1>のダメージをランダムに{{value0}}与える"
   },
   "content.card.brumalyn-rime-pounce.name": {
@@ -2864,7 +2864,7 @@
   "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
-    "sourceHash": "0d3981c463bc79997fc22b6d993441b906e82bf7f0a1e1f1fc5cffc267b25c4e",
+    "sourceHash": "d2bd5396391bdc3a31a87daabc7fe3db2f450d36f5ad099c47f2175ae87d3da8",
     "text": "<keyword0>凍結</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.brumalyn-warmth-ward.name": {
@@ -2876,7 +2876,7 @@
   "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
-    "sourceHash": "8a784c38de8c90748da141f1fd6aeda620ea83000e88ba80cf2c9d0fb528beda",
+    "sourceHash": "c10ed0bb0fa0e5c05b119d69018ab196fef7fa95b04099e0f85ca0f517aba9cd",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復; 味方全員の<keyword2>凍結</keyword2>の蓄積を<keyword1>浄化</keyword1>"
   },
   "content.card.cadenza-echoes-remember.name": {
@@ -2888,7 +2888,7 @@
   "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
     "reviewed": true,
     "source": "Return a random discarded card from a living ally to your hand",
-    "sourceHash": "b9b11d25bd3aac69145fe32ba31ec4c3256f345e5a53cfe02a2bcdbf249978b0",
+    "sourceHash": "350445a026f1e14f27d690645d0159107c56cfb7fc398e652f7f9e37d46844fb",
     "text": "生存中の味方の捨て札からランダムに1枚手札へ戻す"
   },
   "content.card.cadenza-resonant-well.name": {
@@ -2900,25 +2900,25 @@
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "b943d280681937a022d9cc782d1e9ffebb5de8868366180916ef858c0acc972c",
+    "sourceHash": "5714d9d336a4029f19c45026a92ebfeefb3e18488c29da9382fdf03ce51de837",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "ff69792970bb01a393d3fa99a440f10afa62b4daeaa723ee37d9c53b98e2e0d2",
+    "sourceHash": "77843c5906c10a053e1d339a74735898e31dbdf9415a4da82d333ec76204d09e",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "fc16ee6194b5f74c433358a53a1133b0217fc40107ea548492806d91f76e753c",
+    "sourceHash": "06e9221dd5bb24126959701ed309d324274cc080bfcf8e98997042bc34de9a95",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "3b1133ddca0021bbd3533be5872701bd9363939bd80bb28864030b1157f85a44",
+    "sourceHash": "5fc5c7d1147bf0ba5e055606ba52c461e8169a3bb8bb54d6c0d18e747fbc48fc",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.cadenza-rousing-refrain.name": {
@@ -2930,13 +2930,13 @@
   "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "e03d58233d2b21466e7223c0f86021b178b0da34b3771e8366e171f857ac5607",
+    "sourceHash": "7cbf298e12cef8f8f80ab66826993d84c5e3a52ac8dd16b7398b382dfb6857ec",
     "text": "次の自分のターンまで、すべての味方に{{value0}}%の<keyword0>回避</keyword0>を付与"
   },
   "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "a7ec60778a01b1ca5e1f64817b4f191d85f89c96e414d7a84870cb272be0108d",
+    "sourceHash": "30b02d259652587aad2cf09ec98efc66e7afef428f7aafacd4a80b4c1bc06179",
     "text": "次の自分のターンまで、すべての味方に{{value0}}%の<keyword0>回避</keyword0>を付与; カードを{{value1}}枚引く"
   },
   "content.card.captoad-attack.name": {
@@ -2948,7 +2948,7 @@
   "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
-    "sourceHash": "04c5c49e3641e34a6116021f1558324dfd5ae2ab4d4d55efe4b842ad0453ed54",
+    "sourceHash": "72cf91530b440a1d7d5e4cabaeecb177aae9dc6ef4c2b8fb5ca3de8ce94792fe",
     "text": "すべての敵に{{value0}}の<keyword0>毒</keyword0>ダメージを与える"
   },
   "content.card.captoad-guard.name": {
@@ -2960,7 +2960,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "33bd302068f58bbf8d752ffce371844d7faaca3c929ae957f4343bdb2ad31e50",
+    "sourceHash": "a68e8b1644924a35142849351d18dc994cbee03bb1b22e9d5641255ec6884314",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>体力</keyword1>を{{value1}}回復"
   },
   "content.card.captoad-swap.name": {
@@ -2972,13 +2972,13 @@
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "02c6943ed68774aaf760059b182b10690a04a80db77349ab72d5a60ec172d055",
+    "sourceHash": "baf5b67512a28c4154f1ea4d72a56eb4d2fff8d5dd52dd8133bd9b5e3cf291f1",
     "text": "控えの味方1体とランダムに交代"
   },
   "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} cards",
-    "sourceHash": "ed7e02b073dea1cf5d1430eb1b916f14784a77c452f470f6c98f12d7ebf07b17",
+    "sourceHash": "f31634cfca6334f35fe0d64b6ca02c5f2aa04803fd86019aefc4ddb046a20ca7",
     "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
   },
   "content.card.cavalleaf-meadow-return.name": {
@@ -2990,7 +2990,7 @@
   "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "5d26bfa5309f5e5eb535b531540a6294c8eb0fbf7575ab59622b72a2a68e8968",
+    "sourceHash": "8bcc45adc73f021ec4da2e8598ef222f432371e7c3bf8b434a02cda6653a7de5",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.cavalleaf-prairie-leap.name": {
@@ -3002,7 +3002,7 @@
   "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
-    "sourceHash": "1da510af8902cab428aea3d4c2e7e3d3b99865a50dcce98fc8a353f6930e1090",
+    "sourceHash": "ff49217b3b2fa4ccf2cd0631bacab6c19f8e21dfab27123106e77b23cde472f5",
     "text": "ランダムな控えと交代 / 登場した味方は<keyword0>棘</keyword0>を{{value0}}得る"
   },
   "content.card.cavalleaf-raincall.name": {
@@ -3014,7 +3014,7 @@
   "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
     "reviewed": true,
     "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
-    "sourceHash": "2e80fe2433a4caa915a05c49230e3c7ead87ebebefd288e71bf1a029548d4499",
+    "sourceHash": "d991e09c0d4b09adf5efed0f3b3aea54ca03c519951004e64de7e34156e94ab2",
     "text": "<keyword0>水</keyword0>カードを1枚引く / 味方の<keyword2>炎上</keyword2>を<keyword1>浄化</keyword1>"
   },
   "content.card.chimecricket-attack.name": {
@@ -3026,13 +3026,13 @@
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
-    "sourceHash": "e00db4fa21f27ce1687e61c459bd72f5607a2399f7bb42c1f5eef091645bc52b",
+    "sourceHash": "09124cb26ce14cb8b7329da5e14002d2d253d3f10e2b68753aa00bd0c0c26efc",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える; カードを{{value1}}枚引く"
   },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "3c6b60a10d042abcc1bbe33a002013914607f1007fe5b8f99302ba45934a0670",
+    "sourceHash": "fa9ade6caf5b19e55ce289179d11f7c7f8d364d941ab0ef1f8047de68eb2f28e",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.chimecricket-heal.name": {
@@ -3044,7 +3044,7 @@
   "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "ef4ea7c5a3e7b3e5ed447a63e07cd77fec0989a9625b1209a6e594bfce58a799",
+    "sourceHash": "8fc8265d47162ee74940e481aa5f1342a35fba6debd63a2bf7d350e16e618677",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復; <keyword2>回復</keyword2>した味方を<keyword1>浄化</keyword1>"
   },
   "content.card.chimecricket-nullify.name": {
@@ -3056,7 +3056,7 @@
   "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
-    "sourceHash": "3b3d18ca66971d80e4b663d308a9d82ac14b992a0d33c97eb0c1d86c590679a5",
+    "sourceHash": "2ac4cb6228303581b8e534e0e5896a493467d1767f0f119da593bfe034d3a04e",
     "text": "各味方が次に受ける有害な状態効果を<keyword0>無効化</keyword0>"
   },
   "content.card.chronora-borrowed-moment.name": {
@@ -3068,7 +3068,7 @@
   "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
     "reviewed": true,
     "source": "Give all allies <keyword0>Negate</keyword0>",
-    "sourceHash": "19f61fd0aeb44cb4b4ce22dda471897a62b365f1dcb046dd4e04f1a378c08f15",
+    "sourceHash": "c030ecd699ec14f8e158c9f4f0bb03034734d9674a24632542e5ebe1d5c8c146",
     "text": "味方全員に<keyword0>防止</keyword0>を付与"
   },
   "content.card.chronora-bridge-rewind.name": {
@@ -3080,7 +3080,7 @@
   "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
-    "sourceHash": "e169276d97dc022cb4f5f064042b62929521cb59d6d0697a9b191985168ef156",
+    "sourceHash": "832d1942febf9f18f6906dd7c7bd2d94c553470c91fa8800672bde3893e93b9d",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復し、壊れた振り子を1つ復元"
   },
   "content.card.chronora-pendulum-break.name": {
@@ -3092,7 +3092,7 @@
   "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "50e275e182fd094b60a44962a693fd7bdb6f5d135e850634d64c72c9e7d3f19e",
+    "sourceHash": "4438ebda39dbf7bf7a950d7bbaa134612386ea9e354431ebdf50a4be492eff6b",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.cindernewt-ashen-veil.name": {
@@ -3104,7 +3104,7 @@
   "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "f6465e1ab70144c4ca5c79eac4994735f7e498e821af87e081ea854899d57a07",
+    "sourceHash": "f7be9e08134182ebf6319a7b0e62a1743203a6fe1003db2f5fca1a868762f80d",
     "text": "すべての敵に{{value0}}の<keyword0>炎上</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
   },
   "content.card.cindernewt-attack.name": {
@@ -3116,7 +3116,7 @@
   "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
-    "sourceHash": "0d10c74d5d96e542b270b94c2e13c0d62ae32228dd2ddefe1a376595e9f32fed",
+    "sourceHash": "4668cc6f08b15b8e8111dba0a40316c580951fe91cb4da01a6d2c8306ceb5ad3",
     "text": "{{value0}}の<keyword0>物理</keyword0>または<keyword1>炎上</keyword1>ダメージをランダムに与える"
   },
   "content.card.cindernewt-ember-breath.name": {
@@ -3128,7 +3128,7 @@
   "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
-    "sourceHash": "cc61c9cd1887f19bccbad71dc2d4b63e9040634f73064c10479cf18fe7429e2c",
+    "sourceHash": "1257630447c243a62508d3edb189dee892b9b8ee7da5ed1e31973d9a1fa38809",
     "text": "すべての敵に{{value0}}の<keyword0>炎上</keyword0>ダメージを与える; すべての敵の<keyword1>装甲</keyword1>を{{value1}}%除去（切り上げ）"
   },
   "content.card.coralcurl-attack.name": {
@@ -3140,7 +3140,7 @@
   "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
-    "sourceHash": "98d00d7b2a16da1b528543c123f10eea6c7b21125184f8887ece7792ea83fd93",
+    "sourceHash": "160b125526768d0c5d6ed00df65077fb5933713775c64d553c96d0bb3f4fda63",
     "text": "{{value0}}の<keyword0>水</keyword0>ダメージを与える"
   },
   "content.card.coralcurl-guard.name": {
@@ -3152,7 +3152,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "44434954e83c38543fca768e77408333a5bbfc77c5c6692b2bb86e37512a87e6",
+    "sourceHash": "2e8b359bfc92cf9a0b91c257b46d99c46d00a48765e8a89f2953b09c35acb080",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.coralcurl-swap.name": {
@@ -3164,7 +3164,7 @@
   "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "abb82e52dc8becb2c071159250b94d4cbd6ae16d008f304cdd5db9fc8b1eb563",
+    "sourceHash": "8fb2e17949662b7a22c4b53c06aecc522d0c9f1d11c582cb89d6a6367e1ce40b",
     "text": "ランダムな控えと交代; すべての敵を<keyword0>盲目</keyword0>にする"
   },
   "content.card.dawncall-attack.name": {
@@ -3176,7 +3176,7 @@
   "content.card.dawncall-attack.v207aea3bff659874.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
-    "sourceHash": "d5be058730dd18ecbf3ab93a966bdbf70dc91994a67394b578323cb974162dbb",
+    "sourceHash": "60d3c8721b79cff8afd0b40827ff1260a24772c1f7ee076c94a571317a3c5703",
     "text": "すべての敵に{{value0}}の<keyword0>光</keyword0>ダメージを与える"
   },
   "content.card.dawncall-heal.name": {
@@ -3188,7 +3188,7 @@
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "15a20a0b1159fea614c7cd28aec44e91ec9402a5766661b54909d38e1fa9427c",
+    "sourceHash": "b855eb53373c3a7b0ab84f18fee636d71e659e61894d4992d37d8472f99bc6c7",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.dawncall-teamCleanse.name": {
@@ -3200,25 +3200,25 @@
   "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
-    "sourceHash": "5425db2ec587b25c9a4fbe99d01d064338ce45dab8c6b58a2e6e0f4c0b66b940",
+    "sourceHash": "ab309f47bd11948525f026b031feda3177285db3d33341ee3168efbaf1bac663",
     "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
-    "sourceHash": "2d3b9986bcc5bf87ed05c85473028bb8f9e87c4e3e1b0ae790b892393b93273d",
+    "sourceHash": "0080bd79ed84371985f8610241a7befd345c61b07145f3247b42d95817768475",
     "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
-    "sourceHash": "095c8df5d0e00c10fc9f50152794780cd5ad9725868f98f6ce6e7bd451e5c0a8",
+    "sourceHash": "3b01ffdcc33279e0a0cbcce3a935a5d898a4e4cf38391b6f072df53329fb6fe3",
     "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
-    "sourceHash": "91eba7275947c895c8c3d83b31f4a2503682a3f1f846dd060c5fcfa6a8fd251c",
+    "sourceHash": "8ede1856f78fe4da8ace5d689ba0f60e0f8a23b5d74dd171c8b67a279a07b65f",
     "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
   },
   "content.card.dulcera-chapel-light.name": {
@@ -3230,13 +3230,13 @@
   "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "ce4082a1ccd460157a33a071b32e66a22c96c068bca30dd57038d94f79092c09",
+    "sourceHash": "8bff0733eb95eb5324a8aecac7e49997a3aae9db9c2d792989340e891b0feb8b",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復 / <keyword1>マナ</keyword1>を{{value1}}獲得"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "16ee977a12ddd6b080fba799480d1ca049364b1745e621814af15516c47e1ab2",
+    "sourceHash": "04ce0c9bb009990ed0ae20097ba003fbe4f48239d95aa7406081c825bf53238b",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.dulcera-hushed-waters.name": {
@@ -3248,7 +3248,7 @@
   "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
-    "sourceHash": "79e7d20972484edc129d035f9a346352e337069fcc2763dcb27435bb4685cb5d",
+    "sourceHash": "074e535dbcbfe8f323f2443e81bc4c1012fb1830385d5d228f1e7d261815304d",
     "text": "ランダムな控えと交代 / すべての味方を<keyword0>浄化</keyword0>"
   },
   "content.card.dulcera-meadow-shelter.name": {
@@ -3260,7 +3260,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "b5e265a0ff3d9e0d84e7b4b749f3f4ddb1e6cf20b9fb98207fbefa53ff74f275",
+    "sourceHash": "202970d8294b82c33f10f56119956011b5da3a68a3b86a8ae486da78fb9fb747",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.dunefox-attack.name": {
@@ -3272,7 +3272,7 @@
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "75fa7ab9511f9f87011dc075ecb3491f743a5ff22d19f95f663e71a93e12e614",
+    "sourceHash": "64179e65618aa00992cb948c74d5597592cd842148f7e06350209f22721904a6",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.dunefox-dodge.name": {
@@ -3284,13 +3284,13 @@
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "2816b64343ac3d1eb88a56d726a284d9b2e52c47901c3dd839a567ff6a290bbf",
+    "sourceHash": "d7edc0967470291f0f5b264edf012fc293956028aaa4cd0a2a69195f4186e8d6",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得"
   },
   "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "e8e9a2318de6b8fd04cf63f47130357daf970d3600f174e445965a4297603938",
+    "sourceHash": "251286893f1660df5fca70da01050fb4b8afe3e71a9d8e2ed25e4299cb945c6a",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
   "content.card.dunefox-dune-whirl.name": {
@@ -3302,7 +3302,7 @@
   "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "0b55a396a309fab50624f2e9e72a8274295803649c1b5a7d4360f34561c39206",
+    "sourceHash": "ce80bde6a85bb83c7f05e25ed8632591c9305420ce97b7f9144625fffc87181c",
     "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
   },
   "content.card.emberback-attack.name": {
@@ -3314,7 +3314,7 @@
   "content.card.emberback-attack.v49693240c378631b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
-    "sourceHash": "6f456c5f792b0ee49b2a6af5d554d2250e5742f7ea8b9fc38143b56d68ad157c",
+    "sourceHash": "cc2d7e38a6ec9b78c2c688e8672a65bd9bd2c1e1403f605d73d90ef49a878042",
     "text": "{{value0}}の<keyword0>物理</keyword0>ダメージを与える; <keyword1>装甲</keyword1>を{{value1}}獲得"
   },
   "content.card.emberback-furnace-breath.name": {
@@ -3326,7 +3326,7 @@
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "a23444af99ff2b291ad382a840d41f32f54321755ab1f224d65d1b0cbf2dd939",
+    "sourceHash": "adc58e49d8ffe0358d6f638885dc4b32090e03d21e3d703df2f7f3671b8be1cf",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.emberback-magma-stomp.name": {
@@ -3338,7 +3338,7 @@
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "4f2c5bad2fd5ccc108f66f87805e5ccefcf0800e00c14ef3f5c93176a6ade15d",
+    "sourceHash": "99953157ae20422411e2613d584654d8d424204e849ed6d1266dd333e34ea834",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.euphera-possible-path.name": {
@@ -3350,7 +3350,7 @@
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "51493e2a29f0ac15c5b23f092319669e1267e12786b67e836a037b73065027f7",
+    "sourceHash": "c34039fb398d39a33d5e0275452946b3ca192ab9ffebd6097afe6900031b6cad",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
   },
   "content.card.euphera-twilight-lance.name": {
@@ -3362,7 +3362,7 @@
   "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
-    "sourceHash": "4646ceff7b4f346996963ee3b738faefef3620d9a84417d53b3f9bcebc5c7fa6",
+    "sourceHash": "99f0eb2bdbcae5ec54ce427280b303320c4f1f2de3fdfde499869f8516787da1",
     "text": "敵の<keyword1>棘</keyword1>を<keyword0>強化解除</keyword0>; {{value0}}の<keyword2>光</keyword2>ダメージを与える"
   },
   "content.card.euphera-wish-exchange.name": {
@@ -3374,7 +3374,7 @@
   "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
     "reviewed": true,
     "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
-    "sourceHash": "ce1a8abf9566927d2ac05325ef27c4e8296203e7c64e519406039dc740eff731",
+    "sourceHash": "b3bfded4fe499dc4f35320110e940ec0d863e41355346e74af15bbc28a23460e",
     "text": "味方の<keyword0>ブロック</keyword0>を均等に再配分; 味方が<keyword1>ブロック</keyword1>を{{value0}}獲得"
   },
   "content.card.food-apple.all.rule": {
@@ -3440,7 +3440,7 @@
   "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
-    "sourceHash": "b0c1d8e5ead84f1b644add05df80a9c71e45dd2e0afafbdd173b1d7b46c3e6a8",
+    "sourceHash": "c9812fbf539c2683b34e9b14b37304957ad898d9da14b79b9d962dcdb7441420",
     "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える"
   },
   "content.card.glintstride-dodge.name": {
@@ -3452,13 +3452,13 @@
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "160676fd07dfae31c6bab9518cc3b3b221733832ecdca93e471dd56af00c2c81",
+    "sourceHash": "d4817aab2540893e66dc5c4115a82b5595121a6dff970e5f669e128ae5b2394f",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得"
   },
   "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "1b769795de3c3d941c30658a0b77ad644e8a0647525956dea197ea8418dff6f7",
+    "sourceHash": "41862782ccebbc229822f718923ca00db831a5bd9c84bee4fa045e3a30f55564",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
   "content.card.glintstride-teamBlind.name": {
@@ -3470,7 +3470,7 @@
   "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "1098ee122c27f71b74f4670c9baf994478ac6fb1d8a44e7419e9401a6f8fa440",
+    "sourceHash": "f5604fa0af4e6da73165a93ee3ddcf003f8fbf8bf9fbbdffbd3388fae078e0b8",
     "text": "すべての敵を<keyword0>盲目</keyword0>にする"
   },
   "content.card.memento-drowned-revelation.name": {
@@ -3482,13 +3482,13 @@
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "9ff6058fe98a100c83952eddd5d32ecee4d985c610ce6de209680fd1fb6e343a",
+    "sourceHash": "f63d3e489dcee0ad33d022a14f0a1e7573a1ed7408874e006db4a1791961678a",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "8e057e76bcc7044f69882ab9a01fc894461e1f42c876374de9e2c4ae8817c018",
+    "sourceHash": "e88170f908d428a6af6d3ec235ba01c13b0b4709b09c621b9f40322b701188d3",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.memento-lost-procession.name": {
@@ -3500,7 +3500,7 @@
   "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
     "reviewed": true,
     "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
-    "sourceHash": "b8dc1165976fc1b876a983a3123275c1abd3e029c754d0d0015d9374e982925b",
+    "sourceHash": "de23fb421bdd614efaecb1fd41f6d1d9cf952e45066afebc1b31242549f64039",
     "text": "エコーを召喚 / 自分のミニオンの<keyword0>体力</keyword0>を全回復"
   },
   "content.card.memento-pearl.name": {
@@ -3512,7 +3512,7 @@
   "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
     "reviewed": true,
     "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
-    "sourceHash": "0daa2ec65c52af20999af499e65312b416ba6d5e0d282a81211fd942f0b91e3a",
+    "sourceHash": "f8ebea8f1662561232a448e6b63a1f8f7eb22d68629f47f66c5cb0b909020814",
     "text": "<keyword0>消費</keyword0>; <keyword1>ブロック</keyword1>{{value0}}または<keyword2>マナ</keyword2>{{value1}}をランダムに獲得"
   },
   "content.card.memento-treasury-echo.name": {
@@ -3524,7 +3524,7 @@
   "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
     "reviewed": true,
     "source": "Create {{value0}} Pearls",
-    "sourceHash": "fcdf16eac4ea16ccff1e7956c7492aa9ee7d69502f8961969a3ae5f1936939c2",
+    "sourceHash": "1ef04620fd3d31fcd797cf590057186aabdd8dd2d3aeb6ac5393c2618cd4afc2",
     "text": "真珠を{{value0}}個作成"
   },
   "content.card.mossguard-attack.name": {
@@ -3536,7 +3536,7 @@
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "6810d0668dd0796e9b1ebb47a4757252d34d8aa0dbf256c75758f50aeee6de39",
+    "sourceHash": "d33dcbdd1ac79597be9c8a0733772e132c3240ad9dc9d9253c85406b5fcd7cf1",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.mossguard-guard.name": {
@@ -3548,7 +3548,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "5db3c5032ee1c6326b81a30c2360cb5aaf8ad973b0c1c7b252c9e721033e6618",
+    "sourceHash": "9498c52164b191bc6474ee89162530aad2dad78919e254cc6fd016256db1ec37",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.mossguard-heal.name": {
@@ -3560,7 +3560,7 @@
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "fc367bfe35d99a745e1ca8b949cd35c8fc26bee6d73f9665fdf49c17d23acb2e",
+    "sourceHash": "9c91a2cc5362fcde039d65489dd0b4c0111e98e5298a70606125e1a7948b5867",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.neradora-bloom-shelter.name": {
@@ -3572,7 +3572,7 @@
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "4af49c0c9a13d1da0336f4c9fb5cbd090d25cacd4e773757081d56e9fa1b59af",
+    "sourceHash": "d74e3f8f8daa1d1a844ff147c1ff6ed4fc670eeaccb25b727e290644a3f71ecc",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.neradora-tide-cup.name": {
@@ -3584,25 +3584,25 @@
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "d10836f9ab07e5279d6f050a0d655c8d4252237d5a8c1788a29540835c128bab",
+    "sourceHash": "7acedc1b6ecb6ce88457be8b6bf21e1e6f4a93b04fd943c99bca6d81ddcce4b1",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "be8b42ebe9934ec5b51fe61c4ba5aa0dbcf90d98fd2303fa8675f31b10a9e8ef",
+    "sourceHash": "a9f06a499efddd280baa4d036d63a7fbe780d6c39dd5321672916c6613016b15",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.neradora-tide-cup.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "0e5302e1dc83562343c9dc0f68b57d2b27860d4c0f32e4ee5c37becd7a0b89a2",
+    "sourceHash": "a2e296a77ed0cb960c9ad38aeab76387eb3c2b1c25cd5f0c8132aece86396636",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "f6e9629ea414258e16f5ddf5d5dc8815a5706038182ae99ae028122d0ff30bd6",
+    "sourceHash": "e096ac38e86a00ee99a836be1be70c48b739e02ae146848bf37b36bcf45f512b",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.neradora-undertow-knot.name": {
@@ -3614,7 +3614,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "36c5fefeafa0a5173a6bb3dd5223dc2c34b830d0d7d2212677191cf7ebf50860",
+    "sourceHash": "3c183e862d427e63882dedf16c0fbd3c60f8507a84ad05e0891bd14f69662c5f",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 有害な効果を1つ<keyword1>浄化</keyword1>"
   },
   "content.card.oathara-never-lost.name": {
@@ -3626,7 +3626,7 @@
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "638d18355c24f2b68bd8c0d60792d533f0dcbfa5d56e53c54fbaf14e2428f8ac",
+    "sourceHash": "f9b96900ad6f3678ab710a9183a01ebb568c76c15398fad579f7f5a41bfa0ad1",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
   },
   "content.card.oathara-travelers-ward.name": {
@@ -3638,7 +3638,7 @@
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "fca2c769bed9d8eeffad01c758e199271d84a0edf9da4b1d9baa9f232bd6ac5c",
+    "sourceHash": "dee23f00237ebd5d7316973158d0338000123c8d418f7db08c555cb93f07a35a",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
   },
   "content.card.oathara-vow-of-return.name": {
@@ -3650,7 +3650,7 @@
   "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
     "reviewed": true,
     "source": "<keyword0>Resurrect</keyword0> an ally",
-    "sourceHash": "d645fe7c9a6a0cfe5e957c591d27a6815df6773474047e9fdad908d3ea3ba8c5",
+    "sourceHash": "5d4bafe300ac89ecf2fe27f294721bd5afa2c3463bc061d819fa7d54dc89da9a",
     "text": "味方を1体<keyword0>復活</keyword0>させる"
   },
   "content.card.orifable-attack.name": {
@@ -3662,7 +3662,7 @@
   "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "9b15bb563afeaa52220d9f5dce238a9b4ef644d3848189b47d14db849c0ce169",
+    "sourceHash": "438de905fca4f78789f916293da9a1f908caefcbe7abf5e2bbb6ffb591b3af17",
     "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.card.orifable-createFood.name": {
@@ -3674,7 +3674,7 @@
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "68eeb5f3a9b963447e1a3f39a761918803b0d50eae02f3b1a547b68897dc2392",
+    "sourceHash": "e136c17158fe84cab3840059409a64f675dd51cdff30d1dafdecee33f6899fe6",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
   },
   "content.card.orifable-heal.name": {
@@ -3686,7 +3686,7 @@
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "131279f54c980fc3f3a85e6376db19dfbf904823f537ae24d2bf4f7e2fcc2354",
+    "sourceHash": "1825bb8f1ee28dec7e4ae981daf1608ea625d989dfcf1606848f1f0f3b0bd861",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.parhelion-polar-reprieve.name": {
@@ -3698,13 +3698,13 @@
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "2e68dead3580b53382d5c02e66d24826f068f5ad7b277385c0e0e60250a3f30e",
+    "sourceHash": "1f2e2fb8180544fe45f425c03000b4639c8dc3237d283daf54b3b775b1f33bc2",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>; カードを{{value0}}枚引く"
   },
   "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "92959ec1f621ac1336c5ea9ebb92382d69393925f7e4779b58b09224d5aa3645",
+    "sourceHash": "d9dd6fb632016ca7c750179bee08b2280ced9aaf63795bb672667eb9bfbd41aa",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>"
   },
   "content.card.parhelion-sundog-reservoir.name": {
@@ -3716,7 +3716,7 @@
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "363fcf4ddb1f4febb8888e3d2fb0345bccf7c14cc964394c5ffdfd5c7b90045f",
+    "sourceHash": "307f65e459e51ce3c00dc03809fcb0a15ed7b5a37e640d1e87fe7dfb3333d8dc",
     "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
   },
   "content.card.parhelion-whiteout-waltz.name": {
@@ -3728,7 +3728,7 @@
   "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "fbc0dffc40bb3d39efb0abe52bf54e0c492ee00ed149c5a8c312e06dbf21ea51",
+    "sourceHash": "a68fee316b0afe62d5ee7e97b46c2cdfff4aa27cdfcd0005a26605326c5b4125",
     "text": "{{value0}}の<keyword0>凍結</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
   },
   "content.card.pollenmoth-attack.name": {
@@ -3740,7 +3740,7 @@
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
-    "sourceHash": "a8a842ecd7f2a68262052d9dc17b0f02fc497796f7dbe1c8b61ef850542f7170",
+    "sourceHash": "eecd1bb08ba9b6d904940c80e68f66ca34c56ac695e280dad945e02c69738a77",
     "text": "ランダムな敵に<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.pollenmoth-heal.name": {
@@ -3752,7 +3752,7 @@
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "a7b31812cbcc0ff67783556ca673b2c4ff80dea901982cc55f4fcd8338f7708a",
+    "sourceHash": "dc2f178e3011c397317b91fd4e78bac1fdf4bd417cd15d3708c33d4b8915f8f7",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.pollenmoth-teamGuard.name": {
@@ -3764,7 +3764,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "33f19aac777d4ea479085ef4ceb84bb47b8921d2c2ce802e387fefdefcc34bbf",
+    "sourceHash": "8aea1c1a9fcf6d6a47513fc197d0cc61e4c15d1699907eedb4d051deded0d6e4",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.prismram-attack.name": {
@@ -3776,7 +3776,7 @@
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "cf404c56cb73cefc57be6dd1939ffff4f7d9ac2037abe192f845e4186ef492de",
+    "sourceHash": "f6dd400322c5a9ee3059bf33f5e911475e63fa1a573ebf5d808a249fcb4999ed",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.prismram-guard.name": {
@@ -3788,7 +3788,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "cfea44d9ffe4899e1dfcab32990476171c807ac76ba2312493fe9265d1272616",
+    "sourceHash": "87cfd2a49c26db77e321fd17f5234487df08b460dbc8c4eead7de5105ff74341",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3800,7 +3800,7 @@
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
-    "sourceHash": "2472d4eb304b56a2792d29d0b21cb35c2f975814ee90039e8ec9179a916ac05e",
+    "sourceHash": "2f1ed848592b26e1da38e6d9347cc9501be08575f08afad320d2c1257603dfc6",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
   },
   "content.card.pyrella-ember-harvest.name": {
@@ -3812,13 +3812,13 @@
   "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "91aa6ebac8c683075b70e015a900166cce1574a6137a02c8f547fdea68c20b54",
+    "sourceHash": "ab4bd91cb51ff21f3da2dff4a5f41b2e6bccd9ff5c5aa682d588b16de670b019",
     "text": "<keyword0>マナ</keyword0>を{{value0}}回復"
   },
   "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
-    "sourceHash": "5c872cbb6deee64cdb920fbc8f083d0a55423e9c4d5da6f2fba7931423fb7ba2",
+    "sourceHash": "be66d3c41938ebcfa6d80ff05f8fd20b7b12d792f08eb3e45688d569a652675c",
     "text": "<keyword0>マナ</keyword0>を{{value0}}回復 / <keyword1>炎上</keyword1>カードを1枚引く"
   },
   "content.card.pyrella-festival-burst.name": {
@@ -3830,7 +3830,7 @@
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "e4b54adfd1f418a0ecf588ed92986720b33c87f6c58152bdf5f18e1a098ac71e",
+    "sourceHash": "64b72df16512f0f19fbf4a84d63afa51adcf6c723833731d6ac9d7c372591f22",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.pyrella-spark-decoy.name": {
@@ -3842,7 +3842,7 @@
   "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
     "reviewed": true,
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
-    "sourceHash": "a2041ced86a8b7015c922e81d22d7a974a5f63d82697026dfdfdd551458b3cdf",
+    "sourceHash": "318df0ca9634536d31b351b9c4bf1732d8bbe00429579f7975661ad9d0f329ec",
     "text": "すべての敵に<keyword0>炎上</keyword0>を{{value0}}付与 / <keyword1>防止</keyword1>を獲得"
   },
   "content.card.reedstag-attack.name": {
@@ -3854,7 +3854,7 @@
   "content.card.reedstag-attack.vaf3db517079be41f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
-    "sourceHash": "841229c0fc9751bcb2fa4e8d128cd0f82c55f78415f24fe88f87b4d36afcc33d",
+    "sourceHash": "8dc47156dfa5df6f42a2a0c5e632e451270c1b974156ddb94ec2e1d6e66d9db5",
     "text": "{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
   },
   "content.card.reedstag-guard.name": {
@@ -3866,7 +3866,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "e83e373bfddd7948427b2ae90977d733ff07fcac5fc3a293cbc82cd8ec5b3ea2",
+    "sourceHash": "5a5b43d2b6be8a5f8c72f9e4c18fc1b2b1714ee620afb37820909b25a23c93f5",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
   },
   "content.card.reedstag-heal.name": {
@@ -3878,7 +3878,7 @@
   "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "3cc3da14bc5194429664e41ca2c7329bfb46eabace3540836bfb18de607c127d",
+    "sourceHash": "847f7928ffa4473ff3b2aa0597746540dbabada73cc7f1ee443513ba550b407c",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復; <keyword2>回復</keyword2>した味方を<keyword1>浄化</keyword1>"
   },
   "content.card.reverie-dream-double.name": {
@@ -3890,7 +3890,7 @@
   "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
-    "sourceHash": "c4c1c2b82b84fc94a15fd75f5560fec12c22b486d0854e8425d6cc3b7b7b9c2c",
+    "sourceHash": "b038015f65e48563a5aac1b4604fa8f98a82be060dd8c4606878ec98f3b9ba20",
     "text": "<keyword0>棘</keyword0>を{{value0}}獲得 / 次に受ける攻撃を<keyword1>防止</keyword1>"
   },
   "content.card.reverie-nightmare-harvest.name": {
@@ -3902,7 +3902,7 @@
   "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
-    "sourceHash": "18ebd5da351e0844ae88c4138a9df8847f3caf305d3bcddea655a19356f03d5a",
+    "sourceHash": "188dbb1e091d33ab7e62ec04c0cb7c7037c51a4dd86ea0c38c9617ced97a8d4f",
     "text": "すべての味方を<keyword0>浄化</keyword0> / 除去した効果1つにつき<keyword1>マナ</keyword1>を{{value0}}獲得"
   },
   "content.card.reverie-waking-wonder.name": {
@@ -3914,13 +3914,13 @@
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "bd02abb75350381ae5905a0d87b073c126ac762491e4b4790f95f0e889508319",
+    "sourceHash": "74b31715e49eeb0699cd790335d816056faa81520f67e25573318f6f716a9d30",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "bc1e5ebb1561b92948348b55d117ff37d696288a23dc91adb4747bba003c628a",
+    "sourceHash": "a37720b11b04992ad683f6f36c4d39457bc10d9086b343968c8b2144a6b88ab9",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.ringpalm-attack.name": {
@@ -3932,7 +3932,7 @@
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "2fe54819a7ee1f8e971753d56f8cecfb136ae453286152db06063818b6c0c186",
+    "sourceHash": "0eeca79ea11f6fc8876835e6f3a7ce582ac8fcd3d248914714fa004382153691",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.ringpalm-harmonic-set.name": {
@@ -3944,7 +3944,7 @@
   "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
-    "sourceHash": "8d46db87b5cf86cb04b4488372c92c3a4d62d85a67d8c9689d6c91bdbab13652",
+    "sourceHash": "4a6127bccc6a94addfb6174ee829d357de49997222088c99c53d82efbeeb2a0d",
     "text": "すべての敵に{{value0}}の<keyword0>スタン</keyword0>ダメージを与える; <keyword1>装甲</keyword1>を{{value1}}獲得; {{value2}}%の確率で繰り返す"
   },
   "content.card.ringpalm-teamProtection.name": {
@@ -3956,13 +3956,13 @@
   "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "8e6eb14f4c3198ccd2375c7586dd1316e9c58b9f7fea04e715f606058861789a",
+    "sourceHash": "f5906a4168c16ee04fcb7e991aed47358c6bebbe156784e4962ed3ce3d27caba",
     "text": "すべての味方に<keyword0>ブロック</keyword0>を{{value0}}または<keyword1>棘</keyword1>を{{value1}}付与"
   },
   "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
-    "sourceHash": "4f4164d6ab42e8983a07a0741bb824bf026ffa20f8a7324821571091361f38b9",
+    "sourceHash": "068b5b4ee76a2401ea792bd721626509eeb3c4314cfee3afa97a1cd02eb3018d",
     "text": "すべての味方に<keyword0>ブロック</keyword0>または<keyword1>棘</keyword1>を{{value0}}付与"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
@@ -3974,7 +3974,7 @@
   "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "55e4577ae3f038b3c3df7d09a5ae3f3d5b7fe2a945dcb98396910d72d17af814",
+    "sourceHash": "5ff8b1ee7d4a8c08c5c9e5700ee12f21497f0df00401affa423b26df53b00e27",
     "text": "すべての敵に{{value0}}の<keyword0>光</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
   },
   "content.card.rookhaven-margin-of-possibility.name": {
@@ -3986,13 +3986,13 @@
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "65ea755ccb985428c93587a23411d6fa8d8f227db72b550ee50e9d5998d05947",
+    "sourceHash": "4b29ab9b19954f8df326b2857f285782ccc53f14637c820b594533aa54d04c4b",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "770b0f8835994ddb4765d6e86ce3d1ef08c53810692f60791706f11472c44b6f",
+    "sourceHash": "a4c67cc4082296604a8bf48590abff2f652a55314e885c3fe22a0971a73b562b",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.rookhaven-unwritten-ending.name": {
@@ -4004,7 +4004,7 @@
   "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
-    "sourceHash": "1626c1d36e400a40c334c9d60beecdb532e53b13f7481d53d1a32ec433bb613e",
+    "sourceHash": "4bacccb7852698566e7b8a977c3459f2a1c7265256347d171145a78b5d559c8a",
     "text": "すべての敵に<keyword0>強化解除</keyword0>を適用"
   },
   "content.card.shadebrim-attack.name": {
@@ -4016,7 +4016,7 @@
   "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
-    "sourceHash": "a38ddfcbd2a1a217f00450735fc5e716fbc57be6480ad5461174687afada91de",
+    "sourceHash": "155b3cf3d28feece8e7e958fb289c305fe066bb08a3acd403c450c9e53a299f2",
     "text": "すべての敵に{{value0}}の<keyword0>凍結</keyword0>ダメージを与える; すべての味方を<keyword1>浄化</keyword1>"
   },
   "content.card.shadebrim-draw.name": {
@@ -4028,25 +4028,25 @@
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "83b8ac6aa96ff3d66f684ffcf1d9e8a554f22836efb2aa340784577e04e46a24",
+    "sourceHash": "729c2cf1a8e7590c354fea110634fe3a9faddc2f1e6ad159ca32d57d8dc77ffd",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "4e7e7d4891f9a100326ce0d913a3d807406a2f25f9b4f23f346ff52a2711c03a",
+    "sourceHash": "0be9e58790cad7af08a3d87616b68616e9a5d28e3d191da631b1d9112ae3f6b0",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.shadebrim-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "15c85c59c31ec9289a6957f0adeb658b007006e10078307b9da67b1a47bcddcb",
+    "sourceHash": "0579f43fcc917c5f151ed06bb3c4f6d129bc58887e02951059ef28418bc2a722",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "78c9e0fbe4967bdc2631011d5d64219c09dc99536370b612cf02b1c370ae41c7",
+    "sourceHash": "31c03e851f4a9fa95f2c764b49fca09dc197aa7c86169a41b27bf1c74c728ca4",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.shadebrim-guard.name": {
@@ -4058,7 +4058,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "4ae4039288cbe75bb681a1df83ea49c42e3a3997f614681ca0a32c1f00e5f78c",
+    "sourceHash": "c9741e33c350d973a97d59304c695e310a3a4e13c58f33e96222243ae47315a4",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>炎上</keyword2>を<keyword1>反射</keyword1>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4070,7 +4070,7 @@
   "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
     "reviewed": true,
     "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
-    "sourceHash": "06f9c62cd436488d5fc5c00c7900b2085e7d792b4057f2085c67d77c8f3f90cc",
+    "sourceHash": "07d31fe112800b8d7a9f58a7b8c953fcb58258eb432b98c76b9ff0e367aaca64",
     "text": "ランダムな味方と交代 / 入れ替わる味方は次のターンまで{{value0}}%の<keyword0>回避</keyword0>を獲得"
   },
   "content.card.skybex-draw.name": {
@@ -4082,13 +4082,13 @@
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "af6680a89d67ea81260aeab6270d460bf85c8425b6f289500a11c14c2323b703",
+    "sourceHash": "0dc3820f740725e9f79347cce611f39234ddff5e3ec373daafaab74f38365805",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.skybex-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "4a31643567035a975e0bdd75a12a1682b6e1b6a8fbcfd976a68682d345997d03",
+    "sourceHash": "32faedc5b77a2f68c1d4e02c587e4381c10eb4166000c7bdb0115bcf6a743bc9",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.skybex-sky-shepherd.name": {
@@ -4100,7 +4100,7 @@
   "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
-    "sourceHash": "e4853478a911c82a65fa77d9ccc687055bbec7a50949d740d3bda2732743a864",
+    "sourceHash": "60bd8341fbb30cf85b30229f34083c3c68a1e9c4af424184b7411e0796111397",
     "text": "すべての敵に{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
   },
   "content.card.sternshell-attack.name": {
@@ -4112,7 +4112,7 @@
   "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
-    "sourceHash": "4650c8d4d65b6601761b6a84d791f8891c841c8c82b6f1a7cdd19ed34507b1ee",
+    "sourceHash": "c68d3dee756228bdb09b7be7fc652e77201ad9f30cd86abf952ab77ce151b1d0",
     "text": "{{value0}}の<keyword0>物理</keyword0>ダメージを与える; <keyword1>装甲</keyword1>があれば2倍"
   },
   "content.card.sternshell-spiral-return.name": {
@@ -4124,13 +4124,13 @@
   "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
-    "sourceHash": "746056700562dfc6cda59eba784ebdd2af26a50cc7d507243a30d0b236d14f2d",
+    "sourceHash": "2dbf0c9d6eb30a2abfe554b1dc77c64dc0550b189b5c0bd46eca798de97652f6",
     "text": "すべての敵に{{value0}}の<keyword0>水</keyword0>ダメージを与える"
   },
   "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "3861dd8110f8f2620944fcdbcfd28a964eadb6ddff8e3916efca8c9bc00bbb4b",
+    "sourceHash": "13f6966839b656a1e43a49154bee9b73d73f0776eeab667079206fc2d16e73f4",
     "text": "すべての敵に{{value0}}の<keyword0>水</keyword0>ダメージを与える; <keyword1>マナ</keyword1>を{{value1}}獲得"
   },
   "content.card.sternshell-swap.name": {
@@ -4142,13 +4142,13 @@
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "6a9c4d7322433faf86c53798f8865f39cf7484f2433a27ba2e98daf79d0b2982",
+    "sourceHash": "c668bd80ca6ab24e26f9cc447a384e30dfa3e8dac10ef700cadcbc1904552617",
     "text": "控えの味方1体とランダムに交代"
   },
   "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} card",
-    "sourceHash": "fdfd53753e2e3e49be64365f3c1209307d073bed734865e6ac758ef1901bc3ac",
+    "sourceHash": "6ddb204978187940bf6231bf2540be0b79a0dd310094a3c84dc1723f11d4924c",
     "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
   },
   "content.card.stillara-reed-reservoir.name": {
@@ -4160,7 +4160,7 @@
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "b360acd2d183c99a28d61c4e7a64662e039271177080b1903fde016457fd5dfd",
+    "sourceHash": "14c5e1b50a89fbba66386d0998571f5773355583023e93de846da7fb766f8a0f",
     "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
   },
   "content.card.stillara-thaw-path.name": {
@@ -4172,13 +4172,13 @@
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "99cbaf3c08c160ee5f13f3500060cef510b22a6fcb394add1a817a7e621b067a",
+    "sourceHash": "9aa9d3c574873ebe94c4a365c741ecdfbf6bb801fecfb5360dd02acb12a971dd",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>; カードを{{value0}}枚引く"
   },
   "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "a2a7ff206fda7040c1887b2b8c8f0172973a1386af1bf03e323731583962a789",
+    "sourceHash": "d88ae242c963bd061d4bd7d7796750835156b5376f1cbbd09fd705caf10e143f",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>"
   },
   "content.card.stillara-water-remembers.name": {
@@ -4190,13 +4190,13 @@
   "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
-    "sourceHash": "212402a9b32c9de7bb5a6f93a35c01e74614872dfc3e447d706eeba837ba41ca",
+    "sourceHash": "baa16ffdafc19085333ecf64dd2222c6f4a9d65148f24fb2c0879318091d09c1",
     "text": "すべての味方の<keyword0>体力</keyword0>を{{value0}}回復; カードを{{value1}}枚引く"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "e87d5eb82172f7d984b3be63dca1743f9d438ae0fb100f84d13928b600b0e7d8",
+    "sourceHash": "78607f3a5b810785f82b4fc34b9dbc49d690be940b4546ec75f4d09348ca5e54",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.tournelle-attack.name": {
@@ -4208,7 +4208,7 @@
   "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
-    "sourceHash": "b4432a57e44805985420259bdeba0f85b18de45b66c70720b58bb64ae0fb43b3",
+    "sourceHash": "53df39fe923d0ed236731890dc2a1d330a27ad8a8d1d9401b9bf345d24dfa178",
     "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える / 自分より<keyword1>体力</keyword1>が多い敵には2倍"
   },
   "content.card.tournelle-swapLowest.name": {
@@ -4220,13 +4220,13 @@
   "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
-    "sourceHash": "98c86540135f9d4640ad899a1fc2c3653f590dae63dae0b79865cec79857da51",
+    "sourceHash": "be1044f595c8736bbfafede6ce86df0f6b3ba10264be985e95eea73ce8f793ec",
     "text": "<keyword0>体力</keyword0>が最も低い味方を交代させる"
   },
   "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
-    "sourceHash": "d5688d2c2df8a6b9531936c5f5ea2e4a3e27b1d80ce528af628295dde00cccec",
+    "sourceHash": "bafdff86342721eb649c93d1398582167427cbb632caacfd25649ede04a8141f",
     "text": "<keyword0>体力</keyword0>が最も低い味方を交代させる / カードを1枚引く"
   },
   "content.card.tournelle-teamClearBlind.name": {
@@ -4238,14 +4238,50 @@
   "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
-    "sourceHash": "3214312b29f19f0955601877b80537927a0c69fbfb7ace5b735953c05ad284c4",
+    "sourceHash": "8ccc45aecb9d4de5b31cd95483472dc7a9334557af1645944243a924514ca9a9",
     "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0>"
   },
   "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
-    "sourceHash": "3f9b8b3a18cd9dac1e793cbdae45fd91ac7a142c5d97733a43b93979d0e3266b",
+    "sourceHash": "1226a7079741afbf37d1a9f5f6ce70be6f023a26521d6ab5c187f897bdee12c1",
     "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0> / <keyword2>光</keyword2>カードを1枚引く"
+  },
+  "content.card.vitrilo-kilnheart.name": {
+    "reviewed": true,
+    "source": "Kilnheart",
+    "sourceHash": "d14dfbe201e07d6ad4c6e8cb19d980920eedb497a31adfd6e4a6bd2231312904",
+    "text": "窯の心"
+  },
+  "content.card.vitrilo-kilnheart.v8550d6fc467780eb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "aa0f92b913ffe0a428475a0861db878c6430da9a8b540abaffac016b27546ae4",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復する；<keyword1>ブロック</keyword1>を{{value1}}得る"
+  },
+  "content.card.vitrilo-prism-key.name": {
+    "reviewed": true,
+    "source": "Prism Key",
+    "sourceHash": "2e791be2d867444a4e4d7380a681cead80d92a757f3626459ffd241fddcd9105",
+    "text": "プリズムの鍵"
+  },
+  "content.card.vitrilo-prism-key.v256f8f9c4afa4e50.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> an enemy / Steal the effect <keyword1>purged</keyword1>",
+    "sourceHash": "c335f4a55185b8ae7cb0732b3de57ad9fa33369c444a42d5c368710421a5a4b2",
+    "text": "敵1体の<keyword0>強化解除</keyword0> / <keyword1>解除</keyword1>した効果を奪う"
+  },
+  "content.card.vitrilo-sunflare-cast.name": {
+    "reviewed": true,
+    "source": "Sunflare Cast",
+    "sourceHash": "3408f9a72ce0400f74de6832d1a946ae27066688d85e4bbe2404d3f7bf1bcb6a",
+    "text": "陽光の鋳造"
+  },
+  "content.card.vitrilo-sunflare-cast.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "6081f03622132ef49107337f0ade1dc179e41d58896eb13806ed5d616e3450a8",
+    "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える"
   },
   "content.card.wendlet-borrowed-silhouette.name": {
     "reviewed": true,
@@ -4256,7 +4292,7 @@
   "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
     "reviewed": true,
     "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "3ceee154c686d40b94e95b7cbd929895c046612ea1cdfadbce02001c2ee8facf",
+    "sourceHash": "22e73aa093cdd352cad41615b22734e803d3dd2c8585ff26b8fc905273715bf0",
     "text": "控えの味方のランダムな能力のコピーを1枚引く / <keyword0>マナ</keyword0>を{{value0}}得る"
   },
   "content.card.wendlet-midnight-mantle.name": {
@@ -4268,7 +4304,7 @@
   "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
-    "sourceHash": "d3363487c0e4295bc0954b63942dfa681d41b9698b9b2699f2ddb13bde19fd23",
+    "sourceHash": "5cca3d46bf6e8703e324458b4c83ae82ae8387122e8cd2ed91f8d18afb2db17f",
     "text": "次のターンまで<keyword0>回避</keyword0>率を{{value0}}%得る; <keyword1>ブロック</keyword1>を{{value1}}得る"
   },
   "content.card.wendlet-umbra-snare.name": {
@@ -4280,7 +4316,7 @@
   "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "89d69f7e95aea89cc48ea56820200f2f570a08fce39d7d23b2e3c3fff2475cb7",
+    "sourceHash": "d37e884fb9b8c4cc79969039c90f4c510538abf71a176bd5fcc9d70cba0036b0",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.wickwaltz-attack.name": {
@@ -4292,7 +4328,7 @@
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "d9f1c6afec5e388145460887bfb741c52a81ad112467df00de1b4617102a2065",
+    "sourceHash": "ce1d75ad6c7e4d485cf0c70146a37ae07350799c0a327591f60a7d806c6dd8fe",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.wickwaltz-draw.name": {
@@ -4304,25 +4340,25 @@
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "6e739f8a03bc129490db1f64017f3fd53c653738403cdeeff85be5813c786a05",
+    "sourceHash": "ce4a76053d144c5cfb255d41ebf094ccc9149957824e3691a2c0eaa521596ccc",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "e2b7cad7d74481038a276e574a3e6176829751f434d94d748196ad0dc18bd2cd",
+    "sourceHash": "6af5cabdce4716ddd6d275d70398fcce8f86f3e0248fcbc2c1b8852d48ef2358",
     "text": "カードを{{value0}}枚引く"
   },
   "content.card.wickwaltz-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "299967b9c40f236e4b82a44ba7d9282c879b44ac352850533be2a8f0102f1491",
+    "sourceHash": "13bf4012fa3a18ae21dfa9d2bb11af9900a306fac0aa038a390e527f4fbf882d",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "64eb730d02320b51bcd7fec2be761415094b05b2cc8c39adae1b30b7dddcc49c",
+    "sourceHash": "01fc7c751bb6711ab25d3233f1dbc3dbe3397681dcc9d928fb32e4703d8d5f74",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.wickwaltz-guard.name": {
@@ -4334,7 +4370,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "46724211fa7f4985309e70e7a27931b0d00d55374c0b8946887965175a15e636",
+    "sourceHash": "9e10443c4bc9776016d951afc742e7f71ec85fb55aa24a053c40a92ea79ef751",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>凍結</keyword2>ダメージを<keyword1>無効化</keyword1>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -4346,13 +4382,13 @@
   "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup / Draw a Card",
-    "sourceHash": "b6de94a279dd6102f853837e5712f8c532b780ee8eed54aab336c853f80b123f",
+    "sourceHash": "9da0f2e9dde2a8faa4f9ad8e4bcdd8f74c340e4a983dd5ab85c076d46f954645",
     "text": "選んだ控えと交代 / カードを1枚引く"
   },
   "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup",
-    "sourceHash": "6b84cf5f8aff0656f9ccf649f18630bd935b71e99ba59d4ddeae8930d28fb481",
+    "sourceHash": "a01fdfba8e800e0984b64a0c9a87efcacefe425a410da144bffd20755ffd9993",
     "text": "選んだ控えと交代"
   },
   "content.card.wisterelle-lantern-fare.name": {
@@ -4364,13 +4400,13 @@
   "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "8e08ae08e3b48c78ec96733f5dae0452c7fc4ecf182e550a54ced379de80887c",
+    "sourceHash": "9fccc9decd6b5b593899942d34fd703517620daffac22460fe7254d04b67d858",
     "text": "傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復 / <keyword1>マナ</keyword1>を{{value1}}獲得"
   },
   "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "762fb901b5b56aeb827842e5139ec3e69af69b7a05cfaf19a3298d6b73d531ae",
+    "sourceHash": "5fb488f0c5300a37f1b30015d3223b9d3b217278439b393db1efc8849e8dd849",
     "text": "傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.wisterelle-left-luggage.name": {
@@ -4382,13 +4418,13 @@
   "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "ded1909c2bcd7e5754c7a9b5ec51aae75a582e90ccc538bbe746a280a2adc5c8",
+    "sourceHash": "b7566ac1848d950c32a5e8481a774b64daa5e5583eed66b04391963c6236a501",
     "text": "捨て札から味方のカードを1枚引く / <keyword0>マナ</keyword0>を{{value0}}獲得"
   },
   "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile",
-    "sourceHash": "5d3da9643f0988d65477252642e3cf421420fc29cb596f1b62ceb18dc452529c",
+    "sourceHash": "a6924b54e20ffaf065c7b9e9c772f4856f1ccdf026a1b73a118a7e846f64a789",
     "text": "捨て札から味方のカードを1枚引く"
   },
   "content.glossary.action-card.definition.rule": {
@@ -6976,6 +7012,60 @@
     "source": "Gallantry",
     "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
     "text": "騎士の心"
+  },
+  "content.species.vitrilo.name": {
+    "reviewed": true,
+    "source": "Vitrilo",
+    "sourceHash": "526f994e837707ed103e7d9afcf8e8f7f3d21c555d323178dd8fe4d535b6a3de",
+    "text": "Vitrilo"
+  },
+  "content.species.vitrilo.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "5380d00ec9c5120d314510a0696477db1bc4209038fcc0a7c3ed346b37f4608b",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "0e6379a9bdf9c5552f6b39fe0db83a4469b10d50d9be83bcf46561eb187fad14",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "f953512d71f70437149e9d9d97e5e46b1e17471352a8ddfa1ab09c1e00acd762",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "e987043c3fa58f8d5706a55951d8524c47948f2fa9ce7e6df132ae6be2d9c1a9",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "564c5c8c68ecc92e0985f03ea93d0facf1213d052a9b859b78605eefe7b9e12f",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "167ad85b044278344a6e2373b070cc5331ce3a2f85923694f85c94018bb7df1b",
+    "text": "<keyword0>光</keyword0>攻撃はダメージを与える前に対象から<keyword1>ブロック</keyword1>を{{value0}}奪う"
+  },
+  "content.species.vitrilo.title": {
+    "reviewed": true,
+    "source": "The traveling glassmaker",
+    "sourceHash": "6588544a1fed828900066eb10e84db2651fdbae481abd6acba636da1e1c3e839",
+    "text": "旅するガラス職人"
+  },
+  "content.species.vitrilo.trait": {
+    "reviewed": true,
+    "source": "Glass Cutter",
+    "sourceHash": "5365a4cecb4b09dbd9d3b23e4e095dc104e01bdb29fae9446a7d05e5046d4145",
+    "text": "ガラス切り"
   },
   "content.species.wendlet.name": {
     "reviewed": true,

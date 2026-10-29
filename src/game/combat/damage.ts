@@ -32,6 +32,7 @@ import {
 import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
 import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorApplies } from "./damage-values";
+import { glassCutterAmount } from "./glass-cutter";
 import {
   dodgeResponse,
   blockDepletionRewards,
@@ -486,6 +487,21 @@ export function* resolveHit(
   }
   if (attack && alliedSource && !alliedTarget && type === "light" && state.boons.includes("moonseed"))
     ensureCombat(source).moonseedReady = true;
+  if (type === "light" && options.origin === "ability" && options.attackAbility && target.block > 0) {
+    const stolen = Math.min(glassCutterAmount(state, source), target.block);
+    if (stolen > 0) {
+      target.block -= stolen;
+      events.push({
+        kind: "block",
+        actorId: source.id,
+        targetId: target.id,
+        amount: -stolen,
+        text: `${unitName(source)} steals ${stolen} Block from ${unitName(target)}`,
+      });
+      yield* reaction("grantBlock", state, source, stolen, events);
+      if (source.health <= 0 || target.health <= 0) return { outcome: "landed", lost: 0, dealt: 0 };
+    }
+  }
   if (type === "freeze" && stats.nullifyFreeze) {
     stats.nullifyFreeze = false;
     emitStatus(events, target.id, "nullify", "immune", {

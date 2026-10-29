@@ -4,6 +4,7 @@ import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
 import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
+import { glassCutterAmount } from "./combat/glass-cutter";
 import {
   dodgeChance,
   hasHarmfulEffects,
@@ -173,11 +174,12 @@ export function ordinaryAttackEvaluator(
       // Ordinary primary packets omit chance effects and most talent reactions deliberately.
       const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
       const damage = baseDamage * (lastCardCritical ? 2 : 1);
+      const stolenBlock = type === "light" ? Math.min(enemy.block, glassCutterAmount(state, actor)) : 0;
       const armored = armorApplies(state, enemy, type, actor);
       const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
       const payment = blockPayment(
         damage,
-        type === "bleed" && state.boons.includes("harvest-sickle") ? 0 : enemy.block,
+        type === "bleed" && state.boons.includes("harvest-sickle") ? 0 : enemy.block - stolenBlock,
         blockEfficiency(state, enemy, type, actor),
       );
       const piercing = craterPunch ? Math.round(payment.absorbed / boonRule("crater-punch").divisor) : 0;

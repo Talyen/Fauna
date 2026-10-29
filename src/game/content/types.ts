@@ -40,9 +40,11 @@ export type SpeciesId =
   | "wisterelle"
   | "brumalyn"
   | "cavalleaf"
-  | "wendlet";
+  | "wendlet"
+  | "vitrilo";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "glassCutter"; amount: number }
   | { kind: "lostAndFound"; amount: number }
   | { kind: "lastWarmth"; amount: number }
   | { kind: "wellProvisioned"; amount: number }

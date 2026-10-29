@@ -29,7 +29,11 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
       )
     )
       result.add("armorBypass");
-    if (card.effect === "teamPurge" || card.effects?.some((effect) => effect.kind === "purge"))
+    if (
+      card.effect === "teamPurge" ||
+      card.effect === "stealEffect" ||
+      card.effects?.some((effect) => effect.kind === "purge")
+    )
       result.add("purge");
     if (
       card.effect === "nightmareHarvest" ||

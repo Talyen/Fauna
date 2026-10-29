@@ -438,6 +438,7 @@ export const modifierImplementations = freeze(
       expressDelivery: ["./card-zones#expressDelivery"],
       fallenLeaves: ["./combat/turns#decayBlock"],
       livingShadow: ["./combat/turns#decayBlock"],
+      glassCutter: ["./combat/glass-cutter#glassCutterAmount"],
       unfinishedJourney: ["./card-actors#unfinishedJourneyLimit"],
       unhurried: ["./combat/turns#unhurried"],
       gallantry: ["./combat/interception#interceptAttack"],

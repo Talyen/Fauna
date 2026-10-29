@@ -339,10 +339,17 @@ export function battleBenefits(
             : def.target === "injured"
               ? allies().filter((ally) => ally.health < maximumHealth(ally))
               : allies();
+      const extraBlock = Math.min(
+        STACK_LIMIT - actor.block,
+        def.effects?.reduce(
+          (sum, effect) => sum + (effect.kind === "status" && effect.status === "block" ? effect.amount : 0),
+          0,
+        ) ?? 0,
+      );
       return recipients.map((ally) => {
         const benefit = healingBenefit(state, ally, value, play.def.effects);
         const restored = benefit.restored + foodWaffleBenefit(state, def, ally, value);
-        const utility = benefit.utility + foodDodgeBenefit(state, def, ally);
+        const utility = benefit.utility + foodDodgeBenefit(state, def, ally) + extraBlock;
         return supportOne(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
           restored > 0 ? restored : utility,
@@ -489,6 +496,20 @@ export function battleBenefits(
       const useful = countMatching(facts.livingEnemies(), (enemy) => !enemy.combat.blind);
       return support(useful > 0 ? "utility" : "none", useful);
     }
+    case "stealEffect":
+      return facts
+        .livingEnemies()
+        .map((enemy) =>
+          supportOne(
+            hasBeneficialEffects(enemy)
+              ? enemy.block > 0 || enemy.combat.armor > 0
+                ? "defensePurge"
+                : "purge"
+              : "none",
+            0,
+            enemy.id,
+          ),
+        );
     case "teamPurge": {
       const enemies = facts.livingEnemies();
       const useful = countMatching(enemies, hasBeneficialEffects);

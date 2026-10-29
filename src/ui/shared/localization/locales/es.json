@@ -2654,7 +2654,7 @@
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "3d0a6573d74d0a5a443aba9122bcd37bd35113d282887480b6d22ed9719fb4e6",
+    "sourceHash": "e96d5c91957d8521c278d52beb78500718b6b108404b5cef5a77d65621e64196",
     "text": "Añade <keyword0>Comida</keyword0> a tu mano: {{value0}}"
   },
   "content.card.aerostat-true-bearing.name": {
@@ -2666,7 +2666,7 @@
   "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
-    "sourceHash": "016a5a1c1743f2847d440f3049054e4b351f7310b98a472a9c306920053fe4a7",
+    "sourceHash": "cc79a017fc6ee64a8f07816b6ff7bc9b496d5f7584583e3698654b3d020ef3fa",
     "text": "Roba {{value0}} cartas / <keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
   },
   "content.card.aerostat-voyagers-rest.name": {
@@ -2678,7 +2678,7 @@
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "e108395123def47e71bdc2f8e28d60e3675ddc8f1fe19e97cf003f66b07c69df",
+    "sourceHash": "addf926b0cf38f98bdfbe710c60ce53024b3ac19d6249943252f1e7dfffd5012",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.almanelle-autumn-insight.name": {
@@ -2690,13 +2690,13 @@
   "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
     "reviewed": true,
     "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "9642f445e30b3c611588ffdf84a4cf49b2b155b42aa8ec12d67a63e03f3550d3",
+    "sourceHash": "5260272f86e8ddceeb5dd3262b8bb607012f2748427237c593ee70329123c9cb",
     "text": "Devuelve una carta descartada aleatoria a la mano; Restaura {{value0}} de <keyword0>Salud</keyword0> a un aliado herido"
   },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
-    "sourceHash": "5384064310eb9afb78bf6b0026cb63c732b3d55109d795dd0d1492eb0098d586",
+    "sourceHash": "fab32b7489ad08839c62a72b4c3c33020b518c7fbf8a011a01db89efab9af663",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a un aliado vivo"
   },
   "content.card.almanelle-rooted-year.name": {
@@ -2708,7 +2708,7 @@
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "ead3edc790abdaec534c3254661fa7d335ed1ad43b59792811e547d9285a80e7",
+    "sourceHash": "b119169fc9c9f0c7f14a9f81166ff0d83bfb6ca53dbe0ffb5b82f114b07cee77",
     "text": "Obtienes {{value0}} de <keyword0>Bloqueo</keyword0>; Obtienes {{value1}} de <keyword1>Espinas</keyword1>"
   },
   "content.card.almanelle-spring-current.name": {
@@ -2720,7 +2720,7 @@
   "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
-    "sourceHash": "3219157e8712e83ddb7656074024fbdb5215f01b347cad0742ee79e1aa529fd0",
+    "sourceHash": "7a93980869db00ab2cad6faaf44ac4afe29e546ee148cd84b98a816703bc3021",
     "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0>; <keyword1>Purifica</keyword1> a la criatura que actúa: efectos eliminados {{value1}}"
   },
   "content.card.alpenglen-ember-of-evening.name": {
@@ -2732,7 +2732,7 @@
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "7f8f0eedc96617dcf79108afc2cf25791ffa87aa2dfe86bd5ca43e088f1af6e1",
+    "sourceHash": "697622d62985e6c69f9a6ee284e23f2b237d7295c372b0177b82ae88bd9d6fe3",
     "text": "Tu siguiente carta se juega dos veces"
   },
   "content.card.alpenglen-last-light-charge.name": {
@@ -2744,7 +2744,7 @@
   "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
-    "sourceHash": "fdc00b1867fa92ceb3cff6b5006533417deda313754e449d29549aa5dab4a473",
+    "sourceHash": "be1a6e271b99bf9261122ecaa5d37c6912f396ed48f5753ea53f2240f770ff67",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> / Si es la última carta en tu mano, asesta un <keyword1>golpe crítico</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
@@ -2756,7 +2756,7 @@
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "dc919ed49cd16d31a62a6139f244fcf3fa9aab45fa82472188ec67e7e48a0d12",
+    "sourceHash": "e1b04a3cde2ed8c4eab61c1f83a7b7b0f1cee05a02a2667e63d9b598263e7541",
     "text": "<keyword0>Refleja el siguiente ataque</keyword0>"
   },
   "content.card.arabesca-dancing-double.name": {
@@ -2768,7 +2768,7 @@
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
-    "sourceHash": "14fac7b747afded5bfcea0425c299ada60245fbe21d13f24163b3d5a18a8c9d5",
+    "sourceHash": "83cf87f59f774c32b5fe5da13cea8f8878006bb169e260b589afda45feabb4a4",
     "text": "Tu siguiente carta se juega dos veces"
   },
   "content.card.arabesca-ribbon-snare.name": {
@@ -2780,7 +2780,7 @@
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "ab6e384a8cbcfc64bc87773df81542b6c9f5f8c9c3d1648919a89d2f997e7177",
+    "sourceHash": "d1e6045a0fec0854661f639c8a0ee57edfb8725e2455d8f004116fbccadd7d3f",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
   },
   "content.card.arabesca-springbound.name": {
@@ -2792,7 +2792,7 @@
   "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
-    "sourceHash": "3ec2b5eb9522e04ccd93bcc73573f03704150188142fcfa9c23284c789f0fc27",
+    "sourceHash": "06f6fe79e2cd9aff8d6e707e512d168534e64bbad24fe4b7c0b81de0ae815c4b",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados / Obtiene un {{value0}}% de <keyword2>Esquiva</keyword2> hasta el próximo turno"
   },
   "content.card.bloomquail-draw.name": {
@@ -2804,19 +2804,19 @@
   "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "2970eac4acaab3c1332b2eca73c1bd874b2ef17beebfa8463d17cb9f8376fd13",
+    "sourceHash": "7ce01d19daf2afe7216fc81075503ba44051605f37c0a77b38c8a22509b660db",
     "text": "Roba {{value0}} cartas; Restaura {{value1}} de <keyword0>Salud</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
-    "sourceHash": "db306ec043e919fd2b2fd3e4a6bb0d119d105af17f1adf6e50b91dd1f0fcc9d7",
+    "sourceHash": "2d26b79f2b74519b14579ef3734e7f535e954702a509d1c45231b4e70ce38fb7",
     "text": "Roba {{value0}} carta; Restaura {{value1}} de <keyword0>Salud</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "eda5a8c2bfdbb1d7da3cd120ca62176d7554382fc1c273ab80ecaa798fc439b7",
+    "sourceHash": "97d38f46e1214e563d29f6d0f956ab9a12d35da37cfbf1ca679d84b63186d309",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>"
   },
   "content.card.bloomquail-guard.name": {
@@ -2828,7 +2828,7 @@
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "d42135f640ded172fa95d69fae22c6961d39aca1a357b95e32a038c18b26b0af",
+    "sourceHash": "0015930fffe48b08ac2a29f469eb57c455ba99d94c67d6940b1055a58aa82676",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.bloomquail-heal.name": {
@@ -2840,7 +2840,7 @@
   "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "39c31136b9343670e38d3b1f004ac39a79e0f8858ba08ecffd32148e10cc6063",
+    "sourceHash": "06cd5b52d429f246421ddc49560a5707866065d48850113d19ae50997c5543ee",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; <keyword1>Ciega</keyword1> a todos los enemigos"
   },
   "content.card.brumalyn-frost-howl.name": {
@@ -2852,7 +2852,7 @@
   "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
-    "sourceHash": "f50aeed0769c402acc796486cadf0aa16cdbd0191f0eaafa1a82216eacd14843",
+    "sourceHash": "24e1e82abead237aa6b13ebe5d6b67d2e167af038674b5b14d309ea2e03745c0",
     "text": "Inflige al azar {{value0}} de daño de <keyword0>Congelación</keyword0> o <keyword1>Aturdimiento</keyword1> a todos los enemigos"
   },
   "content.card.brumalyn-rime-pounce.name": {
@@ -2864,7 +2864,7 @@
   "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
-    "sourceHash": "d898c77ab9527e208f68a7e3ed20b9636dd09e1d5b2a383f5e71895d0649702e",
+    "sourceHash": "d1c25b95fee6f15859b5285402ff3b032ad127c2b767b8d311a016ad60d31315",
     "text": "Inflige {{value0}} de daño de <keyword0>Congelación</keyword0>"
   },
   "content.card.brumalyn-warmth-ward.name": {
@@ -2876,7 +2876,7 @@
   "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
-    "sourceHash": "6ea3c92183393ca3c74c64b009b339d3df300dd4347cfb99aa6867256f587c13",
+    "sourceHash": "788a2451fc4df97d7f135c5bf1314effe5b4d079fa17b9c3d9a3585632253b19",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; <keyword1>Purifica</keyword1> la acumulación de <keyword2>Congelación</keyword2> de todos los aliados"
   },
   "content.card.cadenza-echoes-remember.name": {
@@ -2888,7 +2888,7 @@
   "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
     "reviewed": true,
     "source": "Return a random discarded card from a living ally to your hand",
-    "sourceHash": "0b5857865184946f2e65b7b23f0a495339dfbb90e3726e6df00645ef57d433f7",
+    "sourceHash": "6b41e67d4547c8a66f95130f60c3c34c2913c3807c631efb8a123dbcb7fd24be",
     "text": "Devuelve a la mano una carta descartada aleatoria de un aliado vivo"
   },
   "content.card.cadenza-resonant-well.name": {
@@ -2900,25 +2900,25 @@
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "fc60123b41ceca64abe56590373165f50059c0c213eb4d5ae0844dcf39f78d0e",
+    "sourceHash": "7906602f92ec37f544231db0977bc61296c84c8e63a0e063e999244a84a162f7",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "68781247aff60776e91b4f8138cfd121f1626c8ff4f3ea1d06888a791fbbc732",
+    "sourceHash": "883b94eaa70f09547dcac8cf6e9d08ac30496ea1cf34241079e8a0f61284d013",
     "text": "Roba {{value0}} carta"
   },
   "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "4937a1c2a34ea79330782c7f82768abea89d8969826387feea7141c1063e27a7",
+    "sourceHash": "886a47f8590d95b477a65b86ab90eb66183ef3afada3649ec90c776cb6c0baaf",
     "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "5defbad0f47d97a94de3b6665ff25158ad6862084842056f97579a7c2eb9c011",
+    "sourceHash": "14aecddfa6b144e91297889fd3107cae0e72db35242271c38ea6de3b7609faeb",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.cadenza-rousing-refrain.name": {
@@ -2930,13 +2930,13 @@
   "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "92cfe4a4fd1ef8070e001dc6eb9836ff750cf17c792bd58d6a33d974557c4515",
+    "sourceHash": "89e4feb4510370efb60663439c0893e103aa6e528fb95b3337a130afd785c854",
     "text": "Otorga un {{value0}}% de <keyword0>Esquiva</keyword0> a todos los aliados hasta tu próximo turno"
   },
   "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "6d783a924d009c32421276166480fe968449265cebd67739e984eb10783ae5d1",
+    "sourceHash": "d68a0af444afd1624aa5ea538ab44f06aaaba4f093c0b6e88d5d1d3ce6b68446",
     "text": "Otorga un {{value0}}% de <keyword0>Esquiva</keyword0> a todos los aliados hasta tu próximo turno; Roba {{value1}} carta"
   },
   "content.card.captoad-attack.name": {
@@ -2948,7 +2948,7 @@
   "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
-    "sourceHash": "e94a8f36d7462b0b159983d526f02122bf90f35007a6d2080004dd9aaa9064dd",
+    "sourceHash": "2504fbf9fc5c4c78dafb8c46a90b11a586c183b636c286f1b6f1d6b33fc0a57d",
     "text": "Inflige {{value0}} de daño de <keyword0>Veneno</keyword0> a todos los enemigos"
   },
   "content.card.captoad-guard.name": {
@@ -2960,7 +2960,7 @@
   "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
-    "sourceHash": "04ad5236542e3775e56c3b74c25847d7130385915336b0d3ffceaee0fbe0e794",
+    "sourceHash": "27592a6be625f9b3bb2dc234e5b711ef6163f7a124e06568c1f03738c170e0d5",
     "text": "Obtiene {{value0}} de <keyword0>Bloqueo</keyword0>; Restaura {{value1}} de <keyword1>Salud</keyword1>"
   },
   "content.card.captoad-swap.name": {
@@ -2972,13 +2972,13 @@
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "9846ff567fa8957cddc3df615cb982d10ad654ffe111865f2fdd4f4fd2437ea7",
+    "sourceHash": "1ac9855b56dc2c5f29d8b34184d593240be1e2696129555e71af820b68caae7c",
     "text": "Cambia por un aliado de reserva al azar"
   },
   "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} cards",
-    "sourceHash": "3205819ffce54e50e0b5f736c2a09fca254874d63cac9683e52b4c2f27895bf1",
+    "sourceHash": "7628c90221b3b6d8ae9fa5f401e0ab92f9958fba044481bfccc21f84f0f6c077",
     "text": "Cambia por un aliado de reserva al azar; Roba {{value0}} cartas"
   },
   "content.card.cavalleaf-meadow-return.name": {
@@ -2990,7 +2990,7 @@
   "content.card.cavalleaf-meadow-return.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "03d800845280dbe7a2d2a7087182507e9d449da55542a423a89137143373d265",
+    "sourceHash": "10e06f9d45806bdb56d9dffb993b53ac8a42589da1671888836acc9c4945c513",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.card.cavalleaf-prairie-leap.name": {
@@ -3002,7 +3002,7 @@
   "content.card.cavalleaf-prairie-leap.v6492842ea97ae376.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / Incoming ally gains {{value0}} <keyword0>Thorns</keyword0>",
-    "sourceHash": "403cbd6c51a440e3c59a09d53f7620e84ced4e68ae3722925b556990fe2e1b2b",
+    "sourceHash": "58536df893650f259a4e264adc2384d63e640ddaea0d807a22d1c858b89c9e64",
     "text": "Cambia por una reserva aleatoria / El aliado entrante obtiene {{value0}} <keyword0>Espinas</keyword0>"
   },
   "content.card.cavalleaf-raincall.name": {
@@ -3014,7 +3014,7 @@
   "content.card.cavalleaf-raincall.v863b14629c10aa2b.rule": {
     "reviewed": true,
     "source": "Draw a <keyword0>Water</keyword0> card / <keyword1>Cleanse</keyword1> <keyword2>Burn</keyword2> from allies",
-    "sourceHash": "db84885f0ed9c2096c384ebd1d0b513507be31ae83f053014384f9b5e096999e",
+    "sourceHash": "6d816180b1fbbdd34baf6f641ce3992cc46f2474599b27a5f9b96a3a8d213c52",
     "text": "Roba una carta de <keyword0>Agua</keyword0> / <keyword1>Purifica</keyword1> la <keyword2>Quemadura</keyword2> de los aliados"
   },
   "content.card.chimecricket-attack.name": {
@@ -3026,13 +3026,13 @@
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
-    "sourceHash": "8bcf1bb188486a0fab26bf034e0c2644ce9ce42e092b369d5be6bf6ad98c4859",
+    "sourceHash": "a6951899a27d6c8fc88a223730ec8ec8c833850ed754482232572948580cff13",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>; Roba {{value1}} carta"
   },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "8701eda058434ea28548ae3628f6e47cafa1f682c77b5151176a2b5ea3bfae45",
+    "sourceHash": "06251d0c875cf79166222c331a9b1b9139f3e0b9f813f10aae334c2a3752c76e",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
   },
   "content.card.chimecricket-heal.name": {
@@ -3044,7 +3044,7 @@
   "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "f5cbc412f0dcad9b6b2db7f96daa693cc33bc0354c59be0bec599003e6985caf",
+    "sourceHash": "10ff112f9ad430868aff5dd7dd8c39e08e3386cec7e20507b072cf5fe5839071",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> al aliado más herido; <keyword1>Purifica</keyword1> al aliado <keyword2>curado</keyword2>"
   },
   "content.card.chimecricket-nullify.name": {
@@ -3056,7 +3056,7 @@
   "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
-    "sourceHash": "d85546aab24da7a47af350ead2d8ef64ca4f8401bafab42bbc8ec7870a7b5f83",
+    "sourceHash": "c33b18c6d48b49e08eb1447daf5cbbfa8fe2d23601ab25502107263ab67e8bf7",
     "text": "<keyword0>Nulifica</keyword0> el próximo efecto perjudicial de cada aliado"
   },
   "content.card.chronora-borrowed-moment.name": {
@@ -3068,7 +3068,7 @@
   "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
     "reviewed": true,
     "source": "Give all allies <keyword0>Negate</keyword0>",
-    "sourceHash": "8009dcc1a831bd05b08b271bb998ae5b5969bd90438acec2e7fc25a878941573",
+    "sourceHash": "0939d16c0e2e18fad3d4957ef5ba582fdf572b02c0b762f078ec851a9f020088",
     "text": "Otorga <keyword0>Anulación</keyword0> a todos los aliados"
   },
   "content.card.chronora-bridge-rewind.name": {
@@ -3080,7 +3080,7 @@
   "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
-    "sourceHash": "88d979db4e3ef0baed19a52b2237ca39b49639b168360c7d360a3ef527de5e2b",
+    "sourceHash": "8704416f1608fa28a48d832a4d318cd0a2fc9e9085a02aac5c8a68330528a508",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>; restaura un péndulo destruido"
   },
   "content.card.chronora-pendulum-break.name": {
@@ -3092,7 +3092,7 @@
   "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "9b1fd2fdfce23ae4ff328d3ca4dd35530fc1d508189ecaa47314eaf7504d5d8b",
+    "sourceHash": "08e3e9c387d988f61a9f749193a4505823e0699852b8a4332edd006fda1bf1cd",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
   },
   "content.card.cindernewt-ashen-veil.name": {
@@ -3104,7 +3104,7 @@
   "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "cc77838a0b7620ec05ab9030bb4e2480e6e413e140f195e7627cb50284dfbc7d",
+    "sourceHash": "ad70593584a855a42b0c60c3bc00e13e937f1507b80df2a66491cdf5273b44cd",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos; <keyword1>Ciega</keyword1> a todos los enemigos"
   },
   "content.card.cindernewt-attack.name": {
@@ -3116,7 +3116,7 @@
   "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
-    "sourceHash": "38c8339a5ff91b04cb66bd3d67c0430a3d3214da6b2256cbd85d908c27fd41e1",
+    "sourceHash": "36c770483131f2943df1eca51c1eea852b6dc27392fa7e45af1ecbd84b021c1f",
     "text": "Inflige al azar {{value0}} de daño <keyword0>Físico</keyword0> o de <keyword1>Quemadura</keyword1>"
   },
   "content.card.cindernewt-ember-breath.name": {
@@ -3128,7 +3128,7 @@
   "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
-    "sourceHash": "665d673bef189e7d7fab3844b040308d092ce1d5f60494324da079d583279fc2",
+    "sourceHash": "c642bd3aaa14bb6dd7460a0809ec27260075cfd7ee5431e46a2204a176205532",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos; Elimina un {{value1}}% de la <keyword1>Armadura</keyword1> de todos los enemigos, redondeado hacia arriba"
   },
   "content.card.coralcurl-attack.name": {
@@ -3140,7 +3140,7 @@
   "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
-    "sourceHash": "f48000d3d9f55745bb9a4e30d448441964e0578f2fd0a8aef4fcec9b55285e4c",
+    "sourceHash": "cc1835bf372238d946aba841e5ac8ddfe794f419303fe089bf3c03e158e1f342",
     "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
   },
   "content.card.coralcurl-guard.name": {
@@ -3152,7 +3152,7 @@
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "a01199801bfd236b4cc2edb68ef2e2527f83c3bf9336fd756fb2b371829f8b13",
+    "sourceHash": "6103ed96622135edb5b027e5543d3c9a45dda47c9b3d3e6a233d6c4bd8f875ba",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.coralcurl-swap.name": {
@@ -3164,7 +3164,7 @@
   "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "1857ed26b4c52631705431461b9a05e1e9fe8e3ca729e437a7fea47e5292dc66",
+    "sourceHash": "9eef4af3c99bb1707958f02f16fc3997d91b4b727610440e34a8f124e11f9e17",
     "text": "Cambia por una reserva aleatoria; <keyword0>Ciega</keyword0> a todos los enemigos"
   },
   "content.card.dawncall-attack.name": {
@@ -3176,7 +3176,7 @@
   "content.card.dawncall-attack.v207aea3bff659874.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
-    "sourceHash": "3e38ceb968860fb3f85580d418155ab522477950e159a8a507ec304093ec99f9",
+    "sourceHash": "1c1ca951e03b3aece260844d1acf4ca2041bc8832078801a0d5b6d63c65e2232",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> a todos los enemigos"
   },
   "content.card.dawncall-heal.name": {
@@ -3188,7 +3188,7 @@
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "967fea2e97609654f5608981b6c659163e7c9fe39b94b8236783bbe02ada570f",
+    "sourceHash": "3b1104f6a51cfe83aebe4f0cf3eed54e31ff43e87d111b164356c14458479f75",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.card.dawncall-teamCleanse.name": {
@@ -3200,25 +3200,25 @@
   "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
-    "sourceHash": "6658e705dd079e69d688c5bfa2ccc5ae0d7bd55a931560e1c2d40a320c6d804a",
+    "sourceHash": "2e1de9ed71a4d463f99ef46a39179c8816f0bb761fdea7ff6d5db33b24c87500",
     "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Roba {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
-    "sourceHash": "dfe9adba265f115073052a260c5b8c310cace6a2e1ff56d8e77b69c574ffeb0c",
+    "sourceHash": "fd56eab8a4b2cbe60669b96f538324820bc4f78b7a20f25c004b339714e6af50",
     "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
-    "sourceHash": "2c3e1606b3f6f7c022dabe3206036d261095f521184f3a264fdadb820b9feb92",
+    "sourceHash": "871834365f26c0308eaabdb061cb5a33c2e8402965f2a28000d61af93c71263c",
     "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Roba {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
-    "sourceHash": "56511566b9c75e4e851a3e4f0bec79acfc7f474aeecde73b1dfc43947b6ac9e5",
+    "sourceHash": "901161633c12a752014ad2e6d4dc21ca7693dff1a023638bd72835a03058ec71",
     "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
@@ -3230,13 +3230,13 @@
   "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "4ecaef285efc5780cb10c2f04976db461d0092d69bbf7489e401ef1e0f662057",
+    "sourceHash": "dfc37a71c7de57f85a672521a22a49f04b6b0d7d747d23cc26f51a5bd7eebdb0",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> / Obtiene {{value1}} de <keyword1>Maná</keyword1>"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
-    "sourceHash": "875f90e34031faa2eee6418cb1a9a7d538dd15de57d6c98ba61f96d96088f85f",
+    "sourceHash": "e8379d712d0dc5ac93d54b4429d89ce7f18ee96d9db8e881c7187b31ce5c5b06",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>"
   },
   "content.card.dulcera-hushed-waters.name": {
@@ -3248,7 +3248,7 @@
   "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
-    "sourceHash": "ab1b76a534c9c1883749037f45ddf194a2ac233cb50a4f2fb505caf8ea3a7855",
+    "sourceHash": "b8415fbbbfee95325702cbaa2a3314ab443590810b58917f3a0d2a9609280999",
     "text": "Cambia por una reserva aleatoria / <keyword0>Purifica</keyword0> a todos los aliados"
   },
   "content.card.dulcera-meadow-shelter.name": {
@@ -3260,7 +3260,7 @@
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "8becd85c3a1018ec49646e635d37befd6c4d7dfebb191ce2313e1186f728101e",
+    "sourceHash": "0e78501e25ede4ad41b9b1b4e7337775d549a577aab77800913e6cbc0b8de09c",
     "text": "Los aliados obtienen {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.dunefox-attack.name": {
@@ -3272,7 +3272,7 @@
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "443843fffda505d828914fd1770c5aa22d1ca5f3a44125e15e0c43f74eb175c7",
+    "sourceHash": "e7a86dac97b9ebd1e6885547f359e3622fda5e4058d2a8bbdc33aae1ccf6de32",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>"
   },
   "content.card.dunefox-dodge.name": {
@@ -3284,13 +3284,13 @@
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "d05e6317f5c2b0b25e748cf3e3cd13e5869f3f7aa7408153d6d6c324d8fef818",
+    "sourceHash": "a29ef2df2a796a849e8f5071c885439d45a20fe51302e4b70faa02478c6c346c",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno"
   },
   "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "1f8949d0ae30c16ebe6de364e8b68b699ab30d268df50116ab27ee522d46983e",
+    "sourceHash": "d1e55d99e7ed288552935278f287ba8c7975b273078e0c7744894bfb6946d4ea",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno; Roba {{value1}} carta"
   },
   "content.card.dunefox-dune-whirl.name": {
@@ -3302,7 +3302,7 @@
   "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "036f7cf846078360d2250b6bac3bed97fa260a59f6e722a907dc83cfdcad34db",
+    "sourceHash": "36eb3aa0bfb091d9d692b8560c33818b12084dfd07e6a8de8fdbedfa7f2b832e",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0> a todos los enemigos; <keyword1>Ciega</keyword1> a todos los enemigos"
   },
   "content.card.emberback-attack.name": {
@@ -3314,7 +3314,7 @@
   "content.card.emberback-attack.v49693240c378631b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
-    "sourceHash": "02b477954d5e506c572c1ecbf6f8f9666cdd1b763ba8212b8a933289fb1c61c2",
+    "sourceHash": "4e1cddd52223b81a166fc3aa854e0188ef5d4c67557dcf1d46e075ffe83964ba",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>; Obtiene {{value1}} de <keyword1>Armadura</keyword1>"
   },
   "content.card.emberback-furnace-breath.name": {
@@ -3326,7 +3326,7 @@
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "d9b3177222d40ea762ad0ed0953457a1e8336dccbe2806828c663d8131a867a9",
+    "sourceHash": "75d47130691c5ec50f60668c98c12493ee777da3394b09ace6a9745f35073782",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos"
   },
   "content.card.emberback-magma-stomp.name": {
@@ -3338,7 +3338,7 @@
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "7bb5fd4a6053cd6367cdaa79b1b57a56c9432e176c32aec2022810eafd9d7243",
+    "sourceHash": "2cbba53fc3d3f5fd887e40ec4c0faef41f456ea7365b7bf3d96ad7d0bb48a90f",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
   },
   "content.card.euphera-possible-path.name": {
@@ -3350,7 +3350,7 @@
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "e566a3433226e2f8ee89707f25a18e5151a80d7082143961a86b2dbb4fa69159",
+    "sourceHash": "fa3c644199129c959e69f91d231335474e26c33dd73244961200b28c234afe25",
     "text": "Baraja tu mano en tu mazo; Roba esa misma cantidad de cartas"
   },
   "content.card.euphera-twilight-lance.name": {
@@ -3362,7 +3362,7 @@
   "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
-    "sourceHash": "a276f6c251afa3bdfc4cdc58cca154d3b2ec50bd11b9fbb7b3b5fec71d3fd400",
+    "sourceHash": "e7867f27ddec7333137feae524254a634e2ce817a61236135603e6b67de5a47f",
     "text": "<keyword0>Purga</keyword0> las <keyword1>Espinas</keyword1> enemigas; Inflige {{value0}} de daño de <keyword2>Luz</keyword2>"
   },
   "content.card.euphera-wish-exchange.name": {
@@ -3374,7 +3374,7 @@
   "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
     "reviewed": true,
     "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
-    "sourceHash": "a2e8816ade4eb068a2a228458b71bc321baf32ae26fc70af8239c3422bf19d7b",
+    "sourceHash": "9fab43d04f918cca2973534c0fd14f99de25c55624cd146c56de66f983f57546",
     "text": "Redistribuye por igual el <keyword0>Bloqueo</keyword0> aliado; Los aliados obtienen {{value0}} de <keyword1>Bloqueo</keyword1>"
   },
   "content.card.food-apple.all.rule": {
@@ -3440,7 +3440,7 @@
   "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
-    "sourceHash": "f24ea9cac04b75c0acee9f968c8750a7d9bd5ac82487647a6ec3684aa8837097",
+    "sourceHash": "bed995d64efd11e8a6281377d102e0f09653817b9780db4b88667dec9402a577",
     "text": "Inflige {{value0}} de daño de tipo <keyword0>Luz</keyword0>"
   },
   "content.card.glintstride-dodge.name": {
@@ -3452,13 +3452,13 @@
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
-    "sourceHash": "73a5141e0f1105961bf122af94dd38c178e39ef436812919f797757fa784c118",
+    "sourceHash": "ce53b446654d8228baf213e376ebdd5c6992145e880e3bcc6f5eaca0bbdd8c29",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno"
   },
   "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
-    "sourceHash": "7a97a45c305d05db9de043b06c5728f76b26b6b73706c699b206e6401737f6ca",
+    "sourceHash": "fe67f36bebde6c7195b18d9a4b9f8b5dd8ac4c7e535060c83618c8477e44bfaa",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno; Roba {{value1}} carta"
   },
   "content.card.glintstride-teamBlind.name": {
@@ -3470,7 +3470,7 @@
   "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0> all enemies",
-    "sourceHash": "46e1f70fed31d1dacaa3f9059e6924bb2dfb73c96efcd65bb3c33d41923e25a8",
+    "sourceHash": "889fa2d3822f5eda6540e489f09fa32e123b558d1ed6bae58c1822aea1c41293",
     "text": "<keyword0>Ciega</keyword0> a todos los enemigos"
   },
   "content.card.memento-drowned-revelation.name": {
@@ -3482,13 +3482,13 @@
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "b2f2eef928aba54d0c8d8a682c2d1e69f52ceb68f2634abc265a2f8df758ee0d",
+    "sourceHash": "d011adebb3075da2870ca092ad552092b5dd9a9c4809854bf4f955c6c2b6161d",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "3e74f4e3fa10de91f59eede84f72ce57becb4d37575fd7b78763a1694ae9223b",
+    "sourceHash": "d8bec98ac7755dd0c3dc2a738a800567c453e0965362f21502d2cbf18747ae1d",
     "text": "Roba {{value0}} carta"
   },
   "content.card.memento-lost-procession.name": {
@@ -3500,7 +3500,7 @@
   "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
     "reviewed": true,
     "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
-    "sourceHash": "434ca1910700c701c3140a1bdb104e47912aa52bf938f268ec0ac891763ba609",
+    "sourceHash": "d6247d7ea39008594fee082cb7e36432ccf376284491a88d143ec785205d64c4",
     "text": "Invoca un Eco / Restaura por completo la <keyword0>Salud</keyword0> de tus esbirros"
   },
   "content.card.memento-pearl.name": {
@@ -3512,7 +3512,7 @@
   "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
     "reviewed": true,
     "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
-    "sourceHash": "20fed5f707c5e0a7a31f84cd77c7f48c0827d88e5f3dc6923dbd8563a5e267d8",
+    "sourceHash": "6989588f9f20efc716420c224fdeb329b873b3f585a6c8561cb2e3e339fa2a0a",
     "text": "<keyword0>Consumir</keyword0>; Obtiene al azar {{value0}} de <keyword1>Bloqueo</keyword1> o {{value1}} de <keyword2>Maná</keyword2>"
   },
   "content.card.memento-treasury-echo.name": {
@@ -3524,7 +3524,7 @@
   "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
     "reviewed": true,
     "source": "Create {{value0}} Pearls",
-    "sourceHash": "aee0b16103c38828d983b6f5796075f90b89bbeb7223670a3523cb0d623b7712",
+    "sourceHash": "e743f9236cadd7154031e786383a2dad0fe83786ffa7cad97dfe9f5ecf0be2df",
     "text": "Perlas creadas: {{value0}}"
   },
   "content.card.mossguard-attack.name": {
@@ -3536,7 +3536,7 @@
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
-    "sourceHash": "bbb619122dbb271ab08ca7b361187cfd8d5897f848889c028da7e572f5d0d329",
+    "sourceHash": "914512ebf02e5ec7fbb032562a1dc1264bcbd23c405bd7e6af18c096300a83bd",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
   },
   "content.card.mossguard-guard.name": {
@@ -3548,7 +3548,7 @@
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "1810cb5aed65fef2ed5bec4e1b8c2c945bc24b8a1706793b344702d3dd03b85b",
+    "sourceHash": "299506736b5843699c1a8ae4a553752befe4be1c73cfa7c3c788d4955e8d0c94",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.mossguard-heal.name": {
@@ -3560,7 +3560,7 @@
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "f17347b3c288a64bc15bd2a3e991441e9763c256d4228c5ef4a1e7daa27e1566",
+    "sourceHash": "7add2a366f4610e57f977a006d6be6a3a86253dcba9a72923b184fbb22a1e738",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.card.neradora-bloom-shelter.name": {
@@ -3572,7 +3572,7 @@
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "219afe2123eb99d6239147b2adecc2eed0f23e14694b44e55e48c6c9894914d4",
+    "sourceHash": "9226e6b19be53f26c0419a165e2586a7b752a0be28be17aa7eb76bfd8bb110a6",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.card.neradora-tide-cup.name": {
@@ -3584,25 +3584,25 @@
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "74cd6b2311b26cab3d6fc648ce64c684647e5a6ded635bd6a7ad4a9be62826c8",
+    "sourceHash": "6d4fa4d5605bd4a4f9a7d9790871f96a67c947c6a12427e9d4200be8f0942e12",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "22a012e00361b85d83c81df32a126b48fdf1cdc93940304355eaf3ee7777ecec",
+    "sourceHash": "c53999f0209e2477fc3e9bb3e47df32886653acf5ee55e077f1bc316772488aa",
     "text": "Roba {{value0}} carta"
   },
   "content.card.neradora-tide-cup.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "d6b9ecc3775c746d6e109f74a16c2b9a136e1a9483a334fa87bc3746997a038d",
+    "sourceHash": "24609cc3a7bc7526d4ae904d1c9fb264f19f0d924089a557d0f00b0aaa888d83",
     "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "e85d53fb2f226c238269c0f73acd859db1625464d58d133cc8dc039b32b21ae2",
+    "sourceHash": "4a5487985dfe5908d99fd7a6500516d0c3e1b902c967ce23de169f697e8c87f7",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.neradora-undertow-knot.name": {
@@ -3614,7 +3614,7 @@
   "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
-    "sourceHash": "dd73a617e5a9d98f3955e266daa102cfdc2ed4bc95dd9f473df7356ae55f4df8",
+    "sourceHash": "13eace688983b5552ac34a379b5abc2cf224457e5cbd3d40dd5883612587bc56",
     "text": "Obtiene {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Purifica</keyword1> un efecto perjudicial"
   },
   "content.card.oathara-never-lost.name": {
@@ -3626,7 +3626,7 @@
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
-    "sourceHash": "859c63fca49ab0e06d191c13a571b3ff2575f97b69ba04311bc0782295229571",
+    "sourceHash": "0112b0a6db256c6039d04674aa42d03ca62b9901f39776231df64ab31d261b93",
     "text": "Baraja tu mano en tu mazo; Roba esa misma cantidad de cartas"
   },
   "content.card.oathara-travelers-ward.name": {
@@ -3638,7 +3638,7 @@
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
-    "sourceHash": "08287adeccfdde1dc9b6e675aff1d8b1c4093e6368d223540d15930a53d4dbe9",
+    "sourceHash": "3fd981bf54d0e0997dd533a6eee2c4bd7423d0da6a2bea8fcca58ac5e4062e9b",
     "text": "<keyword0>Refleja el siguiente ataque</keyword0>"
   },
   "content.card.oathara-vow-of-return.name": {
@@ -3650,7 +3650,7 @@
   "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
     "reviewed": true,
     "source": "<keyword0>Resurrect</keyword0> an ally",
-    "sourceHash": "29bc3cc46e2b02b5b46bfcac5e3e217f1edb7cd0aa95628bfb7aef2e082810c8",
+    "sourceHash": "de3641c38d1ff38e3184994af01d51dde972be3f6f02ebcc311867e0047f82e6",
     "text": "<keyword0>Resucita</keyword0> a un aliado"
   },
   "content.card.orifable-attack.name": {
@@ -3662,7 +3662,7 @@
   "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
-    "sourceHash": "db8fc0d2b826252fcc001e7a99a2362d19ed05012579b8912550673c3efb24ab",
+    "sourceHash": "3d8b7611b664166d39a782b3e2f652b21b84ed207f94aa1295d525ff27902b68",
     "text": "Inflige {{value0}} de daño de tipo <keyword0>Físico</keyword0> a todos los enemigos"
   },
   "content.card.orifable-createFood.name": {
@@ -3674,7 +3674,7 @@
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
-    "sourceHash": "b366a5a1d4cde8aff2187aab0130fe5b3735b17671d3d934aa7477728718216b",
+    "sourceHash": "bbbfb76ad3faf6f7675685bafb3ba4c08d8e28930604bff60cf8ebf0af2ee36a",
     "text": "Añade <keyword0>Comida</keyword0> a tu mano: {{value0}}"
   },
   "content.card.orifable-heal.name": {
@@ -3686,7 +3686,7 @@
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "aeb7841dcf3e0b1611e9045ed54710e862372206a3564bd118c50a2cb0d80b76",
+    "sourceHash": "61a1576f4e573441e2f2c47a1636821818d6140c447c57241d5f44bb35f82d20",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> al aliado más herido"
   },
   "content.card.parhelion-polar-reprieve.name": {
@@ -3698,13 +3698,13 @@
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "db11a561e5dd4e4655a5ec36ddafa338768ac598fa4c4bde99deeb25d30e06f7",
+    "sourceHash": "db3842d4161faa9f149f18c50d3c6c14ab77c2f93208c51e2e02c90e4b60b603",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados; Roba {{value0}} carta"
   },
   "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "0ba82cc03ebe16adc8d7bfa4560d46a4d935bbe68aea7232a772cd17707048cb",
+    "sourceHash": "20c4be182246a83c6346030d559f173d6906b6114e0c3cd4f952089a3b10af01",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados"
   },
   "content.card.parhelion-sundog-reservoir.name": {
@@ -3716,7 +3716,7 @@
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "ba506b31f7d58e7fa58299b9b8ff06e5959f4369cabd102a8d57ad91b1c839dd",
+    "sourceHash": "1556a56a994c4321d0f6ecd5fd7c16cd04b0ea474cb5767b11c3de6f3e3e55b6",
     "text": "Obtienes {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.card.parhelion-whiteout-waltz.name": {
@@ -3728,7 +3728,7 @@
   "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "d144b05fc96330f941be249f74774a7af7110fd8700b024f334d4b6d17f90b93",
+    "sourceHash": "45f6835035bf99f159963052b6c84bb8937e6d79ea495fbeb97854c5f9072bef",
     "text": "Inflige {{value0}} de daño de <keyword0>Congelación</keyword0>; <keyword1>Ciega</keyword1> a todos los enemigos"
   },
   "content.card.pollenmoth-attack.name": {
@@ -3740,7 +3740,7 @@
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
-    "sourceHash": "ca917ccbb67213e6bfe005b2b7a76969d4903b21fb62feec9647fd6c1452515b",
+    "sourceHash": "65c822e78daad1ce98d2e24a0f09d8ceaeb987982040343ebf7546791a0e1a03",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> a un enemigo aleatorio"
   },
   "content.card.pollenmoth-heal.name": {
@@ -3752,7 +3752,7 @@
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
-    "sourceHash": "436553ff7a2b6f4e0a0cf93d45aa4d7391a29272bec3e7597a701ad4a21b89e6",
+    "sourceHash": "37b2ac12172d47a5677b84ccdae314aa41a91f162355604824164ab7549a5997",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> al aliado más herido"
   },
   "content.card.pollenmoth-teamGuard.name": {
@@ -3764,7 +3764,7 @@
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
-    "sourceHash": "1102eaac10756dcd8bf766e5982f582188147b29279dd13978e2587429eaa9d4",
+    "sourceHash": "621ee36e7a2aadaa4467f6cda25f64a4e24addde4256a5ff8edc8bf8e1dbe437",
     "text": "Los aliados obtienen {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.card.prismram-attack.name": {
@@ -3776,7 +3776,7 @@
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
-    "sourceHash": "9594a3128241442a1b608f159009d280c6e207988c66dd88ef1477f0015eb03c",
+    "sourceHash": "056dac0dbbecd6db23edbca1344027016b8ea3896fdc47da6406e4c6b42bfbe5",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>"
   },
   "content.card.prismram-guard.name": {
@@ -3788,7 +3788,7 @@
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
-    "sourceHash": "7999c3fc8b287126d65dfd8d448f21769f648e33acdf1f098ac1a8544a41dddd",
+    "sourceHash": "f15f0955a60c6d1d983510eaac5b4ab7d4f2e4c999f0de523771a1187d3de11a",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Refleja</keyword1> el siguiente efecto perjudicial"
   },
   "content.card.prismram-spectrum-lance.name": {
@@ -3800,7 +3800,7 @@
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
-    "sourceHash": "774abf58e44bbc1658b7d3d682915371b31549d73536def5af1fceb92ae910b2",
+    "sourceHash": "ae74a11e9be30f3da65e4e3467f0907b26b42eab3a97b9c4fe00e7494066d38d",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0>; <keyword1>Purga</keyword1> al objetivo: elimina {{value1}} efecto"
   },
   "content.card.pyrella-ember-harvest.name": {
@@ -3812,13 +3812,13 @@
   "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "bf4cf2a4da8c5c042399e14eaed6d25ff31a55c1f3fd4cb741173646be3bc102",
+    "sourceHash": "9564305c8863bdabbfd9f5867d7e0a3ea1c26aeb603f21da3282c2317f478514",
     "text": "Restaura {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
-    "sourceHash": "c5fe4e7181fb8fa65647602f0ef96c5d7df089f68167c58f8b2eca411af8213e",
+    "sourceHash": "b480d642e9337ddd18f38ba173dd28966e40d299affd4ebf57697384802da5f5",
     "text": "Restaura {{value0}} de <keyword0>Maná</keyword0> / Roba una carta de <keyword1>Quemadura</keyword1>"
   },
   "content.card.pyrella-festival-burst.name": {
@@ -3830,7 +3830,7 @@
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "a2682da865998ec570ad6e7096a5d351d5d18588dbfc31c0bdaff80b8ad8d2ed",
+    "sourceHash": "d63d18f1a00ee03f1d4d25bffb0790261a9bdcac44c81674584472dcab54d8c8",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos"
   },
   "content.card.pyrella-spark-decoy.name": {
@@ -3842,7 +3842,7 @@
   "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
     "reviewed": true,
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
-    "sourceHash": "c1cc74f2585afe8a37038253bb2c8a68c82a22587fbf67628efee947096362b0",
+    "sourceHash": "e6a6e57b7e93b2e44d60974d835401d5d1834e31ad68d69196b2026f8d39f760",
     "text": "Aplica {{value0}} de <keyword0>Quemadura</keyword0> a todos los enemigos / Obtiene <keyword1>Anulación</keyword1>"
   },
   "content.card.reedstag-attack.name": {
@@ -3854,7 +3854,7 @@
   "content.card.reedstag-attack.vaf3db517079be41f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
-    "sourceHash": "c6eee23e019d5211ab3c791117ee799cff323a31f82653fac0d946816d1cc52c",
+    "sourceHash": "b124ab3c3a6f83ab93f99b27111c51ca8ff2fde7c956024de342a64a9dfd8f80",
     "text": "Inflige {{value0}} de daño de tipo <keyword0>Naturaleza</keyword0>"
   },
   "content.card.reedstag-guard.name": {
@@ -3866,7 +3866,7 @@
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "1c3a661e0018fd478f6e9fecf91cffa2088f16cdb0cd08fd618cb489cb7517ac",
+    "sourceHash": "728a509213a22a3200e32875b45cbb248c366e20792d31ab92146324c068363b",
     "text": "Obtienes {{value0}} de <keyword0>Bloqueo</keyword0>; Obtienes {{value1}} de <keyword1>Espinas</keyword1>"
   },
   "content.card.reedstag-heal.name": {
@@ -3878,7 +3878,7 @@
   "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
-    "sourceHash": "c18ea18e3fa728ca48d0281626289a6daf8e33517ac6401eab96ccb298fd02b3",
+    "sourceHash": "5db3f5740c5bafbe9c3852813fc83dd3a705f4148ad397e6849391db81a2e75c",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> al aliado más herido; <keyword1>Purifica</keyword1> al aliado <keyword2>curado</keyword2>"
   },
   "content.card.reverie-dream-double.name": {
@@ -3890,7 +3890,7 @@
   "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
-    "sourceHash": "b1a5ffb1f0becf41ef0b83df74e706251173780be9a87b09714bb9b80bd68190",
+    "sourceHash": "9c309a7357e5903ce3a7f761ac3f6be8b848f15259b71d41f7865fc7911043ec",
     "text": "Obtiene {{value0}} de <keyword0>Espinas</keyword0> / <keyword1>Anula</keyword1> el próximo ataque contra ti"
   },
   "content.card.reverie-nightmare-harvest.name": {
@@ -3902,7 +3902,7 @@
   "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
-    "sourceHash": "af3dacfacff9bfacd6c2451ffc93ee7b02ae25c0fb779167d2d96410f0182e9f",
+    "sourceHash": "02ddff04b1a8b4168219ea9dc0ca870e5a8162d687ebdcc7a9059c58c95f212d",
     "text": "<keyword0>Purifica</keyword0> a todos los aliados / Obtiene {{value0}} de <keyword1>Maná</keyword1> por cada efecto eliminado"
   },
   "content.card.reverie-waking-wonder.name": {
@@ -3914,13 +3914,13 @@
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "cd351bb500f7473207d702cd274d706fd0c9f228024fcbc8305bfaccf3487efd",
+    "sourceHash": "aa1a5eae540ec9d27ad747d2f38cae93264b89b8273d64f13ec86fd59dc3c5a3",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "63a2b119e208f1f91b238bbec679eae86180b8f8c72b137a2f3032250a6400f6",
+    "sourceHash": "cc35501203673bd83193438273274c2ad381ed37a2a5235a458851f47188d3a1",
     "text": "Roba {{value0}} carta"
   },
   "content.card.ringpalm-attack.name": {
@@ -3932,7 +3932,7 @@
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "6c53f40ee5b1b178418b4d3ae11e7b2253fe9672ae8d12dcd85cb848d370d9dc",
+    "sourceHash": "b493cd91751994a90c5407924ff6fe7922c40155fe094be8b25cffc9bc84fdb0",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
   },
   "content.card.ringpalm-harmonic-set.name": {
@@ -3944,7 +3944,7 @@
   "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
-    "sourceHash": "f3a7526f221a105c27a0bc0cf4955229a2fd9cfb184727d5665fb65dfc698dd6",
+    "sourceHash": "52a8dfad2d5f627d77339d5ab2c462e567cea2978f14b5563e461b9351981529",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos; Obtiene {{value1}} de <keyword1>Armadura</keyword1>; {{value2}}% de probabilidad de repetir"
   },
   "content.card.ringpalm-teamProtection.name": {
@@ -3956,13 +3956,13 @@
   "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
-    "sourceHash": "4ec45ffec6122f97a9d237790fa1e26379fec8ebc15588cc0cd98b9ca68e12cb",
+    "sourceHash": "71f9e24c7a8753ed106cb8f288db427272b84dacc2772f3fbc12386b1106ed8c",
     "text": "Otorga a todos los aliados {{value0}} de <keyword0>Bloqueo</keyword0> o {{value1}} de <keyword1>Espinas</keyword1>"
   },
   "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
     "reviewed": true,
     "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
-    "sourceHash": "2e465dfb4849fd9faa14c762521070a7b9a229cae07a2d9a70e3e2bdf3ebef31",
+    "sourceHash": "7191246e99f58560b0316d9e6f17a904f4009b04676dc10f1c8bc971704ba78d",
     "text": "Otorga a todos los aliados {{value0}} de <keyword0>Bloqueo</keyword0> o <keyword1>Espinas</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
@@ -3974,7 +3974,7 @@
   "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
-    "sourceHash": "81e44eb46ece319f387f371ee8f2b603ecb2a3cdb537607e9ac6bc79ca24c16a",
+    "sourceHash": "1cdfb64247cd2140a78e35e294311522e60acefa769a7e1ed1dfc990159689f3",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> a todos los enemigos; <keyword1>Ciega</keyword1> a todos los enemigos"
   },
   "content.card.rookhaven-margin-of-possibility.name": {
@@ -3986,13 +3986,13 @@
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "635744efe650886dd697527e1f837a01cabde1e02d11794a981e007e9f497560",
+    "sourceHash": "e87f7063ce88637f0b5c12e0571356943622c4e671589711b315dc5c26c499a5",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "f68700f11b487473ffaff099d7e6a8eba417d99ab7fc4e93b04f083395b4e99b",
+    "sourceHash": "e7a3842e29be0bf908fc6ac98d3a4735aace4fec5398fc3855446cd78e8f9824",
     "text": "Roba {{value0}} carta"
   },
   "content.card.rookhaven-unwritten-ending.name": {
@@ -4004,7 +4004,7 @@
   "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
-    "sourceHash": "d01ec70ba1cb73c881e2e2a74171b9c9f154aab79dcbcec9985a8170c56ae205",
+    "sourceHash": "fd0fef8d0d994a60d81398d006598840a5d7e1969e2b7a9f4bb40d7d568ae92c",
     "text": "Aplica <keyword0>Purga</keyword0> a todos los enemigos"
   },
   "content.card.shadebrim-attack.name": {
@@ -4016,7 +4016,7 @@
   "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
-    "sourceHash": "98ee85ec896af4d90ebaf9bf69b83a63c77fdcc2de154c47ff5fee9e66be22e0",
+    "sourceHash": "59eb07a8a031639caed26de5902547808923518723a492b8867f2f7399701e35",
     "text": "Inflige {{value0}} de daño de <keyword0>Congelación</keyword0> a todos los enemigos; <keyword1>Purifica</keyword1> a todos los aliados"
   },
   "content.card.shadebrim-draw.name": {
@@ -4028,25 +4028,25 @@
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "5fcb5dee70f184b9fa46e2699b549afe8b15cc047231c64ce1d8252307e644a0",
+    "sourceHash": "d15e06e18eb208fba1ef8cc2f529b172509e0c9a8e1f7bf972684ac88553f418",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "642b9d5483897296b72bf3c6157986109f1c73f426d9c677db1c9c00cc9ce9ea",
+    "sourceHash": "a3218b8a5abaffbd5a15e8a073229b4aa6fc466f9416fc3d25421b8d17e6547c",
     "text": "Roba {{value0}} carta"
   },
   "content.card.shadebrim-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "c6cade11525e30eab313274b27ac475277bd0f0f91031be9dde4c41588a13d50",
+    "sourceHash": "1adc146ece0e57d2095a80811f6a9ada6f5d4be6e2feec49a66c55dff763daa4",
     "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "5120fcec5e11a9be41fe98021c60482d82270ffa928fcd7052a6e36d15d6200f",
+    "sourceHash": "fe686e50901e262adb6053aaebecb545d63357ea985983a535e4825a695c62dd",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.shadebrim-guard.name": {
@@ -4058,7 +4058,7 @@
   "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
-    "sourceHash": "7037efc569590fcbdeaf4eedbd5b906fff1f2e81fb7b7fd2078381ff99ffa263",
+    "sourceHash": "37a3c8b092a850a51ba7b5a70515f3681eaeec7472eef70883de5466c51e769c",
     "text": "Obtiene {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Refleja</keyword1> la próxima <keyword2>Quemadura</keyword2>"
   },
   "content.card.skybex-cloudstep.name": {
@@ -4070,7 +4070,7 @@
   "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
     "reviewed": true,
     "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
-    "sourceHash": "2a023f6fe5a311c920b6de3f80e9b94f3e64785873081be064ccd98599bb2c48",
+    "sourceHash": "ca611b118c335878d98549eb916301d9c8c5e1cb0696bba945e3f5603d4f954b",
     "text": "Cambia por un aliado aleatorio / El aliado entrante obtiene un {{value0}}% de <keyword0>Esquiva</keyword0> hasta el próximo turno"
   },
   "content.card.skybex-draw.name": {
@@ -4082,13 +4082,13 @@
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "aea634036065307c7dde18067820f2ab59eb57cef1d029378700504c63ff8f38",
+    "sourceHash": "41b9738ccbf3ae74d176f2afc8735acdb902bfdb8b721ecef1ad750caeab8b6b",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.skybex-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "cdc22602672c38da44645d24d6f2bded06b159dd8f875e0264c9472ce8d296dd",
+    "sourceHash": "6b4c29d24dab09569c7de717af26614fc13dfcfcb53663c149d1fda43f7a0c4c",
     "text": "Roba {{value0}} carta"
   },
   "content.card.skybex-sky-shepherd.name": {
@@ -4100,7 +4100,7 @@
   "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
-    "sourceHash": "64a2ed32287444be62ff596af6b9a48e8b9442a1eb66acc4dff4a1492be46170",
+    "sourceHash": "edb3254894580fb9a9ae4129f8aba9baa38cbb89270e1b7f2fbf4b83394f2e7e",
     "text": "Inflige {{value0}} de daño de tipo <keyword0>Naturaleza</keyword0> a todos los enemigos"
   },
   "content.card.sternshell-attack.name": {
@@ -4112,7 +4112,7 @@
   "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
-    "sourceHash": "fed858f05194ced0f01a19531fa78e6428ad1ffee7cf3a8c7d81088a063bbfd1",
+    "sourceHash": "18dda1d20ce055ca02f3975586525ff8824c2bc1137e078927daa79bc592bbb0",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>; Se duplica si tienes <keyword1>Armadura</keyword1>"
   },
   "content.card.sternshell-spiral-return.name": {
@@ -4124,13 +4124,13 @@
   "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
-    "sourceHash": "aee16cba30dd8bba8b2c83b60562c21aa197b0f573e240f08a3c6b74057073fe",
+    "sourceHash": "828a8e3028cfcc94eef101dd730705227ed38ad7ec55db76e4284f17bd41fa98",
     "text": "Inflige {{value0}} de daño de tipo <keyword0>Agua</keyword0> a todos los enemigos"
   },
   "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "5b88ddf2e623ee59d5b5b98624cb0eb9c9c50ba5dab9bec747dcefe11a88d25d",
+    "sourceHash": "ad111f1f70bfb4e447d88682a2325a8fdf1a9ae42f96209a1fe66dcafc3e6cb9",
     "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> a todos los enemigos; Obtiene {{value1}} de <keyword1>Maná</keyword1>"
   },
   "content.card.sternshell-swap.name": {
@@ -4142,13 +4142,13 @@
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
-    "sourceHash": "9c0317a550cf6e00bc8c292ecfff20da10cc05a48f329e0381ef28b1d5079c26",
+    "sourceHash": "0af6564d5b412cd500a17908d4c35d82fdca191302a5476769a29b496beb4f9b",
     "text": "Cambia por un aliado de reserva al azar"
   },
   "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup; Draw {{value0}} card",
-    "sourceHash": "c5a0acf02f1de3ce84e065ec946d1f8359a1a831b981c849530fdc0537da70c4",
+    "sourceHash": "932870989d64abba094d2d287c0423d8ce39945c1d5b3a9dd58b57a0ae099d6b",
     "text": "Cambia por un aliado de reserva al azar; Roba {{value0}} carta"
   },
   "content.card.stillara-reed-reservoir.name": {
@@ -4160,7 +4160,7 @@
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "a2337b273a3694740d7a2d719f2c8c4f4db88f4f9697e051f5ba5e0a41c0ed30",
+    "sourceHash": "08199d71f2afad5454c062c6705c9d8d011825007754a9cee9cf0ee80fb5fe3e",
     "text": "Obtienes {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.card.stillara-thaw-path.name": {
@@ -4172,13 +4172,13 @@
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
-    "sourceHash": "1082f6d2c4a9bace2affcadcfb7a689b59fc493fda499437b08e09e220b3f6e8",
+    "sourceHash": "0fa51daea5ffa9b5052246b1f9cfef2c9fe4f8e2e1ecb6b7a04c37c3ed6c9a6a",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados; Roba {{value0}} carta"
   },
   "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
-    "sourceHash": "6727da462094b87a507b0ae10ba21f057314710a45caee4e054934e43b106a5d",
+    "sourceHash": "f5f07c4f76a5ea5f78476d922013014ed2aefc3f3c99d2482e2408d69a6daa72",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados"
   },
   "content.card.stillara-water-remembers.name": {
@@ -4190,13 +4190,13 @@
   "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
-    "sourceHash": "a72f674a28871f1fdf24395bc9fe2c2219fc8eb87d10208ea6c3127c635ee514",
+    "sourceHash": "5e8f40042605a8e505402ef2b3978b1b9376b5fe14e80290dc4d0725a81f235f",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; Roba {{value1}} carta"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
-    "sourceHash": "86aad356e71ff49005c7e6ee50779bc5104b0c96707f626e60f593ac5b2dc124",
+    "sourceHash": "67a853e0a6977cf370f0f9c27b0c4ccf4761a6a2ba6b434e3140ff4b7f10a048",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.card.tournelle-attack.name": {
@@ -4208,7 +4208,7 @@
   "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
-    "sourceHash": "9219ba4a0f604a1f136c582a37b4c56e13a79969f9dbf415f9566384aad654bf",
+    "sourceHash": "dd01cd10cd1a93e88a7e2b1841e725455ed40f5d3335bd99ea3ebaf116fbe7b7",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> / Se duplica contra enemigos con más <keyword1>Salud</keyword1> que tú"
   },
   "content.card.tournelle-swapLowest.name": {
@@ -4220,13 +4220,13 @@
   "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
-    "sourceHash": "7a8975b8f1e0b501acfd67d026a42b52c732fc38115fec198b26ea505d175ff8",
+    "sourceHash": "ace5aad537a9805c38a47bba02c72f98ed055cfb720bdaec6fa22c72ba45497d",
     "text": "Cambia al aliado con menos <keyword0>Salud</keyword0>"
   },
   "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
     "reviewed": true,
     "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
-    "sourceHash": "34df70b44215abe09b0701910e02c1ce270d4dd63199753b0a5e557238bc628d",
+    "sourceHash": "83a6218b38cd9638cbb29fe302fce54f29fecf27dc60f256fac053988a4fbbfd",
     "text": "Cambia al aliado con menos <keyword0>Salud</keyword0> / Roba una carta"
   },
   "content.card.tournelle-teamClearBlind.name": {
@@ -4238,14 +4238,50 @@
   "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
-    "sourceHash": "54ecc32bfbfa650cef829ed5792125b6d6cfa15d0ae408cf577a72a50a383443",
+    "sourceHash": "243b0ad5161554e5fdfc6fdff8269a12ec46716720eba2553f583d2cbdcc2550",
     "text": "<keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
   },
   "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
-    "sourceHash": "56634dcfdfd5df3595716cf88b80d734362d6d0fdf2985f30e7a66c7f987fe82",
+    "sourceHash": "52cf056daedf39c339ed735a395719603ffabf3b2940dff9559f57b8a3898451",
     "text": "<keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados / Roba una carta de <keyword2>Luz</keyword2>"
+  },
+  "content.card.vitrilo-kilnheart.name": {
+    "reviewed": true,
+    "source": "Kilnheart",
+    "sourceHash": "b61f0381f48cc47e8a81cd2d6ca8da90b2e8bbd7f7d131d8f5ecd5cad939dd7a",
+    "text": "Corazón de horno"
+  },
+  "content.card.vitrilo-kilnheart.v8550d6fc467780eb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "0726cd153ea471c67a02a48e04d63fa9678836aba4e6fa5ba5bb8ed1dfca7dca",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>; gana {{value1}} de <keyword1>Bloqueo</keyword1>"
+  },
+  "content.card.vitrilo-prism-key.name": {
+    "reviewed": true,
+    "source": "Prism Key",
+    "sourceHash": "193e2f4b258337106106789ffca7e5d1a80807d23a671c8b806f1b863bfa8a58",
+    "text": "Llave prismática"
+  },
+  "content.card.vitrilo-prism-key.v256f8f9c4afa4e50.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> an enemy / Steal the effect <keyword1>purged</keyword1>",
+    "sourceHash": "46986dc277364fd61a94d55ece9d1e4075357202aee8a7e48b692525ded942dc",
+    "text": "<keyword0>Purga</keyword0> a un enemigo / Roba el efecto <keyword1>purgado</keyword1>"
+  },
+  "content.card.vitrilo-sunflare-cast.name": {
+    "reviewed": true,
+    "source": "Sunflare Cast",
+    "sourceHash": "6434600d2bd26f16feab6bb28e542dfc00656d12eda4f660769c36d2dcd77a5d",
+    "text": "Colada solar"
+  },
+  "content.card.vitrilo-sunflare-cast.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "772727b86e110ce0b52ef2d44e04575432002114e3a519d98ab61440e6025aeb",
+    "text": "Inflige {{value0}} de daño de tipo <keyword0>Luz</keyword0>"
   },
   "content.card.wendlet-borrowed-silhouette.name": {
     "reviewed": true,
@@ -4256,7 +4292,7 @@
   "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
     "reviewed": true,
     "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "b28ebd6be0d954ff011519b75fa77735d820df4605f9dc52246e274a20fa7cdb",
+    "sourceHash": "45588839e2957e86abda85c292437910b1fd9d816f033071c55ee0ba412da9d2",
     "text": "Roba una copia de una habilidad aleatoria de un aliado de reserva / Obtén {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.card.wendlet-midnight-mantle.name": {
@@ -4268,7 +4304,7 @@
   "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
     "reviewed": true,
     "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
-    "sourceHash": "20bb993c02efb0e4f36ec9018d5d830c3e82608ca0a25549855a32c0dcdefb42",
+    "sourceHash": "17ab126d633a73d40c0f7178aa5e299fe62b37bd78baf1bf1876ee7bde723556",
     "text": "Obtén {{value0}}% de <keyword0>Evasión</keyword0> hasta tu próximo turno; Obtén {{value1}} de <keyword1>Bloqueo</keyword1>"
   },
   "content.card.wendlet-umbra-snare.name": {
@@ -4280,7 +4316,7 @@
   "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
-    "sourceHash": "e18ebc39d7335d9fb7722e8ed3cad3b0c590952db7e0720f9afe75c048fd4903",
+    "sourceHash": "512c7a128b011f15a29d8eef767b726f8ce4c4933133300c78908fc7f5f0706a",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
   },
   "content.card.wickwaltz-attack.name": {
@@ -4292,7 +4328,7 @@
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
-    "sourceHash": "49c549b31ed8e5bff41b87f5fa879dbcb398acf1a4527d73677f502a771f3080",
+    "sourceHash": "f59bff9844d246fe72fd0e6c53833c46ffc3a2cb8f70ded4c9699a60c39146c6",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos"
   },
   "content.card.wickwaltz-draw.name": {
@@ -4304,25 +4340,25 @@
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
-    "sourceHash": "0e04b262b1dbac075995c48aa5748214d490416dccf535e77249d7e862164dd8",
+    "sourceHash": "45541fb086b1ddfa58138f66137f00ebd6497a4b251029a9be5cefff297f600d",
     "text": "Roba {{value0}} cartas"
   },
   "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card",
-    "sourceHash": "477c48f028f9f06fd3a1c323143a359862c335ec1440a6091d6d55d6ea3238e2",
+    "sourceHash": "a10e0c4f9cf3747b48263a3670d8a82710e041231dae7322d81445c2c0e9d94c",
     "text": "Roba {{value0}} carta"
   },
   "content.card.wickwaltz-draw.vce386818937868ab.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "7e2ab8b978f1020d7357401e0e1fa017735ede325919c29c5219908d0b16519a",
+    "sourceHash": "c33b5a981ac2059ba1a4605e26b8b520b0d59ef63fd76313888332118a24644a",
     "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
-    "sourceHash": "a5d1d48c7ebc0e4015dd82f09ba2b7bbf64f0adf82ed7b96cad04fcc310961bb",
+    "sourceHash": "3b9fbf1c83856f9ecd089f0e8dc4667e541546059202086915a68f61a417f6e4",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.wickwaltz-guard.name": {
@@ -4334,7 +4370,7 @@
   "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
-    "sourceHash": "ffcecf4227f1f406d1ae70bcb0d686a96c29f08c44bbbaf41bd1487a482f816a",
+    "sourceHash": "658596a6b3bdbcdc049439a85bb38e37efe86181b2f6073cbbb6d64acae1182e",
     "text": "Obtiene {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Nulifica</keyword1> el próximo daño de <keyword2>Congelación</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
@@ -4346,13 +4382,13 @@
   "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup / Draw a Card",
-    "sourceHash": "da431f1021e43a00e1e36f3119fc93b78e126863078011c3581fe05cb5a32e0c",
+    "sourceHash": "c007f4491095571cb13321260cefdf8c5b038df83f2b1bc304470b6ec106d5e5",
     "text": "Cambia por una reserva elegida / Roba una carta"
   },
   "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
     "reviewed": true,
     "source": "Swap out for a chosen backup",
-    "sourceHash": "adb4f03bcc1ec72424324d54371eeafe97ed7943fd3a83376a3bb5e8502dc4bf",
+    "sourceHash": "84ed416fa6ace8a97d397ab04bc795d97bac99d32200aeb1e4e96b6bc586bf01",
     "text": "Cambia por una reserva elegida"
   },
   "content.card.wisterelle-lantern-fare.name": {
@@ -4364,13 +4400,13 @@
   "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
-    "sourceHash": "d746f67f1d4d5b5fcc9ad83cae6751cf4688a92d26a754f9c773f1183e51144d",
+    "sourceHash": "c2bdaa306c3efbbe06105d46144930a60ae335392b9236197966504e7e7afce8",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a un aliado herido / Obtiene {{value1}} de <keyword1>Maná</keyword1>"
   },
   "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
-    "sourceHash": "a4e4b248968a3360746ab914bbde181452edfbca10bbbe6c34a8f3060ed698a5",
+    "sourceHash": "a012b5f8fad36e7041a24e7b5d2474fadc43e5b9080c38bb39a7b6b7611e8936",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a un aliado herido"
   },
   "content.card.wisterelle-left-luggage.name": {
@@ -4382,13 +4418,13 @@
   "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "b47b92bf3a05e29d38f7d061f2eceb97787f51225f89dae9b3776ad5bca7ead4",
+    "sourceHash": "0366a82a44e09579fb8015e5e6e04a557d32cae76856fc514329580ac33b7482",
     "text": "Roba una carta de aliado de tu descarte / Obtiene {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
     "reviewed": true,
     "source": "Draw an ally’s card from your Discard pile",
-    "sourceHash": "499cf9c54186e9bb25cd4bd4682bf73cc8a0d86cd06282a0a95c1033611c714b",
+    "sourceHash": "16cdf5c177eaa83864515b38551f6eb588dcd7115a09af8d10f0c068bb98489d",
     "text": "Roba una carta de aliado de tu descarte"
   },
   "content.glossary.action-card.definition.rule": {
@@ -6976,6 +7012,60 @@
     "source": "Gallantry",
     "sourceHash": "38f1ca8e662fc8cbd4134f3d6e8b39d63c3712ec7801be1b22d16c315f5a33e8",
     "text": "Gallardía"
+  },
+  "content.species.vitrilo.name": {
+    "reviewed": true,
+    "source": "Vitrilo",
+    "sourceHash": "51eacbb9a5b207c53771471e9e430cb833610f286db5ca09da4858c9ea280213",
+    "text": "Vitrilo"
+  },
+  "content.species.vitrilo.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "073bf77e05d13f64110dcc310f8dfe48855a5acf0d4a9fff98bfc8084351e249",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "208983889c87e32895524fe4b7774b8e7fe6283df5b4faff6c97cc758efd508b",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "44fbdc932cab8e3dad22e92bd810b1f90c5dcf5ff4ee355e657d55fcacc34226",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "cd0e0c53b17330e6cba861f0187bfcac9e76db1ace041f2f733177e8eb459215",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "987464fc659aa1c48669098ac12271817f471f539d453e6296817e45abc99475",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks steal {{value0}} <keyword1>Block</keyword1> from the target before dealing damage",
+    "sourceHash": "61a91a14394d438f534954b0a6b39381f0197dcef0bba9db9cf890b708bac188",
+    "text": "Los ataques de <keyword0>Luz</keyword0> roban {{value0}} de <keyword1>Bloqueo</keyword1> al objetivo antes de infligir daño"
+  },
+  "content.species.vitrilo.title": {
+    "reviewed": true,
+    "source": "The traveling glassmaker",
+    "sourceHash": "54eeca157d9d6930b2dd3e62e24c8b62967844f435d3b527ac1e2126dbcbc88c",
+    "text": "El vidriero viajero"
+  },
+  "content.species.vitrilo.trait": {
+    "reviewed": true,
+    "source": "Glass Cutter",
+    "sourceHash": "21ce7b600475c960991e77efa89ee2303f75492d4f31fab2a4acd19a9407527d",
+    "text": "Cortavidrio"
   },
   "content.species.wendlet.name": {
     "reviewed": true,
