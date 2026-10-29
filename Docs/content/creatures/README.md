@@ -36,6 +36,7 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Cadenza](cadenza.md) · [implementation](../../../src/game/content/creatures/cadenza.ts)
 - [Rookhaven](rookhaven.md) · [implementation](../../../src/game/content/creatures/rookhaven.ts)
 - [Memento](memento.md) · [implementation](../../../src/game/content/creatures/memento.ts) — Legendary; Echoes and Pearls
+- [Chronora](chronora.md) · [implementation](../../../src/game/content/creatures/chronora.ts) — Legendary; Pendulums and recovery
 - [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
 - [Tournelle](tournelle.md) · [implementation](../../../src/game/content/creatures/tournelle.ts)
 - [Reverie](reverie.md) · [implementation](../../../src/game/content/creatures/reverie.ts)

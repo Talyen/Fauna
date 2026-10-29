@@ -16,6 +16,7 @@ export const statusOrder: readonly string[] = [
   "freeLight",
   "freeCard",
   "oasisLeech",
+  "turnBackReady",
   "acrobatReady",
   "moonseedReady",
   "toothpickReady",
@@ -82,6 +83,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmu
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
       ["oasisLeech", Number(combat.oasisLeech), "Oasis Seed: next attack has Leech"],
+      ["turnBackReady", Number(combat.turnBackReady), "Turn Back the Tide: next attack may repeat"],
       ["acrobatReady", Number(combat.acrobatReady), "Acrobat Top: next attack cannot be Dodged"],
       [
         "moonseedReady",

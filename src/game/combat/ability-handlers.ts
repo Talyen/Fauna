@@ -17,7 +17,7 @@ import {
   healingAllies,
   isDepartedMinion,
 } from "../battlefield";
-import { summonEcho, createPearls, drawBossCards } from "./legendary";
+import { summonEcho, summonPendulums, pendulumBonus, createPearls, drawBossCards } from "./legendary";
 import { scalePower } from "./ability-values";
 import { species } from "../content";
 import {
@@ -67,6 +67,16 @@ export function executePrimary(context: PrimaryContext) {
   const enemy = action.side === "enemy";
   const power = actorPower(action);
   switch (def.effect) {
+    case "teamNegate":
+      for (const unit of livingFriends(state, action)) {
+        ensureCombat(unit).negate = true;
+        emitStatus(events, unit.id, "negate", "apply", { text: `${unitName(unit)} gains Negate` });
+      }
+      return;
+    case "bridgeRewind":
+      restoreHealth(actor, value, events, false, state, true, actor);
+      if (actor.health > 0) summonPendulums(state, actor, action.side, events, 1);
+      return;
     case "procession":
       summonEcho(state, actor, action.side, value, events);
       return;
@@ -152,7 +162,8 @@ export function executePrimary(context: PrimaryContext) {
             state,
             source,
             victim,
-            value * (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
+            (value + (reflected ? 0 : pendulumBonus(state, actor))) *
+              (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
             damageType,
             events,
             {
@@ -231,6 +242,13 @@ export function executePrimary(context: PrimaryContext) {
         : (state.team.find(matches) ?? state.reserves.find(matches));
       if (recipient) {
         resurrect(recipient, actor, events);
+        if (
+          recipient.health > 0 &&
+          (enemy
+            ? state.battle.enemies.some((unit) => unit.id === recipient.id)
+            : state.team.some((unit) => unit.id === recipient.id))
+        )
+          summonPendulums(state, recipient, action.side, events);
         if (
           !enemy &&
           recipient.health > 0 &&

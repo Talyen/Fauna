@@ -19,6 +19,52 @@ import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
 const MINION_LIMIT = 2;
+const PENDULUM_HEALTH = 6;
+
+/** Recreate each fixed slot on entry, or only the first broken slot for Bridge Rewind. */
+export function summonPendulums(
+  state: BattleState,
+  actor: Combatant,
+  side: "player" | "enemy",
+  events: GameEvent[],
+  count = 2,
+) {
+  if (
+    actor.health <= 0 ||
+    !passiveAmount(side === "player" ? state : undefined, actor.species, "turnBackTide")
+  )
+    return;
+  const minions = state.battle.minions ?? (state.battle.minions = []);
+  for (let slot = 0; slot < 2 && count > 0; slot++) {
+    const id = `pendulum-${actor.id}-${slot}`;
+    const index = minions.findIndex((unit) => unit.id === id);
+    if (index >= 0 && minions[index]!.health > 0) continue;
+    const pendulum = {
+      id,
+      name: "Pendulum" as const,
+      species: "chronora" as const,
+      health: PENDULUM_HEALTH,
+      maxHealth: PENDULUM_HEALTH,
+      power: 1,
+      targetId: actor.id,
+      block: 0,
+      combat: freshCombat(),
+      lastAbility: null,
+      minion: { ownerId: actor.id, side },
+    };
+    if (index < 0) minions.push(pendulum);
+    else minions[index] = pendulum;
+    count--;
+    emitSupport(events, actor.id, { targetId: id, text: "Chronora summons a Pendulum" });
+  }
+}
+
+export function pendulumBonus(state: BattleState, actor: Combatant): number {
+  if (actor.species !== "chronora") return 0;
+  return (state.battle.minions ?? []).filter(
+    (unit) => unit.species === "chronora" && unit.minion.ownerId === actor.id && unit.health > 0,
+  ).length;
+}
 export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   const ids: string[] = [];
   forEachPermanentCard(enemy.species, (card) => ids.push(card.id));

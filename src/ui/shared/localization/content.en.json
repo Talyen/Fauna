@@ -1618,6 +1618,30 @@
     "reference": "Nullify the next harmful status effect on each ally",
     "contextHash": "9f633b7cd622a1168a19e741af8384dadd85576906b480189f8a0961b32186fb"
   },
+  "content.card.chronora-borrowed-moment.name": {
+    "text": "Borrowed Moment"
+  },
+  "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
+    "text": "Give all allies <keyword0>Negate</keyword0>",
+    "reference": "Give all allies Negate",
+    "contextHash": "7bb87a0c30d8244672b33a0b2b9c0b07ac81b3106687d953cc5a4ea601946acb"
+  },
+  "content.card.chronora-bridge-rewind.name": {
+    "text": "Bridge Rewind"
+  },
+  "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
+    "reference": "Restore 4 Health; restore a broken Pendulum",
+    "contextHash": "5c478d3eec9cca6f22b10452ea3add23e782c51525d6df59cb130a877b0e19a8"
+  },
+  "content.card.chronora-pendulum-break.name": {
+    "text": "Pendulum Break"
+  },
+  "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
+    "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "reference": "Deal 4 Stun damage",
+    "contextHash": "f34248d2aa8065acf2b61677bb9c31b8c3b0c20fb5db9075da43440b36534382"
+  },
   "content.card.cindernewt-ashen-veil.name": {
     "text": "Ashen Veil"
   },
@@ -3148,6 +3172,39 @@
   "content.species.chimecricket.trait": {
     "text": "Encore"
   },
+  "content.species.chronora.name": {
+    "text": "Chronora"
+  },
+  "content.species.chronora.passive.0.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has a 50% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.passive.1.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has a 60% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.passive.2.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has a 70% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.passive.3.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has an {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has an 80% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.passive.4.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has a 90% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.passive.5.rule": {
+    "text": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "reference": "Summon 2 Pendulums with 6 Health on entry; each adds 1 attack damage; Chronora’s next attack has a 100% chance to repeat after restoring Health"
+  },
+  "content.species.chronora.title": {
+    "text": "The keeper of borrowed moments"
+  },
+  "content.species.chronora.trait": {
+    "text": "Turn Back the Tide"
+  },
   "content.species.cindernewt.name": {
     "text": "Cindernewt"
   },
@@ -4075,132 +4132,137 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "text": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
     "reference": "Acrobat Top: next attack cannot be Dodged",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "text": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
     "reference": "Attack Reflection: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until used or Purged; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "text": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
     "reference": "Blind: Your next attack has a 50% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a Dodge by each target; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turns",
     "reference": "Stunned: 2 turns",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "text": "Turn skipped",
     "reference": "Turn skipped",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turn",
     "reference": "Frozen: 1 turn",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turns",
     "reference": "Frozen: 2 turns",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turn",
     "reference": "Stunned: 1 turn",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "text": "Control immunity {{value0}}",
     "reference": "Control immunity 0",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "text": "Free Follow-up: next card is free",
     "reference": "Free Follow-up: next card is free",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "text": "Divine Favor: next <keyword0>Light</keyword0> card is free",
     "reference": "Divine Favor: next Light card is free",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "text": "Windstep: next <keyword0>Nature</keyword0> card is free",
     "reference": "Windstep: next Nature card is free",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "text": "Death's Door {{value0}}",
     "reference": "Death's Door 0",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "text": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
     "reference": "Moonseed: next Thorns retaliation deals double damage",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "text": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
     "reference": "Negate: Cancel the next incoming ability attack and its harmful effects on you before Dodge; Thorns still retaliate; Lasts until used or Purged; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "text": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
     "reference": "Open Flank: next attack deals 0 additional Physical damage",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "text": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
     "reference": "Nullify: Prevent the next Burn, Poison, Bleed, Stun, Freeze or Blind application; Direct damage and existing statuses are unchanged; Lasts until used or Purged; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "text": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "text": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
     "reference": "Oasis Seed: next attack has Leech",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "text": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
     "reference": "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "text": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
     "reference": "Reflect: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; Attack Reflection instead returns the whole attack to its attacker; Reflected effects cannot reflect again; Charges do not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "text": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "text": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
     "reference": "Finding Rhythm: +0% Dodge chance",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "text": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "reference": "Ribbon Spool: immune to Stun and Freeze",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "text": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
     "reference": "Riposte: next Physical attack is a guaranteed Critical Hit",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "text": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
     "reference": "Dragon’s Toothpick: next attack also Purges",
-    "contextHash": "a00bcc0629233dd9eaff01de2d29ed509827dcce29d31d93197f8de67f4c1d92"
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
+  },
+  "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
+    "text": "Turn Back the Tide: next attack may repeat",
+    "reference": "Turn Back the Tide: next attack may repeat",
+    "contextHash": "00b0cbe7ec9e725b5da3cc6a5b0f10123c1bc3439d7db19a1cc41554644ec016"
   },
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"

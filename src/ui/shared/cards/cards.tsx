@@ -93,7 +93,7 @@ export function CreatureCard({
     <ArtCard
       aspect="creature"
       artwork={assetUrl(artworkId ?? `creature.${kind}`)}
-      effectKeywords={artworkId === "minion.echo" ? [] : creatureKeywords(kind, progression)}
+      effectKeywords={artworkId?.startsWith("minion.") ? [] : creatureKeywords(kind, progression)}
       urgent={health !== 0 && !!combat?.grace}
       acting={acting}
       control={health === 0 ? null : combat?.controlled}
@@ -103,8 +103,10 @@ export function CreatureCard({
       data-enemy-id={enemyId}
       aria-label={
         label ??
-        (artworkId === "minion.echo"
-          ? i18n.message("creature.echo", "Echo")
+        (artworkId?.startsWith("minion.")
+          ? artworkId === "minion.pendulum"
+            ? i18n.message("creature.pendulum", "Pendulum")
+            : i18n.message("creature.echo", "Echo")
           : i18n.content(`content.species.${kind}.name`, info.name))
       }
       aria-pressed={presentation ? undefined : selected}
@@ -189,13 +191,26 @@ export function AllyCard({
   return (
     <CreatureCard
       actorId={creature.id}
-      artworkId={"minion" in creature && creature.minion ? "minion.echo" : undefined}
+      artworkId={
+        "minion" in creature && creature.minion
+          ? creature.species === "chronora"
+            ? "minion.pendulum"
+            : "minion.echo"
+          : undefined
+      }
       name={"name" in creature ? creature.name : undefined}
       maxHealth={"maxHealth" in creature ? creature.maxHealth : undefined}
       tooltipContent={
         "minion" in creature && creature.minion ? (
           <div className="card-details">
-            <strong>{i18n.message("creature.echo", "Echo")}</strong>
+            <strong>
+              {creature.species === "chronora"
+                ? i18n.message("creature.pendulum", "Pendulum")
+                : i18n.message("creature.echo", "Echo")}
+            </strong>
+            {creature.species === "chronora" && (
+              <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
+            )}
           </div>
         ) : undefined
       }
@@ -215,11 +230,20 @@ export function EnemyCard({
   return (
     <CreatureCard
       kind={enemy.species}
-      artworkId={enemy.minion ? "minion.echo" : undefined}
+      artworkId={
+        enemy.minion ? (enemy.species === "chronora" ? "minion.pendulum" : "minion.echo") : undefined
+      }
       tooltipContent={
         enemy.minion ? (
           <div className="card-details">
-            <strong>{i18n.message("creature.echo", "Echo")}</strong>
+            <strong>
+              {enemy.species === "chronora"
+                ? i18n.message("creature.pendulum", "Pendulum")
+                : i18n.message("creature.echo", "Echo")}
+            </strong>
+            {enemy.species === "chronora" && (
+              <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
+            )}
           </div>
         ) : undefined
       }

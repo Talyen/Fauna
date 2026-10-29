@@ -179,6 +179,12 @@
   "creature.inspect": {
     "text": "Inspect {{name}}"
   },
+  "creature.pendulum": {
+    "text": "Pendulum"
+  },
+  "creature.pendulumRule": {
+    "text": "Chronora’s attacks deal 1 extra damage"
+  },
   "creature.recruit": {
     "text": "Recruit {{name}}"
   },
@@ -472,6 +478,9 @@
   },
   "log.summonEcho": {
     "text": "{{actor}} summons an {{echo}}"
+  },
+  "log.summonPendulum": {
+    "text": "{{actor}} summons a {{pendulum}}"
   },
   "log.swapPositions": {
     "text": "{{actor}} swaps positions with {{target}}."

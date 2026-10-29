@@ -87,6 +87,17 @@ const rules: AbilityRuleCatalog = freeze(
       keywords: ["health"],
       describe: (_card) => "Summon an Echo / Restore your Minions to full Health",
     },
+    teamNegate: {
+      ...automatic,
+      scaling: "authored",
+      describe: () => "Give all allies Negate",
+    },
+    bridgeRewind: {
+      ...automatic,
+      scaling: "power",
+      keywords: ["health"],
+      describe: (_card, { value }) => `Restore ${value} Health; restore a broken Pendulum`,
+    },
     createFood: {
       ...automatic,
       enemy: "unsupported",

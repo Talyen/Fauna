@@ -2781,6 +2781,61 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.chronora",
+      "origin": "repository",
+      "source": "public/art/chronora/portrait.png",
+      "output": "art/chronora/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "https://drive.google.com/file/d/1hwZxrjUzo9Jvzs1Ozcxk6r2WQZFgvmWZ/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "minion.pendulum",
+      "origin": "repository",
+      "source": "public/art/chronora/pendulum.png",
+      "output": "art/chronora/pendulum.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Generated with built-in ImageGen using Chronora portrait as a reference",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.chronora.borrowed-moment",
+      "origin": "repository",
+      "source": "public/art/chronora/borrowed-moment.png",
+      "output": "art/chronora/borrowed-moment.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/184P8bESCJsUKQuUifrJEnsjBeQQAfKcn/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.chronora.pendulum-break",
+      "origin": "repository",
+      "source": "public/art/chronora/pendulum-break.png",
+      "output": "art/chronora/pendulum-break.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1k1xTgYZzOXRgvDVHI-rcqspQtaukvpgI/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.chronora.bridge-rewind",
+      "origin": "repository",
+      "source": "public/art/chronora/bridge-rewind.png",
+      "output": "art/chronora/bridge-rewind.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1kTum0hd8eStozz2PWxfNG1PuEzcdyx9C/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
       "id": "creature.memento",
       "origin": "repository",
       "source": "public/art/memento/portrait.png",

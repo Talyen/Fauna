@@ -27,6 +27,7 @@ const chancePassives = new Set([
   "goodFortune",
   "gallantry",
   "kindlingFlourish",
+  "turnBackTide",
   "resonance",
   "encore",
   "earlyBird",

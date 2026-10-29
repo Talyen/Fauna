@@ -80,10 +80,13 @@ describe("journey encounters", () => {
     }
   });
 
-  it.each([3, 7])(
-    "uses an eligible ordinary Boss at encounter %s when the roster contains Memento",
-    (encounter) => {
-      const started = starterJourney(7, "memento");
+  it.each([
+    [3, "memento"],
+    [7, "chronora"],
+  ] as const)(
+    "uses an eligible ordinary Boss at encounter %s when the roster contains %s",
+    (encounter, boss) => {
+      const started = starterJourney(7, boss);
       const ready = produce(started, (draft) => {
         draft.encounter = encounter;
         draft.journey!.victories = encounter;
@@ -92,7 +95,7 @@ describe("journey encounters", () => {
       const source = encounterSource(ready);
       expect(source.name).toBe("Boss");
       expect(source.enemies).toHaveLength(1);
-      expect(source.enemies[0]!.species).not.toBe("memento");
+      expect(source.enemies[0]!.species).not.toBe(boss);
       expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
       const battle = enter(decodeSave(encodeSave(ready)));
       expect(decodeSave(encodeSave(battle))).toEqual(battle);

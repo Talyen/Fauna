@@ -99,6 +99,15 @@ export function eventPresentation(
         actor: localizedCombatantName(actor, i18n),
         echo: i18n.message("creature.echo", "Echo"),
       });
+    if (
+      actor?.species === "chronora" &&
+      event.actionType === "support" &&
+      event.text === "Chronora summons a Pendulum"
+    )
+      return i18n.message("log.summonPendulum", "{{actor}} summons a {{pendulum}}", {
+        actor: localizedCombatantName(actor, i18n),
+        pendulum: i18n.message("creature.pendulum", "Pendulum"),
+      });
     if (event.actionType === "support" && event.text === "Express Delivery draws an extra card")
       return i18n.message("log.expressDelivery", "{{trait}} draws an extra card", {
         trait: i18n.content("content.species.orifable.trait", "Express Delivery"),

@@ -6,6 +6,8 @@ export type AbilityKind =
   | "springbound"
   | "repeatNextCard"
   | "procession"
+  | "teamNegate"
+  | "bridgeRewind"
   | "createFood"
   | "createPearls"
   | "pearl"

@@ -23,6 +23,7 @@ export type SpeciesId =
   | "sternshell"
   | "neradora"
   | "memento"
+  | "chronora"
   | "euphera"
   | "tournelle"
   | "reverie"
@@ -56,6 +57,7 @@ type PassiveEffect =
   | { kind: "gallantry"; amount: number }
   | { kind: "goodFortune"; amount: number }
   | { kind: "courtRemembers"; amount: number }
+  | { kind: "turnBackTide"; amount: number }
   | { kind: "wellRead"; amount: number }
   | { kind: "livingChorus"; amount: number }
   | { kind: "tidalRegeneration"; amount: number }

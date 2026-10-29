@@ -1,6 +1,11 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "chronora-battle",
+  "chronora-boss",
+  "chronora-restoration",
+  "chronora-collection",
+  "memento-baseline",
   "wisterelle-battle",
   "wisterelle-collection",
   "wisterelle-rank-five",
@@ -265,6 +270,39 @@ export async function reviewScenario(server, name) {
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name === "inspection") game = winBattle();
+  if (name === "memento-baseline") {
+    const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
+    const { produce } = await server.ssrLoadModule("immer");
+    const { summonEcho } = await server.ssrLoadModule("/src/game/combat/legendary.ts");
+    game = produce(teamRun(42, ["memento"]), (draft) => {
+      summonEcho(draft, draft.team[0], "player", 6, []);
+      summonEcho(draft, draft.team[0], "player", 6, []);
+    });
+  }
+  if (name.startsWith("chronora-")) {
+    const { teamRun, authoredPack, prepareDestination } =
+      await server.ssrLoadModule("/tests/support/game.ts");
+    const { produce } = await server.ssrLoadModule("immer");
+    if (name === "chronora-boss") {
+      game = produce(run(), (draft) => {
+        draft.encounter = 7;
+        draft.expedition = { pack: authoredPack(7), recruit: null, lastRoom: "boss" };
+        prepareDestination(draft);
+        draft.journey.victories = 7;
+      });
+      game = accept(game, { type: "beginBattle" });
+    } else {
+      game = teamRun(42, ["chronora"]);
+      if (name === "chronora-restoration") {
+        const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
+        game = produce(game, (draft) => {
+          draft.team[0].health = 50;
+          draft.battle.minions[0].health = 0;
+          setHand(draft, ["chronora-bridge-rewind", "chronora-borrowed-moment", "chronora-pendulum-break"]);
+        });
+      }
+    }
+  }
   if (name === "oasis-battle") {
     game = structuredClone(game);
     game.boons = ["oasis-seed"];
@@ -370,7 +408,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
-  if (creatureFixtures.includes(creature) && (view === "collection" || view === "rank-five")) {
+  if (
+    (creatureFixtures.includes(creature) || creature === "chronora") &&
+    (view === "collection" || view === "rank-five")
+  ) {
     await button("Collection").click();
     const opener = button(`Inspect ${creature[0].toUpperCase() + creature.slice(1)}`);
     const next = button("Next page");

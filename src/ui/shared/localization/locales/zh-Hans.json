@@ -3023,6 +3023,42 @@
     "sourceHash": "e6845d43bce6521c88fc57bc42e020550bfe6dbe168b8bd78fb7c343b87a52b1",
     "text": "<keyword0>无效化</keyword0>每名盟友受到的下一个有害状态效果"
   },
+  "content.card.chronora-borrowed-moment.name": {
+    "reviewed": true,
+    "source": "Borrowed Moment",
+    "sourceHash": "9c12004e7a4b2382b653a8f147980c3f21a86ae8a1986d7881979c06ea8bcd6e",
+    "text": "借来的片刻"
+  },
+  "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
+    "reviewed": true,
+    "source": "Give all allies <keyword0>Negate</keyword0>",
+    "sourceHash": "9c816de846c82ec82b2729aebbb9ce54ad59b8c780be04aa291ada2254f9f287",
+    "text": "使所有友方获得<keyword0>抵消</keyword0>"
+  },
+  "content.card.chronora-bridge-rewind.name": {
+    "reviewed": true,
+    "source": "Bridge Rewind",
+    "sourceHash": "5c6a4c65f396b877a4605f3b21350d6c2114b6923a0b6942eadff2660ad49168",
+    "text": "桥梁回溯"
+  },
+  "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
+    "sourceHash": "27fc927d786ee865cc7ae4558ffc5b7ab0d5f2d597f7d4d65b6570731acf94a3",
+    "text": "恢复{{value0}}点<keyword0>生命</keyword0>；恢复一个被摧毁的钟摆"
+  },
+  "content.card.chronora-pendulum-break.name": {
+    "reviewed": true,
+    "source": "Pendulum Break",
+    "sourceHash": "680f51a7d4cafe14ebe545ae4593247d8c89624afa1b5a449ce2c790eee7ceaa",
+    "text": "钟摆破击"
+  },
+  "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "712c469c212d35b5199027028d680a57d919341bb74d33624c9cb99281605e75",
+    "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
     "source": "Ashen Veil",
@@ -5357,6 +5393,60 @@
     "sourceHash": "35ce9f7f77e6a7d9d9358f4d8bf7a893577c18e01dddad8664ef22c4dada6a58",
     "text": "再来一曲"
   },
+  "content.species.chronora.name": {
+    "reviewed": true,
+    "source": "Chronora",
+    "sourceHash": "f99065adda2c21bf665f88cd55e659f27aa0bea9c3c377389c5e533acaf0e74b",
+    "text": "克洛诺拉"
+  },
+  "content.species.chronora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "6e3405b3193435d7d2cb9a0265500eec4aebbd6f377938b3801992eea8eecee3",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "0350398499c4098d073c5037b27248d503485eae85edd76ced72f1a7ecce5253",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "9b0a54caaa814c537e15d13fd41b33971b4479db9c41738335ae307951804d0b",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has an {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "3f5977cf18aba6614e167f6b868d35d41006f968c61d0c2dae2cfe8eefb6e009",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "d714b40796ba33fa3d95c1aacf67fe6ce3d8e35a6b2a7eac49cc39737fa7c076",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "314917335a6083dcdf4d8b4655bd15f2cf7fd13c4896fda26b98680dce000ef2",
+    "text": "进入战斗时召唤{{value0}}个具有{{value1}}点<keyword0>生命</keyword0>的钟摆；每个钟摆使攻击伤害增加{{value2}}；克洛诺拉恢复<keyword1>生命</keyword1>后，下次攻击有{{value3}}%的概率重复"
+  },
+  "content.species.chronora.title": {
+    "reviewed": true,
+    "source": "The keeper of borrowed moments",
+    "sourceHash": "81eaf1c8d33835b7a2065e2fd50b4c2b10d69244bce0fae732541ab0bffab067",
+    "text": "借来时刻的守护者"
+  },
+  "content.species.chronora.trait": {
+    "reviewed": true,
+    "source": "Turn Back the Tide",
+    "sourceHash": "c422a1695180901e322235aed07141dfa0736200bacb1fa762b14c08962da335",
+    "text": "逆转时潮"
+  },
   "content.species.cindernewt.name": {
     "reviewed": true,
     "source": "Cindernewt",
@@ -6872,158 +6962,164 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "e12cae0ac1ab205cde295ba8bd60d581da5d61383416ac520271d3da9a6a2ff4",
+    "sourceHash": "e1a6ce61036fdcad48718d9b8753df0e5a14d28e926a177935371a3f5038b05b",
     "text": "杂技陀螺：下一次攻击无法被<keyword0>闪避</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "9c647232c6145fc39aa382843e7a46872398b77fcb9a662e9022b006d5e8a9f8",
+    "sourceHash": "25a390789b3f9839b9598c941c812e6236344c816ddaf2b86ddeb8797760796f",
     "text": "<keyword0>攻击反射</keyword0>: 将下一次受到的技能攻击返还给攻击者; 防止该攻击对你造成伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "348ba8fb85c19aa67aad13e9ad156200e1f8ea540b7c557db64a32458f94e55d",
+    "sourceHash": "33f8f7bc119d1270362f4cc4a7a115516dbccd3179b1919d17feec5304574ba3",
     "text": "<keyword0>致盲</keyword0>: 下一次攻击有{{value0}}%概率对所有目标落空; 无论命中与否，该次攻击后结束; 落空视为每个目标都成功<keyword1>闪避</keyword1>; 不叠加"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "f9fd53ced145d471bb5daaf22c077a047bf02ffddc79fae0e18ad7b6392f4dec",
+    "sourceHash": "f54896e33d402100803c7d96c0c6f45e8412de137d9564b03da6aaac75dbfd44",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "0c9c9420b5e3b711cc9de3e08c72aa09543acef977e6f0006241f9adcb6f240d",
+    "sourceHash": "32f71697b06bed670f2496e3c1a7ba8adc87e7180778aeb5029d4a812ec40de1",
     "text": "跳过回合"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "7e853ce17fbe85a48d1955b7a881d579995aa2c8c51c99e7f375cfc228e267bd",
+    "sourceHash": "f536fce563bb316e1cea4edc24ced1c5414df3fe713d74998b1edc37f3071e96",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "be51ff79013eaea31fc7490b6e283c85c7387266da0f067b1235e677772dfce4",
+    "sourceHash": "c8bc21542fa2894f43991ecd563177b225c08c22a33d05304fcda751ee386f91",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "22759ce238b875e1dea4960cf66a69a30651ea8f42d62b3ba429aa906dc63297",
+    "sourceHash": "a79956df9c3ff6f3bfab063976b7340008d61ac8d225ead070ec0f6ad35f117a",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "8959b429434220068bdfb97757d068cb45877966b946a5a0552d2eec1db16d66",
+    "sourceHash": "5539879c440e103818c355946e10d8414f1ed52109d426ecb21fc78d267ef871",
     "text": "控制免疫 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "6f08a7e0f81aeffe4e9ffb5925797f15003d258f59b39446844d88f8ccdcbd94",
+    "sourceHash": "2a151d9dfd337b850cc50a32d7335ee102e23fac12bebbbea123630c722ba669",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "2085c3811d2d000b34c24859e68587e8853b33adf3b9d6716b33e1427851f950",
+    "sourceHash": "7b90482c8bbeeb5b86a269e085871b0a954f759cf43088f5efac14cb667e0ec7",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "bf3ce4f715cfcbb4ea3f6860611693fa4fb897fc44503906ed8ab2dce945358c",
+    "sourceHash": "5ce6ae817c50159dca15259caa93631665667d9fcbc20ab4f3be47509c702207",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "6da5f7db484e9e677b5f0004fa22eb2b418587cd3640b47594bf39dc22d1ab50",
+    "sourceHash": "05b7b7c3785bd3654522b29c1f429a6aac72989ad3a04fe17b8253f1c48806c6",
     "text": "濒死 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "d9924f5989056cbeda29f440c863b1eea3f392153aa61ac854a52997f9c9b995",
+    "sourceHash": "76e1033dc9552f58ff512f9cfd5c3af1dd73909459ac0cb65536ea69e1bf821e",
     "text": "月种：下次<keyword0>荆棘</keyword0>反击造成双倍伤害"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "ac69984adcb81cf171fa3fef9fea4c11bf90d7cdcffaa9e228e644d096546da2",
+    "sourceHash": "d39cfc26559072dad1535c69d87b70d63349bfb1f3caf8b779834d787acdc725",
     "text": "<keyword0>抵消</keyword0>: 在<keyword1>闪避</keyword1>判定前取消下一次受到的技能攻击及其对你的有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "c26defb539067b7c7205c95ed73e70eda513ad835ce7fa1dca218a3b08a8001d",
+    "sourceHash": "356d40611e396e83ae8595b6221afafa29444428eb64366b6beeda8d946a562a",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "28b7f0cbe2c83ca3987c1ecaf7f0b786f524f5e8290481e1cd046281fe634a4b",
+    "sourceHash": "d71e0d21b4808912ab5b95e5bb073e57994857b455b3e22b00853c28d3dcb68e",
     "text": "<keyword0>无效化</keyword0>: 防止下一次施加<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>、<keyword3>流血</keyword3>、<keyword4>眩晕</keyword4>、<keyword5>冻结</keyword5>或<keyword6>致盲</keyword6>; 直接伤害和已有状态不受影响; 持续至使用或被<keyword7>驱散</keyword7>; 不叠加"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "bc61adb6af6d68d9ef2809f4c6f6006af56c925261d276f7b65d0362035037b1",
+    "sourceHash": "f4103a940df39d7dbd99f0976ff09001b8583e1c70ec8b2ee40e8657c69739a8",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "f7334618d878a15787dee65bbb85cdce177883c7faced28c9e3b626c225e8600",
+    "sourceHash": "79756a9d43845c8746dbaa6ccf0f7ced4756f606766ca2a141e822ad218543ff",
     "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "3c37479323b84ab7d56d800c6022d79afa154dd9443ec7826bfa86df2a61270c",
+    "sourceHash": "b5bd16ab82a127232747e777e50d30a44919ce81b6a1e5088ed4cc08978970f8",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "8aa8defa8c17983905c26a35fe884bdecaa72b4452ae1758f1eacf9a48281259",
+    "sourceHash": "2d1fb452259314cf3e98bce8e406dde9d9b4f4b5aa5babbd425477e44c51cc6e",
     "text": "<keyword0>反射</keyword0>: 将指定的有害状态转移给一个随机存活敌人; 直接伤害仍会命中你; <keyword1>攻击反射</keyword1>则将整次攻击返还给攻击者; 被<keyword2>反射</keyword2>的效果不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "e28519beb45394dc291927d0c07f213d89cf58058f8ba72a35429fd07237adce",
+    "sourceHash": "b8a3b484efc7966f85b0b38e18a7420124704349bbb54b2df7a8ac94f6cbd5b6",
     "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "f43459c047bf1046d2dc94457f9889294267ceff39f1536dbb0a826f7e3eee78",
+    "sourceHash": "702af8655692e3d1a764762ffe48f0f1d1c81f1ca7ab737daf033261c8eabb8f",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "5a738204a2891af48cc721034f8bf6d8ebbb9c449dfba0062ced0b8a4a19dd51",
+    "sourceHash": "360984c100c714cbd14d0a0a4fc0f8e3c7606d3a1f44d082db6d062e16f0fa04",
     "text": "缎带线轴：免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "32936172dcbd378fb64842f4ac7687ecaabafb2c7b9d11e4670c88ecde546960",
+    "sourceHash": "1cdb85c84648de741122f64cffb4ec28e8077673c7a5a8e7efcd7be686c08df6",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "95eb3b3bea5dc83f326cf9ce120e2db28c425b0e5899bde5b0925fbc561fd33a",
+    "sourceHash": "8cf7ec1ca74f6a246a113c3550fbf3d908e95fe70803edc7c2183d4a6221f3a7",
     "text": "龙牙签：下次攻击还会<keyword0>驱散</keyword0>"
+  },
+  "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
+    "reviewed": true,
+    "source": "Turn Back the Tide: next attack may repeat",
+    "sourceHash": "407eb75dea5f8f0b7e93579bca4b03f54ff8912b5833316d39d6f2a2e8b6ee80",
+    "text": "逆转时潮：下次攻击可能重复"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
@@ -8687,6 +8783,18 @@
     "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
     "text": "查看{{name}}"
   },
+  "creature.pendulum": {
+    "reviewed": true,
+    "source": "Pendulum",
+    "sourceHash": "07afdeb805f2093a2a80d0549211f0945ea49b6da38328beecb118626ecf6774",
+    "text": "钟摆"
+  },
+  "creature.pendulumRule": {
+    "reviewed": true,
+    "source": "Chronora’s attacks deal 1 extra damage",
+    "sourceHash": "2a501d96eaa18e4cc6672a0ce764c6b4062827ae5e7b4c12c3e0f04a18959b32",
+    "text": "克洛诺拉的攻击额外造成1点伤害"
+  },
   "creature.recruit": {
     "reviewed": true,
     "source": "Recruit {{name}}",
@@ -9274,6 +9382,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "f68e928d05573be63c2472952e932af500c2cd98607fb85d83e525fc75c51a95",
     "text": "{{actor}}召唤一个{{echo}}"
+  },
+  "log.summonPendulum": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{pendulum}}",
+    "sourceHash": "f408d8aab91b30feec195b75eb31a3c75f3878bb41df2e80a9f0d080cd29acd0",
+    "text": "{{actor}}召唤了一个{{pendulum}}"
   },
   "log.swapPositions": {
     "reviewed": true,

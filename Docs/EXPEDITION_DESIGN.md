@@ -160,4 +160,4 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-[Memento](content/creatures/memento.md) defines the Legendary kit, Echoes, Pearl generation/Consume and initial tuning. Memento currently fills both Boss encounters, with the ordinary-creature fallback when already on the roster.
+[Memento](content/creatures/memento.md) appears in the first Boss encounter; [Chronora](content/creatures/chronora.md) appears in the final Boss encounter. Either uses the ordinary-creature fallback when already on the roster.

@@ -3023,6 +3023,42 @@
     "sourceHash": "d85546aab24da7a47af350ead2d8ef64ca4f8401bafab42bbc8ec7870a7b5f83",
     "text": "<keyword0>Nulifica</keyword0> el próximo efecto perjudicial de cada aliado"
   },
+  "content.card.chronora-borrowed-moment.name": {
+    "reviewed": true,
+    "source": "Borrowed Moment",
+    "sourceHash": "001de3f3f06376c1f6c9c3cb8539b7a74e748b83ab7bda3a307c6b6ccb40fb12",
+    "text": "Instante prestado"
+  },
+  "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
+    "reviewed": true,
+    "source": "Give all allies <keyword0>Negate</keyword0>",
+    "sourceHash": "8009dcc1a831bd05b08b271bb998ae5b5969bd90438acec2e7fc25a878941573",
+    "text": "Otorga <keyword0>Anulación</keyword0> a todos los aliados"
+  },
+  "content.card.chronora-bridge-rewind.name": {
+    "reviewed": true,
+    "source": "Bridge Rewind",
+    "sourceHash": "fda66e0a365a97167c15d43542f5512d9126ee2e1a7fbe7760bc496c37ac80f5",
+    "text": "Retorno del puente"
+  },
+  "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
+    "sourceHash": "88d979db4e3ef0baed19a52b2237ca39b49639b168360c7d360a3ef527de5e2b",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>; restaura un péndulo destruido"
+  },
+  "content.card.chronora-pendulum-break.name": {
+    "reviewed": true,
+    "source": "Pendulum Break",
+    "sourceHash": "8731fad7bc6c851d7d82c532ba7a318835cd849322151d27e790fe7476a9a9a0",
+    "text": "Golpe de péndulo"
+  },
+  "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "9b1fd2fdfce23ae4ff328d3ca4dd35530fc1d508189ecaa47314eaf7504d5d8b",
+    "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
+  },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
     "source": "Ashen Veil",
@@ -5357,6 +5393,60 @@
     "sourceHash": "273ff64eed421e39b8d20ae3250ccc1de6ad16588727d31ab7ffac9ec3fd35df",
     "text": "Bis"
   },
+  "content.species.chronora.name": {
+    "reviewed": true,
+    "source": "Chronora",
+    "sourceHash": "631328c5f398677b320699b1062ec710f3f6985a270f99f8c5fde3c253f812a5",
+    "text": "Chronora"
+  },
+  "content.species.chronora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "33379c7e3e517fdade7c7b4264f6225d00be7bf759e9aff8913223683bd7b4b5",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "91fb4f545445e9e6845faa9e7e752a6ca308180a7038df884867948ccbd926f2",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "8abac0c0a1b6a4701d1b0043c5ef5b45618868fa45e5b0405b21f8ebdb57c359",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has an {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "c3926f611ebc1e5d0726101698ed41a52d4a0a12668ca6d8124ae08c86b4bfca",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "8ee27d0c88ca469650f87e00caf48656abe54d6f8758990940663121a90de701",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "6733af970afefbe09092441a6bfca765d1ae49c014a8736d57cb996ad2f20258",
+    "text": "Al entrar en combate, invoca {{value0}} péndulos con {{value1}} de <keyword0>Salud</keyword0>; cada uno aumenta el daño de los ataques en {{value2}}; tras restaurar <keyword1>Salud</keyword1>, el siguiente ataque de Chronora tiene un {{value3}}% de probabilidad de repetirse"
+  },
+  "content.species.chronora.title": {
+    "reviewed": true,
+    "source": "The keeper of borrowed moments",
+    "sourceHash": "5879c4b3a60d7d8ae88e32340ee711998941b769e935350f24880107d8d4b72f",
+    "text": "La guardiana de los momentos prestados"
+  },
+  "content.species.chronora.trait": {
+    "reviewed": true,
+    "source": "Turn Back the Tide",
+    "sourceHash": "62a8cfe41c0987b2e313b21f1e47be7b48ba87964e9b940879eac8c153c67c67",
+    "text": "Invertir la marea"
+  },
   "content.species.cindernewt.name": {
     "reviewed": true,
     "source": "Cindernewt",
@@ -6872,158 +6962,164 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "128471e3c1b8c66b05c705afb0ddce6b898b82655aca756d2e97c16a01825c89",
+    "sourceHash": "d40765dab71153cde5203f60a3315e0e495e75e7a1c29f5c98eb329565044250",
     "text": "Peonza acróbata: el siguiente ataque no puede ser <keyword0>Esquivado</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "0e583ce586a0d4388afcea1bbb91693ed15bb5399e8d27a581448ded6fe8b10d",
+    "sourceHash": "1622c32f25a915112eea2b5c19e75a02eb88f60e54102987672357b7b3e76465",
     "text": "<keyword0>Reflejo de ataque</keyword0>: Devuelve el próximo ataque de habilidad recibido a su atacante; Evita su daño y efectos perjudiciales sobre ti; Los ataques <keyword1>Reflejados</keyword1> no pueden <keyword2>Reflejarse</keyword2> de nuevo; Dura hasta usarse o ser objeto de <keyword3>Purga</keyword3>; No se acumula"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "44000eefebe914a96c5982dcf9b18d2a8904b5cd74d03ca73f0cb45f58e0aefb",
+    "sourceHash": "761312016252f3d94f8044ce67a1b89fa97f1b855bed5abe2087584e87bf0bb6",
     "text": "<keyword0>Ceguera</keyword0>: Tu próximo ataque tiene un {{value0}}% de probabilidad de fallar contra todos sus objetivos; Termina después de ese ataque, acierte o falle; Un fallo cuenta como una <keyword1>Esquiva</keyword1> de cada objetivo; No se acumula"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "60509eae7735a02a02116655e77efaee95b89c7b7b113a94c3ceadba9ff696c1",
+    "sourceHash": "1f7908f0704a8fab11894b9a2300df316f5351e9e6d36b8a9ec28fcfee79e955",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "427cdb1ee76bf0f83e3e6b5dbe1078dd2161da54f2de999d5effde7c9b13489a",
+    "sourceHash": "d012b36cadccdc95e6d5c66121de1ed5beeeb15eaf8b51f0e4779f1c0d724a0c",
     "text": "Turno perdido"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "a339b0f9158bf291ef5f1ca894fdb06af674ddaf7cae277831359fd7273f8451",
+    "sourceHash": "37c3bcbb567e1eacb83e64a16190d7197068b4f5fc622ae3b707d8b685fd5dbb",
     "text": "<keyword0>Congelación</keyword0>: {{value0}} turno"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "1e0db09de1922400d8cd9e09fb616a4558e0362feda5105f06e7a8d80779d453",
+    "sourceHash": "ecfd64dd2df0eca3b65ee9c97e9a5055281ed4ca7e2c4efd0981584e8b777a86",
     "text": "<keyword0>Congelación</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "bd2fb7e45ae202611446753524bc86406288f5a6117ad01c3352d2c721afcda9",
+    "sourceHash": "44cd6a2272b01de2ef23e34ce8629cc14b0a2dcd495b46e492b9ad9f054db812",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turno"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "38a2e21ab9327bfe403a74e3b2624445f7e6c78f53660ee9a93ed42529ed06da",
+    "sourceHash": "b61a3b5afa2d1706bae6f8eac40059a6ced788469ddb412ae9ed8f90c10af346",
     "text": "Inmunidad al control {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "eebe096a210c55df48035d3c63e6f0805cb5ecc42df87538bf17961aa36539fe",
+    "sourceHash": "099b843608d3262029defb5ed36066a3e2808cf4a213973fc74945ba9636cbb7",
     "text": "Seguimiento gratis: la próxima carta es gratis"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "4c436b7ed726d8a3a128a48d351d36c7e375263f37f0916c12030754b83e7c48",
+    "sourceHash": "760360f9eee0338533e969c8fb28a819226e6b3c88f26629b09813aee1d3a440",
     "text": "Favor divino: la próxima carta de <keyword0>Luz</keyword0> es gratis"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "540fcfe85c899346e61e3980cf96d65f442d78ee285d640a1dbe44b6853051e1",
+    "sourceHash": "fddd738089c8948515e25674b331e316f027438133f4c3538922b5e2704c2d06",
     "text": "Paso de viento: la próxima carta de <keyword0>Naturaleza</keyword0> es gratis"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "9fe5b7c0f7d9dbf9c13ba241c9372a0ba8a86c5e8cb89193a8f237b520f9f3d6",
+    "sourceHash": "7ccfa7bc6126aed79879702d6727315c4a7a605fbcf0511663b0fafc0ee137a7",
     "text": "Al borde de la muerte {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "ba2c7fe35c532a07c2df2d06019bef1ca2c51d4bbb8ef668d109fc609821f34d",
+    "sourceHash": "62730dca71eb6efbff921dffdbb9f2c71cd97f075e2a67f2edf9a6a38969a1e6",
     "text": "Semilla lunar: la próxima represalia de <keyword0>Espinas</keyword0> inflige el doble de daño"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "aa88d3946bda6d123da35ea9f4eeab77d9ba94cfd576024dea2bf371b8455fb5",
+    "sourceHash": "144183c34cd85713058a6cd7a80e47ea30cec2deb24607e0d5a2d5cfbc1c5c41",
     "text": "<keyword0>Anulación</keyword0>: Cancela el próximo ataque de habilidad recibido y sus efectos perjudiciales sobre ti antes de la <keyword1>Esquiva</keyword1>; Las <keyword2>Espinas</keyword2> siguen contraatacando; Dura hasta usarse o ser objeto de <keyword3>Purga</keyword3>; No se acumula"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "5ca9a0d3aabeecd25b809761c0f3403dda53a213d7360b72b948ca5800f71a7d",
+    "sourceHash": "8826234d82b210070474b049b6c273061ae1d41dd7d502673bcfa7a4d10c1301",
     "text": "Flanco abierto: el próximo ataque inflige {{value0}} de daño <keyword0>Físico</keyword0> adicional"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "3915287451655840aa549a8f9f532a8b2e4ab7da3793834315ebd137cbac54d5",
+    "sourceHash": "a9007e5950bfa17f0e3dfe64542360233a6884d87593f84f0ea34a323d38a9e0",
     "text": "<keyword0>Nulificación</keyword0>: Impide la próxima aplicación de <keyword1>Quemadura</keyword1>, <keyword2>Veneno</keyword2>, <keyword3>Sangrado</keyword3>, <keyword4>Aturdimiento</keyword4>, <keyword5>Congelación</keyword5> o <keyword6>Ceguera</keyword6>; No altera el daño directo ni los estados existentes; Dura hasta usarse o ser objeto de <keyword7>Purga</keyword7>; No se acumula"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "323ee04c7b201e94f35b0307f6289bd4be03df9722c1ddec7ab9cffa13a6a517",
+    "sourceHash": "4ae6c14615621418433d9a78b8322f743396a4e1b5aa68a785f64345d0d3118b",
     "text": "<keyword0>Nulifica</keyword0> el próximo daño de <keyword1>Congelación</keyword1>; Dura hasta consumirse o ser objeto de <keyword2>Purga</keyword2>; No se acumula"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "ab60f46d6426d27dd3d70c46624987ea15ef1f56eb17652a49ebdaf786e5761a",
+    "sourceHash": "ef52bde9edd399536754119971a024e7108cb8a83468f398f39830189e6c67e9",
     "text": "Semilla de oasis: el siguiente ataque tiene <keyword0>Drenaje</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "007ca9e4b89d444744e72ec06c56a893997cd6958c4e8c1280ab8a7f74852a02",
+    "sourceHash": "c989571c2fb19cf93efebfa89073d2677c2e3b42e03220e7bdbaf8aa6398c0a8",
     "text": "Corte de despedida: el próximo golpe <keyword0>Físico</keyword0> inflige la mitad de su daño como daño de <keyword1>Sangrado</keyword1> adicional"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "dc10b4e1b3aac96d20915fadc03672cdfe9717ad526d9bd0a5bd7959ecec546c",
+    "sourceHash": "baa008bd34bbd54a10d31e883495781541b9aaf75ed711e7f041cfaf80fe11bc",
     "text": "<keyword0>Reflejo</keyword0>: Redirige el estado perjudicial indicado a un enemigo vivo aleatorio; El daño directo sigue alcanzándote; <keyword1>Reflejo de ataque</keyword1> devuelve en su lugar el ataque completo a su atacante; Los efectos <keyword2>Reflejados</keyword2> no pueden <keyword3>Reflejarse</keyword3> de nuevo; Las cargas no se acumulan"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "38089845e56619bf699a0e1a2a521680b896705490d04ed77c1440a1fb2cda73",
+    "sourceHash": "c5bb6647139d342d3106d8493a77567ea5f13afb414081f09b7e1c5faf6a2fce",
     "text": "<keyword0>Refleja</keyword0> la próxima <keyword1>Quemadura</keyword1>; El daño directo sigue impactando; Dura hasta consumirse o ser objeto de <keyword2>Purga</keyword2>; No se acumula"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "12c8b49b21a8f74f49732ab432f1a0fa7907c851defeef99b10a2dfa6301487b",
+    "sourceHash": "fd6526df9c784169c5c446ec36079ddc7199a125cf4fd42710b9ce02ccd82341",
     "text": "Encontrar el ritmo: +{{value0}}% de probabilidad de <keyword0>Esquiva</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "a31b5e76a022ecc39b8d6604c110c66f649cd7def55393857d56e9a0e6c959e9",
+    "sourceHash": "744319b8046a2435ea8c2feaf320bbcdc48912d4dac17a7622c33c674a8ab3c6",
     "text": "Carrete de cinta: inmunidad al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "2b2476d6f3b7097b2f146e032cc2a4265d4278732bb533e7b8497400bef7b808",
+    "sourceHash": "8a45cdee81cf6e2cc20c72e01c0bbc175fb08363334e8946d4dddd4cf9db6ba4",
     "text": "Contraataque: el próximo ataque <keyword0>Físico</keyword0> es un <keyword1>golpe crítico</keyword1> garantizado"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "0383a56581430d17ae0a7747c965d90ad08f1855d4d6a2c5d1c619cc670263cb",
+    "sourceHash": "84edf6a205aa174d2448011509a9ac0a28e135131f306c58a623cfc5b1a85a72",
     "text": "Palillo de dragón: el próximo ataque también <keyword0>purga</keyword0>"
+  },
+  "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
+    "reviewed": true,
+    "source": "Turn Back the Tide: next attack may repeat",
+    "sourceHash": "444e4eb3d7d61fe92dcd0d61a10a7dff5b1c196f75689df876c61e4b5652ea54",
+    "text": "Invertir la marea: el próximo ataque puede repetirse"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
@@ -8687,6 +8783,18 @@
     "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
     "text": "Examinar a {{name}}"
   },
+  "creature.pendulum": {
+    "reviewed": true,
+    "source": "Pendulum",
+    "sourceHash": "5bf4bc63e43f34bcb9a82c5366cc53a81d84532961ea28c2eedaa6d69b503c3c",
+    "text": "Péndulo"
+  },
+  "creature.pendulumRule": {
+    "reviewed": true,
+    "source": "Chronora’s attacks deal 1 extra damage",
+    "sourceHash": "73796943252a068c224e72beb0b53db70529ed8c677af25fcf9f0d341a2eb6f6",
+    "text": "Los ataques de Chronora infligen 1 de daño adicional"
+  },
   "creature.recruit": {
     "reviewed": true,
     "source": "Recruit {{name}}",
@@ -9274,6 +9382,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "b5fa951e6fd348abc88e394fde3ea46aae6b4d0f33a57d9ca3d241e02ea1b981",
     "text": "{{actor}} invoca un {{echo}}"
+  },
+  "log.summonPendulum": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{pendulum}}",
+    "sourceHash": "01908a8a79cc3fb40d6bd6c02c919ed3bab1d446a8db014c4f7a39e38331ef5f",
+    "text": "{{actor}} invoca un {{pendulum}}"
   },
   "log.swapPositions": {
     "reviewed": true,

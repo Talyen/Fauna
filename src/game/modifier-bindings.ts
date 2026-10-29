@@ -441,6 +441,11 @@ export const modifierImplementations = freeze(
       gallantry: ["./combat/interception#interceptAttack"],
       goodFortune: ["./chance#chance"],
       courtRemembers: ["./combat/legendary#courtRemembers"],
+      turnBackTide: [
+        "./combat/legendary#summonPendulums",
+        "./combat/protection#restoreHealth",
+        "./combat/abilities#executeAbility",
+      ],
       wellRead: ["./card-zones#receiveDraw"],
       livingChorus: ["./combat/turns#livingChorus"],
       tidalRegeneration: ["./combat/lifecycle#startAction"],

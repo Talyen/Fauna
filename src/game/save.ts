@@ -430,10 +430,13 @@ function validateMinions(state: BattleState) {
         : state.battle.enemies.find((entry) => entry.id === unit.minion.ownerId);
     invalid(
       !owner ||
-        owner.species !== "memento" ||
+        owner.species !== unit.species ||
         unit.health > unit.maxHealth ||
-        !echoHealthValues.includes(unit.maxHealth) ||
-        (unit.id !== `echo-${unit.minion.ownerId}-0` && unit.id !== `echo-${unit.minion.ownerId}-1`) ||
+        (unit.species === "memento"
+          ? unit.name !== "Echo" || !echoHealthValues.includes(unit.maxHealth)
+          : unit.name !== "Pendulum" || unit.maxHealth !== 6) ||
+        (unit.id !== `${unit.species === "memento" ? "echo" : "pendulum"}-${unit.minion.ownerId}-0` &&
+          unit.id !== `${unit.species === "memento" ? "echo" : "pendulum"}-${unit.minion.ownerId}-1`) ||
         (unit.minion.side === "enemy" &&
           (unit.combat.oasisLeech ||
             unit.combat.acrobatReady ||
@@ -469,6 +472,9 @@ function validateCombatants(state: GameState) {
       for (const unit of row)
         if (unit.combat) {
           const stats = unit.combat;
+          invalid(
+            !!stats.turnBackReady && (unit.species !== "chronora" || ("minion" in unit && !!unit.minion)),
+          );
           invalid(
             stats.fallenCardsPlayedThisTurn >
               unfinishedJourneyLimit("maxHealth" in unit ? undefined : state, unit),

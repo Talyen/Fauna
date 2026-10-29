@@ -10,6 +10,6 @@ Every card costs 1 Mana. Lost Procession summons one Echo if either of two space
 
 The Court Remembers triggers after each accepted card. One random living, uncontrolled Echo attacks one random living opponent after each accepted card, including Pearl. Summoning can trigger the new Echo immediately. Repeated ability effects do not count as additional card plays; there is no attacks-per-turn limit. Echoes have no other attacks or abilities.
 
-Memento currently fills both Boss encounters. Ordinary enemies and Recruit destinations exclude Legendaries; recruiting one unlocks it as a solo starter. Memento's Health and two-Echo limit are initial tuning.
+Memento fills the first Boss encounter. Ordinary enemies and Recruit destinations exclude Legendaries; recruiting one unlocks it as a solo starter. Memento's Health and two-Echo limit are initial tuning.
 
 The battle card limit is 256 currently present cards, including generated cards; consuming a Pearl frees generation capacity. Generation IDs remain unique across the battle and survive reload. Deploying an additional creature at that limit replaces the newest generated copies with its permanent kit. Enemy automatic play is bounded to 256 decisions per turn. Sources and generated images are preserved under `public/art/memento/`; derivatives use the normal asset recipe. Artistic acceptance and full CI/platform validation remain separate from local checks.

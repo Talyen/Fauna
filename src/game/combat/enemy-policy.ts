@@ -23,6 +23,7 @@ const benefits = [
   "nullifyFreeze",
   "negate",
   "attackReflection",
+  "turnBackReady",
 ] as const satisfies readonly (keyof CombatState)[];
 const harms = [
   "burn",

@@ -14,6 +14,7 @@ import { reverie } from "./creatures/reverie";
 import { euphera } from "./creatures/euphera";
 import { tournelle } from "./creatures/tournelle";
 import { memento } from "./creatures/memento";
+import { chronora } from "./creatures/chronora";
 import { freeze } from "immer";
 import type { Species, SpeciesId, CardDefinition } from "./types";
 import { rookhaven } from "./creatures/rookhaven";
@@ -76,6 +77,7 @@ const kits = [
   alpenglen,
   wisterelle,
   brumalyn,
+  chronora,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -117,6 +119,7 @@ export const CARDS: readonly CardDefinition[] = [
   alpenglen,
   wisterelle,
   brumalyn,
+  chronora,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map(kits.map((kit) => [kit.species.id, kit.cards]));

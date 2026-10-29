@@ -40,6 +40,7 @@ const combatStateSchema = z
     fallenCardsPlayedThisTurn: z.number().int().min(0).max(MAX_FALLEN_CARDS_PER_TURN),
     cardsPlayedThisTurn: z.number().int().min(0).max(2),
     encoreUsed: z.boolean(),
+    turnBackReady: z.boolean().optional(),
     firstAttackUsed: z.boolean(),
     desperateGuardUsed: z.boolean(),
     armor: natural,
@@ -82,8 +83,8 @@ const enemy = z.object({
   lastAbility: id.nullable(),
 });
 const minion = enemy.extend({
-  name: z.literal("Echo"),
-  species: z.literal("memento"),
+  name: z.enum(["Echo", "Pendulum"]),
+  species: z.enum(["memento", "chronora"]),
   lastAbility: z.null(),
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });

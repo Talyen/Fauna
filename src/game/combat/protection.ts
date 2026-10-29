@@ -55,6 +55,15 @@ export function* restoreHealth(
   const { gain, excess } = restoration(unit, amount);
   const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
+  if (
+    gain > 0 &&
+    state?.phase === "battle" &&
+    !("minion" in unit && unit.minion) &&
+    passiveAmount(isEnemy(unit) ? undefined : state, unit.species, "turnBackTide") > 0 &&
+    battlefieldHasId(state, isEnemy(unit) ? "enemy" : "player", unit.id)
+  ) {
+    ensureCombat(unit).turnBackReady = true;
+  }
   if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
       yield* reaction("grantBlock", state, unit, overflowBlock(excess), events);

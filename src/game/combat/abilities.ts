@@ -11,6 +11,7 @@ import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
 import { chance as succeeds } from "../chance";
 import { boonRule } from "../rules/boons";
 import { roll } from "../random";
+import { passiveAmount } from "../progression";
 import type { GameEvent, BattleState } from "../types";
 
 /** Runs inside the command draft; command costs, counters and settlement stay with the caller. */
@@ -46,6 +47,16 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
   beforeAbility(state, actor, target, keywords, enemy, events);
   if (actor.health <= 0) return;
   const stats = ensureCombat(actor);
+  const prepared = def.effect === "attack" && stats.turnBackReady;
+  if (prepared) stats.turnBackReady = false;
+  const tideRepeat =
+    !!prepared &&
+    succeeds(
+      state,
+      passiveAmount(enemy ? undefined : state, actor.species, "turnBackTide") / 100,
+      enemy,
+      events,
+    );
   const previousPlays = stats.cardsPlayedThisTurn;
   stats.cardsPlayedThisTurn = Math.min(2, previousPlays + 1);
   const flourishRepeat = previousPlays === 1 && kindlingFlourish(state, actor, events);
@@ -55,7 +66,7 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
   const repeat = talentRepeat(state, keywords, enemy, events);
   for (
     let play = 0;
-    play < (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1);
+    play < (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat ? 2 : 1);
     play++
   ) {
     if (
@@ -75,7 +86,7 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
           : !target || target.health <= 0))
     )
       break;
-    if (play === 1 && (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat))
+    if (play === 1 && (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat))
       emitSupport(events, actor.id, {
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });

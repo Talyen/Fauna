@@ -3023,6 +3023,42 @@
     "sourceHash": "3b3d18ca66971d80e4b663d308a9d82ac14b992a0d33c97eb0c1d86c590679a5",
     "text": "各味方が次に受ける有害な状態効果を<keyword0>無効化</keyword0>"
   },
+  "content.card.chronora-borrowed-moment.name": {
+    "reviewed": true,
+    "source": "Borrowed Moment",
+    "sourceHash": "f94267123d4fa37248bed317afad14dd2de5c65cff717e93c93c80a0958a117a",
+    "text": "借りたひととき"
+  },
+  "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
+    "reviewed": true,
+    "source": "Give all allies <keyword0>Negate</keyword0>",
+    "sourceHash": "19f61fd0aeb44cb4b4ce22dda471897a62b365f1dcb046dd4e04f1a378c08f15",
+    "text": "味方全員に<keyword0>防止</keyword0>を付与"
+  },
+  "content.card.chronora-bridge-rewind.name": {
+    "reviewed": true,
+    "source": "Bridge Rewind",
+    "sourceHash": "52aa331168afeba6e33d980e8c0dfa0a34bf0ebbab2e1dbf1e1c8b7d26de64b1",
+    "text": "橋の巻き戻し"
+  },
+  "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
+    "sourceHash": "e169276d97dc022cb4f5f064042b62929521cb59d6d0697a9b191985168ef156",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復し、壊れた振り子を1つ復元"
+  },
+  "content.card.chronora-pendulum-break.name": {
+    "reviewed": true,
+    "source": "Pendulum Break",
+    "sourceHash": "9053a4f7995c8c348c0fdc0257c1cf339aefb1292eaae81d96d08bf4ffe56648",
+    "text": "振り子の一撃"
+  },
+  "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "50e275e182fd094b60a44962a693fd7bdb6f5d135e850634d64c72c9e7d3f19e",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
     "source": "Ashen Veil",
@@ -5357,6 +5393,60 @@
     "sourceHash": "0c65f076100ea03ca240c744933ca89d2833cbeb7896843d3ecadc960c05568c",
     "text": "アンコール"
   },
+  "content.species.chronora.name": {
+    "reviewed": true,
+    "source": "Chronora",
+    "sourceHash": "10135f6ef66243356fa3a5eb32c1ce8d44384fa3160310b20c78bfb5f42b0929",
+    "text": "クロノラ"
+  },
+  "content.species.chronora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "b7627718d7e2e98d8b3026a8041ff1f94585ef60978be0a0646b3f9d61b327aa",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "cc0d11c281ca337ac943bf6656d88abab2153fe70da48e293db27db5d8f8b256",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "4b1156446b960615600bf73d901c042eabae6d5cfe3abdb1fe06741f2b8a7a9d",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has an {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "e66c5daad95f0abaf2dfd07b008890364f5d83652ac00afa3aaf26faa136d203",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "0918f027f143a190ee4569954d82353b1db99f9d75dc1d4080713e53286c70aa",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "2e7c8ca14469d1e747365026b12dda98319cd000734d7521747f5d0e433b9dd5",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の振り子を{{value0}}個召喚；それぞれ攻撃ダメージを{{value2}}増加；クロノラが<keyword1>体力</keyword1>を回復した後、次の攻撃が{{value3}}%の確率で繰り返される"
+  },
+  "content.species.chronora.title": {
+    "reviewed": true,
+    "source": "The keeper of borrowed moments",
+    "sourceHash": "e634bcda58981bbacc9dbabdac7212c2b1d46024e233fa4494b2e80ab9427053",
+    "text": "借りた時を守るもの"
+  },
+  "content.species.chronora.trait": {
+    "reviewed": true,
+    "source": "Turn Back the Tide",
+    "sourceHash": "34fb7993afe7237cde986c60873605cec8f3b87a3b436036d91cd7e044f7a829",
+    "text": "時の流れを戻す"
+  },
   "content.species.cindernewt.name": {
     "reviewed": true,
     "source": "Cindernewt",
@@ -6872,158 +6962,164 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "dfc41a3a9d7d9bfa63a7b5dc136c79406f4f89fd6e89f0ad4971d56198ff3475",
+    "sourceHash": "9132d77ad8701d2b9589a1a44f0ebf8474dfceffbb5ae8c07b66364ce33b5649",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "8b15d378a8a096d3948b4aa7cca0bd8bcfb2e73ebd2ea150724d67c9b549408e",
+    "sourceHash": "73d487bc5eaf4691f295e3e8e4e3e9f6164b21956e9b4a89ddea792cb55f7656",
     "text": "<keyword0>攻撃反射</keyword0>: 次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃を再び<keyword2>反射</keyword2>することはできない; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "3627ecc5e2a5b9749eb4fac15c1d73a50645c6fb8091ed44565e129ee657c876",
+    "sourceHash": "50f476ac3abe7a77af11b337e1f74b789de4f80bf75b1fe54b2259c152ae794a",
     "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "24dfdd6305c829ba15e43fb8e8b4d9c888e06a6b099eaeed31d727087748dd21",
+    "sourceHash": "23ff4492e64e996b866939ec944d63c61ebee42e075938fd424d8d6410f5431b",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "f8221c9054f68e9d87bd35459a6d25c315bb0a246a9e4eb679ea0d4c4ec63dee",
+    "sourceHash": "c49075832bec6e9c0b47e176f42594c9a4f727e11cd0577fa797a0ead66d9d28",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "cf31cefbc5e5a199e7f1c5b6edc356509b59c04992d8596069511fc8fa2d1140",
+    "sourceHash": "d7bbdce86e7be91113a7f61874d5614c401e4ac2378a2374f6ea80fa0e6005e0",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "457111dc93cf51e07084498efdbb9cd470135b8cef7e99411840b06100ba409c",
+    "sourceHash": "925267d5c3d70a8e6b486b649c1f06a5de0c14a32538c1da47f6617de6133861",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "bb0553d1f0b517fc31c97c71d845cbee3686c8a2836040ddd7b88ebde08ec196",
+    "sourceHash": "df397d46de9feea8fd12ff960bc22c3899c29becf7f15cf1fa051180d3eaf6c6",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "6d8867e738af271e4daf0382b960b74bfb1a75dfc65008c5cb00165cbca94830",
+    "sourceHash": "72a3743187bd091d76f9d523b9a7c66b1e8ac1e704f6e0c9d5623800e80e4ec7",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "f77ccdca3428e0ab97bfc3a171e0e585c91539b6ee98a17258a01dfb203f9167",
+    "sourceHash": "4b3c066f7e0bc245df0112cde9694cac19d7369a6c0b5852f0525432dda97e25",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "acee4a293167127c27fcce0fee830583c70628375c1d622dff2afa8741d0b2ec",
+    "sourceHash": "19f359af6559ca88d73e2335bff231d18b309152e37e733385ac6c518c08585b",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "10dde2ea145804f2250877961100abe3a89c5c92edc39d9458e137146617aa98",
+    "sourceHash": "734485276f4ee93a907b1c12d92ee483497ee1121172be9a77891898de3a778e",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "b5ac76acbb154cdb2c0ec632dcaffb478055ea3f68713d1e86424280dc9a7116",
+    "sourceHash": "f68bd78a50d0d7374cf036fd560654088189cce033c17140cecf5d98fbcc2efe",
     "text": "死の淵 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "65eba7656347e69eda0da469f0bd419fae8bafd7086093fd4aac315524bfde2b",
+    "sourceHash": "e768a88f636be688cdca1ce5575e0985226669e0b8898a4c86398cd6b31ac74c",
     "text": "月の種：次の<keyword0>棘</keyword0>の反撃は2倍のダメージを与える"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "f69abeab97782ad920a016e2c4c7b5367268dfc0b055aa749c158c745c4e26fa",
+    "sourceHash": "3f56e047adc1858da28f6a6f2c005bb0933c414c571227841bc26e299ebbabca",
     "text": "<keyword0>防止</keyword0>: 次に受ける能力の攻撃と自分への有害効果を<keyword1>回避</keyword1>判定前に打ち消す; <keyword2>棘</keyword2>は反撃する; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "98495f2a70ce7436c80633a489d642bbf0e7387243aad314d0a9d5e3229251c2",
+    "sourceHash": "03ef55d6e6334fe1530ce5282dd139fa48a45352c73aab15badaae5f32a1fb86",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "573926e846dd5f9f493f9c76498f98835c1f9a5620fdbde808196018c4d01666",
+    "sourceHash": "1f3f503c638dcc9559b884218c7611b8adc94084944fba845931f489b072691f",
     "text": "<keyword0>無効化</keyword0>: 次の<keyword1>炎上</keyword1>・<keyword2>毒</keyword2>・<keyword3>出血</keyword3>・<keyword4>スタン</keyword4>・<keyword5>凍結</keyword5>・<keyword6>盲目</keyword6>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword7>強化解除</keyword7>されるまで続く; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "36468b4b7f095cf4c1d209ff01dc101558084be3c28f9e6d58456a63a41ca79f",
+    "sourceHash": "b47dc1f033dfdfa2167cfad76feb4d7a662170390df1fc321b2763914aca3a79",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "660d346b5c443510b645f935c1b633bdc4e40adefa71a7c0e72629660aea93a3",
+    "sourceHash": "e7c084d55caebc5efe8614ed6a769479b5e27ef8eb826e3b6e0b905270010ced",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "2ff3f2ac01373dbb0ebc72bc9cbf42fdc885c933c32f110fa40375bd0e26531e",
+    "sourceHash": "173c10b86f60168ffcb57c72f2578fd4fc917990634ee2e5ca763803b66c614e",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "b43a4b5f07447ea4f6076388f6ac39ecd8a4f0121275487f63cff11b12759c18",
+    "sourceHash": "1472aa1507f17244877d59016aaf7bf80e07af2652a476d1bc65ef1c0a83ef30",
     "text": "<keyword0>反射</keyword0>: 指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword1>攻撃反射</keyword1>は攻撃全体を攻撃者へ返す; <keyword2>反射</keyword2>された効果を再び<keyword3>反射</keyword3>することはできない; チャージは重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "67ef1f637e81eda86b6d26d93ccb194e048c9d25033d57f7c4ea4630bdaae33d",
+    "sourceHash": "eab1e76b333df5bfad56bdbae5a184b2e295b997286ca75af4a55e7590e936a5",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "7bccdcc632e1ffe5ed66a51c9ad219e35383f67962acc61d2bd08a689d20ea9a",
+    "sourceHash": "eb15a27a84fbe6144a5bc31d258c0e681bdda064fc7f467c26054b2ff34fca45",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "ce4c0b448bc9e0c431bd23fc92e69547e10401a6bba78e29eefc419e2a64425e",
+    "sourceHash": "50674c06d6610160951b6f8842cce39c7704c28f51dcb0c85d39c5fc4a777191",
     "text": "リボンの糸巻き：<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "ea1bb27225efbdef0769c03170c39b6e9d0262ac8ada245abca2e15caf10fa64",
+    "sourceHash": "ffeb5871ee99cf502b59a6f5078bce445abbb35d524e37da818a545281b49d18",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "1c1847f49d6502bfbcc99be50db3ca3c8944f502bd4b48bcd91ad751df1c22d7",
+    "sourceHash": "57d91f103d7dfbc375b79d812078cde2b23ff6d23bbf6de04bcbe918db07aac4",
     "text": "竜のつまようじ：次の攻撃は<keyword0>強化解除</keyword0>も行う"
+  },
+  "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
+    "reviewed": true,
+    "source": "Turn Back the Tide: next attack may repeat",
+    "sourceHash": "bd545fd9d9b0746b80e6880e72ea2147bd6b761f94fc325b8635e41b15b54322",
+    "text": "時の流れを戻す：次の攻撃が繰り返されることがある"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
@@ -8687,6 +8783,18 @@
     "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
     "text": "{{name}}を調べる"
   },
+  "creature.pendulum": {
+    "reviewed": true,
+    "source": "Pendulum",
+    "sourceHash": "c296842a38ef2739ac298fb00945548bfee8705986fd1ccf92e8e6cfe8cece07",
+    "text": "振り子"
+  },
+  "creature.pendulumRule": {
+    "reviewed": true,
+    "source": "Chronora’s attacks deal 1 extra damage",
+    "sourceHash": "4c13b7e881cb7e76be638ef57673c2343fd5799b1aae7f86391f4d732018bc64",
+    "text": "クロノラの攻撃ダメージが1増加"
+  },
   "creature.recruit": {
     "reviewed": true,
     "source": "Recruit {{name}}",
@@ -9274,6 +9382,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "4fc66ced44f28eca05ae7122c843f65c93f57a21885e722d037ce377f392fa6d",
     "text": "{{actor}}が{{echo}}を召喚"
+  },
+  "log.summonPendulum": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{pendulum}}",
+    "sourceHash": "a23589f7ee7323d4bdd824ece91dae9dbb52157806d25b5e10225b0e08a093be",
+    "text": "{{actor}}は{{pendulum}}を召喚"
   },
   "log.swapPositions": {
     "reviewed": true,

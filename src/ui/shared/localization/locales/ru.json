@@ -3023,6 +3023,42 @@
     "sourceHash": "77eac15dd0b5a746c37ee49cc8b89a948175e80ed4735eeb876e94e597546a82",
     "text": "<keyword0>Аннулируйте</keyword0> следующий вредный статусный эффект каждого союзника"
   },
+  "content.card.chronora-borrowed-moment.name": {
+    "reviewed": true,
+    "source": "Borrowed Moment",
+    "sourceHash": "e308c0bf81b030a78a15205468d185bd88067f5782635972e71215d506646778",
+    "text": "Заимствованный миг"
+  },
+  "content.card.chronora-borrowed-moment.v25ab18d23ed00bcc.rule": {
+    "reviewed": true,
+    "source": "Give all allies <keyword0>Negate</keyword0>",
+    "sourceHash": "6d9bc55c9532a95a12c1c68ec2f52d13a4cdde40c006850c39b66931c402ee1f",
+    "text": "Даруйте всем союзникам <keyword0>Отведение</keyword0>"
+  },
+  "content.card.chronora-bridge-rewind.name": {
+    "reviewed": true,
+    "source": "Bridge Rewind",
+    "sourceHash": "51bb26da60a147bd1c3fdd357a4445bb745c96d4eebe6e6ec826508aea428a49",
+    "text": "Возвращение моста"
+  },
+  "content.card.chronora-bridge-rewind.v048b790449fe83b0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; restore a broken Pendulum",
+    "sourceHash": "78f04d7e2ac2d949748fdfd01846f65627b232b35e55d8f80fa69b89b36df20c",
+    "text": "Восстановите {{value0}} ед. <keyword0>Здоровья</keyword0>; восстановите разрушенный маятник"
+  },
+  "content.card.chronora-pendulum-break.name": {
+    "reviewed": true,
+    "source": "Pendulum Break",
+    "sourceHash": "7c9e3c92214e2393d47d075cb0b0f0830c36b65269ceff43c3f551f21f09af7d",
+    "text": "Удар маятника"
+  },
+  "content.card.chronora-pendulum-break.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "76b69b0e586606c51bc1056e5e4650b49c5b608889e8272843df7562e4e23126",
+    "text": "Нанесите {{value0}} ед. урона <keyword0>Оглушением</keyword0>"
+  },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
     "source": "Ashen Veil",
@@ -5357,6 +5393,60 @@
     "sourceHash": "19dee03a4480acb1b1031183e2a345b34540913289dd4aa7e9e19ddd54b35045",
     "text": "На бис"
   },
+  "content.species.chronora.name": {
+    "reviewed": true,
+    "source": "Chronora",
+    "sourceHash": "967d5aecb8bff8737843ed36995dd726c4cfc51bab332075ecbfdc9f23fa0b91",
+    "text": "Хронора"
+  },
+  "content.species.chronora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "9acb0226ad70f5a9a1e44a85218c0b6cb8b90bdb2d20e0047840ca423d2874e0",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "5e77ad26e8729a8aa54eef44a4585bffc53cac2f3f675bad3e007298bb22582d",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "6239d3eb551463239b211c861859b9670b2958d412a4b322950f15a18ff4beb6",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has an {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "bd0fbc4129973db5127d76cd8f528a7a84210aba47a581a34983d3f1bf24b7a7",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "9382a2f9a81570d913f10a072bfeaead4724d06af8fe02bc4f1b205f74326032",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Pendulums with {{value1}} <keyword0>Health</keyword0> on entry; each adds {{value2}} attack damage; Chronora’s next attack has a {{value3}}% chance to repeat after restoring <keyword1>Health</keyword1>",
+    "sourceHash": "4fd8d30b9e71b6281443966ea6597d374d63c63185d5a12d45a811630e348c3d",
+    "text": "При вступлении в бой призовите маятники в количестве {{value0}} с {{value1}} <keyword0>Здоровья</keyword0> каждый; каждый повышает урон атак на {{value2}}; после восстановления <keyword1>Здоровья</keyword1> следующая атака Хроноры повторяется с вероятностью {{value3}}%"
+  },
+  "content.species.chronora.title": {
+    "reviewed": true,
+    "source": "The keeper of borrowed moments",
+    "sourceHash": "116119142036b0127885a3739c2e7a053ee50f93fb5abd9b728f89541d7edd88",
+    "text": "Хранительница заимствованных мгновений"
+  },
+  "content.species.chronora.trait": {
+    "reviewed": true,
+    "source": "Turn Back the Tide",
+    "sourceHash": "124cb26f24099fab5a823b17424fc9022976cdbf884b69050c48cd8d0b4cac12",
+    "text": "Повернуть время вспять"
+  },
   "content.species.cindernewt.name": {
     "reviewed": true,
     "source": "Cindernewt",
@@ -6872,158 +6962,164 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "3e8965c8daaa4e72e002dfac5c1a40cc7f3208d51a0fe0503b7cc58f1fb1d76f",
+    "sourceHash": "0491dd42143c13dc69d636362e4e77b2b448a875aa0fcf727819edb9fd89f3eb",
     "text": "Волчок акробата: от следующей атаки нельзя <keyword0>уклониться</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "246e2a7c56980b0be76652052f2c42d3a2cf1e4d3422c202a5fadcf5f471cf86",
+    "sourceHash": "0fc7bb69bfbd873d8c7e0591b65cf6ef2b01818aab422fd3b07827edd43e11c0",
     "text": "<keyword0>Отражение атаки</keyword0>: Возвращает следующую входящую атаку способности её атакующему; Предотвращает её урон и вредные эффекты на вас; <keyword1>Отражённые</keyword1> атаки нельзя <keyword2>отразить</keyword2> снова; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "854100285db9d9844a90d514236b80b9db70490ce3f4fec17216a5038064b3d6",
+    "sourceHash": "4a0aee95bacea59757b3717a3c7f042f51713f22216d1233d7d0edd600753735",
     "text": "<keyword0>Ослепление</keyword0>: Ваша следующая атака с вероятностью {{value0}}% промахнётся по всем целям; Эффект заканчивается после этой атаки при любом исходе; Промах считается <keyword1>уклонением</keyword1> каждой цели; Не суммируется"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "95bb96403c00db428bddef2682abf54996f0da33247a02eeadbd69696325acf3",
+    "sourceHash": "c7076de32a72216c7fdb50759888f05e5cffb33155212e04959d0a0a559caf6d",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "9f13a28a8bf265178703761b80ffba206a1fdc44a177760938394e6187a7efa1",
+    "sourceHash": "eb503784f656416fd87fc374e56a93675410977fee7a176d41eb9bb15c0470cc",
     "text": "Ход пропущен"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "16c3ec1704d812eb07bd36f0e3f9eae050095ba251a1b4bb7c0d85f9940d8907",
+    "sourceHash": "9fd6605d931d106f17f319320609d64477ae605c459dbe1dd897daa299e41a13",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "209a398a9e0251eda63328bd03d71e44572ac8a1ccdbe1389ffdd59dba29fcba",
+    "sourceHash": "1cca950478efae8a219b5d37e5e88c067236cb6b11f5d8ba9f5c3122f9a2f8f0",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "db89c19ea096468a12c00b7c5fe0c85194c87ccf5026a78a92ccb40e41d589cc",
+    "sourceHash": "0d9237d9a218a253bed9add02a20e0fe64971faf844c73f2d3e81aa0fd99b8c3",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "f5203e0c975e905b937422c766abf5a30b30972462352c056f8dce89e282aa91",
+    "sourceHash": "73084423d6e7ebec51cbb6d8bcda09cf842fffb1786254c9b928db302fda1b21",
     "text": "Иммунитет к контролю {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "033624ebb1154b16500d29325443de477da0d697601153918a6af8bf964f11b7",
+    "sourceHash": "88d5ead32e414b19d17ce7eaaf3633937db85ba1e05bf7bbd511d8556b3be098",
     "text": "Бесплатное продолжение: следующая карта бесплатна"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "c2ea9908ae1a5d575cc94d5a3918cc498f3a82ae6fa6c3ad850a32f7396b2a53",
+    "sourceHash": "de328d88130f8aeb4bea282742c2a96383ae0917ce930f1a71d7cc1ba690ff18",
     "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "d47437e4199b1bb957b9ec7c98a4e49a55ac217275e6477fc28bf76418a81322",
+    "sourceHash": "454590ec3ca3d15e1583484b689ae3b3df1260f14ddf6ecbad3e4a5788cb3c0a",
     "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "844d94e583140e5eee9efc53581c12591089ca9319c436d11a046350db241c61",
+    "sourceHash": "009ed80a52d89b7f1d7e4596ea909c94919e1a9605f73f186fd60b8b58c68b65",
     "text": "На пороге смерти {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "c9732a9e545c8a57d2c77c5730d9ff1da332cb787717ff8fc91a549de0f4ff00",
+    "sourceHash": "9035aff07ff2e4681ce45196df3fa4ec315c2e813915cc00de3f9a116b5c0999",
     "text": "Лунное семя: следующая ответная атака <keyword0>шипами</keyword0> наносит двойной урон"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "8f0b9ae116b6050bb1739bdb686c670165de319627fe4fe0afbd75e90b5c644f",
+    "sourceHash": "bf892379fcdbc3ea4cbdf873444d86fcd64dd8f1c861e9ab881310800525322a",
     "text": "<keyword0>Отведение</keyword0>: Отменяет следующую входящую атаку способности и её вредные эффекты на вас до <keyword1>уклонения</keyword1>; <keyword2>Шипы</keyword2> всё равно наносят ответный урон; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "361c018054864e581312625a9cd4f1202b448e800b06fea5e090dad4dbc74730",
+    "sourceHash": "837a3d8f94c1530ee301439a6eb2b59ed52504565f5b04af462b1160b983a224",
     "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "ef5b1a08da0055fdb8c67583812ec6aba19341b888da136053f85698a3c42475",
+    "sourceHash": "9faa5efa801dd872c2231714c7f1bc9cb0ed3d2a6e6c273175629dc24a28a849",
     "text": "<keyword0>Аннулирование</keyword0>: Предотвращает следующее наложение <keyword1>горения</keyword1>, <keyword2>яда</keyword2>, <keyword3>кровотечения</keyword3>, <keyword4>оглушения</keyword4>, <keyword5>заморозки</keyword5> или <keyword6>ослепления</keyword6>; Прямой урон и уже действующие статусы не меняются; Действует до использования или <keyword7>рассеивания</keyword7>; Не суммируется"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "ffd7b7c638a17d3fccdcfa8e3d0ef1698c0f60361a15246ec7a4a548c509d526",
+    "sourceHash": "5dca3632a0f361dd406d7d8d7f4eaf806e69fe0bafd5a6198efbb3346395388a",
     "text": "<keyword0>Аннулирует</keyword0> следующий урон от <keyword1>заморозки</keyword1>; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "95ac3e79f9897f9e11949a13853ba2e180fa69d45f835ac5d10545814403de8a",
+    "sourceHash": "f43bfdbfc25a99c81320d882a630ad57c8746a6221e608c534c9381a1cd6692b",
     "text": "Семя оазиса: следующая атака имеет <keyword0>вампиризм</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "48963f466f990d98a30781d2b7d61ef2863ccb5751dc66326c8ddf6041c1d72e",
+    "sourceHash": "aaabf46a091f0e88128c4e8c832f2ad57087ce0169d9bde87d589aeeae2ac2b2",
     "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "d0591e256d48d14f6e8b3bc991882765ebf9f4e4e7a9f94b5a8c654a1f51bf72",
+    "sourceHash": "6a9a316cc69f7c6c14b51694dea629ca7971b8fea7adeb18cb27f0da944b6dc9",
     "text": "<keyword0>Отражение</keyword0>: Перенаправляет указанный вредный статус на случайного живого врага; Прямой урон всё равно попадает по вам; <keyword1>Отражение атаки</keyword1> вместо этого возвращает всю атаку её атакующему; <keyword2>Отражённые</keyword2> эффекты нельзя <keyword3>отразить</keyword3> снова; Заряды не суммируются"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "15c0fe0e82fa4102da64aa826576fed679aa1f8145094b6f9b15427952151e73",
+    "sourceHash": "d510792c32ac61c6d6bb4db229940d9762f276cdcec924ce85d3925bc98a32a2",
     "text": "<keyword0>Отражает</keyword0> следующее <keyword1>горение</keyword1>; Прямой урон всё равно проходит; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "2d2a11d3f0df010b7426c3a8a53c9d67fb051e2a1a4df2f36a3e3f9479cafd2c",
+    "sourceHash": "b4819a84c4ae3e7e153ac2b8d04a931b1d716146e5ea79850beac9503d730961",
     "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "c4030837137fc509b45866d57d599085579046754031dd17fe0a380d8a793990",
+    "sourceHash": "bd643625289ada307dcc75e53c2772884c87acc87dc24230cb4b0492f498ccb3",
     "text": "Катушка лент: иммунитет к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "ad98bd40465adbfc4f3f9a62d921f3192caed201c04f0eeb9eb5c5b1af024772",
+    "sourceHash": "ebf2d49be0d5c1b4e2ec0345d36a1286efcf2df54fc880a8db5684e58a273d96",
     "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "a336d0ed99e5d73de71d1ec17d812d764090ef17ba85951f9c24f6c0c1afa261",
+    "sourceHash": "52e36ace345306beddc95400d2872430162b6aa4b56c79d8496566c94f5ea52c",
     "text": "Драконья зубочистка: следующая атака также вызывает <keyword0>рассеивание</keyword0>"
+  },
+  "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
+    "reviewed": true,
+    "source": "Turn Back the Tide: next attack may repeat",
+    "sourceHash": "9b9ddc6098aee99d109710f370137f83a6cd61d8ff087f789146848c1e1bc146",
+    "text": "Повернуть время вспять: следующая атака может повториться"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
@@ -8687,6 +8783,18 @@
     "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
     "text": "Осмотреть: {{name}}"
   },
+  "creature.pendulum": {
+    "reviewed": true,
+    "source": "Pendulum",
+    "sourceHash": "312be1abacaa6aed0504a7458bd2f1628d6625ecc923ef4a7cbafdccd058f1f9",
+    "text": "Маятник"
+  },
+  "creature.pendulumRule": {
+    "reviewed": true,
+    "source": "Chronora’s attacks deal 1 extra damage",
+    "sourceHash": "015d10240dcaaa89bc91ccba99dc6f528ce70318c9f4729f01022a62acf76c7e",
+    "text": "Атаки Хроноры наносят на 1 урон больше"
+  },
   "creature.recruit": {
     "reviewed": true,
     "source": "Recruit {{name}}",
@@ -9274,6 +9382,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "61fa59d21f8938aa7c3e2132f98eb3bb14bda2e4e40395f256af6bb09d995a05",
     "text": "{{actor}} призывает {{echo}}"
+  },
+  "log.summonPendulum": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{pendulum}}",
+    "sourceHash": "6e8ab06a9e31ba6e03683890d1087a34f00825dbe485b0cb3b54b945806d7d29",
+    "text": "{{actor}} призывает {{pendulum}}"
   },
   "log.swapPositions": {
     "reviewed": true,
