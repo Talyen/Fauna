@@ -7,7 +7,7 @@ import {
 } from "./combat/battle-modifiers";
 import { battlefieldView } from "./battlefield";
 import { wellProvisioned } from "./combat/food";
-import { bossDeck, removeDepartedMinions, summonPendulums } from "./combat/legendary";
+import { bossDeck, removeDepartedMinions, summonPendulums, summonRoyalBlooms } from "./combat/legendary";
 import { species } from "./content";
 import { merchantPriceRange, merchantOfferCount } from "./destinations";
 import { starterCount, starterOfferPool, STARTER_OFFER_COUNT, KEYWORDS } from "./progression";
@@ -123,8 +123,14 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     expedition: state.expedition,
     journey: { ...state.journey, outcome: null },
   });
-  for (const unit of active.team) summonPendulums(active, unit, "player", events);
-  for (const unit of active.battle.enemies) summonPendulums(active, unit, "enemy", events);
+  for (const unit of active.team) {
+    summonPendulums(active, unit, "player", events);
+    summonRoyalBlooms(active, unit, "player", events);
+  }
+  for (const unit of active.battle.enemies) {
+    summonPendulums(active, unit, "enemy", events);
+    summonRoyalBlooms(active, unit, "enemy", events);
+  }
   wellProvisioned(active, events);
   active.battle.draw = shuffle(active, active.battle.draw);
   for (const enemy of active.battle.enemies)

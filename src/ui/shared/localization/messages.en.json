@@ -191,6 +191,12 @@
   "creature.recruitAction": {
     "text": "Recruit"
   },
+  "creature.royalBloom": {
+    "text": "Royal Bloom"
+  },
+  "creature.royalBloomRule": {
+    "text": "With The Garden Answers, attacks a random enemy when its owner gains Block"
+  },
   "deck.discardEmpty": {
     "text": "Discard Pile is empty"
   },
@@ -481,6 +487,9 @@
   },
   "log.summonPendulum": {
     "text": "{{actor}} summons a {{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "text": "{{actor}} summons a {{bloom}}"
   },
   "log.swapPositions": {
     "text": "{{actor}} swaps positions with {{target}}."

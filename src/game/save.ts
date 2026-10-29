@@ -182,7 +182,7 @@ export function validateRoster(state: GameState) {
       !roster.some((unit) => unit.health > 0),
   );
   // Reserve battle-generated identities before a destination can create those combatants.
-  invalid(roster.some((unit) => /^(?:enemy-|echo-)/.test(unit.id)));
+  invalid(roster.some((unit) => /^(?:enemy-|echo-|pendulum-|bloom-)/.test(unit.id)));
   invalid(!uniqueBy(roster, (creature) => creature.species));
   invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
@@ -454,9 +454,13 @@ function validateMinions(state: BattleState) {
         unit.health > unit.maxHealth ||
         (unit.species === "memento"
           ? unit.name !== "Echo" || !echoHealthValues.includes(unit.maxHealth)
-          : unit.name !== "Pendulum" || unit.maxHealth !== 6) ||
-        (unit.id !== `${unit.species === "memento" ? "echo" : "pendulum"}-${unit.minion.ownerId}-0` &&
-          unit.id !== `${unit.species === "memento" ? "echo" : "pendulum"}-${unit.minion.ownerId}-1`) ||
+          : unit.species === "chronora"
+            ? unit.name !== "Pendulum" || unit.maxHealth !== 6
+            : unit.name !== "Royal Bloom" || !echoHealthValues.includes(unit.maxHealth)) ||
+        (unit.id !==
+          `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : "bloom"}-${unit.minion.ownerId}-0` &&
+          unit.id !==
+            `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : "bloom"}-${unit.minion.ownerId}-1`) ||
         (unit.minion.side === "enemy" &&
           (unit.combat.oasisLeech ||
             unit.combat.acrobatReady ||

@@ -1,6 +1,8 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "velvetmonarch-battle",
+  "velvetmonarch-collection",
   "chronora-battle",
   "chronora-boss",
   "chronora-restoration",
@@ -292,6 +294,20 @@ export async function reviewScenario(server, name) {
       summonEcho(draft, draft.team[0], "player", 6, []);
     });
   }
+  if (name.startsWith("velvetmonarch-")) {
+    const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
+    const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
+    const { produce } = await server.ssrLoadModule("immer");
+    game = produce(teamRun(42, ["velvetmonarch"]), (draft) => {
+      draft.team[0].health = 54;
+      draft.battle.minions[0].health = 0;
+      setHand(draft, [
+        "velvetmonarch-royal-repose",
+        "velvetmonarch-meadow-decree",
+        "velvetmonarch-sovereigns-wake",
+      ]);
+    });
+  }
   if (name.startsWith("chronora-")) {
     const { teamRun, authoredPack, prepareDestination } =
       await server.ssrLoadModule("/tests/support/game.ts");
@@ -423,7 +439,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
   if (
-    (creatureFixtures.includes(creature) || creature === "chronora") &&
+    (creatureFixtures.includes(creature) || creature === "chronora" || creature === "velvetmonarch") &&
     (view === "collection" || view === "rank-five")
   ) {
     await button("Collection").click();

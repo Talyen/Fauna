@@ -2456,6 +2456,30 @@
     "reference": "Cleanse allies Blind / Draw a Light card",
     "contextHash": "2d942dad52f17bdf143c4e65f9b59e6e81d0f45ffc449d8c9fb0c58304807026"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "text": "Meadow Decree"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "text": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "reference": "Summon a Royal Bloom with 6 Health / Restore 2 Health to all allies",
+    "contextHash": "7ecde1d8b9581a367942ca99ddc3df10eb5e4e88ae9975386bf5644dd9c6c86c"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "text": "Royal Repose"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "reference": "Restore 4 Health / Give all allies 1 Block",
+    "contextHash": "83ccb17fa3866fedd41c81979f621e7b5f874eb34385d392d62bfe27e7162012"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "text": "Sovereign's Wake"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "text": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "reference": "Deal 2 Nature damage to all enemies; Blind all enemies",
+    "contextHash": "0a42c3906d4adce8151c72b7ace9f8597d7e40c2a0dfab59e8f17427656b1210"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "text": "Kilnheart"
   },
@@ -4167,6 +4191,39 @@
   },
   "content.species.tournelle.trait": {
     "text": "Gallantry"
+  },
+  "content.species.velvetmonarch.name": {
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 1 Nature damage"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 2 Nature damage"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 3 Nature damage"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 4 Nature damage"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 5 Nature damage"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "text": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "reference": "Summon 2 Royal Blooms with 6 Health on entry; when Velvetmonarch gains Block, each Royal Bloom attacks a random enemy for 6 Nature damage"
+  },
+  "content.species.velvetmonarch.title": {
+    "text": "The garden sovereign"
+  },
+  "content.species.velvetmonarch.trait": {
+    "text": "The Garden Answers"
   },
   "content.species.vitrilo.name": {
     "text": "Vitrilo"

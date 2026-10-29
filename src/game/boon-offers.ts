@@ -13,6 +13,7 @@ const noKeywords: readonly KeywordId[] = [];
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   glassCutter: ["light", "block"],
   courtRemembers: ["water"],
+  gardenAnswers: ["nature", "block"],
   lostAndFound: ["health"],
   lastWarmth: ["health"],
   wellProvisioned: ["food"],

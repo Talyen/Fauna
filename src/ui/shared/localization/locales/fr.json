@@ -4247,6 +4247,42 @@
     "sourceHash": "f9e47e76db42f90d77284e1fc992aa1db257cc80af38b54f9595b251e4512532",
     "text": "<keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés / Pioche une carte de <keyword2>Lumière</keyword2>"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "b74a68852a761b1287857a53215032ec5777eaa1806b871f974928e4d9b07926",
+    "text": "Décret des prés"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "0675d342a3b971f5e5ae24dfa84b1d1d662493a9270124d82c0b737adc1c59eb",
+    "text": "Invoque une Fleur royale avec {{value0}} <keyword0>Santé</keyword0> / Restaure {{value1}} <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "57c37bf0a4c0e252fc0b228756871d3eae68648f3cd2dea9248493e81826f423",
+    "text": "Repos royal"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "0e47b3d87a8fcbc375e95bc97cbe7a1fd44ddb39fcbe8a11a7f537acaed4ddd4",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> / Donne {{value1}} <keyword1>Blocage</keyword1> à tous les alliés"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "99e0af3fdf5a76c55ee5f7a56512feb44ec5bfc88606fbde8fec9b1bd168c237",
+    "text": "Sillage souverain"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "c27fd4dbf6674ff0385798f6857d7af3543545efed9e738103ff8cbd326b202d",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Nature</keyword0> à tous les ennemis; <keyword1>Aveugle</keyword1> tous les ennemis"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "85ec89b0b997371505d099f4ff7d99a80cb51768a890959a5b258e17e034801e",
     "text": "Galant geste"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "af7ce73ed5a8217b59bbe78865314670cd4ab7e83438466ee0f27ebe40207e93",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "d171f6fb646c61ef2bc5db7616224eebe5c898db93449b41186b9ca34d222600",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "953d79094fb60cc52ad0ae5a374c6fb9413bf1513313685ae348685517d5910a",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "3bbe708a2fc472057122ba6bb0711d08b42a96c4cc6dd99240a65dc0333d3dbc",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "e9a13456adaf765314cf6c30446bf04afe6c9ad348dfadd3ae314d03fff59f5f",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "19b58624c04a47b26ec28a0162bd91237c311248b776fa66fac327fba736251e",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "ea7670cb9002668bb1d48e99757bee7cc8940923032340ae236e940ca5562b90",
+    "text": "À son entrée en combat, invoque {{value0}} Fleurs royales avec {{value1}} <keyword0>Santé</keyword0>; quand Velvetmonarch gagne du <keyword1>Blocage</keyword1>, chaque Fleur royale attaque un ennemi aléatoire et inflige {{value2}} dégâts de <keyword2>Nature</keyword2>"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "3306b6fa8b08119f6e0a296fed6421d96f7eea52ce7d751e2b109c0ffac3e97a",
+    "text": "La souveraine du jardin"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "2c1a92207b518f83fac94b9873c347af486a94a82aa893c708388c3adb1014d9",
+    "text": "Le jardin répond"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "b7db602a635c9f0de1f59eee9b0a407c3c1dcf3e8ce559e52dfc076086eda900",
     "text": "Recruter"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "d1bf49f2c7950685327038b059b97aadb694c7b257e08a34c8b77138df9dbee5",
+    "text": "Fleur royale"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "dd77532bcc0fdc1df059f0562141fcbffd167cba85707610c742bf46cd7e6c8f",
+    "text": "Avec Le jardin répond, attaque un ennemi aléatoire quand son propriétaire gagne du Blocage"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "4aa63ba66a3eb2b53e8253fdaa84aca0220ed585f7466400acf000e39ce73fd5",
     "text": "{{actor}} invoque un {{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "8c16c7d505efcd2ba26499c7a2b0c2a25475be1690878fc5cef445d9eb6d5877",
+    "text": "{{actor}} invoque une {{bloom}}"
   },
   "log.swapPositions": {
     "reviewed": true,

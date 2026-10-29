@@ -4247,6 +4247,42 @@
     "sourceHash": "194fdf29c86d0dc60ab844de503e3c4fff7756bd234edff6556fded266c033b6",
     "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "45375c3cf285b9051389384e415b5cba25ce201099d847321a79731fc8936f64",
+    "text": "草甸敕令"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "0409017e2aac21ac0f42e68ad82a35845dc13bb59abcb9193d7296a4a030083c",
+    "text": "召唤一朵拥有{{value0}}点<keyword0>生命</keyword0>的皇家花朵 / 为所有盟友恢复{{value1}}点<keyword1>生命</keyword1>"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "bfcf196089f83296c8466784291254380f46f926dc8270817ad528184e362f46",
+    "text": "王者安憩"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "435d0599b70c8c660d46593281d71e337c99d244053c8b4ed70b2a7996fbeeb8",
+    "text": "恢复{{value0}}点<keyword0>生命</keyword0> / 为所有盟友提供{{value1}}点<keyword1>格挡</keyword1>"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "a5911362180b0c5372262d610eba6998edac547766518283131a1b19f34c725e",
+    "text": "君主余波"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "ce9b49e346784d848b67778d08ca9b9dbb1bb047456b65709911921b8a2a662a",
+    "text": "对所有敌人造成{{value0}}点<keyword0>自然</keyword0>伤害；<keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
     "text": "侠义"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "2eace1f49ccab4efba52c0470419f2123d5c44cd3a3cf93764d6daea3f99f6ef",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "5405c60bae4d09ce66d96b835b4ea378e5482038a52b53a9268f32aafee929b6",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "e06c47935959d62527c8f17f4845f9bbdbde2f2eee526efe7a45be9e52587943",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "c7a32ad81c6a205af0b763f8c01531f21d62b0444264653fbbbe291cfa9beb34",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "fb92de3075c0813f99b22d75b8750b80147024ab39c120658a7e17371ee414bb",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "614d7abc0b215b71d2905844ce3a7734392c08e41078010cbe08b584751aa766",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "ec6f6a7707ef3063e1020ea2a0367ff743cde73ccc7b7ba77fb46a8ea4d3f18e",
+    "text": "入场时召唤{{value0}}朵拥有{{value1}}点<keyword0>生命</keyword0>的皇家花朵；当Velvetmonarch获得<keyword1>格挡</keyword1>时，每朵皇家花朵攻击一名随机敌人，造成{{value2}}点<keyword2>自然</keyword2>伤害"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "a5f87f6e4e32f9445ecf6e3296d25661f16f4e4d8213e5323dbe6f7c834e2363",
+    "text": "花园的君主"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "42e9a6aff244b88d1fec77d4e203aad8e223181fd9d806063e892b55a52fc48a",
+    "text": "花园回应"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "cd26922237a543d76b8ab88484730519b56182a53c2bdc0c5e02894120df1ddc",
     "text": "招募"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "b2e3ebf23d12ce8cb88c49f0e9b365081382025fd922ca7642ff5554f8dca9cb",
+    "text": "皇家花朵"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "ab60fbe6400669f77234c6a8d115d335f83701ff3bc425e2fe36c105deb1e323",
+    "text": "拥有花园回应时，主人获得格挡会使其攻击一名随机敌人"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "f408d8aab91b30feec195b75eb31a3c75f3878bb41df2e80a9f0d080cd29acd0",
     "text": "{{actor}}召唤了一个{{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "e3550263c6b1915b19c17ccfe605dc07349fb1c785c21b5e2baecda4c0eb8def",
+    "text": "{{actor}}召唤了一朵{{bloom}}"
   },
   "log.swapPositions": {
     "reviewed": true,

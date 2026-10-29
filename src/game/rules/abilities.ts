@@ -107,6 +107,19 @@ const rules: AbilityRuleCatalog = freeze(
       scaling: "authored",
       describe: (_card) => "Your next card is played twice",
     },
+    royalRepose: {
+      ...automatic,
+      scaling: "power",
+      keywords: ["health", "block"],
+      describe: (_card, { value, power }) =>
+        `Restore ${value} Health / Give all allies ${scalePower(1, power)} Block`,
+    },
+    meadowDecree: {
+      ...automatic,
+      keywords: ["health"],
+      describe: (_card, { value, power }) =>
+        `Summon a Royal Bloom with ${value} Health / Restore ${scalePower(2, power)} Health to all allies`,
+    },
     procession: {
       ...automatic,
       keywords: ["health"],

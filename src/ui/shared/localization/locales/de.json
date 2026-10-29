@@ -4247,6 +4247,42 @@
     "sourceHash": "bbd9947a4e5a11e758eb3dd335aac2843162c4ed339def25dadf1635edb7eb30",
     "text": "<keyword0>Reinige</keyword0> <keyword1>Blindheit</keyword1> von Verbündeten / Ziehe eine <keyword2>Licht</keyword2>-Karte"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "ed295011dc155e1c56f1f3f1301665255bfd9a518ec0ff734fbd64732c387ac5",
+    "text": "Wiesenerlass"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "6ee9dbf62bd8eebe8ef1c0c7c9661051a2b414b34f32a09c60cfac361f470386",
+    "text": "Beschwöre eine Königsblüte mit {{value0}} <keyword0>Gesundheit</keyword0> / Stelle allen Verbündeten {{value1}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "dbf9742b0c67fa68f0c400cd5658a00b3782e21ceacba8f216f08b1cb4912238",
+    "text": "Königliche Ruhe"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "29e134e93d373d14eca4cbc7467b3ec23a3ba262ea3049cc9beebd2831ea07df",
+    "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her / Gib allen Verbündeten {{value1}} <keyword1>Block</keyword1>"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "ce4a3e340d3025f0e378b45322fc5cf038604a93710aedb59653b3d1aaad1051",
+    "text": "Erwachen der Königin"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "94b93f1c0536ecb14d8bc611a890c4d69017c65531d9e5a8940ae3e4831f509e",
+    "text": "Füge allen Gegnern {{value0}} <keyword0>Natur</keyword0>schaden zu; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "75a394ce451f0bc2603ef720ceddb4af34ab90abafbb45feb2bd66aa4a3f1676",
     "text": "Galante Geste"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "50ecece9c31a762f50f1e29dc01e5e297cfe6645037709193b26aad44fa329b7",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "1fd97d5d09519f604bc49d64e8d80d51b8bbb4f94981433bcc53c557575f2e10",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "3d789c30b5d966d4a973fff750c44ce66f1d285acaee393313a38b6f5070ddf1",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "b853e5926dbb2785a5a95a0e1a98ecb9c0ef83c2c868f512b7d0f36a4d62de27",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "51362c3ae43c969e23a06258bce8ee6ca190a2519a282892468adebefa65c3c3",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "9c16eca9cb93cc97fea196bf6d0560cf122d17a7729f0014d2f8de0c320152bf",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "680c424ccdd8cc32717a21e387f044effc1a30cb60310d9384eece50722f890e",
+    "text": "Beschwöre beim Eintritt {{value0}} Königsblüten mit {{value1}} <keyword0>Gesundheit</keyword0>; wenn Velvetmonarch <keyword1>Block</keyword1> erhält, greift jede Königsblüte einen zufälligen Gegner für {{value2}} <keyword2>Natur</keyword2>schaden an"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "32c82b06f018d076ec2dd902db333ba65e32cb47ea1a478832c6b5f535783e91",
+    "text": "Die Gartenherrscherin"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "bc26bccf1730493455c8ea51f7b76c332c7d70b2b2953f242b5e1001582a02e1",
+    "text": "Der Garten antwortet"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "036b11593374719c1a42a936f7e815726056a9011e376fe19d69e74460ab4955",
     "text": "Rekrutieren"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "64f3cc56216917a3734b72d52f0779ca5e7e4ec0b48bb412429a8c95754775d7",
+    "text": "Königsblüte"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "92a468aec4ebd264624317b91374c17e6ebcd4e15496cdd2e8784fb60313eb2b",
+    "text": "Mit Der Garten antwortet greift sie einen zufälligen Gegner an, wenn ihr Besitzer Block erhält"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "880c2fbac81ea4d735cc3f8ad58b9bbace9a69f05aac6f9569132a642e8cb447",
     "text": "{{actor}} beschwört ein {{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "5bc3a835520689e17bcc2e50f3f77bcc2c523f5c4f50434620902efd026d3554",
+    "text": "{{actor}} beschwört eine {{bloom}}"
   },
   "log.swapPositions": {
     "reviewed": true,

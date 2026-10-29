@@ -83,8 +83,8 @@ const enemy = z.object({
   lastAbility: id.nullable(),
 });
 const minion = enemy.extend({
-  name: z.enum(["Echo", "Pendulum"]),
-  species: z.enum(["memento", "chronora"]),
+  name: z.enum(["Echo", "Pendulum", "Royal Bloom"]),
+  species: z.enum(["memento", "chronora", "velvetmonarch"]),
   lastAbility: z.null(),
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });

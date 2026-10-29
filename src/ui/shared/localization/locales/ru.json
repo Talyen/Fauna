@@ -4247,6 +4247,42 @@
     "sourceHash": "5a181faddb5ff39fa3a491a8e564402956254643cc47266d9d2a8ba635eec9d4",
     "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников / Возьмите карту <keyword2>света</keyword2>"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "3ce5df31748e13666b6473db4c7873b4e997a9d6e99d44b834e023ed4b95bc53",
+    "text": "Указ луга"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "9ecaafdd85986f0f699b893fdccb1e76cbd5dc406cfc84e2c9c918af0611c2ff",
+    "text": "Призовите Королевский цветок с {{value0}} <keyword0>Здоровья</keyword0> / Восстановите всем союзникам {{value1}} <keyword1>Здоровья</keyword1>"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "ca6d80b2da286d8503381d3d109e282cccb08bfdbe68137b898249f05c948f56",
+    "text": "Королевский покой"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "ed73526ae5d697e9baed30669c535325b12d3aa43c624dc3f9f001e9f6e96677",
+    "text": "Восстановите {{value0}} <keyword0>Здоровья</keyword0> / Дайте всем союзникам {{value1}} <keyword1>Блока</keyword1>"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "f0718867dc3535bda1807c3025069abb46dc0f907590e002a76ced9ae967cb37",
+    "text": "След владычицы"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "f2d71315e4b1d6f7fc45e91aed0a76f7f8bdb1d585335732247a57be684e6e34",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>Природой</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
     "text": "Галантность"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "165155ee903ced6b71aafbcdc8b4ff2537770fe651be3ef7e337e99321bc37ef",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "fbd8bbe8d6ada3321b9c9e8cd9a6873fc1bfb771ab7ddef00e9eb3147f64a6cb",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "4a8b9e9387d82c96745cdbe7ab5f7b6783f86949ab5f6b9336bc6af0d82bde72",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "842aebf6f4252807e55ceb4002a868b4436f9b4b4a8fb42d0ab558928559bfe0",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "cc362aca61ad27f0fa63f2e6a1494a9049d3dd758baa49e59103388131a30805",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "2ceaa1e998e5f2559fef3a7a51277a36b6c5b95be178f585c42a34e06b626a98",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "2cdd45f0964c6c0cbbfe1bbab6ab1b7b8b9ac46df782dce6e90e3c4db3fb9ca7",
+    "text": "При вступлении в бой призовите {{value0}} Королевских цветка с {{value1}} <keyword0>Здоровья</keyword0> каждый; когда Velvetmonarch получает <keyword1>Блок</keyword1>, каждый Королевский цветок атакует случайного врага, нанося {{value2}} урона <keyword2>Природой</keyword2>"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "2c127e4b415966d5fca3d4c2203b2731088599aa8560c3e3dbcab8915493bf88",
+    "text": "Владычица сада"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "449eed7da1a7b7fe7764fb40675541cbd0f9d50a100086ae7f73e5e195ef4b7d",
+    "text": "Сад отвечает"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "e30321c9335b247e0c869475df74992e1061af69ccf1435dab62d53402ffb510",
     "text": "Завербовать"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "f0c4faa2b25a853917e377155306e35a1015760f508a3dffd967005974b71249",
+    "text": "Королевский цветок"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "2e17b29aa4845351d67926e8628f2f17319bc53030f9a46645bf60b56a03f1ce",
+    "text": "При наличии способности «Сад отвечает» атакует случайного врага, когда её владелец получает Блок"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "6e8ab06a9e31ba6e03683890d1087a34f00825dbe485b0cb3b54b945806d7d29",
     "text": "{{actor}} призывает {{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "8b3cec7743d3bd10418f13bea5b653fad5687364439da161405c654e24010ace",
+    "text": "{{actor}} призывает {{bloom}}"
   },
   "log.swapPositions": {
     "reviewed": true,

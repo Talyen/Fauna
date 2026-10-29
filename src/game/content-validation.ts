@@ -306,13 +306,17 @@ function validateEncounters(
       }
   };
   for (const pack of catalog.combatPacks) validatePack(pack);
-  for (const boss of catalog.bosses) validatePack(boss.pack);
+  for (const boss of catalog.bosses) {
+    validatePack(boss.pack);
+    if ("alternatives" in boss) for (const pack of boss.alternatives) validatePack(pack);
+  }
   for (const pack of catalog.combatPacks)
     if (pack.some((id) => speciesById.get(id)?.legendary))
       error("combat", "packs", "Legendaries only appear in Boss encounters");
   for (const boss of catalog.bosses)
-    if (boss.pack.length !== 1 || !speciesById.get(boss.pack[0]!)?.legendary)
-      error(boss.id, "packs", "Boss encounters require one Legendary");
+    for (const pack of [boss.pack, ...("alternatives" in boss ? boss.alternatives : [])])
+      if (pack.length !== 1 || !speciesById.get(pack[0]!)?.legendary)
+        error(boss.id, "packs", "Boss encounters require one Legendary");
   const encounters = new Set<number>();
   for (const boss of catalog.bosses) {
     if (

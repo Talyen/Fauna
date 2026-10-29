@@ -108,6 +108,15 @@ export function eventPresentation(
         actor: localizedCombatantName(actor, i18n),
         pendulum: i18n.message("creature.pendulum", "Pendulum"),
       });
+    if (
+      actor &&
+      event.actionType === "support" &&
+      event.text === `${species(actor.species).name} summons a Royal Bloom`
+    )
+      return i18n.message("log.summonRoyalBloom", "{{actor}} summons a {{bloom}}", {
+        actor: localizedCombatantName(actor, i18n),
+        bloom: i18n.message("creature.royalBloom", "Royal Bloom"),
+      });
     if (event.actionType === "support" && event.text === "Express Delivery draws an extra card")
       return i18n.message("log.expressDelivery", "{{trait}} draws an extra card", {
         trait: i18n.content("content.species.orifable.trait", "Express Delivery"),

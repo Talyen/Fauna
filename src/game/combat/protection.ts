@@ -21,6 +21,7 @@ import {
   combatantById,
 } from "../battlefield";
 import { drawKeyword } from "../card-zones";
+import { roll } from "../random";
 import { hasTalent, passiveAmount } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
@@ -29,6 +30,7 @@ import {
   maximumHealth,
   unitName,
   mostInjured,
+  controlled,
   STACK_LIMIT,
   harmfulStatuses,
   gainGold,
@@ -283,6 +285,26 @@ export function* grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
+  if (state.phase === "battle" && !("minion" in unit && unit.minion)) {
+    const side = isEnemy(unit) ? "enemy" : "player";
+    const amount = passiveAmount(side === "player" ? state : undefined, unit.species, "gardenAnswers");
+    if (amount > 0 && battlefieldHasId(state, side, unit.id)) {
+      const blooms = (state.battle?.minions ?? []).filter(
+        (bloom) => bloom.minion.ownerId === unit.id && bloom.species === "velvetmonarch",
+      );
+      for (const bloom of blooms) {
+        if (unit.health <= 0) break;
+        if (bloom.health <= 0 || controlled(bloom)) continue;
+        const opponents = battlefield(state, side === "player" ? "enemy" : "player").filter(
+          (opponent) => opponent.health > 0,
+        );
+        if (!opponents.length) break;
+        const target =
+          opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]!;
+        yield* reaction("hit", state, bloom, target, amount, "nature", events, { origin: "ability" });
+      }
+    }
+  }
   if (isEnemy(unit) && state.phase === "battle" && state.boons.includes("apple-press")) {
     const stats = ensureCombat(unit);
     if (stats.bleed > 0) {

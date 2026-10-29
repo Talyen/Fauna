@@ -4247,6 +4247,42 @@
     "sourceHash": "52cf056daedf39c339ed735a395719603ffabf3b2940dff9559f57b8a3898451",
     "text": "<keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados / Roba una carta de <keyword2>Luz</keyword2>"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "4691976dbc21914208ea5c5b1632f35096f8b180ecf365ad7334c3224d76146a",
+    "text": "Decreto del prado"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "25244ff24b160c9b02ca94b90966e64efed598312a27e013c1540cc9662c0d95",
+    "text": "Invoca una Flor real con {{value0}} de <keyword0>Salud</keyword0> / Restaura {{value1}} de <keyword1>Salud</keyword1> a todos los aliados"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "74fb4761c51388a50637ab6d50c4ca7f10fbfc9292065a60ce733b3c8fdc6c70",
+    "text": "Reposo real"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "ec0a811557315bafd064cce2c8b139ddef9131b427b9e80f190ed5aec7c0c5ef",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> / Otorga {{value1}} de <keyword1>Bloqueo</keyword1> a todos los aliados"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "8c1c00fe40634ee894e0d8187ebe5b9c987cf5d3190b19c2726988eaa50e3a2c",
+    "text": "Estela de la soberana"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "3eeea2fea9e6dcb242b6b3dcc29a163996f45b37c9fb20293c84aaac87919adf",
+    "text": "Inflige {{value0}} de daño de <keyword0>Naturaleza</keyword0> a todos los enemigos; <keyword1>Ciega</keyword1> a todos los enemigos"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "38f1ca8e662fc8cbd4134f3d6e8b39d63c3712ec7801be1b22d16c315f5a33e8",
     "text": "Gallardía"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "9e397bb981bb055274ec189f95cd85bf1f37461b1b0bbc80d0e0adb45ba79bae",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "be85c116d28fb3d9dcd0d33cc805bf8c893bbb3931cf3e7dfa5560fc709095c8",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "cabc21f2519c0818b59a23555a4bec2c9495fc66a765bc6af478fad015433cc5",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "bd51b0a32067f81bffe02f896411f5da36199ebe0fa7174a60b32e6be35f214e",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "90efcdcf2bc48efb458ca819a791b8de8ec8937ef3be0ab1d8a38f322be43dab",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "bf1866e5bebef2cbaeb1bff571425fdd86f1f82f86b3c916574542ba8bb2650d",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "d5768a63a5ba727e1e60616021742ed608c69712af27cea3400909c62d8a7af7",
+    "text": "Al entrar en combate, invoca {{value0}} Flores reales con {{value1}} de <keyword0>Salud</keyword0>; cuando Velvetmonarch obtiene <keyword1>Bloqueo</keyword1>, cada Flor real ataca a un enemigo aleatorio e inflige {{value2}} de daño de <keyword2>Naturaleza</keyword2>"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "df7005f9a937988aa6d1cf13bd4832a4a25fe0241d3be12bb48f10f2435198de",
+    "text": "La soberana del jardín"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "99294e0926381fb2bcfed254d1e41ac82834dfdf18af0142c5308d5c34fcd159",
+    "text": "El jardín responde"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "6798e4ee0b1488c4b12fb9be0dfa03c479b45c84fc4858d72143a49b54ca4174",
     "text": "Reclutar"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "ae4cf77601f0e398e79beeb4841486b085f08089560f3506a36874a24f5da944",
+    "text": "Flor real"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "6a9c2ded6d87aa75a7a804e32e3ef080bd3d1a3687891d44539f557281e86783",
+    "text": "Con El jardín responde, ataca a un enemigo aleatorio cuando su dueño obtiene Bloqueo"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "01908a8a79cc3fb40d6bd6c02c919ed3bab1d446a8db014c4f7a39e38331ef5f",
     "text": "{{actor}} invoca un {{pendulum}}"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "d967f306b5eae56c52f39dda067e9643cbf4b4dad93d3c4330ce2ef53a1f19fd",
+    "text": "{{actor}} invoca una {{bloom}}"
   },
   "log.swapPositions": {
     "reviewed": true,

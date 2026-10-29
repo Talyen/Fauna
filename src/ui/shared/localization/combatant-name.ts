@@ -7,7 +7,9 @@ export function localizedCombatantName(unit: Combatant, i18n: ReturnType<typeof 
   if ("minion" in unit && unit.minion)
     return unit.species === "chronora"
       ? i18n.message("creature.pendulum", "Pendulum")
-      : i18n.message("creature.echo", "Echo");
+      : unit.species === "velvetmonarch"
+        ? i18n.message("creature.royalBloom", "Royal Bloom")
+        : i18n.message("creature.echo", "Echo");
   const name = unitName(unit);
   const canonicalName = species(unit.species).name;
   return name === canonicalName ? i18n.content(`content.species.${unit.species}.name`, canonicalName) : name;

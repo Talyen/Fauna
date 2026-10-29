@@ -2781,6 +2781,61 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.velvetmonarch",
+      "origin": "repository",
+      "source": "public/art/velvetmonarch/portrait.png",
+      "output": "art/velvetmonarch/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "https://drive.google.com/file/d/1KBr8GbsQJITO1QZzfCcMSwl9WZX9PtJ1/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "minion.royal-bloom",
+      "origin": "repository",
+      "source": "public/art/velvetmonarch/royal-bloom.png",
+      "output": "art/velvetmonarch/royal-bloom.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Generated with built-in ImageGen using Velvetmonarch portrait and Meadow Decree as references",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.velvetmonarch.royal-repose",
+      "origin": "repository",
+      "source": "public/art/velvetmonarch/royal-repose.png",
+      "output": "art/velvetmonarch/royal-repose.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1gsEkIJdx0t-DOnV4T_Fzo1AM5LTYjUvw/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.velvetmonarch.meadow-decree",
+      "origin": "repository",
+      "source": "public/art/velvetmonarch/meadow-decree.png",
+      "output": "art/velvetmonarch/meadow-decree.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/186XyfvdctbXrOr29Io9wEhPiZsMllmC6/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.velvetmonarch.sovereigns-wake",
+      "origin": "repository",
+      "source": "public/art/velvetmonarch/sovereigns-wake.png",
+      "output": "art/velvetmonarch/sovereigns-wake.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1Kvl3msSF8uENTiD0b42TtqZYC4J21NfO/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
       "id": "creature.chronora",
       "origin": "repository",
       "source": "public/art/chronora/portrait.png",

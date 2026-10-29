@@ -17,7 +17,14 @@ import {
   healingAllies,
   isDepartedMinion,
 } from "../battlefield";
-import { summonEcho, summonPendulums, pendulumBonus, createPearls, drawBossCards } from "./legendary";
+import {
+  summonEcho,
+  summonPendulums,
+  summonRoyalBlooms,
+  pendulumBonus,
+  createPearls,
+  drawBossCards,
+} from "./legendary";
 import { scalePower } from "./ability-values";
 import { species, speciesCards } from "../content";
 import {
@@ -113,6 +120,20 @@ export function executePrimary(context: PrimaryContext) {
       restoreHealth(actor, value, events, false, state, true, actor);
       if (actor.health > 0)
         summonPendulums(state, actor, action.side, events, 1, actor.species !== "chronora");
+      return;
+    case "royalRepose":
+      restoreHealth(actor, value, events, false, state, true, actor);
+      for (const unit of livingFriends(state, action)) {
+        if (actor.health <= 0) break;
+        grantBlock(state, unit, scalePower(1, power), events);
+      }
+      return;
+    case "meadowDecree":
+      summonRoyalBlooms(state, actor, action.side, events, 1, value, actor.species !== "velvetmonarch");
+      for (const unit of healingAllies(state, action.side)) {
+        if (actor.health <= 0) break;
+        restoreHealth(unit, scalePower(2, power), events, false, state, true, actor);
+      }
       return;
     case "procession":
       summonEcho(state, actor, action.side, value, events);
@@ -285,8 +306,10 @@ export function executePrimary(context: PrimaryContext) {
           (enemy
             ? state.battle.enemies.some((unit) => unit.id === recipient.id)
             : state.team.some((unit) => unit.id === recipient.id))
-        )
+        ) {
           summonPendulums(state, recipient, action.side, events);
+          summonRoyalBlooms(state, recipient, action.side, events);
+        }
         if (
           !enemy &&
           recipient.health > 0 &&

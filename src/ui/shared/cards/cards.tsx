@@ -106,7 +106,9 @@ export function CreatureCard({
         (artworkId?.startsWith("minion.")
           ? artworkId === "minion.pendulum"
             ? i18n.message("creature.pendulum", "Pendulum")
-            : i18n.message("creature.echo", "Echo")
+            : artworkId === "minion.royal-bloom"
+              ? i18n.message("creature.royalBloom", "Royal Bloom")
+              : i18n.message("creature.echo", "Echo")
           : i18n.content(`content.species.${kind}.name`, info.name))
       }
       aria-pressed={presentation ? undefined : selected}
@@ -195,7 +197,9 @@ export function AllyCard({
         "minion" in creature && creature.minion
           ? creature.species === "chronora"
             ? "minion.pendulum"
-            : "minion.echo"
+            : creature.species === "velvetmonarch"
+              ? "minion.royal-bloom"
+              : "minion.echo"
           : undefined
       }
       name={"name" in creature ? creature.name : undefined}
@@ -206,10 +210,20 @@ export function AllyCard({
             <strong>
               {creature.species === "chronora"
                 ? i18n.message("creature.pendulum", "Pendulum")
-                : i18n.message("creature.echo", "Echo")}
+                : creature.species === "velvetmonarch"
+                  ? i18n.message("creature.royalBloom", "Royal Bloom")
+                  : i18n.message("creature.echo", "Echo")}
             </strong>
             {creature.species === "chronora" && (
               <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
+            )}
+            {creature.species === "velvetmonarch" && (
+              <p>
+                {i18n.message(
+                  "creature.royalBloomRule",
+                  "With The Garden Answers, attacks a random enemy when its owner gains Block",
+                )}
+              </p>
             )}
           </div>
         ) : undefined
@@ -231,7 +245,13 @@ export function EnemyCard({
     <CreatureCard
       kind={enemy.species}
       artworkId={
-        enemy.minion ? (enemy.species === "chronora" ? "minion.pendulum" : "minion.echo") : undefined
+        enemy.minion
+          ? enemy.species === "chronora"
+            ? "minion.pendulum"
+            : enemy.species === "velvetmonarch"
+              ? "minion.royal-bloom"
+              : "minion.echo"
+          : undefined
       }
       tooltipContent={
         enemy.minion ? (
@@ -239,10 +259,20 @@ export function EnemyCard({
             <strong>
               {enemy.species === "chronora"
                 ? i18n.message("creature.pendulum", "Pendulum")
-                : i18n.message("creature.echo", "Echo")}
+                : enemy.species === "velvetmonarch"
+                  ? i18n.message("creature.royalBloom", "Royal Bloom")
+                  : i18n.message("creature.echo", "Echo")}
             </strong>
             {enemy.species === "chronora" && (
               <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
+            )}
+            {enemy.species === "velvetmonarch" && (
+              <p>
+                {i18n.message(
+                  "creature.royalBloomRule",
+                  "With The Garden Answers, attacks a random enemy when its owner gains Block",
+                )}
+              </p>
             )}
           </div>
         ) : undefined

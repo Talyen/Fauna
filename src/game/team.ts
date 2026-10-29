@@ -2,7 +2,7 @@ import { emitSupport } from "./events";
 import { forEachPermanentCard } from "./card-kit";
 import { battlefield, isRosterCreature } from "./battlefield";
 import { drawOwner, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
-import { removeDepartedMinions, summonPendulums } from "./combat/legendary";
+import { removeDepartedMinions, summonPendulums, summonRoyalBlooms } from "./combat/legendary";
 import { grantArmor, grantBlock, restoreHealth, removeEffects, hit, ensureCombat } from "./combat/index";
 import { boonRule } from "./rules/boons";
 import { unitName, type Combatant } from "./combat/state";
@@ -284,7 +284,10 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
     removeDepartedMinions(state);
     if (state.phase === "battle")
       for (const unit of state.team)
-        if (!previousIds.has(unit.id)) summonPendulums(state, unit, "player", events);
+        if (!previousIds.has(unit.id)) {
+          summonPendulums(state, unit, "player", events);
+          summonRoyalBlooms(state, unit, "player", events);
+        }
     fillHand(state);
   }
   events.push({ kind: "action", actionType: "swap", actorId: ids[0]!, text: "Your formation changes" });

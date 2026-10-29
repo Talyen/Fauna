@@ -160,4 +160,4 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-[Memento](content/creatures/memento.md) appears in the first Boss encounter; [Chronora](content/creatures/chronora.md) appears in the final Boss encounter. Either uses the ordinary-creature fallback when already on the roster.
+The first Boss encounter selects [Memento](content/creatures/memento.md) or [Velvetmonarch](content/creatures/velvetmonarch.md); [Chronora](content/creatures/chronora.md) appears in the final Boss encounter. A selected Legendary already on the roster uses the ordinary-creature fallback.

@@ -82,6 +82,7 @@ describe("journey encounters", () => {
 
   it.each([
     [3, "memento"],
+    [3, "velvetmonarch"],
     [7, "chronora"],
   ] as const)(
     "uses an eligible ordinary Boss at encounter %s when the roster contains %s",
@@ -90,7 +91,7 @@ describe("journey encounters", () => {
       const ready = produce(started, (draft) => {
         draft.encounter = encounter;
         draft.journey!.victories = encounter;
-        draft.expedition!.pack = generateEncounterPack(draft);
+        draft.expedition!.pack = generateEncounterPack(draft, [boss]);
       });
       const source = encounterSource(ready);
       expect(source.name).toBe("Boss");

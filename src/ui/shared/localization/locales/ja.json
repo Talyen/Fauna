@@ -4247,6 +4247,42 @@
     "sourceHash": "1226a7079741afbf37d1a9f5f6ce70be6f023a26521d6ab5c187f897bdee12c1",
     "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0> / <keyword2>光</keyword2>カードを1枚引く"
   },
+  "content.card.velvetmonarch-meadow-decree.name": {
+    "reviewed": true,
+    "source": "Meadow Decree",
+    "sourceHash": "a1ff1c1f2301666a725b4047a7963ede9e075ab5ee6f57a34cace740273cf60d",
+    "text": "草原の勅令"
+  },
+  "content.card.velvetmonarch-meadow-decree.v9e736f3a308a244b.rule": {
+    "reviewed": true,
+    "source": "Summon a Royal Bloom with {{value0}} <keyword0>Health</keyword0> / Restore {{value1}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "534a873167f5f8c651ce1f956d726ed12ad055ff1025e65fc38c923b3aadab15",
+    "text": "<keyword0>体力</keyword0>{{value0}}の王家の花を1つ召喚 / すべての味方の<keyword1>体力</keyword1>を{{value1}}回復"
+  },
+  "content.card.velvetmonarch-royal-repose.name": {
+    "reviewed": true,
+    "source": "Royal Repose",
+    "sourceHash": "d3aded5a013b6fa60915117b301ae61e6883d5eff3bfb87eb5ab7f255a896e90",
+    "text": "王の休息"
+  },
+  "content.card.velvetmonarch-royal-repose.vcda705cd55b3ccbe.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Give all allies {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "d624ae782006737c9b317e38ba73661b2b5005b8c62504317701996e4e77506f",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復 / すべての味方に<keyword1>ブロック</keyword1>を{{value1}}付与"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.name": {
+    "reviewed": true,
+    "source": "Sovereign's Wake",
+    "sourceHash": "d74c4dec1239596f52d8f78492226a0d5a9a0f8b9fb77362092b413a06a6b2c4",
+    "text": "君主の航跡"
+  },
+  "content.card.velvetmonarch-sovereigns-wake.veea4d3b362084f6d.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "5b65b1e0dd8d6d0be892c668b68cf0c495c749cf89b5fc484fe82048b9037db8",
+    "text": "すべての敵に<keyword0>自然</keyword0>ダメージを{{value0}}与える; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.vitrilo-kilnheart.name": {
     "reviewed": true,
     "source": "Kilnheart",
@@ -7013,6 +7049,60 @@
     "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
     "text": "騎士の心"
   },
+  "content.species.velvetmonarch.name": {
+    "reviewed": true,
+    "source": "Velvetmonarch",
+    "sourceHash": "b47bae89e1c16ce19c59801cd325ced31e9aac635dc96f83cd29c900961d8380",
+    "text": "Velvetmonarch"
+  },
+  "content.species.velvetmonarch.passive.0.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "29055ea55af7d538cfa7c8fcfdee832453d715770c738aacb26e974099530509",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.passive.1.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "7f65be830ad138fa028a8e0f2d063dfe0e0e2651079d428d6c8f5e0ed01432a1",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.passive.2.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "1f42c8c941a889c7eaf11460067ab615f4f5ef416b2e22b541b051581153902a",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.passive.3.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "5efb027fb40d6d38c24b82b30e742ea163647430a0fd2b57fac40a37eae3ccc1",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.passive.4.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "aed1b8b782fd5f913740fe799963719bb845e9dab82554db379bea3674c357fd",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.passive.5.rule": {
+    "reviewed": true,
+    "source": "Summon {{value0}} Royal Blooms with {{value1}} <keyword0>Health</keyword0> on entry; when Velvetmonarch gains <keyword1>Block</keyword1>, each Royal Bloom attacks a random enemy for {{value2}} <keyword2>Nature</keyword2> damage",
+    "sourceHash": "a99fdabe2409a07df7df317443f8de6bf75d5d28d0ed90d4569d76ca1a07e9f8",
+    "text": "登場時、<keyword0>体力</keyword0>{{value1}}の王家の花を{{value0}}個召喚; Velvetmonarchが<keyword1>ブロック</keyword1>を得ると、それぞれの王家の花がランダムな敵を攻撃し、<keyword2>自然</keyword2>ダメージを{{value2}}与える"
+  },
+  "content.species.velvetmonarch.title": {
+    "reviewed": true,
+    "source": "The garden sovereign",
+    "sourceHash": "97be364b428c38f7dfacb8ad72c444d696af3fc7703f7141452de7eed3ffd1a6",
+    "text": "庭園の君主"
+  },
+  "content.species.velvetmonarch.trait": {
+    "reviewed": true,
+    "source": "The Garden Answers",
+    "sourceHash": "a695c7512c06b289bc7664a56c2e4af41f6604d63c07187569ec340c190aa325",
+    "text": "庭園の応答"
+  },
   "content.species.vitrilo.name": {
     "reviewed": true,
     "source": "Vitrilo",
@@ -9077,6 +9167,18 @@
     "sourceHash": "e32ee6fbef213e52d82dbe10a016dd4eca3951b52077212718bd0e6c32131207",
     "text": "仲間にする"
   },
+  "creature.royalBloom": {
+    "reviewed": true,
+    "source": "Royal Bloom",
+    "sourceHash": "14dd540103a303df4cca608bc2b77f0d37d2d19c7d28423963d3504a55c1c72e",
+    "text": "王家の花"
+  },
+  "creature.royalBloomRule": {
+    "reviewed": true,
+    "source": "With The Garden Answers, attacks a random enemy when its owner gains Block",
+    "sourceHash": "505077a2b7e2bc4c5dc91906a360db82b2411481d77a1a38a689e4bc2f9b37e7",
+    "text": "庭園の応答がある場合、持ち主がブロックを得るとランダムな敵を攻撃する"
+  },
   "deck.discardEmpty": {
     "reviewed": true,
     "source": "Discard Pile is empty",
@@ -9658,6 +9760,12 @@
     "source": "{{actor}} summons a {{pendulum}}",
     "sourceHash": "a23589f7ee7323d4bdd824ece91dae9dbb52157806d25b5e10225b0e08a093be",
     "text": "{{actor}}は{{pendulum}}を召喚"
+  },
+  "log.summonRoyalBloom": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{bloom}}",
+    "sourceHash": "1221c3514d8b04b0a5ecd8bc6ad3b5e5053aa088bc3ef473bf07fccd924d8501",
+    "text": "{{actor}}が{{bloom}}を召喚"
   },
   "log.swapPositions": {
     "reviewed": true,

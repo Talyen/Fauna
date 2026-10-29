@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "b41020e1b70f9dc5df4d6775af132658ba8bcfe5b838ca33430653801652fce7",
-  "generation": "ec9cdf62c603010ac19e06eea7910e7084c2a0d340d55e9baf6fafdf613c6a80",
+  "manifestHash": "79f9bd5cd2eb3bdfd6e3655b34303b6991df42c987b280519e9fda89f68e9631",
+  "generation": "a7e4ae222cdf0d7194005a8b9190c77c50e8545bced7ef1d4d91a67c5de214e4",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -3190,6 +3190,71 @@
       "outputHash": "77e087db0a29b954b34a09dcf8249ccd6e95c28f57ab60924f52bbcc812cd289",
       "sourceBytes": 2406399,
       "outputBytes": 951960,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.velvetmonarch": {
+      "url": "./prepared/objects/8b0596f3490ef803bc0097f8144717d876220525e66bdf9578bec64cadeb7e68/asset.webp",
+      "sourceHash": "2c73db927fdd5544fe1624d5a64808c958727d6af8a56beced5d03d2c9f3edfe",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "a0630422109a2d9b4d127a40a1bad631824ada2bd15d6e4a53998e2fa444b5af",
+      "sourceBytes": 2660313,
+      "outputBytes": 1028858,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "minion.royal-bloom": {
+      "url": "./prepared/objects/0c3d07ba0fe1d63b63823147c05e0ad923388006ecd72048f33ca8d2a31decd9/asset.webp",
+      "sourceHash": "f44903d0becbe2bb5dd7aafc8df1784836ef005f6d45211c0b725895785735d1",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "3fec01cb9c4bdd1096fe662fd7b41ac1b985dd3835f27d55b5f732a61e62c553",
+      "sourceBytes": 2298008,
+      "outputBytes": 919792,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.velvetmonarch.royal-repose": {
+      "url": "./prepared/objects/b017f8afad51f26192c138ecf0ea6e1888cc77ee29a3534e0b12d6db6e6dd6fe/asset.webp",
+      "sourceHash": "f143fbe04647364ac10a366dc23d8e0582fbe79c06f1ac53771b8a17c3352b66",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "aef0a0d7e1a0c2f36d1e2db32b9cc81825cfda54678c97095c2a2b7d644f1455",
+      "sourceBytes": 1989186,
+      "outputBytes": 743072,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.velvetmonarch.meadow-decree": {
+      "url": "./prepared/objects/309b5860dccf83229631841da5dbedfe716ef50601f55e01cae3a4267080823d/asset.webp",
+      "sourceHash": "4c6afe1f5c750a848b33269744a59cbaeaeb22bf0de01783a17afc916ad2ac9e",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "3ed5dcfb7995830bd9816b7e630cddb0e923a780913c822dbd5625f9c444da1e",
+      "sourceBytes": 2318465,
+      "outputBytes": 899842,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.velvetmonarch.sovereigns-wake": {
+      "url": "./prepared/objects/124aebef0f1c2b2837a4ebfb7764b819d4cb7a3b09273bac380ebf1d450a07db/asset.webp",
+      "sourceHash": "31d2c6de3881050fbbf8930552035cc5c402c276444b5bc2e76eb485836fc149",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "fc96ffd7b1f7e8fa8ecef24a6e522bd2c27a5638325116cc2731364df934c415",
+      "sourceBytes": 1983706,
+      "outputBytes": 756710,
       "width": 720,
       "height": 960,
       "alpha": false

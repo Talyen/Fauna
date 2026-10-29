@@ -60,6 +60,58 @@ export function summonPendulums(
   }
 }
 
+/** Recreate the first vacant garden position; entry creates both positions. */
+export function summonRoyalBlooms(
+  state: BattleState,
+  actor: Combatant,
+  side: "player" | "enemy",
+  events: GameEvent[],
+  count = 2,
+  health = 6,
+  borrowed = false,
+) {
+  if (
+    actor.health <= 0 ||
+    (!borrowed && !passiveAmount(side === "player" ? state : undefined, actor.species, "gardenAnswers"))
+  )
+    return;
+  const minions = state.battle.minions ?? (state.battle.minions = []);
+  for (let slot = 0; slot < 2 && count > 0; slot++) {
+    const id = `bloom-${actor.id}-${slot}`;
+    let index = minions.findIndex((unit) => unit.id === id);
+    if (index >= 0 && minions[index]!.health > 0) continue;
+    if (index < 0) {
+      const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
+      if (owned.length >= MINION_LIMIT) {
+        const vacant = minions.findIndex((unit) => unit.minion.ownerId === actor.id && unit.health <= 0);
+        if (vacant < 0) break;
+        minions.splice(vacant, 1);
+        index = -1;
+      }
+    }
+    const bloom = {
+      id,
+      name: "Royal Bloom" as const,
+      species: "velvetmonarch" as const,
+      health,
+      maxHealth: health,
+      power: 1,
+      targetId: actor.id,
+      block: 0,
+      combat: freshCombat(),
+      lastAbility: null,
+      minion: { ownerId: actor.id, side },
+    };
+    if (index < 0) minions.push(bloom);
+    else minions[index] = bloom;
+    count--;
+    emitSupport(events, actor.id, {
+      targetId: id,
+      text: `${species(actor.species).name} summons a Royal Bloom`,
+    });
+  }
+}
+
 export function pendulumBonus(state: BattleState, actor: Combatant): number {
   if (actor.species !== "chronora") return 0;
   return (state.battle.minions ?? []).filter(

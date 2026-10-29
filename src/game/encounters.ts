@@ -88,6 +88,7 @@ export const BOSSES = [
     encounter: 3,
     name: "Memento",
     pack: ["memento"],
+    alternatives: [["velvetmonarch"]],
   },
   {
     id: "hollow-crown",
@@ -102,7 +103,7 @@ const bossesByEncounter = new Map<number, (typeof BOSSES)[number]>(
 );
 export function encounterPacks(encounter: number) {
   const boss = bossesByEncounter.get(encounter);
-  return boss ? [boss.pack] : COMBAT_PACKS;
+  return boss ? [boss.pack, ...("alternatives" in boss ? boss.alternatives : [])] : COMBAT_PACKS;
 }
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
