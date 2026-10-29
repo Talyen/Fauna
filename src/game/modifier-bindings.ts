@@ -43,6 +43,8 @@ type Modules = {
     passingFlame: typeof passingFlame;
   };
   "./combat/damage-values": typeof import("./combat/damage-values");
+  "./combat/dodge": typeof import("./combat/dodge");
+  "./combat/glass-cutter": typeof import("./combat/glass-cutter");
   "./combat/healing-values": typeof import("./combat/healing-values");
   "./combat/interception": typeof import("./combat/interception");
   "./combat/legendary": typeof import("./combat/legendary");

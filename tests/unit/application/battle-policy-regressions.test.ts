@@ -20,6 +20,20 @@ function withHand(state: GameState, definitions: string[]) {
   });
 }
 
+it.each([
+  ["chronora", "chronora-borrowed-moment"],
+  ["chronora", "chronora-bridge-rewind"],
+  ["velvetmonarch", "velvetmonarch-royal-repose"],
+  ["velvetmonarch", "velvetmonarch-meadow-decree"],
+] as const)("Auto-play evaluates and plays useful %s support ability %s", (kind, id) => {
+  const state = produce(withHand(teamRun(42, [kind]), [id]), (game) => {
+    game.team[0]!.health -= 5;
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  expect(dispatch(state, command).accepted).toBe(true);
+});
+
 it("Auto-play preserves Traveler's Ward while its attack reflection is still active", () => {
   const state = produce(withHand(teamRun(42, ["oathara"]), ["oathara-travelers-ward"]), (game) => {
     game.team[0]!.combat!.attackReflection = true;

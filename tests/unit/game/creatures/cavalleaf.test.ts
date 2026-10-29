@@ -103,7 +103,7 @@ describe("Cavalleaf", () => {
     const rejected = playCard(ready, leap);
     expect(rejected.accepted).toBe(false);
     expect(rejected.state).toBe(ready);
-    expect(rejected.reason).toBe("There are no living backups.");
+    if (!rejected.accepted) expect(rejected.reason).toBe("There are no living backups.");
     produce(ready, (draft) => {
       const before = draft.team.map((unit) => unit.id);
       const rng = draft.rng;

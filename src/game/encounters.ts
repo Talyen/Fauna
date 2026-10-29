@@ -3,7 +3,7 @@ import { SPECIES, species, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 import { roll } from "./random";
 
-export const ACT_COUNT = 3;
+const ACT_COUNT = 3;
 export const ROOMS_PER_ACT = 10;
 export const JOURNEY_LENGTH = ACT_COUNT * ROOMS_PER_ACT;
 export const COMBAT_PACKS = [

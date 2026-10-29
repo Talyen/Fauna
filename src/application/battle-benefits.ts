@@ -420,6 +420,29 @@ export function battleBenefits(
     }
     case "repeatNextCard":
       return support(state.battle.repeatNext.player ? "none" : "standardUtility");
+    case "teamNegate": {
+      const useful = countMatching(allies(), (unit) => !unit.combat?.negate);
+      return support(useful > 0 ? "protection" : "none", useful);
+    }
+    case "bridgeRewind": {
+      const restored = healingBenefit(state, actor, value, def.effects).restored;
+      const minions = (state.battle.minions ?? []).filter((unit) => unit.minion.ownerId === actor.id);
+      const vacant = minions.filter((unit) => unit.health > 0).length < 2;
+      return support(restored > 0 ? "healing" : vacant ? "standardUtility" : "none", restored);
+    }
+    case "meadowDecree": {
+      const restored = facts
+        .healingAllies()
+        .reduce((sum, ally) => sum + healingBenefit(state, ally, 2, def.effects).restored, 0);
+      const minions = (state.battle.minions ?? []).filter((unit) => unit.minion.ownerId === actor.id);
+      const vacant = minions.filter((unit) => unit.health > 0).length < 2;
+      return support(restored > 0 ? "healing" : vacant ? "standardUtility" : "none", restored);
+    }
+    case "royalRepose": {
+      const restored = healingBenefit(state, actor, value, def.effects).restored;
+      const block = allies().reduce((sum, unit) => sum + Number(unit.block < STACK_LIMIT), 0);
+      return support(restored > 0 ? "healing" : block > 0 ? "protection" : "none", restored || block);
+    }
     case "springbound": {
       const frozen = countMatching(allies(), (unit) => (unit.combat?.freeze ?? 0) > 0);
       return frozen > 0

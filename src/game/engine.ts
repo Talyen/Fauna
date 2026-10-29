@@ -341,6 +341,7 @@ function resolve(
         }
         addRecruit(draft, command.species);
         if (command.type === "recruitDestination") {
+          if (draft.phase !== "teamSelection") throw new Error("Invalid Recruit destination.");
           draft.expedition.recruit = null;
           draft.expedition.lastRoom = "recruit";
           advanceEncounter(draft);

@@ -96,7 +96,7 @@ describe("Vitrilo", () => {
     const result = playCard(ready, key, ready.battle.enemies[0]!.id);
     expect(result.accepted).toBe(true);
     expect(result.state.team[0]!.block).toBe(0);
-    expect(result.state.team[0]!.combat.armor).toBe(0);
+    expect(result.state.team[0]!.combat!.armor).toBe(0);
   });
   it.each([
     "armor",
@@ -117,10 +117,10 @@ describe("Vitrilo", () => {
     });
     const result = playCard(ready, key, ready.battle.enemies[0]!.id);
     expect(result.accepted).toBe(true);
-    expect(result.state.team[0]!.combat[effect]).toBe(
+    expect(result.state.team[0]!.combat![effect]).toBe(
       effect === "armor" || effect === "thorns" || effect === "dodge" ? 3 : true,
     );
-    if (effect === "dodge") expect(result.state.team[0]!.combat.temporaryDodge).toBe(12);
+    if (effect === "dodge") expect(result.state.team[0]!.combat!.temporaryDodge).toBe(12);
   });
   it("restores Health and gains Block from Kilnheart", () => {
     const ready = produce(battle(), (draft) => {
@@ -183,7 +183,7 @@ describe("Vitrilo", () => {
       const ally = draft.team[0]!;
       enemy.block = 7;
       ally.block = 4;
-      ally.combat.reflect = true;
+      ally.combat!.reflect = true;
       draft.boons.push("star-hoop");
       executeAbility(
         draft,

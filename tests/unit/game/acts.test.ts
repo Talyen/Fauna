@@ -10,6 +10,7 @@ import {
   JOURNEY_LENGTH,
 } from "../../../src/game/encounters";
 import { observeDecisions } from "../../../src/game/random";
+import type { GameState } from "../../../src/game/types";
 import {
   accept,
   completeRecruitment,
@@ -67,7 +68,7 @@ describe("three-act journey", () => {
   });
 
   it("counts a purchased Merchant once after resume but not a canceled visit", () => {
-    let state = merchantDestination();
+    let state: GameState = merchantDestination();
     const startingRoom = state.encounter;
     const visit = state.support!;
     const entered = accept(state, { type: "enterSupport", visit: visit.id });
