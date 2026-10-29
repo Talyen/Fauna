@@ -238,6 +238,7 @@ export function battleBenefits(
       }
       return support(count < 2 ? "summon" : injured ? "summonRecovery" : canAct ? "protection" : "none");
     }
+    case "createBees":
     case "createFood":
     case "createPearls":
       return support(battleCardCapacity(state) > 0 ? "resource" : "none");
@@ -586,6 +587,14 @@ export function battleBenefits(
             : usefulDraw(play, facts)
               ? "utility"
               : "none",
+      );
+    case "armorAlly":
+      return allies().map((ally) =>
+        supportOne(
+          (ally.combat?.armor ?? 0) < STACK_LIMIT ? "protection" : "none",
+          Math.min(value, STACK_LIMIT - (ally.combat?.armor ?? 0)),
+          ally.id,
+        ),
       );
     case "guard":
     case "redistributeBlock":

@@ -2422,6 +2422,38 @@
     "reference": "Restore 1 Health to all allies",
     "contextHash": "9d3d7fd44a621f95ae48a2e9029f96b9df996574df071fecd6c52384de2482c0"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "text": "Clockwork Bee"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "text": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "reference": "Consume; Deal 6 Physical damage",
+    "contextHash": "c58c4fd82d1f6325c884ca09cc0490c802babb5c9a3850e7751c14bc7d44088d"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "text": "Clockwork Launch"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "text": "Add {{value0}} Clockwork Bees to your hand",
+    "reference": "Add 2 Clockwork Bees to your hand",
+    "contextHash": "048b6b79bcd15f819f0b8d65db8179309bd51edd9d7baf831a55b53996cd3317"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "text": "Copper Canopy"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "reference": "Allies gain 2 Block",
+    "contextHash": "f8b01c483c6f326d06c43455a985d1da2e21aeac1d293b0ec0243d6497a85c8d"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "text": "Gear Mender"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "text": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Give an ally 3 Armor",
+    "contextHash": "64393fd613c2fe6ddb03751accb9ad6d5a7f54d61da7c28c189a68c4477d7c58"
+  },
   "content.card.tournelle-attack.name": {
     "text": "Valiant Challenge"
   },
@@ -4182,6 +4214,39 @@
   },
   "content.species.stillara.trait": {
     "text": "First Thaw"
+  },
+  "content.species.tinkervale.name": {
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 1 Block"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 2 Block"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 3 Block"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 4 Block"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 5 Block"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "text": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When an ally's Armor is spent, give them 6 Block"
+  },
+  "content.species.tinkervale.title": {
+    "text": "The ingenious maker"
+  },
+  "content.species.tinkervale.trait": {
+    "text": "Spare Parts"
   },
   "content.species.tournelle.name": {
     "text": "Tournelle"

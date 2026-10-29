@@ -5,6 +5,7 @@ import { TURN_MANA } from "../state-limits";
 import { shareNegate, shareDodge } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
+import { CLOCKWORK_BEE } from "../content/creatures/tinkervale";
 import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
@@ -29,6 +30,7 @@ import { scalePower } from "./ability-values";
 import { species, speciesCards } from "../content";
 import {
   ensureCombat,
+  grantArmor,
   grantBlock,
   grantStatus,
   restoreHealth,
@@ -53,6 +55,7 @@ import {
   receiveDraw,
   fillHand,
   battleCardCapacity,
+  receiveCard,
 } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
@@ -138,6 +141,36 @@ export function executePrimary(context: PrimaryContext) {
     case "procession":
       summonEcho(state, actor, action.side, value, events);
       return;
+    case "createBees": {
+      let created = 0;
+      if (action.side === "enemy") {
+        const before = action.actor.clockworkBees ?? 0;
+        action.actor.clockworkBees = Math.min(6, before + value);
+        created = action.actor.clockworkBees - before;
+      } else {
+        for (let index = 0; index < value; index++) {
+          const bee = createTemporaryCard(state, {
+            definitionId: CLOCKWORK_BEE.id,
+            ownerId: actor.id,
+            level: 0,
+            ...(actor.species !== "tinkervale" ? { borrowedFrom: "tinkervale" as const } : {}),
+          });
+          if (!bee) break;
+          receiveCard(state, bee.id);
+          created++;
+        }
+      }
+      if (created)
+        emitSupport(events, actor.id, { amount: created, text: `${name} creates ${created} Clockwork Bees` });
+      return;
+    }
+    case "armorAlly": {
+      const recipient = battlefieldView(state, action.side).find(
+        (unit) => unit.id === action.allyTargetId && unit.health > 0,
+      );
+      if (recipient) grantArmor(state, recipient, value, events);
+      return;
+    }
     case "createFood":
       if (action.side === "player") createFood(state, action.actor, value, events);
       return;

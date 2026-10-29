@@ -52,7 +52,9 @@ function rowValue(state: BattleState, side: "player" | "enemy") {
 function positionValue(state: BattleState) {
   let resources = 0;
   for (const enemy of state.battle.enemies)
-    resources += enemy.deck ? enemy.deck.mana + enemy.deck.hand.length + enemy.deck.buffer.length : 0;
+    resources += enemy.deck
+      ? enemy.deck.mana + enemy.deck.hand.length + enemy.deck.buffer.length
+      : (enemy.clockworkBees ?? 0) * 3;
   return (
     rowValue(state, "enemy") - rowValue(state, "player") + resources + Number(state.battle.repeatNext.enemy)
   );

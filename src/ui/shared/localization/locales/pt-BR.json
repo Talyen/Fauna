@@ -4199,6 +4199,54 @@
     "sourceHash": "cac739fc6ef0003e02c39e00e8645efc2c7ccfb97e775105b5e2c71201eb7500",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "reviewed": true,
+    "source": "Clockwork Bee",
+    "sourceHash": "eecc0c4be599f5323ffd973ff2e397f9c306ecf5057f6df5e4267386cd81fdcc",
+    "text": "Abelha de corda"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "c28eebd1b2fd822f22cce150b4ad2e1220a1e43868b212ef5537d28144aa85ab",
+    "text": "<keyword0>Consumir</keyword0>; Causa {{value0}} de dano <keyword1>físico</keyword1>"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "reviewed": true,
+    "source": "Clockwork Launch",
+    "sourceHash": "1203f772403e82d326b81da34fe47dff884843072359128d2cae92c54645dfab",
+    "text": "Lançamento de corda"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} Clockwork Bees to your hand",
+    "sourceHash": "f795d49b537d23a76347ed77b65a6061ae670d115e61e8d739ef3b56dd130a31",
+    "text": "Adicione {{value0}} abelhas de corda à sua mão"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "reviewed": true,
+    "source": "Copper Canopy",
+    "sourceHash": "1c10787d5b3077f68a3d36d0a9ccefa0a2a8f2e393b96357719dc2bd7e622755",
+    "text": "Cobertura de cobre"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "90db9c2cf0d8ac85dec28aebc93e012e331883e337704a6377b8589f6ea2479b",
+    "text": "Aliados recebem {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "reviewed": true,
+    "source": "Gear Mender",
+    "sourceHash": "a1690423fc01418f4366942e7a7a8ef5d28c8bcb06920fcfb30cf27603a4b883",
+    "text": "Reparo de engrenagens"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "reviewed": true,
+    "source": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "402b4cadfb81ca84f1bf0a8110088f7a4ae5d1ab65bcbab06b70dfe1bf6a20e7",
+    "text": "Conceda {{value0}} de <keyword0>Armadura</keyword0> a um aliado"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7030,6 +7078,60 @@
     "source": "First Thaw",
     "sourceHash": "23afa34328a8ab833bd81916a5c06c49b4bf612d2d8b9b49ad6a41e87721a7e0",
     "text": "Primeiro degelo"
+  },
+  "content.species.tinkervale.name": {
+    "reviewed": true,
+    "source": "Tinkervale",
+    "sourceHash": "6c11f1a9421632ffcb5b09f9d884c796a5fbe4906c5345b7f855760471aacd3a",
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "23a3495898d2645a741db2cf78d30aeddcd132d944ce4e6df186fc34aa39b35d",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "a4c00ed12b3a1e73461a77b4c574d5ac537dccefb61eca9b19536db8db32fc69",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "a24ccc5bd7735a70728b4daafeef98bba41c5f1b485270ff677557ca02ed24d7",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "96ddf420532c5f758626e1425dfdd6eb45f20a69b4e756d61d4adefbc078e23b",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "8164f9983a3a62081631e72200a757e612fb2b8989bf5f89fa50829a83cf0512",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "c3112d8427a7adb945a0b711a3da8426f5def7b662432b059b90ea41c609dedd",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado é gasta, conceda a ele {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.species.tinkervale.title": {
+    "reviewed": true,
+    "source": "The ingenious maker",
+    "sourceHash": "9ddef19505049681a3cf13e1d8503b9700e9bcb1b738d1f341371bc34ef87e30",
+    "text": "A inventora engenhosa"
+  },
+  "content.species.tinkervale.trait": {
+    "reviewed": true,
+    "source": "Spare Parts",
+    "sourceHash": "ee7941b22915452d0f10fe417e86aeb06f285ac1ae4db63cbae16f8db09c9302",
+    "text": "Peças sobressalentes"
   },
   "content.species.tournelle.name": {
     "reviewed": true,

@@ -3,6 +3,7 @@ import { matchesPermanentKit, speciesHasCard } from "./card-kit";
 import { isFood } from "./content/food";
 import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
+import { CLOCKWORK_BEE } from "./content/creatures/tinkervale";
 import { PEARL } from "./content/creatures/memento";
 import { battlefieldView } from "./battlefield";
 import { needsCampfire, merchantPriceRange, merchantOfferCount } from "./destinations";
@@ -230,14 +231,25 @@ export function validateRoster(state: GameState) {
         return !(
           card.temporary &&
           (owner.species === "wendlet" ||
-            (owner.species === "oathara" && roster.some((unit) => unit.species === "wendlet"))) &&
+            (owner.species === "oathara" &&
+              (roster.some((unit) => unit.species === "wendlet") ||
+                (card.borrowedFrom === "tinkervale" && card.definitionId === CLOCKWORK_BEE.id)))) &&
           roster.some((unit) => unit.species === card.borrowedFrom) &&
           (speciesHasCard(card.borrowedFrom, card.definitionId) ||
-            (card.borrowedFrom === "memento" && card.definitionId === PEARL.id))
+            (card.borrowedFrom === "memento" && card.definitionId === PEARL.id) ||
+            (card.borrowedFrom === "tinkervale" &&
+              card.definitionId === CLOCKWORK_BEE.id &&
+              card.level === 0))
         );
       return (
         !speciesHasCard(owner.species, card.definitionId) &&
-        !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento")
+        !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento") &&
+        !(
+          card.temporary &&
+          card.level === 0 &&
+          card.definitionId === CLOCKWORK_BEE.id &&
+          owner.species === "tinkervale"
+        )
       );
     }),
   );
@@ -361,8 +373,20 @@ function validateBattle(state: BattleState) {
         enemy.maxHealth !== original.health ||
         enemy.power !== original.power ||
         enemy.health > enemy.maxHealth ||
+        ((enemy.clockworkBees ?? 0) > 0 &&
+          enemy.species !== "tinkervale" &&
+          !(
+            unfinishedJourneyLimit(undefined, enemy) > 0 &&
+            battle.enemies.some((unit) => unit.species === "tinkervale")
+          )) ||
         (enemy.lastAbility !== null &&
           !speciesHasCard(enemy.species, enemy.lastAbility) &&
+          !(
+            enemy.lastAbility === CLOCKWORK_BEE.id &&
+            (enemy.species === "tinkervale" ||
+              (unfinishedJourneyLimit(undefined, enemy) > 0 &&
+                battle.enemies.some((unit) => unit.species === "tinkervale")))
+          ) &&
           !(
             unfinishedJourneyLimit(undefined, enemy) > 0 &&
             battle.enemies.some((owner) => speciesHasCard(owner.species, enemy.lastAbility!))

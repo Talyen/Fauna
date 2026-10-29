@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "65e5ce9819fee95c6e5b202730a88e00ec15dac189c2fbcbac6aa7d0bd4aefd5",
-  "generation": "f316e1120217aa7449120394740c50e2411eee5375cc5bda03158826ff454bb1",
+  "manifestHash": "df0241153b4623b8b686bafadc1dcaeda267fd5cfa8a3590f94f15bd515a9155",
+  "generation": "98a88b5868d8596d572808547af62b4e3976910e1d6cc076e3e4d487155c9820",
   "records": {
     "boon.orchard-ladder-charm": {
       "url": "./prepared/objects/e3eb81ca4ae43f281468fb3208e624581fd97a62e98093b656dc5afddb023d1b/asset.webp",
@@ -5491,6 +5491,71 @@
       "outputHash": "011554ffb1d2f8ad90b4917b87bf29977d07b332e6e57d9d4d2fc1c2f346568a",
       "sourceBytes": 2209163,
       "outputBytes": 814928,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.tinkervale": {
+      "url": "./prepared/objects/28765ce1e0e38f5903b761616f11acc5f3097defa90c5ece04c6ab96eb3ff3e8/asset.webp",
+      "sourceHash": "2043c6b04be5d00550ab024834fb640cc2fe4c21e7600fc09d709be464365000",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "17e84d130bbbda44c61ac615a78a4260498bdb475048068164a2945ebc821bf3",
+      "sourceBytes": 2085233,
+      "outputBytes": 785878,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.tinkervale.copper-canopy": {
+      "url": "./prepared/objects/f2fc644623072286934db98a66b9294bc2f015d05e9a422fa92e0ece3b568e2d/asset.webp",
+      "sourceHash": "2ebda51dd4577a18625771428f66dcbf304ebda84498b673a762992072d36ef8",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "aa0249d8532df460a7847486f9ea848298e16dea18e0bd3b9c86b228d6228e78",
+      "sourceBytes": 2226461,
+      "outputBytes": 845022,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.tinkervale.clockwork-launch": {
+      "url": "./prepared/objects/fd16085126356567bf255e3919bd34788dab6ff3b62fe7cc5c5a9412bc838c49/asset.webp",
+      "sourceHash": "0998faa304bcd8f3b34abb2f8ff7eac70da5e57b708201e18ca50b775b038fc9",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "59464615c3a0a3d18238a6a82658200c216358d44c573dca0255a51d1e719060",
+      "sourceBytes": 1922851,
+      "outputBytes": 708902,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.tinkervale.gear-mender": {
+      "url": "./prepared/objects/691e8c692d25886d31db32bd29e52d4b0c1879125005823f86b01fd9803bc36a/asset.webp",
+      "sourceHash": "7533a62fca55a32db649e531c6197c4b999f6e717a11ff9bbe922fd82cb06643",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "c483fd94fb32cf7f7151fcd5c859d41f30b0d38639f4e43a1f5b8ead1cc4854e",
+      "sourceBytes": 1756344,
+      "outputBytes": 637078,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.tinkervale.clockwork-bee": {
+      "url": "./prepared/objects/fea61ec377fae18b84e92fd2632758091a558c450aa21461a226ef8ffdeb6e6c/asset.webp",
+      "sourceHash": "d4916648e96d813de0f005093b22d4183d152cad9e5840ca02e1785f48aea3d2",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f32809d9e1eb443565eae74aae8f8e9d4ec6068d30f3c08a2ccc9c64eacb2fa6",
+      "sourceBytes": 1965833,
+      "outputBytes": 770606,
       "width": 720,
       "height": 960,
       "alpha": false

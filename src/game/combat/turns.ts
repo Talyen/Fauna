@@ -5,6 +5,7 @@ import { cardActor, unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, livingBattlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES, type SpeciesId, type CardDefinition } from "../content";
 import { drawBossCards, removeDepartedMinions } from "./legendary";
+import { CLOCKWORK_BEE } from "../content/creatures/tinkervale";
 import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
 import { promoteBufferedCards, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
@@ -189,7 +190,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           ? [...own, ...inherited]
           : own
         : enemyAbilitiesWithoutResurrection.get(enemy.species)!;
-      const choice = chooseEnemyCard(draft, enemy, abilities);
+      const candidates = enemy.clockworkBees ? [...abilities, CLOCKWORK_BEE] : abilities;
+      const choice = chooseEnemyCard(draft, enemy, candidates);
       if (!choice) continue;
       const { def, targetId, allyTargetId } = choice;
       enemy.targetId = targetId ?? enemy.targetId;

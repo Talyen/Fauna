@@ -3,6 +3,7 @@ import type { CardDefinition } from "../content/types";
 import type { BattleState, Enemy, GameEvent } from "../types";
 import { executeAbility } from "./abilities";
 import { courtRemembers } from "./legendary";
+import { CLOCKWORK_BEE } from "../content/creatures/tinkervale";
 
 /** Pay and execute the same enemy ability in live turns and policy probes. */
 export function playEnemyAbility(
@@ -14,6 +15,7 @@ export function playEnemyAbility(
   events: GameEvent[],
 ) {
   const deck = actor.deck;
+  if (!deck && def.id === CLOCKWORK_BEE.id && actor.clockworkBees) actor.clockworkBees--;
   const cardIndex = deck?.hand.indexOf(def.id) ?? -1;
   const lastCardInHand = cardIndex >= 0 && deck?.hand.length === 1;
   if (deck) {
