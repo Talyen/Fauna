@@ -9,6 +9,7 @@ import type { AbilityAction } from "./ability-context";
 import {
   ensureCombat,
   grantStatus,
+  grantBlock,
   grantArmor,
   restoreHealth,
   triggerArmorBreak,
@@ -70,7 +71,8 @@ export function applyExtras(
           });
         break;
       case "status":
-        if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
+        if (effect.status === "block") grantBlock(state, actor, effect.amount, events);
+        else if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
         else grantStatus(actor, effect.status, effect.amount, events, state);
         break;
       case "meltArmor":

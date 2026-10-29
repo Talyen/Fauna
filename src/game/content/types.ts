@@ -39,7 +39,8 @@ export type SpeciesId =
   | "alpenglen"
   | "wisterelle"
   | "brumalyn"
-  | "cavalleaf";
+  | "cavalleaf"
+  | "wendlet";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "lostAndFound"; amount: number }
@@ -54,6 +55,7 @@ type PassiveEffect =
   | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
+  | { kind: "livingShadow"; amount: number }
   | { kind: "unfinishedJourney"; amount: number }
   | { kind: "unhurried"; amount: number }
   | { kind: "gallantry"; amount: number }

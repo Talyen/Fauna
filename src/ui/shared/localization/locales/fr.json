@@ -4247,6 +4247,42 @@
     "sourceHash": "4f2d83b19109e46185eb05315eb225b8f26d32446cee6de43c397c55b7fa0ebf",
     "text": "<keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés / Pioche une carte de <keyword2>Lumière</keyword2>"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "reviewed": true,
+    "source": "Borrowed Silhouette",
+    "sourceHash": "142b0ca47f5247d417689962c7c22bb16474a9eaf12d7f7017994244cc8f340b",
+    "text": "Silhouette empruntée"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "reviewed": true,
+    "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "822b4f6a6779a3369369ce9628b47527c0cf0ebd2ec128f738fed154b7a6c4e3",
+    "text": "Piochez une copie d’une capacité aléatoire d’un allié en réserve / Gagnez {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "reviewed": true,
+    "source": "Midnight Mantle",
+    "sourceHash": "c8b721aff12674b41a8ee60a203918ab0112beaf2cc0cdfe94e7bb7e020e11f6",
+    "text": "Manteau de minuit"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "ddb6e1602712263922c719709d648b4d56636f50ed3b4723d334e7f6b30ede16",
+    "text": "Gagnez {{value0}}% d’<keyword0>Esquive</keyword0> jusqu’à votre prochain tour ; Gagnez {{value1}} <keyword1>Blocage</keyword1>"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "reviewed": true,
+    "source": "Umbra Snare",
+    "sourceHash": "aa47b06cc337808dc78bf3535822bed94b27ac5593f672f2252ddd6a1ae535ca",
+    "text": "Piège d’ombre"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "4478566840d7a56c3ffd15c68c15706d21fb790fa9f265d26b5ce8dc11165c61",
+    "text": "Infligez {{value0}} dégâts d’<keyword0>Étourdissement</keyword0>"
+  },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
     "source": "Ember Pirouette",
@@ -6940,6 +6976,60 @@
     "source": "Gallantry",
     "sourceHash": "85ec89b0b997371505d099f4ff7d99a80cb51768a890959a5b258e17e034801e",
     "text": "Galant geste"
+  },
+  "content.species.wendlet.name": {
+    "reviewed": true,
+    "source": "Wendlet",
+    "sourceHash": "b6eaf6f7ef4fec06e8d1a1041743119a027cdc43412199393023d3c601824532",
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "393da9b77385481368042d40faef194a163bd72636e26f69334e3df586df0e65",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "2e2c4a68d9eb6292882e8c3e6c9bb58017a78afd9a2dc390bcd780861020857e",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "0a56c3f72dbcbeee6606a7e0746e678909797177adc11105c3361199a538ec6b",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "f1e272b7c9f77fb7d9a78e3c9200e822447d3ec87f5828cf61b056b036775d91",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "93be51a6f3cddcef2c76d99d283c7f5cc36bddd5499afea20837225ff1d093c0",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "282288beb12dc9bdadef01bee34d00af7141855e81ba33796eb152e4f3491e01",
+    "text": "Quand le <keyword0>Blocage</keyword0> de Wendlet diminue, donnez {{value0}}% du <keyword1>Blocage</keyword1> perdu à l’allié le plus blessé"
+  },
+  "content.species.wendlet.title": {
+    "reviewed": true,
+    "source": "The shadow's companion",
+    "sourceHash": "8f4b13c61004f56525ff79c2140c2413ad2e289e8b9c32462394c041951b7335",
+    "text": "Le compagnon de l’ombre"
+  },
+  "content.species.wendlet.trait": {
+    "reviewed": true,
+    "source": "Living Shadow",
+    "sourceHash": "c01bc441d7a0408cd4a1ef101c108b72d12a67cb0f26dee3984ce5b651036164",
+    "text": "Ombre vivante"
   },
   "content.species.wickwaltz.name": {
     "reviewed": true,

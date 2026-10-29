@@ -4247,6 +4247,42 @@
     "sourceHash": "3f9b8b3a18cd9dac1e793cbdae45fd91ac7a142c5d97733a43b93979d0e3266b",
     "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0> / <keyword2>光</keyword2>カードを1枚引く"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "reviewed": true,
+    "source": "Borrowed Silhouette",
+    "sourceHash": "4b0d66b6b01b7c7ab6389fb26d3d2033f31f90fff8c4fdf44c4d1b8d119dbc67",
+    "text": "借りたシルエット"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "reviewed": true,
+    "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "3ceee154c686d40b94e95b7cbd929895c046612ea1cdfadbce02001c2ee8facf",
+    "text": "控えの味方のランダムな能力のコピーを1枚引く / <keyword0>マナ</keyword0>を{{value0}}得る"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "reviewed": true,
+    "source": "Midnight Mantle",
+    "sourceHash": "37e1991e31710c5a45a3fb1f18f3c30bad9da202bfab5738a3b579a4efe11ea7",
+    "text": "真夜中のマント"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "d3363487c0e4295bc0954b63942dfa681d41b9698b9b2699f2ddb13bde19fd23",
+    "text": "次のターンまで<keyword0>回避</keyword0>率を{{value0}}%得る; <keyword1>ブロック</keyword1>を{{value1}}得る"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "reviewed": true,
+    "source": "Umbra Snare",
+    "sourceHash": "630a4172fc9817de8ca613be7c831850cbb28e6a83a2eb4426b742dcb34ee95b",
+    "text": "闇の罠"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "89d69f7e95aea89cc48ea56820200f2f570a08fce39d7d23b2e3c3fff2475cb7",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
     "source": "Ember Pirouette",
@@ -6940,6 +6976,60 @@
     "source": "Gallantry",
     "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
     "text": "騎士の心"
+  },
+  "content.species.wendlet.name": {
+    "reviewed": true,
+    "source": "Wendlet",
+    "sourceHash": "6c95c5842f26b348288b182b0db4819cfd41ea7873ee6c092c7b78d15ccbf9b7",
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "57ccbdb54ab108b31cc505c90b0b05b6ac40bd7f9606b00db6e286641175cb09",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "567b453b8fb53cd1613926888d6682853823378f2b10e4870580e5aefc43159e",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "949e470a4fb6324750ba07f2ea41b6965c23091af689e20e55fb7e1eecf07d5a",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "dc2b44e01b6990520704c8b6e78cb0a305f9df5c475be3f232f46865e885011a",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "712c35bba2f2ee006df7fb5b328f465c44c634ec276d8fd1c2c8c7362d7a036a",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "0c3090c9797b98347d00aefeffa5493c586b08203ebc332a3feb4170e684b3d0",
+    "text": "ウェンドレットの<keyword0>ブロック</keyword0>が減衰した時、失った<keyword1>ブロック</keyword1>の{{value0}}%を最も傷ついた味方に与える"
+  },
+  "content.species.wendlet.title": {
+    "reviewed": true,
+    "source": "The shadow's companion",
+    "sourceHash": "510815fe9946392c25903fae78396e3b94a731f73883d4f14e093a2de07794da",
+    "text": "闇の相棒"
+  },
+  "content.species.wendlet.trait": {
+    "reviewed": true,
+    "source": "Living Shadow",
+    "sourceHash": "2ba5fa784bf9edea0f6e60bb421593c4059080391fc8b7f5a5418c8081e77109",
+    "text": "生きた闇"
   },
   "content.species.wickwaltz.name": {
     "reviewed": true,

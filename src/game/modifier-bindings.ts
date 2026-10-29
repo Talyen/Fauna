@@ -437,6 +437,7 @@ export const modifierImplementations = freeze(
       petalwake: ["./combat/damage-reactions#dodgeResponse"],
       expressDelivery: ["./card-zones#expressDelivery"],
       fallenLeaves: ["./combat/turns#decayBlock"],
+      livingShadow: ["./combat/turns#decayBlock"],
       unfinishedJourney: ["./card-actors#unfinishedJourneyLimit"],
       unhurried: ["./combat/turns#unhurried"],
       gallantry: ["./combat/interception#interceptAttack"],

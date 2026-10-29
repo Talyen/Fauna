@@ -4247,6 +4247,42 @@
     "sourceHash": "f5a285601da0657393e5d0b22492a55902ae634548e281359e8d01b3edb36547",
     "text": "<keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados / Compre uma carta de <keyword2>Luz</keyword2>"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "reviewed": true,
+    "source": "Borrowed Silhouette",
+    "sourceHash": "a388d2a86127db58e512ee2720709377c89a20073324bda6c897afedf8a86fce",
+    "text": "Silhueta emprestada"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "reviewed": true,
+    "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8d02b3422be7ac55c6e49e0b8b0248b464abcb717c948ec2f8ec457490ee0858",
+    "text": "Compre uma cópia de uma habilidade aleatória de um aliado na reserva / Ganhe {{value0}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "reviewed": true,
+    "source": "Midnight Mantle",
+    "sourceHash": "95811b62c4e1c0e4fabc1883cb6d0115008480497afd77cd66b369d3978f6767",
+    "text": "Manto da meia-noite"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "95976a47fbd0e24ad040f8f96e95b209f7f5686888a6cf9f80cfe71f2d0ca4c5",
+    "text": "Ganhe {{value0}}% de <keyword0>Esquiva</keyword0> até seu próximo turno; Ganhe {{value1}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "reviewed": true,
+    "source": "Umbra Snare",
+    "sourceHash": "193a1c63cc2b60ae1c0e2c5bf22faea41f0ec8d9b96f1a88d60bba680ed3160b",
+    "text": "Armadilha sombria"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "5f1998f15b438872447e4de3961d8516312b01f4e4ead7c2f74b2f175514bb76",
+    "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
+  },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
     "source": "Ember Pirouette",
@@ -6940,6 +6976,60 @@
     "source": "Gallantry",
     "sourceHash": "81ba6826e459bb4f8a09b087b4e2cfa4658cf4149504310543cdbbbe49336f8a",
     "text": "Galantaria"
+  },
+  "content.species.wendlet.name": {
+    "reviewed": true,
+    "source": "Wendlet",
+    "sourceHash": "df58b06b7bc0e643df7a199faf15c1f9d9071260b8577ec6c32bba9029f2e472",
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "b9da83035c08ed7f8b2fe30501244585f67c66db19cca43103371ec9618cc442",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "9614e8c764dac00e2432493fd8c6d8994e1d23f55fe5771f22f1eac5f49d974d",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "e5926a8e6e177003e00192e178d0f733c393e06880df03931fc87f014bb85ad5",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "0d50e502f8289094b61f6bbaf737d2f68c8de52f4268f62d3485c3d15bf40016",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "d24aef89f64178ecdd7119de64b5f3cc44a66ec5249e168dcde94258f636eb16",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "dcc73595c247bac5e2e733540135bb1f18b3e33d318bf76f140307e35ed7a878",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de Wendlet diminuir, conceda {{value0}}% do <keyword1>Bloqueio</keyword1> perdido ao aliado mais ferido"
+  },
+  "content.species.wendlet.title": {
+    "reviewed": true,
+    "source": "The shadow's companion",
+    "sourceHash": "52f5d990f481ab800a2460c47bc6e388ab622eb1c09c6838fb99baf0c0d0b7d6",
+    "text": "O companheiro da sombra"
+  },
+  "content.species.wendlet.trait": {
+    "reviewed": true,
+    "source": "Living Shadow",
+    "sourceHash": "900bed875883ea9387dcf72a48941933d71b2f952da5a14b4681c98ac3fa6c41",
+    "text": "Sombra viva"
   },
   "content.species.wickwaltz.name": {
     "reviewed": true,

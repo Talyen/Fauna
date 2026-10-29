@@ -350,6 +350,12 @@ export function battleBenefits(
         );
       });
     }
+    case "borrowBackup":
+      return support(
+        state.reserves.some((unit) => unit.health > 0) && battleCardCapacity(state) > 0
+          ? "standardUtility"
+          : "none",
+      );
     case "mana": {
       const cost = cardCost(card, state, def, actor);
       const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
@@ -454,7 +460,16 @@ export function battleBenefits(
       if (def.target === "allAllies") {
         for (const unit of allies()) useful += Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0));
       } else useful += Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
-      return dodgeSupport(useful);
+      const extraBlock =
+        def.effects?.reduce(
+          (sum, effect) =>
+            sum +
+            (effect.kind === "status" && effect.status === "block"
+              ? Math.min(effect.amount, STACK_LIMIT - actor.block)
+              : 0),
+          0,
+        ) ?? 0;
+      return useful > 0 ? dodgeSupport(useful) : support(extraBlock > 0 ? "protection" : "none", extraBlock);
     }
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
@@ -539,7 +554,8 @@ export function battleBenefits(
                 sum +
                 Math.min(
                   effect.amount,
-                  (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
+                  (effect.status === "dodge" ? 70 : STACK_LIMIT) -
+                    (effect.status === "block" ? actor.block : (actor.combat?.[effect.status] ?? 0)),
                 )
               );
             return sum;

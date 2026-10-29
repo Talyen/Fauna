@@ -1,6 +1,6 @@
 import { boonRule } from "../rules/boons";
 import { swapFromCard } from "../team";
-import { emitStatus } from "../events";
+import { emitStatus, emitSupport } from "../events";
 import { TURN_MANA } from "../state-limits";
 import { shareNegate, shareDodge } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
@@ -19,7 +19,7 @@ import {
 } from "../battlefield";
 import { summonEcho, summonPendulums, pendulumBonus, createPearls, drawBossCards } from "./legendary";
 import { scalePower } from "./ability-values";
-import { species } from "../content";
+import { species, speciesCards } from "../content";
 import {
   ensureCombat,
   grantBlock,
@@ -37,7 +37,16 @@ import {
   removeControlBuildup,
 } from "./index";
 import { roll } from "../random";
-import { drawDiscard, draw, drawKeyword, redrawHand } from "../card-zones";
+import {
+  drawDiscard,
+  draw,
+  drawKeyword,
+  redrawHand,
+  createTemporaryCard,
+  receiveDraw,
+  fillHand,
+  battleCardCapacity,
+} from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
 import { actorPower, livingFriends, livingOpponents, type PrimaryContext } from "./ability-context";
@@ -67,6 +76,29 @@ export function executePrimary(context: PrimaryContext) {
   const enemy = action.side === "enemy";
   const power = actorPower(action);
   switch (def.effect) {
+    case "borrowBackup": {
+      if (action.side !== "player") return;
+      const choices = state.reserves
+        .filter((unit) => unit.health > 0)
+        .flatMap((unit) => speciesCards(unit.species).map((card) => ({ species: unit.species, card })));
+      if (choices.length && battleCardCapacity(state) > 0) {
+        const chosen =
+          choices[Math.floor(roll(state, { kind: "index", size: choices.length }) * choices.length)]!;
+        const copy = createTemporaryCard(state, {
+          definitionId: chosen.card.id,
+          ownerId: actor.id,
+          level: 0,
+          borrowedFrom: chosen.species,
+        });
+        if (copy) {
+          fillHand(state);
+          receiveDraw(state, copy.id, events);
+          emitSupport(events, actor.id, { text: `${name} draws a copy of ${chosen.card.name}` });
+        }
+      }
+      gainMana(state, 1, events);
+      return;
+    }
     case "teamNegate":
       for (const unit of livingFriends(state, action)) {
         ensureCombat(unit).negate = true;
@@ -75,7 +107,8 @@ export function executePrimary(context: PrimaryContext) {
       return;
     case "bridgeRewind":
       restoreHealth(actor, value, events, false, state, true, actor);
-      if (actor.health > 0) summonPendulums(state, actor, action.side, events, 1);
+      if (actor.health > 0)
+        summonPendulums(state, actor, action.side, events, 1, actor.species !== "chronora");
       return;
     case "procession":
       summonEcho(state, actor, action.side, value, events);

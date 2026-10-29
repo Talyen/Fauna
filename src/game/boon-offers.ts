@@ -23,6 +23,7 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   mountainGuide: ["block"],
   petalwake: ["dodge", "health"],
   fallenLeaves: ["block", "thorns"],
+  livingShadow: ["block"],
   unhurried: ["health"],
   livingChorus: ["health"],
   tidalRegeneration: ["health"],

@@ -30,6 +30,13 @@ const automatic = {
 
 const rules: AbilityRuleCatalog = freeze(
   {
+    borrowBackup: {
+      ...automatic,
+      scaling: "authored",
+      enemy: "unsupported",
+      keywords: ["mana"],
+      describe: () => "Draw a copy of a random backup ally ability / Gain 1 Mana",
+    },
     raincall: {
       ...automatic,
       scaling: "authored",

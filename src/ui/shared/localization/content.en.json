@@ -2456,6 +2456,30 @@
     "reference": "Cleanse allies Blind / Draw a Light card",
     "contextHash": "8f0556a17791958278f3a8315af6cdc97592d9aa7492c8af9cf357d866b7330e"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "text": "Borrowed Silhouette"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "text": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "reference": "Draw a copy of a random backup ally ability / Gain 1 Mana",
+    "contextHash": "bb88c6dbcd0102b49390e424645c520d38870ba3eb321f148eeba479b7179387"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "text": "Midnight Mantle"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "reference": "Gain 20% Dodge until your next turn; Gain 3 Block",
+    "contextHash": "d6ed030142231803d9c5881a1b54e68845bfbe51466b1000f083b5c9ced99c3a"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "text": "Umbra Snare"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "text": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "reference": "Deal 6 Stun damage",
+    "contextHash": "414cce39554b8e414cc377a0ffd77c1521a4ae6b75aeab8f602434a7bf359ef3"
+  },
   "content.card.wickwaltz-attack.name": {
     "text": "Ember Pirouette"
   },
@@ -4119,6 +4143,39 @@
   },
   "content.species.tournelle.trait": {
     "text": "Gallantry"
+  },
+  "content.species.wendlet.name": {
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 50% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 60% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 70% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 80% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 90% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "text": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "reference": "When Wendlet's Block decays, give 100% of the lost Block to the most injured ally"
+  },
+  "content.species.wendlet.title": {
+    "text": "The shadow's companion"
+  },
+  "content.species.wendlet.trait": {
+    "text": "Living Shadow"
   },
   "content.species.wickwaltz.name": {
     "text": "Wickwaltz"

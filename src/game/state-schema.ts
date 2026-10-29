@@ -147,6 +147,7 @@ const shared = z.object({
         ownerId: id.nullable(),
         level: z.number().int().min(0).max(3),
         temporary: z.literal(true).optional(),
+        borrowedFrom: speciesId.optional(),
       }),
     )
     .max(MAX_BATTLE_CARDS),

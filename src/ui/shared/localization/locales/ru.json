@@ -4247,6 +4247,42 @@
     "sourceHash": "59cfc5aec91f68921603d189587649c6d16cd43602057d3b83613b5d2914fdad",
     "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников / Возьмите карту <keyword2>света</keyword2>"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "reviewed": true,
+    "source": "Borrowed Silhouette",
+    "sourceHash": "f70e0496705b1d603916c1ed1f7ef5780462f4e9e191372021ad148aa6569c26",
+    "text": "Заимствованный силуэт"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "reviewed": true,
+    "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "dfed14fc500046813869edd5ed5b62ac7c250a504d231fff01329b737ab3c10d",
+    "text": "Возьмите копию случайной способности союзника в запасе / Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "reviewed": true,
+    "source": "Midnight Mantle",
+    "sourceHash": "069ed1d2dbae4a9171cdf99299b380ac65a25f0bad2605879aa255391ec08183",
+    "text": "Полуночная мантия"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "0dd867546e1e3439ba68b5ffad3b0755ce6ee4546723bf0b1cb68ec8ad4ee9ac",
+    "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Получите {{value1}} <keyword1>блока</keyword1>"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "reviewed": true,
+    "source": "Umbra Snare",
+    "sourceHash": "bac703b4834113ec8f180934fc7a2f817d5e75fb519a0cac9f3155345e9bd0f2",
+    "text": "Теневая ловушка"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "eabb595ae401bf829af664429cfc1dfae490a1327dcb5e503596816fd18af96a",
+    "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
+  },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
     "source": "Ember Pirouette",
@@ -6940,6 +6976,60 @@
     "source": "Gallantry",
     "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
     "text": "Галантность"
+  },
+  "content.species.wendlet.name": {
+    "reviewed": true,
+    "source": "Wendlet",
+    "sourceHash": "3063a12d7e40147b6d24e2f17346c1b592b627990b34808d0e339e4c4afddac6",
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "3d945243a4506bf7b79721e7efa673f414dd0e78d528f7707a9eec706d43325b",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "15dd0d4c4347483907bac803dcfb5846d2196dbfb4b5e72c15b9b3fc44726c0f",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "81e1d3454e331d0f2c1ca17a64e8e30d8c27b1c87224ea5ed12e0f737974e3cc",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "bc63659a1e2c506132eb9f8901529434ecce3bee8e39689a92a67f4cae9ad333",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "ee052def1f2644fe29dd2afe2a8fa5952842c7ff23907d52f6f888194f779cd7",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "aaaf78d448b4a4ea516fd1200e1dc07174b834169eb901a8abda8071e30aaa72",
+    "text": "Когда <keyword0>блок</keyword0> Вендлета уменьшается, дайте наиболее раненому союзнику {{value0}}% утраченного <keyword1>блока</keyword1>"
+  },
+  "content.species.wendlet.title": {
+    "reviewed": true,
+    "source": "The shadow's companion",
+    "sourceHash": "93920463621b49da0450bf536a04a18eefb290bb5359b8b579dd939650313ede",
+    "text": "Спутник тени"
+  },
+  "content.species.wendlet.trait": {
+    "reviewed": true,
+    "source": "Living Shadow",
+    "sourceHash": "186683dd00e60b66584e9d1c51e36350bd73ddecb434486a66d1b7106accb070",
+    "text": "Живая тень"
   },
   "content.species.wickwaltz.name": {
     "reviewed": true,

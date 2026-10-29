@@ -67,6 +67,14 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
   if (lost <= 0 || unit.health <= 0) return;
   const percent = passiveAmount(allied ? state : undefined, unit.species, "fallenLeaves");
   if (percent > 0) grantStatus(unit, "thorns", Math.round((lost * percent) / 100), events, state);
+  const shadow = passiveAmount(allied ? state : undefined, unit.species, "livingShadow");
+  const deployed = allied
+    ? state.team.some((ally) => ally.id === unit.id)
+    : state.battle?.enemies.some((ally) => ally.id === unit.id);
+  if (shadow > 0 && deployed) {
+    const recipient = mostInjured(livingBattlefield(state, allied ? "player" : "enemy"));
+    if (recipient) grantBlock(state, recipient, Math.round((lost * shadow) / 100), events);
+  }
   if (allied && state.boons.includes("pleated-pagoda"))
     grantArmor(state, unit, Math.round(lost / boonRule("pleated-pagoda").divisor), events);
 }

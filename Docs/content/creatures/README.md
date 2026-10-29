@@ -53,3 +53,4 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Wisterelle](wisterelle.md) · [implementation](../../../src/game/content/creatures/wisterelle.ts) — Lost and Found and the flowering station
 - [Brumalyn](brumalyn.md) · [implementation](../../../src/game/content/creatures/brumalyn.ts) — Winter’s Reprieve and the winter guide
 - [Cavalleaf](cavalleaf.md) · [implementation](../../../src/game/content/creatures/cavalleaf.ts) — Wild Path, team recovery and protective passage
+- [Wendlet](wendlet.md) · [implementation](../../../src/game/content/creatures/wendlet.ts) — Living Shadow and borrowed backup abilities

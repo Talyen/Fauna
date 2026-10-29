@@ -1,6 +1,7 @@
 import type { DamageType } from "../keywords";
 
 export type AbilityKind =
+  | "borrowBackup"
   | "swapChosen"
   | "swapDodge"
   | "swapThorns"
@@ -42,7 +43,7 @@ export type SupplementalEffect =
   | { kind: "nullifyFreeze"; amount: number }
   | { kind: "thaw"; amount: number }
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
-  | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
+  | { kind: "status"; status: "armor" | "thorns" | "dodge" | "block"; amount: number }
   | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
   | { kind: "reflect"; amount: number; status?: "burn" }
   | { kind: "heal"; amount: number; target?: "recipient" }

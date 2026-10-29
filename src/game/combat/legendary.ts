@@ -28,10 +28,11 @@ export function summonPendulums(
   side: "player" | "enemy",
   events: GameEvent[],
   count = 2,
+  borrowed = false,
 ) {
   if (
     actor.health <= 0 ||
-    !passiveAmount(side === "player" ? state : undefined, actor.species, "turnBackTide")
+    (!borrowed && !passiveAmount(side === "player" ? state : undefined, actor.species, "turnBackTide"))
   )
     return;
   const minions = state.battle.minions ?? (state.battle.minions = []);
@@ -108,6 +109,7 @@ export function createPearls(
         definitionId: PEARL.id,
         ownerId: actor.id,
         level: 0,
+        ...(actor.species !== "memento" ? { borrowedFrom: "memento" as const } : {}),
       });
       if (!card) break;
       receiveCard(state, card.id);

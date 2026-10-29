@@ -4247,6 +4247,42 @@
     "sourceHash": "bb9ce074828665479cfdb156eb42be4c20c15c22cffdf6fdadd89d576984bea2",
     "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
   },
+  "content.card.wendlet-borrowed-silhouette.name": {
+    "reviewed": true,
+    "source": "Borrowed Silhouette",
+    "sourceHash": "bd7313bc0a0ae16166e522c0312419067e6ed1302a00a46d23a3596a8d15e459",
+    "text": "借来的身影"
+  },
+  "content.card.wendlet-borrowed-silhouette.v1b2f07cb523ed441.rule": {
+    "reviewed": true,
+    "source": "Draw a copy of a random backup ally ability / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "7a74fc1450d7eb725529e53e856d1412d39934fa58b60e81763206d99f97d7c8",
+    "text": "抽取一张随机后备队友能力的复制牌 / 获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wendlet-midnight-mantle.name": {
+    "reviewed": true,
+    "source": "Midnight Mantle",
+    "sourceHash": "e7c680f991aaad5d12568b4fabaa06ddb221d5a30f722ac8adbd92d36ba790d6",
+    "text": "午夜护衣"
+  },
+  "content.card.wendlet-midnight-mantle.v43ab1408fd666611.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Gain {{value1}} <keyword1>Block</keyword1>",
+    "sourceHash": "87db219d624ce8047b4ff6b35700eb8d3dd850d36dead62ab0adb21ebc97258a",
+    "text": "在下回合前获得{{value0}}%<keyword0>闪避</keyword0>；获得{{value1}}点<keyword1>格挡</keyword1>"
+  },
+  "content.card.wendlet-umbra-snare.name": {
+    "reviewed": true,
+    "source": "Umbra Snare",
+    "sourceHash": "6a065d820f668fb4dd4f8204b51266f0bb6e317f10b8b4696bc35ea9f4a37bb5",
+    "text": "暗影陷阱"
+  },
+  "content.card.wendlet-umbra-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "f7f7d5e4a05ec0ca5e989822da2b9f825543fb16688972afa7d938c4a43fad32",
+    "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
     "source": "Ember Pirouette",
@@ -6940,6 +6976,60 @@
     "source": "Gallantry",
     "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
     "text": "侠义"
+  },
+  "content.species.wendlet.name": {
+    "reviewed": true,
+    "source": "Wendlet",
+    "sourceHash": "5721dd94d73366c473edd2409c56b2605cb72c3fd0110a3150d2311dd8f5ffc2",
+    "text": "Wendlet"
+  },
+  "content.species.wendlet.passive.0.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "8c737366aed4409443f6943eb4e8b4b53d2499ff923ea86040b86145c06fc7b0",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.passive.1.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "26e1594fb3511f028f3366713d8e55ee5ec750c39c055fb10c54e7f4ad1030e6",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.passive.2.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "497c5f707aab98880ee73f05d77e9fdc101428e7254988d923c1fc09a76cd1ea",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.passive.3.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "23ba7480d2be6ec7b624fbcddddcfadd7a66c264a9f1ff6faeb2e68f0df0c477",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.passive.4.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "48db58e6d5d76da84586863cb14930b85438b3ddbe88889d772bea6afaa8c862",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.passive.5.rule": {
+    "reviewed": true,
+    "source": "When Wendlet's <keyword0>Block</keyword0> decays, give {{value0}}% of the lost <keyword1>Block</keyword1> to the most injured ally",
+    "sourceHash": "1bcf6c82cc243e314a8fa07aca4126b01f09ede20328ffb79deb9e01988b43a0",
+    "text": "温德莱特的<keyword0>格挡</keyword0>衰减时，将失去的<keyword1>格挡</keyword1>的{{value0}}%给予伤势最重的队友"
+  },
+  "content.species.wendlet.title": {
+    "reviewed": true,
+    "source": "The shadow's companion",
+    "sourceHash": "58fe99763d40972b8dea369c47cdc7c00361b9ec3de5587a3b4ef072ad125d79",
+    "text": "影子的伙伴"
+  },
+  "content.species.wendlet.trait": {
+    "reviewed": true,
+    "source": "Living Shadow",
+    "sourceHash": "1ae810bd20d4f046726d37985fe612746112662d325dbc9444d53d01e77c6857",
+    "text": "活影"
   },
   "content.species.wickwaltz.name": {
     "reviewed": true,

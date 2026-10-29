@@ -201,11 +201,16 @@ export function validateRoster(state: GameState) {
       )
         return true;
       if (card.ownerId === null)
-        return !(
-          card.level === 0 &&
-          isFood(card.definitionId) &&
-          (card.temporary ||
-            (card.id === CORNUCOPIA_CARD_ID && card.definitionId === "food-mana-berries" && hasCornucopia()))
+        return (
+          !!card.borrowedFrom ||
+          !(
+            card.level === 0 &&
+            isFood(card.definitionId) &&
+            (card.temporary ||
+              (card.id === CORNUCOPIA_CARD_ID &&
+                card.definitionId === "food-mana-berries" &&
+                hasCornucopia()))
+          )
         );
       if (!teamById) {
         teamById = new Map();
@@ -213,6 +218,15 @@ export function validateRoster(state: GameState) {
       }
       const owner = teamById.get(card.ownerId);
       if (!owner) return true;
+      if (card.borrowedFrom)
+        return !(
+          card.temporary &&
+          (owner.species === "wendlet" ||
+            (owner.species === "oathara" && roster.some((unit) => unit.species === "wendlet"))) &&
+          roster.some((unit) => unit.species === card.borrowedFrom) &&
+          (speciesHasCard(card.borrowedFrom, card.definitionId) ||
+            (card.borrowedFrom === "memento" && card.definitionId === PEARL.id))
+        );
       return (
         !speciesHasCard(owner.species, card.definitionId) &&
         !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento")
@@ -430,7 +444,13 @@ function validateMinions(state: BattleState) {
         : state.battle.enemies.find((entry) => entry.id === unit.minion.ownerId);
     invalid(
       !owner ||
-        owner.species !== unit.species ||
+        (owner.species !== unit.species &&
+          !(
+            unit.minion.side === "player" &&
+            (owner.species === "wendlet" || owner.species === "oathara") &&
+            [...state.team, ...state.reserves].some((ally) => ally.species === "wendlet") &&
+            [...state.team, ...state.reserves].some((ally) => ally.species === unit.species)
+          )) ||
         unit.health > unit.maxHealth ||
         (unit.species === "memento"
           ? unit.name !== "Echo" || !echoHealthValues.includes(unit.maxHealth)

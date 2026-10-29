@@ -426,6 +426,7 @@ export function createTemporaryCard(
     ownerId: card.ownerId,
     level: card.level,
     temporary: true,
+    ...(card.borrowedFrom ? { borrowedFrom: card.borrowedFrom } : {}),
   };
   state.cards.push(copy);
   return copy;

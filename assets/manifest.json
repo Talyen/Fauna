@@ -4537,6 +4537,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Cavalleaf artwork from Google Drive: https://drive.google.com/file/d/1wjlWJepzFSk7YK43ztFD8N5_Q91wo_bx/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.wendlet",
+      "origin": "repository",
+      "source": "public/art/creatures/wendlet/portrait.png",
+      "output": "art/wendlet/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "User-selected Wendlet artwork from Google Drive: https://drive.google.com/file/d/1P-N53zZAgCWg4Wnm43lrbBeiARV0m4cM/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wendlet.midnight-mantle",
+      "origin": "repository",
+      "source": "public/art/creatures/wendlet/midnight-mantle.png",
+      "output": "art/wendlet/midnight-mantle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Wendlet artwork from Google Drive: https://drive.google.com/file/d/1mdN3l2dq-FCuJUItWrhGL1fIjTLXGSF6/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wendlet.umbra-snare",
+      "origin": "repository",
+      "source": "public/art/creatures/wendlet/umbra-snare.png",
+      "output": "art/wendlet/umbra-snare.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Wendlet artwork from Google Drive: https://drive.google.com/file/d/1sAcRy6Uen7SQamhW90TrXf5uAhoMrhyC/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wendlet.borrowed-silhouette",
+      "origin": "repository",
+      "source": "public/art/creatures/wendlet/borrowed-silhouette.png",
+      "output": "art/wendlet/borrowed-silhouette.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Wendlet artwork from Google Drive: https://drive.google.com/file/d/1u83EdHgXwgeYOxPGoyz_8WSf83Dzr-4T/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

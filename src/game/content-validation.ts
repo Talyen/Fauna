@@ -49,7 +49,7 @@ const cardBonusTriggers: readonly string[] = ["firstAttack", "stunAttack", "heal
 const bounceEffects: readonly string[] = ["light", "heal"];
 const foodEffects: readonly string[] = ["heal", "guard", "mana"];
 const drawKeywords: readonly string[] = ["light", "nature", "water", "burn"];
-const grantedStatuses: readonly string[] = ["armor", "thorns", "dodge"];
+const grantedStatuses: readonly string[] = ["armor", "thorns", "dodge", "block"];
 const friendlyTargets: readonly string[] = ["recipient", "allAllies"];
 
 export interface ContentIssue {
@@ -125,7 +125,12 @@ function validatePassiveTiers(entry: Catalog["species"][number], error: ReportEr
     for (const effect of tier?.effects ?? []) {
       if (!Object.hasOwn(modifierImplementations.passives, effect.kind))
         error(entry.id, "passiveTiers", "Passive effect needs an implementation binding");
-      if ((effect.kind === "fallenLeaves" || effect.kind === "passingFlame") && effect.amount > 100)
+      if (
+        (effect.kind === "fallenLeaves" ||
+          effect.kind === "livingShadow" ||
+          effect.kind === "passingFlame") &&
+        effect.amount > 100
+      )
         error(entry.id, "passiveTiers", "Passive conversion cannot exceed 100 percent");
       if (chancePassives.has(effect.kind) && effect.amount > 100)
         error(entry.id, "passiveTiers", "Passive chance cannot exceed 100 percent");

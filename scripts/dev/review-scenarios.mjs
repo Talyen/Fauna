@@ -16,6 +16,9 @@ export const SCENARIOS = [
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
+  "wendlet-battle",
+  "wendlet-collection",
+  "wendlet-rank-five",
   "cavalleaf-battle",
   "cavalleaf-no-backup",
   "cavalleaf-collection",
@@ -127,6 +130,7 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
+  "wendlet",
   "wisterelle",
   "alpenglen",
   "aerostat",
