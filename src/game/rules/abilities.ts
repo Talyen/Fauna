@@ -149,6 +149,18 @@ const rules: AbilityRuleCatalog = freeze(
       keywords: ["health"],
       describe: (_card, { value }) => `Restore ${value} Health; restore a broken Pendulum`,
     },
+    createBees: {
+      ...automatic,
+      scaling: "authored",
+      describe: (_card, { value }) => `Add ${value} Clockwork Bees to your hand`,
+    },
+    armorAlly: {
+      ...automatic,
+      targeting: "ally",
+      scaling: "power",
+      keywords: ["armor"],
+      describe: (_card, { value }) => `Give an ally ${value} Armor`,
+    },
     createFood: {
       ...automatic,
       enemy: "unsupported",

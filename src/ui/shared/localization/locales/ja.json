@@ -4199,6 +4199,54 @@
     "sourceHash": "78607f3a5b810785f82b4fc34b9dbc49d690be940b4546ec75f4d09348ca5e54",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "reviewed": true,
+    "source": "Clockwork Bee",
+    "sourceHash": "be3a4f786e3b6a77db8686def04980747eef50ae0fe9876b955ecf6ba46fab56",
+    "text": "ぜんまいバチ"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "6ee537c98301d6ec4d6bdb3aaa8e342e5f10a7c4b2d91535846a63eb77674175",
+    "text": "<keyword0>消費</keyword0>；{{value0}}の<keyword1>物理</keyword1>ダメージを与える"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "reviewed": true,
+    "source": "Clockwork Launch",
+    "sourceHash": "b67338f2233b48e33d051d2cadc028a56c2a3604484b163c0b892b505a7ac163",
+    "text": "ぜんまい発射"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} Clockwork Bees to your hand",
+    "sourceHash": "bc6d829eb78cf0b1d1df03eda1455481b575aa2e0a759b497dc9776e67ac9a3d",
+    "text": "ぜんまいバチを{{value0}}枚手札に加える"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "reviewed": true,
+    "source": "Copper Canopy",
+    "sourceHash": "84dd75acebc130d04bc2d919fe72b81e131f8f9f92c51e25a26bb071b7fc2934",
+    "text": "銅の天蓋"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "e373d5b25dc4ba96a7b4b1352c9d69027eb91054d7262f6d1aeb6403dd45e740",
+    "text": "味方全員が{{value0}}の<keyword0>ブロック</keyword0>を得る"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "reviewed": true,
+    "source": "Gear Mender",
+    "sourceHash": "45ce194c0cc7a898fd36075a1e69dcd55d345174fcb6fbe8a6938032a267ff6d",
+    "text": "歯車修理"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "reviewed": true,
+    "source": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "6f4bb800739ec0bb2b717f24520e9f1ab2e583d338a3b3b9c93bb4a996ea1026",
+    "text": "味方1体に{{value0}}の<keyword0>装甲</keyword0>を与える"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7030,6 +7078,60 @@
     "source": "First Thaw",
     "sourceHash": "e14f09efe8bd01c373a5e16d1ab89a9e006d2fd5c490e04a72dc8dc9a299d5b3",
     "text": "最初の雪解け"
+  },
+  "content.species.tinkervale.name": {
+    "reviewed": true,
+    "source": "Tinkervale",
+    "sourceHash": "429731cd9e7e5b095c9fee6256b2046a6ee2b82d52bc6972fe47043cb8f2160f",
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "ea00f7c8e0f777353a005c765404a30004df741ce69e05edb6074e6c31c3e42f",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "f37298672c19881a54c60d5089023fadfaa8f8db05533f62b67f5d0b3dae374f",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "2c8e398f58c4d0047053fa2d9530e8ddd7c8204604e80068dfd5cfd2527027be",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "1ba15e7cbed467aede9b97b8dfa692544be69cfe102f72e5cf3c0ae16f5527d5",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "09f7284d2c7f86c4e563f359dd89b75d69ed2a175cdf69ffbcb7bb8dcc284ace",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "878a33984efe0caddb70797a3dc7cc91ea3f266897e3b7fd165303106ed87aa4",
+    "text": "味方の<keyword0>装甲</keyword0>が消費されると、その味方に{{value0}}の<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.species.tinkervale.title": {
+    "reviewed": true,
+    "source": "The ingenious maker",
+    "sourceHash": "1068f0090986d170a9ac479de116365d88f26be082a7aa648b3b4149f7dbcb6f",
+    "text": "ひらめきの発明家"
+  },
+  "content.species.tinkervale.trait": {
+    "reviewed": true,
+    "source": "Spare Parts",
+    "sourceHash": "4c4d3273f4db0a4258f14ee20f787a69183f127f4c046b63d258a571d99e319a",
+    "text": "予備部品"
   },
   "content.species.tournelle.name": {
     "reviewed": true,

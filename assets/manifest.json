@@ -4724,6 +4724,61 @@
       "aspect": [3, 4],
       "provenance": "Selected Velouria artwork from Google Drive: https://drive.google.com/file/d/1Xzm0kXigfSPvsnShIqYw17vH_vaV2OJd/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.tinkervale",
+      "origin": "repository",
+      "source": "public/art/creatures/tinkervale/portrait.png",
+      "output": "art/tinkervale/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Tinkervale artwork from Google Drive: https://drive.google.com/file/d/1c046eWAckNlewamk00Os2CO6XAaUmR8F/view",
+      "rights": "User-provided Fauna artwork; source original retained"
+    },
+    {
+      "id": "action.tinkervale.copper-canopy",
+      "origin": "repository",
+      "source": "public/art/creatures/tinkervale/copper-canopy.png",
+      "output": "art/tinkervale/copper-canopy.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Tinkervale artwork from Google Drive: https://drive.google.com/file/d/1_rZKloOOBfFscreZAJmyoat-qteqP4dA/view",
+      "rights": "User-provided Fauna artwork; source original retained"
+    },
+    {
+      "id": "action.tinkervale.clockwork-launch",
+      "origin": "repository",
+      "source": "public/art/creatures/tinkervale/clockwork-launch.png",
+      "output": "art/tinkervale/clockwork-launch.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Tinkervale artwork from Google Drive: https://drive.google.com/file/d/1j0zZrsnivVwz3Z2UZ88bcdbT03x3dw7p/view",
+      "rights": "User-provided Fauna artwork; source original retained"
+    },
+    {
+      "id": "action.tinkervale.gear-mender",
+      "origin": "repository",
+      "source": "public/art/creatures/tinkervale/gear-mender.png",
+      "output": "art/tinkervale/gear-mender.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Tinkervale artwork from Google Drive: https://drive.google.com/file/d/1BvC0o4at7tnAIaOtJJ19lvgxnrRtPqmq/view",
+      "rights": "User-provided Fauna artwork; source original retained"
+    },
+    {
+      "id": "action.tinkervale.clockwork-bee",
+      "origin": "repository",
+      "source": "public/art/creatures/tinkervale/clockwork-bee.png",
+      "output": "art/tinkervale/clockwork-bee.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Generated for Tinkervale using Fauna locked style prompt: https://drive.google.com/file/d/1VODYgwwZO9leeR5xLgc5OoVdbefRiYRv/view; variant 2 selected by user on 2026-10-29",
+      "rights": "AI-generated for Fauna using the built-in image generation tool"
     }
   ]
 }

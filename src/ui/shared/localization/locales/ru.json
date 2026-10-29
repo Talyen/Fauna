@@ -4199,6 +4199,54 @@
     "sourceHash": "9d0956466b6517314752cd9a26403e6e8ca587f8486c68142769de6094397b82",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "reviewed": true,
+    "source": "Clockwork Bee",
+    "sourceHash": "7a1e270b3d0bc07578a438daeb207bc5cb1f93e5376bfa3bcab0114590824705",
+    "text": "Заводная пчела"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "07b1ae6469a0417bf9aff1742475bb5ca31cdfa424f247706ae5586a833718c6",
+    "text": "<keyword0>Расходуется</keyword0>; Наносит {{value0}} <keyword1>физического</keyword1> урона"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "reviewed": true,
+    "source": "Clockwork Launch",
+    "sourceHash": "5790bf8f984f88b6e68c4d900cbc37db8625232f05475a9d51b24458a8c5b483",
+    "text": "Запуск механизма"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} Clockwork Bees to your hand",
+    "sourceHash": "3454870ae30fafcbbf5ca3e157b611e9112428348097f63b8cb7a0d17b6f2bd5",
+    "text": "Добавляет {{value0}} заводных пчёл в руку"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "reviewed": true,
+    "source": "Copper Canopy",
+    "sourceHash": "06a331e884282e38217874d0beae5c6787e24f30cee6753d6eb7155dbcacf0d6",
+    "text": "Медный навес"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "20982835f2a2e79ecf9b219fc39ff9f97df7557a0e3f452788abd00f3655a916",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "reviewed": true,
+    "source": "Gear Mender",
+    "sourceHash": "0ef41b380f68d44adbd5623bbeae3e96cdd5b177354b517cfcea180a0fd7664a",
+    "text": "Починка шестерён"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "reviewed": true,
+    "source": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "321a07137b3c6afaca56a0cb1df2ac06be55dba38e46dcd8b35468c63cfc37b6",
+    "text": "Даёт союзнику {{value0}} <keyword0>брони</keyword0>"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7030,6 +7078,60 @@
     "source": "First Thaw",
     "sourceHash": "ecc5cfffe63b3ddb1a44c5a58a450c8bb04f8db4d935c85e2eac50256ea6c478",
     "text": "Первая оттепель"
+  },
+  "content.species.tinkervale.name": {
+    "reviewed": true,
+    "source": "Tinkervale",
+    "sourceHash": "f306e434a670fc70ca2a73962cac0e6604a1776fb3566a7715de7df82941c0ef",
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "ae9c1de412e39d3ec8a9b111a6dd55714acc29732439b37b95b8c01aa78adb1a",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "ae65dcae95d0efb79a0c0c4387c2042715057719cb2e62f4ad2f3eeaeb7e5072",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "6ed56f428452dec568dff2c2d25cc93e50b66221a37da344a8b8383ae217f4ff",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "0a55650a2fa42e56d730593b1967886604729b7485a912f699eaca79f5e91782",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "cba65ab0e951fed0e7f8246f5e109989441045571e2fd864975d624f4ddb8ede",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "cb6e1a302458db4454805be2c2356953a37afe1ca3a80651c257caad92e2f611",
+    "text": "Когда <keyword0>броня</keyword0> союзника расходуется, он получает {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.species.tinkervale.title": {
+    "reviewed": true,
+    "source": "The ingenious maker",
+    "sourceHash": "d5c4655b0879aef6f539a1dbc6aa562da8a73bf0c58f31378f0980c7b233d9a0",
+    "text": "Изобретательная мастерица"
+  },
+  "content.species.tinkervale.trait": {
+    "reviewed": true,
+    "source": "Spare Parts",
+    "sourceHash": "1c7d73f816f91d5af26cd5335e5bca2197e6afb3572a4ee7de00307c8a593bc0",
+    "text": "Запасные детали"
   },
   "content.species.tournelle.name": {
     "reviewed": true,

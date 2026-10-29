@@ -472,6 +472,7 @@ export const modifierImplementations = freeze(
       dodgeBurn: ["./combat/damage-reactions#dodgeResponse"],
       encore: ["./combat/ability-modifiers#encore"],
       earlyBird: ["./combat/state#openingCriticalBonus"],
+      spareParts: ["./combat/damage#resolveHit"],
       armorBreak: ["./combat/statuses#triggerArmorBreak"],
       blockBreak: ["./combat/damage-reactions#passiveRetaliation"],
       statusReflection: ["./combat/statuses#applyHarmfulStatus", "./combat/statuses#removeEffects"],

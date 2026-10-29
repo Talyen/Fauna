@@ -414,9 +414,11 @@ export function* resolveHit(
   const hadArmor = stats.armor > 0;
   const wasStunned = stats.controlled === "stun";
   const depletions: ArmorDepletion[] = [];
+  let armorSpent = 0;
   const erode = (amount: number) => {
-    const { depletion } = removeArmor(target, amount);
+    const { removed, depletion } = removeArmor(target, amount);
     if (depletion) depletions.push(depletion);
+    return removed;
   };
   const blessedLeech =
     alliedSource &&
@@ -622,7 +624,7 @@ export function* resolveHit(
     !(alliedTarget && type === "poison" && state.boons.includes("nebula-weld-clamp")) &&
     !(alliedTarget && stats.grace > 0 && state.boons.includes("cypress-reliquary"))
   )
-    erode(1);
+    armorSpent = erode(1);
   if (effectDamage > 0) {
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
@@ -836,6 +838,14 @@ export function* resolveHit(
     }
   }
   if (direct) yield* passiveRetaliation(context, depletedBlock);
+  if (armorSpent && target.health > 0) {
+    const side = alliedTarget ? "player" : "enemy";
+    for (const maker of battlefield(state, side)) {
+      if (maker.health <= 0 || ("minion" in maker && maker.minion)) continue;
+      const amount = passiveAmount(alliedTarget ? state : undefined, maker.species, "spareParts");
+      if (amount) yield* reaction("grantBlock", state, target, amount * armorSpent, events);
+    }
+  }
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   if (
     (direct || options.origin === "overkill") &&

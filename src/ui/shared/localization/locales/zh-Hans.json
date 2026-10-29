@@ -4199,6 +4199,54 @@
     "sourceHash": "d99055f926f2a097d38dc8af0e966124ed65a1df7e0b878e037296a912bb1a01",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "reviewed": true,
+    "source": "Clockwork Bee",
+    "sourceHash": "c1cf49c470a8c00b18d36df97889884f0aed677a1d96cabcfeac6c1976987523",
+    "text": "发条蜂"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "bfa74b20a7ef674c0108faa399e944e4f0085a68f88dd2b0b6349a644d2ac042",
+    "text": "<keyword0>消耗</keyword0>；造成{{value0}}点<keyword1>物理</keyword1>伤害"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "reviewed": true,
+    "source": "Clockwork Launch",
+    "sourceHash": "03129b3e563e8fac90ca5435bafa2fd1208be2c6e42f70e48f2e47938ac593dc",
+    "text": "发条起飞"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} Clockwork Bees to your hand",
+    "sourceHash": "a0ec0a2fb4ccfd2150c5da3da6049a4adf735f4307bf56baca3525c9d07e672c",
+    "text": "将{{value0}}张发条蜂加入手牌"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "reviewed": true,
+    "source": "Copper Canopy",
+    "sourceHash": "bc862cbb83d07ceb30dbdfd1594d4787c69c5d23d6404c9b8d3deba779d00bbb",
+    "text": "铜制遮篷"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "31606c7acb09e18236faa2c2f580ab42213f6d9d7fd808a9afeaf2a89abe7fe1",
+    "text": "所有友方获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "reviewed": true,
+    "source": "Gear Mender",
+    "sourceHash": "255b1ad024c670dd9ebff86a9d73ec78770e802f999b2aa570707451e45a31ee",
+    "text": "齿轮修理"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "reviewed": true,
+    "source": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "e3087e1ff54d1ac60834f519c9e7d179971856715cf96913282c0073352ea651",
+    "text": "给予一名友方{{value0}}点<keyword0>护甲</keyword0>"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7030,6 +7078,60 @@
     "source": "First Thaw",
     "sourceHash": "6ac2aa988c9284d08fec5557b6aa9522601ef152667fae163be162c751b6fea8",
     "text": "初融"
+  },
+  "content.species.tinkervale.name": {
+    "reviewed": true,
+    "source": "Tinkervale",
+    "sourceHash": "65f8dd3baf674aea5a2f291baf3ea42091b8032ae9f3c38792331747b82f0428",
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "430f2836fc09970e5f8cf2af6ad3526f7552578ab297738a914ce01b07f3c0a4",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "2d1f079509f3aadb3080fdbd18d32c8e494a9c35db9b4e463f19b46f56cb00ff",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "a7f3fc8d83e2a52cc0939a10f133c7a8a7f160c1cb168d97c0d9f1b6d1e21e0a",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "940d5193bdb49a0e4a62fe9c3cef624ff4eaac32eb3a1e6ff562df3dc75daaf4",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "83eb864d0742b63fb1f285513472c66682216670ace30e80d5bea38794680183",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "2c1e38ef8ea36f8b11846214a0ee21e71bbefae0611eeef4913fdeebbdabb75f",
+    "text": "当友方的<keyword0>护甲</keyword0>被消耗时，给予其{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.species.tinkervale.title": {
+    "reviewed": true,
+    "source": "The ingenious maker",
+    "sourceHash": "91a73087a342daada5e8175b293e993b4099dbcd6e64199665cc91f3cc4205c1",
+    "text": "巧思发明家"
+  },
+  "content.species.tinkervale.trait": {
+    "reviewed": true,
+    "source": "Spare Parts",
+    "sourceHash": "49ebdb392c8121e19a59199effe0ef0a3a379048407ac2f629cd1c0fe73a48c6",
+    "text": "备用零件"
   },
   "content.species.tournelle.name": {
     "reviewed": true,

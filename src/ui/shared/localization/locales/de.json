@@ -4199,6 +4199,54 @@
     "sourceHash": "1c33afdb28f7b08f18a382aa8026ca5449e58f19919285050f6d4f9dd0a8a285",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.tinkervale-clockwork-bee.name": {
+    "reviewed": true,
+    "source": "Clockwork Bee",
+    "sourceHash": "bfcb28962816e9383ed538c09037f4310199ea3e459f025754d7163c5a6e5c39",
+    "text": "Uhrwerkbiene"
+  },
+  "content.card.tinkervale-clockwork-bee.v6b75e75a139c44e5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Deal {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "847b36d2d1984215099083bb582f7bcc57699c56442a888d1502b8b8f8e02799",
+    "text": "<keyword0>Verbrauchen</keyword0>; Verursacht {{value0}} <keyword1>physischen</keyword1> Schaden"
+  },
+  "content.card.tinkervale-clockwork-launch.name": {
+    "reviewed": true,
+    "source": "Clockwork Launch",
+    "sourceHash": "cbd2c3636eaa8c55d6c87d15865d580428a4492d0d2742340f707204c50c851b",
+    "text": "Uhrwerkstart"
+  },
+  "content.card.tinkervale-clockwork-launch.v6c574c0d48b8f3e6.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} Clockwork Bees to your hand",
+    "sourceHash": "203e744c555540e9bd2a6ec44ec5b4bd8fded9a117d1312b5563e2c40b613860",
+    "text": "Füge deiner Hand {{value0}} Uhrwerkbienen hinzu"
+  },
+  "content.card.tinkervale-copper-canopy.name": {
+    "reviewed": true,
+    "source": "Copper Canopy",
+    "sourceHash": "20fe57d8f9a45fe11be1c2d100dd3c668171d156df0742e99643800e40e31b76",
+    "text": "Kupferdach"
+  },
+  "content.card.tinkervale-copper-canopy.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "cfea30ea44c8c59475419618f0d628b0627921994f18552f6112cf74e98e66ce",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.tinkervale-gear-mender.name": {
+    "reviewed": true,
+    "source": "Gear Mender",
+    "sourceHash": "a6751b8979446e3dc208e94d2b4630898f6c85a393ebaa590d1c911588549fb0",
+    "text": "Zahnradreparatur"
+  },
+  "content.card.tinkervale-gear-mender.vfd4a90744c49e948.rule": {
+    "reviewed": true,
+    "source": "Give an ally {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "331e4a1bb8ad2485cdc6f018a689fa112a1489a8286899955d661ef666af0689",
+    "text": "Gib einem Verbündeten {{value0}} <keyword0>Rüstung</keyword0>"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7030,6 +7078,60 @@
     "source": "First Thaw",
     "sourceHash": "9e5ce9a136cada3fe6108ad935cd75bc70d38da5e779e4631b2c96fa8b8273a3",
     "text": "Erstes Tauwetter"
+  },
+  "content.species.tinkervale.name": {
+    "reviewed": true,
+    "source": "Tinkervale",
+    "sourceHash": "9def13281265d7e0837161c6a41611e7121b8f828f9f557fa21e922af3576377",
+    "text": "Tinkervale"
+  },
+  "content.species.tinkervale.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "1286f105c19df1111568f57ffb624010839df89d19fb4febaffeb59fb6c0f591",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "e440784a14cf13f811aa2fa4cc421c99425aa73dd542bafe478c77139b0810ea",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "bd38ea3cd0a3adff856b94ad8830c502199378ce9bd763752ff0403a4d647236",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "fde8127bbf0379b8fedf16d23530046ec77586aec05e081b423f0819047330e0",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "3c239a9d5d80b30bc88a6968f63218b437d4f6a0647a5f4ba871a585491d09d0",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally's <keyword0>Armor</keyword0> is spent, give them {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "1172809694caa7c9e524df1af6158f2f2d66430289fd1196772068095c0e27fa",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten verbraucht wird, erhält er {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.species.tinkervale.title": {
+    "reviewed": true,
+    "source": "The ingenious maker",
+    "sourceHash": "5dd8d849b410920f4078dac330072efef68d9d37023c796e3441ff9094593aad",
+    "text": "Die einfallsreiche Tüftlerin"
+  },
+  "content.species.tinkervale.trait": {
+    "reviewed": true,
+    "source": "Spare Parts",
+    "sourceHash": "a062d81c149f25ce8cf7553ceb8c4529e3d2b7c41eab0413ec910d69c7743919",
+    "text": "Ersatzteile"
   },
   "content.species.tournelle.name": {
     "reviewed": true,

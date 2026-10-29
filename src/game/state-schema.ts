@@ -85,6 +85,7 @@ const enemy = z.object({
   block: natural,
   combat: combatStateSchema,
   lastAbility: id.nullable(),
+  clockworkBees: z.number().int().min(0).max(6).optional(),
 });
 const minion = enemy.extend({
   name: z.enum(["Echo", "Pendulum", "Royal Bloom"]),

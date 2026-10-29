@@ -1,4 +1,5 @@
 import { velvetmonarch } from "./creatures/velvetmonarch";
+import { tinkervale } from "./creatures/tinkervale";
 import { velouria } from "./creatures/velouria";
 import { wendlet } from "./creatures/wendlet";
 import { vitrilo } from "./creatures/vitrilo";
@@ -88,6 +89,7 @@ const kits = [
   vitrilo,
   velvetmonarch,
   velouria,
+  tinkervale,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -135,6 +137,7 @@ export const CARDS: readonly CardDefinition[] = [
   vitrilo,
   velvetmonarch,
   velouria,
+  tinkervale,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map(kits.map((kit) => [kit.species.id, kit.cards]));

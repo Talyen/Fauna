@@ -11,6 +11,7 @@ import type { GameState } from "./types";
 const noKeywords: readonly KeywordId[] = [];
 // These associations describe the current passive's actual rules, including trigger keywords.
 const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
+  spareParts: ["armor", "block"],
   rimewake: ["dodge", "freeze"],
   glassCutter: ["light", "block"],
   courtRemembers: ["water"],

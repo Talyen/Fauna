@@ -24,6 +24,7 @@ Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, com
 
 - [Architecture, application commands, saves and platform boundaries](Docs/ARCHITECTURE.md): `src/game/`, `src/application/session.ts`, and `src/platform/`.
 - [Content and artwork](Docs/CONTENT.md): `src/game/content.ts` and `public/art/`.
+- [Fauna image generation](.agents/skills/fauna-image-generation/SKILL.md): use for every Fauna image-generation task; retrieve the current locked style prompt from Google Drive before generating.
 - [Creature design](Docs/CREATURE_DESIGN.md): use the [creature design skill](.agents/skills/fauna-creature-design/SKILL.md) for individual abilities and passives, artwork-led kit options, implementation, and Boss/Legendary design. Follow its [elegant mechanics standard](Docs/CREATURE_DESIGN.md#elegant-abilities-and-passives) for rules understood at a glance.
 - [Boon design skill](.agents/skills/fauna-boon-design/SKILL.md): use for artwork-led Boon proposals, distinct thematic mechanics, balance reasoning and exact effect descriptions; [content contracts](Docs/CONTENT.md#boon-selections) own implementation.
 - [UI task procedure](Docs/UI.md#required-review): the single checklist for visual and interaction work. Use the repo [UI design](.agents/skills/fauna-ui-design/SKILL.md), [UI critique](.agents/skills/fauna-ui-critique/SKILL.md), or [art direction](.agents/skills/fauna-art-direction/SKILL.md) skill for the corresponding task; consult [references](design/visual-quality/README.md) for composition or art direction

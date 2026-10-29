@@ -1,6 +1,11 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "tinkervale-battle",
+  "tinkervale-bees",
+  "tinkervale-interaction",
+  "tinkervale-collection",
+  "tinkervale-rank-five",
   "velouria-battle",
   "velouria-collection",
   "velouria-rank-five",
@@ -140,6 +145,7 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
+  "tinkervale",
   "velouria",
   "vitrilo",
   "wendlet",
@@ -379,6 +385,10 @@ export async function reviewScenario(server, name) {
         ? ["orifable-food", "orifable-targeting"].includes(name)
         : undefined;
     game = argument === undefined ? fixture[`${creature}Battle`]() : fixture[`${creature}Battle`](argument);
+    if (name === "tinkervale-bees") {
+      const card = game.cards.find((entry) => entry.definitionId === "tinkervale-clockwork-launch");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
     if (name === "cavalleaf-no-backup") game = { ...game, reserves: [] };
     if (rankFive && !["alpenglen", "aerostat"].includes(creature))
       game = {
@@ -471,6 +481,26 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
+  }
+  if (scenario.name === "tinkervale-interaction") {
+    const gear = page.locator('.hand [data-card-id="ally-0:tinkervale-gear-mender"]');
+    await gear.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("button", { name: "Target Mossguard", exact: true })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(gear).toBeFocused();
+    await expect(gear).toHaveAttribute("aria-pressed", "false");
+    await page.keyboard.press("Enter");
+    await page.getByRole("button", { name: "Target Mossguard", exact: true }).click();
+    await expect
+      .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")).team[2].combat.armor))
+      .toBe(3);
+    await page.locator('.hand [data-card-id="ally-0:tinkervale-clockwork-launch"]').click();
+    const bees = page.locator('.hand [aria-label^="Clockwork Bee,"]');
+    await expect(bees).toHaveCount(2);
+    await bees.first().click();
+    await page.getByRole("button", { name: "Target Emberback", exact: true }).click();
+    await expect(bees).toHaveCount(1);
   }
   if (scenario.name === "brumalyn-targeting")
     await page.locator('.hand [data-card-id="ally-0:brumalyn-rime-pounce"]').click();

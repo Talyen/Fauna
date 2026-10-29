@@ -37,6 +37,7 @@ export function dealsDamage(card: CardDefinition): boolean {
   const enemyAbility = enemyCard(card);
   return (
     enemyAbility.effect === "attack" ||
+    enemyAbility.effect === "createBees" ||
     enemyAbility.effects?.some((effect) => effect.kind === "damage") === true
   );
 }

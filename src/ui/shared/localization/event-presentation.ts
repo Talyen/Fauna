@@ -1,6 +1,7 @@
 import { battlefieldView, combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
 import { CARDS, FOOD_CARDS, SPECIES, species, type CardDefinition } from "../../../game/content";
+import { CLOCKWORK_BEE } from "../../../game/content/creatures/tinkervale";
 import { PEARL } from "../../../game/content/creatures/memento";
 import { isKeywordId, KEYWORD_DEFINITIONS, type KeywordId } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
@@ -10,7 +11,7 @@ import { localizedCombatantName } from "./combatant-name";
 // A repeated English name cannot safely identify a specific authored card.
 const cardsByEnglishName = new Map<string, CardDefinition | null>();
 const cardsById = new Map<string, CardDefinition>();
-for (const card of [...CARDS, ...FOOD_CARDS, PEARL]) {
+for (const card of [...CARDS, ...FOOD_CARDS, PEARL, CLOCKWORK_BEE]) {
   cardsByEnglishName.set(card.name, cardsByEnglishName.has(card.name) ? null : card);
   cardsById.set(card.id, card);
 }

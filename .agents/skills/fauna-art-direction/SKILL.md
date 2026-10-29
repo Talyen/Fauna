@@ -13,6 +13,8 @@ Define the asset's job and intended display size. Use a small, explicit set of p
 
 When generating bitmap artwork, use the available image-generation workflow. Preserve source originals and use the repository asset pipeline for prepared output. Do not add a dependency or replace a working source library for a single image. For code-native styling, edit the canonical source and tokens rather than rasterizing controls.
 
+For every Fauna image-generation task, use [fauna-image-generation](../fauna-image-generation/SKILL.md) to retrieve and apply the current locked Google Drive style prompt before generation.
+
 For in-game card art, review both the source and its real ArtCard rendering at the native [artwork ratio](../../../Docs/CONTENT.md#artwork-contracts) and shared profile. Other assets need inspection on their intended surface; do not force a background, icon or branding asset into a card review. Check silhouette, focal point, edges, value separation and image-to-background cohesion at the actual shared artwork profile. An attractive large source image can still fail at 160px. Check the set together for consistent lighting and visual weight.
 
 Reject mismatched framing, illegible detail, unexplained glow, generic ornament, unintended text, broken anatomy or geometry, and styles inconsistent with the selected references. Correct the supported defect and inspect again. Do not try to compensate for weak composition by increasing saturation, glow or detail.
