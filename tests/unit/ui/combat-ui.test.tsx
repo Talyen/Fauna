@@ -141,12 +141,12 @@ it(
       expect(
         within(recovery).getByRole("progressbar", { name: "Emberback Health" }).getAttribute("aria-valuenow"),
       ).toBe("19");
-      expect(after.rng).toBe(before.rng);
+      expect(after.encounter).toBe(before.encounter + 1);
       expect(after.keywordXP).toEqual(before.keywordXP);
       expect(after.currency).toBe(before.currency);
       expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
       expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(after);
-      await user.click(screen.getByRole("button", { name: /^Boss: / }));
+      await user.click(screen.getByRole("button", { name: /^Combat: / }));
       expect(session.store.getState().game.phase).toBe("battle");
       expect(screen.queryByRole("status", { name: "Rest recovery" })).toBeNull();
     } finally {

@@ -28,6 +28,7 @@ export const recordedTraceDigest = (value: unknown) =>
           );
         if (key === "metronomeActor" && entry === null) return undefined;
         if (key === "fireThorns" && entry === 0) return undefined;
+        if (key === "dodgeFreezeRetaliation" && entry === 0) return undefined;
         if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
         if (key === "encoreProgress" && entry === 0) return undefined;
         if (

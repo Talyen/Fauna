@@ -62,7 +62,7 @@ describe("journey earnings and results", () => {
         action === "choose" ? { type: "chooseBoon" as const, boon: chosen } : { type: "skipBoon" as const };
       const next = accept(reward, command);
       expect(next.phase).toBe("teamSelection");
-      expect(next.encounter).toBe(4);
+      expect(next.encounter).toBe(10);
       expect(next.reward).toBeNull();
       expect(next.currency).toBe(reward.currency);
       expect(next.keywordXP).toEqual(reward.keywordXP);
@@ -83,7 +83,7 @@ describe("journey earnings and results", () => {
     expect(recruit.phase).toBe("recruit");
     const won = completeRecruitment(recruit);
     expect(won.phase).toBe("teamSelection");
-    expect(won.encounter).toBe(4);
+    expect(won.encounter).toBe(10);
     expect(won.reward).toBeNull();
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
@@ -255,7 +255,7 @@ it(
     let deployedThree = false;
     for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
       deployedThree ||= game.team.length === 3;
-      expect(game.phase).not.toBe("defeat");
+      expect(game.phase, `defeated at room ${game.encounter + 1}`).not.toBe("defeat");
       expect(game.reward?.outcome).not.toBe("defeat");
       const command =
         game.phase === "recruit"

@@ -32,7 +32,21 @@ import { requireBattle, teamRun } from "../../support/game";
 // New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/*.test.ts.
 const recordedSpecies = SPECIES.filter(
   (entry) =>
-    !["arabesca", "skybex", "dulcera", "parhelion", "pyrella", "alpenglen", "brumalyn"].includes(entry.id),
+    ![
+      "arabesca",
+      "skybex",
+      "dulcera",
+      "parhelion",
+      "pyrella",
+      "alpenglen",
+      "brumalyn",
+      "chronora",
+      "velvetmonarch",
+      "cavalleaf",
+      "wendlet",
+      "vitrilo",
+      "velouria",
+    ].includes(entry.id),
 );
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));

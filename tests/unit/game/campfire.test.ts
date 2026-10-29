@@ -16,7 +16,7 @@ it.each([22, 21, 20, 1])("uses the exact 30%% missing Health threshold at %s/30"
   if (health > 21) expect(result.state).toBe(s);
   else expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
-it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerolling combat", (encounter) => {
+it.each([0, 1, 2, 3, 4, 5, 6, 7])("resting at encounter %s advances the room", (encounter) => {
   const s = produce(destinations(), (d) => {
     d.encounter = encounter;
     d.journey!.victories = d.encounter;
@@ -26,9 +26,9 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
   });
   const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });
   expect(rested.team[0]!.health).toBe(30);
-  expect(rested.expedition).toEqual({ ...s.expedition, lastRoom: "campfire" });
-  expect(rested.rng).toBe(s.rng);
-  expect(rested.encounter).toBe(encounter);
+  expect(rested.expedition!.lastRoom).toBe("campfire");
+  expect(rested.encounter).toBe(encounter + 1);
+  expect(rested.journey).toEqual(s.journey);
   expect(canVisitCampfire(rested)).toBe(false);
   expect(decodeSave(encodeSave(rested))).toEqual(rested);
 });

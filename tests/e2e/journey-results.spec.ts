@@ -39,6 +39,11 @@ for (const [width, enlarged, outcome] of [
               : completeRecruitment(game);
         if (game.phase === "boon") game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
       }
+      game = produce(game, (draft) => {
+        draft.encounter = 29;
+        draft.expedition = { pack: authoredPack(29), recruit: null, lastRoom: "combat" };
+        draft.support = null;
+      });
       game = victoryReady(accept(game, { type: "beginBattle" }));
       ending = { type: "play", cardId: game.battle!.hand[0]!, targetId: "enemy-0" };
     } else {

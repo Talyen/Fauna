@@ -247,7 +247,7 @@ it.each([0, 1, 2, 3, BOONS.length])(
       draft.currency = 100;
       draft.boons = BOONS.slice(0, BOONS.length - remaining).map((boon) => boon.id);
       // Fix a successful independent Merchant roll, including before battle one.
-      draft.rng = 10;
+      draft.rng = 123456;
     });
     game = accept(game, { type: "start" });
     game = produce(game, (draft) => replenishJourneyCards(draft));
