@@ -21,6 +21,24 @@ import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../typ
 const MINION_LIMIT = 2;
 const PENDULUM_HEALTH = 6;
 
+function minionSlot(state: BattleState, actor: Combatant, prefix: string) {
+  const minions = state.battle.minions ?? (state.battle.minions = []);
+  const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
+  for (let slot = 0; slot < MINION_LIMIT; slot++) {
+    const id = `${prefix}-${actor.id}-${slot}`;
+    const index = minions.findIndex((unit) => unit.id === id);
+    if (index >= 0) {
+      if (minions[index]!.health <= 0) return { id, index };
+      continue;
+    }
+    if (owned.length < MINION_LIMIT) return { id, index: -1 };
+    const vacant = minions.findIndex((unit) => unit.minion.ownerId === actor.id && unit.health <= 0);
+    if (vacant >= 0) return { id, index: vacant };
+    return undefined;
+  }
+  return undefined;
+}
+
 /** Recreate each fixed slot on entry, or only the first broken slot for Bridge Rewind. */
 export function summonPendulums(
   state: BattleState,
@@ -36,10 +54,10 @@ export function summonPendulums(
   )
     return;
   const minions = state.battle.minions ?? (state.battle.minions = []);
-  for (let slot = 0; slot < 2 && count > 0; slot++) {
-    const id = `pendulum-${actor.id}-${slot}`;
-    const index = minions.findIndex((unit) => unit.id === id);
-    if (index >= 0 && minions[index]!.health > 0) continue;
+  while (count > 0) {
+    const slot = minionSlot(state, actor, "pendulum");
+    if (!slot) break;
+    const { id, index } = slot;
     const pendulum = {
       id,
       name: "Pendulum" as const,
@@ -76,19 +94,10 @@ export function summonRoyalBlooms(
   )
     return;
   const minions = state.battle.minions ?? (state.battle.minions = []);
-  for (let slot = 0; slot < 2 && count > 0; slot++) {
-    const id = `bloom-${actor.id}-${slot}`;
-    let index = minions.findIndex((unit) => unit.id === id);
-    if (index >= 0 && minions[index]!.health > 0) continue;
-    if (index < 0) {
-      const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
-      if (owned.length >= MINION_LIMIT) {
-        const vacant = minions.findIndex((unit) => unit.minion.ownerId === actor.id && unit.health <= 0);
-        if (vacant < 0) break;
-        minions.splice(vacant, 1);
-        index = -1;
-      }
-    }
+  while (count > 0) {
+    const slot = minionSlot(state, actor, "bloom");
+    if (!slot) break;
+    const { id, index } = slot;
     const bloom = {
       id,
       name: "Royal Bloom" as const,
@@ -182,21 +191,19 @@ export function summonEcho(
   events: GameEvent[],
 ) {
   const minions = state.battle.minions ?? (state.battle.minions = []);
-  let ownedCount = 0;
-  let oldIndex = -1;
   let alive: (typeof minions)[number][] | undefined;
   for (let index = 0; index < minions.length; index++) {
     const unit = minions[index]!;
     if (unit.minion.ownerId !== actor.id) continue;
-    ownedCount++;
     if (unit.health > 0) (alive ??= []).push(unit);
-    else if (unit.health === 0 && oldIndex < 0) oldIndex = index;
   }
   if (alive && alive.length >= MINION_LIMIT) {
     for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
     return;
   }
-  const id = minions[oldIndex]?.id ?? `echo-${actor.id}-${ownedCount}`;
+  const slot = minionSlot(state, actor, "echo");
+  if (!slot) return;
+  const { id, index } = slot;
   const echo = {
     id,
     name: "Echo" as const,
@@ -210,7 +217,7 @@ export function summonEcho(
     lastAbility: null,
     minion: { ownerId: actor.id, side },
   };
-  if (oldIndex >= 0) minions[oldIndex] = echo;
+  if (index >= 0) minions[index] = echo;
   else minions.push(echo);
   emitSupport(events, actor.id, { targetId: id, text: "Memento summons an Echo" });
 }

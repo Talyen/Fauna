@@ -93,6 +93,33 @@ describe("Wendlet", () => {
     });
     expect(decodeSave(encodeSave(ready))).toEqual(ready);
   });
+  it("keeps mixed borrowed summons within their owner's slots and preserves their identities", () => {
+    let state = produce(battle(), (draft) => {
+      addReserve(draft, "memento-backup", "memento", 30, freshCombat());
+      addReserve(draft, "chronora-backup", "chronora", 30, freshCombat());
+    });
+    const use = (id: string) => {
+      state = produce(state, (draft) => {
+        const def = definition(id);
+        executeAbility(draft, { side: "player", actor: draft.team[0]!, def, value: def.value }, []);
+      });
+      expect(decodeSave(encodeSave(state))).toEqual(state);
+    };
+    use("memento-lost-procession");
+    use("memento-lost-procession");
+    use("chronora-bridge-rewind");
+    expect(state.battle.minions?.map((unit) => unit.species)).toEqual(["memento", "memento"]);
+    state = produce(state, (draft) => {
+      draft.battle.minions![0]!.health = 0;
+    });
+    use("chronora-bridge-rewind");
+    expect(state.battle.minions?.map((unit) => unit.species)).toEqual(["chronora", "memento"]);
+    state = produce(state, (draft) => {
+      draft.battle.minions![0]!.health = 0;
+    });
+    use("memento-lost-procession");
+    expect(state.battle.minions?.map((unit) => unit.species)).toEqual(["memento", "memento"]);
+  });
   it.each([
     ["memento", 0, "memento-lost-procession"],
     ["memento", 1, "memento-treasury-echo"],
