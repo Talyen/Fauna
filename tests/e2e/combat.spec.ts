@@ -8,7 +8,7 @@ test("Campfire fits both sizes, heals once, resumes and enters the boss", async 
   await page.setViewportSize({ width: 1280, height: 800 });
   const game = produce(run(), (s) => {
     prepareDestination(s);
-    s.encounter = 3;
+    s.encounter = 8;
     s.journey!.victories = s.encounter;
     s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
     s.team[0]!.health = 0;
@@ -38,7 +38,7 @@ test("Campfire fits both sizes, heals once, resumes and enters the boss", async 
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
   expect(saved.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
-  expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
+  expect(saved.expedition?.pack).toEqual(rested.expedition!.pack);
 });
 
 test("mouse targeting previews without committing and stays stable across live resize", async ({ page }) => {

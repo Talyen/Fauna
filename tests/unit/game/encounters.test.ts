@@ -1,3 +1,4 @@
+import { encounterPacks } from "../../support/encounter-packs";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -5,11 +6,13 @@ import {
   JOURNEY_LENGTH,
   bossEncounter,
   encounterSource,
-  encounterPacks,
   generateEncounterPack,
+  dealsDamage,
 } from "../../../src/game/encounters";
-import { species } from "../../../src/game/content";
+import { SPECIES, species, speciesCards } from "../../../src/game/content";
+import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import {
   authoredPack,
   completeRecruitment,
@@ -50,6 +53,73 @@ describe("journey encounters", () => {
       })),
     ).toEqual(preview.enemies.map(({ name, species, health, power }) => ({ name, species, health, power })));
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
+  });
+
+  it("draws from every eligible ordinary species and requires two direct attackers in larger groups", () => {
+    const base = starterJourney(42, "mossguard");
+    const eligible = SPECIES.filter((entry) => !entry.legendary && entry.id !== "mossguard");
+    const attackers = new Set(
+      eligible.filter((entry) => speciesCards(entry.id).some(dealsDamage)).map((entry) => entry.id),
+    );
+    const firstRoom = new Set<string>();
+    for (let index = 0; index < eligible.length; index++) {
+      produce(base, (draft) => {
+        observeDecisions(draft, () => (index + 0.5) / eligible.length);
+        firstRoom.add(generateEncounterPack(draft)[0]!);
+      });
+    }
+    expect([...firstRoom]).toEqual(eligible.map((entry) => entry.id));
+
+    for (const encounter of [1, 2, 8]) {
+      const seen = new Set<string>();
+      for (let seed = 0; seed < 200; seed++) {
+        produce(base, (draft) => {
+          draft.encounter = encounter;
+          draft.rng = seed * 87123;
+          const pack = generateEncounterPack(draft);
+          expect(pack.filter((id) => attackers.has(id)).length).toBeGreaterThanOrEqual(2);
+          for (const id of pack) seen.add(id);
+        });
+      }
+      if (encounter > 1) expect([...seen].sort()).toEqual(eligible.map((entry) => entry.id).sort());
+    }
+  });
+
+  it("reports malformed abilities while checking whether the enemy pool has enough attackers", () => {
+    for (const effects of [{ kind: "heal", amount: 2 }, [null], ["damage"]]) {
+      const catalog = structuredClone(contentCatalog);
+      const card = catalog.cards.find((entry) => entry.id === "mossguard-guard")!;
+      Object.assign(card, { effects });
+      expect(validateCatalog(catalog)).toContainEqual(
+        expect.objectContaining({ id: card.id, field: "effects", severity: "error" }),
+      );
+    }
+  });
+
+  it("allows a support creature in any position when two teammates deal damage", () => {
+    const base = starterJourney(42, "mossguard");
+    const positions = new Set<number>();
+    for (let seed = 0; seed < 500; seed++) {
+      produce(base, (draft) => {
+        draft.encounter = 2;
+        draft.rng = seed * 87123;
+        const pack = generateEncounterPack(draft);
+        pack.forEach((id, index) => {
+          if (id === "neradora") positions.add(index);
+        });
+      });
+    }
+    expect([...positions].sort()).toEqual([0, 1, 2]);
+  });
+
+  it("can generate repeated creatures without using a fixed lineup", () => {
+    const state = produce(starterJourney(42, "mossguard"), (draft) => {
+      draft.encounter = 2;
+      observeDecisions(draft, () => 0);
+      const pack = generateEncounterPack(draft);
+      expect(pack).toEqual([pack[0], pack[0], pack[0]]);
+    });
+    expect(state.encounter).toBe(2);
   });
 
   it("excludes the full roster from generated packs, including backups and knocked-out creatures", () => {
@@ -157,10 +227,6 @@ describe("journey encounters", () => {
         }
       }
     }
-  });
-
-  it("uses the same ordinary enemy pool throughout the journey", () => {
-    for (const encounter of [0, 1, 2, 4, 5, 6]) expect(encounterPacks(encounter)).toEqual(encounterPacks(0));
   });
 
   it("rejects entry outside the encounter screen without consuming RNG or changing state", () => {

@@ -11,7 +11,7 @@ import { freshCombat, ensureCombat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { inspectCardPlay } from "../../src/game/play-queries";
 import { produce } from "immer";
-import { encounterPacks } from "../../src/game/encounters";
+import { encounterPacks } from "./encounter-packs";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId, type BoonId } from "../../src/game/content";
 import type {
@@ -356,7 +356,7 @@ export function merchantDestination(boons: BoonId[] = []) {
   // Fix this scenario's destination roll independently of the changing recruit catalog.
   state = produce(state, (draft) => {
     draft.boons = boons;
-    draft.rng = 10;
+    draft.rng = 2;
     draft.currency = 40;
   });
   const ready = accept(state, recruitChoice(state));

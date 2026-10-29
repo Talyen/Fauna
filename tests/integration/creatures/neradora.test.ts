@@ -7,7 +7,6 @@ import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, startAction } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { prepareDestination, accept, teamRun } from "../../support/game";
@@ -41,7 +40,7 @@ it("registers the selected support kit, Water classification, encounters and res
   ]);
   expect(kit.map(definitionKeywords)).toEqual([["block", "health"], ["health"], ["mana"]]);
   expect(FIRST_RUN_STARTERS).not.toContain("neradora");
-  expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "neradora"))).toBe(true);
+
   for (const ability of ["undertow-knot", "bloom-shelter", "tide-cup"] as const) {
     const game = ready();
     const before = encodeSave(game);

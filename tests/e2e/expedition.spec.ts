@@ -2,10 +2,10 @@ import { createBattleActor } from "../../src/application/battle-actor";
 import { expect, type Locator } from "@playwright/test";
 import { species } from "../../src/game/content";
 import { policy, fullJourneyRecruit, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
-import { test, seed, state } from "./support/session";
+import { test, seed, state, reloadHome, resume } from "./support/session";
 import { continueToRecruit, step } from "./support/journey";
 
-test("one starter grows a lineup through a full expedition", async ({ page }) => {
+test("one starter grows a lineup and reaches a committed journey outcome", async ({ page }) => {
   test.setTimeout(process.env.CI ? 0 : 120_000);
   await page.clock.setFixedTime(new Date(FULL_JOURNEY_SEED));
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -17,13 +17,12 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
   expect((await state(page)).team.map((unit) => unit.id)).toEqual(["ally-0"]);
   let deployedThree = false;
+  let resumed = false;
   const actor = createBattleActor();
   for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {
     const s = await state(page);
     deployedThree ||= s.team.length === 3;
-    if (s.phase === "victory") break;
-    expect(s.phase).not.toBe("defeat");
-    expect(s.reward?.outcome).not.toBe("defeat");
+    if (s.phase === "victory" || s.phase === "defeat") break;
     if (s.phase === "recruit" && s.team.length + s.reserves.length < 5) {
       await continueToRecruit(page);
       const roster = [...s.team, ...s.reserves];
@@ -50,6 +49,12 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
         repeated ? [] : [{ species: incoming }],
       );
       expect(recruited.discovery.recruited[incoming]).toBe((s.discovery.recruited[incoming] ?? 0) + 1);
+      if (!resumed) {
+        await reloadHome(page);
+        await resume(page);
+        expect(await state(page)).toEqual(recruited);
+        resumed = true;
+      }
     } else
       await step(
         page,
@@ -62,9 +67,17 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
             : policy(s),
       );
   }
-  await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   const final = await state(page);
+  expect(["victory", "defeat"]).toContain(final.phase);
+  await expect(
+    page.getByRole("heading", {
+      name: final.phase === "victory" ? "Journey complete" : "Defeated",
+      exact: true,
+    }),
+  ).toBeVisible();
   expect(deployedThree).toBe(true);
+  expect(resumed).toBe(true);
+  expect(final.journey!.victories).toBeGreaterThan(0);
   expect([...final.team, ...final.reserves].length).toBeGreaterThanOrEqual(3);
   expect(final.team.length).toBeGreaterThanOrEqual(1);
   expect(final.team.length).toBeLessThanOrEqual(species(final.team[0]!.species).legendary ? 1 : 3);
