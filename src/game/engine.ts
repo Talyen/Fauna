@@ -15,13 +15,14 @@ import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { rememberSlipperCard, fillHand } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
 import { definition, species, SPECIES } from "./content";
-import { bossEncounter, generateEncounterPack } from "./encounters";
+import { bossEncounter } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";
 import {
   offerStarters,
   beginBattle,
   settle,
   afterRewards,
+  advanceEncounter,
   startJourney,
   enterMerchant,
   leaveMerchant,
@@ -257,7 +258,7 @@ function resolve(
         if (draft.phase !== "campfire") throw new Error("Invalid Campfire rest.");
         for (const row of [draft.team, draft.reserves])
           for (const creature of row) restoreHealth(creature, campfireRecovery(creature), events, true);
-        leaveCampfire(draft);
+        leaveCampfire(draft, true);
         break;
       case "play": {
         if (draft.phase !== "battle") throw new Error("Invalid battle action.");
@@ -341,8 +342,8 @@ function resolve(
         addRecruit(draft, command.species);
         if (command.type === "recruitDestination") {
           draft.expedition.recruit = null;
-          draft.expedition.pack = generateEncounterPack(draft, draft.expedition.pack!);
           draft.expedition.lastRoom = "recruit";
+          advanceEncounter(draft);
           events.push({
             kind: "reward",
             text: alreadyOnRoster

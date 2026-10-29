@@ -3,6 +3,7 @@ import type { GameEvent } from "../../../src/game/types";
 import { swapFixture, completeRecruitment, accept, run, teamRun, winBattle } from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
+import { JOURNEY_LENGTH } from "../../../src/game/encounters";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { ensureCombat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
@@ -192,7 +193,7 @@ describe("game commands", () => {
   });
   it("settles rewards once and preserves the complete eligible roster and permanent progress", () => {
     let s = run();
-    for (let battle = s.encounter; battle < 8; battle++) {
+    for (let battle = s.encounter; battle < JOURNEY_LENGTH; battle++) {
       s = winBattle(s);
       const bank = s.currency;
       expect(dispatch(s, { type: "skipBoon" }).accepted).toBe(false);

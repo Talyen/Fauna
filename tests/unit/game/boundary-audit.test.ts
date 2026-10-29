@@ -281,9 +281,9 @@ it.each(["area", "bounce"] as const)(
   (delivery) => {
     const destination = produce(teamRun(42, [delivery === "area" ? "captoad" : "pollenmoth"]), (draft) => {
       prepareDestination(draft);
-      draft.encounter = 3;
-      draft.journey!.victories = 3;
-      draft.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+      draft.encounter = 9;
+      draft.journey!.victories = 9;
+      draft.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
       if (delivery === "bounce") draft.discovery.recruited.pollenmoth = 3;
     });
     const state = structuredClone(requireBattle(accept(destination, { type: "beginBattle" })));

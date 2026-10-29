@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import {
   JOURNEY_LENGTH,
+  bossEncounter,
   encounterSource,
   encounterPacks,
   generateEncounterPack,
@@ -68,12 +69,13 @@ describe("journey encounters", () => {
             draft.expedition = { pack: generateEncounterPack(draft), recruit: null, lastRoom: null };
           });
           const pack = state.expedition!.pack!;
-          expect(pack).toHaveLength([3, 7].includes(encounter) ? 1 : Math.min(3, encounter + 1));
-          expect(
-            pack.every(
-              (kind) => ![...state.team, ...state.reserves].map((unit) => unit.species).includes(kind),
-            ),
-          ).toBe(true);
+          expect(pack).toHaveLength(bossEncounter(state) ? 1 : Math.min(3, encounter + 1));
+          if (!bossEncounter(state))
+            expect(
+              pack.every(
+                (kind) => ![...state.team, ...state.reserves].map((unit) => unit.species).includes(kind),
+              ),
+            ).toBe(true);
           expect(enter(state).battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
         }
       }
@@ -81,35 +83,34 @@ describe("journey encounters", () => {
   });
 
   it.each([
-    [3, "memento"],
-    [3, "velvetmonarch"],
-    [7, "chronora"],
-  ] as const)(
-    "uses an eligible ordinary Boss at encounter %s when the roster contains %s",
-    (encounter, boss) => {
-      const started = starterJourney(7, boss);
-      const ready = produce(started, (draft) => {
-        draft.encounter = encounter;
-        draft.journey!.victories = encounter;
-        draft.expedition!.pack = generateEncounterPack(draft, [boss]);
-      });
-      const source = encounterSource(ready);
-      expect(source.name).toBe("Boss");
-      expect(source.enemies).toHaveLength(1);
-      expect(source.enemies[0]!.species).not.toBe(boss);
-      expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
-      const battle = enter(decodeSave(encodeSave(ready)));
-      expect(decodeSave(encodeSave(battle))).toEqual(battle);
-      const result = dispatch(battle, { type: "devWinBattle" }, true);
-      expect(result.accepted).toBe(true);
-      const reward = result.state;
-      expect(reward.reward!.currency).toBe(40);
-      expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
-      expect(decodeSave(encodeSave(reward))).toEqual(reward);
-    },
-  );
+    [9, "memento"],
+    [19, "velvetmonarch"],
+    [29, "chronora"],
+  ] as const)("keeps an owned Legendary as the Boss at encounter %s", (encounter, boss) => {
+    const started = starterJourney(7, boss);
+    const ready = produce(started, (draft) => {
+      draft.encounter = encounter;
+      draft.journey!.victories = encounter;
+      draft.expedition!.pack = generateEncounterPack(draft, [boss]);
+      draft.expedition.recruit = null;
+      draft.support = null;
+    });
+    const source = encounterSource(ready);
+    expect(source.name).toBe("Boss");
+    expect(source.enemies).toHaveLength(1);
+    expect(source.enemies[0]!.species).toBe(boss);
+    expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
+    const battle = enter(decodeSave(encodeSave(ready)));
+    expect(decodeSave(encodeSave(battle))).toEqual(battle);
+    const result = dispatch(battle, { type: "devWinBattle" }, true);
+    expect(result.accepted).toBe(true);
+    const reward = result.state;
+    expect(reward.reward!.currency).toBe(40);
+    expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
+    expect(decodeSave(encodeSave(reward))).toEqual(reward);
+  });
 
-  it("replaces only conflicting enemies after an optional recruit and persists the new pack", () => {
+  it("advances after an optional recruit and persists the next pack", () => {
     const ready = produce(start(), (draft) => {
       draft.encounter = 2;
       draft.journey!.victories = 2;
@@ -122,7 +123,7 @@ describe("journey encounters", () => {
     expect(accept(ready, command)).toEqual(recruited);
     const pack = recruited.expedition!.pack!;
     expect(pack).toHaveLength(3);
-    expect(pack[1]).toBe("dunefox");
+    expect(recruited.encounter).toBe(3);
     expect(
       pack.every(
         (kind) => ![...recruited.team, ...recruited.reserves].map((unit) => unit.species).includes(kind),
@@ -142,6 +143,10 @@ describe("journey encounters", () => {
           draft.encounter = encounter;
           draft.journey!.victories = draft.encounter;
           draft.expedition!.pack = authoredPack(draft.encounter, pack);
+          if (bossEncounter(draft)) {
+            draft.expedition.recruit = null;
+            draft.support = null;
+          }
         });
         const battle = enter(state);
         for (const enemy of battle.battle!.enemies) {
@@ -166,24 +171,25 @@ describe("journey encounters", () => {
     }
   });
 
-  it("runs eight encounters with bosses fourth and last and advances only after completing rewards", () => {
+  it("runs thirty rooms with three bosses and advances only after completing rewards", () => {
     let s = start();
     let earnings = 0;
     for (let index = 0; index < JOURNEY_LENGTH; index++) {
       expect(s.encounter).toBe(index);
       if (s.support) expect(s.support.encounter).toBe(index);
-      expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
-      expect(encounterSource(s).enemies).toHaveLength(index % 4 === 3 ? 1 : Math.min(3, index + 1));
-      expect(
-        encounterSource(s).enemies.every(
-          (enemy) => ![...s.team, ...s.reserves].map((unit) => unit.species).includes(enemy.species),
-        ),
-      ).toBe(true);
+      expect(encounterSource(s).name).toBe(index % 10 === 9 ? "Boss" : "Combat");
+      expect(encounterSource(s).enemies).toHaveLength(index % 10 === 9 ? 1 : Math.min(3, index + 1));
+      if (!bossEncounter(s))
+        expect(
+          encounterSource(s).enemies.every(
+            (enemy) => ![...s.team, ...s.reserves].map((unit) => unit.species).includes(enemy.species),
+          ),
+        ).toBe(true);
       expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
       const route = enter(s).expedition;
       s = winBattle(enter(s));
       expect(["recruit", "boon", "teamSelection", "victory"]).toContain(s.phase);
-      earnings += [3, 7].includes(index) ? 40 : 20;
+      earnings += [9, 19, 29].includes(index) ? 40 : 20;
       expect(s.currency).toBe(earnings);
       if (s.phase !== "teamSelection") expect(s.expedition).toEqual(route);
       expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -196,7 +202,7 @@ describe("journey encounters", () => {
       }
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
       expect(decodeSave(encodeSave(s))).toEqual(s);
-      if (index < 7) {
+      if (index < JOURNEY_LENGTH - 1) {
         expect(s.phase).toBe("teamSelection");
         expect(s.expedition!.pack).not.toBeNull();
       }

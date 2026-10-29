@@ -287,14 +287,14 @@
   "inspection.trait": {
     "text": "Trait"
   },
+  "journey.actRoom": {
+    "text": "Act {{act}} · Room {{room}} of {{total}}"
+  },
   "journey.boss": {
     "text": "Boss: {{name}}"
   },
   "journey.combat": {
     "text": "Combat"
-  },
-  "journey.encounter": {
-    "text": "Encounter {{current}} of {{total}}"
   },
   "journey.encounters": {
     "text": "Encounters"

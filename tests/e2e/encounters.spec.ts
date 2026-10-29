@@ -8,7 +8,7 @@ import { reloadHome, test, seed, state, resume } from "./support/session";
 
 for (const [width, enlarged, encounter] of [
   [1280, true, 0],
-  [1920, false, 3],
+  [1920, false, 9],
 ] as const)
   test(`encounter ${encounter} enters directly at ${width}, enlarged ${enlarged}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
@@ -20,6 +20,10 @@ for (const [width, enlarged, encounter] of [
       (draft) => {
         draft.encounter = encounter;
         draft.expedition!.pack = authoredPack(draft.encounter);
+        if (encounter === 9) {
+          draft.expedition.recruit = null;
+          draft.support = null;
+        }
         draft.journey!.victories = encounter;
       },
     );
@@ -54,7 +58,7 @@ for (const [width, enlarged, encounter] of [
     await expect(page.getByRole("dialog")).toHaveCount(0);
     expect(await state(page)).toEqual(game);
     // Resume an unstarted boss destination before entering through the UI
-    if (encounter === 3) {
+    if (encounter === 9) {
       await reloadHome(page);
       await resume(page);
       expect(await state(page)).toEqual(game);

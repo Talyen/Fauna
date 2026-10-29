@@ -243,8 +243,8 @@ describe("combat commands and journey health", () => {
     s = accept(s, { type: "rest" });
     expect(s.team.map((c) => c.health)).toEqual([10, 16, 30]);
     expect(s.revision).toBe(revision + 1);
-    expect(s.rng).toBe(rng);
-    expect(s.encounter).toBe(3);
+    expect(s.rng).not.toBe(rng);
+    expect(s.encounter).toBe(4);
     expect(dispatch(s, { type: "rest" }).state).toBe(s);
     s = decodeSave(encodeSave(s));
     expect(s.team.map((c) => c.health)).toEqual([10, 16, 30]);

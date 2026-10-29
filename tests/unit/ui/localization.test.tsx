@@ -633,7 +633,7 @@ it("localizes campfire health and committed recovery without changing the rest o
   if (before.phase !== "campfire") throw new Error("Expected campfire");
   const result = dispatch(before, { type: "rest" });
   expect(result.accepted).toBe(true);
-  expect(result.state.rng).toBe(before.rng);
+  expect(result.state.encounter).toBe(before.encounter + 1);
   const { container, rerender } = renderMessages(
     <TooltipProvider>
       <Campfire game={before} send={() => true} />

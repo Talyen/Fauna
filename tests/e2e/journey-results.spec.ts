@@ -135,11 +135,11 @@ for (const input of ["keyboard", "controller"] as const)
     const fixture = victoryReady(
       accept(
         produce(run(7), (draft) => {
-          draft.encounter = 7;
+          draft.encounter = 29;
           draft.journey!.victories = draft.encounter;
           prepareDestination(draft);
           draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
-          draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, lastBattle: null };
+          draft.journey = { outcome: null, victories: 29, currency: 0, xp: {}, lastBattle: null };
         }),
         { type: "beginBattle" },
       ),

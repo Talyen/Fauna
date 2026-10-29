@@ -34,6 +34,11 @@ export function offerStarters(state: GameState) {
 function prepareEncounter(state: GameState) {
   const route = state.expedition;
   route.pack = generateEncounterPack(state);
+  if (bossEncounter(state)) {
+    route.recruit = null;
+    state.support = null;
+    return;
+  }
   const prices = route.lastRoom !== "merchant" ? merchantPriceRange(state) : undefined;
   const kind =
     prices && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE ? "merchant" : null;
@@ -244,7 +249,9 @@ export function afterRewards(state: RewardState) {
     });
   } else advanceEncounter(state);
 }
-function advanceEncounter(state: BattleState | RewardState) {
+export function advanceEncounter(
+  state: BattleState | RewardState | StateAt<"teamSelection" | "support" | "campfire">,
+) {
   state.encounter++;
   prepareEncounter(state);
   enterDestination(state);
@@ -296,17 +303,22 @@ export function enterMerchant(state: StateAt<"teamSelection">) {
   enterPhase(state, { ...state, phase: "support", support: state.support, expedition: state.expedition });
 }
 export function leaveMerchant(state: StateAt<"support">) {
+  const purchased = state.support.purchased !== null;
   state.support.resolved = true;
   state.expedition.lastRoom = "merchant";
-  prepareEncounter(state);
-  enterDestination(state);
+  if (purchased) advanceEncounter(state);
+  else {
+    prepareEncounter(state);
+    enterDestination(state);
+  }
 }
 export function enterCampfire(state: StateAt<"teamSelection">) {
   enterPhase(state, { ...state, phase: "campfire", expedition: state.expedition });
 }
-export function leaveCampfire(state: StateAt<"campfire">) {
+export function leaveCampfire(state: StateAt<"campfire">, rested = false) {
   state.expedition.lastRoom = "campfire";
-  enterDestination(state);
+  if (rested) advanceEncounter(state);
+  else enterDestination(state);
 }
 export function returnHome(state: Exclude<GameState, StateAt<"draft" | "victory" | "defeat">>) {
   state.expedition.recruit = null;

@@ -34,19 +34,19 @@ If the deployed row falls, stop remaining enemy attacks and begin the next playe
 
 ## Encounters
 
-A journey has eight battles, with Bosses fourth and eighth. Only the final Boss completes it. Ordinary enemy counts are one in battle 1, two in battle 2 and three thereafter. Bosses begin with one authored Legendary; if its species is on the roster, use one eligible ordinary creature instead.
+A journey has three acts of ten rooms each: nine ordinary rooms followed by a mandatory Boss in rooms 10, 20 and 30. Completing any room advances to the next; only the third Boss completes the journey. Ordinary combat has one enemy in room 1, two in room 2 and three thereafter. Each Boss is one randomly selected Legendary, including species already on the roster.
 
 ### Saved enemy packs
 
-Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary packs use the shared combat pool. Exclude every roster species, including backup and knockouts; replace conflicting slots with seeded ordinary species while retaining pack size. Optional recruitment replaces only newly conflicting slots and never rewrites completed rewards.
+Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary packs use the shared combat pool. Exclude every roster species, including backup and knockouts, from ordinary combat; replace conflicting slots with seeded ordinary species while retaining pack size. Bosses draw from the full Legendary pool, including owned species. Optional recruitment completes its room and prepares the next room.
 
-Menus, Campfire and reload preserve packs and consume no pack RNG. Completing a Merchant room prepares a fresh pack at the same battle ordinal. Combat or Boss always remains available as the progression fallback.
+Menus, canceled Campfire visits and reload preserve packs and consume no pack RNG. Completing a support room prepares a fresh pack for the next room. A Boss room offers only the Boss; ordinary rooms always offer Combat.
 
 Activating the encounter commits its pack and starts battle directly, without an enemy preview, inspection dialog, Begin battle step or team selection. Deck remains available. Enemy intents stay hidden; pinned kit inspection belongs outside battle and in Collection. [Encounter presentation](ui/screens.md#encounter-and-required-replacement) owns artwork, labels and readouts.
 
 ### Enemy scaling
 
-Enemies, including Legendaries, start from authored species Health; recruits use unscaled Health. Health and authored damage, healing and Block gain 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance scaling.
+Enemies, including Legendaries, start from authored species Health; recruits use unscaled Health. Health and authored damage, healing and Block gain 10% of their base per room after the first: 100% in room 1 through 390% in room 30, rounded to the nearest whole number. Completed support rooms advance the room and therefore scaling.
 
 Shared ability values, including area attacks and supplemental damage/healing, scale once through explicit room power. Chances, effect counts, resources and passive tiers do not scale; mixed Block-or-Thorns effects scale only Block. Enemy pools vary between runs. These values are playtest tuning, not final balance.
 
@@ -83,7 +83,7 @@ Actual recruitment permanently collects a species. Its first copy gives zero sta
 
 Offer one uniformly selected ordinary species, including uncollected and already-owned species, only while the roster has fewer than five individuals. Legendaries are excluded. [Support visits](#optional-support-visits) defines destination rolls.
 
-Activating Recruit consumes the saved offer and adds a new species at full Health directly, without confirmation or release. Recruiting a species already on the roster only improves Collection rank and preserves the existing individual. Fill ordinary deployment up to three, then backup; a deployed Legendary keeps recruits in backup. The command grants Collection progress without advancing the battle, spending Gold or consuming RNG. Starting battle forfeits the unclaimed offer. This is independent of victory recruitment. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns full-kit disclosure.
+Activating Recruit consumes the saved offer and adds a new species at full Health directly, without confirmation or release. Recruiting a species already on the roster only improves Collection rank and preserves the existing individual. Fill ordinary deployment up to three, then backup; a deployed Legendary keeps recruits in backup. The command grants Collection progress, completes the room and prepares the next room using seeded RNG, without spending Gold. Starting battle forfeits the unclaimed offer. This is independent of victory recruitment. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns full-kit disclosure.
 
 ### Victory recruitment
 
@@ -134,13 +134,13 @@ Development builds expose Skip combat beside the battle menu and Auto-play. It s
 
 ## Optional support visits
 
-Recruit and Boon Merchant roll independently at 25% when preparing destinations, subject to their eligibility rules. Support visits never advance the battle ordinal or remove any of the eight battles. Omit the most recently visited room type from returning options; Combat or Boss remains available.
+Recruit and Boon Merchant roll independently at 25% when preparing ordinary rooms, subject to their eligibility rules. Completing Recruit, Rest or a Merchant purchase advances one room. Omit the most recently visited room type from returning options; Combat remains available in ordinary rooms. Boss rooms offer no support choices.
 
 ### Campfire
 
-Offer Campfire when any roster member, including backup or knockout, is missing at least 30% maximum Health, unless Campfire was the last visited room. Entering commits a saved visit; Rest is its only recovery action. Rest restores 30% maximum Health to the whole roster, capped at full, without advancing the battle or consuming RNG.
+Offer Campfire when any roster member, including backup or knockout, is missing at least 30% maximum Health, unless Campfire was the last visited room. Entering commits a saved visit; Rest is its only recovery action. Rest restores 30% maximum Health to the whole roster, capped at full, and completes the room.
 
-Resting or leaving suppresses Campfire until another room is visited. Both preserve the enemy pack; Campfire also preserves pending Merchant offers. [Campfire presentation](ui/screens.md#campfire) owns recovery readouts.
+Resting prepares the next room. Leaving without resting cancels the visit without advancing, preserving the current enemy pack and Merchant offers; either suppresses Campfire until another room is visited. [Campfire presentation](ui/screens.md#campfire) owns recovery readouts.
 
 ### Boon Merchant
 
@@ -148,7 +148,7 @@ Offer Merchant only when it was not the last room and at least one unowned Boon 
 
 Stock uses the same roster keyword weighting as Boss rewards and contains up to three distinct unowned Boons, each with an independently rolled integer price of 20–40 Gold inclusive. Merchant's Favor subtracts 7 when stock is prepared, yielding 13–33. Inspection, menus, Campfire and reload preserve prices.
 
-Purchase commits one Boon and immediately completes the room. A saved purchase resumes by completing the room without another grant. Shelf and purchase survive menus/reload without duplicate grants or spending. Leaving, including Back without buying, prepares a fresh combat pack and optional Recruit offer at the same ordinal and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
+Purchase commits one Boon and immediately completes the room. A saved purchase resumes by completing the room without another grant. Shelf and purchase survive menus/reload without duplicate grants or spending. After purchase, departure prepares the next room; a saved purchase resumes the same completion without duplicating the grant. Leaving without buying prepares fresh offers at the same room and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
 
 ## Legendaries and Minions
 
@@ -160,4 +160,4 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-The first Boss encounter selects [Memento](content/creatures/memento.md) or [Velvetmonarch](content/creatures/velvetmonarch.md); [Chronora](content/creatures/chronora.md) appears in the final Boss encounter. A selected Legendary already on the roster uses the ordinary-creature fallback.
+Each Boss encounter randomly selects from the full Legendary pool, including creatures already on the roster. The selected pack is committed before battle; recruiting an already-owned Boss raises its Collection rank. The current pool contains [Memento](content/creatures/memento.md), [Chronora](content/creatures/chronora.md) and [Velvetmonarch](content/creatures/velvetmonarch.md).

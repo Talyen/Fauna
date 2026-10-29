@@ -101,10 +101,10 @@ describe("Chronora", () => {
 
   it("enters the final boss battle with its own six cards and pendulums", () => {
     let state = produce(run(), (draft) => {
-      draft.encounter = 7;
-      draft.expedition = { pack: authoredPack(7), recruit: null, lastRoom: "boss" };
+      draft.encounter = 29;
+      draft.expedition = { pack: authoredPack(29), recruit: null, lastRoom: "boss" };
       prepareDestination(draft);
-      draft.journey!.victories = 7;
+      draft.journey!.victories = 29;
     });
     state = accept(state, { type: "beginBattle" });
     expect(state.battle!.enemies[0]!.species).toBe("chronora");

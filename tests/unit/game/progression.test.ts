@@ -263,7 +263,7 @@ it("consumes Flashpoint once and does not refresh it on talent reset or resume",
 
 it("final victory banks rewards once before recruitment and offers no run-only Boons", () => {
   const ready = produce(run(), (draft) => {
-    draft.encounter = 7;
+    draft.encounter = 29;
     prepareDestination(draft);
     draft.expedition = { pack: ["memento"], recruit: null, lastRoom: null };
   });

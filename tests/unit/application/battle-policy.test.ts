@@ -689,9 +689,9 @@ it("favors a healthy complementary backup when deployed damage is already availa
 it("Auto-play Blinds new Echoes even when their summoner is already Blind", () => {
   const destination = produce(teamRun(42, ["glintstride"]), (game) => {
     prepareDestination(game);
-    game.encounter = 3;
-    game.journey!.victories = 3;
-    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+    game.encounter = 9;
+    game.journey!.victories = 9;
+    game.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
   });
   const state = produce(requireBattle(accept(destination, { type: "beginBattle" })), (game) => {
     const card = game.cards.find((card) => card.definitionId === "glintstride-teamBlind")!;

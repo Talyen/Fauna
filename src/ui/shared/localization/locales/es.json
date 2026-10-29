@@ -9359,6 +9359,12 @@
     "sourceHash": "1960ec6375c89c145c4c5dd158daa425df982aab4c43811df1f837ea09720150",
     "text": "Rasgo"
   },
+  "journey.actRoom": {
+    "reviewed": true,
+    "source": "Act {{act}} · Room {{room}} of {{total}}",
+    "sourceHash": "4ff87e5f6d5675cfce0ce35650adda0bfef75ba8052a03d65a2b66d63243e4b9",
+    "text": "Acto {{act}} · Sala {{room}} de {{total}}"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -9370,12 +9376,6 @@
     "source": "Combat",
     "sourceHash": "c7a23bc0fb5587d25b9c5d199789845f70cece3014687cf651131d76b8858ff3",
     "text": "Combate"
-  },
-  "journey.encounter": {
-    "reviewed": true,
-    "source": "Encounter {{current}} of {{total}}",
-    "sourceHash": "1e025200a3849a9df592debe673cafb3992911c69eeb753d12a6c61d571d8e4a",
-    "text": "Encuentro {{current}} de {{total}}"
   },
   "journey.encounters": {
     "reviewed": true,

@@ -1,4 +1,5 @@
 import { boonRule } from "./rules/boons";
+import { bossEncounter } from "./encounters";
 import { species } from "./content";
 import type { GameState } from "./types";
 export function merchantPriceRange(state: Pick<GameState, "boons">) {
@@ -24,6 +25,7 @@ export function needsCampfire(state: GameState) {
 export function canVisitCampfire(state: GameState) {
   return (
     state.phase === "teamSelection" &&
+    !bossEncounter(state) &&
     state.expedition !== null &&
     state.expedition.lastRoom !== "campfire" &&
     needsCampfire(state)
@@ -32,6 +34,7 @@ export function canVisitCampfire(state: GameState) {
 export function canVisitMerchant(state: GameState) {
   return (
     state.phase === "teamSelection" &&
+    !bossEncounter(state) &&
     state.expedition.lastRoom !== "merchant" &&
     !!state.support &&
     !state.support.resolved &&
@@ -42,6 +45,7 @@ export function canVisitMerchant(state: GameState) {
 export function canRecruitDestination(state: GameState) {
   return (
     state.phase === "teamSelection" &&
+    !bossEncounter(state) &&
     state.expedition.lastRoom !== "recruit" &&
     state.team.length + state.reserves.length < 5 &&
     !!state.expedition.recruit &&

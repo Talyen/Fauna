@@ -232,9 +232,11 @@ it("keeps the committed full price when Favor is purchased from the current Merc
 
 it("rejects a final victory receipt on a Boon choice screen", () => {
   const destinations = produce(starterJourney(3, "captoad"), (draft) => {
-    draft.encounter = 7;
-    draft.journey!.victories = 7;
+    draft.encounter = 29;
+    draft.journey!.victories = 29;
     draft.expedition!.pack = authoredPack(draft.encounter);
+    draft.expedition.recruit = null;
+    draft.support = null;
   });
   const battle = accept(destinations, { type: "beginBattle" });
   const won = dispatch(battle, { type: "devWinBattle" }, true).state;
@@ -295,10 +297,10 @@ it.each(["control", "reward", "price"])(
 
 it.each([999_999, 1_000_000])("keeps final victory saveable with %s previous wins", (wins) => {
   const ready = produce(starterJourney(3, "captoad"), (draft) => {
-    draft.encounter = 7;
+    draft.encounter = 29;
     draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
     draft.wins = wins;
-    draft.journey!.victories = 7;
+    draft.journey!.victories = 29;
   });
   const battle = accept(ready, { type: "beginBattle" });
   expect(decodeSave(encodeSave(battle))).toEqual(battle);

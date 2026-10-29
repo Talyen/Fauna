@@ -144,7 +144,7 @@ it("rejects impossible saved recruitment selections", () => {
     expect(() => decodeSave(encodeSave(broken))).toThrow();
 });
 
-it.each([3, 7])(
+it.each([9, 29])(
   "keeping the team after Boss recruitment at encounter %s preserves reward ordering",
   (encounter) => {
     const ready = produce(teamRun(42, ["prismram"]), (game) => {
@@ -155,7 +155,7 @@ it.each([3, 7])(
     const reward = fullRosterReward(winBattle(accept(ready, { type: "beginBattle" })));
     const selected = accept(reward, { type: "recruit", species: reward.reward.recruits[0]! });
     const next = accept(decodeSave(encodeSave(selected)), { type: "confirmRecruit" });
-    expect(next.phase).toBe(encounter === 7 ? "victory" : "boon");
+    expect(next.phase).toBe(encounter === 29 ? "victory" : "boon");
     expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(
       [...reward.team, ...reward.reserves].map((unit) => unit.species),
     );

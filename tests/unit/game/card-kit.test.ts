@@ -10,9 +10,9 @@ import { accept, authoredPack, prepareDestination, requireBattle, run, teamRun }
 function bossBattle() {
   const destination = produce(run(), (state) => {
     prepareDestination(state);
-    state.encounter = 3;
-    state.journey!.victories = 3;
-    state.expedition.pack = authoredPack(3);
+    state.encounter = 9;
+    state.journey!.victories = 9;
+    state.expedition.pack = authoredPack(9);
   });
   return requireBattle(accept(destination, { type: "beginBattle" }));
 }

@@ -18,7 +18,7 @@ import {
 } from "./progression";
 import { gameStateSchema } from "./state-schema";
 import { SPECIES, species } from "./content";
-import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
+import { encounterSource, finalEncounter, bossEncounter, ROOMS_PER_ACT } from "./encounters";
 import type { BattleState, GameState } from "./types";
 import { CORNUCOPIA_CARD_ID } from "./journey-cards";
 function unique(values: readonly unknown[]) {
@@ -117,13 +117,16 @@ function validateJourney(state: GameState) {
     invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (state.keywordXP[keyword] ?? 0)));
     const receipt = summary.lastBattle;
     const justWon = receipt?.encounter === state.encounter && receipt.outcome !== "defeat";
-    invalid(summary.victories !== state.encounter + Number(justWon));
+    const completedRooms = state.encounter + Number(justWon);
+    invalid(
+      summary.victories > completedRooms || summary.victories < Math.floor(completedRooms / ROOMS_PER_ACT),
+    );
     if (receipt)
       invalid(
-        receipt.encounter > state.encounter ||
-          receipt.encounter < state.encounter - 1 ||
+        (receipt.outcome !== "defeat" && summary.victories === 0) ||
+          receipt.encounter > state.encounter ||
           state.phase === "battle" ||
-          (receipt.encounter === state.encounter - 1 && receipt.outcome !== "next") ||
+          (receipt.encounter < state.encounter && receipt.outcome !== "next") ||
           (receipt.outcome === "victory" &&
             state.phase !== "victory" &&
             state.phase !== "recruit" &&
@@ -160,7 +163,12 @@ function validateExpedition(state: GameState) {
     invalid(
       route.pack === null ||
         route.pack.length !== (boss ? 1 : Math.min(3, state.encounter + 1)) ||
-        (!boss && route.pack.some((kind) => species(kind).legendary)),
+        (!boss && route.pack.some((kind) => species(kind).legendary)) ||
+        (boss &&
+          (!species(route.pack[0]!).legendary ||
+            route.recruit !== null ||
+            state.support !== null ||
+            state.phase === "campfire")),
     );
   }
   if (route.recruit !== null)

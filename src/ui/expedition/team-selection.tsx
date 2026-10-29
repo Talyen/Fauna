@@ -18,7 +18,7 @@ import type { Command, StateAt, GameEvent } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
-import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../../game/encounters";
+import { bossEncounter, encounterSource, ROOMS_PER_ACT } from "../../game/encounters";
 type Props = {
   game: StateAt<"teamSelection">;
   send: (command: Command) => boolean;
@@ -41,9 +41,10 @@ export function TeamSelection({
     <Screen className="destinations-screen">
       <header className="destination-heading">
         <ScreenHeading>
-          {i18n.message("journey.encounter", "Encounter {{current}} of {{total}}", {
-            current: game.encounter + 1,
-            total: JOURNEY_LENGTH,
+          {i18n.message("journey.actRoom", "Act {{act}} · Room {{room}} of {{total}}", {
+            act: Math.floor(game.encounter / ROOMS_PER_ACT) + 1,
+            room: (game.encounter % ROOMS_PER_ACT) + 1,
+            total: ROOMS_PER_ACT,
           })}
         </ScreenHeading>
       </header>

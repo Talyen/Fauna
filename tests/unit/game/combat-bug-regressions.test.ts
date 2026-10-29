@@ -76,9 +76,9 @@ it("retains Last Light Charge's guaranteed critical hit when reflected", () => {
 function bossBattle() {
   const destination = produce(teamRun(42, ["pollenmoth"]), (state) => {
     prepareDestination(state);
-    state.encounter = 3;
-    state.journey!.victories = 3;
-    state.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+    state.encounter = 9;
+    state.journey!.victories = 9;
+    state.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
   });
   return structuredClone(requireBattle(accept(destination, { type: "beginBattle" })));
 }
@@ -144,9 +144,9 @@ it("returns a knockout replacement after one round even when its backup skipped 
 it("resumes a return home from the final boss recruitment without losing the completed journey", () => {
   const destination = produce(run(), (state) => {
     prepareDestination(state);
-    state.encounter = 7;
-    state.journey!.victories = 7;
-    state.expedition = { pack: authoredPack(7), recruit: null, lastRoom: "boss" };
+    state.encounter = 29;
+    state.journey!.victories = 29;
+    state.expedition = { pack: authoredPack(29), recruit: null, lastRoom: "boss" };
   });
   const battle = accept(destination, { type: "beginBattle" });
   const won = dispatch(battle, { type: "devWinBattle" }, true).state;
@@ -155,7 +155,7 @@ it("resumes a return home from the final boss recruitment without losing the com
 
   const returned = accept(won, { type: "abandon" });
 
-  expect(returned.journey).toMatchObject({ outcome: "returned", victories: 8 });
+  expect(returned.journey).toMatchObject({ outcome: "returned", victories: 30 });
   expect(returned.wins).toBe(won.wins);
   expect(returned.currency).toBe(won.currency);
   expect(decodeSave(encodeSave(returned))).toEqual(returned);
@@ -207,9 +207,9 @@ it.each(["block", "armor"] as const)(
 it("a blinded Echo misses its intended recipient before Gallantry can intercept it", () => {
   const destination = produce(teamRun(42, ["mossguard", "tournelle"]), (game) => {
     prepareDestination(game);
-    game.encounter = 3;
-    game.journey!.victories = 3;
-    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+    game.encounter = 9;
+    game.journey!.victories = 9;
+    game.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
   });
   const state = structuredClone(requireBattle(accept(destination, { type: "beginBattle" })));
   state.discovery.recruited.tournelle = 6;

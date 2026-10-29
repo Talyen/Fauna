@@ -9359,6 +9359,12 @@
     "sourceHash": "714714678986b6a8c43b66cb45bffd9c2e0dcfbbb1d6e0496664e87bafabd276",
     "text": "Traço"
   },
+  "journey.actRoom": {
+    "reviewed": true,
+    "source": "Act {{act}} · Room {{room}} of {{total}}",
+    "sourceHash": "91f3e359cedfdff1d98d83f9f29f8bbb776bf65e595fa4a13deaa9992732f82d",
+    "text": "Ato {{act}} · Sala {{room}} de {{total}}"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -9370,12 +9376,6 @@
     "source": "Combat",
     "sourceHash": "dd06e8d95954915129f16e4eb24529b431b0e9cf67f37825b68ffd1240cd1893",
     "text": "Combate"
-  },
-  "journey.encounter": {
-    "reviewed": true,
-    "source": "Encounter {{current}} of {{total}}",
-    "sourceHash": "0ab222c126ab3d4a17628c8eb1837d73918b6a1c05793e1189771a9d8c931c4d",
-    "text": "Encontro {{current}} de {{total}}"
   },
   "journey.encounters": {
     "reviewed": true,

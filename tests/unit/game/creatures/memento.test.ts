@@ -201,10 +201,10 @@ describe("Memento and Legendary formations", () => {
   });
   it("runs a solo Boss with a six-card deck and offers its recruitment before a Boon", () => {
     let state: GameState = produce(run(), (draft) => {
-      draft.encounter = 3;
+      draft.encounter = 9;
       draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
       prepareDestination(draft);
-      draft.journey!.victories = 3;
+      draft.journey!.victories = 9;
     });
     state = accept(state, { type: "beginBattle" });
     expect(state.battle!.enemies).toHaveLength(1);
@@ -235,10 +235,10 @@ describe("Memento and Legendary formations", () => {
   });
   it("consumes boss Pearls, retaining the core kit and an accurate resumable live count", () => {
     const destination = produce(run(), (draft) => {
-      draft.encounter = 3;
+      draft.encounter = 9;
       draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
       prepareDestination(draft);
-      draft.journey!.victories = 3;
+      draft.journey!.victories = 9;
     });
     const ready = produce(accept(destination, { type: "beginBattle" }), (draft) => {
       const boss = draft.battle!.enemies[0]!;
@@ -336,8 +336,8 @@ describe("Memento and Legendary formations", () => {
   it("a controlled Boss still restores Mana and draws, without playing cards", () => {
     const destination = produce(run(), (draft) => {
       prepareDestination(draft);
-      draft.encounter = 3;
-      draft.journey!.victories = 3;
+      draft.encounter = 9;
+      draft.journey!.victories = 9;
       draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
     });
     const battle = produce(accept(destination, { type: "beginBattle" }), (draft) => {

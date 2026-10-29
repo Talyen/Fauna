@@ -9359,6 +9359,12 @@
     "sourceHash": "d334931dac1262c4e67fb3ebb45750f5be2f45f678d39c0d5ef342a52042fae1",
     "text": "特性"
   },
+  "journey.actRoom": {
+    "reviewed": true,
+    "source": "Act {{act}} · Room {{room}} of {{total}}",
+    "sourceHash": "357192ab275db0b8d06a30f50ce88b8cc5f6bb70f887124275d7e9b37a92ec1d",
+    "text": "第{{act}}幕 · 房间{{room}} / {{total}}"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -9370,12 +9376,6 @@
     "source": "Combat",
     "sourceHash": "59537c2d96f84af9419a9f9dd6dcaaecbbf4758d1913d1bd1655b0f4a8e434d8",
     "text": "战斗"
-  },
-  "journey.encounter": {
-    "reviewed": true,
-    "source": "Encounter {{current}} of {{total}}",
-    "sourceHash": "d955310d50be1e7f135767eafe1d4f8681bdd718dd797acee13f3b294f13428b",
-    "text": "遭遇 {{current}} / {{total}}"
   },
   "journey.encounters": {
     "reviewed": true,

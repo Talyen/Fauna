@@ -1,5 +1,5 @@
 {
-  "version": 72,
+  "version": 74,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -307,7 +307,7 @@
       "level": 0
     }
   ],
-  "encounter": 7,
+  "encounter": 9,
   "keywordXP": {
     "physical": 97,
     "burn": 0,
@@ -492,8 +492,8 @@
         "name": "Memento",
         "species": "memento",
         "health": 54,
-        "maxHealth": 102,
-        "power": 1.7,
+        "maxHealth": 114,
+        "power": 1.9,
         "targetId": "recruit-18",
         "block": 9,
         "combat": {
@@ -569,7 +569,7 @@
   "reward": null,
   "journey": {
     "outcome": null,
-    "victories": 7,
+    "victories": 9,
     "currency": 160,
     "xp": {
       "physical": 97,

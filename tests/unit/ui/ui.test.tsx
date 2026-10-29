@@ -133,7 +133,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.keywordXP.nature).toBe(24);
     await session.dispose();
   });
-  it.each([0, 3, 7])("starts encounter %s directly without an enemy preview", async (encounter) => {
+  it.each([0, 9, 29])("starts encounter %s directly without an enemy preview", async (encounter) => {
     const game = produce(
       accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
         type: "start",
@@ -142,6 +142,10 @@ describe("player interface", () => {
         draft.encounter = encounter;
         draft.journey!.victories = draft.encounter;
         draft.expedition!.pack = authoredPack(draft.encounter);
+        if (encounter !== 0) {
+          draft.expedition.recruit = null;
+          draft.support = null;
+        }
         draft.journey!.victories = encounter;
       },
     );
@@ -156,7 +160,11 @@ describe("player interface", () => {
     const enter = screen.getByRole("button", {
       name: encounter === 0 ? "Combat" : `Boss: ${encounterSource(game).enemies[0]!.name}`,
     });
-    expect(screen.getByRole("heading", { name: `Encounter ${encounter + 1} of 8` })).toBeTruthy();
+    expect(
+      screen.getByRole("heading", {
+        name: `Act ${Math.floor(encounter / 10) + 1} · Room ${(encounter % 10) + 1} of 10`,
+      }),
+    ).toBeTruthy();
     if (encounter !== 0) {
       const boss = encounterSource(game).enemies[0]!;
       expect(screen.getByRole("heading", { name: boss.name })).toBeTruthy();

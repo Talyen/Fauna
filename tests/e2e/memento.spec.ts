@@ -64,8 +64,8 @@ test("Legendary stays centered and only unplayed Pearls survive reload", async (
 test("enemy Echoes are targetable without being roster creatures", async ({ page }) => {
   const destination = produce(run(), (draft) => {
     prepareDestination(draft);
-    draft.encounter = 3;
-    draft.journey!.victories = 3;
+    draft.encounter = 9;
+    draft.journey!.victories = 9;
     draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
   });
   const fixture = produce(accept(destination, { type: "beginBattle" }), (draft) => {

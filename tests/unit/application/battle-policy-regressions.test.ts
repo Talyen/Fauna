@@ -109,9 +109,9 @@ it("Auto-play preserves Dawn Cry's Mana when it would only redraw itself", () =>
 it("Auto-play uses Petal Veil to Blind enemy Echoes after their summoner is already Blind", () => {
   const destination = produce(teamRun(42, ["bloomquail"]), (game) => {
     prepareDestination(game);
-    game.encounter = 3;
-    game.journey!.victories = 3;
-    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+    game.encounter = 9;
+    game.journey!.victories = 9;
+    game.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
   });
   const state = produce(
     withHand(accept(destination, { type: "beginBattle" }), ["bloomquail-heal"]),
@@ -157,9 +157,9 @@ it("Auto-play preserves Dream Double when both Thorns and Negate are already ful
 it("Auto-play Purges a protected enemy Echo when its summoner has no removable effects", () => {
   const destination = produce(teamRun(42, ["rookhaven"]), (game) => {
     prepareDestination(game);
-    game.encounter = 3;
-    game.journey!.victories = 3;
-    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+    game.encounter = 9;
+    game.journey!.victories = 9;
+    game.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
   });
   const state = produce(
     withHand(requireBattle(accept(destination, { type: "beginBattle" })), ["rookhaven-unwritten-ending"]),

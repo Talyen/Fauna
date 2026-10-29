@@ -11,6 +11,8 @@ import {
   winBattle,
   merchantDestination as merchant,
   completeRecruitment,
+  authoredPack,
+  prepareDestination,
 } from "../../support/game";
 it("saves an atomic purchase, rejects repeats and progresses to fresh destinations", () => {
   const s = merchant();
@@ -24,7 +26,7 @@ it("saves an atomic purchase, rejects repeats and progresses to fresh destinatio
   expect(dispatch(bought, { type: "buyBoon", visit: v.id, slot: v.stock[1]!.slot }).state).toBe(bought);
   const left = accept(bought, { type: "leaveSupport", visit: v.id });
   expect(left.expedition!.lastRoom).toBe("merchant");
-  expect(left.encounter).toBe(s.encounter);
+  expect(left.encounter).toBe(s.encounter + 1);
   expect(left.rng).not.toBe(bought.rng);
   expect(left.expedition!.pack).not.toBe(s.expedition!.pack);
   expect(left.support).toBeNull();
@@ -70,9 +72,10 @@ it("can roll no Merchant after an ordinary victory", () => {
   expect(s.support).toBeNull();
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });
-it("preserves eight battles after Merchant purchases", () => {
+it("counts Merchant purchases among the thirty rooms", () => {
   let s: GameState = merchant();
-  for (let i = 1; i < 8; i++) {
+  let purchases = 0;
+  for (let guard = 0; guard < 60 && s.phase !== "victory"; guard++) {
     if (s.support?.kind === "merchant" && s.support.stock.some((slot) => slot.price <= s.currency)) {
       s = accept(s, { type: "enterSupport", visit: s.support.id });
       s = accept(s, {
@@ -81,30 +84,28 @@ it("preserves eight battles after Merchant purchases", () => {
         slot: s.support!.stock.find((slot) => slot.price <= s.currency)!.slot,
       });
       s = accept(s, { type: "leaveSupport", visit: s.support!.id });
+      purchases++;
+      continue;
     }
     s = winBattle(accept(s, { type: "beginBattle" }));
     if (s.phase === "recruit") s = completeRecruitment(s);
-    if (s.phase === "boon") {
-      expect(s.reward!.boons.length).toBeGreaterThan(0);
-      s = accept(s, { type: "chooseBoon", boon: s.reward!.boons[0]! });
-    }
+    if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     expect(decodeSave(encodeSave(s))).toEqual(s);
   }
-  expect(s.journey!.victories).toBe(8);
+  expect(s.phase).toBe("victory");
+  expect(s.journey!.victories + purchases).toBe(30);
 });
-it("keeps Merchant stock and combat offers through Campfire rest and reload", () => {
+it("prepares a new room after Campfire rest and reload", () => {
   let s: GameState = produce(merchant(), (d) => {
     d.team[0]!.health = 0;
   });
-  const route = s.expedition,
-    visit = s.support;
+  const room = s.encounter;
   s = accept(s, { type: "visitCampfire" });
   s = decodeSave(encodeSave(s));
   s = accept(s, { type: "rest" });
-  expect(s.expedition).toEqual({ ...route, lastRoom: "campfire" });
-  expect(s.support).toEqual(visit);
+  expect(s.encounter).toBe(room + 1);
+  expect(s.expedition.lastRoom).toBe("campfire");
   expect(decodeSave(encodeSave(s))).toEqual(s);
-  expect(accept(s, { type: "enterSupport", visit: visit!.id }).phase).toBe("support");
 });
 it.each([-1, 0])("checks the cheapest committed price at affordability offset %s", (offset) => {
   const ready = merchant();
@@ -133,6 +134,9 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
     // Explicit loadout fixture; these Boons are not claimed as earned purchases.
     s = produce(s, (d) => {
       d.boons = BOONS.slice(0, owned).map((b) => b.id);
+      d.encounter = 9;
+      prepareDestination(d);
+      d.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "boss" };
     });
     s = winBattle(accept(s, { type: "beginBattle" }));
     expect(s.phase).toBe("recruit");

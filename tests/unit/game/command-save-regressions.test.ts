@@ -44,9 +44,9 @@ it("offers the next controlled turn when shared Food can still be played", () =>
 it("recovers a backup instead of accepting an already-owned pending Boon", async () => {
   const destination = produce(run(), (draft) => {
     prepareDestination(draft);
-    draft.encounter = 3;
-    draft.journey!.victories = 3;
-    draft.expedition.pack = authoredPack(3);
+    draft.encounter = 9;
+    draft.journey!.victories = 9;
+    draft.expedition.pack = authoredPack(9);
   });
   const good = dispatch(accept(destination, { type: "beginBattle" }), { type: "devWinBattle" }, true).state;
   expect(good.phase).toBe("recruit");

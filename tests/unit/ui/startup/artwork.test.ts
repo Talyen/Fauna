@@ -88,7 +88,7 @@ it("covers ordinary and Boss destinations, Campfire and completed journeys", () 
   const campfire = accept(hurt, { type: "visitCampfire" });
   expect(immediateArtwork(campfire)).toContain(assetUrl("creature.emberback"));
   const boss = produce(destination, (draft) => {
-    draft.encounter = 3;
+    draft.encounter = 9;
     draft.expedition!.pack = ["memento"];
   });
   expect(immediateArtwork(boss)).toContain(assetUrl("creature.memento"));

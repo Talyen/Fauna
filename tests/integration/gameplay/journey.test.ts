@@ -165,7 +165,7 @@ describe("journey earnings and results", () => {
 
   it("retains complete totals and the complete roster across saving; a new journey resets the summary", () => {
     let s = startedJourney();
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 30; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
@@ -173,8 +173,8 @@ describe("journey earnings and results", () => {
     expect(s.phase).toBe("victory");
     expect(s.journey).toMatchObject({
       outcome: "victory",
-      victories: 8,
-      currency: 200,
+      victories: 30,
+      currency: 660,
     });
     expect(s.journey!.xp).toEqual(
       Object.fromEntries(Object.entries(s.keywordXP).filter(([, value]) => value > 0)),
@@ -184,7 +184,7 @@ describe("journey earnings and results", () => {
     s = accept(s, { type: "newRun", seed: 8 });
     expect(s.journey).toBeNull();
     expect(s.keywordXP).toEqual(oldXP);
-    expect(s.currency).toBe(200);
+    expect(s.currency).toBe(660);
     // The battle-finishing fixture needs an attacking starter, rather than a solo support Legendary.
     const attacker = s.starterOffers.find((kind) =>
       speciesCards(kind).some((card) => card.effect === "attack"),
@@ -194,13 +194,13 @@ describe("journey earnings and results", () => {
       s = accept(s, { type: "draft", species: s.starterOffers[0]! });
     s = accept(s, { type: "start" });
     expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {} });
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 30; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
-    expect(s.journey!.currency).toBe(200);
-    expect(s.currency).toBe(400);
+    expect(s.journey!.currency).toBe(660);
+    expect(s.currency).toBe(1320);
   });
 
   it.each([1, 2, 3, 4, 5, 6, 7, 8, 13])("rejects obsolete development save version %s", (version) => {

@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../../src/game/engine";
 import { definition } from "../../../../src/game/content";
 import { cardText } from "../../../../src/game/card-rules";
+import { encounterPacks } from "../../../../src/game/encounters";
 import { grantBlock } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { accept, authoredPack, prepareDestination, run, teamRun } from "../../../support/game";
@@ -109,10 +110,17 @@ describe("Velvetmonarch", () => {
 
   it("appears as a boss and its enemy policy values and executes the same garden", () => {
     let state = produce(run(), (draft) => {
-      draft.encounter = 3;
-      draft.expedition = { pack: authoredPack(3, 1), recruit: null, lastRoom: "boss" };
+      draft.encounter = 9;
+      draft.expedition = {
+        pack: authoredPack(
+          9,
+          encounterPacks(9).findIndex((pack) => pack[0] === "velvetmonarch"),
+        ),
+        recruit: null,
+        lastRoom: "boss",
+      };
       prepareDestination(draft);
-      draft.journey!.victories = 3;
+      draft.journey!.victories = 9;
     });
     state = accept(state, { type: "beginBattle" });
     expect(state.battle!.enemies[0]!.species).toBe("velvetmonarch");

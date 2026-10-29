@@ -26,7 +26,7 @@ import type {
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 // Fixed current-catalog full-journey fixture; shared with the browser expedition.
 export const FULL_JOURNEY_SEED = 30;
-export const FULL_JOURNEY_COMMAND_BUDGET = 800;
+export const FULL_JOURNEY_COMMAND_BUDGET = 3000;
 /** Preserve the established five-creature roster while still collecting each offered recruit. */
 export function fullJourneyRecruit(
   state: GameState,
@@ -289,9 +289,8 @@ export function policy(s: GameState): Command {
 export function bossReward() {
   const ready = produce(run(), (d) => {
     prepareDestination(d);
-    d.encounter = 3;
+    d.encounter = 9;
     d.journey!.victories = d.encounter;
-    d.journey!.victories = 3;
     d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
   });
   const recruit = winBattle(accept(ready, { type: "beginBattle" }));

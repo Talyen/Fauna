@@ -89,7 +89,7 @@ The identity comes from the complete setup/payoff loop, not printed damage. Borr
 
 - **Solo formation:** One Legendary deploys alone, with up to four backup in the five-creature roster; its kit must work without ordinary deployed teammates
 - **Deck and resources:** Two copies of each of three abilities form the six-card core; Boss enemies use four Mana, four draws and the six-card hand with persistent overflow
-- **Encounter and recruitment:** Boss encounters 4 and 8 begin with one Legendary; test both room scales, recruitment, solo starter play and all player passive tiers
+- **Encounter and recruitment:** Boss rooms 10, 20 and 30 begin with one Legendary; test all three room scales, recruitment, solo starter play and all player passive tiers
 - **Minions, if used:** They have Health/effects but no cards, roster slots, autonomous turns or Death's Door; they leave when their summoner falls or departs, and defeating the enemy Legendary wins even if Minions remain
 
 Give the boss recognizable setup, pressure, payoff and an accessible response without requiring one counter species. Test poor openings, recovery after interruption and fight length. Avoid endless healing, control locks and runaway resource engines. Enemy intents remain hidden: communicate threats through rules, visible state and outcomes.

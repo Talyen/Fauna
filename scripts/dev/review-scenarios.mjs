@@ -64,6 +64,8 @@ export const SCENARIOS = [
   "oathara-battle",
   "oathara-collection",
   "oathara-resurrection",
+  "journey-room",
+  "journey-boss",
   "home",
   "campfire",
   "boon",
@@ -285,6 +287,18 @@ export async function reviewScenario(server, name) {
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name === "inspection") game = winBattle();
+  if (name === "journey-room" || name === "journey-boss") {
+    const { starterJourney, authoredPack } = await server.ssrLoadModule("/tests/support/game.ts");
+    game = starterJourney(42, "mossguard");
+    if (name === "journey-boss") {
+      const { produce } = await server.ssrLoadModule("immer");
+      game = produce(game, (draft) => {
+        draft.encounter = 9;
+        draft.expedition = { pack: authoredPack(9), recruit: null, lastRoom: "combat" };
+        draft.support = null;
+      });
+    }
+  }
   if (name === "memento-baseline") {
     const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
     const { produce } = await server.ssrLoadModule("immer");
@@ -314,10 +328,10 @@ export async function reviewScenario(server, name) {
     const { produce } = await server.ssrLoadModule("immer");
     if (name === "chronora-boss") {
       game = produce(run(), (draft) => {
-        draft.encounter = 7;
-        draft.expedition = { pack: authoredPack(7), recruit: null, lastRoom: "boss" };
+        draft.encounter = 29;
+        draft.expedition = { pack: authoredPack(29), recruit: null, lastRoom: "boss" };
         prepareDestination(draft);
-        draft.journey.victories = 7;
+        draft.journey.victories = 29;
       });
       game = accept(game, { type: "beginBattle" });
     } else {

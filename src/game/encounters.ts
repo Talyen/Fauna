@@ -3,7 +3,9 @@ import { SPECIES, species, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 import { roll } from "./random";
 
-export const JOURNEY_LENGTH = 8;
+export const ACT_COUNT = 3;
+export const ROOMS_PER_ACT = 10;
+export const JOURNEY_LENGTH = ACT_COUNT * ROOMS_PER_ACT;
 export const COMBAT_PACKS = [
   ["emberback", "pollenmoth", "mossguard"],
   ["mossguard", "prismram", "pollenmoth"],
@@ -85,14 +87,19 @@ export const COMBAT_PACKS = [
 export const BOSSES = [
   {
     id: "briar-warden",
-    encounter: 3,
+    encounter: 9,
     name: "Memento",
     pack: ["memento"],
-    alternatives: [["velvetmonarch"]],
+  },
+  {
+    id: "garden-court",
+    encounter: 19,
+    name: "Velvetmonarch",
+    pack: ["velvetmonarch"],
   },
   {
     id: "hollow-crown",
-    encounter: 7,
+    encounter: 29,
     name: "Chronora",
     pack: ["chronora"],
   },
@@ -103,7 +110,11 @@ const bossesByEncounter = new Map<number, (typeof BOSSES)[number]>(
 );
 export function encounterPacks(encounter: number) {
   const boss = bossesByEncounter.get(encounter);
-  return boss ? [boss.pack, ...("alternatives" in boss ? boss.alternatives : [])] : COMBAT_PACKS;
+  if (!boss) return COMBAT_PACKS;
+  return [
+    boss.pack,
+    ...SPECIES.filter((entry) => entry.legendary && entry.id !== boss.pack[0]).map((entry) => [entry.id]),
+  ];
 }
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
@@ -114,6 +125,7 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
     pack = packs[Math.floor(roll(state) * packs.length)]!;
   }
   const selected = pack.slice(0, Math.min(3, state.encounter + 1));
+  if (bossEncounter(state)) return selected;
   const inRoster = (kind: SpeciesId) =>
     state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
   if (!selected.some(inRoster)) return selected;

@@ -1,7 +1,8 @@
 import { produce } from "immer";
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { generateEncounterPack } from "../../../src/game/encounters";
+import { generateEncounterPack, JOURNEY_LENGTH } from "../../../src/game/encounters";
+import { canVisitCampfire } from "../../../src/game/destinations";
 import { availablePlays } from "../../../src/game/play-queries";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
@@ -37,7 +38,7 @@ describe("journey lifecycle and deterministic replay", () => {
     step({ type: "draft", species: state.starterOffers[0]! });
     step({ type: "start" });
     expect(state.phase).toBe("teamSelection");
-    for (let room = 0; room < 8; room++) {
+    for (let steps = 0; steps < 100 && state.phase !== "victory"; steps++) {
       expect(state.phase).toBe("teamSelection");
       if (state.support && state.support.stock.some((slot) => slot.price <= state.currency)) {
         const visit = state.support;
@@ -49,13 +50,17 @@ describe("journey lifecycle and deterministic replay", () => {
         expect(state.boons).toContain(slot.boon);
         step({ type: "buyBoon", visit: visit.id, slot: slot.slot }, false);
         step({ type: "leaveSupport", visit: visit.id });
+        continue;
       }
       if (state.expedition?.recruit && state.team.length + state.reserves.length < 5) {
         const species = state.expedition.recruit;
         const count = state.discovery.recruited[species] ?? 0;
         step({ type: "recruitDestination", species });
         expect(state.discovery.recruited[species]).toBe(Math.min(6, count + 1));
+        continue;
       }
+      const room = state.encounter;
+      const victories = state.journey!.victories;
       const pack = state.expedition!.pack;
       step({ type: "beginBattle" });
       expect(state.phase).toBe("battle");
@@ -80,8 +85,8 @@ describe("journey lifecycle and deterministic replay", () => {
       expect(state.phase).toBe("recruit");
       expect(state.battle).toBeNull();
       expect(state.reward!.recruits).toEqual(pack);
-      expect(state.journey!.lastBattle?.outcome).toBe(room === 7 ? "victory" : "next");
-      expect(state.journey!.victories).toBe(room + 1);
+      expect(state.journey!.lastBattle?.outcome).toBe(room === JOURNEY_LENGTH - 1 ? "victory" : "next");
+      expect(state.journey!.victories).toBe(victories + 1);
       step({ type: "endTurn" }, false);
       const reward = state as GameState;
       if (reward.phase !== "recruit") throw new Error("Expected a recruit reward");
@@ -96,17 +101,19 @@ describe("journey lifecycle and deterministic replay", () => {
         step({ type: "chooseBoon", boon });
         expect(state.boons).toContain(boon);
       }
-      if (room === 7) break;
+      if (room === JOURNEY_LENGTH - 1) break;
       state = produce(state, (draft) => {
         draft.team[0]!.health = 1;
       });
       replay = decodeSave(encodeSave(state));
-      step({ type: "visitCampfire" });
-      expect(state.phase).toBe("campfire");
-      step({ type: room % 2 ? "leaveCampfire" : "rest" });
-      expect(state.phase).toBe("teamSelection");
-      if (room % 2 === 0) expect(state.team[0]!.health).toBeGreaterThan(1);
-      else expect(state.team[0]!.health).toBe(1);
+      if (canVisitCampfire(state)) {
+        step({ type: "visitCampfire" });
+        expect(state.phase).toBe("campfire");
+        step({ type: room % 2 ? "leaveCampfire" : "rest" });
+        expect(state.phase).toBe("teamSelection");
+        if (room % 2 === 0) expect(state.team[0]!.health).toBeGreaterThan(1);
+        else expect(state.team[0]!.health).toBe(1);
+      }
     }
     expect(state.phase).toBe("victory");
     step({ type: "newRun", seed: seed + 1 });
@@ -124,9 +131,11 @@ describe("journey lifecycle and deterministic replay", () => {
 
 it("completes the final Boss reward after removing the former Legendary", () => {
   const ready = produce(starterJourney(7, "captoad"), (draft) => {
-    draft.encounter = 7;
-    draft.journey!.victories = 7;
-    draft.expedition!.pack = generateEncounterPack(draft);
+    draft.encounter = 29;
+    draft.journey!.victories = 29;
+    draft.expedition!.pack = generateEncounterPack(draft, ["chronora"]);
+    draft.expedition.recruit = null;
+    draft.support = null;
   });
   expect(ready.expedition!.pack).toEqual(["chronora"]);
   const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
@@ -138,14 +147,15 @@ it("completes the final Boss reward after removing the former Legendary", () => 
   expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
 });
 
-it("uses a valid ordinary final Boss when Chronora is on the roster", () => {
+it("allows an owned Legendary as the final Boss", () => {
   const ready = produce(starterJourney(7, "chronora"), (draft) => {
-    draft.encounter = 7;
-    draft.journey!.victories = 7;
-    draft.expedition!.pack = generateEncounterPack(draft);
+    draft.encounter = 29;
+    draft.journey!.victories = 29;
+    draft.expedition!.pack = generateEncounterPack(draft, ["chronora"]);
+    draft.expedition.recruit = null;
+    draft.support = null;
   });
-  expect(ready.expedition!.pack).toHaveLength(1);
-  expect(ready.expedition!.pack![0]).not.toBe("chronora");
+  expect(ready.expedition!.pack).toEqual(["chronora"]);
   const battle = accept(decodeSave(encodeSave(ready)), { type: "beginBattle" });
   const result = dispatch(battle, { type: "devWinBattle" }, true);
   expect(result.accepted).toBe(true);
@@ -222,9 +232,11 @@ it("exposes required phase payloads in the shared schema types", () => {
 
 it("resumes a return home from the final Recruit reward without losing the earned victory", () => {
   const ready = produce(starterJourney(3, "captoad"), (draft) => {
-    draft.encounter = 7;
-    draft.journey!.victories = 7;
+    draft.encounter = 29;
+    draft.journey!.victories = 29;
     draft.expedition!.pack = generateEncounterPack(draft);
+    draft.expedition.recruit = null;
+    draft.support = null;
   });
   const won = winBattle(accept(ready, { type: "beginBattle" }));
   expect(won.phase).toBe("recruit");

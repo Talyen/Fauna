@@ -92,9 +92,9 @@ it("shares generated identities across Food and Well Read, including serial exha
 it("keeps the permanent Boss kit intact when Pearl generation fills the battle-card budget", () => {
   const destination = produce(run(), (draft) => {
     prepareDestination(draft);
-    draft.encounter = 3;
-    draft.journey!.victories = 3;
-    draft.expedition.pack = authoredPack(3);
+    draft.encounter = 9;
+    draft.journey!.victories = 9;
+    draft.expedition.pack = authoredPack(9);
   });
   const before = requireBattle(accept(destination, { type: "beginBattle" }));
   const next = produce(before, (draft) => {

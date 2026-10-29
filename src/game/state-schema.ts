@@ -76,7 +76,10 @@ const enemy = z.object({
   species: speciesId,
   health: natural,
   maxHealth: natural,
-  power: z.number().min(1).max(2),
+  power: z
+    .number()
+    .min(1)
+    .max(1 + (JOURNEY_LENGTH - 1) / 10),
   targetId: id,
   block: natural,
   combat: combatStateSchema,
