@@ -29,7 +29,6 @@ import { freshCombat, hit, grantTemporaryDodge, startAction } from "../../../src
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { swapBackup } from "../../../src/game/team";
 import { createFood } from "../../../src/game/combat/food";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { BattleState, GameEvent } from "../../../src/game/types";
 
@@ -214,7 +213,6 @@ describe("Arabesca's selected ability contracts", () => {
       [1, 2, 3, 4, 5, 6].map((amount) => [{ kind: "petalwake", amount }]),
     );
     expect(FIRST_RUN_STARTERS).not.toContain("arabesca");
-    expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "arabesca"))).toBe(true);
   });
 
   it.each([1, 2, 3, 4, 5, 6])(

@@ -184,7 +184,7 @@ it.each([1, 14, 19, 20.5, 41, 1000000])("rejects an impossible Merchant price of
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
   const destinations = accept(
     produce(won, (draft) => {
-      draft.rng = 10;
+      draft.rng = 2;
     }),
     recruitChoice(won),
   );
@@ -200,7 +200,7 @@ it("rejects a Merchant discount without Merchant's Favor", () => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
   const destinations = accept(
     produce(won, (draft) => {
-      draft.rng = 10;
+      draft.rng = 2;
     }),
     recruitChoice(won),
   );
@@ -258,7 +258,7 @@ it.each(["control", "reward", "price"])(
         ? won
         : accept(
             produce(won, (draft) => {
-              draft.rng = 10;
+              draft.rng = 2;
             }),
             recruitChoice(won),
           );

@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../../src/game/engine";
 import { definition } from "../../../../src/game/content";
 import { cardText } from "../../../../src/game/card-rules";
-import { encounterPacks } from "../../../../src/game/encounters";
+import { encounterPacks } from "../../../support/encounter-packs";
 import { grantBlock } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { accept, authoredPack, prepareDestination, run, teamRun } from "../../../support/game";

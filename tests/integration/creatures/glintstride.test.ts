@@ -7,7 +7,7 @@ import { cardText } from "../../../src/game/card-rules";
 import { applyBlind, freshCombat, hit } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
 

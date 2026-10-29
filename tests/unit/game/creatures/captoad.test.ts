@@ -15,7 +15,8 @@ import { CARDS, definition, species, type SpeciesId } from "../../../../src/game
 import { cardText } from "../../../../src/game/card-rules";
 import { freshCombat, hit, tickStatuses } from "../../../../src/game/combat";
 import { dispatch, previewCard } from "../../../../src/game/engine";
-import { COMBAT_PACKS, encounterSource } from "../../../../src/game/encounters";
+import { encounterSource } from "../../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../../support/encounter-packs";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { GameEvent } from "../../../../src/game/types";

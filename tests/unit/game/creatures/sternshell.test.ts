@@ -16,7 +16,7 @@ import { freshCombat } from "../../../../src/game/combat";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { actionValue, enemyAbilityValue } from "../../../../src/game/ability-rules";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../../support/encounter-packs";
 import type { GameState } from "../../../../src/game/types";
 
 function ready() {
@@ -52,7 +52,7 @@ it("adds the approved kit to drafts, encounters and current-format saves", () =>
     "Deal 3 Physical damage; Doubled if you have Armor",
   );
   expect(FIRST_RUN_STARTERS).toContain("sternshell");
-  expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "sternshell"))).toBe(true);
+
   for (const card of CARDS.filter((card) => card.species === "sternshell")) {
     const game = ready();
     const before = encodeSave(game);

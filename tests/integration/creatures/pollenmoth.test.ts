@@ -5,7 +5,7 @@ import { CARDS, species } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, restoreHealth } from "../../../src/game/combat/index";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../support/encounter-packs";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateCatalog } from "../../../src/game/content-validation";
 import { battleChoices } from "../../../src/application/battle-policy";

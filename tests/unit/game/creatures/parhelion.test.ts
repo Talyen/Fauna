@@ -24,7 +24,7 @@ import { executeAbility } from "../../../../src/game/combat/abilities";
 import { swapBackup } from "../../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { validateCatalog } from "../../../../src/game/content-validation";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../../support/encounter-packs";
 import { parhelionBattle } from "../../../support/parhelion";
 import type { GameEvent } from "../../../../src/game/types";
 

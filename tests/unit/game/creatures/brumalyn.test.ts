@@ -12,7 +12,7 @@ import { previewCard } from "../../../../src/game/engine";
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { validateCatalog } from "../../../../src/game/content-validation";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { COMBAT_PACKS } from "../../../support/encounter-packs";
 
 const ward = "brumalyn-warmth-ward";
 const pounce = "brumalyn-rime-pounce";
