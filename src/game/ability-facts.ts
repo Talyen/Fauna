@@ -144,7 +144,7 @@ export function ordinaryAttackEvaluator(
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
-  let packet: { origin: "ability"; cardLeech: boolean } | undefined;
+  let packet: { origin: "ability"; cardLeech: boolean; primaryAttack: true } | undefined;
   return (enemy: Enemy): OrdinaryHit[] => {
     const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
     const outcomes: OrdinaryHit[] = [];
@@ -169,6 +169,7 @@ export function ordinaryAttackEvaluator(
       }
       packet ??= {
         origin: "ability",
+        primaryAttack: true,
         cardLeech: !!(def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
       };
       // Ordinary primary packets omit chance effects and most talent reactions deliberately.

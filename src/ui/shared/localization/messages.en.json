@@ -176,6 +176,12 @@
   "creature.echo": {
     "text": "Echo"
   },
+  "creature.gildedWard": {
+    "text": "Gilded Ward"
+  },
+  "creature.gildedWardRule": {
+    "text": "When its owner attacks, deal 1 Light damage to all enemies"
+  },
   "creature.healthFraction": {
     "text": "Health {{health}}/{{maximum}}"
   },
@@ -487,6 +493,9 @@
   },
   "log.summonEcho": {
     "text": "{{actor}} summons an {{echo}}"
+  },
+  "log.summonGildedWard": {
+    "text": "{{actor}} summons a {{ward}}"
   },
   "log.summonPendulum": {
     "text": "{{actor}} summons a {{pendulum}}"

@@ -88,8 +88,8 @@ const enemy = z.object({
   clockworkBees: z.number().int().min(0).max(6).optional(),
 });
 const minion = enemy.extend({
-  name: z.enum(["Echo", "Pendulum", "Royal Bloom"]),
-  species: z.enum(["memento", "chronora", "velvetmonarch"]),
+  name: z.enum(["Echo", "Pendulum", "Royal Bloom", "Gilded Ward"]),
+  species: z.enum(["memento", "chronora", "velvetmonarch", "tithemaw"]),
   lastAbility: z.null(),
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });

@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { isEnemy, battlefieldView } from "../battlefield";
-import { hasTalent, creaturePassiveTier } from "../progression";
+import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameState } from "../types";
@@ -23,6 +23,16 @@ export function modifiedDamage(
   const stats = target.combat!;
   const cardLeech = "cardLeech" in options && options.cardLeech;
   let damage = value;
+  if (
+    attack &&
+    options.origin === "ability" &&
+    options.primaryAttack &&
+    !options.delivery &&
+    !("minion" in source && source.minion)
+  ) {
+    const amount = passiveAmount(alliedSource ? state : undefined, source.species, "costOfShelter");
+    damage += Math.round((target.block * amount) / 100);
+  }
   if (
     options.origin === "ability" &&
     alliedSource &&

@@ -104,11 +104,13 @@ export function CreatureCard({
       aria-label={
         label ??
         (artworkId?.startsWith("minion.")
-          ? artworkId === "minion.pendulum"
-            ? i18n.message("creature.pendulum", "Pendulum")
-            : artworkId === "minion.royal-bloom"
-              ? i18n.message("creature.royalBloom", "Royal Bloom")
-              : i18n.message("creature.echo", "Echo")
+          ? artworkId === "minion.gilded-ward"
+            ? i18n.message("creature.gildedWard", "Gilded Ward")
+            : artworkId === "minion.pendulum"
+              ? i18n.message("creature.pendulum", "Pendulum")
+              : artworkId === "minion.royal-bloom"
+                ? i18n.message("creature.royalBloom", "Royal Bloom")
+                : i18n.message("creature.echo", "Echo")
           : i18n.content(`content.species.${kind}.name`, info.name))
       }
       aria-pressed={presentation ? undefined : selected}
@@ -195,11 +197,13 @@ export function AllyCard({
       actorId={creature.id}
       artworkId={
         "minion" in creature && creature.minion
-          ? creature.species === "chronora"
-            ? "minion.pendulum"
-            : creature.species === "velvetmonarch"
-              ? "minion.royal-bloom"
-              : "minion.echo"
+          ? creature.species === "tithemaw"
+            ? "minion.gilded-ward"
+            : creature.species === "chronora"
+              ? "minion.pendulum"
+              : creature.species === "velvetmonarch"
+                ? "minion.royal-bloom"
+                : "minion.echo"
           : undefined
       }
       name={"name" in creature ? creature.name : undefined}
@@ -208,12 +212,22 @@ export function AllyCard({
         "minion" in creature && creature.minion ? (
           <div className="card-details">
             <strong>
-              {creature.species === "chronora"
-                ? i18n.message("creature.pendulum", "Pendulum")
-                : creature.species === "velvetmonarch"
-                  ? i18n.message("creature.royalBloom", "Royal Bloom")
-                  : i18n.message("creature.echo", "Echo")}
+              {creature.species === "tithemaw"
+                ? i18n.message("creature.gildedWard", "Gilded Ward")
+                : creature.species === "chronora"
+                  ? i18n.message("creature.pendulum", "Pendulum")
+                  : creature.species === "velvetmonarch"
+                    ? i18n.message("creature.royalBloom", "Royal Bloom")
+                    : i18n.message("creature.echo", "Echo")}
             </strong>
+            {creature.species === "tithemaw" && (
+              <p>
+                {i18n.message(
+                  "creature.gildedWardRule",
+                  "When its owner attacks, deal 1 Light damage to all enemies",
+                )}
+              </p>
+            )}
             {creature.species === "chronora" && (
               <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
             )}
@@ -246,23 +260,35 @@ export function EnemyCard({
       kind={enemy.species}
       artworkId={
         enemy.minion
-          ? enemy.species === "chronora"
-            ? "minion.pendulum"
-            : enemy.species === "velvetmonarch"
-              ? "minion.royal-bloom"
-              : "minion.echo"
+          ? enemy.species === "tithemaw"
+            ? "minion.gilded-ward"
+            : enemy.species === "chronora"
+              ? "minion.pendulum"
+              : enemy.species === "velvetmonarch"
+                ? "minion.royal-bloom"
+                : "minion.echo"
           : undefined
       }
       tooltipContent={
         enemy.minion ? (
           <div className="card-details">
             <strong>
-              {enemy.species === "chronora"
-                ? i18n.message("creature.pendulum", "Pendulum")
-                : enemy.species === "velvetmonarch"
-                  ? i18n.message("creature.royalBloom", "Royal Bloom")
-                  : i18n.message("creature.echo", "Echo")}
+              {enemy.species === "tithemaw"
+                ? i18n.message("creature.gildedWard", "Gilded Ward")
+                : enemy.species === "chronora"
+                  ? i18n.message("creature.pendulum", "Pendulum")
+                  : enemy.species === "velvetmonarch"
+                    ? i18n.message("creature.royalBloom", "Royal Bloom")
+                    : i18n.message("creature.echo", "Echo")}
             </strong>
+            {enemy.species === "tithemaw" && (
+              <p>
+                {i18n.message(
+                  "creature.gildedWardRule",
+                  "When its owner attacks, deal 1 Light damage to all enemies",
+                )}
+              </p>
+            )}
             {enemy.species === "chronora" && (
               <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
             )}

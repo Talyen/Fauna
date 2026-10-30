@@ -13,6 +13,10 @@ export const SCENARIOS = [
   "velouria-battle",
   "velouria-collection",
   "velouria-rank-five",
+  "tithemaw-battle",
+  "tithemaw-boss",
+  "tithemaw-summon",
+  "tithemaw-collection",
   "velvetmonarch-battle",
   "velvetmonarch-collection",
   "chronora-battle",
@@ -323,6 +327,37 @@ export async function reviewScenario(server, name) {
       summonEcho(draft, draft.team[0], "player", 6, []);
     });
   }
+  if (name === "tithemaw-boss") {
+    const { authoredPack, prepareDestination } = await server.ssrLoadModule("/tests/support/game.ts");
+    const { encounterPacks } = await server.ssrLoadModule("/tests/support/encounter-packs.ts");
+    const { produce } = await server.ssrLoadModule("immer");
+    const { summonGildedWards } = await server.ssrLoadModule("/src/game/combat/legendary.ts");
+    game = produce(run(), (draft) => {
+      draft.encounter = 9;
+      draft.expedition = {
+        pack: authoredPack(
+          9,
+          encounterPacks(9).findIndex((pack) => pack[0] === "tithemaw"),
+        ),
+        recruit: null,
+        lastRoom: "boss",
+      };
+      prepareDestination(draft);
+      draft.journey.victories = 9;
+    });
+    game = accept(game, { type: "beginBattle" });
+    game = produce(game, (draft) => summonGildedWards(draft, draft.battle.enemies[0], "enemy", []));
+  } else if (name.startsWith("tithemaw-")) {
+    const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
+    const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
+    const { produce } = await server.ssrLoadModule("immer");
+    const { summonGildedWards } = await server.ssrLoadModule("/src/game/combat/legendary.ts");
+    game = produce(teamRun(42, ["tithemaw"]), (draft) => {
+      draft.team[0].health = 54;
+      if (name !== "tithemaw-summon") summonGildedWards(draft, draft.team[0], "player", []);
+      setHand(draft, ["tithemaw-gilded-ward", "tithemaw-coinfang", "tithemaw-oath-howl"]);
+    });
+  }
   if (name.startsWith("velvetmonarch-")) {
     const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
     const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
@@ -472,7 +507,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
   if (
-    (creatureFixtures.includes(creature) || creature === "chronora" || creature === "velvetmonarch") &&
+    (creatureFixtures.includes(creature) ||
+      creature === "chronora" ||
+      creature === "velvetmonarch" ||
+      creature === "tithemaw") &&
     (view === "collection" || view === "rank-five")
   ) {
     await button("Collection").click();
@@ -486,6 +524,14 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
+  }
+  if (scenario.name === "tithemaw-summon") {
+    await page.locator('.hand [data-card-id="ally-0:tithemaw-gilded-ward"]').click();
+    await expect(page.locator('[data-actor-id^="ward-ally-0-"]')).toHaveCount(2);
+    await page.locator('.hand [data-card-id="ally-0:tithemaw-oath-howl"]').click();
+    await expect
+      .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")).battle.mana))
+      .toBe(2);
   }
   if (scenario.name === "tinkervale-interaction") {
     const gear = page.locator('.hand [data-card-id="ally-0:tinkervale-gear-mender"]');

@@ -23,6 +23,7 @@ import {
   summonEcho,
   summonPendulums,
   summonRoyalBlooms,
+  summonGildedWards,
   pendulumBonus,
   createPearls,
   drawBossCards,
@@ -146,6 +147,13 @@ export function executePrimary(context: PrimaryContext) {
       restoreHealth(actor, value, events, false, state, true, actor);
       if (actor.health > 0)
         summonPendulums(state, actor, action.side, events, 1, actor.species !== "chronora");
+      return;
+    case "gildedWard":
+      for (const unit of healingAllies(state, action.side)) {
+        if (actor.health <= 0) break;
+        restoreHealth(unit, value, events, false, state, true, actor);
+      }
+      if (actor.health > 0) summonGildedWards(state, actor, action.side, events);
       return;
     case "royalRepose":
       restoreHealth(actor, value, events, false, state, true, actor);
@@ -283,6 +291,7 @@ export function executePrimary(context: PrimaryContext) {
             {
               origin: "ability",
               attackAbility: true,
+              primaryAttack: true,
               delivery: reflected ? "reflection" : undefined,
               interceptionChecked: true,
               blindMiss: reflected ? false : blindMiss,

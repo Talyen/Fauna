@@ -9,6 +9,7 @@ interface AttackValues {
   leech?: boolean;
   cardLeech?: boolean;
   attackAbility?: boolean;
+  primaryAttack?: boolean;
 }
 export type DamagePacket =
   | (AttackValues & {

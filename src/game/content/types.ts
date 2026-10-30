@@ -45,9 +45,11 @@ export type SpeciesId =
   | "velvetmonarch"
   | "velouria"
   | "tinkervale"
-  | "selvage";
+  | "selvage"
+  | "tithemaw";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "costOfShelter"; amount: number }
   | { kind: "mendTheBroken"; amount: number }
   | { kind: "spareParts"; amount: number }
   | { kind: "rimewake"; amount: number }

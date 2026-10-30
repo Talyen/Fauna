@@ -15,6 +15,7 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   rimewake: ["dodge", "freeze"],
   glassCutter: ["light", "block"],
   courtRemembers: ["water"],
+  costOfShelter: ["physical", "light", "block"],
   gardenAnswers: ["nature", "block"],
   lostAndFound: ["health"],
   lastWarmth: ["health"],

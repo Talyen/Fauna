@@ -4289,6 +4289,42 @@
     "sourceHash": "e3087e1ff54d1ac60834f519c9e7d179971856715cf96913282c0073352ea651",
     "text": "给予一名友方{{value0}}点<keyword0>护甲</keyword0>"
   },
+  "content.card.tithemaw-coinfang.name": {
+    "reviewed": true,
+    "source": "Coinfang",
+    "sourceHash": "4d5e1669a4452d9eb6f5b95d7b0ba2f0ae1a1bfb1ab0c5ee697b4ddd9391d127",
+    "text": "金币之牙"
+  },
+  "content.card.tithemaw-coinfang.vd9f676521c35492e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "e895dfd16b2e1e6facad0ca11f05588b899a4cd9009a1d578a04e298e49bcf90",
+    "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害；<keyword1>净化</keyword1>目标：移除{{value1}}个效果"
+  },
+  "content.card.tithemaw-gilded-ward.name": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "6c67358ae53edfc05f84b36464ab8f9866db553f0352ce97583853540b261419",
+    "text": "鎏金守卫"
+  },
+  "content.card.tithemaw-gilded-ward.v194facc020ba7677.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies / Summon {{value1}} Gilded Wards with {{value2}} <keyword1>Health</keyword1>",
+    "sourceHash": "0ae554d5ae322a969f5486fd04be0e7f9150a0f31f2f443f2af35082dab40ecf",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0> / 召唤{{value1}}个拥有{{value2}}点<keyword1>生命</keyword1>的鎏金守卫"
+  },
+  "content.card.tithemaw-oath-howl.name": {
+    "reviewed": true,
+    "source": "Oath Howl",
+    "sourceHash": "06bdf0eddca5eb94c71f1fe5267da5cc6f0748fe93d8bf83f7687685116c891e",
+    "text": "誓约之嚎"
+  },
+  "content.card.tithemaw-oath-howl.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "780aa077bfbc0a56499cc53e68f7c4b46a20c7ba0a0f65e41e5348abbd26db1f",
+    "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7229,6 +7265,60 @@
     "sourceHash": "49ebdb392c8121e19a59199effe0ef0a3a379048407ac2f629cd1c0fe73a48c6",
     "text": "备用零件"
   },
+  "content.species.tithemaw.name": {
+    "reviewed": true,
+    "source": "Tithemaw",
+    "sourceHash": "34b9c83b320d8b3dcd68d32a53d48afe9ff19eb71805f9cb8ff5da6e68128f5c",
+    "text": "Tithemaw"
+  },
+  "content.species.tithemaw.passive.0.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "8e2fb9579a5efd19fdadb65ba164211885872d675aac7dbf03e981f566b0bedb",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.passive.1.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "51b14cafbf56e7ba39042e6621fdda4e04dd51e3d2d8a82301d1a46f1b9d111a",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.passive.2.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "c68a7637d16a5bfce36fef12b02deba9778ec9da2a62cd33ef1fdd235cd8bf81",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.passive.3.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "6b565e5f8671ee01d42554905d98591ea67a09be13d8c9eaf030d01fb970d72a",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.passive.4.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "e82c952e2e3b4f4db8cc5a1152c5cfc4e057099012c216aa194da27cdd5ad63b",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.passive.5.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "3796826be55ada8dc87eb51a8d2fdeab14d6dc6537f93f8edd860bbde2a6a615",
+    "text": "Tithemaw的攻击造成额外伤害，数值等于目标<keyword0>格挡</keyword0>的{{value0}}%"
+  },
+  "content.species.tithemaw.title": {
+    "reviewed": true,
+    "source": "The empire's reckoning",
+    "sourceHash": "04ff2d6d7bc63c0e5f6cd93d4ab07a834e0a3145af66271459aa7f17a87edd9a",
+    "text": "帝国的清算"
+  },
+  "content.species.tithemaw.trait": {
+    "reviewed": true,
+    "source": "The Cost of Shelter",
+    "sourceHash": "e4b20e106c144de9ebe99fccda88f15acf07894d885332f1d1c827ca0694bacb",
+    "text": "庇护的代价"
+  },
   "content.species.tournelle.name": {
     "reviewed": true,
     "source": "Tournelle",
@@ -9419,6 +9509,18 @@
     "sourceHash": "3c36e40733abf9b6457c411093d43a8a5f015c90a73a334f5571076209505b7d",
     "text": "回响"
   },
+  "creature.gildedWard": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "6c67358ae53edfc05f84b36464ab8f9866db553f0352ce97583853540b261419",
+    "text": "鎏金守卫"
+  },
+  "creature.gildedWardRule": {
+    "reviewed": true,
+    "source": "When its owner attacks, deal 1 Light damage to all enemies",
+    "sourceHash": "bb98bbe4c3a41e6c1524404ba203522809d94120628c02a7fb09871708188e8e",
+    "text": "主人攻击时，对所有敌人造成1点光伤害"
+  },
   "creature.healthFraction": {
     "reviewed": true,
     "source": "Health {{health}}/{{maximum}}",
@@ -10042,6 +10144,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "f68e928d05573be63c2472952e932af500c2cd98607fb85d83e525fc75c51a95",
     "text": "{{actor}}召唤一个{{echo}}"
+  },
+  "log.summonGildedWard": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{ward}}",
+    "sourceHash": "503a6b5dbef6420b3d97841917e25e0a2ecbac5bd87932da5dd9536756402885",
+    "text": "{{actor}}召唤了{{ward}}"
   },
   "log.summonPendulum": {
     "reviewed": true,

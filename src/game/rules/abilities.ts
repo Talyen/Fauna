@@ -120,6 +120,13 @@ const rules: AbilityRuleCatalog = freeze(
       scaling: "authored",
       describe: (_card) => "Your next card is played twice",
     },
+    gildedWard: {
+      ...automatic,
+      scaling: "power",
+      keywords: ["health"],
+      describe: (_card, { value }) =>
+        `Restore ${value} Health to all allies / Summon 2 Gilded Wards with 4 Health`,
+    },
     royalRepose: {
       ...automatic,
       scaling: "power",

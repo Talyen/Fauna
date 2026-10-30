@@ -493,11 +493,13 @@ function validateMinions(state: BattleState) {
           ? unit.name !== "Echo" || !echoHealthValues.includes(unit.maxHealth)
           : unit.species === "chronora"
             ? unit.name !== "Pendulum" || unit.maxHealth !== 6
-            : unit.name !== "Royal Bloom" || !echoHealthValues.includes(unit.maxHealth)) ||
+            : unit.species === "tithemaw"
+              ? unit.name !== "Gilded Ward" || unit.maxHealth !== 4
+              : unit.name !== "Royal Bloom" || !echoHealthValues.includes(unit.maxHealth)) ||
         (unit.id !==
-          `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : "bloom"}-${unit.minion.ownerId}-0` &&
+          `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : unit.species === "tithemaw" ? "ward" : "bloom"}-${unit.minion.ownerId}-0` &&
           unit.id !==
-            `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : "bloom"}-${unit.minion.ownerId}-1`) ||
+            `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : unit.species === "tithemaw" ? "ward" : "bloom"}-${unit.minion.ownerId}-1`) ||
         (unit.minion.side === "enemy" &&
           (unit.combat.oasisLeech ||
             unit.combat.acrobatReady ||

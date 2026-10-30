@@ -454,6 +454,7 @@ export const modifierImplementations = freeze(
       gallantry: ["./combat/interception#interceptAttack"],
       goodFortune: ["./chance#chance"],
       courtRemembers: ["./combat/legendary#courtRemembers"],
+      costOfShelter: ["./combat/damage-values#modifiedDamage"],
       gardenAnswers: ["./combat/legendary#summonRoyalBlooms", "./combat/protection#grantBlock"],
       turnBackTide: [
         "./combat/legendary#summonPendulums",

@@ -45,6 +45,7 @@ const newerSpecies = [
   "velouria",
   "tinkervale",
   "selvage",
+  "tithemaw",
 ];
 it("preserves the recorded creature, passive tier, card and Pearl catalog", () => {
   const digest = (value: unknown) =>

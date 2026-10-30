@@ -50,11 +50,13 @@ export function immediateArtwork(game: GameState) {
         for (const unit of row) creature(unit.species);
       for (const minion of game.battle.minions ?? [])
         ids.add(
-          minion.species === "chronora"
-            ? "minion.pendulum"
-            : minion.species === "velvetmonarch"
-              ? "minion.royal-bloom"
-              : "minion.echo",
+          minion.species === "tithemaw"
+            ? "minion.gilded-ward"
+            : minion.species === "chronora"
+              ? "minion.pendulum"
+              : minion.species === "velvetmonarch"
+                ? "minion.royal-bloom"
+                : "minion.echo",
         );
       const handCards =
         game.battle.hand.length > 1 ? new Map<string, (typeof game.cards)[number]>() : undefined;

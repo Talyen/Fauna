@@ -4289,6 +4289,42 @@
     "sourceHash": "321a07137b3c6afaca56a0cb1df2ac06be55dba38e46dcd8b35468c63cfc37b6",
     "text": "Даёт союзнику {{value0}} <keyword0>брони</keyword0>"
   },
+  "content.card.tithemaw-coinfang.name": {
+    "reviewed": true,
+    "source": "Coinfang",
+    "sourceHash": "52c5c135485cb42c8bf57a06a3651654dc706e5b14c034aa32b9b385f26b5a38",
+    "text": "Монетный клык"
+  },
+  "content.card.tithemaw-coinfang.vd9f676521c35492e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "4cc437fedf71e3d2dab98bfba73d0415b1868fcbd5f54352fbef8afe56871e48",
+    "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона; <keyword1>очистите</keyword1> цель: удалите {{value1}} эффект"
+  },
+  "content.card.tithemaw-gilded-ward.name": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "a19df0ceb13ba5371584e093b3a3431e54b9beafcd3f4922404630512df356d4",
+    "text": "Золотой страж"
+  },
+  "content.card.tithemaw-gilded-ward.v194facc020ba7677.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies / Summon {{value1}} Gilded Wards with {{value2}} <keyword1>Health</keyword1>",
+    "sourceHash": "16a8273dcd138f6dfd72f250ffefccc90ed60ac67aa52948ad205dd98e3a0c2c",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> всем союзникам / Призовите {{value1}} Золотых стражей с {{value2}} <keyword1>здоровья</keyword1>"
+  },
+  "content.card.tithemaw-oath-howl.name": {
+    "reviewed": true,
+    "source": "Oath Howl",
+    "sourceHash": "d42955a141407c83e26456654565642427a0aec7405ba5b983cd5b10e1e33001",
+    "text": "Вой клятвы"
+  },
+  "content.card.tithemaw-oath-howl.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "956a005379a41b981557cad2625e4a244cbdfb5af4cc8e7cac2291dc150b186d",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> всем врагам"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7229,6 +7265,60 @@
     "sourceHash": "1c7d73f816f91d5af26cd5335e5bca2197e6afb3572a4ee7de00307c8a593bc0",
     "text": "Запасные детали"
   },
+  "content.species.tithemaw.name": {
+    "reviewed": true,
+    "source": "Tithemaw",
+    "sourceHash": "6ef5428f7be01b1dfce74931a39f5b925ac292a73fd10ba7ce151b95feb98d3f",
+    "text": "Tithemaw"
+  },
+  "content.species.tithemaw.passive.0.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "a3314b07d7a2dc799c89df86c7b1f90c0cc30edfffbfcc8fc8156aaeef6811d5",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.passive.1.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "974c35005bb84178165ac1955a4a67c9a6fd4387646b830fe900a5dcf1aae2ca",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.passive.2.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "5a24a9347979443cfdfa9ae97f481fa178a36020ba19cf3f17a8945e6f47ccdb",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.passive.3.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "52c1e9f1c6b1bcc20a34298ba86cd187e4cea7848e72a27898b871f26092369a",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.passive.4.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "346e0fc892035be5e1a76dd6b99b7c3363c1ca48edcfa230a1b9a1609ab575a1",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.passive.5.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "d5767b9db9fb02ee110e3ae5cc69609b44d6c57cfa05de3ee2b7896845e04094",
+    "text": "Атаки Tithemaw наносят дополнительный урон, равный {{value0}}% от <keyword0>блока</keyword0> цели"
+  },
+  "content.species.tithemaw.title": {
+    "reviewed": true,
+    "source": "The empire's reckoning",
+    "sourceHash": "e3ef4d9630b7156bd15a2ba3b78ed284ddaab73d2dc970605204e02bbdbf388d",
+    "text": "Расплата империи"
+  },
+  "content.species.tithemaw.trait": {
+    "reviewed": true,
+    "source": "The Cost of Shelter",
+    "sourceHash": "fa9931601317d44a9ffa4cfbc0cd3a435fd5ebb37486540f2dbef2769176b0eb",
+    "text": "Цена защиты"
+  },
   "content.species.tournelle.name": {
     "reviewed": true,
     "source": "Tournelle",
@@ -9419,6 +9509,18 @@
     "sourceHash": "2720241a7c0ae161461475b03c70b9bf3e6ed49a03730041cc745f31fe5c9f92",
     "text": "Эхо"
   },
+  "creature.gildedWard": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "a19df0ceb13ba5371584e093b3a3431e54b9beafcd3f4922404630512df356d4",
+    "text": "Золотой страж"
+  },
+  "creature.gildedWardRule": {
+    "reviewed": true,
+    "source": "When its owner attacks, deal 1 Light damage to all enemies",
+    "sourceHash": "a574f7b17cd650279820d7d84122d8c1bfe799c43750517cf2ce919a8514861a",
+    "text": "Когда хозяин атакует, наносит 1 урон светом всем врагам"
+  },
   "creature.healthFraction": {
     "reviewed": true,
     "source": "Health {{health}}/{{maximum}}",
@@ -10042,6 +10144,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "61fa59d21f8938aa7c3e2132f98eb3bb14bda2e4e40395f256af6bb09d995a05",
     "text": "{{actor}} призывает {{echo}}"
+  },
+  "log.summonGildedWard": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{ward}}",
+    "sourceHash": "607930aebc23b78b89f6d374ea6f4a7c51ecf6b075d410e7019f5429ed5375bb",
+    "text": "{{actor}} призывает: {{ward}}"
   },
   "log.summonPendulum": {
     "reviewed": true,

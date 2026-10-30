@@ -2781,6 +2781,61 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.tithemaw",
+      "origin": "repository",
+      "source": "public/art/tithemaw/portrait.png",
+      "output": "art/tithemaw/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "https://drive.google.com/file/d/1HQ-0yVzp5L8YSC20Ok3wtBWHyHQGrLWC/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "minion.gilded-ward",
+      "origin": "repository",
+      "source": "public/art/tithemaw/ward.png",
+      "output": "art/tithemaw/ward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Generated with built-in ImageGen from Fauna locked style prompt; fox selected by user on 2026-10-30; exact prompt in public/art/tithemaw/ward-prompts.txt",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.tithemaw.coinfang",
+      "origin": "repository",
+      "source": "public/art/tithemaw/coinfang.png",
+      "output": "art/tithemaw/coinfang.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1bkWJHC63dPhym_w4MOBQqtlPVBEU8_FD/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.tithemaw.gilded-ward",
+      "origin": "repository",
+      "source": "public/art/tithemaw/gilded-ward.png",
+      "output": "art/tithemaw/gilded-ward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1-190WSSEvVnn8S2YJgmIlkCKtd_F3vyP/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.tithemaw.oath-howl",
+      "origin": "repository",
+      "source": "public/art/tithemaw/oath-howl.png",
+      "output": "art/tithemaw/oath-howl.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1LZZhQt-OMOvqUhO0scXsUwDyyBrx6IrP/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
       "id": "creature.velvetmonarch",
       "origin": "repository",
       "source": "public/art/velvetmonarch/portrait.png",

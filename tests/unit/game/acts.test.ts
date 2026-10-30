@@ -23,7 +23,7 @@ describe("three-act journey", () => {
   it("draws every eligible Legendary in every Boss room", () => {
     for (const encounter of [9, 19, 29]) {
       const found = new Set<string>();
-      for (const roll of [0.1, 0.5, 0.9]) {
+      for (const roll of [0.1, 0.35, 0.6, 0.9]) {
         const state = produce(starterJourney(42, "mossguard"), (draft) => {
           draft.encounter = encounter;
           observeDecisions(draft, () => roll);
@@ -31,17 +31,17 @@ describe("three-act journey", () => {
         });
         expect(bossEncounter(state)).toBe(true);
       }
-      expect([...found].sort()).toEqual(["chronora", "memento", "velvetmonarch"]);
-      expect(encounterPacks(encounter)).toHaveLength(3);
+      expect([...found].sort()).toEqual(["chronora", "memento", "tithemaw", "velvetmonarch"]);
+      expect(encounterPacks(encounter)).toHaveLength(4);
     }
     const choices = new Set<string>();
-    for (const roll of [0.1, 0.9])
+    for (const roll of [0.1, 0.5, 0.9])
       produce(starterJourney(42, "memento"), (draft) => {
         draft.encounter = 9;
         observeDecisions(draft, () => roll);
         choices.add(generateEncounterPack(draft)[0]!);
       });
-    expect([...choices].sort()).toEqual(["chronora", "velvetmonarch"]);
+    expect([...choices].sort()).toEqual(["chronora", "tithemaw", "velvetmonarch"]);
     expect(JOURNEY_LENGTH).toBe(30);
   });
 

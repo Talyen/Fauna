@@ -1,6 +1,7 @@
 import { emitSupport } from "../events";
 import { findLivingBattlefield } from "../battlefield";
 import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
+import { goldenChorus } from "./legendary";
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
@@ -155,5 +156,6 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
         sharedNegate: primary.sharedNegate,
         attackTargetOnly: true,
       });
+    if (def.effect === "attack" && actor.health > 0) goldenChorus(state, actor, events);
   }
 }

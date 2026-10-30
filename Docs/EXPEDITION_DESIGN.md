@@ -160,4 +160,4 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-Each Boss encounter randomly selects a Legendary outside the roster, or from the full Legendary pool if all are on the roster. The selected pack is committed before battle; recruiting an already-owned Boss in that fallback raises its Collection rank. The current pool contains [Memento](content/creatures/memento.md), [Chronora](content/creatures/chronora.md) and [Velvetmonarch](content/creatures/velvetmonarch.md).
+Each Boss encounter randomly selects a Legendary outside the roster, or from the full Legendary pool if all are on the roster. The selected pack is committed before battle; recruiting an already-owned Boss in that fallback raises its Collection rank. The current pool contains [Memento](content/creatures/memento.md), [Chronora](content/creatures/chronora.md), [Velvetmonarch](content/creatures/velvetmonarch.md) and [Tithemaw](content/creatures/tithemaw.md).

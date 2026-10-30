@@ -545,10 +545,12 @@
   grid-column: 3;
   grid-row: 1;
 }
-.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="pendulum-"][data-actor-id$="-0"] {
+.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="pendulum-"][data-actor-id$="-0"],
+.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="ward-"][data-actor-id$="-0"] {
   grid-column: 1;
 }
-.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="pendulum-"][data-actor-id$="-1"] {
+.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="pendulum-"][data-actor-id$="-1"],
+.battle-screen [data-legendary] > .creature-wrap[data-actor-id^="ward-"][data-actor-id$="-1"] {
   grid-column: 3;
 }
 

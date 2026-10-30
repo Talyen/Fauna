@@ -4289,6 +4289,42 @@
     "sourceHash": "331e4a1bb8ad2485cdc6f018a689fa112a1489a8286899955d661ef666af0689",
     "text": "Gib einem Verbündeten {{value0}} <keyword0>Rüstung</keyword0>"
   },
+  "content.card.tithemaw-coinfang.name": {
+    "reviewed": true,
+    "source": "Coinfang",
+    "sourceHash": "b29d8f40d6bbec17d56d35ad9a1ccf33bc95e7430447658f89ff619fb7dd78f8",
+    "text": "Münzfang"
+  },
+  "content.card.tithemaw-coinfang.vd9f676521c35492e.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "1a50eb559bc4678298604aa210e23ea749c39d5339290b3ad673dbdc816532d9",
+    "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu; <keyword1>bereinige</keyword1> das Ziel: entferne {{value1}} Effekt"
+  },
+  "content.card.tithemaw-gilded-ward.name": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "42ff4ff6a9c6ea68b7ce6a36c63cf37a09acee7d6392ddb6524eefe08fb9480d",
+    "text": "Vergoldeter Wächter"
+  },
+  "content.card.tithemaw-gilded-ward.v194facc020ba7677.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies / Summon {{value1}} Gilded Wards with {{value2}} <keyword1>Health</keyword1>",
+    "sourceHash": "a00047b9bd7f07dd37b68b2e1e21ee43b08f2551b3a86843aacc2a2b0259d035",
+    "text": "Stelle bei allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her / Beschwöre {{value1}} Vergoldete Wächter mit {{value2}} <keyword1>Gesundheit</keyword1>"
+  },
+  "content.card.tithemaw-oath-howl.name": {
+    "reviewed": true,
+    "source": "Oath Howl",
+    "sourceHash": "1795bf2bfaf741be5e57144597240c0424d8a1b931550af9bf643068180fda10",
+    "text": "Schwurheulen"
+  },
+  "content.card.tithemaw-oath-howl.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "8ea20d44ca312e66cb1ce0a063527f9db8d6faa1fdf4dc9d2fed351a396afcaa",
+    "text": "Füge allen Gegnern {{value0}} <keyword0>Licht</keyword0>schaden zu"
+  },
   "content.card.tournelle-attack.name": {
     "reviewed": true,
     "source": "Valiant Challenge",
@@ -7229,6 +7265,60 @@
     "sourceHash": "a062d81c149f25ce8cf7553ceb8c4529e3d2b7c41eab0413ec910d69c7743919",
     "text": "Ersatzteile"
   },
+  "content.species.tithemaw.name": {
+    "reviewed": true,
+    "source": "Tithemaw",
+    "sourceHash": "9602d60c57744051e67b11f98b9337479a1523ed623befc6bd6b38857fd30d0e",
+    "text": "Tithemaw"
+  },
+  "content.species.tithemaw.passive.0.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "ad0c3af6830ecba6408a7a870465ea180430c52237bc28da40f2da7d47fd71a0",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.passive.1.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "a3a48cc13ab258281a7ad61f47bd583dbfe8a0fd1f17d8ca9072ddf9b7196e0c",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.passive.2.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "66cc2c77ba399fc336a00eb4647e28cd967e7facd4099a730c0b7c5aba85bdad",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.passive.3.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "c8c1861c6dc696edbfeda626e9e80ba09dd8ea54049b4a3662845000c55deb6e",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.passive.4.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "f64690f5157a0ae5840c03a8fa1868fd93bc966d0c46b9a105c823c664b0169a",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.passive.5.rule": {
+    "reviewed": true,
+    "source": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "sourceHash": "b693126b64b9087051384a39ab3883b9c6fcc563c02f8a546ff8c25becd04ada",
+    "text": "Tithemaws Angriffe verursachen zusätzlichen Schaden in Höhe von {{value0}}% des <keyword0>Blocks</keyword0> des Ziels"
+  },
+  "content.species.tithemaw.title": {
+    "reviewed": true,
+    "source": "The empire's reckoning",
+    "sourceHash": "3a4cebc8e9647906452b215e7e8ca6b4d12b10d8796f4b9ee1c039c5791d438c",
+    "text": "Die Abrechnung des Imperiums"
+  },
+  "content.species.tithemaw.trait": {
+    "reviewed": true,
+    "source": "The Cost of Shelter",
+    "sourceHash": "37a58cc1ae7a89c0bfb7ced1747fd1024f8469ee6ecc4a9b9310dd78bed6ed82",
+    "text": "Der Preis des Schutzes"
+  },
   "content.species.tournelle.name": {
     "reviewed": true,
     "source": "Tournelle",
@@ -9419,6 +9509,18 @@
     "sourceHash": "0854cc4ecb103017c0b407a6dddcfb53569734d40adcdb73c7728cb460db869b",
     "text": "Echo"
   },
+  "creature.gildedWard": {
+    "reviewed": true,
+    "source": "Gilded Ward",
+    "sourceHash": "42ff4ff6a9c6ea68b7ce6a36c63cf37a09acee7d6392ddb6524eefe08fb9480d",
+    "text": "Vergoldeter Wächter"
+  },
+  "creature.gildedWardRule": {
+    "reviewed": true,
+    "source": "When its owner attacks, deal 1 Light damage to all enemies",
+    "sourceHash": "7c6988510e8a6d8733a75bb96fb2c159c45d1f1ca7aece4accffee35959b435f",
+    "text": "Wenn sein Besitzer angreift, füge allen Gegnern 1 Lichtschaden zu"
+  },
   "creature.healthFraction": {
     "reviewed": true,
     "source": "Health {{health}}/{{maximum}}",
@@ -10042,6 +10144,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "566520b1e8720d48a296d8988eba5e9588c8b09abf7c05fc36ea6811ab43d291",
     "text": "{{actor}} beschwört ein {{echo}}"
+  },
+  "log.summonGildedWard": {
+    "reviewed": true,
+    "source": "{{actor}} summons a {{ward}}",
+    "sourceHash": "b019676893597d0c77f5d19bb19aed3c1ec085c269879ea58f5375f3aa45577f",
+    "text": "{{actor}} beschwört einen {{ward}}"
   },
   "log.summonPendulum": {
     "reviewed": true,

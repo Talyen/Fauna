@@ -13,6 +13,7 @@ export type AbilityKind =
   | "raincall"
   | "springbound"
   | "repeatNextCard"
+  | "gildedWard"
   | "royalRepose"
   | "meadowDecree"
   | "procession"

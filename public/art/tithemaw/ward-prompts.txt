@@ -1,0 +1,11 @@
+Source: https://drive.google.com/file/d/1VODYgwwZO9leeR5xLgc5OoVdbefRiYRv/view
+Generation: built-in image generation, fresh independent images; requested model is not a selectable tool parameter
+
+Common text in each request:
+Preferred model: gpt-image-2.5-sunburst.
+A DISTINCTLY GRAPHIC hand-painted illustration style: chunky simplified silhouettes, exaggerated appealing shapes, matte gouache, only 3 broad flat tones per material, dark blue ink outlines, very little texture, no fine fur or leaf detail. Beautiful bold children's adventure-book print aesthetic with sophisticated color design.
+One large expressive creature per image, full-bleed painted habitat. Landscape 4:3. No text, frames, gaps, UI. Clear readable designs for small pet-battler cards. Highest native resolution.
+
+01-fox.png: A Gilded Ward, a small fox-like guardian spirit with a broad golden shield-shaped mantle and a pale muzzle, standing protectively in the blue-shadowed ruins of a golden desert palace
+02-shield.png: A Gilded Ward, a small living round golden shield with a simple expressive fox face and four short legs, guarding the sunlit ruins of a desert palace
+03-scarab.png: A Gilded Ward, a small golden scarab-like guardian with broad shield-shaped wings and an expressive face, standing watch among blue-shadowed desert palace ruins

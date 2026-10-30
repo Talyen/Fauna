@@ -121,6 +121,57 @@ export function summonRoyalBlooms(
   }
 }
 
+/** Fill the owner's vacant ward slots; existing wards are not refreshed. */
+export function summonGildedWards(
+  state: BattleState,
+  actor: Combatant,
+  side: "player" | "enemy",
+  events: GameEvent[],
+) {
+  if (actor.health <= 0) return;
+  const minions = state.battle.minions ?? (state.battle.minions = []);
+  for (let count = 0; count < 2; count++) {
+    const slot = minionSlot(state, actor, "ward");
+    if (!slot) break;
+    const ward = {
+      id: slot.id,
+      name: "Gilded Ward" as const,
+      species: "tithemaw" as const,
+      health: 4,
+      maxHealth: 4,
+      power: 1,
+      targetId: actor.id,
+      block: 0,
+      combat: freshCombat(),
+      lastAbility: null,
+      minion: { ownerId: actor.id, side },
+    };
+    if (slot.index < 0) minions.push(ward);
+    else minions[slot.index] = ward;
+    emitSupport(events, actor.id, {
+      targetId: ward.id,
+      text: `${species(actor.species).name} summons a Gilded Ward`,
+    });
+  }
+}
+
+/** Each living uncontrolled Ward answers each completed owner attack once. */
+export function goldenChorus(state: BattleState, actor: Combatant, events: GameEvent[]) {
+  const wards = (state.battle.minions ?? []).filter(
+    (unit) =>
+      unit.species === "tithemaw" && unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
+  );
+  const side = isEnemy(actor) ? "player" : "enemy";
+  for (const ward of wards) {
+    if (actor.health <= 0) break;
+    if (ward.health <= 0 || controlled(ward)) continue;
+    for (const target of livingBattlefield(state, side)) {
+      if (actor.health <= 0 || ward.health <= 0) break;
+      hit(state, ward, target, 1, "light", events, { origin: "derived" });
+    }
+  }
+}
+
 export function pendulumBonus(state: BattleState, actor: Combatant): number {
   if (actor.species !== "chronora") return 0;
   return (state.battle.minions ?? []).filter(

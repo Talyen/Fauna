@@ -2478,6 +2478,30 @@
     "reference": "Give an ally 3 Armor",
     "contextHash": "64393fd613c2fe6ddb03751accb9ad6d5a7f54d61da7c28c189a68c4477d7c58"
   },
+  "content.card.tithemaw-coinfang.name": {
+    "text": "Coinfang"
+  },
+  "content.card.tithemaw-coinfang.vd9f676521c35492e.rule": {
+    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "reference": "Deal 4 Physical damage; Purge target: remove 1 effect",
+    "contextHash": "9d8bd5242c56214d6fbcd32fbba930df937544bd8045dd03e227a6573572fa5c"
+  },
+  "content.card.tithemaw-gilded-ward.name": {
+    "text": "Gilded Ward"
+  },
+  "content.card.tithemaw-gilded-ward.v194facc020ba7677.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies / Summon {{value1}} Gilded Wards with {{value2}} <keyword1>Health</keyword1>",
+    "reference": "Restore 2 Health to all allies / Summon 2 Gilded Wards with 4 Health",
+    "contextHash": "eb7a8be200a0fef42663ffdab75dbce1264f1594a9fa1a668e2c7c54bdc1cac4"
+  },
+  "content.card.tithemaw-oath-howl.name": {
+    "text": "Oath Howl"
+  },
+  "content.card.tithemaw-oath-howl.v207aea3bff659874.rule": {
+    "text": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "reference": "Deal 2 Light damage to all enemies",
+    "contextHash": "86d64da5388940b36cc63517a01248e857f756fd03e94f49b210820987f696c6"
+  },
   "content.card.tournelle-attack.name": {
     "text": "Valiant Challenge"
   },
@@ -4304,6 +4328,39 @@
   },
   "content.species.tinkervale.trait": {
     "text": "Spare Parts"
+  },
+  "content.species.tithemaw.name": {
+    "text": "Tithemaw"
+  },
+  "content.species.tithemaw.passive.0.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 20% of the target's Block"
+  },
+  "content.species.tithemaw.passive.1.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 30% of the target's Block"
+  },
+  "content.species.tithemaw.passive.2.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 40% of the target's Block"
+  },
+  "content.species.tithemaw.passive.3.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 50% of the target's Block"
+  },
+  "content.species.tithemaw.passive.4.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 60% of the target's Block"
+  },
+  "content.species.tithemaw.passive.5.rule": {
+    "text": "Tithemaw's attacks deal additional damage equal to {{value0}}% of the target's <keyword0>Block</keyword0>",
+    "reference": "Tithemaw's attacks deal additional damage equal to 70% of the target's Block"
+  },
+  "content.species.tithemaw.title": {
+    "text": "The empire's reckoning"
+  },
+  "content.species.tithemaw.trait": {
+    "text": "The Cost of Shelter"
   },
   "content.species.tournelle.name": {
     "text": "Tournelle"

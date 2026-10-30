@@ -196,10 +196,12 @@ describe("journey encounters", () => {
     for (const encounter of [9, 19, 29]) {
       produce(base, (draft) => {
         draft.encounter = encounter;
-        draft.journey!.encounteredEnemies = ["memento", "chronora"];
+        draft.journey!.encounteredEnemies = ["memento", "chronora", "tithemaw"];
         expect(generateEncounterPack(draft)).toEqual(["velvetmonarch"]);
         draft.journey!.encounteredEnemies.push("velvetmonarch");
-        expect(["memento", "chronora", "velvetmonarch"]).toContain(generateEncounterPack(draft)[0]);
+        expect(["memento", "chronora", "tithemaw", "velvetmonarch"]).toContain(
+          generateEncounterPack(draft)[0],
+        );
       });
     }
   });
@@ -266,9 +268,10 @@ describe("journey encounters", () => {
       for (const owned of [
         ["memento", "chronora"],
         ["memento", "chronora", "velvetmonarch"],
+        ["memento", "chronora", "velvetmonarch", "tithemaw"],
       ] as const) {
         const found = new Set<string>();
-        for (const decision of [0.1, 0.5, 0.9]) {
+        for (const decision of [0.1, 0.35, 0.6, 0.9]) {
           produce(teamRun(42, [...owned]), (draft) => {
             prepareDestination(draft);
             draft.reserves = draft.team.splice(1);
@@ -279,7 +282,11 @@ describe("journey encounters", () => {
           });
         }
         expect([...found].sort()).toEqual(
-          owned.length === 2 ? ["velvetmonarch"] : ["chronora", "memento", "velvetmonarch"],
+          owned.length === 2
+            ? ["tithemaw", "velvetmonarch"]
+            : owned.length === 3
+              ? ["tithemaw"]
+              : ["chronora", "memento", "tithemaw", "velvetmonarch"],
         );
       }
     }
@@ -287,7 +294,7 @@ describe("journey encounters", () => {
 
   it("saves and plays the fallback Boss when all Legendaries are on the roster", () => {
     const ready = produce(starterJourney(7, "memento"), (draft) => {
-      for (const kind of ["chronora", "velvetmonarch"] as const) {
+      for (const kind of ["chronora", "velvetmonarch", "tithemaw"] as const) {
         addRecruit(draft, kind);
         draft.discovery.encountered.push(kind);
         draft.discovery.recruited[kind] = 1;
