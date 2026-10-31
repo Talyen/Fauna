@@ -2,8 +2,30 @@ import { expect, it } from "vitest";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { SPECIES } from "../../../src/game/content";
+import { produce } from "immer";
+import { dispatch } from "../../../src/game/engine";
+import { policy, teamRun } from "../../support/game";
+import { setHand } from "../../support/cards";
 import { ordinaryLineups } from "../../support/lineups";
 import { LINEUP_SHARDS, lineupShard } from "../../../scripts/ci/unit-shards.mjs";
+
+it.each([
+  [30, "ally-0"],
+  [11, "ally-2"],
+] as const)(
+  "chooses a legal healing recipient when Selvage can revive a fallen ally",
+  (prismHealth, targetId) => {
+    const state = produce(teamRun(42, ["selvage", "emberback", "prismram"]), (draft) => {
+      draft.team[0]!.health = 10;
+      draft.team[1]!.health = 0;
+      draft.team[2]!.health = prismHealth;
+      setHand(draft, ["selvage-mending-song"]);
+    });
+    const command = policy(state);
+    expect(command).toMatchObject({ type: "play", targetId });
+    expect(dispatch(state, command).accepted).toBe(true);
+  },
+);
 
 it("partitions every ordinary lineup once without changing seeds, order or scenarios", () => {
   const scenarios = ordinaryLineups();

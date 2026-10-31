@@ -9,7 +9,8 @@ import { mostInjured } from "../../src/game/combat/state";
 import { observeDecisions, type DecisionSource } from "../../src/game/random";
 import { freshCombat, ensureCombat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
-import { inspectCardPlay } from "../../src/game/play-queries";
+import { chosenRecipients, inspectCardPlay } from "../../src/game/play-queries";
+import { playTargeting } from "../../src/game/mending";
 import { produce } from "immer";
 import { encounterPacks } from "./encounter-packs";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -255,10 +256,14 @@ export function policy(s: GameState): Command {
     .sort((a, b) => a.health - b.health)[0];
   if (heal && injured) {
     const def = definition(heal.definitionId);
+    const actor = s.team.find((unit) => unit.id === heal.ownerId);
+    const recipients =
+      s.phase === "battle" && playTargeting(def, s, actor) === "ally" ? chosenRecipients(s, def, actor) : [];
+    const target = recipients.find((unit) => unit.id === injured.id) ?? recipients[0];
     return {
       type: "play",
       cardId: heal.id,
-      ...(def.effect === "heal" && (!def.target || def.target === "injured") ? { targetId: injured.id } : {}),
+      ...(target ? { targetId: target.id } : {}),
     };
   }
   const groupProtection = cards.find((c) => {
