@@ -82,7 +82,7 @@ import french from "../../../src/ui/shared/localization/locales/fr.json";
 import russian from "../../../src/ui/shared/localization/locales/ru.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { Keyword } from "../../../src/ui/shared/keyword-text";
-import { AllyCard, CreatureCard } from "../../../src/ui/shared/cards/cards";
+import { AllyCard, CreatureCard, EnemyCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
 import {
@@ -661,6 +661,35 @@ it("announces a summoned Echo by its localized identity", () => {
     </TooltipProvider>,
   );
   expect(screen.getByRole("button", { name: /^Écho$/ })).toBeTruthy();
+});
+
+it.each([
+  ["tithemaw", "Gilded Ward", "When its owner attacks, deal 1 Light damage to all enemies"],
+  ["chronora", "Pendulum", "Chronora’s attacks deal 1 extra damage"],
+  [
+    "velvetmonarch",
+    "Royal Bloom",
+    "With The Garden Answers, attacks a random enemy when its owner gains Block",
+  ],
+  ["memento", "Echo", null],
+] as const)("shows the same %s minion details for either side", async (kind, name, rule) => {
+  const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  summonEcho(game, game.team[0]!, "player", 5, []);
+  const minion = { ...game.battle.minions![0]!, species: kind };
+  const user = userEvent.setup();
+  for (const side of ["player", "enemy"] as const) {
+    const unit = { ...minion, minion: { ...minion.minion, side } };
+    const view = render(
+      <TooltipProvider delayDuration={0}>
+        {side === "player" ? <AllyCard creature={unit} /> : <EnemyCard enemy={unit} />}
+      </TooltipProvider>,
+    );
+    await user.hover(screen.getByRole("button", { name }));
+    const text = (await screen.findByRole("tooltip")).textContent;
+    expect(text).toContain(name);
+    if (rule) expect(text).toContain(rule);
+    view.unmount();
+  }
 });
 
 it("shows the creature health detail in the selected language", async () => {

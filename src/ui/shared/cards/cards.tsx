@@ -187,61 +187,64 @@ export function CreatureCard({
   );
 }
 
+function minionArtwork(kind: SpeciesId) {
+  return kind === "tithemaw"
+    ? "minion.gilded-ward"
+    : kind === "chronora"
+      ? "minion.pendulum"
+      : kind === "velvetmonarch"
+        ? "minion.royal-bloom"
+        : "minion.echo";
+}
+
+function MinionDetails({ kind }: { kind: SpeciesId }) {
+  const i18n = useMessages();
+  return (
+    <div className="card-details">
+      <strong>
+        {kind === "tithemaw"
+          ? i18n.message("creature.gildedWard", "Gilded Ward")
+          : kind === "chronora"
+            ? i18n.message("creature.pendulum", "Pendulum")
+            : kind === "velvetmonarch"
+              ? i18n.message("creature.royalBloom", "Royal Bloom")
+              : i18n.message("creature.echo", "Echo")}
+      </strong>
+      {kind === "tithemaw" && (
+        <p>
+          {i18n.message(
+            "creature.gildedWardRule",
+            "When its owner attacks, deal 1 Light damage to all enemies",
+          )}
+        </p>
+      )}
+      {kind === "chronora" && (
+        <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
+      )}
+      {kind === "velvetmonarch" && (
+        <p>
+          {i18n.message(
+            "creature.royalBloomRule",
+            "With The Garden Answers, attacks a random enemy when its owner gains Block",
+          )}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function AllyCard({
   creature,
   ...props
 }: { creature: Creature | Enemy } & Omit<CreatureProps, "kind" | "health" | "block">) {
-  const i18n = useMessages();
+  const minion = "minion" in creature && creature.minion;
   return (
     <CreatureCard
       actorId={creature.id}
-      artworkId={
-        "minion" in creature && creature.minion
-          ? creature.species === "tithemaw"
-            ? "minion.gilded-ward"
-            : creature.species === "chronora"
-              ? "minion.pendulum"
-              : creature.species === "velvetmonarch"
-                ? "minion.royal-bloom"
-                : "minion.echo"
-          : undefined
-      }
+      artworkId={minion ? minionArtwork(creature.species) : undefined}
       name={"name" in creature ? creature.name : undefined}
       maxHealth={"maxHealth" in creature ? creature.maxHealth : undefined}
-      tooltipContent={
-        "minion" in creature && creature.minion ? (
-          <div className="card-details">
-            <strong>
-              {creature.species === "tithemaw"
-                ? i18n.message("creature.gildedWard", "Gilded Ward")
-                : creature.species === "chronora"
-                  ? i18n.message("creature.pendulum", "Pendulum")
-                  : creature.species === "velvetmonarch"
-                    ? i18n.message("creature.royalBloom", "Royal Bloom")
-                    : i18n.message("creature.echo", "Echo")}
-            </strong>
-            {creature.species === "tithemaw" && (
-              <p>
-                {i18n.message(
-                  "creature.gildedWardRule",
-                  "When its owner attacks, deal 1 Light damage to all enemies",
-                )}
-              </p>
-            )}
-            {creature.species === "chronora" && (
-              <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
-            )}
-            {creature.species === "velvetmonarch" && (
-              <p>
-                {i18n.message(
-                  "creature.royalBloomRule",
-                  "With The Garden Answers, attacks a random enemy when its owner gains Block",
-                )}
-              </p>
-            )}
-          </div>
-        ) : undefined
-      }
+      tooltipContent={minion ? <MinionDetails kind={creature.species} /> : undefined}
       kind={creature.species}
       health={creature.health}
       block={creature.block}
@@ -254,55 +257,11 @@ export function EnemyCard({
   enemy,
   ...props
 }: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "name">) {
-  const i18n = useMessages();
   return (
     <CreatureCard
       kind={enemy.species}
-      artworkId={
-        enemy.minion
-          ? enemy.species === "tithemaw"
-            ? "minion.gilded-ward"
-            : enemy.species === "chronora"
-              ? "minion.pendulum"
-              : enemy.species === "velvetmonarch"
-                ? "minion.royal-bloom"
-                : "minion.echo"
-          : undefined
-      }
-      tooltipContent={
-        enemy.minion ? (
-          <div className="card-details">
-            <strong>
-              {enemy.species === "tithemaw"
-                ? i18n.message("creature.gildedWard", "Gilded Ward")
-                : enemy.species === "chronora"
-                  ? i18n.message("creature.pendulum", "Pendulum")
-                  : enemy.species === "velvetmonarch"
-                    ? i18n.message("creature.royalBloom", "Royal Bloom")
-                    : i18n.message("creature.echo", "Echo")}
-            </strong>
-            {enemy.species === "tithemaw" && (
-              <p>
-                {i18n.message(
-                  "creature.gildedWardRule",
-                  "When its owner attacks, deal 1 Light damage to all enemies",
-                )}
-              </p>
-            )}
-            {enemy.species === "chronora" && (
-              <p>{i18n.message("creature.pendulumRule", "Chronora’s attacks deal 1 extra damage")}</p>
-            )}
-            {enemy.species === "velvetmonarch" && (
-              <p>
-                {i18n.message(
-                  "creature.royalBloomRule",
-                  "With The Garden Answers, attacks a random enemy when its owner gains Block",
-                )}
-              </p>
-            )}
-          </div>
-        ) : undefined
-      }
+      artworkId={enemy.minion ? minionArtwork(enemy.species) : undefined}
+      tooltipContent={enemy.minion ? <MinionDetails kind={enemy.species} /> : undefined}
       enemyId={enemy.id}
       name={enemy.name}
       health={enemy.health}

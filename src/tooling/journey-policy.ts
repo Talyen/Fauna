@@ -12,10 +12,9 @@ export interface JourneyDecision {
   command: Command;
   reason: string;
 }
-function livingRosterKinds(state: GameState) {
+function livingKinds(units: readonly GameState["team"][number][]) {
   const kinds: GameState["team"][number]["species"][] = [];
-  for (const row of [state.team, state.reserves])
-    for (const unit of row) if (unit.health > 0) kinds.push(unit.species);
+  for (const unit of units) if (unit.health > 0) kinds.push(unit.species);
   return kinds;
 }
 type KitTraits = {
@@ -53,7 +52,11 @@ function traitsFor(kind: GameState["team"][number]["species"]): KitTraits {
 }
 
 /** Prepare roster facts once when comparing multiple Boons. */
-function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = capabilities(state, kinds)) {
+function boonScorer(
+  state: GameState,
+  kinds = livingKinds([...state.team, ...state.reserves]),
+  has = capabilities(state, kinds),
+) {
   let healing: boolean | undefined;
   const canHeal = () =>
     (healing ??=
@@ -415,11 +418,6 @@ function recruitDecision(state: GameState): JourneyDecision {
   const selected = state.phase === "recruit" ? state.reward.selectedRecruit : undefined;
   const offers = selected === undefined ? state.reward!.recruits : [selected];
   const roster = [...state.team, ...state.reserves];
-  const livingKinds = (units: typeof roster) => {
-    const kinds: (typeof roster)[number]["species"][] = [];
-    for (const unit of units) if (unit.health > 0) kinds.push(unit.species);
-    return kinds;
-  };
   const rosterKinds = livingKinds(roster);
   const before = capabilities(state, rosterKinds);
   const score = (
@@ -639,9 +637,7 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
         if (config.policy !== "random") return battle.choose(state);
         const choices = rankedBattleChoices(state);
         return choices.length
-          ? config.policy === "random"
-            ? pick(choices)
-            : choices[0]!
+          ? pick(choices)
           : decision({ type: "endTurn" }, "No affordable playable card has a scored visible benefit");
       }
     }
