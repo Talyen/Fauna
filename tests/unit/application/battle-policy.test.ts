@@ -345,6 +345,7 @@ const recordedRankingSpecies = SPECIES.filter(
       "velouria",
       "tinkervale",
       "selvage",
+      "tithemaw",
     ].includes(id),
 );
 // Each row retains one ordered choice, including its serialized field order; null denotes an empty ranking.

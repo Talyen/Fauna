@@ -68,7 +68,7 @@ function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
 }
 
-export function restoreFallen(context: PrimaryContext, recipient: Combatant, health?: number) {
+function restoreFallen(context: PrimaryContext, recipient: Combatant, health?: number) {
   const { state, action, events } = context;
   const { actor } = action;
   const enemy = action.side === "enemy";

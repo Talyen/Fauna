@@ -15,7 +15,6 @@ import {
   starterJourney,
   winBattle,
   merchantDestination,
-  completeRecruitment,
   run,
   teamRun,
   requireBattle,
@@ -247,23 +246,16 @@ it("rejects a Merchant discount without Merchant's Favor", () => {
 });
 
 it("keeps the committed full price when Favor is purchased from the current Merchant", () => {
-  for (let seed = 1; seed <= 1000; seed++) {
-    const won = winBattle(accept(starterJourney(seed, "captoad"), { type: "beginBattle" }));
-    const destinations = produce(completeRecruitment(won), (draft) => {
-      draft.currency = 40;
-    });
-    const visit = destinations.support;
-    if (!visit) continue;
-    const favor = visit.stock.find((slot) => slot.boon === "merchants-favor");
-    if (!favor) continue;
-    const shopping = accept(destinations, { type: "enterSupport", visit: visit.id });
-    const purchased = accept(shopping, { type: "buyBoon", visit: visit.id, slot: favor.slot });
-    expect(purchased.support!.stock).toEqual(visit.stock);
-    expect(purchased.support!.stock.every((slot) => slot.price >= 20 && slot.price <= 40)).toBe(true);
-    expect(decodeSave(encodeSave(purchased))).toEqual(purchased);
-    return;
-  }
-  throw new Error("No seeded Merchant offered Favor");
+  const destinations = produce(merchantDestination(), (draft) => {
+    draft.support!.stock[0]!.boon = "merchants-favor";
+  });
+  expect(decodeSave(encodeSave(destinations))).toEqual(destinations);
+  const visit = destinations.support!;
+  const shopping = accept(destinations, { type: "enterSupport", visit: visit.id });
+  const purchased = accept(shopping, { type: "buyBoon", visit: visit.id, slot: visit.stock[0]!.slot });
+  expect(purchased.support!.stock).toEqual(visit.stock);
+  expect(purchased.support!.stock.every((slot) => slot.price >= 20 && slot.price <= 40)).toBe(true);
+  expect(decodeSave(encodeSave(purchased))).toEqual(purchased);
 });
 
 it("rejects a final victory receipt on a Boon choice screen", () => {

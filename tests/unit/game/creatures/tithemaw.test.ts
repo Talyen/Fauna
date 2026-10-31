@@ -97,7 +97,7 @@ describe("Tithemaw", () => {
     expect(
       result.events
         .filter((event) => event.kind === "damage" && event.actorId?.startsWith("ward-"))
-        .every((event) => event.amount === 1 && event.damageType === "light"),
+        .every((event) => event.kind === "damage" && event.amount === 1 && event.damageType === "light"),
     ).toBe(true);
   });
 

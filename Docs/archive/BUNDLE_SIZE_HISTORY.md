@@ -33,3 +33,9 @@ The same run measured 943,153 bytes on Windows. The larger measured baseline is 
 ## Localization catalogs
 
 The English-only Linux build for `12ec98c9` measured 991,285 uncompressed JavaScript bytes in [hosted CI](https://github.com/Talyen/Fauna/actions/runs/40564504511). The seven reviewed runtime catalogs total 1,985,196 UTF-8 bytes when serialized without authoring hashes and review flags. They retain source text for stale-translation fallback. Adding those figures gives an estimate of 2,976,481 bytes before differences from bundling and subsequent local-main changes. The provisional allowance is 3,328 KiB with the existing 95% warning. The qualified production bundle has not been measured, and this estimate does not establish build, startup performance or platform acceptance.
+
+## Measured localization bundle and Tithemaw
+
+The first hosted build including the seven qualified catalogs and the reviewed Tithemaw kit measured 3,432,868 bytes on Linux and 3,432,877 bytes on Windows for `83158889` in [CI run 41207574857](https://github.com/Talyen/Fauna/actions/runs/41207574857). The prior 3,328 KiB limit was an estimate based on the English build and catalog data before bundling; the Windows build exceeded it by 25,005 bytes. Inspection found the seven qualified runtime catalogs, Tithemaw's authored content and the shared combat/UI changes, with no added runtime dependency or duplicate interpreter. The observed bundle size includes all JavaScript chunks and does not measure startup or device performance.
+
+The new baseline uses the larger Windows measurement and the 3,584 KiB allowance retains about 6.9% headroom with the existing 95% warning. The run failed other checks as well, so this is size evidence only; the repaired revision still needs its own CI qualification.

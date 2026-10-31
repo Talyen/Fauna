@@ -48,6 +48,7 @@ const recordedSpecies = SPECIES.filter(
       "velouria",
       "tinkervale",
       "selvage",
+      "tithemaw",
     ].includes(entry.id),
 );
 // New Boons have direct outcome assertions in boons.test.ts
