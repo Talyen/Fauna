@@ -5,6 +5,7 @@ import { dispatch } from "../../../src/game/engine";
 import { needsCampfire } from "../../../src/game/destinations";
 import { species } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import { summonEcho } from "../../../src/game/combat/legendary";
 import type { GameState } from "../../../src/game/types";
 import {
   authoredPack,
@@ -16,6 +17,8 @@ import {
   merchantDestination,
   completeRecruitment,
   run,
+  teamRun,
+  requireBattle,
 } from "../../support/game";
 
 it("checks the active team and backups for campfire recovery", () => {
@@ -127,6 +130,39 @@ it.each(["roster", "destination"] as const)(
       expect(result.accepted).toBe(false);
       expect(result.state).toBe(corrupt);
     }
+    const session = createSession({
+      desktop: false,
+      saves: {
+        readCandidates: async () => [
+          { source: "primary", data: encodeSave(corrupt) },
+          { source: "backup", data: encodeSave(good) },
+        ],
+        write: async () => {},
+      },
+    });
+    try {
+      await session.load();
+      expect(session.store.getState().game).toEqual(good);
+    } finally {
+      await session.dispose();
+    }
+  },
+);
+
+it.each(["power", "target", "bees"] as const)(
+  "rejects an impossible summoned creature's %s and recovers the intact backup",
+  async (field) => {
+    const good = produce(requireBattle(teamRun(42, ["memento"])), (draft) => {
+      summonEcho(draft, draft.team[0]!, "player", 6, []);
+    });
+    expect(decodeSave(encodeSave(good))).toEqual(good);
+    const corrupt = produce(good, (draft) => {
+      const echo = draft.battle.minions![0]!;
+      if (field === "power") echo.power = 2;
+      else if (field === "target") echo.targetId = "missing";
+      else echo.clockworkBees = 1;
+    });
+    expect(() => decodeSave(encodeSave(corrupt))).toThrow("Save contains inconsistent game data.");
     const session = createSession({
       desktop: false,
       saves: {
