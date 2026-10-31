@@ -249,7 +249,7 @@ it("retains discard order, eligible owners and recovery events", () => {
     livingCards[1]!.id,
     livingCards[0]!.id,
   ]);
-  expect(drawHasAnotherCard(state, fallenCard, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
   observeDecisions(state, () => 0.99);
   const events: Parameters<typeof recoverBrokenGuard>[2] = [];
   recoverBrokenGuard(state, living!.id, events);
@@ -334,9 +334,9 @@ it("does not invent copy draws when the draw pile is empty", () => {
   state.battle.discard = [];
   state.boons = ["journey-loom"];
   expect(journeyReturnHasDraw(state, card.ownerId)).toBe(false);
-  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
   state.team[0]!.health = 0;
-  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
 });
 
 it("returns a dodged card only for enemy dodges after the current ability started", () => {
@@ -789,15 +789,14 @@ it("uses the borrowing creature's free play when a fallen owner's card is inspec
 it("handles a single discarded card consistently for recovery and draw previews", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["wisterelle", "mossguard"])));
   const [owner, ally] = state.team;
-  const own = state.cards.find((card) => card.ownerId === owner!.id)!;
   const other = state.cards.find((card) => card.ownerId === ally!.id)!;
   state.battle.draw = [];
   state.battle.discard = [other.id];
   expect(discardDrawCards(state, owner!.id)).toEqual([other]);
-  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
   ally!.health = 0;
   expect(discardDrawCards(state, owner!.id)).toEqual([]);
-  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
 });
 
 it("draws an eligible single card without changing decisions or buffer promotion", () => {
@@ -1512,12 +1511,11 @@ it("keeps decision-local attack and draw facts fresh across battle changes", () 
   const evaluate = ordinaryAttackEvaluator(state, actor, def, 12, 1);
   for (const enemy of state.battle.enemies)
     expect(evaluate(enemy)).toEqual(ordinaryAttackFacts(state, actor, def, 12, enemy, 1));
-  const play = availablePlays(state)[0]!;
   const draw = { kind: "draw", amount: 1 } as const;
   const facts = battleBenefitFacts(state);
-  expect(facts.drawAvailable(play, draw)).toBe(drawHasAnotherCard(state, play.card, draw));
+  expect(facts.drawAvailable(draw)).toBe(drawHasAnotherCard(state, draw));
   state.battle.draw = [];
-  expect(battleBenefitFacts(state).drawAvailable(play, draw)).toBe(false);
+  expect(battleBenefitFacts(state).drawAvailable(draw)).toBe(false);
 });
 
 it("keeps authored kit traits and live boon scoring aligned", () => {

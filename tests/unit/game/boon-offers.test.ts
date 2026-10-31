@@ -37,6 +37,33 @@ describe("team-weighted Boon offers", () => {
     expect(rosterBoonKeywords(starterJourney(42, "dawncall")).has("criticalHit")).toBe(true);
   });
 
+  it("recognizes Negate and generated Physical attacks when weighting offers", () => {
+    expect(rosterBoonKeywords(teamRun(42, ["chronora"])).has("negate")).toBe(true);
+    expect(rosterBoonKeywords(teamRun(42, ["tinkervale"])).has("physical")).toBe(true);
+
+    for (const [kind, matching] of [
+      ["chronora", "devotion-clasp"],
+      ["tinkervale", "icy-heart"],
+    ] as const) {
+      const state = teamRun(42, [kind]);
+      const pick = (decision: number) => {
+        let result: ReturnType<typeof offerBoons> = [];
+        produce(state, (draft) => {
+          draft.boons = BOONS.filter((boon) => boon.id !== matching && boon.id !== "smugglers-map").map(
+            (boon) => boon.id,
+          );
+          observeDecisions(draft, () => decision);
+          result = offerBoons(draft, 1);
+        });
+        return result[0];
+      };
+      const matchFirst =
+        BOONS.findIndex((boon) => boon.id === matching) <
+        BOONS.findIndex((boon) => boon.id === "smugglers-map");
+      expect(pick(matchFirst ? 0.6 : 0.4)).toBe(matching);
+    }
+  });
+
   it("replays the same seeded offer and excludes owned Boons", () => {
     const state = starterJourney(23, "captoad");
     const draw = () => {

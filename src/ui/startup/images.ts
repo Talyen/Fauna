@@ -11,6 +11,7 @@ export function warmImage(src: string, signal: AbortSignal, report: Report) {
     }
     const image = new Image();
     let settled = false;
+    let decoding = false;
     const finish = (ready: boolean) => {
       if (settled) return;
       settled = true;
@@ -27,6 +28,8 @@ export function warmImage(src: string, signal: AbortSignal, report: Report) {
     const fail = () => finish(false);
     const abort = () => finish(false);
     const load = () => {
+      if (decoding || settled) return;
+      decoding = true;
       try {
         if (typeof image.decode === "function") void image.decode().then(() => finish(true), fail);
         else finish(image.naturalWidth > 0);
