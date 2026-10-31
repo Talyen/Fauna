@@ -17,24 +17,28 @@ export const defaultAudioPreferences: AudioPreferences = {
   effects: 50,
   muteInBackground: true,
 };
+function normalizePercentage(value: unknown, fallback: number): number {
+  return typeof value === "number" && Number.isFinite(value)
+    ? Math.max(0, Math.min(100, Math.round(value)))
+    : fallback;
+}
 export function normalizeAudioPreferences(value: unknown): AudioPreferences {
   const candidate = value && typeof value === "object" ? (value as Partial<AudioPreferences>) : {};
   const volume = (key: "master" | "music" | "effects") =>
-    typeof candidate[key] === "number" && Number.isFinite(candidate[key])
-      ? Math.max(0, Math.min(100, Math.round(candidate[key])))
-      : defaultAudioPreferences[key];
+    normalizePercentage(candidate[key], defaultAudioPreferences[key]);
   return {
-    enabled: typeof candidate.enabled === "boolean" ? candidate.enabled : true,
-    muteInBackground: typeof candidate.muteInBackground === "boolean" ? candidate.muteInBackground : true,
+    enabled: typeof candidate.enabled === "boolean" ? candidate.enabled : defaultAudioPreferences.enabled,
+    muteInBackground:
+      typeof candidate.muteInBackground === "boolean"
+        ? candidate.muteInBackground
+        : defaultAudioPreferences.muteInBackground,
     master: volume("master"),
     music: volume("music"),
     effects: volume("effects"),
   };
 }
 export function normalizeEffectIntensity(value: unknown) {
-  return typeof value === "number" && Number.isFinite(value)
-    ? Math.max(0, Math.min(100, Math.round(value)))
-    : 100;
+  return normalizePercentage(value, 100);
 }
 export interface DevicePreferences {
   audio: AudioPreferences;
