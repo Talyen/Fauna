@@ -129,6 +129,10 @@ export function BattleScreen({
     allyTarget,
     enemyRow,
     playerRow,
+    enemyLegendary,
+    playerLegendary,
+    enemyPresentation,
+    playerPresentation,
     visibleHand,
     cardsById,
     legalTargets,
@@ -162,96 +166,94 @@ export function BattleScreen({
         className="enemy-row"
         data-nav-row
         aria-label={i18n.message("battle.enemyRow", "Enemy row")}
-        data-legendary={battle.enemies.some((unit) => species(unit.species).legendary) || undefined}
+        data-legendary={enemyLegendary || undefined}
       >
-        {enemyRow
-          .filter((unit) => !unit.minion || unit.health > 0)
-          .map((enemy) => (
-            <EnemyCard
-              key={enemy.id}
-              enemy={enemy}
-              sharedDodge={sharedDodgeChance(game, enemy)}
-              tooltips={!selected}
-              invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
-              validTarget={!!selected && enemyTarget && enemy.health > 0}
-              activeTarget={!!selected && target === enemy.id}
-              onPreviewEnd={() => leaveTarget(enemy.id)}
-              onPreview={() => {
-                if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
-              }}
-              preview={
-                selected && model.affected.has(enemy.id) ? (
-                  <TargetPreview
-                    forecast={model.units.get(enemy.id)}
-                    displayName={localizedCombatantName(enemy, i18n)}
-                  />
-                ) : undefined
+        {enemyPresentation.map(({ unit: enemy, slot }) => (
+          <EnemyCard
+            key={enemy.id}
+            enemy={enemy}
+            battleSlot={slot}
+            sharedDodge={sharedDodgeChance(game, enemy)}
+            tooltips={!selected}
+            invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
+            validTarget={!!selected && enemyTarget && enemy.health > 0}
+            activeTarget={!!selected && target === enemy.id}
+            onPreviewEnd={() => leaveTarget(enemy.id)}
+            onPreview={() => {
+              if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
+            }}
+            preview={
+              selected && model.affected.has(enemy.id) ? (
+                <TargetPreview
+                  forecast={model.units.get(enemy.id)}
+                  displayName={localizedCombatantName(enemy, i18n)}
+                />
+              ) : undefined
+            }
+            onClick={(element) => {
+              if (selected) {
+                if (enemyTarget && enemy.health > 0)
+                  play({ type: "play", cardId: selected, targetId: enemy.id });
+                else onDenied(element);
               }
-              onClick={(element) => {
-                if (selected) {
-                  if (enemyTarget && enemy.health > 0)
-                    play({ type: "play", cardId: selected, targetId: enemy.id });
-                  else onDenied(element);
-                }
-              }}
-              label={
-                selected && enemyTarget && enemy.health > 0
-                  ? i18n.message("battle.target", "Target {{name}}", {
-                      name: localizedCombatantName(enemy, i18n),
-                    })
-                  : localizedCombatantName(enemy, i18n)
-              }
-            />
-          ))}
+            }}
+            label={
+              selected && enemyTarget && enemy.health > 0
+                ? i18n.message("battle.target", "Target {{name}}", {
+                    name: localizedCombatantName(enemy, i18n),
+                  })
+                : localizedCombatantName(enemy, i18n)
+            }
+          />
+        ))}
       </section>
       <section
         className="player-row"
         data-nav-row
         aria-label={i18n.message("battle.playerRow", "Player row")}
-        data-legendary={game.team.some((unit) => species(unit.species).legendary) || undefined}
+        data-legendary={playerLegendary || undefined}
       >
-        {playerRow
-          .filter((unit) => !("minion" in unit) || unit.health > 0)
-          .map((creature) => (
-            <AllyCard
-              progression={game}
-              key={creature.id}
-              creature={creature}
-              sharedDodge={sharedDodgeChance(game, creature)}
-              sharedImmunity={sharedControlImmunity(game, creature)}
-              tooltips={!selected}
-              acting={acting?.id === creature.id}
-              validTarget={!!selected && legalTargets.has(creature.id) && allyTarget}
-              activeTarget={!!selected && legalTargets.has(creature.id) && target === creature.id}
-              onPreviewEnd={() => leaveTarget(creature.id)}
-              invalidTarget={!!selected && (!allyTarget || !legalTargets.has(creature.id))}
-              onPreview={() => {
-                if (selected && allyTarget && legalTargets.has(creature.id)) setTarget(creature.id);
-              }}
-              preview={
-                selected && model.affected.has(creature.id) ? (
-                  <TargetPreview
-                    forecast={model.units.get(creature.id)}
-                    displayName={localizedCombatantName(creature, i18n)}
-                  />
-                ) : undefined
+        {playerPresentation.map(({ unit: creature, slot }) => (
+          <AllyCard
+            progression={game}
+            key={creature.id}
+            creature={creature}
+            battleSlot={slot}
+            sharedDodge={sharedDodgeChance(game, creature)}
+            sharedImmunity={sharedControlImmunity(game, creature)}
+            tooltips={!selected}
+            acting={acting?.id === creature.id}
+            validTarget={!!selected && legalTargets.has(creature.id) && allyTarget}
+            activeTarget={!!selected && legalTargets.has(creature.id) && target === creature.id}
+            onPreviewEnd={() => leaveTarget(creature.id)}
+            invalidTarget={!!selected && (!allyTarget || !legalTargets.has(creature.id))}
+            onPreview={() => {
+              if (selected && allyTarget && legalTargets.has(creature.id)) setTarget(creature.id);
+            }}
+            preview={
+              selected && model.affected.has(creature.id) ? (
+                <TargetPreview
+                  forecast={model.units.get(creature.id)}
+                  displayName={localizedCombatantName(creature, i18n)}
+                />
+              ) : undefined
+            }
+            onClick={(element) => {
+              if (selected) {
+                if (allyTarget && legalTargets.has(creature.id))
+                  play({ type: "play", cardId: selected, targetId: creature.id });
+                else onDenied(element);
               }
-              onClick={(element) => {
-                if (selected) {
-                  if (allyTarget && legalTargets.has(creature.id))
-                    play({ type: "play", cardId: selected, targetId: creature.id });
-                  else onDenied(element);
-                }
-              }}
-              label={
-                selected && allyTarget && legalTargets.has(creature.id)
-                  ? i18n.message("battle.target", "Target {{name}}", {
-                      name: localizedCombatantName(creature, i18n),
-                    })
-                  : localizedCombatantName(creature, i18n)
-              }
-            />
-          ))}
+            }}
+            label={
+              selected && allyTarget && legalTargets.has(creature.id)
+                ? i18n.message("battle.target", "Target {{name}}", {
+                    name: localizedCombatantName(creature, i18n),
+                  })
+                : localizedCombatantName(creature, i18n)
+            }
+          />
+        ))}
       </section>
       <div className="target-control">
         <div className="target-summary" role="status" aria-live="polite">
@@ -289,51 +291,45 @@ export function BattleScreen({
                 actor={acting}
                 modifiers={game}
               />
-              {def.effect === "resurrect" ||
-              def.effect === "swapChosen" ||
-              hasMendingTargets(game, def, acting)
-                ? game.reserves
-                    .filter((unit) => legalTargets.has(unit.id))
-                    .map((unit) => (
-                      <Button
-                        key={unit.id}
-                        variant="outline"
-                        data-backup-target={unit.id}
-                        data-resurrection-target={
-                          def.effect === "resurrect" || hasMendingTargets(game, def, acting)
-                            ? unit.id
-                            : undefined
-                        }
-                        aria-label={
-                          def.effect === "swapChosen"
-                            ? i18n.message("battle.swapBackup", "Swap in {{name}} from backup", {
-                                name: localizedCombatantName(unit, i18n),
-                              })
-                            : unit.health === 0
-                              ? i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
-                                  name: localizedCombatantName(unit, i18n),
-                                })
-                              : i18n.message("battle.target", "Target {{name}}", {
-                                  name: localizedCombatantName(unit, i18n),
-                                })
-                        }
-                        onFocus={() => setTarget(unit.id)}
-                        onMouseEnter={() => setTarget(unit.id)}
-                        onMouseLeave={() => leaveTarget(unit.id)}
-                        onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
-                      >
-                        {hasMendingTargets(game, def, acting) && unit.health === 0
-                          ? i18n.message("battle.reviveBackup", "Revive {{name}}", {
+              {game.reserves
+                .filter((unit) => legalTargets.has(unit.id))
+                .map((unit) => (
+                  <Button
+                    key={unit.id}
+                    variant="outline"
+                    data-backup-target={unit.id}
+                    data-resurrection-target={
+                      def.effect === "resurrect" || hasMendingTargets(game, def, acting) ? unit.id : undefined
+                    }
+                    aria-label={
+                      def.effect === "swapChosen"
+                        ? i18n.message("battle.swapBackup", "Swap in {{name}} from backup", {
+                            name: localizedCombatantName(unit, i18n),
+                          })
+                        : unit.health === 0
+                          ? i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
                               name: localizedCombatantName(unit, i18n),
                             })
-                          : def.effect === "resurrect" || hasMendingTargets(game, def, acting)
-                            ? i18n.message("battle.backupName", "{{name}} (backup)", {
-                                name: localizedCombatantName(unit, i18n),
-                              })
-                            : localizedCombatantName(unit, i18n)}
-                      </Button>
-                    ))
-                : null}
+                          : i18n.message("battle.target", "Target {{name}}", {
+                              name: localizedCombatantName(unit, i18n),
+                            })
+                    }
+                    onFocus={() => setTarget(unit.id)}
+                    onMouseEnter={() => setTarget(unit.id)}
+                    onMouseLeave={() => leaveTarget(unit.id)}
+                    onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
+                  >
+                    {hasMendingTargets(game, def, acting) && unit.health === 0
+                      ? i18n.message("battle.reviveBackup", "Revive {{name}}", {
+                          name: localizedCombatantName(unit, i18n),
+                        })
+                      : def.effect === "resurrect" || hasMendingTargets(game, def, acting)
+                        ? i18n.message("battle.backupName", "{{name}} (backup)", {
+                            name: localizedCombatantName(unit, i18n),
+                          })
+                        : localizedCombatantName(unit, i18n)}
+                  </Button>
+                ))}
               {model.messages.map((message, index) => (
                 <p key={index}>{localizedPreviewMessage(message, i18n)}</p>
               ))}

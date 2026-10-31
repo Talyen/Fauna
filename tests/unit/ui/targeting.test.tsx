@@ -13,6 +13,8 @@ import { previewCard } from "../../../src/game/engine";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";
 import { requireBattle, teamRun } from "../../support/game";
+import { summonPendulums } from "../../../src/game/combat/legendary";
+import { wisterelleBattle } from "../../support/wisterelle";
 
 screenTestEnvironment({ visible: true });
 
@@ -115,6 +117,62 @@ it("navigation previews and remembers a recipient, cancels back to the card, and
   });
   expect(container.querySelector(".target-preview")).toBeNull();
 });
+it("navigates Legendary targets by their visible fixed slots even if summon records are reordered", () => {
+  const game = produce(fixture(), (state) => {
+    const battle = requireBattle(state);
+    battle.battle.enemies = [battle.battle.enemies[0]!];
+    const boss = battle.battle.enemies[0]!;
+    boss.species = "chronora";
+    summonPendulums(battle, boss, "enemy", [], 2, true);
+    battle.battle.minions!.reverse();
+  });
+  const { container, controls, card, send } = open(game, true);
+  const bossId = game.battle!.enemies[0]!.id;
+  const leftId = `pendulum-${bossId}-0`;
+  const rightId = `pendulum-${bossId}-1`;
+  const focusedId = () => document.activeElement?.closest("[data-actor-id]")?.getAttribute("data-actor-id");
+  fireEvent.click(card("attack"));
+  expect(focusedId()).toBe(leftId);
+  expect(container.querySelector(`[data-actor-id="${leftId}"]`)?.getAttribute("data-battle-slot")).toBe(
+    "left",
+  );
+  expect(container.querySelector(`[data-actor-id="${rightId}"]`)?.getAttribute("data-battle-slot")).toBe(
+    "right",
+  );
+  act(() => {
+    controls.current!("right");
+  });
+  expect(focusedId()).toBe(bossId);
+  act(() => {
+    controls.current!("right");
+  });
+  expect(focusedId()).toBe(rightId);
+  act(() => {
+    controls.current!("back");
+  });
+  expect(document.activeElement).toBe(card("attack"));
+  expect(send).not.toHaveBeenCalled();
+});
+
+it("navigates legal backup targets in the same order they are displayed", () => {
+  const game = wisterelleBattle();
+  const { controls, card, send } = open(game, true);
+  fireEvent.click(card("wisterelle-forgotten-junction"));
+  const buttons = screen.getAllByRole("button", { name: /^Swap in .* from backup$/ });
+  expect(buttons).toHaveLength(2);
+  expect(document.activeElement).toBe(buttons[0]);
+  act(() => {
+    controls.current!("right");
+  });
+  expect(document.activeElement).toBe(buttons[1]);
+  fireEvent.click(buttons[1]!);
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "play",
+    cardId: card("wisterelle-forgotten-junction").dataset.cardId,
+    targetId: buttons[1]!.getAttribute("data-backup-target"),
+  });
+});
+
 it("plays a chosen-target card immediately when only one recipient is legal", async () => {
   const game = produce(fixture(), (state) => {
     state.battle!.enemies.slice(1).forEach((unit) => {
