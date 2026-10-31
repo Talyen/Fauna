@@ -24,6 +24,7 @@ const PENDULUM_HEALTH = 6;
 function minionSlot(state: BattleState, actor: Combatant, prefix: string) {
   const minions = state.battle.minions ?? (state.battle.minions = []);
   const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
+  if (owned.filter((unit) => unit.health > 0).length >= MINION_LIMIT) return undefined;
   for (let slot = 0; slot < MINION_LIMIT; slot++) {
     const id = `${prefix}-${actor.id}-${slot}`;
     const index = minions.findIndex((unit) => unit.id === id);
@@ -31,10 +32,16 @@ function minionSlot(state: BattleState, actor: Combatant, prefix: string) {
       if (minions[index]!.health <= 0) return { id, index };
       continue;
     }
-    if (owned.length < MINION_LIMIT) return { id, index: -1 };
-    const vacant = minions.findIndex((unit) => unit.minion.ownerId === actor.id && unit.health <= 0);
-    if (vacant >= 0) return { id, index: vacant };
-    return undefined;
+    const vacant = minions.findIndex((unit) => {
+      if (unit.minion.ownerId !== actor.id || unit.health > 0) return false;
+      // A status or deferred Leech payment may still belong to this summon.
+      return ![...state.team, ...state.reserves, ...state.battle.enemies, ...minions].some(
+        (other) =>
+          Object.values(other.combat?.statusSources ?? {}).includes(unit.id) ||
+          other.combat?.bleedLeech.some((payment) => payment.sourceId === unit.id),
+      );
+    });
+    return { id, index: vacant };
   }
   return undefined;
 }

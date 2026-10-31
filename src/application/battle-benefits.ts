@@ -443,6 +443,22 @@ export function battleBenefits(
       const vacant = minions.filter((unit) => unit.health > 0).length < 2;
       return support(restored > 0 ? "healing" : vacant ? "standardUtility" : "none", restored);
     }
+    case "gildedWard": {
+      let restored = 0;
+      let utility = 0;
+      for (const ally of facts.healingAllies()) {
+        const benefit = healingBenefit(state, ally, value, def.effects);
+        restored += benefit.restored;
+        utility += benefit.utility;
+      }
+      const living = (state.battle.minions ?? []).filter(
+        (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
+      ).length;
+      return support(
+        restored > 0 ? "healing" : living < 2 ? "summon" : utility > 0 ? "utility" : "none",
+        restored || utility,
+      );
+    }
     case "meadowDecree": {
       const restored = facts
         .healingAllies()

@@ -98,7 +98,8 @@ const battle = z.object({
   encoreProgress: z.number().int().min(0).max(2),
   puzzleProgress: z.array(z.enum(["burn", "poison", "bleed", "stun", "freeze", "blind"])).max(2),
   repeatNext: z.object({ player: z.boolean(), enemy: z.boolean() }).strict(),
-  minions: z.array(minion).max(12).optional(),
+  // Four summon kinds, two identities each, for each possible combatant owner.
+  minions: z.array(minion).max(64).optional(),
   copySerial: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   earnedGold: natural,
   freeBurnUsed: z.boolean(),

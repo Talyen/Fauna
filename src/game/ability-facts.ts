@@ -5,6 +5,7 @@ import type { BattleState, Creature, Enemy } from "./types";
 import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
 import { glassCutterAmount } from "./combat/glass-cutter";
+import { pendulumBonus } from "./combat/legendary";
 import {
   dodgeChance,
   hasHarmfulEffects,
@@ -146,7 +147,9 @@ export function ordinaryAttackEvaluator(
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
   let packet: { origin: "ability"; cardLeech: boolean; primaryAttack: true } | undefined;
   return (enemy: Enemy): OrdinaryHit[] => {
-    const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
+    const magnitude =
+      (value + pendulumBonus(state, actor)) *
+      (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
     const outcomes: OrdinaryHit[] = [];
     const count = def.alternateDamageType ? 2 : 1;
     for (let index = 0; index < count; index++) {
