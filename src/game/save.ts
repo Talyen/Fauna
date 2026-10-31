@@ -196,7 +196,7 @@ export function validateRoster(state: GameState) {
       !roster.some((unit) => unit.health > 0),
   );
   // Reserve battle-generated identities before a destination can create those combatants.
-  invalid(roster.some((unit) => /^(?:enemy-|echo-|pendulum-|bloom-)/.test(unit.id)));
+  invalid(roster.some((unit) => /^(?:enemy-|echo-|pendulum-|bloom-|ward-)/.test(unit.id)));
   invalid(!uniqueBy(roster, (creature) => creature.species));
   invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
@@ -472,7 +472,8 @@ function validateMinions(state: BattleState) {
   const minions = state.battle.minions ?? [];
   const counts = minions.length > 2 ? new Map<string, number>() : undefined;
   if (counts)
-    for (const unit of minions) counts.set(unit.minion.ownerId, (counts.get(unit.minion.ownerId) ?? 0) + 1);
+    for (const unit of minions)
+      if (unit.health > 0) counts.set(unit.minion.ownerId, (counts.get(unit.minion.ownerId) ?? 0) + 1);
   for (const unit of minions) {
     const owner =
       unit.minion.side === "player"
