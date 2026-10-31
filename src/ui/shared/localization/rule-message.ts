@@ -26,16 +26,19 @@ export function renderRuleMessage(message: RuleMessage, translation = message.te
     const token = /<(keyword\d+)>([^<>]*)<\/\1>|\{\{(value\d+)\}\}/g;
     let cursor = 0;
     const appendText = (text: string) => {
-      if (/[<>]|\{\{|\}\}/.test(text)) return false;
       if (text) {
         const last = parts.at(-1);
         if (last && !last.keyword) parts[parts.length - 1] = { text: last.text + text };
         else parts.push({ text });
       }
+    };
+    const appendTemplateText = (text: string) => {
+      if (/[<>]|\{\{|\}\}/.test(text)) return false;
+      appendText(text);
       return true;
     };
     for (const match of template.matchAll(token)) {
-      if (!appendText(template.slice(cursor, match.index))) return null;
+      if (!appendTemplateText(template.slice(cursor, match.index))) return null;
       if (match[1]) {
         const id = message.keywords[match[1]];
         if (!id || seenKeywords.has(match[1]) || !match[2] || /\{\{|\}\}/.test(match[2])) return null;
@@ -49,7 +52,7 @@ export function renderRuleMessage(message: RuleMessage, translation = message.te
       }
       cursor = match.index + match[0].length;
     }
-    if (!appendText(template.slice(cursor))) return null;
+    if (!appendTemplateText(template.slice(cursor))) return null;
     if (
       seenValues.size !== Object.keys(message.values).length ||
       seenKeywords.size !== Object.keys(message.keywords).length

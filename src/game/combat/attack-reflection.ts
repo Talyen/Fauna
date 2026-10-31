@@ -2,8 +2,10 @@ import { ensureCombat, unitName, type Combatant } from "./state";
 import type { GameEvent } from "../types";
 
 export function takeAttackReflection(source: Combatant, target: Combatant, events: GameEvent[]) {
-  if (source.health <= 0 || target.health <= 0 || !ensureCombat(target).attackReflection) return false;
-  ensureCombat(target).attackReflection = false;
+  if (source.health <= 0 || target.health <= 0) return false;
+  const combat = ensureCombat(target);
+  if (!combat.attackReflection) return false;
+  combat.attackReflection = false;
   publishAttackReflection(source, target, events);
   return true;
 }

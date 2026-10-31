@@ -1,11 +1,10 @@
-import { cardRuleId } from "../localization/card-rule-id";
-import { structuredCardRule } from "../localization/structured-card-rule";
+import { cardRulePresentation } from "../localization/card-rule-id";
 import { useMessages } from "../localization/message-context";
 import type { GameState } from "../../../game/types";
 import { KeywordText } from "../keyword-text";
 import { Droplet, Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
 import { type CardDefinition, type DamageType } from "../../../game/content";
-import { cardText, DAMAGE_LABELS } from "../../../game/card-rules";
+import { DAMAGE_LABELS } from "../../../game/card-rules";
 const DAMAGE_ICONS = {
   physical: Swords,
   poison: FlaskConical,
@@ -58,15 +57,10 @@ export function CardRules({
   power?: number;
   modifiers?: GameState;
 }) {
-  const text = cardText(card, level, value, power, modifiers);
-  const structured = structuredCardRule(card, level, value, power, text);
+  const rule = cardRulePresentation(card, level, value, power, modifiers);
   return (
     <span className="action-effect">
-      <KeywordText
-        text={text}
-        id={structured?.id ?? cardRuleId(card, modifiers, text)}
-        structured={structured?.message}
-      />
+      <KeywordText text={rule.text} id={rule.id} structured={rule.message} />
     </span>
   );
 }

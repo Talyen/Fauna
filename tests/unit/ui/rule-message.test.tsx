@@ -33,6 +33,18 @@ describe("localizable rule messages", () => {
       expect(result.filter((part) => part.keyword).map((part) => part.keyword)).toEqual(["health", "block"]);
     }
   });
+
+  it("renders placeholder values literally even when they contain template syntax", () => {
+    const message = {
+      source: "Original",
+      template: "Value: {{value0}}",
+      values: { value0: "<tag> {{value1}}" },
+      keywords: {},
+    };
+    expect(renderRuleMessage(message, "Translated: {{value0}}")).toEqual([
+      { text: "Translated: <tag> {{value1}}" },
+    ]);
+  });
 });
 
 it("updates rendered rules when the catalog changes, retaining accessible text and keyword identity", () => {

@@ -1,5 +1,4 @@
-import { cardRuleId } from "../localization/card-rule-id";
-import { structuredCardRule } from "../localization/structured-card-rule";
+import { cardRulePresentation } from "../localization/card-rule-id";
 import { useRuleText } from "../localization/rule-catalog";
 import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
@@ -14,7 +13,6 @@ import { actionDisplay } from "./action-display";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
 import { species } from "../../../game/content";
-import { cardText } from "../../../game/card-rules";
 import type { SpeciesId } from "../../../game/content";
 import type { Card, Creature, Enemy, GameState } from "../../../game/types";
 type CreatureProps = {
@@ -343,13 +341,8 @@ export function ActionCard({
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers);
-  const effectText = cardText(def, card.level, value, 1, modifiers);
-  const structured = structuredCardRule(def, card.level, value, 1, effectText);
-  const effectLabel = useRuleText(
-    effectText,
-    structured?.id ?? cardRuleId(def, modifiers, effectText),
-    structured?.message,
-  )
+  const rule = cardRulePresentation(def, card.level, value, 1, modifiers);
+  const effectLabel = useRuleText(rule.text, rule.id, rule.message)
     .map((part) => part.text)
     .join("");
   const name = i18n.content(`content.card.${def.id}.name`, def.name);
@@ -362,7 +355,7 @@ export function ActionCard({
     mana: modifiers ? cardCost(card, modifiers) : def.cost,
     effect: effectLabel,
   });
-  useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
+  useEffectBaseline(selected ? effectPalette(visualKeywords(rule.text)) : null, 1);
   const artwork = (
     <ArtCard
       aspect="action"
@@ -370,7 +363,7 @@ export function ActionCard({
       presentation={presentation}
       tabIndex={presentation ? undefined : 0}
       className={selected ? "selected" : undefined}
-      effectText={effectText}
+      effectText={rule.text}
       data-card-id={card.id}
       data-effect={def.effect}
       data-consume={def.consume || undefined}
