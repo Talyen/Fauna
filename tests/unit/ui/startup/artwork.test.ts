@@ -61,7 +61,17 @@ it("warms the saved combat's visible hand, creatures and minions without loading
       },
     ];
   });
-  expect(immediateArtwork(minions)).toContain(assetUrl("minion.echo"));
+  for (const [kind, artwork] of [
+    ["memento", "minion.echo"],
+    ["tithemaw", "minion.gilded-ward"],
+    ["chronora", "minion.pendulum"],
+    ["velvetmonarch", "minion.royal-bloom"],
+  ] as const) {
+    const encounter = produce(minions, (draft) => {
+      draft.battle.minions![0]!.species = kind;
+    });
+    expect(immediateArtwork(encounter)).toContain(assetUrl(artwork));
+  }
   expect(urls.length).toBeLessThan(Object.keys(prepared.records).length / 2);
 });
 it("covers recruitment, Boon and Merchant choices", () => {

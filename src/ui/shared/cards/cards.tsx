@@ -4,7 +4,7 @@ import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
 import { CombatStatus } from "../combat/combat-status";
-import { assetUrl } from "../assets";
+import { assetUrl, minionArtwork } from "../assets";
 import { useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
@@ -186,16 +186,6 @@ export function CreatureCard({
       </div>
     </div>
   );
-}
-
-function minionArtwork(kind: SpeciesId) {
-  return kind === "tithemaw"
-    ? "minion.gilded-ward"
-    : kind === "chronora"
-      ? "minion.pendulum"
-      : kind === "velvetmonarch"
-        ? "minion.royal-bloom"
-        : "minion.echo";
 }
 
 function MinionDetails({ kind }: { kind: SpeciesId }) {

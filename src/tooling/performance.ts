@@ -56,6 +56,33 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
   const started = dispatch(fixture, { type: "beginBattle" });
   if (!started.accepted) throw new Error(started.reason);
   const initial = encodeSave(decodeSave(encodeSave(started.state)));
+  if (diagnostic)
+    return [
+      {
+        id: "diagnostic-stall",
+        initial,
+        fixture: "synthetic-stall-v1",
+        actions: [{ kind: "stall", checkpoint: initial }],
+      },
+    ];
+  if (resources)
+    return [
+      {
+        id: "resource-menus",
+        initial,
+        fixture: "repeated-artwork-navigation-v1",
+        actions: Array.from({ length: 3 }, () => [
+          { kind: "click", name: "Collection", checkpoint: initial },
+          { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
+          { kind: "cancel", checkpoint: initial },
+          { kind: "click", name: "Next page", checkpoint: initial },
+          { kind: "click", name: "Previous page", checkpoint: initial },
+          { kind: "click", name: "Back", checkpoint: initial },
+          { kind: "click", name: "Talents", checkpoint: initial },
+          { kind: "click", name: "Back", checkpoint: initial },
+        ]).flat(),
+      },
+    ];
   const attack = battleChoices(started.state, false).find(
     (c) =>
       c.type === "play" &&
@@ -87,33 +114,6 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
     { kind: "targetKey", key: "d", checkpoint: initial },
     { kind: "cancel", checkpoint: initial },
   ];
-  if (diagnostic)
-    return [
-      {
-        id: "diagnostic-stall",
-        initial,
-        fixture: "synthetic-stall-v1",
-        actions: [{ kind: "stall", checkpoint: initial }],
-      },
-    ];
-  if (resources)
-    return [
-      {
-        id: "resource-menus",
-        initial,
-        fixture: "repeated-artwork-navigation-v1",
-        actions: Array.from({ length: 3 }, () => [
-          { kind: "click", name: "Collection", checkpoint: initial },
-          { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
-          { kind: "cancel", checkpoint: initial },
-          { kind: "click", name: "Next page", checkpoint: initial },
-          { kind: "click", name: "Previous page", checkpoint: initial },
-          { kind: "click", name: "Back", checkpoint: initial },
-          { kind: "click", name: "Talents", checkpoint: initial },
-          { kind: "click", name: "Back", checkpoint: initial },
-        ]).flat(),
-      },
-    ];
   return [
     { id: "preview", initial, fixture: "target-preview-v1", actions: previewActions },
     ...workloadCases(initial),
