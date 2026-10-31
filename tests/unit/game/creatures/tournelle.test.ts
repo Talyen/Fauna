@@ -14,6 +14,7 @@ import { definition, species } from "../../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { cardKeywords } from "../../../../src/game/progression";
 import { freshCombat, hit } from "../../../../src/game/combat/index";
+import { interceptAttack } from "../../../../src/game/combat/interception";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { COMBAT_PACKS } from "../../../support/encounter-packs";
 import type { GameEvent } from "../../../../src/game/types";
@@ -183,6 +184,22 @@ describe("Tournelle", () => {
       );
     }
   });
+  it.each(["equal injury", "knocked out", "in backup"])(
+    "does not consume RNG when the Gallantry protector is %s",
+    (condition) => {
+      const events: GameEvent[] = [];
+      const game = produce(fixture(), (draft) => {
+        if (condition !== "equal injury") draft.team[1]!.health = 10;
+        if (condition === "knocked out") draft.team[0]!.health = 0;
+        if (condition === "in backup") addBackups(draft, draft.team.shift()!);
+        draft.rng = 2358;
+        const target = draft.team.find((unit) => unit.id === "ally-1")!;
+        expect(interceptAttack(draft, draft.battle!.enemies[0]!, target, events)).toBe(target);
+      });
+      expect(game.rng).toBe(2358);
+      expect(events).toEqual([]);
+    },
+  );
   it("checks relative injury rather than absolute Health and persists no temporary interception state", () => {
     const events: GameEvent[] = [];
     const initial = produce(teamRun(42, ["tournelle", "mossguard", "prismram"]), (d) => {

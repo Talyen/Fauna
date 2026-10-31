@@ -12,10 +12,15 @@ import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
 import { replenishJourneyCards } from "./journey-cards";
 
+/** Keep formation order when identifying creatures on only one side of an exchange. */
+function formationDifference(units: readonly Combatant[], other: readonly Combatant[]) {
+  return units.filter((unit) => !other.some((candidate) => candidate.id === unit.id));
+}
+
 /** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
 export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
   if (state.phase !== "battle") return;
-  const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
+  const entering = formationDifference(state.team, previous);
   if (!entering.length) return;
   const providers = new Map<string, (typeof state.team)[number]>();
   for (const unit of previous) providers.set(unit.id, unit);
@@ -382,19 +387,11 @@ export function swapBackup(
   }
   if (fromCard && outgoing) {
     if (state.boons.includes("farewell-oar"))
-      farewellOar(
-        state,
-        previous.filter((ally) => !state.team.some((current) => current.id === ally.id)),
-        events,
-      );
+      farewellOar(state, formationDifference(previous, state.team), events);
     matchSwapBlock(state, outgoing, incoming, events);
     shareSwapNullify(state, outgoing, incoming, events);
     if (state.boons.includes("rook-of-mercy"))
-      rookOfMercy(
-        state,
-        state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
-        events,
-      );
+      rookOfMercy(state, formationDifference(state.team, previous), events);
   }
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
@@ -412,20 +409,17 @@ export function swapFromCard(
   // A repeat cannot swap an actor that already left the deployed formation.
   const from = row.findIndex((unit) => unit.id === actor.id);
   if (from < 0) return;
-  if (allied && backupId !== undefined) {
-    const incoming = state.reserves.find((unit) => unit.id === backupId && unit.health > 0);
-    if (incoming) {
+  if (allied) {
+    const backups = state.reserves.filter((unit) => unit.health > 0);
+    if (backups.length) {
+      const incoming =
+        backupId === undefined
+          ? backups[Math.floor(roll(state, { kind: "index", size: backups.length }) * backups.length)]
+          : backups.find((unit) => unit.id === backupId);
+      if (!incoming) return;
       swapBackup(state, actor.id, incoming.id, events, true);
       return incoming;
     }
-    if (state.reserves.some((unit) => unit.health > 0)) return;
-  }
-  const backup = allied && backupId === undefined ? state.reserves.filter((unit) => unit.health > 0) : [];
-  if (backup.length) {
-    const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
-    if (!incoming) return;
-    swapBackup(state, actor.id, incoming.id, events, true);
-    return incoming;
   }
   if (backupOnly) return;
   const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
