@@ -34,3 +34,44 @@ it("leaves CI suite and test execution unbounded without weakening audit checks"
     vi.resetModules();
   }
 });
+
+it("limits the reviewed legacy minimatch exception to the inspected development artifacts", () => {
+  const advisory = {
+    source: 1244012,
+    name: "minimatch",
+    title: "globparts amplification",
+    severity: "moderate",
+    range: "<11.0.1",
+    url: "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+  };
+  const node = "node_modules/legacy/node_modules/minimatch";
+  const report = {
+    metadata: { vulnerabilities: {} },
+    vulnerabilities: { minimatch: { nodes: [node], via: [advisory] } },
+  };
+  const legacy = {
+    version: "3.1.5",
+    dev: true,
+    integrity:
+      "sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==",
+  };
+  const lock = (pkg) => ({ packages: { [node]: pkg } });
+  expect(auditFindings(report, lock(legacy))).toMatchObject({
+    rejected: [],
+    exceptions: [expect.any(String)],
+  });
+  for (const pkg of [
+    { ...legacy, version: "9.0.9" },
+    { ...legacy, integrity: "changed" },
+    { ...legacy, version: "unknown", integrity: undefined },
+    { ...legacy, dev: false },
+    undefined,
+  ])
+    expect(auditFindings(report, lock(pkg)).rejected).toHaveLength(1);
+  expect(
+    auditFindings(
+      { ...report, vulnerabilities: { minimatch: { nodes: [node], via: [{ ...advisory, source: 1 }] } } },
+      lock(legacy),
+    ).rejected,
+  ).toHaveLength(1);
+});
