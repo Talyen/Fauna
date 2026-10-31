@@ -490,6 +490,9 @@ function validateMinions(state: BattleState) {
             [...state.team, ...state.reserves].some((ally) => ally.species === unit.species)
           )) ||
         unit.health > unit.maxHealth ||
+        unit.power !== 1 ||
+        unit.targetId !== unit.minion.ownerId ||
+        (unit.clockworkBees ?? 0) !== 0 ||
         (unit.species === "memento"
           ? unit.name !== "Echo" || !echoHealthValues.includes(unit.maxHealth)
           : unit.species === "chronora"
