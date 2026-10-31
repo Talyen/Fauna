@@ -433,7 +433,6 @@ export function createTemporaryCard(
 /** Inspect actual drawable cards without sampling or including the played card's future Discard slot. */
 export function drawHasAnotherCard(
   state: BattleState,
-  _played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
   if (!state.battle.draw.length) return false;

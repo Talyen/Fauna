@@ -25,7 +25,7 @@ it("keeps draw eligibility aligned with the ordered pool as owners and piles cha
       other!.health = health;
       const eligible = journeyReturnEligibility(state, owner!.id);
       expect(journeyReturnHasDraw(state, owner!.id)).toBe(!!eligible);
-      expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(
+      expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(
         pile.some((id) => id === own.id || (id === theirs.id && health > 0)),
       );
     }
