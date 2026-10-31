@@ -102,9 +102,7 @@ it("filtered draws retain pile order and hidden decisions across owners, keyword
     });
     if (method === "keyword") {
       const before = structuredClone(state);
-      expect(drawHasAnotherCard(state, skipped, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(
-        true,
-      );
+      expect(drawHasAnotherCard(state, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(true);
       expect(state).toEqual(before);
       expect(decisions).toEqual([]);
     }
@@ -115,9 +113,7 @@ it("filtered draws retain pile order and hidden decisions across owners, keyword
     expect(state.battle.draw).toEqual([skipped.id]);
     expect(decisions).toEqual([undefined]);
     if (method === "keyword")
-      expect(drawHasAnotherCard(state, skipped, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(
-        false,
-      );
+      expect(drawHasAnotherCard(state, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(false);
   }
 });
 
@@ -130,7 +126,7 @@ it("does not value buffered promotion as a new draw for Auto-play", () => {
   state.battle.draw = [];
   state.battle.discard = [];
   expect(decodeSave(encodeSave(state))).toEqual(state);
-  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
+  expect(drawHasAnotherCard(state, { kind: "draw", amount: 1 })).toBe(false);
   expect(
     rankedBattleChoices(state, false).some(
       (choice) => choice.command.type === "play" && choice.command.cardId === card.id,

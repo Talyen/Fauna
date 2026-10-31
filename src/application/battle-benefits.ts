@@ -124,12 +124,12 @@ export function battleBenefitFacts(state: BattleState) {
       }
       return result;
     },
-    drawAvailable: (play: AvailablePlay, effect: SupplementalEffect & { kind: "draw" | "drawKeyword" }) => {
+    drawAvailable: (effect: SupplementalEffect & { kind: "draw" | "drawKeyword" }) => {
       const key = effect.kind === "draw" ? "draw" : effect.keyword;
       drawAvailability ??= new Map();
       let result = drawAvailability.get(key);
       if (result === undefined) {
-        result = drawHasAnotherCard(state, play.card, effect);
+        result = drawHasAnotherCard(state, effect);
         drawAvailability.set(key, result);
       }
       return result;
@@ -146,16 +146,12 @@ function usefulDraw(play: AvailablePlay, facts: ReturnType<typeof battleBenefitF
     (effect) =>
       (effect.kind === "draw" || effect.kind === "drawKeyword") &&
       effect.amount > 0 &&
-      facts.drawAvailable(play, effect),
+      facts.drawAvailable(effect),
   );
 }
 
-function ordinaryDrawBenefit(
-  play: AvailablePlay,
-  facts: ReturnType<typeof battleBenefitFacts>,
-  amount: number,
-): boolean {
-  return facts.drawAvailable(play, { kind: "draw", amount });
+function ordinaryDrawBenefit(facts: ReturnType<typeof battleBenefitFacts>, amount: number): boolean {
+  return facts.drawAvailable({ kind: "draw", amount });
 }
 
 /** A spent primary effect can still justify a play through healing or a useful draw. */
@@ -418,7 +414,7 @@ export function battleBenefits(
       return burning > 0
         ? controlRemoval(burning)
         : support(
-            facts.drawAvailable(play, { kind: "drawKeyword", keyword: "water", amount: 1 })
+            facts.drawAvailable({ kind: "drawKeyword", keyword: "water", amount: 1 })
               ? "standardUtility"
               : "none",
           );
@@ -427,7 +423,7 @@ export function battleBenefits(
       const blinded = countMatching(allies(), (unit) => unit.combat?.blind);
       return blinded > 0
         ? controlRemoval(blinded)
-        : def.draw && ordinaryDrawBenefit(play, facts, value)
+        : def.draw && ordinaryDrawBenefit(facts, value)
           ? support("standardUtility", value)
           : controlRemoval(0);
     }
@@ -537,7 +533,7 @@ export function battleBenefits(
       return support(
         healing() > 0
           ? "healing"
-          : ordinaryDrawBenefit(play, facts, value) ||
+          : ordinaryDrawBenefit(facts, value) ||
               state.battle.minions?.some(
                 (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
               )
