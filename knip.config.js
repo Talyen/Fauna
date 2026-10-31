@@ -23,7 +23,7 @@ export default {
   // Named modifier owners have local runtime callers and typed data-only references.
   tags: ["-modifierContract"],
   ignore: ["src/components/ui/**"], // Registered upstream primitive public props are intentionally retained.
-  // Regressions exercise the packager and its pinned transitive Jake/EJS consumers.
-  ignoreDependencies: ["app-builder-lib", "ejs", "jake"],
+  // The regression verifies the matcher shipped inside our pinned electron-builder installation.
+  ignoreDependencies: ["app-builder-lib"],
   ignoreBinaries: ["du"], // System disk-allocation utility, not an npm binary.
 };
