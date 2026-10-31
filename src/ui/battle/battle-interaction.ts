@@ -1,4 +1,4 @@
-import { hasMendingTargets, playTargeting } from "../../game/mending";
+import { playTargeting } from "../../game/mending";
 import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
 import { battlefieldView } from "../../game/battlefield";
 import { cardActor, drawableOwnerIds } from "../../game/card-actors";
@@ -8,6 +8,7 @@ import type { BattleState, Command } from "../../game/types";
 import { returnFocus } from "../shared/navigation/focus";
 import type { Controls, InputAction } from "../shared/navigation/input";
 import { motionValue } from "../shared/motion-values";
+import { battlefieldPresentation, orderedTargets, targetElement } from "./battle-targets";
 
 interface Selection {
   selected: string | null;
@@ -105,23 +106,17 @@ export function useBattleInteraction({
   const mode = def ? playTargeting(def, game, actor) : "automatic";
   const enemyTarget = mode === "enemy",
     allyTarget = mode === "ally";
-  const row = enemyTarget
-    ? enemyRow
-    : def?.effect === "swapChosen"
-      ? game.reserves
-      : def && (def.effect === "resurrect" || hasMendingTargets(game, def, actor))
-        ? [...playerRow, ...game.reserves]
-        : playerRow;
-  // Visual order belongs to the UI; filter legal recipients after ordering the complete row.
-  const ordered =
-    row.length > 1 &&
-    (enemyTarget ? game.battle.enemies : game.team).some((unit) => species(unit.species).legendary)
-      ? [row[1]!, row[0]!, ...row.slice(2)]
-      : row;
-  const legal = new Set<string>();
-  if (def) for (const unit of chosenRecipients(game, def, actor)) legal.add(unit.id);
-  const targets: string[] = [];
-  for (const unit of ordered) if (legal.has(unit.id)) targets.push(unit.id);
+  const enemyLegendary = game.battle.enemies.some((unit) => species(unit.species).legendary);
+  const playerLegendary = game.team.some((unit) => species(unit.species).legendary);
+  const enemyPresentation = battlefieldPresentation(enemyRow, enemyLegendary);
+  const playerPresentation = battlefieldPresentation(playerRow, playerLegendary);
+  const recipients = def ? chosenRecipients(game, def, actor) : [];
+  const legal = new Set(recipients.map((unit) => unit.id));
+  const targets = orderedTargets(
+    recipients,
+    enemyTarget ? enemyPresentation : playerPresentation,
+    enemyTarget ? [] : game.reserves,
+  );
   const last = enemyTarget ? remembered.enemy : remembered.ally;
   const navigationTarget = targets.includes(last ?? "") ? last : targets[0];
   const target = navigateFocus ? navigationTarget : targets.includes(hovered ?? "") ? hovered! : undefined;
@@ -177,11 +172,7 @@ export function useBattleInteraction({
             targets.length
         ]!;
       setTarget(next);
-      board.current
-        ?.querySelector<HTMLElement>(
-          `[data-actor-id="${next}"] .creature-card, [data-backup-target="${next}"]`,
-        )
-        ?.focus();
+      targetElement(board.current, next)?.focus();
       return true;
     }
     return false;
@@ -193,12 +184,7 @@ export function useBattleInteraction({
     };
   });
   useLayoutEffect(() => {
-    if (selected && target && navigateFocus)
-      board.current
-        ?.querySelector<HTMLElement>(
-          `[data-actor-id="${target}"] .creature-card, [data-backup-target="${target}"]`,
-        )
-        ?.focus();
+    if (selected && target && navigateFocus) targetElement(board.current, target)?.focus();
   }, [selected, target, navigateFocus, board]);
 
   const chooseCard = (cardId: string) => {
@@ -227,6 +213,10 @@ export function useBattleInteraction({
     allyTarget,
     enemyRow,
     playerRow,
+    enemyLegendary,
+    playerLegendary,
+    enemyPresentation,
+    playerPresentation,
     visibleHand,
     cardsById,
     legalTargets: legal,
