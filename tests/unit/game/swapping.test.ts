@@ -17,7 +17,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, definition, species } from "../../../src/game/content";
 import { MAX_BATTLE_TURN } from "../../../src/game/state-limits";
 import type { GameEvent } from "../../../src/game/types";
-import { pendingReplacement, swapBackup } from "../../../src/game/team";
+import { pendingReplacement, swapBackup, swapFromCard } from "../../../src/game/team";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
 
 function withReserves() {
@@ -27,6 +27,28 @@ function withReserves() {
     }
   });
 }
+
+it("selects a requested living backup or leaves the exchange untouched when that choice is invalid", () => {
+  const state = produce(teamRun(42, ["dulcera", "mossguard", "emberback"]), (draft) => {
+    addReserve(draft, "first", "coralcurl", 10, freshCombat());
+    addReserve(draft, "second", "dunefox", 10, freshCombat());
+  });
+  const rejectedEvents: GameEvent[] = [];
+  const unchanged = produce(state, (draft) => {
+    expect(swapFromCard(draft, draft.team[0]!, rejectedEvents, false, "missing")).toBeUndefined();
+  });
+  expect(unchanged).toBe(state);
+  expect(rejectedEvents).toEqual([]);
+
+  const events: GameEvent[] = [];
+  const selected = produce(state, (draft) => {
+    expect(swapFromCard(draft, draft.team[0]!, events, true, "second")?.id).toBe("second");
+  });
+  expect(selected.team[0]).toMatchObject({ id: "second", health: 11 });
+  expect(selected.reserves.map((unit) => unit.id)).toEqual(["first", "ally-0"]);
+  expect(events.filter((event) => event.kind === "heal")).toHaveLength(1);
+  expect(decodeSave(encodeSave(selected))).toEqual(selected);
+});
 
 it.each(["coralcurl", "memento"] as const)(
   "delivers swap protection, arrival passives and the Saddle Pouch draw once in order for %s",
