@@ -12,12 +12,14 @@ it("keeps Jake file discovery and EJS template compilation working with the upda
     for (const file of ["keep.txt", "skip.txt", "other.json"])
       writeFileSync(path.join(directory, file), file);
     const normalized = directory.split(path.sep).join("/");
-    const jake = require("jake");
+    const builderRequire = createRequire(require.resolve("app-builder-lib/package.json"));
+    const ejsPath = builderRequire.resolve("ejs");
+    const jake = createRequire(ejsPath)("jake");
     const files = new jake.FileList();
     files.include(`${normalized}/*.txt`);
     files.exclude(`${normalized}/skip.txt`);
     expect(files.toArray()).toEqual([`${normalized}/keep.txt`]);
-    expect(require("ejs").compile("<%= name %>")({ name: "Fauna" })).toBe("Fauna");
+    expect(builderRequire("ejs").compile("<%= name %>")({ name: "Fauna" })).toBe("Fauna");
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }
