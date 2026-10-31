@@ -46,6 +46,27 @@ it("waits for decode after load, retains success and cleans its timeout", async 
   expect(report).not.toHaveBeenCalled();
   expect(vi.getTimerCount()).toBe(0);
 });
+it("decodes a complete cached image only once when its load event also fires", async () => {
+  let decoded = () => {};
+  vi.stubGlobal("Image", function () {
+    const image = document.createElement("img");
+    Object.defineProperty(image, "complete", { value: true });
+    image.decode = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          decoded = resolve;
+        }),
+    );
+    images.push(image);
+    return image;
+  });
+  const pending = warmImage("cached.webp", lifetime.signal, report);
+  images[0]!.dispatchEvent(new Event("load"));
+  expect(images[0]!.decode).toHaveBeenCalledOnce();
+  decoded();
+  expect(await pending).toBe(images[0]);
+  expect(report).not.toHaveBeenCalled();
+});
 it.each(["error", "decode-rejection", "load-timeout", "decode-timeout"])(
   "settles optional artwork failure: %s",
   async (mode) => {

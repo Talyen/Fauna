@@ -51,6 +51,8 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
 // Progression groups some distinct effects under broader XP categories; offer matching uses
 // the actual keyword instead (for example, Thorns is not Nature damage).
 const abilityKeywordOverrides: Partial<Record<AbilityKind, readonly KeywordId[]>> = {
+  createBees: ["physical"],
+  teamNegate: ["negate"],
   stealEffect: ["purge"],
   springbound: ["cleanse", "freeze", "dodge"],
   resurrect: ["resurrect"],
