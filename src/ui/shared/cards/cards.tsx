@@ -33,6 +33,7 @@ type CreatureProps = {
   presentation?: boolean;
   enemyId?: string;
   actorId?: string;
+  battleSlot?: "left" | "center" | "right";
   onPreview?: () => void;
   onPreviewEnd?: () => void;
   validTarget?: boolean;
@@ -70,6 +71,7 @@ export function CreatureCard({
   presentation = false,
   enemyId,
   actorId,
+  battleSlot,
   onPreview,
   onPreviewEnd,
   validTarget = false,
@@ -146,6 +148,7 @@ export function CreatureCard({
     <div
       className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`}
       data-actor-id={actorId ?? enemyId}
+      data-battle-slot={battleSlot}
       data-valid-target={validTarget || undefined}
       data-active-target={activeTarget || undefined}
       data-acting={acting || undefined}
