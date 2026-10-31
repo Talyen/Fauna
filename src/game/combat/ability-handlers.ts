@@ -68,7 +68,8 @@ function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
 }
 
-function restoreFallen(context: PrimaryContext, recipient: Combatant, health?: number) {
+/** @modifierContract Typed data-only binding; the runtime callers are in this module. */
+export function restoreFallen(context: PrimaryContext, recipient: Combatant, health?: number) {
   const { state, action, events } = context;
   const { actor } = action;
   const enemy = action.side === "enemy";
