@@ -11,10 +11,6 @@ const legacyMinimatch = new Map([
     "3.1.5",
     "sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==",
   ],
-  [
-    "5.1.9",
-    "sha512-7o1wEA2RyMP7Iu7GNba9vc0RWWGACJOCZBJX2GJWip0ikV+wcOsgVuY9uE8CPiyQhkGFSlhuSkZPavN7u1c2Fw==",
-  ],
 ]);
 function legacyOptimizationException(entry, advisory, lock) {
   return (

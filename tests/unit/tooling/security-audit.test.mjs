@@ -62,6 +62,12 @@ it("limits the reviewed legacy minimatch exception to the inspected development 
   });
   for (const pkg of [
     { ...legacy, version: "9.0.9" },
+    {
+      ...legacy,
+      version: "5.1.9",
+      integrity:
+        "sha512-7o1wEA2RyMP7Iu7GNba9vc0RWWGACJOCZBJX2GJWip0ikV+wcOsgVuY9uE8CPiyQhkGFSlhuSkZPavN7u1c2Fw==",
+    },
     { ...legacy, integrity: "changed" },
     { ...legacy, version: "unknown", integrity: undefined },
     { ...legacy, dev: false },
