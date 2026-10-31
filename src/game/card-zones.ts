@@ -348,12 +348,11 @@ function drawCards(state: GameState, count: number, events: GameEvent[], turnSta
   if (!state.battle!.draw.length && (!turnStart || !state.battle!.discard.length)) return 0;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
-  const eligibleCards = alive.size ? new Set<string>() : undefined;
+  const eligibleCards = new Set<string>();
   // Well Read inserts copies into hand/overflow without changing draw eligibility.
-  if (eligibleCards)
-    for (const card of state.cards)
-      if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
-  const eligible = (id: string) => !eligibleCards || eligibleCards.has(id);
+  for (const card of state.cards)
+    if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
+  const eligible = (id: string) => eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
     // Retain fallen owners' inert slots without letting them prevent the next refill.

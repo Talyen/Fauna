@@ -54,7 +54,7 @@ import {
 } from "../../../src/game/progression";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { createBrowserPlatform } from "../../../src/platform/browser";
-import { packetPolicy, packetPolicyView, type DamagePacket } from "../../../src/game/combat/policy";
+import { packetPolicy, type DamagePacket } from "../../../src/game/combat/policy";
 import { abilityExtras, scalePower } from "../../../src/game/combat/ability-values";
 import { abilityRule } from "../../../src/game/rules/abilities";
 import { supplementalRule } from "../../../src/game/rules/supplemental";
@@ -146,7 +146,7 @@ it("preserves the browser save byte boundary for multibyte text", async () => {
   expect(values.get("fauna.save.v1")).toBe(exact);
 });
 
-it("keeps packet policies independent and preserves every delivery rule", () => {
+it("keeps packet policies immutable and preserves every delivery rule", () => {
   const cases: [DamagePacket, boolean, boolean, boolean, boolean, boolean][] = [
     [{ origin: "ability" }, true, true, true, true, false],
     [{ origin: "ability", delivery: "bounce" }, true, false, true, false, false],
@@ -164,14 +164,12 @@ it("keeps packet policies independent and preserves every delivery rule", () => 
     [{ origin: "overkill" }, false, false, false, false, true],
   ];
   for (const [packet, attack, wrongFoot, resonance, bounce, deadSource] of cases) {
-    const view = packetPolicyView(packet);
+    const view = packetPolicy(packet);
     expect(view).toMatchObject({ attack, wrongFoot, resonance, bounce, deadSource });
     expect(view.buildup).toBe(attack || packet.origin === "statusRetaliation" || packet.origin === "boon");
     expect(view.direct).toBe(packet.origin === "ability");
     expect(view.leechRewards).toBe(packet.origin !== "overkill");
-    const copy = packetPolicy(packet);
-    copy.attack = !copy.attack;
-    expect(packetPolicyView(packet)).toEqual(view);
+    expect(Object.isFrozen(view)).toBe(true);
   }
 });
 

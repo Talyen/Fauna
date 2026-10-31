@@ -51,8 +51,8 @@ const buildup = Object.freeze({ ...inactive, buildup: true });
 const derived = Object.freeze({ ...inactive, deadSource: true });
 const overkill = Object.freeze({ ...derived, leechRewards: false });
 
-/** Internal readers share immutable policies; the public copy remains independently writable. */
-export function packetPolicyView(packet: DamagePacket) {
+/** Damage reactions share immutable policies for each packet origin and delivery. */
+export function packetPolicy(packet: DamagePacket) {
   switch (packet.origin) {
     case "ability":
       return packet.delivery === "reflection"
@@ -82,8 +82,4 @@ export function packetPolicyView(packet: DamagePacket) {
     }
   }
 }
-export function packetPolicy(packet: DamagePacket) {
-  return { ...packetPolicyView(packet) };
-}
-
 export type AttackPacket = Extract<DamagePacket, { origin: "ability" | "proc" | "resonance" }>;
