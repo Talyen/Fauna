@@ -6,6 +6,6 @@ Captoad joins ordinary encounter and recruitment pools. Its base passive, Sporec
 
 Mushroom Guard heals only its actor. Bogbound Leap follows [ordinary swap and card-zone rules](../../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps), then draws two, including when alone without backup. Enemy Leap swaps with another living enemy without a draw or extra action; enemy identity remains stable for save validation.
 
-## Artwork provenance and validation record
+## Artwork
 
 Source: [Captoad Drive folder](https://drive.google.com/drive/folders/16zyEo4h2IGJGun_C1VqTCqV3U3-HMdGI). Player wording uses Backup; internal save fields retain their existing names.

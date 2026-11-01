@@ -8,6 +8,6 @@ Chimecricket is a musical support creature available through starter drafts, ord
 
 Hush Dome gives each living deployed ally, including Chimecricket, one [Nullify protection](../../KEYWORDS.md#nullify). Enemy Hush Dome protects only living enemies.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Chimecricket Drive folder](https://drive.google.com/drive/folders/1kAT543t5YDsXpU-an5j9XeROepKrKPeX). Portrait: `05.png`. Source inspected; rendered review was pending.
+Source: [Chimecricket Drive folder](https://drive.google.com/drive/folders/1kAT543t5YDsXpU-an5j9XeROepKrKPeX). Portrait: `05.png`.

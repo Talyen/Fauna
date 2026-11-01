@@ -164,6 +164,6 @@ The user authorized unchanged 420×560 Alchemy copies for `pile.draw`, `pile.dis
 
 ## Creature references
 
-The [creature index](content/creatures/README.md) links kits, distinctive edge rules and artwork rationale. The manifest owns per-file provenance/rights; dated rendered observations remain historical evidence. Shared authoring and preparation rules belong here.
+The [creature index](content/creatures/README.md) links kits, distinctive edge rules and artwork rationale. The manifest owns per-file provenance and rights. Shared authoring and preparation rules belong here.
 
 [Memento](content/creatures/memento.md) records its four original selections and proposed Echo/Pearl artwork; [generation prompts](content/creatures/memento-art-prompts.md) retain the references and intent.

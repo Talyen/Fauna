@@ -14,6 +14,6 @@ Borrowed Silhouette chooses uniformly among the three authored abilities of each
 
 Copies preserve source species through Well Read copies and current-format save/resume. Borrowed Legendary abilities can create actor-owned Echoes, Pearls or Pendulums using the shared rules; a borrowed ability does not grant the backup's passive. Oathara can play a fallen Wendlet's abilities under Unfinished Journey and owns any cards or Minions it creates. Generated cards and Minions leave with their acting owner through existing cleanup
 
-## Artwork and evidence
+## Artwork
 
-The owner narrowed the [Drive collection](https://drive.google.com/drive/folders/199repgT4C7QM3F5y3C96M6KLZKJo4BDK) to the portrait and the three v2 illustrations in this kit. Originals are preserved under `public/art/creatures/wendlet/` and their source URLs are recorded in the [manifest](../../../assets/manifest.json). Measured balance, hosted CI and platform qualification remain separate from local checks and rendered review
+The owner narrowed the [Drive collection](https://drive.google.com/drive/folders/199repgT4C7QM3F5y3C96M6KLZKJo4BDK) to the portrait and the three v2 illustrations in this kit. Originals are preserved under `public/art/creatures/wendlet/` and their source URLs are recorded in the [manifest](../../../assets/manifest.json).

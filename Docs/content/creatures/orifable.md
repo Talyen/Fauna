@@ -30,7 +30,7 @@ The [shared Food contract](../../CONTENT.md#shared-food-cards) owns targeting, n
 
 Care Package opens choices: use Mana Berries to extend a useful turn, feed an injured ally with an Apple, or protect someone with Trail Bread. Good Tidings supplies reliable recovery without finding Food first, while Postal Swarm gives a weak or full-Health opening a useful attack. Express Delivery improves access to the mixed team deck. Orifable is vulnerable to pressure that outpaces its healing, and Food can crowd the hand or cost more Mana than the current turn can spare.
 
-## Artwork and evidence
+## Artwork
 
 The [Orifable Drive collection](https://drive.google.com/drive/folders/1kAqpnhORlxqzn1PQyiRG3ybdgZwwMvgd) supplies unchanged originals:
 

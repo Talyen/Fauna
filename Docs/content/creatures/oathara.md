@@ -33,16 +33,8 @@ Poor hands contain resurrection without a knockout or redraw without useful alte
 
 Redraw intentionally overlaps Euphera’s selected hand exchange. Attack reflection can exceed a six-point defensive budget against a large attack, while resurrection typically restores about six Health and access to a creature’s passive. Neither ability adds unrelated utility. Duplicate guides, repeated resurrection and high-rank borrowing need hosted balance qualification; no measured balance claim is made
 
-## Artwork and evidence
+## Artwork
 
 Unchanged sources from the [Oathara Drive folder](https://drive.google.com/drive/folders/1jRdwJ4l7OobGfEx5t_On5g65puOr5f5X) are preserved in `public/art/oathara/`. The [asset manifest](../../../assets/manifest.json) records all four source URLs, rights and lossless preparation recipes. The selected portrait, Never Lost, Traveler’s Ward and Vow of Return retain their native compositions
 
-Focused regression coverage lives in [Oathara’s suite](../../../tests/unit/game/creatures/oathara.test.ts). Rendered review and platform qualification are separate from source inspection; current evidence and limitations are recorded with the implementation handoff
-
-## Rendered review
-
-Focused Chromium review on October 23, 2026 inspected Collection and creature inspection, all three ability illustrations and tooltips, base and five-star passive wording, battle and targeting at 1280×720 with 125% text and 1920×1080 with default text. Captures used reduced motion and 2× device density. The selected compositions remain uncropped, the rules and controls fit, and the shortened backup target label clears the portrait
-
-The browser flow exercised keyboard card selection, targeting and cancellation, borrowed-card Mana payment and spent-allowance visibility, resurrection previews and the committed six-Health return, restored ownership after revival, attack-reflection consumption and turn reset. Separate flows exercised Never Lost and resurrection of a knocked-out backup. The retained task checkout holds captures, checkpoints, prior attempts and interaction results in `reports/oathara/evidence.json`; all recorded layout assertions passed
-
-The focused game regression suite passed locally. Full compilers, broader unit/DOM suites, browser suites, measured balance, native desktop, Windows packaging, physical controllers, Steam client and Steam Deck remain unverified or CI-owned. Source artwork and the kit were user-selected; this rendered review does not establish separate artistic approval
+Focused regression coverage lives in [Oathara’s suite](../../../tests/unit/game/creatures/oathara.test.ts).

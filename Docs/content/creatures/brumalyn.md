@@ -17,7 +17,3 @@ Rime Pounce deals single-target Freeze damage. Frost Howl makes one equally weig
 ## Artwork
 
 The [Drive folder](https://drive.google.com/drive/folders/1-WgIiUo4yfENVBIQajZQNFzbDMGhk8PQ) contains the unchanged portrait and selected second-generation action images. The [manifest](../../../assets/manifest.json) records each source and its retained original. Brumalyn’s packed lynx and lantern suggest a mountain guide who brings warmth and respite; its ice pounce and upward howl express the two attacks
-
-## Verification
-
-[Focused combat regressions](../../../tests/unit/game/creatures/brumalyn.test.ts) cover the selected cards, tiered healing, trigger exclusions, enemy behavior, random type, preview and save/resume. Balance estimates, rendered review, hosted CI and platform qualification are separate evidence

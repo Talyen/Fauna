@@ -41,7 +41,3 @@ Whiteout Waltz spends most of its budget on group Blind, with only one primary F
 A normal opening uses Reservoir to fund allied plays, Whiteout to obscure incoming attacks, or Reprieve to clear accumulated Freeze and cycle a card. A satisfying recovery thaws two injured allies, heals both and draws another action. Without Freeze to remove, Reprieve still draws but grants no healing. Against fast damage, periodic effects or enemies that do not use Freeze, Parhelion relies on teammates to win and survive. It remains outside the first-run solo starter pool; appended ordinary encounter packs support recruitment without reordering existing packs
 
 Values and comparisons are design estimates, not measured balance. Full lineup, advanced upgrade and talent/Boon combinations remain CI balance qualification
-
-## Verification
-
-[Focused regressions](../../../tests/unit/game/creatures/parhelion.test.ts) cover six tiers, actual removal, field ownership, duplicate providers, enemy tiers, repeats, Mana caps, damage/Blind targets, previews, save/resume and recruitment. [The shared review fixture](../../../tests/support/parhelion.ts) supplies all three cards, two injured allies with buildup and an injured ally without it

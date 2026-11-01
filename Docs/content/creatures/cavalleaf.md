@@ -16,8 +16,6 @@ Raincall draws one Water card from the ordinary eligible draw pile, then selecti
 
 Prairie Leap swaps Cavalleaf for a seeded random living backup and gives that incoming creature the primary amount of Thorns after ordinary swap reactions. Without a living backup the card is unavailable and a rejected play preserves Mana, formation and RNG. Ordinary enemies have no backup and cannot usefully exchange. A repeated play cannot swap an actor already in backup. The Thorns amount upgrades normally
 
-## Artwork and evidence
+## Artwork
 
 The [Drive collection](https://drive.google.com/drive/folders/11G-8_ikc9eE13gnQyE_nSlIG_zAVrFvq) supplies the selected [portrait](https://drive.google.com/file/d/1KBEBqne0jHUe8iKN3Vh-LYP7nN0h2OSF/view), [Meadow Return](https://drive.google.com/file/d/16VZCLwUwouJxf8RTKz7iT55KmF_wBm9U/view), [Raincall](https://drive.google.com/file/d/1Rw3glFE2tVF5B_QI96Ql-h03p11mTdJt/view) and [Prairie Leap](https://drive.google.com/file/d/1wjlWJepzFSk7YK43ztFD8N5_Q91wo_bx/view). Unchanged originals are retained in `public/art/creatures/cavalleaf/` and registered with provenance in the [asset manifest](../../../assets/manifest.json)
-
-[Focused regressions](../../../tests/unit/game/creatures/cavalleaf.test.ts) cover healing triggers and tiers, selective Cleanse, Backup exchange, previews and save/resume. Measured balance, hosted CI and platform qualification are separate

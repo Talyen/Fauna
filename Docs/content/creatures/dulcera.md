@@ -32,7 +32,7 @@ Meadow Shelter protects the team while attackers spend the remaining Mana. Chape
 
 A poor draw still offers Block or a Mana-neutral heal. Without backups, Hushed Waters retains its Cleanse but loses extraction and passage. A team lacking damage can be overwhelmed despite its recovery. Strong healing/Block talents and Boons remain ordinary amplification; focused examples and budget comparisons do not establish measured win rates or fight length. Broad balance sweeps remain CI-owned.
 
-## Artwork and evidence
+## Artwork
 
 Unchanged originals come from the [Dulcera Drive collection](https://drive.google.com/drive/folders/1zJ1y0S5agPaoBCelodw8MNbD0ZCBgbPT):
 

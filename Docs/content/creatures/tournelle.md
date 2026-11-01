@@ -30,5 +30,3 @@ Unchanged originals from the user's [Tournelle folder](https://drive.google.com/
 | Safe Passage      | [Last-Second Rescue](https://drive.google.com/file/d/1khPQmksWYiHy3GrLK0v3NB1uFPxIf4s9/view) | Scarf lifts a bird away from breaking ice                   |
 
 Creature artwork uses 4:3 landscape; abilities use 3:4 portrait. Source inspection, rendered review, user design selection and balance acceptance are separate evidence
-
-## Rendered review

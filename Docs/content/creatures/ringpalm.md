@@ -10,6 +10,6 @@ Harmonic Set independently rolls its 20% chance once per accepted play and repea
 
 Seedling Circle rolls one seeded, equally likely choice per resolution and gives that same protection to every living deployed ally, including Ringpalm. Backups and knockouts are excluded. Block and Thorns use their ordinary grant rules and passive interactions. Enemies protect only their own side using authored support values with explicit room power. Classification awards Block and Nature XP once per accepted play, matching other cards with random alternative effects. Previews use detached state and preserve the source RNG; current-format saves retain the resulting outcomes.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Ringpalm Drive folder](https://drive.google.com/drive/folders/1uQOzqWfnYQEIQ9XQFpejGV-syxth8zcp). Portrait: `03.png`. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Ringpalm Drive folder](https://drive.google.com/drive/folders/1uQOzqWfnYQEIQ9XQFpejGV-syxth8zcp). Portrait: `03.png`.

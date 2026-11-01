@@ -10,6 +10,6 @@ Coral Spiral follows [ordinary swap rules](../../EXPEDITION_DESIGN.md#knockout-r
 
 [Keywords](../../KEYWORDS.md#damage-identities) owns Water mitigation and [XP classification](../../KEYWORDS.md#classification-and-progression); its blue token is distinct from Mana, Block and Freeze. The six [Water talents](../../../src/game/content/talents/water.ts) form three rows. Their hit rewards include fully absorbed hits, exclude Dodges and require a surviving actor; passive damage cannot activate them.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Coralcurl Drive folder](https://drive.google.com/drive/folders/19NVnBIdFleyfmnqCTyg4GeSiQkMbI2TE). Water talent art reuses Reef Jet; Water uses generic impact audio. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Coralcurl Drive folder](https://drive.google.com/drive/folders/19NVnBIdFleyfmnqCTyg4GeSiQkMbI2TE). Water talent art reuses Reef Jet; Water uses generic impact audio.

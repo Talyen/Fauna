@@ -38,11 +38,3 @@ Unchanged selected originals from the user’s [Reverie folder](https://drive.go
 | Nightmare Harvest | [Nightmare Harvest](https://drive.google.com/file/d/1a-GcsGV1azUwAPpjml_21Pp7ZTYYZMrZ/view) | Harmful cloud becomes useful light            |
 
 The other ability illustrations are not part of the implemented kit. The lossless card recipe preserves the selected compositions at runtime sizes; source inspection and rendered review remain separate from artistic and balance acceptance
-
-## Implementation review
-
-Chromium review on October 23, 2026 inspected Collection, all three ability illustrations and rules, base/five-star passives and battle at 1280×720 with 125% text and 1920×1080 with default text. Main captures used 2× device density and reduced motion. The complete composition, native artwork ratios, readable keyword colors, control reachability and effect icons were inspected; all captured layout assertions passed
-
-The browser flow played Dream Double, Nightmare Harvest and Waking Wonder, checked committed protection/Thorns, group removal and capped Mana, then advanced the turn and confirmed protection consumption and idle allies’ healing. Local evidence remains in the retained task checkout at `reports/reverie/evidence.json`, with frames and the initial checkpoint beside it. `reports/review/reverie-before-bc57f92f-a0ec-4f26-a4c2-a909ff806f23/` retains the pre-edit inspection layout
-
-This is focused browser evidence, not measured balance or native desktop, Windows packaging, physical controller, Steam client or Steam Deck qualification. The user selected the kit and source artwork; the rendered composition has not received separate artistic approval

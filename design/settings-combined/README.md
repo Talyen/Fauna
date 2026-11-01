@@ -10,14 +10,8 @@ Preview tools are explicitly separate from the proposed game settings. Narrow la
 
 Simulate save error displays a persistent synthetic notice with muted-red Lucide warning icon, ordinary light text and Retry. Retry clears only this sample notice. Settings values are ephemeral React state; no application session, game save, platform display API or player-preference persistence is used. Diagnostic reporting and its tab/copy action are removed. Audio controls do not play sounds: listening/mix review remains pending. Reset preview values resets the sample controls and returns to Display; closing/reopening retains values.
 
-Evidence scope: this was a component preview against [Phone decisions](../PHONE_DECISIONS.md), not full-game acceptance. Full CI viewport/input journeys, native desktop, physical controller, Windows, Steam and Steam Deck were pending.
-
-Focused local browser review checked the rendered Display/Sound compositions, native tab and radio arrows, 10% slider key changes with whole-slider focus, 125% text in the 440px-wide Sound layout without dialog-wide horizontal overflow, scrolling in the 440px-high layout, reduced-motion styles, simulated error/Retry and modal focus return. Retry restores focus to the active Settings tab; closing uses the same returnFocus owner as the application. The preview also corrects duplicate switch-thumb translation caused by combining upstream utility styles with the study's fixed-pixel track treatment.
-
 Current hierarchy uses normal light foreground text: 24px semibold dialog title, 20px semibold section headings and 16px option labels at default size. Headers do not use gold merely for hierarchy. Inactive tabs use subtle charcoal hover fill and gold borders. Every tab has a real visible border; keyboard focus retains its outline and a visible neutral border.
 
 Panel switches keep the dialog height and tab geometry fixed. Every tab label uses regular weight. Long panel content scrolls internally with stable scrollbar gutters; preview tools have their own bounded scroll area. Content switches instantly without fading, overlap or movement. Tab colors retain their 150ms transitions; reduced motion removes these. Native shadcn/Radix tabs own selection, visibility and focus.
-
-Focused browser review confirmed unchanged tab-button and icon rectangles across Display, Sound and Battle at 100%. Browser review of the final treatment confirmed immediate panel switching, fully opaque active content with no animation, and hidden/empty inactive panels. CI regression coverage compares the same geometry at 75%, 100% and 125%; its execution remains pending.
 
 Selected tabs have no extra hover change. Border thickness stays fixed; keyboard/controller focus remains visible.

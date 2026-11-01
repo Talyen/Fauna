@@ -34,4 +34,4 @@ Use case: illustration-story. Create ONE standalone Food-card illustration for F
 
 ## Evidence scope
 
-All three originals are 1086 × 1448 pixels. Source review inspected the complete images and the shared card-size profiles. The subjects use distinct red, blue and golden-brown silhouettes, opaque backgrounds and no baked text. Originals use the [prepared-asset pipeline](../../CONTENT.md#prepared-assets); [the creature reference](orifable.md#artwork-and-evidence) distinguishes regression, rendered review and artistic acceptance.
+All three originals are 1086 × 1448 pixels. Source review inspected the complete images and the shared card-size profiles. The subjects use distinct red, blue and golden-brown silhouettes, opaque backgrounds and no baked text. Originals use the [prepared-asset pipeline](../../CONTENT.md#prepared-assets); [the creature reference](orifable.md#artwork) identifies their use.

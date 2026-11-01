@@ -8,6 +8,6 @@ Sternshell is available through starter drafts, ordinary encounters and recruitm
 
 Surge Ram doubles its intrinsic damage, including card upgrades, while its actor has Armor; ordinary offensive modifiers and target defenses then apply. It does not spend Armor. Enemies use the same doubling condition with explicit room power. Siphon Vault follows [ordinary swap rules](../../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps) and always draws one, including without backup. Spiral Return refunds Mana once after its attacks, before automatic end turn. Enemy abilities omit player-only draws and Mana refunds.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Sternshell Drive folder](https://drive.google.com/drive/folders/1xjBLqhme5buwclO6BpNvko_Q1gw_rovb). Portrait: `Sternshell_03.png`. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Sternshell Drive folder](https://drive.google.com/drive/folders/1xjBLqhme5buwclO6BpNvko_Q1gw_rovb). Portrait: `Sternshell_03.png`.

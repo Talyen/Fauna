@@ -10,6 +10,6 @@ Noonward follows the ordinary Reflect contract, restricted to Burn status buildu
 
 Coolfront damages opponents first, then fully Cleanses every living deployed ally, including its actor, even if its attacks miss. Backup and knockouts are excluded. Enemy Coolfront Cleanses living enemies. Noon Bloom draws before returning Mana, uses the ordinary hand and Mana caps, and grants accepted-play XP once. Its refund happens before automatic end turn. Enemies omit this player-only ability and rank Noonward and Coolfront through the shared [decision policy](../../EXPEDITION_DESIGN.md#enemy-decisions), using ordinary encounter damage and defense scaling.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Shadebrim Drive folder](https://drive.google.com/drive/folders/1iJFM9EwjiVDMIZdTMjCXSMpTjtR7uOhz). Portrait: `03.png`. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Shadebrim Drive folder](https://drive.google.com/drive/folders/1iJFM9EwjiVDMIZdTMjCXSMpTjtR7uOhz). Portrait: `03.png`.

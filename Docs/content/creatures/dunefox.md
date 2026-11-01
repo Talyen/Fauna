@@ -10,6 +10,6 @@ Dune Whirl applies [Blind](../../KEYWORDS.md#blind) to surviving enemies after d
 
 Mirage Step uses the shared [temporary Dodge rules](../../KEYWORDS.md#temporary-dodge). Enemies retain its 30% Dodge without the player-only draw.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Dunefox Drive folder](https://drive.google.com/drive/folders/1NI9Ud-lqluU5whB6A3066vh2Oop5DUP3). Source inspected; rendered review was pending.
+Source: [Dunefox Drive folder](https://drive.google.com/drive/folders/1NI9Ud-lqluU5whB6A3066vh2Oop5DUP3).

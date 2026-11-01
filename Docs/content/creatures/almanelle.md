@@ -49,9 +49,3 @@ A normal opening uses Rooted Year to gain shelter and Thorns. Spring Current rem
 For a stronger setup, reach twenty Block through repeated Rooted Year or allied protection. Ten remain after decay, while Fallen Leaves grows five to ten Thorns. Upgraded Rooted Year, Water's Seafoam, Ironwood Buckler and allied Block cards can support this buildup; the passive supplies no free Mana or cards
 
 Poor draws contain recovery without a useful discard or healing with no missing Health. Strong incoming attacks spend the stored Block before it can grow Thorns. Dodge prevents Thorns retaliation; fully absorbed attacks still trigger it. Periodic damage spends Block and does not trigger Thorns, and Purge can remove accumulated Thorns. Almanelle must survive an attack to retaliate. The complete kit and higher-rank sustain require hosted balance qualification; no measured win-rate claim is made
-
-## Verification
-
-[Almanelle's focused suite](../../../tests/unit/game/creatures/almanelle.test.ts) protects all six tiers, rounding, real turn ordering, reserve/knockout boundaries, caps, enemy use, authoritative previews, targeted recovery/healing, repeats, upgrades, save/resume and normal recruitment. [The review fixture](../../../tests/support/almanelle.ts) supplies a damaged party, Burn, all three cards and a recoverable discarded card
-
-Source inspection and passing asset hashes do not establish artistic acceptance, measured balance, native input or platform qualification

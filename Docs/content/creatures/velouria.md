@@ -12,6 +12,6 @@ Moonlit Waltz grants temporary Dodge and a fixed 3 Freeze retaliation for each e
 
 Velvet Aegis grants the chosen living ally the existing non-stacking Attack Reflection protection. Hushed Finale selects a random living enemy and uses ordinary Freeze attack resolution; repeats keep that target unless an explicit modifier redirects them
 
-## Artwork and evidence
+## Artwork
 
-The selected portrait and v2 ability illustrations are preserved in the repository and identified in the [asset manifest](../../../assets/manifest.json). [Drive folder](https://drive.google.com/drive/folders/18PpXGPdC490kzIFzcAxJVleGAH5njBfq). Rendered review, measured balance, hosted CI and platform qualification are separate from source selection
+The selected portrait and v2 ability illustrations are preserved in the repository and identified in the [asset manifest](../../../assets/manifest.json). [Drive folder](https://drive.google.com/drive/folders/18PpXGPdC490kzIFzcAxJVleGAH5njBfq).

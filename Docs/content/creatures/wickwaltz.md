@@ -8,6 +8,6 @@ Wickwaltz is available through starter drafts, ordinary encounters and recruitme
 
 Saffron Screen’s ward prevents one landed Freeze damage packet entirely, before Block, Health loss and Freeze buildup. A miss, Dodge, zero-value packet or another damage type leaves it intact. It lasts until consumed or Purged, survives turn changes and swaps, and does not stack. Ordinary Nullify remains a separate defense against harmful statuses. The ward and repeat counter survive current-format resume.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Wickwaltz Drive folder](https://drive.google.com/drive/folders/1T7f1XtjbmZIHqbfvQYmCSLGwMwf56pV0). Portrait: `Wickwaltz_02.png`; Wickstep and Hearth Circle are excluded. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Wickwaltz Drive folder](https://drive.google.com/drive/folders/1T7f1XtjbmZIHqbfvQYmCSLGwMwf56pV0). Portrait: `Wickwaltz_02.png`; Wickstep and Hearth Circle are excluded.

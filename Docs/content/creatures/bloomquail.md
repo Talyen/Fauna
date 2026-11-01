@@ -8,6 +8,6 @@ Bloomquail is a support creature available through ordinary encounters, recruitm
 
 Enemies use the base 50% conversion and heal their own side. Bloom Cradle draws two cards then restores two Health to Bloomquail itself; its healing never targets another ally. Enemies omit its player-only draw and heal themselves through authored healing and explicit room power. Petal Veil heals each living ally and applies Blind to opponents once per play, independently of how many allies were healed. Its Blind remains useful when allies are already at full Health.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Bloomquail Drive folder](https://drive.google.com/drive/folders/15IdDXgCiwta6JLr2VJhR-j0w7kQRvtWt). Rendered review was pending.
+Source: [Bloomquail Drive folder](https://drive.google.com/drive/folders/15IdDXgCiwta6JLr2VJhR-j0w7kQRvtWt).

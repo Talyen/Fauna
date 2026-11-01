@@ -10,6 +10,6 @@ Undertow Knot grants its user 4 Block and Cleanses one harmful effect, using ord
 
 Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts. Camp Hammock includes living backups under the [shared recipient rules](../../KEYWORDS.md#healing-and-leech). Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and rank Undertow Knot and Bloom Shelter through the shared [decision policy](../../EXPEDITION_DESIGN.md#enemy-decisions), using authored values and explicit room power. The current save format persists ordinary Block and combat effects.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Neradora Drive folder](https://drive.google.com/drive/folders/1g3jJYLQNAqF9zMim3AQlKLBo-MFS1Mpd). Portrait: `Neradora_02.png`; Hidden Spring and Salt Release are excluded. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Neradora Drive folder](https://drive.google.com/drive/folders/1g3jJYLQNAqF9zMim3AQlKLBo-MFS1Mpd). Portrait: `Neradora_02.png`; Hidden Spring and Salt Release are excluded.

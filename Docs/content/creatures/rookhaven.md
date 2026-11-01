@@ -12,6 +12,6 @@ Copies and the next copy ID survive current-format save/resume and deterministic
 
 Borrowed Brilliance uses the shared area-attack rules, including Dodge, Critical hits, Block, retaliation and room scaling. Its subsequent Blind applies once to every living opposing creature through the existing harmful-status owner, including Nullify and Reflect interactions. Retaliation that knocks out Rookhaven stops its remaining hits and Blind. Unwritten Ending removes all beneficial effects, including Block, Armor, Thorns, Dodge, Reflect and Nullify variants, from each living opponent. It retains harmful effects and uses the ordinary Armor-depletion reactions; those reactions can stop a defeated caster. It needs no chosen target. Its complete Purge is unchanged by card level or room power. Auto-play uses it when a living enemy has a removable beneficial effect. Margin of Possibility draws through the shared draw owner, triggering Well Read separately for each actual draw. Enemies use Borrowed Brilliance and Unwritten Ending against the deployed player team, and exclude the unsupported draw ability.
 
-## Artwork provenance and validation record
+## Artwork
 
 Source: [Rookhaven Drive folder](https://drive.google.com/drive/folders/16A7CWiutkxd-XLHU805kMGUYCZ3QfcTX). Portrait: `Rookhaven_03.png`; originals: `public/art/rookhaven/`.

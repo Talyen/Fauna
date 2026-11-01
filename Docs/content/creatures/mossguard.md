@@ -6,6 +6,6 @@ Mossguard replaces the retired Mossback content. It joins ordinary encounters, r
 
 Overgrowth retains 10%, 20%, 30%, 40%, 50% or 60% more Block at zero through five stars. This is a relative increase over the ordinary 50% retention: 55%, 60%, 65%, 70%, 75% or 80% of remaining Block survives, rounded normally. It applies on each turn transition, including in backup. Enemy Mossguard always uses the base tier.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Retired Mossback placeholders are unselected; earlier prepared outputs remain in Git history. Source inspected at native ratios; rendered review remained a separate gate.
+Source: [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Retired Mossback placeholders are unselected; earlier prepared outputs remain in Git history.

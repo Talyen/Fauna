@@ -1,7 +1,5 @@
 # Fauna roadmap
 
-Last inventoried: October 27, 2026
-
 Fauna has a complete short playable journey. The current capabilities below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are remaining work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
 ## Current capabilities

@@ -14,6 +14,6 @@ Wish Exchange pools Block from living deployed allies, divides it evenly, and as
 
 Possible Path exchanges the remaining visible hand after its own card has entered discard. It shuffles those existing card instances into the draw pile, then draws the same number through the ordinary draw owner. Identity, ownership, upgrades and temporary-copy flags remain intact. Hidden overflow stays in FIFO order and fills available hand slots normally; it is not part of the exchanged count. Well Read and Good Fortune apply to actual replacement draws. An empty remaining hand does not shuffle or draw. Enemies use Twilight Lance and Wish Exchange on their corresponding opposing/friendly rows and exclude Possible Path because they have no ordinary player hand. Auto-play supports all three player abilities and avoids an empty exchange.
 
-## Artwork provenance and validation record
+## Artwork
 
 Source: [Euphera Drive folder](https://drive.google.com/drive/folders/1jm5_8I9N8Q5m6yT4QcN7xKuCupkhzAmq). Portrait: `Euphera_03.png`; originals: `public/art/euphera/`. All other ability artwork is excluded.

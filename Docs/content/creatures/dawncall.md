@@ -8,6 +8,6 @@ Dawncall is a support creature available through starter drafts, ordinary encoun
 
 Dawn Cry removes one harmful category from each living deployed ally through ordinary Cleanse rules, then draws one card even if no harmful effects were present. Morning Bloom heals each living deployed ally, including Dawncall. Neither affects backup nor revives knocked-out creatures. Enemy Dawn Cry Cleanses living enemies and omits the player-only draw; enemy Morning Bloom uses ordinary encounter healing scaling. The current save format stores the opening-attack receipt.
 
-## Artwork provenance and validation record
+## Artwork
 
-Source: [Dawncall Drive folder](https://drive.google.com/drive/folders/1yPgufTCHVyQTjXPWwlGwkGz0H7k38EtR). Portrait: `03.png`; originals: `public/art/dawncall/`. Source inspected; rendered gameplay and balance acceptance were pending.
+Source: [Dawncall Drive folder](https://drive.google.com/drive/folders/1yPgufTCHVyQTjXPWwlGwkGz0H7k38EtR). Portrait: `03.png`; originals: `public/art/dawncall/`.

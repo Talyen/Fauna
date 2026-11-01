@@ -12,6 +12,6 @@ Sunflare Cast is an ordinary targeted Light attack. Prism Key targets a living e
 
 Kilnheart restores Health and then grants Block to the acting creature; its primary Health value upgrades while its Block extra remains fixed. Repeats resolve the full ability again. No new saved state is required
 
-## Artwork and evidence
+## Artwork
 
-The [Drive folder](https://drive.google.com/drive/folders/14T3JA8J_uEQGkUOa1EYoU_XR7D6dF75f) contains the portrait and both versions of the ability illustrations. The v2 action illustrations and the available portrait are preserved under `public/art/creatures/vitrilo/`; individual source URLs are recorded in the [manifest](../../../assets/manifest.json). The user selected the abilities, not an artwork version. Rendered review, measured balance, hosted CI and platform qualification remain separate from the source selection
+The [Drive folder](https://drive.google.com/drive/folders/14T3JA8J_uEQGkUOa1EYoU_XR7D6dF75f) contains the portrait and both versions of the ability illustrations. The v2 action illustrations and the available portrait are preserved under `public/art/creatures/vitrilo/`; individual source URLs are recorded in the [manifest](../../../assets/manifest.json). The user selected the abilities, not an artwork version.
