@@ -25,3 +25,7 @@ node design/visual-quality/capture.mjs http://127.0.0.1:PORT candidate
 ```
 
 Replace PORT with the actual port. The script requires a quiet-preview identity, creates disposable browser contexts, exercises the Merchant flow and captures Settings and Battle frames under `reports/visual-quality`. It closes its browser and fixture server; the preview owner closes the preview. Inspect the images yourself and capture the before state before editing. The script does not reconstruct historical source. Preserve accepted references and record the scope of any new choice.
+
+## React Compiler comparison
+
+The user approved a [scoped production browser comparison](../../Docs/task-evidence/2026-10-27-react-compiler-visual-review.md) at its recorded commit. Its observations do not extend to untested screens, platforms or later changes.

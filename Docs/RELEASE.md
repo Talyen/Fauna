@@ -10,7 +10,7 @@ Fauna targets Windows x64 on Steam and runs offline without Steam, servers or ac
 2. **Build and identify:** use the final clean tagged commit, retain its successful full CI and run the [release identity gate](#release-verification-and-player-notes). Windows uses electron-builder and `com.fauna.game`; the unpacked x64 package contains only the renderer, desktop code and required runtime dependencies
 3. **Qualify:** complete the [candidate record](RELEASE_QUALIFICATION.md) on the actual Steam depot, resolving Windows launch blocks and recording physical-controller, Deck, display and live Cloud results. Finish artwork/audio, source-rights review, store material and privacy/support decisions
 
-The candidate record owns the detailed acceptance checklist. Tags, signing/setup, Steam delivery and publication require separate authorization under [AGENTS.md](../AGENTS.md#worktrees-and-integration). No release upload, automatic promotion, telemetry or Steam credential handling is configured; the commands below do not publish.
+[Earlier Steam-readiness evidence](task-evidence/2026-10-23-steam-readiness.md) records its tested scope and unverified release gates; it does not qualify a new candidate. The candidate record owns the detailed acceptance checklist. Tags, signing/setup, Steam delivery and publication require separate authorization under [AGENTS.md](../AGENTS.md#worktrees-and-integration). No release upload, automatic promotion, telemetry or Steam credential handling is configured; the commands below do not publish.
 
 ## Release verification and player notes
 
