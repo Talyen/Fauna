@@ -4,7 +4,7 @@
 
 Neradora is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool.
 
-**Tidal Regeneration** restores Neradora's own Health every other turn, scaling through 1, 2, 3, 4, 5 and 6 Health at zero through five stars. It triggers at the start of its owner's second, fourth and subsequent even-numbered battle turns, after periodic damage and before resolving control skips. It works while Stunned or Frozen, but only while alive and deployed. Backup misses its scheduled healing without banking it; swaps and current-format resume retain the battle's cadence. Each battle begins again on turn one. Its healing follows the shared [passive-healing rules](../../KEYWORDS.md#repeats-and-derived-effects); enemies receive no additional automatic regeneration.
+**Tidal Regeneration** restores Neradora’s own Health every other turn. It triggers at the start of its owner's second, fourth and subsequent even-numbered battle turns, after periodic damage and before resolving control skips. It works while Stunned or Frozen, but only while alive and deployed. Backup misses its scheduled healing without banking it; swaps and current-format resume retain the battle's cadence. Each battle begins again on turn one. Its healing follows the shared [passive-healing rules](../../KEYWORDS.md#repeats-and-derived-effects); enemies receive no additional automatic regeneration.
 
 Undertow Knot grants its user 4 Block and Cleanses one harmful effect, using ordinary Block sharing and Cleanse rules. Its Block scales with ability level; the Cleanse remains one effect. It grants Block and Health XP once per accepted play.
 

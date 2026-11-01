@@ -8,7 +8,7 @@ All three abilities cost 1 Mana. Autumn Insight uses the ordinary player-chosen 
 
 ## Fallen Leaves
 
-Almanelle keeps the normal retained half of its own Block, rounded normally. Fallen Leaves converts the Block actually lost during that turn decay into Thorns, also rounded normally. For example, 20 Block becomes 10 Block and grants 5, 6, 7, 8, 9 or 10 Thorns at the six tiers. Three Block becomes two Block and grants one Thorns at base rank; a single Block rounds back to one and loses nothing
+Almanelle keeps the normal retained half of its own Block, rounded normally. Fallen Leaves converts the Block actually lost during that turn decay into Thorns, also rounded normally. A single Block rounds back to one and loses nothing
 
 The conversion runs at the existing turn boundary, after periodic damage and before the creature starts its action window. It also follows the ordinary Block decay of living reserves, including while controlled. Knocked-out creatures gain nothing. Block spent absorbing attacks, removed by another effect or moved between creatures does not trigger the passive
 
@@ -22,14 +22,7 @@ The [Drive source folder](https://drive.google.com/drive/folders/1AYTvxX-JPpkKdT
 
 The action sources show a clear water arc over a moving animal, a raised paw guiding autumn leaves, and flowering roots sheltering it from rain. The seasonal orchard identity interprets those visible actions. Spring Current uses the file named Winter Pause because the selected image depicts running water with no ice. No artwork was generated or edited
 
-Unchanged PNG originals are preserved in `public/art/creatures/almanelle/`. The [manifest](../../../assets/manifest.json) records these exact Drive IDs, rights notes and lossless preparation recipes:
-
-| Selection      | Drive file ID                       |
-| -------------- | ----------------------------------- |
-| Portrait       | `1c38i8eEKL_xx-Ge9KIOmVQd1SaZrPXAY` |
-| Spring Current | `1F6ra5V0H2DGp7IjfKwMuc3Yb0zaEy7gQ` |
-| Autumn Insight | `1vLezcKwd2AWYhEnNWkK7_LOpEns7t2XN` |
-| Rooted Year    | `1HLZ6FCMzkYdhqhWQTplkq1Q_koT0Y9Zo` |
+Unchanged originals are preserved in `public/art/creatures/almanelle/`; the [manifest](../../../assets/manifest.json) records their Drive IDs, rights and preparation recipes.
 
 ## Ability choices and budgets
 
@@ -43,8 +36,4 @@ Ordinary enemies have no shared hand, so Autumn Insight adapts to three healing 
 
 ## Play and weakness
 
-A normal opening uses Rooted Year to gain shelter and Thorns. Spring Current removes Almanelle's Burn and pressures an enemy, while Autumn Insight recovers a spent card and restores an injured companion. If Rooted Year's three Block survives to the next turn, two remain and Fallen Leaves adds one Thorns. Stacking or upgrading Block makes rank differences more visible
-
-For a stronger setup, reach twenty Block through repeated Rooted Year or allied protection. Ten remain after decay, while Fallen Leaves grows five to ten Thorns. Upgraded Rooted Year, Water's Seafoam, Ironwood Buckler and allied Block cards can support this buildup; the passive supplies no free Mana or cards
-
-Poor draws contain recovery without a useful discard or healing with no missing Health. Strong incoming attacks spend the stored Block before it can grow Thorns. Dodge prevents Thorns retaliation; fully absorbed attacks still trigger it. Periodic damage spends Block and does not trigger Thorns, and Purge can remove accumulated Thorns. Almanelle must survive an attack to retaliate. The complete kit and higher-rank sustain require hosted balance qualification; no measured win-rate claim is made
+Almanelle converts Block lost to ordinary decay into future retaliation. Strong attacks can spend Block before it decays, while Dodge, periodic damage and Purge can limit Thorns. Recovery is weaker without a useful discard or missing Health; the kit's high-rank sustain still needs measured balance review.

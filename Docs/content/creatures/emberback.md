@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Current kit](../../../src/game/content/creatures/emberback.ts) · [Authoring contracts](../../CONTENT.md)
 
-Emberback is an armored brawler. Its unique passive, Molten Shell, reads: "When your Armor breaks, deal 1 Burn damage to all enemies" Damage scales from 1 through 6 at zero through five stars, replacing the previous tier. It grants no starting Armor. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
+Emberback is an armored brawler. Molten Shell grants no starting Armor.
 
 Molten Shell triggers once per positive-to-zero Armor transition, after the effect that removes Armor completes. Damage, periodic damage, shattering, Purge and Armor theft can break Armor. No burst occurs while Armor remains, when Armor was already zero, or after the creature is knocked out. New Armor can enable another burst. Burn packets use existing mitigation and buildup, without Dodge, Critical hits or ordinary attack retaliation. Player bursts use the collected tier and hit living enemies; enemy bursts use the base tier and hit deployed living allies.
 

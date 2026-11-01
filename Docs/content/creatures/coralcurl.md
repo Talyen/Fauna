@@ -4,7 +4,7 @@
 
 Coralcurl is available through ordinary encounters, recruitment and starter drafts.
 
-**Bubbleburst** reads "Deal 1 Water damage when your Block breaks" at zero stars and scales to 2, 3, 4, 5 and 6. When a direct attack spends the last Block, a surviving Coralcurl damages the living attacker, including an exactly absorbed attack. The captured break still triggers if another reward restores Block. Purge, expiry, periodic damage and retaliation do not trigger it; Bubbleburst cannot chain retaliation.
+**Bubbleburst** retaliates when Block breaks. When a direct attack spends the last Block, a surviving Coralcurl damages the living attacker, including an exactly absorbed attack. The captured break still triggers if another reward restores Block. Purge, expiry, periodic damage and retaliation do not trigger it; Bubbleburst cannot chain retaliation.
 
 Coral Spiral follows [ordinary swap rules](../../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps), then Blinds every living enemy, including when alone without backup. Enemy Spiral exchanges battlefield positions and Blinds deployed allies.
 

@@ -21,8 +21,8 @@ Ordinary enemy Oathara uses the base tier and may choose an eligible ability fro
 ## Shared mechanics
 
 - Never Lost uses the existing redraw owner: the played card leaves the hand first, the remaining visible hand returns to the deck, and that many ordinary draws occur. Buffered draws retain FIFO priority. Card identities and ownership remain unchanged
-- Traveler’s Ward grants one non-stacking [Attack Reflection](../../KEYWORDS.md#attack-reflection) protection to its actor. An incoming attack returns to the attacker after interception and Negate, before Dodge or defenses. Harmful authored follow-ups return too; other area recipients and the attacker’s support benefits keep their ordinary owners. A reflected attack cannot reflect again, but normal defenses apply. A repeated attack resolves separately. Periodic and proc damage and Blind misses do not consume the ward. It survives swaps and saves and can be Purged
-- [Resurrect](../../KEYWORDS.md#resurrection) returns a knocked-out roster ally, including backup, with 20% of maximum Health, rounded normally with a minimum of one. It is direct restoration of life, unaffected by healing bonuses and without healing-trigger rewards. It preserves existing effects and spent per-battle counters and does not renew spent Death’s Door or grace. The recipient stays in its current formation position and regains ordinary ownership of its cards
+- Traveler’s Ward gives its actor the shared [Attack Reflection](../../KEYWORDS.md#attack-reflection) protection; it survives swaps and saves and can be Purged
+- [Resurrect](../../KEYWORDS.md#resurrection) can return a knocked-out roster ally, including backup, without renewing spent Death’s Door or per-battle counters. The recipient stays in formation and regains ordinary ownership of its cards
 
 ## Play and balance
 

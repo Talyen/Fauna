@@ -1,6 +1,6 @@
 # Velouria
 
-The user selected Rimewake, Moonlit Waltz, Velvet Aegis and Hushed Finale on October 29, 2026. The [kit](../../../src/game/content/creatures/velouria.ts) owns Health, values and all six passive tiers. Velouria is an ordinary recruitable creature outside the starter pool
+The [kit](../../../src/game/content/creatures/velouria.ts) owns Health, values and all six passive tiers. Velouria is an ordinary recruitable creature outside the starter pool
 
 ## Rimewake
 

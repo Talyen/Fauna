@@ -1,14 +1,8 @@
 # Tinkervale
 
-Tinkervale is a village inventor with 28 Health. Spare Parts gives an allied creature 1, 2, 3, 4, 5 or 6 Block, at zero through five stars, whenever one of its Armor stacks is spent reducing damage. The Block is granted after the hit; a hit fully absorbed by Block does not wear Armor. Purge and other removal are not Armor spent for this passive. The inventor must be alive and deployed, and enemy Tinkervale uses the base tier.
+Tinkervale is a village inventor. The [authored kit](../../../src/game/content/creatures/tinkervale.ts) owns its values and passive tiers. Spare Parts grants Block when an ally’s Armor is spent reducing damage. The Block is granted after the hit; a hit fully absorbed by Block does not wear Armor. Purge and other removal are not Armor spent for this passive. The inventor must be alive and deployed, and enemy Tinkervale uses the base tier.
 
-All three abilities cost 1 Mana:
-
-- Copper Canopy gives all allies 2 Block
-- Clockwork Launch adds 2 Clockwork Bees to hand
-- Gear Mender gives an ally 3 Armor
-
-A Clockwork Bee costs 1 Mana, deals 6 Physical damage and is Consumed when played. Generated Bees belong to their creator, enter hand or ordinary overflow, recycle if unplayed, and expire after battle. They use the ordinary temporary-card capacity and save/resume rules. Ordinary enemy Tinkervale stores up to six Bees and can select one as its action; enemy cards use the same authored effects.
+Clockwork Bees are Consumed when played. Generated Bees belong to their creator, enter hand or ordinary overflow, recycle if unplayed, and expire after battle. They use the ordinary temporary-card capacity and save/resume rules. Ordinary enemy Tinkervale stores up to six Bees and can select one as its action; enemy cards use the same authored effects.
 
 ## Artwork provenance
 

@@ -1,12 +1,12 @@
 # Tithemaw
 
-Legendary · The empire's reckoning · 60 Health
+Legendary · The empire's reckoning
 
 [Kit](../../../src/game/content/creatures/tithemaw.ts) · [Drive artwork](https://drive.google.com/drive/folders/1hDAC1limdhNmkXpuH1xeRxMDkhgX_Gx7) · [Legendary rules](../../EXPEDITION_DESIGN.md#legendaries-and-minions)
 
-The Cost of Shelter adds 20–70% of each target's current Block, rounded normally, to Tithemaw's attack damage before ordinary modifiers and critical hits. The enemy uses the base tier. Each area recipient is calculated independently. Only Tithemaw's own ability attacks receive this bonus, not Gilded Ward damage or reflected attacks.
+The Cost of Shelter adds a portion of each target's current Block, rounded normally, to Tithemaw's attack damage before ordinary modifiers and critical hits. The enemy uses the base tier. Each area recipient is calculated independently. Only Tithemaw's own ability attacks receive this bonus, not Gilded Ward damage or reflected attacks.
 
-Coinfang deals 4 Physical damage, then Purges one effect from its target. Oath Howl deals 2 Light damage to all enemies. Gilded Ward restores 2 Health to living allies, including existing Wards, then summons up to two Gilded Wards in vacant slots. Card upgrades raise the primary damage or healing by 2 per level; summon count and Ward Health do not change. Every card costs 1 Mana.
+Gilded Ward heals living allies, including existing Wards, before summoning into vacant slots. Upgrades change the primary healing, not summon count or Ward Health.
 
 Each Gilded Ward has 4 Health. After each resolved attack by its living owner, each living, uncontrolled Ward deals 1 Light damage to all living enemies. The response occurs once per attack resolution, not once per target; repeated attacks may trigger it again. Ward damage is derived, so it cannot Dodge, critically hit, retaliate or trigger attack chains. Wards follow the shared Minion lifecycle. They can be summoned again after defeat, disappear when their owner leaves or falls, and do not revive when their owner returns. These rules apply to either side.
 

@@ -20,13 +20,6 @@ Tournelle is appended to the explicit species/card catalogs and two ordinary com
 
 ## Artwork
 
-Unchanged originals from the user's [Tournelle folder](https://drive.google.com/drive/folders/1qpoPbzR2GxzTh-81Y3sQmXewc-IJmynL) are preserved under `public/art/tournelle/` and prepared through the manifest's lossless card recipe
-
-| Selection         | Source                                                                                       | Visible connection                                          |
-| ----------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Creature portrait | [Tournelle 04](https://drive.google.com/file/d/1TZfYsjvKSQeO5i_LHOT0bqyR7kx-gYem/view)       | Stoat in a red scarf facing sunlight beyond snowy mountains |
-| Kindled Courage   | [Kindled Courage](https://drive.google.com/file/d/1gBMp0kBwlpyKgJnv_Tt32d-EcFfSoLbj/view)    | Golden scarf-light clears the storm                         |
-| Valiant Challenge | [Valiant Challenge](https://drive.google.com/file/d/1ze5eKOdpZriAseUceIEWBJ-NDPilbgFw/view)  | Brooch-light reaches a larger distant rival                 |
-| Safe Passage      | [Last-Second Rescue](https://drive.google.com/file/d/1khPQmksWYiHy3GrLK0v3NB1uFPxIf4s9/view) | Scarf lifts a bird away from breaking ice                   |
+Unchanged originals from the [Tournelle folder](https://drive.google.com/drive/folders/1qpoPbzR2GxzTh-81Y3sQmXewc-IJmynL) are preserved under `public/art/tournelle/` and identified in the [manifest](../../../assets/manifest.json). Golden scarf-light clears the storm, brooch-light reaches a rival, and the scarf lifts a bird away from breaking ice.
 
 Creature artwork uses 4:3 landscape; abilities use 3:4 portrait. Source inspection, rendered review, user design selection and balance acceptance are separate evidence

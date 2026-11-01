@@ -1,6 +1,6 @@
 # Wendlet
 
-The owner selected Living Shadow, Midnight Mantle, Umbra Snare and Borrowed Silhouette on October 28, 2026. The [authored kit](../../../src/game/content/creatures/wendlet.ts) owns Health, exact rules and all six passive tiers. Wendlet is an ordinary recruitable creature outside the first-run starter pool
+The [authored kit](../../../src/game/content/creatures/wendlet.ts) owns Health, exact rules and all six passive tiers. Wendlet is an ordinary recruitable creature outside the first-run starter pool
 
 ## Living Shadow
 

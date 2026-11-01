@@ -4,7 +4,7 @@
 
 Prismram is a crystal defender found in ordinary combat packs and collected through recruitment.
 
-**Refraction** gives harmful status effects received a 10%, 20%, 30%, 40%, 50% or 60% chance to redirect to a random living enemy at zero through five stars. Faceted Ward grants one guaranteed [Reflect charge](../../KEYWORDS.md#reflection) ahead of Refraction's passive chance, including against Blind.
+**Refraction** can redirect received harmful status effects to a random living enemy. Faceted Ward grants one guaranteed [Reflect charge](../../KEYWORDS.md#reflection) ahead of Refraction's passive chance, including against Blind.
 
 ## Artwork
 

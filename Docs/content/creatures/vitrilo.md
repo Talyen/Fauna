@@ -1,6 +1,6 @@
 # Vitrilo
 
-The owner selected Glass Cutter, Sunflare Cast, Prism Key and Kilnheart on October 29, 2026. The [authored kit](../../../src/game/content/creatures/vitrilo.ts) owns Health, exact rules and all six passive tiers. Vitrilo is an ordinary recruitable creature outside the first-run starter pool
+The [authored kit](../../../src/game/content/creatures/vitrilo.ts) owns Health, exact rules and all six passive tiers. Vitrilo is an ordinary recruitable creature outside the first-run starter pool
 
 ## Glass Cutter
 

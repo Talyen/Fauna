@@ -16,7 +16,7 @@ The shared [team owner](../../../src/game/team.ts) grants Mountain Guide on abil
 
 Cloudstep uses the existing swap selection: prefer a random living backup; with no living backup, exchange positions with a random other living deployed ally. The creature entering Skybex's former position receives the Dodge. No available partner means no swap and no grant. The swap owner returns that actual recipient; the ability never infers it from card slots or mutable ownership. Temporary Dodge follows the existing cap, Purge and expiry rules, including backup turns, skipped turns and save/resume.
 
-A repeated Cloudstep can swap again while its actor remains deployed. An actor already moved to backup cannot swap again or spend additional RNG. Existing swap abilities share that validity check. A legal play still pays once and awards Dodge XP once. Sky Shepherd awards Nature XP, and its attacks use ordinary Dodge, Critical hits, Block and damage reactions. No saved counters or format change are needed.
+A repeated Cloudstep can swap again while its actor remains deployed. An actor already moved to backup cannot swap again or spend additional RNG. Existing swap abilities share that validity check. A legal play still pays once and awards Dodge XP once. Sky Shepherd awards Nature XP, and its attacks use ordinary Dodge, Critical hits, Block and damage reactions.
 
 ## Play and balance
 
@@ -26,13 +26,6 @@ Without a backup, Cloudstep can still exchange deployed positions. With no livin
 
 ## Artwork provenance
 
-Selected by the user on October 25, 2026 from the [Skybex Drive folder](https://drive.google.com/drive/folders/1idImi9bO0hHFU1FrU-s5uKvyW2xPHhy9):
-
-| Use          | Original                                      | Drive source                                                                       |
-| ------------ | --------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Portrait     | `skybex_02.png`                               | [Original](https://drive.google.com/file/d/1wqwVGx9SjPLUFBukcBOx9Ew_cbSd2dBl/view) |
-| Far Horizon  | `Skybex_Ability-Utility-04_FarHorizon.png`    | [Original](https://drive.google.com/file/d/1pc6Cqq3LkFNAiWLUY2o7zGmfACyIsLjO/view) |
-| Cloudstep    | `Skybex_Ability-Utility-01_Cloudstep.png`     | [Original](https://drive.google.com/file/d/1W5WK3vAlYaCsm6aIbsdcvjF4oMK7buTI/view) |
-| Sky Shepherd | `Skybex_Ability-Expansion-02_SkyShepherd.png` | [Original](https://drive.google.com/file/d/1v59fZy8YS-MJuzoZGUcFaphkYlKc-fmg/view) |
+The [Skybex Drive folder](https://drive.google.com/drive/folders/1idImi9bO0hHFU1FrU-s5uKvyW2xPHhy9) supplies the selected portrait and actions; the [manifest](../../../assets/manifest.json) identifies their sources.
 
 Unchanged PNG originals are retained under `public/art/creatures/skybex/`; the manifest registers the portrait at 4:3 and actions at 3:4 through the lossless prepared-art pipeline. Unselected illustrations are excluded from production.

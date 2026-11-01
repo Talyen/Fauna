@@ -12,17 +12,15 @@ Each living, deployed Aerostat contributes its own tier at battle startup. Falle
 
 Well Provisioned supplies resources before any ability is drawn. This differs from Orifable’s extra turn-start draw and Rookhaven’s copies of actual draws. Resume, turns, swaps and recruitment during combat never replay the opening grant. Duplicate providers add their counts; existing supplies remain usable when a provider leaves or falls.
 
-## Consume and battle lifecycle
+## Food lifecycle
 
-All three [shared Food definitions](../../../src/game/content/food.ts) already have Consume. Playing one removes that card for the rest of the battle, after any accepted repeat resolves. It enters neither discard nor draw and cannot be recovered. Unplayed Food discards and recycles normally. Invalid or unaffordable plays preserve the card, state and RNG; previews are detached and resume preserves consumed cards’ absence.
-
-Every new battle rebuilds the starting deck and replenishes the active providers’ complete tier counts. Used starting Food therefore does not disappear permanently or require repurchasing. Extra Food generated during combat remains battle-only; it does not accumulate across battles. The random Food types are selected anew at startup. No new persisted fields or save-format change are needed: the existing temporary neutral-card contract represents both starting and generated supplies, and battle cleanup removes them before the next opening.
+The shared [Food contract](../../CONTENT.md#shared-food-cards) owns consumption, overflow and persistence. Each battle supplies fresh Food; unused supplies remain usable after a provider leaves or falls, and combat-generated Food does not accumulate between battles.
 
 ## Abilities, enemies and balance
 
-Voyager’s Rest targets Aerostat alone. True Bearing first draws, then removes Blind from every living deployed ally, including Aerostat and allied Minions; it leaves other harmful effects and backups unchanged. It remains usable when nobody is Blind. Blind removal uses the existing Cleanse owner and its ordinary rewards. The existing team-Blind-removal rule now supports a primary-value draw, leaving Tournelle’s Kindled Courage and its Light-card draw unchanged.
+Voyager’s Rest targets Aerostat alone. True Bearing first draws, then removes Blind from every living deployed ally, including Aerostat and allied Minions; it leaves other harmful effects and backups unchanged. It remains usable when nobody is Blind. Blind removal uses the existing Cleanse owner and its ordinary rewards.
 
-Parcel Drop uses the same Food generation and overflow rules as Orifable’s Care Package. Their shared description now says that Food enters the hand. Upgrades increase primary values by two per level: Voyager’s Rest gives 6/8/10/12 Block, True Bearing draws 2/4/6/8 cards and Parcel Drop creates 2/4/6/8 Food. Blind removal remains fixed, and Food itself does not upgrade.
+Parcel Drop uses the same Food generation and overflow rules as Orifable’s Care Package. Blind removal remains fixed, and Food itself does not upgrade.
 
 Ordinary enemies have no hand or draw pile. Enemy Aerostat can use Voyager’s Rest and True Bearing’s allied Blind removal, but cannot draw or create Food; Well Provisioned has no enemy deck to supply. This preserves the existing ordinary-enemy resource boundary rather than adding a second deck model. Player passive rank does not amplify enemy behavior.
 
@@ -30,13 +28,6 @@ Voyager’s Rest follows the six-point Block baseline. Parcel Drop supplies choi
 
 ## Selected artwork
 
-The owner selected these ability illustrations from the [Aerostat Drive folder](https://drive.google.com/drive/folders/1MHRIhvQatC43T9A-pjxXoE2aotfS_aa2). Its sole portrait supplies the creature artwork. Unchanged originals are retained under `public/art/creatures/aerostat/` and registered in the [manifest](../../../assets/manifest.json).
-
-| Use            | Original                                       | Drive source                                                                       |
-| -------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Portrait       | `Aerostat_01.png`                              | [Original](https://drive.google.com/file/d/1X-PzTKAuLvbA3TWVCqcIwKB-fq2PmIip/view) |
-| Voyager’s Rest | `Aerostat_Ability-Utility-04_VoyagersRest.png` | [Original](https://drive.google.com/file/d/1Fn5H6DydGDCJ_Q-y1nJ9tGvo-aDq-Kei/view) |
-| True Bearing   | `Aerostat_Ability-Utility-02_TrueBearing.png`  | [Original](https://drive.google.com/file/d/1TDEiAbrOny7C9sDQuo5G-pSoQ69t_GVV/view) |
-| Parcel Drop    | `Aerostat_Ability-Expansion-01_ParcelDrop.png` | [Original](https://drive.google.com/file/d/1-wi60sXxkABUNwlw3RdsbBC8z8Z7cVgn/view) |
+The [Aerostat Drive folder](https://drive.google.com/drive/folders/1MHRIhvQatC43T9A-pjxXoE2aotfS_aa2) supplies the selected actions and sole portrait. Unchanged originals are retained under `public/art/creatures/aerostat/` and identified in the [manifest](../../../assets/manifest.json).
 
 The portrait uses 4:3 landscape framing and actions use 3:4 portrait framing through the shared lossless prepared-art pipeline. The pack-bearing silhouette, compass clearing dark clouds, sheltered rest and descending supply parcels retain one consistent blue/gold travel palette.

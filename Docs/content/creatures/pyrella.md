@@ -6,7 +6,7 @@ Use the [authored kit](../../../src/game/content/creatures/pyrella.ts) for curre
 
 Pyrella enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged.
 
-Every card costs 1 Mana. Festival Burst follows ordinary attack upgrades and room power. Ember Harvest refunds Mana before drawing and before automatic end turn; primary Mana upgrades add two per level while the Burn draw remains one. It follows hand/overflow, eligible living-owner, recycling and Mana caps. It grants Mana XP, while drawing a Burn card does not grant Burn XP. Enemies omit Ember Harvest and use their two supported cards. Spark Decoy applies 2 Burn buildup to each enemy, adding two per ability level, then grants non-stacking Negate and Burn XP. The Burn has no immediate damage and follows ordinary Nullify and reflection rules.
+Festival Burst follows ordinary attack upgrades and room power. Ember Harvest refunds Mana before drawing and before automatic end turn; primary Mana upgrades add two per level while the Burn draw remains one. It follows hand/overflow, eligible living-owner, recycling and Mana caps. It grants Mana XP, while drawing a Burn card does not grant Burn XP. Enemies omit Ember Harvest and use their two supported cards. Spark Decoy applies 2 Burn buildup to each enemy, adding two per ability level, then grants non-stacking Negate and Burn XP. The Burn has no immediate damage and follows ordinary Nullify and reflection rules.
 
 ## Passing Flame
 
@@ -14,9 +14,9 @@ Passing Flame spreads a rank-dependent portion of a defeated Burning opponent's 
 
 Only the Pyrella credited with the defeat triggers its passive, while alive and deployed. Direct damage, attributed periodic damage and ordinary Thorns can qualify; a teammate's defeat does not. Enemy Pyrella uses the base tier. Death's Door must actually expire and Health reach zero before a roster creature counts as defeated. Multiple Pyrellas do not each trigger from another creature's kill.
 
-Capture the victim's existing Burn at defeat, before a lethal hit adds its own buildup or a lethal periodic tick decays. Round the percentage pool once, divide it equally among surviving deployed creatures on the victim's side, including Minions, and assign indivisible remainder stacks in battlefield order. Six Burn at the six tiers produces total pools of 1, 2, 3, 4, 5 and 6. Full transfer conserves the pool; recipient caps can discard excess, and a protected recipient's portion is not reassigned. No surviving recipients means no spread or RNG draw.
+Capture the victim's existing Burn at defeat, before a lethal hit adds its own buildup or a lethal periodic tick decays. Round the percentage pool once, divide it equally among surviving deployed creatures on the victim's side, including Minions, and assign indivisible remainder stacks in battlefield order. Full transfer conserves the pool; recipient caps can discard excess, and a protected recipient's portion is not reassigned. No surviving recipients means no spread or RNG draw.
 
-Spreading applies Burn buildup without immediate damage. It retains Pyrella as its source, follows Nullify and harmful-status Reflection, and grants no extra card XP. Reflection can redirect a recipient's portion, without recursively reflecting it. No new passive counter or saved bookkeeping is needed. Obsolete development saves are rejected without migration.
+Spreading applies Burn buildup without immediate damage. It retains Pyrella as its source, follows Nullify and harmful-status Reflection, and grants no extra card XP. Reflection can redirect a recipient's portion, without recursively reflecting it.
 
 ## Identity and balance
 

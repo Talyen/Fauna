@@ -10,7 +10,7 @@ Dulcera is a support creature, the gentle sanctuary. Her rounded sea-cow silhoue
 
 The shared swap owner restores Health after the new formation is committed. Living Dulceras involved in the exchange provide passage: those deployed before or after the swap, including a departing Dulcera and an arriving Dulcera herself. A provider present in both formations contributes once; duplicate providers contribute independently. Fallen and unrelated backup Dulceras provide nothing. Only newly deployed creatures receive restoration. Rearranging existing positions, opening a battle, recruitment outside battle and resuming a save do not trigger passage. Legendary formation changes and knockout replacements use the same boundary.
 
-This is ordinary passive healing: maximum Health, Mending and healing-triggered Boons apply; it neither revives nor grants card-only overhealing rewards or healing bounces. No new saved counters or fields are needed. Rejected commands retain state and RNG. Preview resolves the same production swap on detached state.
+This is ordinary passive healing: maximum Health, Mending and healing-triggered Boons apply; it neither revives nor grants card-only overhealing rewards or healing bounces.
 
 Tournelle intercepts attacks and Reedstag shares protection; Gentle Passage makes changing the lineup restorative. It works with other creatures' swap abilities and required replacements. Its weakness is the need for living backups and opportunities to exchange creatures; it supplies no damage or automatic recovery while the lineup stays unchanged.
 
