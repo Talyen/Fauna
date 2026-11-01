@@ -3,9 +3,8 @@
 Use the [authored kit](../../../src/game/content/creatures/reverie.ts) for current values and complete tiers.
 
 Reverie is an ordinary support creature, titled “The sanctuary of dreams”
-The user selected this kit on October 23, 2026
 
-All three cost 1 Mana. Unhurried restores rank-dependent Health at turn end to allies that played no cards
+All three abilities cost 1 Mana. Unhurried restores rank-dependent Health at turn end to allies that played no cards
 
 ## Identity and resolution
 

@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Kit](../../../src/game/content/creatures/wisterelle.ts) · [Discard draws](../../../src/game/card-zones.ts) · [Regressions](../../../tests/unit/game/creatures/wisterelle.test.ts)
 
-Wisterelle is a support creature built around the flowering railway station. The owner selected Forgotten Junction, Lantern Fare, Left Luggage and Lost and Found on October 25, 2026. Its unchanged portrait and three selected action illustrations come from the [Wisterelle Drive folder](https://drive.google.com/drive/folders/1xj0u7m4-QZa4eCDmX6WIPciExhHnp5x5); exact file IDs and rights provenance remain in the asset manifest.
+Wisterelle is a support creature built around the flowering railway station. Its unchanged portrait and three selected action illustrations come from the [Wisterelle Drive folder](https://drive.google.com/drive/folders/1xj0u7m4-QZa4eCDmX6WIPciExhHnp5x5); exact file IDs and rights provenance remain in the asset manifest.
 
 ## Kit and ownership
 

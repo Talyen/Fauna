@@ -4,7 +4,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/orifable.ts) for current values and complete tiers.
 
-Orifable is a support creature, the bearer of good tidings. The owner selected its kit and all three Food cards on October 23, 2026. It appears in ordinary encounter packs and recruitment; it is excluded from the first-run starter pool. Once collected, it follows ordinary starter selection rules.
+Orifable is a support creature, the bearer of good tidings. It appears in ordinary encounter packs and recruitment; it is excluded from the first-run starter pool. Once collected, it follows ordinary starter selection rules.
 
 ## Express Delivery
 

@@ -2,7 +2,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/tournelle.ts) for current values and complete tiers.
 
-Tournelle is an ordinary creature whose scarf, sunburst brooch and rescue imagery inform a protective Light kit. The user selected these rules on October 22, 2026
+Tournelle is an ordinary creature whose scarf, sunburst brooch and rescue imagery inform a protective Light kit.
 
 ## Resolution
 

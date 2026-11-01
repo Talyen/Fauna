@@ -167,10 +167,3 @@ uses an isolated, bounded language request so an invalid or timed-out optional
 reply does not stop its Cloud transport. Startup and runtime catalog localization
 use the same qualified languages. Production build and platform verification are
 reported separately from catalog and rendered-flow checks.
-
-The rule-message adapter retains numeric values and keyword identities so a
-translated rule can reorder them; invalid or unrecognized templates fall back to
-English. The card extractor checks runtime numeric branches against the forms it
-samples, so newly introduced branches need explicit coverage. The UI inventory is
-an additional aid and cannot by itself prove coverage of dynamic text. The
-language selector offers the languages marked qualified in the registry.

@@ -3,9 +3,8 @@
 Use the [authored kit](../../../src/game/content/creatures/parhelion.ts) for current values and complete tiers.
 
 Parhelion is an ordinary support creature, “The sun upon the snow”
-The user selected Sunthaw, Polar Reprieve, Sundog Reservoir and Whiteout Waltz on October 25, 2026
 
-All abilities cost 1 Mana. [The kit](../../../src/game/content/creatures/parhelion.ts) uses the existing thaw, Mana and attack owners. This selection replaces earlier Light/Freeze damage and escape proposals; Threefold Escape and Polar Noon are not used
+All abilities cost 1 Mana. [The kit](../../../src/game/content/creatures/parhelion.ts) uses the existing thaw, Mana and attack owners.
 
 ## Sunthaw
 

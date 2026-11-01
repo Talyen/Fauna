@@ -4,7 +4,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/pyrella.ts) for current values and complete tiers.
 
-Pyrella enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged. The selected kit was approved on October 25, 2026.
+Pyrella enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged.
 
 Every card costs 1 Mana. Festival Burst follows ordinary attack upgrades and room power. Ember Harvest refunds Mana before drawing and before automatic end turn; primary Mana upgrades add two per level while the Burn draw remains one. It follows hand/overflow, eligible living-owner, recycling and Mana caps. It grants Mana XP, while drawing a Burn card does not grant Burn XP. Enemies omit Ember Harvest and use their two supported cards. Spark Decoy applies 2 Burn buildup to each enemy, adding two per ability level, then grants non-stacking Negate and Burn XP. The Burn has no immediate damage and follows ordinary Nullify and reflection rules.
 
@@ -35,4 +35,4 @@ Source: [Pyrella Drive folder](https://drive.google.com/drive/folders/15CrVtC9zg
 - Ember Harvest: `Pyrella_Ability-Utility-02_EmberHarvest.png`, Drive ID `1tWwJGdixFry8L1xkwYjxuQtJne3w3sW7`
 - Spark Decoy: `Pyrella_Ability-Expansion-01_SparkDecoy.png`, Drive ID `1QsahvRmVYOtXNXiCfsuB_aiZ4MCEx-n2`
 
-The originals and all eight candidates were visually inspected during design. The user selected these three illustrations and mechanics on 2026-10-25. Prepared derivatives use the existing lossless card recipe and preserve the complete composition. Source selection is separate from rendered review and measured balance.
+Prepared derivatives use the existing lossless card recipe and preserve the complete composition. Source selection is separate from rendered review and measured balance.

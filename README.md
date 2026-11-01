@@ -1,6 +1,6 @@
 # Fauna
 
-A single-player creature-collecting card battler for Steam. Choose a starter, recruit companions and combine their cards in one shared deck through an eight-encounter journey. Creature and ability illustrations are in place; some encounter/location art remains placeholder. See the [roadmap](Docs/ROADMAP.md) for current capabilities and open work.
+A single-player creature-collecting card battler for Steam. Choose a starter, recruit companions and combine their cards in one shared deck through a three-act journey. Creature and ability illustrations are in place; some encounter/location art remains placeholder. See the [roadmap](Docs/ROADMAP.md) for current capabilities and open work.
 
 ## Run
 

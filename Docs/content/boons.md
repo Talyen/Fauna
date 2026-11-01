@@ -195,7 +195,7 @@ Current saves support the ownership-dependent seventh hand slot and stored build
 
 ## Woven artifact Boons
 
-The October 26 approved additions use the ordinary unowned Merchant and Boss reward pools, owned-Boon inspection and committed combat feedback. The [focused regressions](../../tests/unit/game/woven-boons.test.ts) cover their interactions. The [Boon rules](../../src/game/rules/boons.ts) own exact copy and values; no new saved fields or counters are introduced.
+These Boons use the ordinary unowned Merchant and Boss reward pools, owned-Boon inspection and committed combat feedback. The [focused regressions](../../tests/unit/game/woven-boons.test.ts) cover their interactions. The [Boon rules](../../src/game/rules/boons.ts) own exact copy and values; no new saved fields or counters are introduced.
 
 | Boon               | Execution contract                                                                                                                                                                                                                                                                                                           |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
