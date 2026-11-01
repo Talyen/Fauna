@@ -1,3 +1,5 @@
+import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 import { createHash, randomUUID } from "node:crypto";
 import { lstatSync, readFileSync, readdirSync, renameSync, rmSync } from "node:fs";
 import path from "node:path";
@@ -5,7 +7,47 @@ import { generatedName } from "../balance/report-retention.mjs";
 import { readReceipt, eligible as eligibleDevelopmentPackage } from "./development-package-receipt.mjs";
 
 const DAY = 24 * 60 * 60 * 1000;
+const PREPARED = /^reports\/(?:[a-z0-9][a-z0-9._-]*\/){1,3}prepared$/;
+const PREPARED_BUDGET = 1024 ** 3;
+function inactive(file) {
+  const result = spawnSync("lsof", ["-nP", "+D", file], { encoding: "utf8", timeout: 5000 });
+  return !result.error && result.status === 1 && !result.stdout && !result.stderr;
+}
+// Only the generated build-media layout qualifies; unknown originals remain.
+function preparedCopy(file) {
+  const receipt = JSON.parse(readFileSync(path.join(file, "manifest.json"), "utf8"));
+  if (receipt.version !== 2 || !/^[a-f0-9]{64}$/.test(receipt.manifestHash ?? "") || !receipt.records)
+    return null;
+  const expected = new Set(["manifest.json"]);
+  for (const record of Object.values(receipt.records)) {
+    if (
+      !/^\.\/prepared\/objects\/[a-f0-9]{64}\/asset\.(?:webp|png|svg|mp3|wav|ogg)$/.test(record.url ?? "") ||
+      !/^[a-f0-9]{64}$/.test(record.outputHash ?? "")
+    )
+      return null;
+    expected.add(record.url.slice("./prepared/".length));
+  }
+  let bytes = 0;
+  const actual = [];
+  function visit(dir) {
+    for (const name of readdirSync(dir)) {
+      const item = path.join(dir, name),
+        stat = lstatSync(item);
+      if (stat.isSymbolicLink()) throw new Error("Unsupported evidence");
+      if (stat.isDirectory()) visit(item);
+      else if (stat.isFile()) {
+        actual.push(path.relative(file, item).split(path.sep).join("/"));
+        bytes += stat.size;
+      } else throw new Error("Unsupported evidence");
+    }
+  }
+  visit(file);
+  return expected.size > 1 && actual.length === expected.size && actual.every((name) => expected.has(name))
+    ? bytes
+    : null;
+}
 const eligible = (name) =>
+  PREPARED.test(name) ||
   /^(?:playwright-report|blob-report|all-blob-reports|test-results)$/.test(name) ||
   /^reports\/balance\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(name) ||
   /^reports\/(?:performance\/capture|interactions\/run)-[0-9]+$/.test(name) ||
@@ -110,23 +152,40 @@ function generatedRun(file, kind) {
   return names.length === expected.length && names.every((name, index) => name === expected[index]);
 }
 
+function pinned(directory) {
+  // Persistent advisory-lock files are not proof of a live owner. Explicit
+  // retention controls are; native open-file checks guard the actual payload.
+  return readdirSync(directory).some(
+    (name) =>
+      name === ".retention-keep" || name === ".retention-lock" || name.endsWith(".retention-owner.json"),
+  );
+}
+
 function safeParents(archive, relative) {
+  if (pinned(archive) || pinned(path.dirname(archive))) return false;
   let current = path.join(archive, "files");
   for (const part of relative.split("/").slice(0, -1)) {
-    if (lstatSync(path.join(current, ".retention-keep"), { throwIfNoEntry: false })) return false;
+    if (pinned(current)) return false;
     current = path.join(current, part);
     const item = lstatSync(current);
     if (!item.isDirectory() || item.isSymbolicLink()) return false;
   }
-  return !lstatSync(path.join(current, ".retention-keep"), { throwIfNoEntry: false });
+  return !pinned(current);
 }
 
 // Identity and directory entries detect later edits without reading large artifacts again.
 // Any unusual entry or keep marker makes the whole tree caller-owned.
-function evidenceSnapshot(file) {
+function evidenceSnapshot(file, { compiled = false } = {}) {
   const hash = createHash("sha256");
   function visit(item, relative) {
     const stat = lstatSync(item, { bigint: true });
+    if (
+      /(?:^|\/)(?:sources?|originals?|saves?|backups?|masters?|finals?|trailers?)(?:\/|$)|\.(?:sqlite(?:-wal|-shm)?|save|db|mp4|mov|ipa|xcarchive|patch|diff)$/i.test(
+        relative,
+      ) ||
+      (!compiled && /\.(?:swift|tsx?|jsx?)$/i.test(relative))
+    )
+      throw new Error("Unsupported evidence");
     if (stat.isSymbolicLink() || (!stat.isFile() && !stat.isDirectory()))
       throw new Error("Unsupported evidence");
     hash.update(
@@ -141,7 +200,13 @@ function evidenceSnapshot(file) {
     );
     if (stat.isDirectory()) {
       const names = readdirSync(item).sort();
-      if (names.includes(".retention-keep")) throw new Error("Evidence explicitly retained");
+      if (
+        names.some(
+          (name) =>
+            name === ".retention-keep" || name.endsWith(".retention-owner.json") || name.endsWith(".lock"),
+        )
+      )
+        throw new Error("Evidence explicitly retained");
       for (const name of names) visit(path.join(item, name), path.join(relative, name));
     }
   }
@@ -153,6 +218,24 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
   const entries = [];
   const names = ignored.map((name) => name.replace(/\/$/u, "")).filter(eligible);
   if (ignored.includes("reports/")) {
+    const reports = path.join(archive, "files/reports");
+    function findPrepared(directory, depth = 0) {
+      if (depth > 4) return;
+      for (const entry of readdirSync(directory, { withFileTypes: true })) {
+        if (!entry.isDirectory() || entry.isSymbolicLink()) continue;
+        const item = path.join(directory, entry.name),
+          relative = path.relative(path.join(archive, "files"), item).split(path.sep).join("/");
+        if (PREPARED.test(relative)) {
+          if (preparedCopy(item) !== null) names.push(relative);
+        } else if (!/^(?:source|assets?|art|saves?|backups?|trailers?|finals?|masters?)$/i.test(entry.name))
+          findPrepared(item, depth + 1);
+      }
+    }
+    try {
+      findPrepared(reports);
+    } catch {
+      /* Unknown or modified build copies remain. */
+    }
     try {
       const review = path.join(archive, "files/reports/agent-diff");
       if (safeParents(archive, "reports/agent-diff/item")) {
@@ -270,11 +353,19 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
       if (!root.isDirectory() || root.isSymbolicLink()) continue;
       const item = path.join(archive, "files", relative);
       if (relative.startsWith("reports/agent-diff/") && !committedReview(item)) continue;
-      const snapshot = evidenceSnapshot(item);
+      const snapshot = evidenceSnapshot(item, {
+        compiled: relative.startsWith("release/.fauna-development/"),
+      });
       const review = relative.startsWith("reports/agent-diff/")
         ? JSON.parse(readFileSync(path.join(item, "index.json"), "utf8"))
         : undefined;
-      entries.push({ path: relative, snapshot, ...(review ? { review } : {}) });
+      const prepared = PREPARED.test(relative) ? preparedCopy(item) : null;
+      entries.push({
+        path: relative,
+        snapshot,
+        ...(review ? { review } : {}),
+        ...(prepared === null ? {} : { prepared: { bytes: prepared, sealedAt: now } }),
+      });
     } catch {
       // Unknown or explicitly retained evidence remains archived indefinitely.
     }
@@ -283,7 +374,11 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
 }
 
 // Only archives explicitly sealed by this policy qualify; legacy archives never do.
-export function expireEvidence(archives, { now = Date.now() } = {}) {
+export function expireEvidence(
+  archives,
+  { now = Date.now(), dryRun = false, budget = PREPARED_BUDGET, isInactive = inactive } = {},
+) {
+  if (!Number.isFinite(budget) || budget < 1) throw new Error("Invalid archive budget");
   const removed = [];
   const info = lstatSync(archives, { throwIfNoEntry: false });
   if (!info) return removed;
@@ -314,20 +409,52 @@ export function expireEvidence(archives, { now = Date.now() } = {}) {
       !Array.isArray(retention.entries)
     )
       continue;
-    for (const item of retention.entries) {
+    const prepared = retention.entries.filter(
+      (item) =>
+        PREPARED.test(item?.path ?? "") &&
+        Number.isFinite(item.prepared?.bytes) &&
+        Number.isFinite(item.prepared?.sealedAt),
+    );
+    let preparedBytes = prepared.reduce((sum, item) => sum + item.prepared.bytes, 0);
+    for (const item of [...retention.entries].sort(
+      (a, b) => (a.prepared?.sealedAt ?? 0) - (b.prepared?.sealedAt ?? 0),
+    )) {
+      if (removed.length >= 64) return removed;
       if (!item || !eligible(item.path) || typeof item.snapshot !== "string") continue;
       const source = path.join(archive, "files", item.path);
+      if (
+        PREPARED.test(item.path) &&
+        (!item.prepared ||
+          now < item.prepared.sealedAt + DAY ||
+          (now < item.prepared.sealedAt + 3 * DAY && preparedBytes <= budget))
+      )
+        continue;
       const claim = path.join(path.dirname(source), `.fauna-expiring-${randomUUID()}`);
       try {
         if (!safeParents(archive, item.path)) continue;
-        if (evidenceSnapshot(source) !== item.snapshot) continue;
+        if (
+          !isInactive(source) ||
+          evidenceSnapshot(source, { compiled: item.path.startsWith("release/.fauna-development/") }) !==
+            item.snapshot
+        )
+          continue;
+        if (dryRun) {
+          removed.push(source);
+          preparedBytes -= item.prepared?.bytes ?? 0;
+          continue;
+        }
         renameSync(source, claim);
-        if (evidenceSnapshot(claim) !== item.snapshot) {
+        if (
+          !isInactive(claim) ||
+          evidenceSnapshot(claim, { compiled: item.path.startsWith("release/.fauna-development/") }) !==
+            item.snapshot
+        ) {
           if (!lstatSync(source, { throwIfNoEntry: false })) renameSync(claim, source);
           continue;
         }
         rmSync(claim, { recursive: true });
         removed.push(source);
+        preparedBytes -= item.prepared?.bytes ?? 0;
       } catch (error) {
         // Preserve an interrupted or changed claim for inspection; never overwrite a replacement.
         if (lstatSync(claim, { throwIfNoEntry: false }) && !lstatSync(source, { throwIfNoEntry: false })) {
@@ -346,4 +473,25 @@ export function expireEvidence(archives, { now = Date.now() } = {}) {
     }
   }
   return removed;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  if (process.argv.slice(2).join(" ") !== "--dry-run")
+    throw new Error("Usage: node scripts/lib/evidence-retention.mjs --dry-run");
+  const result = spawnSync("git", ["rev-parse", "--path-format=absolute", "--git-common-dir"], {
+    encoding: "utf8",
+  });
+  if (result.error || result.status !== 0) throw new Error("Cannot identify repository archive root");
+  console.log(
+    JSON.stringify(
+      {
+        dryRun: true,
+        eligible: expireEvidence(path.join(result.stdout.trim(), "fauna-worktree-archives"), {
+          dryRun: true,
+        }),
+      },
+      null,
+      2,
+    ),
+  );
 }
