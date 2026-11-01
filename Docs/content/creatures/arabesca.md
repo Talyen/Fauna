@@ -4,7 +4,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/arabesca.ts) for current values and complete tiers.
 
-Arabesca is a spring dancer. The owner selected Ribbon Snare, Springbound, Dancing Double and allied Dodge healing on October 25, 2026. Allies include Arabesca herself. Her kit uses short, direct rules tied to the depicted action.
+Arabesca is a spring dancer whose kit follows the depicted actions. Her allied Dodge healing includes herself.
 
 ## Petalwake
 
@@ -30,7 +30,7 @@ Dancing Double does not repeat itself when initially played. If an existing gran
 
 Springbound prepares evasive healing, Ribbon Snare supplies pressure and control, and Dancing Double prepares a strong teammate's card or a second Springbound resolution. Weaknesses include unreliable Dodge, control, periodic damage and the tempo spent preparing a double instead of addressing immediate danger. No special partner is required, and the passive can heal Arabesca even when she is the last survivor.
 
-Arabesca is appended to ordinary encounter and card catalogs, preserving the earlier entries' relative order, and can be recruited normally. She is excluded from the first-run starter pool; collected starter selection follows the existing rules. Auto-play recognizes her Freeze removal, Dodge and pending-repeat utility.
+Arabesca appears in ordinary encounters and can be recruited normally. She is excluded from the first-run starter pool; collected starter selection follows the existing rules. Auto-play recognizes her Freeze removal, Dodge and pending-repeat utility.
 
 ## Artwork
 

@@ -8,4 +8,4 @@ Overgrowth retains 10%, 20%, 30%, 40%, 50% or 60% more Block at zero through fiv
 
 ## Artwork
 
-Source: [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Retired Mossback placeholders are unselected; earlier prepared outputs remain in Git history.
+Source: [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz).

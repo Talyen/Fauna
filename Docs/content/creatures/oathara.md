@@ -3,9 +3,8 @@
 Use the [authored kit](../../../src/game/content/creatures/oathara.ts) for current values and complete tiers.
 
 Oathara is an ordinary support creature, “The keeper of unfinished journeys”
-The user selected its kit on October 23, 2026
 
-All three cost 1 Mana. Unfinished Journey supplies a rank-dependent allowance of fallen ally card plays each turn. It grants access, not free plays, generated cards, a second passive or another progression system
+All three abilities cost 1 Mana. Unfinished Journey supplies a rank-dependent allowance of fallen ally card plays each turn. It grants access, not free plays, generated cards, a second passive or another progression system
 
 ## Identity and ownership
 

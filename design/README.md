@@ -13,8 +13,6 @@ These interactive studies are isolated sandboxes, not current production specifi
 - [Tooltip review batch](tooltip-interactions/README.md)
 - [Artwork interaction batch](artwork-interactions/README.md)
 - [Tab interaction batch](tab-interactions/README.md)
-- [Alchemy combatant motion direction](combat-motion/README.md)
-- [Alchemy draw, discard and hand reflow direction](hand-motion/README.md)
 - [Plain inline keywords and Glossary](keyword-interactions/README.md)
 - [Interactive talent states and fine-tuning](talent-interactions/README.md)
 - [Swap opposing arc-height comparison](swap-motion/README.md)

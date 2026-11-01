@@ -3,9 +3,8 @@
 Use the [authored kit](../../../src/game/content/creatures/almanelle.ts) for current values and complete tiers.
 
 Almanelle is an ordinary support creature, “The orchard through the seasons”
-The user selected Fallen Leaves, Rooted Year and Autumn Insight on October 23, 2026
 
-All three cost 1 Mana. Autumn Insight uses the ordinary player-chosen ally targeting flow; recovery resolves before healing. A full-Health recipient can still receive the card's recovery utility, with healing capped normally
+All three abilities cost 1 Mana. Autumn Insight uses the ordinary player-chosen ally targeting flow; recovery resolves before healing. A full-Health recipient can still receive the card's recovery utility, with healing capped normally
 
 ## Fallen Leaves
 
@@ -13,7 +12,7 @@ Almanelle keeps the normal retained half of its own Block, rounded normally. Fal
 
 The conversion runs at the existing turn boundary, after periodic damage and before the creature starts its action window. It also follows the ordinary Block decay of living reserves, including while controlled. Knocked-out creatures gain nothing. Block spent absorbing attacks, removed by another effect or moved between creatures does not trigger the passive
 
-Only Almanelle converts its Block. Duplicate individuals act independently. Enemy Almanelle uses the base 50% tier regardless of the player's Collection rank or room power. Converted Thorns use the normal status cap and gain owner. No new saved counter, historical-card record or migration is needed; ordinary Block, Thorns and progression data preserve the state across save/resume
+Only Almanelle converts its Block. Duplicate individuals act independently. Enemy Almanelle uses the base 50% tier regardless of the player's Collection rank or room power. Converted Thorns use the normal status cap and gain owner. Ordinary Block, Thorns and progression data preserve the state across save/resume
 
 The nearest overlap is Mossguard's Block retention. Mossguard keeps more shelter; Almanelle keeps the ordinary amount and turns the lost portion into retaliation. Reedstag shares new protection and Coralcurl retaliates when Block breaks; neither converts turn decay. The rule introduces a choice between spending Block to survive now and banking enough to grow future Thorns, without a per-turn allowance or mandatory partner
 

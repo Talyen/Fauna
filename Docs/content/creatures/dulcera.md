@@ -4,7 +4,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/dulcera.ts) for current values and complete tiers.
 
-Dulcera is a support creature, the gentle sanctuary. The owner selected Gentle Passage, Chapel Light, Meadow Shelter and Hushed Waters on October 25, 2026. Her rounded sea-cow silhouette, submerged chapel, warm sunlight and protective seagrass connect restoration with safe passage. She appears in ordinary encounter packs and recruitment. Her kit has no direct damage, so she is excluded from the first-run starter pool; collected copies follow ordinary starter selection.
+Dulcera is a support creature, the gentle sanctuary. Her rounded sea-cow silhouette, submerged chapel, warm sunlight and protective seagrass connect restoration with safe passage. She appears in ordinary encounter packs and recruitment. Her kit has no direct damage, so she is excluded from the first-run starter pool; collected copies follow ordinary starter selection.
 
 ## Gentle Passage
 
@@ -41,4 +41,4 @@ Unchanged originals come from the [Dulcera Drive collection](https://drive.googl
 - [Meadow Shelter](https://drive.google.com/file/d/12YKPTcxa0gPYJDE2yrV-T-VaaiRx2XZ3/view): seagrass redirects falling rubble around a safe hollow
 - [Hushed Waters](https://drive.google.com/file/d/101oV5XFxz3DMF5apa36E7nEbTk-_0Kel/view): a flipper quiets a turbulent current, supporting withdrawal and cleansing
 
-The owner selected these three ability illustrations and their rules on October 25, 2026. Originals are retained under `public/art/creatures/dulcera/`; [the manifest](../../../assets/manifest.json) records their Drive sources and standard lossless preparation recipe. The artwork uses the existing landscape creature and portrait action profiles without layout changes.
+Originals are retained under `public/art/creatures/dulcera/`; [the manifest](../../../assets/manifest.json) records their Drive sources and standard lossless preparation recipe. The artwork uses the existing landscape creature and portrait action profiles without layout changes.

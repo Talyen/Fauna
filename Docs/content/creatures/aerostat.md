@@ -4,7 +4,7 @@
 
 Use the [authored kit](../../../src/game/content/creatures/aerostat.ts) for current values and complete tiers.
 
-Aerostat is a traveling quartermaster. The owner selected its kit on October 25, 2026: travel packs and provisions establish its resource identity, with Voyager’s Rest providing a simple defensive option. Aerostat joins ordinary encounter packs, recruitment and collected starter drafts. Its support-only kit is excluded from the first-run starter pool.
+Aerostat is a traveling quartermaster. Travel packs and provisions establish its resource identity, with Voyager’s Rest providing a simple defensive option. Aerostat joins ordinary encounter packs, recruitment and collected starter drafts. Its support-only kit is excluded from the first-run starter pool.
 
 ## Well Provisioned
 

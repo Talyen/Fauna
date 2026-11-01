@@ -1,6 +1,6 @@
 # Fauna roadmap
 
-Fauna has a complete short playable journey. The current capabilities below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are remaining work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
+Fauna has a playable three-act journey. The current capabilities below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are remaining work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
 ## Current capabilities
 
@@ -51,7 +51,7 @@ The groups below are in recommended order. Each proposal needs design and playte
 ### 3. Expand journey choices
 
 - [ ] **Optional event encounters:** offer compact risk/reward decisions alongside combat and test their effect on pacing
-- [ ] **Branching routes:** introduce visible tradeoffs between encounters, recovery and rewards; prototype against the current eight-battle pacing first
+- [ ] **Branching routes:** introduce visible tradeoffs between encounters, recovery and rewards; prototype against the current journey pacing first
 - [ ] **More bosses and enemy formations:** test different team strengths while preserving the hidden-action battle design
 - [ ] **More Boons:** broaden unusual team combinations before increasing the number of overlapping systems
 
