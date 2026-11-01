@@ -15,7 +15,7 @@ Fauna has a complete short playable journey. The current capabilities below are 
 | Persistence/platform | Offline browser/Electron saves, validated backups, graceful close, optional Steam/Cloud adapters and Windows package checks                | [Architecture](ARCHITECTURE.md), [Release](RELEASE.md)                        |
 | Development          | Isolated worktrees, locked integration, media preparation, audits, replay/balance/performance tools and full hosted verification           | [Contributing](../CONTRIBUTING.md), [Development tools](DEVELOPMENT_TOOLS.md) |
 
-Localization includes bundled English, German, Simplified Chinese, Russian, Spanish (Spain), Brazilian Portuguese, Japanese and French catalogs, device-local language selection and script fonts. The [localization guide](LOCALIZATION.md) separates enabled-language metadata, recorded browser review and remaining platform qualification.
+Localization includes bundled English, German, Simplified Chinese, Russian, Spanish (Spain), Brazilian Portuguese, Japanese and French catalogs, device-local language selection and script fonts. The [localization guide](LOCALIZATION.md) separates enabled-language metadata, implementation and platform qualification.
 
 Catalogs own current creature, ability, talent and Boon counts. Implemented adapters and passing automation do not establish live Steam or hardware acceptance.
 
@@ -23,7 +23,7 @@ Catalogs own current creature, ability, talent and Boon counts. Implemented adap
 
 Before substantial expansion:
 
-- [ ] Balance the complete journey against clear difficulty and duration goals, including starter/team strength, ranks, talents, Boons and support-visit value; use the [first balance pass](archive/JOURNEY_BALANCE.md) as historical evidence
+- [ ] Balance the complete journey against clear difficulty and duration goals, including starter/team strength, ranks, talents, Boons and support-visit value
 - [ ] Replace remaining encounter/support artwork placeholders and inspect them in play
 - [ ] Approve source rights, artwork/audio selections, mix and long-session listening comfort
 - [ ] Qualify current rendered flows, Windows, physical controllers, live Steam/two-device Cloud and Steam Deck through the [release checklist](RELEASE_QUALIFICATION.md)

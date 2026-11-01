@@ -14,4 +14,4 @@ Borrowed Brilliance uses the shared area-attack rules, including Dodge, Critical
 
 ## Artwork provenance and validation record
 
-Source: [Rookhaven Drive folder](https://drive.google.com/drive/folders/16A7CWiutkxd-XLHU805kMGUYCZ3QfcTX). Portrait: `Rookhaven_03.png`; originals: `public/art/rookhaven/`. [Implementation-time review](../../../design/visual-quality/DECISIONS.md#rookhaven-implementation-review) retains the inspected states, findings, evidence location and verification scope.
+Source: [Rookhaven Drive folder](https://drive.google.com/drive/folders/16A7CWiutkxd-XLHU805kMGUYCZ3QfcTX). Portrait: `Rookhaven_03.png`; originals: `public/art/rookhaven/`.

@@ -1,6 +1,6 @@
 # Reverie
 
-Use the [authored kit](../../../src/game/content/creatures/reverie.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#reverie) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/reverie.ts) for current values and complete tiers.
 
 Reverie is an ordinary support creature, titled “The sanctuary of dreams”
 The user selected this kit on October 23, 2026

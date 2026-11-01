@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Content contracts](../../CONTENT.md)
 
-Use the [authored kit](../../../src/game/content/creatures/alpenglen.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#alpenglen) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/alpenglen.ts) for current values and complete tiers.
 
 Alpenglen’s resting alpine ibex portrait and warm sunlight against cold mountains suggest the last warmth remaining after sunset. It joins ordinary encounters, recruitment and collected starter drafts. It stays outside the curated first-run pool pending measured solo balance: reflection and repeat setup leave only Last Light Charge as immediate damage.
 
@@ -41,4 +41,4 @@ The user selected the three ability illustrations and Last Warmth on October 25,
 | Ember of Evening  | `Alpenglen_Ability-Expansion-02_EmberOfEvening.png` | [Original](https://drive.google.com/file/d/1l_dj41eH_oxzs0mHtOjWtGbynXLeZrb4/view) |
 | Last Light Charge | `Alpenglen_Ability-Utility-04_LastLightCharge.png`  | [Original](https://drive.google.com/file/d/1lRSth6jP4kQw8gXBrwoX5W1BwtWNKZ-8/view) |
 
-The golden returning wave, preserved sun and forceful leap match their chosen actions. Unchanged originals live under `public/art/creatures/alpenglen/`; the manifest and shared lossless recipe preserve their complete compositions at 4:3 for the portrait and 3:4 for actions. [Implementation evidence](../../task-evidence/alpenglen.md) records observed checks and outstanding gates.
+The golden returning wave, preserved sun and forceful leap match their chosen actions. Unchanged originals live under `public/art/creatures/alpenglen/`; the manifest and shared lossless recipe preserve their complete compositions at 4:3 for the portrait and 3:4 for actions.

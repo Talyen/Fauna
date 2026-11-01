@@ -1,8 +1,6 @@
 # Design references
 
-Historical studies preserve scoped user choices, alternatives and verification evidence. Some retain retired flows, smaller reserve cards, scrolling, synthetic errors or earlier colors. Operating instructions apply only to their sandbox; recorded reviews neither resume a task nor qualify current production. Use [UI contracts](../Docs/UI.md) and [required review](../Docs/UI.md#required-review) for new work.
-
-When shortening a record, keep its source/date, current owner and evidence scope together. Preserve explicit choices, source identities and evidence paths, with attempt-specific observations and limitations beside their attempt.
+These interactive studies are isolated sandboxes, not current production specifications. Some show retired flows or earlier styling. Use [UI contracts](../Docs/UI.md) and [required review](../Docs/UI.md#required-review) for new work; see [visual references](visual-quality/README.md) for current direction and acceptance scope.
 
 - [Battle layout and mana provenance](battle-layout/README.md)
 - [Menu options](menu-options/README.md)
@@ -11,7 +9,6 @@ When shortening a record, keep its source/date, current owner and evidence scope
 - [Battle swaps](battle-swap/README.md)
 - [Battle rewards](battle-rewards/README.md)
 - [Interactive button states](button-interactions/README.md)
-- [Historical UI review process and element inventory](UI_REVIEW.md)
 - [Interactive icon button sizes](icon-buttons/README.md)
 - [Tooltip review batch](tooltip-interactions/README.md)
 - [Artwork interaction batch](artwork-interactions/README.md)

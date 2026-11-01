@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Content contracts](../../CONTENT.md)
 
-Use the [authored kit](../../../src/game/content/creatures/skybex.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#skybex) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/skybex.ts) for current values and complete tiers.
 
 Skybex’s mountain paths, cloud stepping stones and sweeping horns support movement, protection and Nature damage. It joins ordinary encounters, recruitment and collected starter drafts. It is excluded from the first-run solo pool because Cloudstep and Mountain Guide need another creature.
 
@@ -35,4 +35,4 @@ Selected by the user on October 25, 2026 from the [Skybex Drive folder](https://
 | Cloudstep    | `Skybex_Ability-Utility-01_Cloudstep.png`     | [Original](https://drive.google.com/file/d/1W5WK3vAlYaCsm6aIbsdcvjF4oMK7buTI/view) |
 | Sky Shepherd | `Skybex_Ability-Expansion-02_SkyShepherd.png` | [Original](https://drive.google.com/file/d/1v59fZy8YS-MJuzoZGUcFaphkYlKc-fmg/view) |
 
-Unchanged PNG originals are retained under `public/art/creatures/skybex/`; the manifest registers the portrait at 4:3 and actions at 3:4 through the lossless prepared-art pipeline. Unselected illustrations are excluded from production. [Implementation evidence](../../task-evidence/skybex.md) records local validation and remaining gates.
+Unchanged PNG originals are retained under `public/art/creatures/skybex/`; the manifest registers the portrait at 4:3 and actions at 3:4 through the lossless prepared-art pipeline. Unselected illustrations are excluded from production.

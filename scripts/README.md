@@ -57,7 +57,7 @@ Documentation parsing, measured bundle checks, worktree setup, integration safeg
 
 ## Bundle allowance
 
-[bundle-budget.mjs](checks/bundle-budget.mjs) owns the measured baseline, allowance and warning threshold. The [measurement history](../Docs/archive/BUNDLE_SIZE_HISTORY.md) retains build identities and the reasons for previous changes. CI measures the exact pushed commit; the recorded baseline establishes size only.
+[bundle-budget.mjs](checks/bundle-budget.mjs) owns the measured baseline, allowance and warning threshold. CI measures the exact pushed commit; the recorded baseline establishes size only.
 
 The checker sums all JavaScript files recursively and rejects missing or empty entry bundles. Chunk splits do not create extra allowance. Investigate unexpected growth before raising the ceiling; update the measured baseline and reason together when intentional growth needs a new allowance. This gate measures JavaScript size, not artwork downloads, frame pacing or device performance. Run it against an existing build; build execution follows [the single verification policy](../CONTRIBUTING.md#execution-and-evidence).
 

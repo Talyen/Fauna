@@ -39,16 +39,6 @@ the existing reviewed translations without changing their freshness attestations
 The pilot does not migrate other abilities; compare singular forms, extras and
 enemy adaptation before expanding it.
 
-## Recorded review
-
-The [October 27 localized screen review](task-evidence/2026-10-27-localized-screen-review.md)
-records all seven translated languages across selected menus, battle, rewards and
-support screens, plus focused interaction checks. The
-[translation and artwork review](task-evidence/2026-10-27-translation-art-review.md)
-records its linguistic and content scope. These are dated, selected-state browser
-observations; changed content needs fresh review, and native desktop, Windows,
-physical controllers, Steam and Deck remain separate qualification work.
-
 ## Migration inventory
 
 `npm --silent run localization:inventory` prints a JSON inventory of literal JSX text,

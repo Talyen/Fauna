@@ -18,8 +18,8 @@ Consult this pack for composition or art-direction work through the [UI task pro
 | [Merchant A](references/merchant-before-1280.png)    | Preferred over B; still rejected aesthetically | Preserve original illustrations, aspect ratios and accessible controls                                                  | Earlier claims that equal purchase emphasis and hover-only rules were defects are withdrawn; the user preferred A and later specified individual changes |
 | [Merchant B](references/merchant-candidate-1280.png) | Rejected; not a positive reference             | Inspect the failed attempt: visible effects, aligned rows and neutral buttons did not deliver an acceptable composition | Do not reuse this composition as an improvement template                                                                                                 |
 
-## Screen records and capture tools
+## Direction and capture tools
 
-[Decision records](DECISIONS.md) retain Merchant comparisons, artwork references, Memento/Tournelle evidence and the user-directed creature inspection composition. Each record states its acceptance scope and verification limits. Add screen-specific history there instead of expanding this index. Existing implementation is not automatically an accepted artistic reference.
+[Visual direction](DECISIONS.md) records the choices that remain useful for future work, including Merchant, inspection and recruitment. Existing implementation is not automatically an accepted artistic reference.
 
-[Repeatable Merchant capture](DECISIONS.md#repeatable-evidence) documents the task-owned capture command; other flows use their existing fixtures and preview tools. Follow the single [rendered review procedure](../../Docs/UI.md#required-review) for baseline captures, comparison sizes, interaction review and preference decisions. The [benchmark](BENCHMARK.md) evaluates the workflow; it adds no routine task requirements.
+[Repeatable Merchant capture](DECISIONS.md#repeatable-evidence) documents the focused capture command; other flows use their existing fixtures and preview tools. Follow the [rendered review procedure](../../Docs/UI.md#required-review) for baseline captures, comparison sizes, interaction review and preference decisions.

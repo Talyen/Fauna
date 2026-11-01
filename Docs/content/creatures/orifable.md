@@ -2,7 +2,7 @@
 
 [Shared Food definitions](../../../src/game/content/food.ts) · [Food execution](../../../src/game/combat/food.ts) · [Focused regressions](../../../tests/unit/game/creatures/orifable.test.ts)
 
-Use the [authored kit](../../../src/game/content/creatures/orifable.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#orifable) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/orifable.ts) for current values and complete tiers.
 
 Orifable is a support creature, the bearer of good tidings. The owner selected its kit and all three Food cards on October 23, 2026. It appears in ordinary encounter packs and recruitment; it is excluded from the first-run starter pool. Once collected, it follows ordinary starter selection rules.
 
@@ -40,5 +40,3 @@ The [Orifable Drive collection](https://drive.google.com/drive/folders/1kAqpnhOR
 - [Postal Swarm](https://drive.google.com/file/d/1AMG-3DWaEpNC0GXPq3GZ9jr4giX_hPC1/view): a flock of letters obstructs a stone pursuer
 
 [Food prompts](orifable-art-prompts.md) preserve the built-in ImageGen requests and original style provenance. Original sources live under `public/art/`; [the manifest](../../../assets/manifest.json) registers all seven images and the standard lossless prepared-art recipe. Source inspection and generated art do not establish artistic approval. Focused regression, browser-rendered evidence and full CI/platform qualification are separate outcomes.
-
-[Implementation verification](../../task-evidence/orifable-food.md) records the observed checks, rendered conditions, live player interactions and unrun platform gates.

@@ -150,9 +150,9 @@ Current saves validate the identity and ownership of Cornucopia's journey-owned 
 
 [The current save format](../../src/game/save-format.json) and [save validation](../../src/game/save.ts) own encoding and validation; [development saves](../../AGENTS.md#development-saves) have no migration path. Status source attribution for Blind and control is saved alongside periodic effects. Rainkeeper's Mana allowance, the shared next-card repeat grant and Encore Baton's cross-turn progress use the existing saved combat owners.
 
-Story Puzzle Cube saves zero through two distinct successful harmful-effect types; new battles clear the set and validation rejects progress without the Boon. Mercury Metronome saves the last acting roster ally; validation rejects unknown actors or progress without ownership. Maximum Mana supports seven crystals plus Rainkeeper's two overflow points. The [October 25 elegant artifact additions](../task-evidence/2026-10-25-elegant-boons.md) add no saved counters or pending resolution. Status-only reflection, including Prismram, retains its ordinary contract.
+Story Puzzle Cube saves zero through two distinct successful harmful-effect types; new battles clear the set and validation rejects progress without the Boon. Mercury Metronome saves the last acting roster ally; validation rejects unknown actors or progress without ownership. Maximum Mana supports seven crystals plus Rainkeeper's two overflow points. Status-only reflection, including Prismram, retains its ordinary contract.
 
-[Journey rules](../EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](../EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the [UI review procedure](../UI.md#required-review). Dated [Boon delivery records](../archive/README.md#boons) retain approved revisions, source identities and verification limits.
+[Journey rules](../EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](../EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the [UI review procedure](../UI.md#required-review).
 
 ## Revised artifact Boons
 

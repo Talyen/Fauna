@@ -68,8 +68,8 @@ Use the [tool selection reference](Docs/DEVELOPMENT_TOOLS.md#task-selection-and-
 
 ### Documentation scope
 
-Markdown changes check maintained links, anchors, file references and npm examples across the repository. Reachability from README or AGENTS is advisory. Link durable guides for discovery; historical records belong under `Docs/archive/` or `Docs/task-evidence/<task>.md`, and ignored reports/screenshots under `reports/`. History cannot be the sole owner of a current rule. Prefix foreign file references with their repository.
+Markdown changes check maintained links, anchors, file references and npm examples across the repository. Link durable guides for discovery and prefix foreign file references with their repository.
 
-Keep each rule in its owning guide and link elsewhere. Current guides explain behavior and procedure; dated records retain source identity, observations and limitations. Prefer source links for catalog values and one evidence-scope block per record, retaining differences between attempts. Preserve historical decisions and evidence when shortening prose.
+Keep current rules and procedures in their owning guides; link to source for catalog values. Remove superseded plans, dated task logs and stale measurements instead of maintaining a documentation archive. Preserve active design direction, asset provenance and release qualification evidence where they are needed for future work. Use `reports/` for task captures and keep required evidence with its release candidate.
 
 See [script owners](scripts/README.md) and [test maintenance](tests/README.md) when changing their infrastructure.

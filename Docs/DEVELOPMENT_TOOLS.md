@@ -154,11 +154,6 @@ At least five samples are needed for review-level statistical findings. Extreme 
 
 ## Reproducible performance captures
 
-The [hitch attribution implementation record](archive/PERFORMANCE_ATTRIBUTION_PLAN.md) records scope, delivery and verification boundaries.
-
-The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
-shared layout and animation optimizations, visual parity evidence and remaining device qualification.
-
 For a bounded battle investigation, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. Diagnostic mode uses the same execution policy as the capture/replay commands below.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. Fixed scenarios cover target preview/cancellation, area reactions, repeat/draw overflow, card play/enemy turns, required knockout replacements and Collection/menu transitions. Select `--scenario preview`, `area-reactions`, `draw-repeat`, `battle`, `swap` or `menus`. Named fixtures explicitly grant their roster, ranks and conditions; they are validated as current-format saves, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
@@ -188,10 +183,6 @@ These commands follow the existing CI-first execution policy. The weekly workflo
 ## Periodic performance and compiler trial
 
 The React Compiler is enabled in ordinary development and production builds. The [performance workflow](../.github/workflows/performance.yml) runs weekly or on manual dispatch and compares that build with an uncompiled build using `FAUNA_REACT_COMPILER=0`. It builds each renderer once and captures four paired trials on the same hosted runner, in baseline/compiler, compiler/baseline, compiler/baseline, baseline/compiler order. Reports record and verify build identities, and comparisons require matching environments, fixtures and actions. The workflow also runs selected battle, menu and persistence browser journeys against the compiler build; it retains samples, comparisons and browser results for 30 days. Hosted timings are observations, without timing pass/fail thresholds; capture completion and checkpoint correctness remain required. Compare equivalent reports and inspect frame gaps, input delay and heap behavior before promoting any optimization. Browser performance checks do not establish visual parity or qualify packaged Windows or Deck performance.
-
-The [October 26 compiler observation](task-evidence/2026-10-26-stack-maintenance.md#react-compiler) found no established p95 improvement in its three comparisons; fixed capture order and the absence of rendered parity evidence limit the conclusion.
-
-The [October 27 production visual review](task-evidence/2026-10-27-react-compiler-visual-review.md) records the user's approval and the comparison's tested scope and remaining limits.
 
 ## Combat resolution trace
 

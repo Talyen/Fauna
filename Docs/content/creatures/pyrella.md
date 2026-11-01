@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Use the [authored kit](../../../src/game/content/creatures/pyrella.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#pyrella) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/pyrella.ts) for current values and complete tiers.
 
 Pyrella enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged. The selected kit was approved on October 25, 2026.
 
@@ -36,7 +36,3 @@ Source: [Pyrella Drive folder](https://drive.google.com/drive/folders/15CrVtC9zg
 - Spark Decoy: `Pyrella_Ability-Expansion-01_SparkDecoy.png`, Drive ID `1QsahvRmVYOtXNXiCfsuB_aiZ4MCEx-n2`
 
 The originals and all eight candidates were visually inspected during design. The user selected these three illustrations and mechanics on 2026-10-25. Prepared derivatives use the existing lossless card recipe and preserve the complete composition. Source selection is separate from rendered review and measured balance.
-
-## Validation record
-
-The [implementation and rendered review record](../../task-evidence/pyrella.md) retains focused regression results, viewport conditions, interaction readback and verification boundaries.

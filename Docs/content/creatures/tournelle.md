@@ -1,6 +1,6 @@
 # Tournelle
 
-Use the [authored kit](../../../src/game/content/creatures/tournelle.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#tournelle) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/tournelle.ts) for current values and complete tiers.
 
 Tournelle is an ordinary creature whose scarf, sunburst brooch and rescue imagery inform a protective Light kit. The user selected these rules on October 22, 2026
 
@@ -32,5 +32,3 @@ Unchanged originals from the user's [Tournelle folder](https://drive.google.com/
 Creature artwork uses 4:3 landscape; abilities use 3:4 portrait. Source inspection, rendered review, user design selection and balance acceptance are separate evidence
 
 ## Rendered review
-
-[Implementation-time evidence](../../../design/visual-quality/DECISIONS.md#tournelle-and-required-replacements) retains the Collection, battle, rank and replacement frames, observed interactions and verification scope.

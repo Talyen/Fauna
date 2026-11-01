@@ -16,4 +16,4 @@ Possible Path exchanges the remaining visible hand after its own card has entere
 
 ## Artwork provenance and validation record
 
-Source: [Euphera Drive folder](https://drive.google.com/drive/folders/1jm5_8I9N8Q5m6yT4QcN7xKuCupkhzAmq). Portrait: `Euphera_03.png`; originals: `public/art/euphera/`. All other ability artwork is excluded. [Implementation-time review](../../../design/visual-quality/DECISIONS.md#euphera-implementation-review) retains the inspected states, findings, evidence location and verification scope.
+Source: [Euphera Drive folder](https://drive.google.com/drive/folders/1jm5_8I9N8Q5m6yT4QcN7xKuCupkhzAmq). Portrait: `Euphera_03.png`; originals: `public/art/euphera/`. All other ability artwork is excluded.

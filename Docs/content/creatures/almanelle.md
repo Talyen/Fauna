@@ -1,6 +1,6 @@
 # Almanelle
 
-Use the [authored kit](../../../src/game/content/creatures/almanelle.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#almanelle) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/almanelle.ts) for current values and complete tiers.
 
 Almanelle is an ordinary support creature, “The orchard through the seasons”
 The user selected Fallen Leaves, Rooted Year and Autumn Insight on October 23, 2026
@@ -54,4 +54,4 @@ Poor draws contain recovery without a useful discard or healing with no missing 
 
 [Almanelle's focused suite](../../../tests/unit/game/creatures/almanelle.test.ts) protects all six tiers, rounding, real turn ordering, reserve/knockout boundaries, caps, enemy use, authoritative previews, targeted recovery/healing, repeats, upgrades, save/resume and normal recruitment. [The review fixture](../../../tests/support/almanelle.ts) supplies a damaged party, Burn, all three cards and a recoverable discarded card
 
-The [rendered review record](../../task-evidence/almanelle.md) retains source identity, evidence paths, exercised interactions and platform boundaries. Source inspection and passing asset hashes do not establish artistic acceptance, measured balance, native input or platform qualification
+Source inspection and passing asset hashes do not establish artistic acceptance, measured balance, native input or platform qualification

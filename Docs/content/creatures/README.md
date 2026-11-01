@@ -4,13 +4,11 @@
 
 ## Reference scope
 
-Each reference links its authored kit as the authority for current Health, ability values, exact descriptions and six passive tiers. Keep these references focused on identity, design rationale and distinctive timing, stacking or ownership. Dated user selections and worked examples retain their recorded values; they are historical observations rather than another catalog to update. The [recorded kit selections](../../archive/CREATURE_KIT_SELECTIONS.md) preserve catalog excerpts moved out of maintained references. Use source links for ordinary kit inventories and link [task evidence](../../archive/README.md#creatures) for implementation checks.
+Each reference links its authored kit as the authority for current Health, ability values, exact descriptions and six passive tiers. Keep these references focused on identity, design rationale and distinctive timing, stacking or ownership. Use source links for ordinary kit inventories and avoid duplicating values that can change.
 
-## Shared artwork and evidence scope
+## Shared artwork
 
 Unless an entry specifies otherwise, its selection is an unchanged creature portrait and three action PNGs from the linked user-provided Drive folder. Preserve originals and native 4:3 creature / 3:4 action compositions; derivatives use the shared prepared-media pipeline. [The manifest](../../../assets/manifest.json) retains per-file URLs, selections and rights notes. Entries keep specific variants, exclusions and selection rationale.
-
-Source-inspection and pending-review statements describe implementation-time observations, not current acceptance. Source checks, rendered evidence, artistic approval and measured balance are separate facts. Recorded browser review is Chromium simulation; it does not qualify full CI, native desktop, Windows packaging, physical controllers, Steam or Deck. [UI review](../../UI.md#required-review) and [Release](../../RELEASE.md) define current qualification.
 
 For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [reusable skill](../../../.agents/skills/fauna-creature-design/SKILL.md), including the [Boss and Legendary section](../../CREATURE_DESIGN.md#boss-and-legendary-creatures).
 

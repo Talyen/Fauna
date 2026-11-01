@@ -35,6 +35,6 @@ Accepted commands save automatically. Desktop close drains queued saves; abrupt 
 - [Development tools](Docs/DEVELOPMENT_TOOLS.md): previews, replay, balance and performance; [script map](scripts/README.md): implementations
 - [Localization](Docs/LOCALIZATION.md): enabled languages, translation authoring and review scope
 - [CI](Docs/CI.md): hosted verification and evidence; [Release](Docs/RELEASE.md): shipping gates and platform qualification
-- [History](Docs/archive/README.md) and [design references](design/README.md): implementation records, measurements and scoped user choices
+- [Design references](design/visual-quality/README.md) and [interactive studies](design/README.md): visual direction and sandbox previews
 
 Alchemy informed the technology and some selected media; Fauna has its own implementation and no runtime dependency on Alchemy. Asset provenance lives in the manifest and linked source records.

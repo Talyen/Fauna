@@ -1,6 +1,6 @@
 # Parhelion
 
-Use the [authored kit](../../../src/game/content/creatures/parhelion.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#parhelion) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/parhelion.ts) for current values and complete tiers.
 
 Parhelion is an ordinary support creature, “The sun upon the snow”
 The user selected Sunthaw, Polar Reprieve, Sundog Reservoir and Whiteout Waltz on October 25, 2026
@@ -45,5 +45,3 @@ Values and comparisons are design estimates, not measured balance. Full lineup, 
 ## Verification
 
 [Focused regressions](../../../tests/unit/game/creatures/parhelion.test.ts) cover six tiers, actual removal, field ownership, duplicate providers, enemy tiers, repeats, Mana caps, damage/Blind targets, previews, save/resume and recruitment. [The shared review fixture](../../../tests/support/parhelion.ts) supplies all three cards, two injured allies with buildup and an injured ally without it
-
-[Rendered evidence](../../task-evidence/parhelion.md) records Collection, inspection, battle and committed outcomes with platform boundaries

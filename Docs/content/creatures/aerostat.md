@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Food execution](../../../src/game/combat/food.ts) · [Regressions](../../../tests/unit/game/creatures/aerostat.test.ts)
 
-Use the [authored kit](../../../src/game/content/creatures/aerostat.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#aerostat) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/aerostat.ts) for current values and complete tiers.
 
 Aerostat is a traveling quartermaster. The owner selected its kit on October 25, 2026: travel packs and provisions establish its resource identity, with Voyager’s Rest providing a simple defensive option. Aerostat joins ordinary encounter packs, recruitment and collected starter drafts. Its support-only kit is excluded from the first-run starter pool.
 
@@ -39,4 +39,4 @@ The owner selected these ability illustrations from the [Aerostat Drive folder](
 | True Bearing   | `Aerostat_Ability-Utility-02_TrueBearing.png`  | [Original](https://drive.google.com/file/d/1TDEiAbrOny7C9sDQuo5G-pSoQ69t_GVV/view) |
 | Parcel Drop    | `Aerostat_Ability-Expansion-01_ParcelDrop.png` | [Original](https://drive.google.com/file/d/1-wi60sXxkABUNwlw3RdsbBC8z8Z7cVgn/view) |
 
-The portrait uses 4:3 landscape framing and actions use 3:4 portrait framing through the shared lossless prepared-art pipeline. The pack-bearing silhouette, compass clearing dark clouds, sheltered rest and descending supply parcels retain one consistent blue/gold travel palette. [Implementation evidence](../../task-evidence/aerostat.md) records rendered conditions, exercised interactions and verification boundaries.
+The portrait uses 4:3 landscape framing and actions use 3:4 portrait framing through the shared lossless prepared-art pipeline. The pack-bearing silhouette, compass clearing dark clouds, sheltered rest and descending supply parcels retain one consistent blue/gold travel palette.

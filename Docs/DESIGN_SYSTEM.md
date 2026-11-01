@@ -34,7 +34,7 @@ Primitives and infrastructure cannot import higher-level owners. Screen styles c
 | Result completion and animated numbers    | `src/ui/shared/rewards/`                                                                                           |
 | Audio playback and delegated activation   | `src/ui/audio/`                                                                                                    |
 
-The [reference index](../design/visual-quality/README.md) records artistic acceptance scope. The [UI adoption record](archive/UI_ADOPTION.md) retains older browser observations. For a new change, follow the single [rendered review procedure](UI.md#required-review); past rollout results do not qualify current main.
+The [reference index](../design/visual-quality/README.md) records artistic acceptance scope. For a new change, follow the single [rendered review procedure](UI.md#required-review); past rollout results do not qualify current main.
 
 ## Source checks and registration
 

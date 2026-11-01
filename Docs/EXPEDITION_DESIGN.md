@@ -6,7 +6,7 @@ This guide owns journey rules and progression. [Screen specifications](ui/screen
 
 ### Starter draft
 
-The first journey starts with one creature chosen from three seeded offers in `FIRST_RUN_STARTERS` in `src/game/content.ts`. Recruit commits the choice, adds it to Collection and starts the journey. Team-oriented kits outside this solo pool remain available through encounters, recruitment and later drafts. The [first balance pass](archive/JOURNEY_BALANCE.md) records the opening-matchup evidence.
+The first journey starts with one creature chosen from three seeded offers in `FIRST_RUN_STARTERS` in `src/game/content.ts`. Recruit commits the choice, adds it to Collection and starts the journey. Team-oriented kits outside this solo pool remain available through encounters, recruitment and later drafts.
 
 Later journeys draft up to three distinct collected ordinary species. Each round offers up to three species not already chosen. When fewer than three ordinary species are collected, draft only that many; offers never repeat a species to fill space. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. An early loss cannot prevent another journey.
 

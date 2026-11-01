@@ -6,7 +6,7 @@ Review one behavior at a time: hover fill, hover border, hover movement, focus f
 
 Choose options independently with the radio controls; Clear this choice restores an undecided behavior. Provisional choices persist in browser storage under `fauna-design-button-picks-v1`; storage failure leaves the current session usable. Combine my choices applies only explicit choices and lists undecided behaviors. Unavailable and busy treatments can be previewed separately there. No production styles or approved design decisions change until the combination is reviewed. Mouse and native keyboard behavior are connected; gamepad navigation is not.
 
-The historical [component inventory](../UI_REVIEW.md) extended this method across UI elements: playable comparisons preceded decisions, screenshots supplemented them and each comparison held unrelated variables constant.
+For current work, follow the [rendered review procedure](../../Docs/UI.md#required-review).
 
 ## Choices reviewed on 2026-10-20
 

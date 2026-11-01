@@ -65,7 +65,21 @@ The main menu logo selection uses `Fauna_Gamboloom_Logo.png` from Google Drive, 
 
 ## Keyword artwork
 
-The [manifest](../assets/manifest.json) identifies keyword/category portraits, copy recipes and later Alchemy source selections. The [original nine-source mapping](archive/ALCHEMY_ADOPTION_PLAN.md#keyword-source-selections) retains provenance referenced by older manifest entries. These unchanged Alchemy portraits are Fauna-owned copies, independent of Alchemy's mechanics or runtime. Water reuses [Coralcurl's Reef Jet](content/creatures/coralcurl.md). Use contain rendering and the [talents overview sizing rule](ui/screens.md#talents).
+The [manifest](../assets/manifest.json) identifies keyword/category portraits and copy recipes. These unchanged Alchemy portraits are Fauna-owned copies, independent of Alchemy's mechanics or runtime. Water reuses [Coralcurl's Reef Jet](content/creatures/coralcurl.md). Use contain rendering and the [talents overview sizing rule](ui/screens.md#talents).
+
+The original nine keyword portraits were copied unchanged from `Alchemy: src/assets/optimized/` at 420 × 563 pixels. Local files below are under `public/art/keywords/`. Later Armor, Bleed, Dodge, Leech and Mana portraits have exact source paths in the manifest.
+
+| Fauna keyword | Local file       | Alchemy source         |
+| ------------- | ---------------- | ---------------------- |
+| Physical      | `physical.webp`  | `talent-physical.webp` |
+| Burn          | `fire.webp`      | `talent-burn.webp`     |
+| Freeze        | `ice.webp`       | `talent-freeze.webp`   |
+| Stun          | `lightning.webp` | `talent-stun.webp`     |
+| Poison        | `poison.webp`    | `talent-poison.webp`   |
+| Nature        | `nature.webp`    | `talent-nature.webp`   |
+| Light         | `light.webp`     | `talent-holy.webp`     |
+| Block         | `block.webp`     | `talent-block.webp`    |
+| Health        | `heal.webp`      | `talent-health.webp`   |
 
 ## Prepared assets
 
@@ -93,7 +107,7 @@ Lossless encoding preserves resized pixels and alpha, but downsampling changes p
 
 ### Build inventory
 
-Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. The [active-media validator](../scripts/assets/active-assets.mjs) enforces media limits; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). Aliased IDs share files and the unused Marsh recording remains excluded. [Resource efficiency](RESOURCE_EFFICIENCY.md#inventory-and-budgets) owns current inventory commands, allowances and maintenance; the [Boon implementation record](task-evidence/2026-10-25-elegant-boons.md#artwork-and-rendering) retains its measured media increase and unchanged lossless recipe. Retained historical generations do not enlarge new builds.
+Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. The [active-media validator](../scripts/assets/active-assets.mjs) enforces media limits; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). Aliased IDs share files and the unused Marsh recording remains excluded. [Resource efficiency](RESOURCE_EFFICIENCY.md#inventory-and-budgets) owns current inventory commands, allowances and maintenance. Retained historical generations do not enlarge new builds.
 
 ### Audio selections
 

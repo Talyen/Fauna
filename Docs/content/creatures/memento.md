@@ -1,6 +1,6 @@
 # Memento
 
-Use the [authored kit](../../../src/game/content/creatures/memento.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#memento) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/memento.ts) for current values and complete tiers.
 
 Legendary · The palace that remembers
 

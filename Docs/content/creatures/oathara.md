@@ -1,6 +1,6 @@
 # Oathara
 
-Use the [authored kit](../../../src/game/content/creatures/oathara.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#oathara) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/oathara.ts) for current values and complete tiers.
 
 Oathara is an ordinary support creature, “The keeper of unfinished journeys”
 The user selected its kit on October 23, 2026

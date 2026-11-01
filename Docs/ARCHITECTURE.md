@@ -67,10 +67,6 @@ Armor depletion records a once-delivered receipt at each positive-to-zero transi
 
 Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Its [benefit assessment](../src/application/battle-benefits.ts) scores [legal play candidates](../src/game/play-queries.ts) using explicit ordinary-hit approximations and application-owned weights; the policy selects legal commands and applies stable tie breaks. Rankings expose reasons for automation journals rather than claiming complete forecasts. Auto-play cycle history retains waiting-card FIFO order while excluding hidden draw order; an exhausted generated-card identity space is also part of its tactical state. Ordinary enemies rank supported abilities through the shared [enemy evaluator](../src/game/combat/enemy-policy.ts), preferring a different ability only when values tie. Deterministic evaluations reuse their first result; random or hidden decisions retain all eight probes. A Legendary decision reuses duplicate card-and-recipient evaluations only within that decision; every subsequent play evaluates the current state again. Adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
 
-The [modifier ownership assessment](archive/MODIFIER_RULES_PLAN.md) retains the original proposal. The [implementation evidence](task-evidence/2026-10-23-modifier-contracts.md) records the local implementation, unchanged behavior comparisons, protected integration and pending hosted checks.
-
-The [follow-through record](task-evidence/2026-10-23-modifier-followthrough.md) records the reconciled Talent parameters, deferred-effect bindings and their verification scope.
-
 ## Save contract
 
 Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
@@ -175,11 +171,3 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 | [desktop boundary](../tsconfig.desktop-boundary.json) | Explicit parameters, unknown catches and exact optional properties for storage, preload, Steam transport and recovery boundaries |
 
 `npm run check:types` checks all six; broader desktop callbacks retain the ordinary checked-JavaScript inference. [Contributing](../CONTRIBUTING.md#verification) owns execution policy.
-
-## Plans and history
-
-The [startup simplification](task-evidence/2026-10-23-startup-simplification.md) records the completed removal of repeated bundled-content validation, terminal splash behavior and verification evidence.
-
-The [combat and interaction implementation](task-evidence/2026-10-23-complexity-reduction.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
-
-The [simplification implementation record](archive/SIMPLIFICATION_IMPLEMENTATION.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.

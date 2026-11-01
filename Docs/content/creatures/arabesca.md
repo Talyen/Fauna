@@ -2,7 +2,7 @@
 
 [Ability and passive regressions](../../../tests/unit/game/ability-contracts.test.ts) · [Review fixture](../../../tests/support/arabesca.ts)
 
-Use the [authored kit](../../../src/game/content/creatures/arabesca.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#arabesca) preserve historical tuning.
+Use the [authored kit](../../../src/game/content/creatures/arabesca.ts) for current values and complete tiers.
 
 Arabesca is a spring dancer. The owner selected Ribbon Snare, Springbound, Dancing Double and allied Dodge healing on October 25, 2026. Allies include Arabesca herself. Her kit uses short, direct rules tied to the depicted action.
 
@@ -26,8 +26,6 @@ Dancing Double exchanges a card and Mana for one additional resolution of a late
 
 Dancing Double does not repeat itself when initially played. If an existing grant doubles it, its resolutions refresh one future grant rather than stacking charges or recursing. Shared Food can consume the grant, resolves twice and is Consumed once; creature-specific Food exclusions remain unchanged. The grant survives turns, creator departure, swaps and save/resume, and resets with a new battle. Rejected commands and detached previews cannot consume the live grant. The battle shows Next card ×2 while the player's grant is pending.
 
-[Implementation evidence](../../task-evidence/arabesca.md) records the original save-format and baseline changes.
-
 ## Play pattern and availability
 
 Springbound prepares evasive healing, Ribbon Snare supplies pressure and control, and Dancing Double prepares a strong teammate's card or a second Springbound resolution. Weaknesses include unreliable Dodge, control, periodic damage and the tempo spent preparing a double instead of addressing immediate danger. No special partner is required, and the passive can heal Arabesca even when she is the last survivor.
@@ -44,5 +42,3 @@ The [Drive collection](https://drive.google.com/drive/folders/14UODVexijj1Kbj0R9
 - [Dancing Double](https://drive.google.com/file/d/1Ec4K0wytqKvA-HiJ6VdJ9wWoZGC7xz4s/view): a luminous petal duplicate follows her
 
 Original PNGs are preserved under `public/art/creatures/arabesca/`. The asset manifest records source identity and the standard lossless prepared-art recipe. The owner's selection establishes the requested artwork and mechanics; rendered acceptance and measured balance remain separate evidence.
-
-[Implementation evidence](../../task-evidence/arabesca.md) records local checks, rendered review, exercised interactions and pending validation.
