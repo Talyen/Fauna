@@ -1,8 +1,16 @@
-import { cpSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { cpSync, existsSync, readFileSync, writeFileSync, symlinkSync } from "node:fs";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { git, put, repository, temporaryDirectory } from "../../support/tooling.mjs";
-import { expireEvidence, expiringEvidence } from "../../../scripts/lib/evidence-retention.mjs";
+import {
+  expireEvidence as applyEvidenceExpiry,
+  expiringEvidence,
+} from "../../../scripts/lib/evidence-retention.mjs";
+// Fixtures have no native consumers; production always queries scoped open files.
+const expireEvidence = (root, options = {}) =>
+  applyEvidenceExpiry(root, { isInactive: () => true, ...options });
+
 import { expireCheckoutReviews } from "../../../scripts/lib/review-retention.mjs";
 import { review } from "../../../scripts/agent/agent-review.mjs";
 import { sealBalanceReport } from "../../../scripts/balance/report-retention.mjs";
@@ -204,4 +212,107 @@ it("expires sealed archived development packages while retaining distributed and
   expect(expireEvidence(root, { now: 86_400_000 })).toEqual([normal.output]);
   expect(existsSync(path.join(distributed.output, "win-unpacked/Fauna.exe"))).toBe(true);
   expect(existsSync(path.join(files, "release/unknown.exe"))).toBe(true);
+});
+
+it("retires sealed prepared-media copies by age/size, retaining manifests and caller-owned output", () => {
+  const root = temporaryDirectory("fauna-prepared-retention-");
+  const archive = path.join(root, "task-prepared");
+  const rel = "reports/compiler-parity/compiler-on/prepared";
+  const url = "./prepared/objects/" + "a".repeat(64) + "/asset.webp";
+  put(
+    archive,
+    `files/${rel}/manifest.json`,
+    JSON.stringify({
+      version: 2,
+      manifestHash: "b".repeat(64),
+      records: {
+        example: { url, outputHash: createHash("sha256").update("compiled asset copy").digest("hex") },
+      },
+    }),
+  );
+  put(archive, `files/${rel}/objects/${"a".repeat(64)}/asset.webp`, "compiled asset copy");
+  put(archive, "files/reports/original.webp", "preserve unclassified original");
+  const retention = expiringEvidence(archive, ["reports/"], 0);
+  expect(retention.entries.map((entry) => entry.path)).toEqual([rel]);
+  put(archive, "manifest.json", JSON.stringify({ retention }));
+  expect(expireEvidence(root, { now: 2 * 86400_000 })).toEqual([]);
+  const target = path.join(archive, "files", rel);
+  expect(expireEvidence(root, { now: 86400_000 - 1, budget: 1 })).toEqual([]);
+  expect(expireEvidence(root, { now: 2 * 86400_000, budget: 1, dryRun: true })).toEqual([target]);
+  expect(existsSync(target)).toBe(true);
+  expect(expireEvidence(root, { now: 2 * 86400_000, budget: 1 })).toEqual([target]);
+  expect(existsSync(path.join(archive, "manifest.json"))).toBe(true);
+  expect(existsSync(path.join(archive, "files/reports/original.webp"))).toBe(true);
+});
+
+it("preserves open, locked and protected payloads during archive expiry", () => {
+  const root = temporaryDirectory("fauna-archive-owners-");
+  const archive = path.join(root, "task-one");
+  put(archive, "files/test-results/output.log", "diagnostic");
+  const retention = expiringEvidence(archive, ["test-results/"], 0);
+  put(archive, "manifest.json", JSON.stringify({ retention }));
+  expect(expireEvidence(root, { now: 2 * 86400_000, isInactive: () => false })).toEqual([]);
+  put(archive, ".retention-owner.json", "unknown live owner");
+  expect(expireEvidence(root, { now: 2 * 86400_000 })).toEqual([]);
+  for (const [index, file] of [
+    "saves/player.json",
+    "source/card.ts",
+    "footage.mp4",
+    "PlayerSave.sqlite",
+    "work.lock",
+  ].entries()) {
+    const other = path.join(root, `task-protected-${index}`);
+    put(other, `files/test-results/${file}`, "caller-owned");
+    expect(expiringEvidence(other, ["test-results/"], 0).entries).toEqual([]);
+  }
+});
+
+it("never seals or follows a link into source or another output tree", () => {
+  const root = temporaryDirectory("fauna-retention-links-");
+  const archive = path.join(root, "task-links");
+  put(root, "source.txt", "uncommitted source");
+  put(archive, "files/test-results/generated.log", "diagnostic");
+  symlinkSync(path.join(root, "source.txt"), path.join(archive, "files/test-results/source-link"));
+  expect(expiringEvidence(archive, ["test-results/"], 0).entries).toEqual([]);
+  expect(readFileSync(path.join(root, "source.txt"), "utf8")).toBe("uncommitted source");
+});
+
+it("restores an archive claim changed during the final activity check", () => {
+  const root = temporaryDirectory("fauna-retention-race-");
+  const archive = path.join(root, "task-one");
+  const output = path.join(archive, "files/test-results");
+  put(output, "generated.log", "diagnostic");
+  put(
+    archive,
+    "manifest.json",
+    JSON.stringify({ retention: expiringEvidence(archive, ["test-results/"], 0) }),
+  );
+  const isInactive = (file) => {
+    if (path.basename(file).startsWith(".fauna-expiring-")) put(file, "new.log", "new writer data");
+    return true;
+  };
+  expect(expireEvidence(root, { now: 2 * 86400_000, isInactive })).toEqual([]);
+  expect(readFileSync(path.join(output, "new.log"), "utf8")).toBe("new writer data");
+});
+
+it("does not seal copied media whose bytes differ from the generated output receipt", () => {
+  const root = temporaryDirectory("fauna-prepared-corruption-");
+  const archive = path.join(root, "task-corrupt");
+  const relative = "reports/compiler-parity/compiler-on/prepared";
+  const url = "./prepared/objects/" + "a".repeat(64) + "/asset.webp";
+  put(
+    archive,
+    `files/${relative}/manifest.json`,
+    JSON.stringify({
+      version: 2,
+      manifestHash: "b".repeat(64),
+      records: {
+        example: { url, outputHash: createHash("sha256").update("generated bytes").digest("hex") },
+      },
+    }),
+  );
+  const asset = path.join(archive, `files/${relative}/objects/${"a".repeat(64)}/asset.webp`);
+  put(path.dirname(asset), "asset.webp", "caller-modified image");
+  expect(expiringEvidence(archive, ["reports/"], 0).entries).toEqual([]);
+  expect(readFileSync(asset, "utf8")).toBe("caller-modified image");
 });
