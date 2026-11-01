@@ -12,9 +12,9 @@ Inspect [Lucky Clover](../../public/art/boons/lucky-clover.webp), [Grove's Favor
 
 ## Creature inspection and recruitment
 
-The selected inspector is artwork-first: name as the main heading, native 4:3 creature artwork above three native 3:4 abilities, the current passive and five stars. Empty stars represent the base tier; permanent rank fills them. Ability rules appear on hover/focus. Collection uses the same inspector for base species abilities. The creature artwork is narrower than the centered ability row. Inspection does not recruit; a separate Recruit action commits the choice. See the [screen specifications](../../Docs/ui/screens.md#creature-and-action-inspection) for current behavior.
+The [inspection specification](../../Docs/ui/screens.md#creature-and-action-inspection) owns current composition and disclosure. Inspection is read-only; recruitment is a separate action.
 
-The user selected the [team tray concept](references/recruit-team-concept.png): one exchange artwork above a quiet tray showing all five roster artworks, with one centered Confirm action. Its generated creature art and approximate geometry are not production artwork references. The [replacement specification](../../Docs/ui/screens.md#replace-a-creature) owns current behavior.
+The user selected the [team tray concept](references/recruit-team-concept.png), showing exchange artwork above a quiet five-creature tray and one centered Confirm action. Its generated creature art and approximate geometry are not production artwork references. The [replacement specification](../../Docs/ui/screens.md#replace-a-creature) owns current controls and behavior.
 
 ## Repeatable evidence
 

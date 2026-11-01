@@ -57,9 +57,9 @@ The SPA fallback serves the application entry point for browser navigation. Save
 
 ## Steam setup
 
-Partner identity verification and application creation are pending; Fauna has no Store page or assigned App ID yet. After verification, complete this setup for the candidate:
+Verify the current Steam Partner identity and application setup for each candidate. The repository configuration currently has no App ID. Complete or confirm the following:
 
-1. Create Fauna's own application, Windows x64 depot and packages. Enter the assigned App ID in [steam-config.json](../desktop/steam-config.json); never reuse another game's identities or saves. A null ID disables Steam integration; full release verification rejects missing, invalid and Spacewar IDs, while ordinary development and version-only checks remain available
+1. Use Fauna's own application, Windows x64 depot and packages. Enter the assigned App ID in [steam-config.json](../desktop/steam-config.json); never reuse another game's identities or saves. A null ID disables Steam integration; full release verification rejects missing, invalid and Spacewar IDs, while ordinary development and version-only checks remain available
 2. Configure the depot to launch `Fauna.exe` from the verified unpacked game directory. Upload that immutable game artifact through the authorized delivery process; an NSIS installer belongs only to the optional direct-download path
 3. Configure and publish application-managed Cloud for at least 64 files and 64 MiB per user: 32 device streams, two slots each, up to 1 MiB per slot. Keep **Dynamic Cloud Sync disabled** because the adapter does not consume in-session remote-file-change callbacks. Do not also Auto-Cloud progression paths, device preferences, diagnostics or identity metadata
 4. Enable intended controller types through Steam Input and publish recommended configurations. Qualify actual hardware and prompts, including emulated Xbox identities

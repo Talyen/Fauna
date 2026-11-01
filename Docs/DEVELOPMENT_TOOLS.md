@@ -146,7 +146,7 @@ For an otherwise authorized playthrough, `FAUNA_PLAYTHROUGH_PROFILE=1` adds stag
 
 ## Ranked balance findings
 
-Balance runs, experiments and comparisons now write ranked `findings.json` and `findings.md` beside their evidence. `npm run balance:findings -- reports/balance/smoke/report.json` reanalyzes an existing suite without running simulations; an optional second argument selects a fresh empty directory under ignored reports. Existing evidence and concurrent writers are rejected. It also accepts a generated `comparison.json`. No finding changes gameplay or tuning automatically.
+Balance runs, experiments and comparisons write ranked `findings.json` and `findings.md` beside their evidence. `npm run balance:findings -- reports/balance/smoke/report.json` reanalyzes an existing suite without running simulations; an optional second argument selects a fresh empty directory under ignored reports. Existing evidence and concurrent writers are rejected. It also accepts a generated `comparison.json`. No finding changes gameplay or tuning automatically.
 
 Report and case completion must be boolean, completed metrics must be valid integer outcomes, and career seeds must be distinct unsigned 32-bit values. Critical findings identify incomplete evidence, including watchdogs and rejected commands; unfinished cases never become defeats. Review findings identify completed careers averaging over 120 turns, no retained keyword XP, starter success spreads of at least 25 percentage points with matching seed sets and an approximate two-standard-error filter, or supported paired shifts. Paired thresholds are 20 percentage points for success, 5 turns, 5 remaining Health, 20 Gold and 5 keyword XP. Either direction can merit review. These are Fauna review heuristics, not Alchemy's encounter targets or release gates.
 
@@ -187,8 +187,6 @@ The React Compiler is enabled in ordinary development and production builds. The
 ## Combat resolution trace
 
 For a focused deterministic investigation, call `traceCombat` from [combat-trace.ts](../src/tooling/combat-trace.ts) with a root operation, its ordinary arguments, and the same state and event array. Each enter/exit record contains the operation, depth, detached state (including RNG) and events. [The focused regression](../tests/unit/game/combat-trace.test.ts) demonstrates a Thorns child reaction and compares its result with ordinary resolution. The trace covers only the explicitly invoked root; it does not capture other operations or install a global observer. Snapshots can be large, so use it for focused scenarios, not routine play. It is diagnostic evidence, not proof of preview or full-journey parity.
-
-In that regression, a 4-damage hit meets 20 Block and 5 Thorns. The entry sequence is `hit` → `negateAttack` → `resolveHit` → `applyHarmfulStatus` → nested `hit` → nested `resolveHit` → `healthThresholds`, with depths 0, 1, 1, 2, 2, 3 and 4. The ordered events are Block loss, the original zero-damage packet and the 5-damage Thorns response. Child frames finish before their parents resume. Compare each detached event list when investigating a changed ordering; do not infer that every hit follows this exact path.
 
 ## Local diagnostics
 

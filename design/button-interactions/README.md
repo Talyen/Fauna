@@ -8,8 +8,6 @@ Choose options independently with the radio controls; Clear this choice restores
 
 For current work, follow the [rendered review procedure](../../Docs/UI.md#required-review).
 
-## Choices reviewed on 2026-10-20
+## Recorded choices
 
-The user's combined view showed all 13 decisions completed. They are recorded in [reviewed choices](reviewed-choices.ts) as a baseline for later studies: subtle hover/press fills, gold hover/press borders, 3.5% hover/focus growth, no focus fill change, unchanged focus border, solid focus outline, 2% pressed shrink, 150ms transitions, 50% unavailable contrast, and text with spinner for busy feedback.
-
-The combination retains a separate external focus outline and clear movement on press. Subtle hover and pressed fills match on supporting buttons, so movement supplies their additional pressed cue. Gold borders add little contrast on gold primary buttons. Selection rings must remain distinguishable from the solid focus outline when selectable elements are reviewed. Reduced motion overrides movement. These preferences are adopted through the [shared design system](../../Docs/DESIGN_SYSTEM.md); full screen/controller acceptance remains separate.
+[Reviewed choices](reviewed-choices.ts) provide the baseline for related studies. Current control, focus, selection and reduced-motion behavior belongs to the [shared UI contract](../../Docs/UI.md#shared-control-states-and-feedback).

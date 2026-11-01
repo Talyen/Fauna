@@ -6,4 +6,4 @@ Select a creature, then the other, or use Swap again. Local slot ownership chang
 
 The accepted 4px/150ms selection lift, unchanged single-ring thickness on hover and fixed artwork dimensions remain. No game state, progression, saves or audio load. This isolated two-slot composition is for motion comparison, not full Lineup/Swap layout acceptance. Production adoption is recorded in the [shared design system](../../Docs/DESIGN_SYSTEM.md); full CI journeys, desktop and physical-controller review remain separate.
 
-The user selected 32px opposing arcs. Combined with the earlier phone choices, Swap motion now uses 32px curvature, 150ms ease-out travel and a 4px selection lift over 150ms. The 600ms slow-motion setting remains an inspection aid only.
+The [shared motion contract](../../Docs/UI.md#shared-control-states-and-feedback) owns the selected production behavior. The 600ms slow-motion setting is an inspection aid.

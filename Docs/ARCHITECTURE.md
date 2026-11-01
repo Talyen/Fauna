@@ -17,7 +17,7 @@ This guide owns runtime boundaries, command transactions and persistence. [Journ
 
 ## Command resolution and previews
 
-`team` and `reserves` are the authoritative ordered creature arrays; together they contain at most one individual of each species. Owned species and deployed IDs are derived; saves contain no roster or lineup mirrors. Every phase has expedition state and prepared encounters consume committed packs under one eight-battle contract. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Results return directly home without an unlock pipeline.
+`team` and `reserves` are the authoritative ordered creature arrays; together they contain at most one individual of each species. Owned species and deployed IDs are derived; saves contain no roster or lineup mirrors. Every phase carries expedition state, and encounters consume committed packs. [Journey rules](EXPEDITION_DESIGN.md#encounters) own room progression, recruitment and starter eligibility.
 
 [Committed event variants](../src/game/types.ts) require target, amount and damage type for damage and the corresponding facts for healing, Block, statuses and actions. [Feedback adaptation](../src/ui/battle/combat-feedback-model.ts) converts these facts to presentation entries without changing committed event order or inventing gameplay defaults.
 

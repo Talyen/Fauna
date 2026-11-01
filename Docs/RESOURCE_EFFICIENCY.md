@@ -28,7 +28,7 @@ Windows packaging excludes renderer npm modules already compiled into Vite outpu
 
 ## Artwork preparation
 
-[Startup](../src/ui/startup/prepare.ts) waits for current-screen essentials, fonts and the existing splash duration. Optional preparation chooses at most eight owned/offered ability images beyond current-screen artwork. It never resolves a future command or selects candidates from hidden draw order. Selection changes, backgrounding and disposal cancel obsolete preparation; no permanent image-element cache retains the library. Browser-managed decoded-image eviction remains outside application control.
+[Startup presentation](ui/screens.md#startup-loading) owns essential and optional artwork preparation. The [preparation owner](../src/ui/startup/prepare.ts) retains no permanent image-element cache for the library; browser-managed decoded-image eviction remains outside application control.
 
 Verify first-use battle, Collection, inspection and paging with uncached browser contexts. Missing images, degraded artwork, command delays or navigation regressions fail acceptance. The [UI review procedure](UI.md#required-review) defines rendered evidence.
 

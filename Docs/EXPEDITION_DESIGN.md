@@ -148,7 +148,7 @@ Offer Merchant only when it was not the last room and at least one unowned Boon 
 
 Stock uses the same roster keyword weighting as Boss rewards and contains up to three distinct unowned Boons, each with an independently rolled integer price of 20–40 Gold inclusive. Merchant's Favor subtracts 7 when stock is prepared, yielding 13–33. Inspection, menus, Campfire and reload preserve prices.
 
-Purchase commits one Boon and immediately completes the room. A saved purchase resumes by completing the room without another grant. Shelf and purchase survive menus/reload without duplicate grants or spending. After purchase, departure prepares the next room; a saved purchase resumes the same completion without duplicating the grant. Leaving without buying prepares fresh offers at the same room and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
+Purchase commits one Boon and its price. The shell automatically completes the visit and prepares the next room; a saved purchase resumes this departure without another grant or charge. Leaving without buying prepares fresh offers at the same room and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
 
 ## Legendaries and Minions
 
