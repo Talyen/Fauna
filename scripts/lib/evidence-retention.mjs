@@ -4,6 +4,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { lstatSync, readFileSync, readdirSync, renameSync, rmSync } from "node:fs";
 import path from "node:path";
 import { generatedName } from "../balance/report-retention.mjs";
+import { archiveFileHash } from "./archive-dedup.mjs";
 import { readReceipt, eligible as eligibleDevelopmentPackage } from "./development-package-receipt.mjs";
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -14,18 +15,20 @@ function inactive(file) {
   return !result.error && result.status === 1 && !result.stdout && !result.stderr;
 }
 // Only the generated build-media layout qualifies; unknown originals remain.
-function preparedCopy(file) {
+function preparedCopy(file, { verifyContent = true } = {}) {
   const receipt = JSON.parse(readFileSync(path.join(file, "manifest.json"), "utf8"));
   if (receipt.version !== 2 || !/^[a-f0-9]{64}$/.test(receipt.manifestHash ?? "") || !receipt.records)
     return null;
-  const expected = new Set(["manifest.json"]);
+  const expected = new Map([["manifest.json", null]]);
   for (const record of Object.values(receipt.records)) {
     if (
       !/^\.\/prepared\/objects\/[a-f0-9]{64}\/asset\.(?:webp|png|svg|mp3|wav|ogg)$/.test(record.url ?? "") ||
       !/^[a-f0-9]{64}$/.test(record.outputHash ?? "")
     )
       return null;
-    expected.add(record.url.slice("./prepared/".length));
+    const relative = record.url.slice("./prepared/".length);
+    if (expected.has(relative) && expected.get(relative) !== record.outputHash) return null;
+    expected.set(relative, record.outputHash);
   }
   let bytes = 0;
   const actual = [];
@@ -42,9 +45,14 @@ function preparedCopy(file) {
     }
   }
   visit(file);
-  return expected.size > 1 && actual.length === expected.size && actual.every((name) => expected.has(name))
-    ? bytes
-    : null;
+  if (!(expected.size > 1 && actual.length === expected.size && actual.every((name) => expected.has(name))))
+    return null;
+  if (
+    verifyContent &&
+    actual.some((name) => expected.get(name) && archiveFileHash(path.join(file, name)) !== expected.get(name))
+  )
+    return null;
+  return bytes;
 }
 const eligible = (name) =>
   PREPARED.test(name) ||
@@ -226,7 +234,7 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
         const item = path.join(directory, entry.name),
           relative = path.relative(path.join(archive, "files"), item).split(path.sep).join("/");
         if (PREPARED.test(relative)) {
-          if (preparedCopy(item) !== null) names.push(relative);
+          if (preparedCopy(item, { verifyContent: false }) !== null) names.push(relative);
         } else if (!/^(?:source|assets?|art|saves?|backups?|trailers?|finals?|masters?)$/i.test(entry.name))
           findPrepared(item, depth + 1);
       }
@@ -360,6 +368,7 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
         ? JSON.parse(readFileSync(path.join(item, "index.json"), "utf8"))
         : undefined;
       const prepared = PREPARED.test(relative) ? preparedCopy(item) : null;
+      if (PREPARED.test(relative) && prepared === null) continue;
       entries.push({
         path: relative,
         snapshot,
