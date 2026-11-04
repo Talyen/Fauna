@@ -46,7 +46,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     },
   );
   await page.addInitScript((value) => {
-    localStorage.setItem("fauna.text-scale", "1.25");
+    localStorage.setItem("fauna.test.text-scale", "1.25");
     localStorage.setItem("fauna.save.v1", value);
   }, JSON.stringify(game));
   await openHome(page);
@@ -99,7 +99,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
     starterOffers: ["mossguard"],
   };
   await page.addInitScript((save) => localStorage.setItem("fauna.save.v1", save), JSON.stringify(collection));
-  if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await openHome(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await pad.frames();

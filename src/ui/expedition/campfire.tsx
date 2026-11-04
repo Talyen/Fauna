@@ -45,18 +45,26 @@ export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (com
               tone="health"
             />
             <p>
-              <MessageParts
-                template={i18n.template(
-                  "campfire.healthAndRest",
-                  "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
-                )}
-                values={{
-                  health: creature.health.toLocaleString(i18n.locale),
-                  maximum: species(creature.species).health.toLocaleString(i18n.locale),
-                  keyword: <Keyword id="health" className="rule-keyword" />,
-                  amount: (rested ? 0 : campfireRecovery(creature)).toLocaleString(i18n.locale),
-                }}
-              />
+              {rested ? (
+                <>
+                  {creature.health.toLocaleString(i18n.locale)}/
+                  {species(creature.species).health.toLocaleString(i18n.locale)}{" "}
+                  <Keyword id="health" className="rule-keyword" />
+                </>
+              ) : (
+                <MessageParts
+                  template={i18n.template(
+                    "campfire.healthAndRest",
+                    "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+                  )}
+                  values={{
+                    health: creature.health.toLocaleString(i18n.locale),
+                    maximum: species(creature.species).health.toLocaleString(i18n.locale),
+                    keyword: <Keyword id="health" className="rule-keyword" />,
+                    amount: campfireRecovery(creature).toLocaleString(i18n.locale),
+                  }}
+                />
+              )}
             </p>
           </div>
         )}

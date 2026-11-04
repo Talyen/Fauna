@@ -498,18 +498,18 @@ export async function reviewScenario(server, name) {
 
 export async function openReviewScenario(page, origin, scenario, scale) {
   await page.addInitScript(
-    ({ save, scale }) => {
+    ({ save }) => {
       // Reloads retain committed interactions instead of restoring the original fixture.
       if (sessionStorage.getItem("fauna.review.seeded")) return;
       localStorage.setItem("fauna.save.v1", save);
-      localStorage.setItem("fauna.text-scale", String(scale));
       sessionStorage.setItem("fauna.review.seeded", "1");
     },
-    { save: scenario.save, scale },
+    { save: scenario.save },
   );
   await page.goto(origin);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible({ timeout: 30000 });
   await expect(page.locator("#startup-splash")).toHaveCount(0);
+  await applyReviewTextScale(page, scale);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
@@ -670,4 +670,12 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (scenario.name === "battle-rewards") await expect(page.getByLabel("Last battle earnings")).toBeVisible();
   if (scenario.name.startsWith("merchant"))
     await expect(page.getByRole("region", { name: "Boon Merchant stock" })).toBeVisible();
+}
+
+/** Independent text stress stays available after replacing Text Size with Game Size. */
+export async function applyReviewTextScale(page, scale = 1) {
+  await page.evaluate((scale) => {
+    const density = Number(getComputedStyle(document.documentElement).getPropertyValue("--ui-density")) || 1;
+    document.documentElement.style.setProperty("--text-scale", String(density * scale));
+  }, scale);
 }

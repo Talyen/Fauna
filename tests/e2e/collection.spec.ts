@@ -80,7 +80,7 @@ test("Collection keeps a later-page creature and focus through live resize and t
     game.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
   });
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, fixture);
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const next = page.getByRole("button", { name: "Next page", exact: true });

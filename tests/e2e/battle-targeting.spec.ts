@@ -19,7 +19,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   page,
 }) => {
   const fixture = targetingBattle();
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, fixture);
   await resume(page);
   const before = await state(page);
@@ -53,7 +53,7 @@ test("short battles use Collection-scale portraits with the hand at the bottom a
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   const fixture = produce(run(7), (draft) => {
     draft.battle!.enemies[0]!.combat.thorns = 3;
   });

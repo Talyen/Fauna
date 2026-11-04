@@ -139,7 +139,7 @@ for (const input of ["keyboard", "controller"] as const)
   test(`boss victory commits rewards with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+    await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
     const fixture = victoryReady(
       accept(
         produce(run(7), (draft) => {

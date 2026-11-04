@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { expect, it } from "vitest";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, renderHook, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
 import { screenTestEnvironment } from "../../support/ui";
@@ -11,6 +11,7 @@ import { definition, species } from "../../../src/game/content";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { App } from "../../../src/ui/App";
+import { useDevicePreferences } from "../../../src/ui/settings/preferences";
 import { offensiveCardValue } from "../../../src/ui/shared/cards/action-display";
 
 screenTestEnvironment({ visible: true });
@@ -133,4 +134,12 @@ it("shows save failure and retries the same committed outcome before accepting m
   expect(screen.queryByRole("alert")).toBeNull();
   expect(decodeSave(localStorage.getItem("fauna.save.v1")!)).toEqual(committed);
   await session.dispose();
+});
+
+it("uses volume controls after removing the separate Sound switch", () => {
+  localStorage.setItem("fauna.audio.v1", JSON.stringify({ enabled: false, master: 35 }));
+  const { result, unmount } = renderHook(() => useDevicePreferences());
+  expect(result.current[0].audio.enabled).toBe(true);
+  expect(result.current[0].audio.master).toBe(35);
+  unmount();
 });

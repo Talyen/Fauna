@@ -176,7 +176,7 @@ async function createDisplay({
       window.on("enter-full-screen", publish);
       window.on("leave-full-screen", publish);
       if (!isolated && preferences.mode !== "windowed")
-        void set("fullscreen").catch(() =>
+        void set(preferences.mode).catch(() =>
           publishState({ ...read(), error: "Could not restore fullscreen." }),
         );
     },

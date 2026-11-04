@@ -59,7 +59,7 @@ function normalizePreferences(value: unknown): DevicePreferences {
       ? Math.max(min, Math.min(max, Math.round(value * 20) / 20))
       : 1;
   return {
-    audio: normalizeAudioPreferences(candidate.audio),
+    audio: { ...normalizeAudioPreferences(candidate.audio), enabled: true },
     glow: normalizeEffectIntensity(candidate.glow),
     particles: normalizeEffectIntensity(candidate.particles),
     scale: scale(candidate.scale, 0.8, 1.2),

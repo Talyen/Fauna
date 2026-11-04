@@ -26,7 +26,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     const width = input === "mouse" ? 1920 : 1280;
     await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await page.addInitScript(
-      (scale) => localStorage.setItem("fauna.text-scale", String(scale)),
+      (scale) => localStorage.setItem("fauna.test.text-scale", String(scale)),
       width === 1280 ? 1.25 : 1,
     );
     const press = input === "controller" ? await gamepad(page) : null;

@@ -11,7 +11,7 @@ const layouts = [
 test("onboarding inspection and commitment across both layouts", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Play", exact: true }).click();
