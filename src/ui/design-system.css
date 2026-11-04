@@ -168,7 +168,6 @@
 }
 .ui-tabs-list .ui-tab {
   --tab-frame-color: var(--border);
-  position: relative;
   flex-shrink: 0;
   border: 2px solid transparent;
   padding-inline: var(--space-3);
@@ -179,17 +178,14 @@
   transition:
     color var(--motion-fast),
     border-color var(--motion-fast),
+    outline-color var(--motion-fast),
     background-color var(--motion-fast);
 }
-.ui-tabs-list .ui-tab::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
+/* Selection and resting tab frames remain visible when pointer focus hides navigation decoration. */
+.ui-tabs-list .ui-tab,
+:root:not([data-focus="visible"]) .ui-tabs-list .ui-tab:focus {
   outline: var(--hover-frame-width) solid var(--tab-frame-color);
   outline-offset: calc(-1 * var(--hover-frame-outset));
-  border-radius: var(--radius);
-  pointer-events: none;
-  transition: outline-color var(--motion-fast);
 }
 .ui-tabs-list .ui-tab[data-state="active"] {
   --tab-frame-color: var(--primary);
@@ -212,7 +208,8 @@
 }
 :root[data-focus="visible"] .ui-tabs-list .ui-tab:focus {
   --tab-frame-color: var(--primary);
-  outline: none;
+  outline: var(--hover-frame-width) solid var(--tab-frame-color);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
   border-color: transparent;
   box-shadow: none;
 }
