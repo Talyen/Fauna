@@ -7808,163 +7808,169 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "4b37c6274ec21f2109330224fb0c74b85c8674d436b435222f6e23d700b3c38f",
+    "sourceHash": "e39387076b69e0152fe47653b11202fe4b6e88dfe7c61c424013d9e5d0404fed",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "a040cc37b3a0c3491bf3bda05fb6763636eacef425ac7615bdbf580777012bcd",
+    "sourceHash": "e27e6d53c6d3834f2b897f9f0035a055271c2341399b7127621128c018ae229b",
     "text": "<keyword0>攻撃反射</keyword0>: 次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃を再び<keyword2>反射</keyword2>することはできない; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "86abfc4b87a2ca7ef94f96d11ad328bf4ef6914bf4f5ca0c72ded633a8c8d401",
+    "sourceHash": "5aebb299279f6684084f84d04b7cff17bd3078ed44b481844d9574a2c7d846de",
     "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "d3c864da67bfb6dfcc6413871958725a1df429753d31e540ad2d1814925c984f",
+    "sourceHash": "a25044cb74bf1c01ab9fbd7f8680070ec464bbea9849937f92efe6af9027665d",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "818642fc238246d0a03f9d82e49db015b4921233a6854c37319a6d7a7a731940",
+    "sourceHash": "4387f14553a119c09cd2bbb4ad24fe4d7abd3af042f20dcaa9ad8955118a517a",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "8ef00af7c59d8b844645f918d608f286855d499beffaa49b377c9bccf25cc1d8",
+    "sourceHash": "79c3a8f99873aff5831391c8ca1a794f771ed997849211c70318dfdcc421730f",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "47b041322b1948f1ce5ebe18fa0bdddb31d9426b940c03ac24e4c28c5a203632",
+    "sourceHash": "2f95810dfd7940cb9be31285822f246341571c85b248d9e4dc4efdda2f05d6e0",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "f772b6cce9bdc42d10486af1094e4ba3b7d1ef61eea77de27fe956e2776c60bc",
+    "sourceHash": "dafcf69dc83c3e6ef3482d81a287db8aa68feb3b7b56e3694f176776563e4ab8",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "06b6a368a7d42da1d4c944b5aee55289cd9eb916e34a2ccd8b5588b288f6c7da",
+    "sourceHash": "4631872db7761b34cfc99624cf696116da6e05307c3a3b87a08084697a851042",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "bb214d370183a6db45f32113de373372107743bb014115c5ebba79df4fb35e87",
+    "sourceHash": "ff763d835b17d797eb0010114d4c5ddcc6f30e1bba0a00fb22a935a447f90e73",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "219e005f16ec54a5951a83c32caf79b15d816b6198bd4b0daa306ce9c86328fc",
+    "sourceHash": "fc89ce6e2a7cd09f7f98094436cfb42c9eb8c1d9a6204d6b7da806be31448af8",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "8e3001bf415f7e8da24232d28954971fc19962b6f54bc64a3e9c3947027ed001",
+    "sourceHash": "3fd0af7ab762966edf895fa11c4dff9d9d3d74dbcf1764e26377368ef9927ab9",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "58631449b94dd95506d17036cf3e7a49cdcfd721cfc5d2e444e206096390db79",
+    "sourceHash": "0178eddc29e0369c15396f6984febf33d6c0f91258fa67d38c3bb416f26bf272",
     "text": "死の淵 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "6a6512d3b8a093601566fa23e5c00711d85487029997c7535d455188e8b48323",
+    "sourceHash": "b883db8f78b416edb9ed09b35245fc3f5474c44a6c5c8c93e0930633d8623108",
     "text": "月の種：次の<keyword0>棘</keyword0>の反撃は2倍のダメージを与える"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "4ac7af2fa6b267a0c9f93d10a711e20a7c313c73d92785cc341f99eb426bc185",
+    "sourceHash": "2de640b818db278a51e43243fc274c9f66f5dddf8ad3e3d4966fa2466c80d15f",
     "text": "<keyword0>防止</keyword0>: 次に受ける能力の攻撃と自分への有害効果を<keyword1>回避</keyword1>判定前に打ち消す; <keyword2>棘</keyword2>は反撃する; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "345729aab60dc7be4634d5c74421f91bf19682bf67315af05bef0918b6241c29",
+    "sourceHash": "b5022d76efc6a19dba07b13102a75c0954237f0f1e604028ca37ce367835fb8f",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "f96726ff296ccde36d2dbe0a6decd58737dfc0c5b658dbe9ff93dac18dc83a76",
+    "sourceHash": "50e99505682458f6599d603e727524dd124150fd2acdbb56c79eb1c7efc1204e",
     "text": "<keyword0>無効化</keyword0>: 次の<keyword1>炎上</keyword1>・<keyword2>毒</keyword2>・<keyword3>出血</keyword3>・<keyword4>スタン</keyword4>・<keyword5>凍結</keyword5>・<keyword6>盲目</keyword6>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword7>強化解除</keyword7>されるまで続く; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "466cdfd7bb7b15cf148fd5eb9b069240b4ab44b73b57379b885d9127252d8703",
+    "sourceHash": "90f23ff2ce26abf2c448068a19b5fc2127809413412a238d3b0373d023312b34",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "cb7ae2d5b467dd6aedb4914b80e576d99418ddd1158f2d284034e8527ab061e9",
+    "sourceHash": "519ca1833a7344e564272b753a33147fdc6a7d5eb68be42e67faa9a65f020724",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "2a9e391dd91130034a1541354f9cb954e61ac35af0a379f329cf5d795480fb89",
+    "sourceHash": "3b2b77d47a52caac6e5e9aaf99e8c79ed5f941df2347e2190317b879b4954d55",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "9230e6d8f2ed506e88eaabeaebaffeceb1a9cf0f373d80772cfcd826f3b5268d",
+    "sourceHash": "99b78aeeb91b8bfa2066c9852f548c19818a8c2677f4714a6807565e49575846",
     "text": "<keyword0>反射</keyword0>: 指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword1>攻撃反射</keyword1>は攻撃全体を攻撃者へ返す; <keyword2>反射</keyword2>された効果を再び<keyword3>反射</keyword3>することはできない; チャージは重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "a405278fe490898de9ca818816d6e6917bfb52940c388b00db8df5d88fdacb4d",
+    "sourceHash": "6a53e6ae6dd66a3b12ed11ba60ef1644f65af1869d7487f352af2446f06ec4d4",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "d3df02af4f2758ec1accdbb3579240fdd9f7fc1215145ed5603b8f5f29148356",
+    "sourceHash": "744317e1cb88a46858d0577f49137bf43731ff810da1d0574218147d928a841a",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "5bc1a0a90e5d8435ce0966cf2fd1d37c9095f5142636935db5e26eb1d5cd2719",
+    "sourceHash": "686dcbd7e5f84836be3e0220fb58906f4cab19fac057b28d243054756af806bb",
     "text": "リボンの糸巻き：<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "97d7b92a657c6fd169b77c5e17da03f658dd934222d7a8ba11ebd12a2fd3d3a1",
+    "sourceHash": "4031697ae29b3494e16b12e7e8a2ab32c82e3106ee48774b9e8efefc83ea811e",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
+  },
+  "content.status.springTide.v9686824085c1ef98.rule": {
+    "reviewed": true,
+    "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
+    "sourceHash": "2df697834fd4f5ba7337f456e18741fdfd65372dfb42b3580ac81db3a83e1991",
+    "text": "大潮：次の<keyword0>水</keyword0>カードは二回使用される"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "45a19a20d4764a03d16712bf4989990f3e3f8e624b7441f58f4467c427e9cc3e",
+    "sourceHash": "17974bcf9deb00e508899b44c55545ff301831b07e36bca2d13f2b59d1aa211a",
     "text": "竜のつまようじ：次の攻撃は<keyword0>強化解除</keyword0>も行う"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "4e5133b908bf1d153814da5702de0edfea7144cc82bae02f47f8e37e55bb117f",
+    "sourceHash": "e3cf466298e167928e4fcc3ae72bbe4888ec58518a9084938715f0f1cf19d7e4",
     "text": "時の流れを戻す：次の攻撃が繰り返されることがある"
   },
   "content.talent.armor.armored-surge.name": {
@@ -8327,6 +8333,18 @@
     "sourceHash": "af35133ba47511f085cd3e8c673f3c16cb934caff004e710df5cd2352de3e164",
     "text": "<keyword0>物理</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
   },
+  "content.talent.burn.combustion.name": {
+    "reviewed": true,
+    "source": "Combustion",
+    "sourceHash": "1ee96272b28c19d6dbd15da88fc096bed65468b47480d2565e1a054bbdda7cba",
+    "text": "爆燃"
+  },
+  "content.talent.burn.combustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% against Poisoned or <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "8dd5c43670e3691a700119a6a3083afc9ed3264580eb93385094783245ffe11e",
+    "text": "毒または<keyword1>出血</keyword1>中の敵に対する<keyword0>炎上</keyword0>ダメージが{{value0}}%増加する"
+  },
   "content.talent.burn.fire-resistance.name": {
     "reviewed": true,
     "source": "Fire Resistance",
@@ -8363,6 +8381,18 @@
     "sourceHash": "9605391568549de810d87d8779fa5fddd7887c75573cac2622b01f8e00a0c8c2",
     "text": "各戦闘で最初の<keyword0>炎上</keyword0>は無料"
   },
+  "content.talent.burn.hearthfire.name": {
+    "reviewed": true,
+    "source": "Hearthfire",
+    "sourceHash": "84fabaefba856021ba4423a32a9c523da833fe72a0ac407902268fc66e2ca343",
+    "text": "炉火"
+  },
+  "content.talent.burn.hearthfire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits against <keyword1>Burning</keyword1> enemies restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "b13de5d2da87504685060a25e6c05212f99f927d645a6bd8344dfbe2fe583f3d",
+    "text": "<keyword1>炎上</keyword1>中の敵への<keyword0>炎上</keyword0>の命中時に<keyword2>体力</keyword2>を{{value0}}回復"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -8374,6 +8404,18 @@
     "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
     "sourceHash": "7d8428cc2b6aa63ab760c9258ff04d7223a7db3336f64a6f5cf74cca08471788",
     "text": "<keyword0>炎上</keyword0>の一撃は{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+  },
+  "content.talent.burn.heat-haze.name": {
+    "reviewed": true,
+    "source": "Heat Haze",
+    "sourceHash": "8302ae9c2a555660f708793561443619b362e5cfdc5ac7cdbce8b69f3443b9de",
+    "text": "陽炎"
+  },
+  "content.talent.burn.heat-haze.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "173c43a2f4d9cb33d02ce439c968bbcdf58d8e9276621f10b27d8575b5ea31ec",
+    "text": "<keyword1>炎上</keyword1>中の敵に対する<keyword0>回避</keyword0>率が{{value0}}%増加する"
   },
   "content.talent.burn.melting-point.name": {
     "reviewed": true,
@@ -8519,6 +8561,18 @@
     "sourceHash": "98691de4a7f62e41f37627c4fd43bee0b30d653b28c8f17a72a355c4d83889f0",
     "text": "<keyword0>回避</keyword0>すると、自分の<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の蓄積を<keyword1>浄化</keyword1>"
   },
+  "content.talent.dodge.veil-of-mist.name": {
+    "reviewed": true,
+    "source": "Veil of Mist",
+    "sourceHash": "4dd01541ee3a0a3aa20437d3bf4caf6b30d13f4a612306054de2ca15e1973179",
+    "text": "煙のヴェール"
+  },
+  "content.talent.dodge.veil-of-mist.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance while you have <keyword1>Block</keyword1>",
+    "sourceHash": "f242188eb034b3e8a4d9c6f4266b96a574bcfd5fc555d843219aba84ee22d9b2",
+    "text": "<keyword1>ブロック</keyword1>がある間、<keyword0>回避</keyword0>率が{{value0}}%増加する"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
@@ -8602,6 +8656,18 @@
     "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
     "sourceHash": "6a58abed8f9984a36cc9a02c58acbae58653e1f3c2dd2863a5feede0f10586f5",
     "text": "敵を<keyword0>凍結</keyword0>させるとその<keyword1>ブロック</keyword1>をすべて取り除く"
+  },
+  "content.talent.freeze.permafrost.name": {
+    "reviewed": true,
+    "source": "Permafrost",
+    "sourceHash": "6ba76ef92d50038eb6a57a86267985983b133604911e8a6ed6fed6a436d23311",
+    "text": "永凍氷"
+  },
+  "content.talent.freeze.permafrost.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Block</keyword0> does not decay while an enemy is <keyword1>Frozen</keyword1>",
+    "sourceHash": "335cde92050904552a6db97dd480e51de5749096d515493701957c75948dbcb3",
+    "text": "敵が<keyword1>凍結</keyword1>している間、自身の<keyword0>ブロック</keyword0>が減衰しない"
   },
   "content.talent.freeze.thaw-dividend.name": {
     "reviewed": true,
@@ -8891,6 +8957,18 @@
     "sourceHash": "6d2e67e3d9a57e7145a84c18388bbeddba2ba0ee4d22fca1f738c0d553366d08",
     "text": "受ける<keyword0>光</keyword0>ダメージが半分になる"
   },
+  "content.talent.light.daybreak.name": {
+    "reviewed": true,
+    "source": "Daybreak",
+    "sourceHash": "3c6c4dd361689ee80a1b8cdab229b7176ad4d3acde7c9332d82f077f66be7d0c",
+    "text": "夜明け"
+  },
+  "content.talent.light.daybreak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits restore {{value0}} <keyword1>Health</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "661d5c8bbd63600c5e33c240a84530f5d36909d07e3e7ecda812ea4d51821411",
+    "text": "<keyword2>ブロック</keyword2>がある間、<keyword0>光</keyword0>の命中時に<keyword1>体力</keyword1>を{{value0}}回復"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
@@ -8975,6 +9053,18 @@
     "sourceHash": "74ba0a14cd8d5199c3f04fe94b0dd1c90f76ef1757282c5e1cbd0a95c720980a",
     "text": "<keyword0>光</keyword0>ダメージは{{value0}}%の確率で、敵が失った<keyword1>体力</keyword1>と同量のゴールドを獲得"
   },
+  "content.talent.mana.arcane-discharge.name": {
+    "reviewed": true,
+    "source": "Arcane Discharge",
+    "sourceHash": "58993a8ac8f088e97f50cad1ccbf7c3309e7046664e319e6bacc298430bd279d",
+    "text": "マナ放出"
+  },
+  "content.talent.mana.arcane-discharge.rule": {
+    "reviewed": true,
+    "source": "Spending your last <keyword0>Mana</keyword0> deals {{value0}} <keyword1>Stun</keyword1> damage to a random enemy",
+    "sourceHash": "4e963775d042ad32b43b4bdbdb87cf69639749c6d8c88f8a9ed89a3192bc40e0",
+    "text": "最後の<keyword0>マナ</keyword0>を消費すると、ランダムな敵1体に{{value0}}の<keyword1>スタン</keyword1>ダメージを与える"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -8998,6 +9088,18 @@
     "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
     "sourceHash": "80818fd1a7ab41d31337780855b78a89e3ec7ba89b2d241cab303fa41c7261ba",
     "text": "生存している出撃中の各クリーチャーは、獲得した<keyword1>マナ</keyword1>1につき<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.talent.mana.astral-veil.name": {
+    "reviewed": true,
+    "source": "Astral Veil",
+    "sourceHash": "21141cd027700713ea3acd998a520180056af30432854da3abca295e00fb657f",
+    "text": "星界のヴェール"
+  },
+  "content.talent.mana.astral-veil.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance for each point of <keyword1>Mana</keyword1> you have",
+    "sourceHash": "6cbb109b731a0d656c75c353c74b08e81c5dba390db8da21267511e25c318db3",
+    "text": "所持している<keyword1>マナ</keyword1>1につき<keyword0>回避</keyword0>率が{{value0}}%増加する"
   },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
@@ -9227,6 +9329,18 @@
     "sourceHash": "be7e0ae3e057365aff97cddcfce21a9d7fd458c598934271da60d2cb5279a044",
     "text": "<keyword0>物理</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>スタン</keyword1>ダメージを与える"
   },
+  "content.talent.physical.juggernaut.name": {
+    "reviewed": true,
+    "source": "Juggernaut",
+    "sourceHash": "a81dec2332c9471c94b215606da3d42f7afadb636b3b10f6ad5bd2e864eb66e0",
+    "text": "ジャガーノート"
+  },
+  "content.talent.physical.juggernaut.rule": {
+    "reviewed": true,
+    "source": "When a <keyword0>Physical</keyword0> attack breaks enemy <keyword1>Block</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "932bb61481e5655840348e8f19617c5a7c70a91e5bbb31918df23088bc723e3e",
+    "text": "<keyword0>物理</keyword0>攻撃で敵の<keyword1>ブロック</keyword1>を破壊すると<keyword2>装甲</keyword2>を{{value0}}獲得"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
@@ -9262,6 +9376,18 @@
     "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
     "sourceHash": "ce8f42722921c2495265ad0e6359999618dda2c4e314a73e22d61de3b2ff3272",
     "text": "<keyword0>物理</keyword0>の<keyword1>クリティカル</keyword1>は<keyword2>出血</keyword2>を爆発させる"
+  },
+  "content.talent.physical.savagery.name": {
+    "reviewed": true,
+    "source": "Savagery",
+    "sourceHash": "1a7882313de925edc06a136818b9975c33b8eedd1497e06270d28c29a25412a3",
+    "text": "猛攻"
+  },
+  "content.talent.physical.savagery.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> attacks gain {{value0}}% <keyword1>Critical Hit</keyword1> chance against <keyword2>Bleeding</keyword2> or <keyword3>Stunned</keyword3> enemies",
+    "sourceHash": "b2c3171535838cb81aafc6fad5b06782318b4a40ce2266f2b7c162696844da8b",
+    "text": "<keyword2>出血</keyword2>または<keyword3>スタン</keyword3>中の敵に対する<keyword0>物理</keyword0>攻撃の<keyword1>クリティカル</keyword1>率が{{value0}}%増加する"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -9491,6 +9617,18 @@
     "sourceHash": "2c46d0fd587edb34290565bb93eb5fbba3e6e79a2f705b3b75a90690fc225adf",
     "text": "敵を<keyword0>スタン</keyword0>させると、その敵の<keyword1>装甲</keyword1>をすべて除去"
   },
+  "content.talent.stun.static-charge.name": {
+    "reviewed": true,
+    "source": "Static Charge",
+    "sourceHash": "c1e5f29849700b1ab291e7b3c0ffc6d84aefb1e58c7b6af3cce4dd38450b1d15",
+    "text": "静雷の蓄積"
+  },
+  "content.talent.stun.static-charge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> attacks deal {{value0}}% more damage against enemies with <keyword1>Block</keyword1> or <keyword2>Armor</keyword2>",
+    "sourceHash": "50de02740acf139e2f60ac5663d4b51f95af13a0914a0ea71b03599ba1dfb4d3",
+    "text": "<keyword1>ブロック</keyword1>または<keyword2>装甲</keyword2>を持つ敵に対する<keyword0>スタン</keyword0>攻撃のダメージが{{value0}}%増加する"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -9539,6 +9677,18 @@
     "sourceHash": "b9d91e152106fc0358fc09d19869e66e2f03dfbaea7b2688647c1f3401569407",
     "text": "<keyword0>水</keyword0>の命中時に<keyword1>装甲</keyword1>を{{value0}}除去する"
   },
+  "content.talent.water.frigid-current.name": {
+    "reviewed": true,
+    "source": "Frigid Current",
+    "sourceHash": "1a07859a439063c28c92e56e872229bd205405fa22734af2ea92032b6812022f",
+    "text": "寒流"
+  },
+  "content.talent.water.frigid-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "4414440c7669423930cce8a6ec72705dda7a28b9c74681c4ef9dd2fc8dd9cc32",
+    "text": "<keyword0>水</keyword0>ダメージは半分の量の<keyword1>凍結</keyword1>蓄積も与える"
+  },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
     "source": "High Tide",
@@ -9550,6 +9700,18 @@
     "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
     "sourceHash": "f5d01c7f004c7f9c80d6c03c415e40f669c0e108e7bf8384969d75aeed15f3e3",
     "text": "<keyword1>ブロック</keyword1>がある間、<keyword0>水</keyword0>攻撃のダメージが{{value0}}%増加"
+  },
+  "content.talent.water.living-water.name": {
+    "reviewed": true,
+    "source": "Living Water",
+    "sourceHash": "08d213a358eb131102384eed8a6a78c322abd2aad24adec9fdcbc5c17f3500eb",
+    "text": "命の水"
+  },
+  "content.talent.water.living-water.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against enemies without <keyword1>Armor</keyword1> restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6cab0c268053cb6451c576745be6fd9135926f258621b6322234648d8adcb805",
+    "text": "<keyword1>装甲</keyword1>がない敵への<keyword0>水</keyword0>の命中時に<keyword2>体力</keyword2>を{{value0}}回復"
   },
   "content.talent.water.pressure.name": {
     "reviewed": true,
@@ -9586,6 +9748,30 @@
     "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
     "sourceHash": "ab2e32c696c9f862c8b55601c72cfda2b5a667d5ea0b07364ea7f7b76d849447",
     "text": "<keyword0>水</keyword0>の命中時に<keyword1>ブロック</keyword1>を{{value0}}獲得"
+  },
+  "content.talent.water.spring-tide.name": {
+    "reviewed": true,
+    "source": "Spring Tide",
+    "sourceHash": "96ec9f823196de08b31eb2041b758a76183e3b2fba1827ecc67eb5898f7e38de",
+    "text": "大潮"
+  },
+  "content.talent.water.spring-tide.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Cleanse</keyword0> a harmful effect, your next <keyword1>Water</keyword1> card plays twice",
+    "sourceHash": "fc60a0351ece18b6540e1c6918813b5233dee73a117c40e509244284023dbae7",
+    "text": "有害な効果を<keyword0>浄化</keyword0>すると、次の<keyword1>水</keyword1>カードは二回使用される"
+  },
+  "content.talent.water.storm-surge.name": {
+    "reviewed": true,
+    "source": "Storm Surge",
+    "sourceHash": "c79eb2e98704e9ee3c5f4ddcb272d3c534cdfe06b9f851305e5b4933907aa7b2",
+    "text": "高潮"
+  },
+  "content.talent.water.storm-surge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2> enemies restore {{value0}} <keyword3>Mana</keyword3>",
+    "sourceHash": "d0439f0d96452e79ae340eb67f71b07d03d49cd6338990eae11e4c2e72174a4c",
+    "text": "<keyword1>スタン</keyword1>または<keyword2>凍結</keyword2>中の敵への<keyword0>水</keyword0>の命中時に<keyword3>マナ</keyword3>を{{value0}}回復"
   },
   "controller.circle": {
     "reviewed": true,

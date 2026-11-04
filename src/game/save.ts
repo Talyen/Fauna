@@ -525,6 +525,7 @@ function validateMinions(state: BattleState) {
             `${unit.species === "memento" ? "echo" : unit.species === "chronora" ? "pendulum" : unit.species === "tithemaw" ? "ward" : "bloom"}-${unit.minion.ownerId}-1`) ||
         (unit.minion.side === "enemy" &&
           (unit.combat.oasisLeech ||
+            unit.combat.springTide ||
             unit.combat.acrobatReady ||
             unit.combat.moonseedReady ||
             unit.combat.toothpickReady ||

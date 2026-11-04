@@ -348,7 +348,7 @@ export function* removeEffects(
       : onlyStatus
         ? Number(stats[onlyStatus]) > 0 || (onlyStatus === "dodge" && stats.temporaryDodge > 0)
         : hasBeneficialEffects(unit)) &&
-    succeeds(state, dodgeChance(state, unit) / 100, false, events)
+    succeeds(state, dodgeChance(state, unit, source) / 100, false, events)
   ) {
     yield* dodgeResponse({ state, source, target: unit, type: "physical", events }, false);
     return 0;
@@ -742,6 +742,7 @@ export function* cleanseRewards(
   }
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats[talentRule("light.divine-favor").state] = true;
+    if (hasTalent(state, "water.spring-tide")) stats[talentRule("water.spring-tide").state] = true;
     const healing =
       Number(hasTalent(state, "health.renewal")) * talentRule("health.renewal").amount +
       (state.boons.includes("sin-eaters-lantern") ? boonRule("sin-eaters-lantern").healing : 0);

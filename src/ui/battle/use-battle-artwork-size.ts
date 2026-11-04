@@ -1,5 +1,5 @@
 import { useLayoutEffect, type RefObject } from "react";
-/** Fit the portraits and lift the unchanged fan so its middle card clips by only 4px. */
+/** Fit equal-area combatants and hand cards, keeping only 4px of middle-card clipping. */
 export function useBattleArtworkSize(board: RefObject<HTMLElement | null>, handCount: number) {
   useLayoutEffect(() => {
     const root = board.current;
@@ -59,16 +59,18 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>, handC
           (parseFloat(root.style.getPropertyValue("--battle-hand-lift")) || 0)
         : root.getBoundingClientRect().bottom;
       const clearance = parseFloat(css.getPropertyValue("--battle-hand-hover-clearance"));
-      const top = parseFloat(css.paddingTop) || 0;
-      // The 10% reduction supplies clearance for lifting the original fan.
-      const availableHeight = Math.min(
-        root.clientHeight - paddingBottom + priorLift - top,
-        handTop - root.getBoundingClientRect().top - clearance - top,
-      );
+      const handHeight = hand ? parseFloat(getComputedStyle(hand).height) : 0;
+      const availableHeight =
+        Math.min(
+          root.clientHeight - paddingBottom + priorLift,
+          handTop - root.getBoundingClientRect().top - clearance,
+        ) + handHeight;
       // Each rail keeps enough room for target rules and the symmetric controls beside the board.
       const minimumRail = parseFloat(getComputedStyle(rail).minWidth);
       const byWidth = (root.clientWidth - 2 * minimumRail - 2 * columnGap - rowPadding - 2 * gap) / 3;
-      const byHeight = ((availableHeight - extra - gap) * 2) / 3;
+      // Two landscape rows use 3/4 of the shared long side each; the portrait hand uses one.
+      // Fit the combined artwork budget directly so the hand cannot feed shrinking sizes back in.
+      const byHeight = (availableHeight - extra - gap) / 2.5;
       const width = Math.max(
         parseFloat(css.getPropertyValue("--control-height")),
         Math.floor(Math.min(byWidth, byHeight)) * 0.9,

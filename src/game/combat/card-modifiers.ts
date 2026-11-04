@@ -14,9 +14,10 @@ import type { ProgressionKeyword } from "../keywords";
 import { livingChorus } from "./turns";
 import type { BattleState, GameEvent, Card } from "../types";
 import { definition } from "../content";
-import { battlefield, healingAllies } from "../battlefield";
-import { passiveAmount } from "../progression";
+import { battlefield, findLivingBattlefield, healingAllies, livingBattlefield } from "../battlefield";
+import { hasTalent, passiveAmount } from "../progression";
 import { receiveCard, draw, journeyReturn } from "../card-zones";
+import { roll } from "../random";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
@@ -84,8 +85,31 @@ export function lastWarmth(state: BattleState, enemy: boolean, events: GameEvent
 }
 
 /** One accepted player card owns this counter, before refill and settlement. */
-export function afterPlayerCard(state: BattleState, events: GameEvent[], actor?: Combatant) {
+export function afterPlayerCard(
+  state: BattleState,
+  events: GameEvent[],
+  actor?: Combatant,
+  spentLastMana = false,
+) {
   const battle = state.battle;
+  if (spentLastMana && hasTalent(state, "mana.arcane-discharge")) {
+    const caster = actor && actor.health > 0 ? actor : findLivingBattlefield(state, "player");
+    const enemies = livingBattlefield(state, "enemy");
+    if (caster && enemies.length > 0) {
+      const target =
+        enemies[Math.floor(roll(state, { kind: "index", size: enemies.length }) * enemies.length)]!;
+      resolveCombat(
+        "hit",
+        state,
+        caster,
+        target,
+        talentRule("mana.arcane-discharge").amount,
+        "stun",
+        events,
+        { origin: "proc" },
+      );
+    }
+  }
   if (actor && state.boons.includes("mercury-metronome")) {
     const previous = battle.metronomeActor;
     battle.metronomeActor = actor.id;

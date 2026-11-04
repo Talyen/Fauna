@@ -7808,163 +7808,169 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "0c990f4a2b97fc3ca025ba30db9bcc8911eed7da24cab4a3a93ea19d1f51fb12",
+    "sourceHash": "fb73e7e67cb259e6d37aa23c18263aa1fcba892e67085160fdcdefea5956dee4",
     "text": "Волчок акробата: от следующей атаки нельзя <keyword0>уклониться</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "291b97c65b104d2b84d51bb804dfa52340c4fd43c61d33247ffb4333c9716692",
+    "sourceHash": "2f8141971bdddccf9562635500ba03ff58b369b5cc66cb578d89089baf53d8fa",
     "text": "<keyword0>Отражение атаки</keyword0>: Возвращает следующую входящую атаку способности её атакующему; Предотвращает её урон и вредные эффекты на вас; <keyword1>Отражённые</keyword1> атаки нельзя <keyword2>отразить</keyword2> снова; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "ae07c17cde1756e76e0597f77994f95a0625f4bc7b9ec21e13ab27dda8b243e0",
+    "sourceHash": "756da6b79c9dfbffcb2a69394f40d2ce04fedac0389f0c0f46a02f0e65ec5cc6",
     "text": "<keyword0>Ослепление</keyword0>: Ваша следующая атака с вероятностью {{value0}}% промахнётся по всем целям; Эффект заканчивается после этой атаки при любом исходе; Промах считается <keyword1>уклонением</keyword1> каждой цели; Не суммируется"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "3596b51478260491d7f064efc8a953f6696f102ad9214f556d5ff0d67bf115dd",
+    "sourceHash": "2d73010b7a97cdee45a8dfdcc2fc46978ddcdc8caa52befcdcebde8ed9b759cd",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "7c51e79a9ac0b76331592f2f89f5103cf7ac187d24cab892d84e60609e81ddfa",
+    "sourceHash": "fad2c8a5e9d79717203679f156c2ae89fd339d6180bf5c1f09ade06a8f698fbb",
     "text": "Ход пропущен"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "c95313687ad8eea626effdd883f9104b9b092578204207a4d850ecbfb20d82a6",
+    "sourceHash": "e35f455d5bbd89766313ea29145d043d53a8f1ff9388cfe53b8ccf2234151703",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "d5596411b8ac9db440d1665aa6134b2de71717327d258a0a794795fedd720be2",
+    "sourceHash": "4605835dbb11bdb769ea9e71afcf11af4cdcdc1c5b98fd9ebafb57d05465f3a3",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "7d6e61e6643106a4a95e998e583613224650d587b74fb0b6acf9a3b4380675eb",
+    "sourceHash": "7f666ba03c98812c60de29a3dfd47ddcdcae755307810bac4a8f32a9eb9f7b8e",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "d90a8c47fd5b16db48cb6d986f9721d3924d2ac2dfcc88801cb835fb846314b7",
+    "sourceHash": "d9ee0290b9b557edd801da82e5ca835e97831199fc244add10f76eddfb3b6934",
     "text": "Иммунитет к контролю {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "d6749d80d408c03296514f0d320a52038cf0d1fc0fab243a0ac49a398f155aa8",
+    "sourceHash": "27fc2947fa8d742e77d4b65c0dd0ff0018dd0fb26978614d3165b706facf560e",
     "text": "Бесплатное продолжение: следующая карта бесплатна"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "9f2d6c0af604ad033480972a970e9f2ae9a1cb3d687b9d7877682cf4a30fec27",
+    "sourceHash": "ead6e4a0af8cf36c8fa636787463496530087346bdb42d20a5fa451fcfa0e608",
     "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "62f398509ce80cdd8be3a69c600a8484cfd9ec76808e1b8660fcd70dc67e8c03",
+    "sourceHash": "3ad97bdc88367410ee9308878eb887fcab2e8d921fd97c344c7f1abc13701d92",
     "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "f39e96507be619e7f430a9538c66e62e9d15d7daffd6965e56d7ab06b820957c",
+    "sourceHash": "78cb489ba65f3a1bd3590d092d0736c626e61058ff8ef68e7d90df561b7fafc9",
     "text": "На пороге смерти {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "5e68c9eb49004070a8ea851c8a54c193a1779814ce69b1240a8fd329419f49d3",
+    "sourceHash": "357f6a0ece6892b378d22b90ef828e420bba341c5c1cdf1cc8bb988688bc85c9",
     "text": "Лунное семя: следующая ответная атака <keyword0>шипами</keyword0> наносит двойной урон"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "fad8974b1eff506341befdc6aeca223bb61e63d00a1938ba136727ec3a730fcc",
+    "sourceHash": "538b139f7e22764f4a4f928d2c9b7d9543e547b2537bc2688dba1fac0393bb11",
     "text": "<keyword0>Отведение</keyword0>: Отменяет следующую входящую атаку способности и её вредные эффекты на вас до <keyword1>уклонения</keyword1>; <keyword2>Шипы</keyword2> всё равно наносят ответный урон; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "db7db4ef8eacd692d7942bee1e4976032ff5bf0879762dbbcc68b3f0be9a6954",
+    "sourceHash": "3694e70165e34742eeae61baacc22a7951ec038b77cda2bc866063ec9f0e54d5",
     "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "5b234bada1c8902d88f2ddd7613332c81ac65a632ae8c4fb0e9e84dca563513c",
+    "sourceHash": "726bac897ae4bc12905b47970850c5628c5802f3855702db838d06a24e32fe4c",
     "text": "<keyword0>Аннулирование</keyword0>: Предотвращает следующее наложение <keyword1>горения</keyword1>, <keyword2>яда</keyword2>, <keyword3>кровотечения</keyword3>, <keyword4>оглушения</keyword4>, <keyword5>заморозки</keyword5> или <keyword6>ослепления</keyword6>; Прямой урон и уже действующие статусы не меняются; Действует до использования или <keyword7>рассеивания</keyword7>; Не суммируется"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "9b1ed2a8bfc5a47d311be52e66521d9b7de159d369593a901abc1d205eb96f0b",
+    "sourceHash": "866e23752a0d97ca858229207e198c97148b14e082571c62e40d346ef95d6ada",
     "text": "<keyword0>Аннулирует</keyword0> следующий урон от <keyword1>заморозки</keyword1>; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "12d70054581e2a0edb44a1eb4a4cbd34c393a64851c8376b1ef0fbc4dcd6cbe4",
+    "sourceHash": "1ffdb06a69ee40c6ed3812569d5d9d47e29fe3d740e409e768b2ea29286544e1",
     "text": "Семя оазиса: следующая атака имеет <keyword0>вампиризм</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "bf38197ed493e9ad6eae12a79de4e26b0a4ebeab8f4ceb0f50fb1a2a24a38a9d",
+    "sourceHash": "e6469d7a0ef41372c6cd0aba1c65eaa76313a3d21e4230c15d6cb69614eb5e5d",
     "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "eacda74468490ad7c3a6c23229301a0c7fcf7b7e31bc24ebddd256f7d9d1e486",
+    "sourceHash": "81d927ddaa8ce9741a47e12a61cefefc09eb5005ace27dc972b5b501aa96a217",
     "text": "<keyword0>Отражение</keyword0>: Перенаправляет указанный вредный статус на случайного живого врага; Прямой урон всё равно попадает по вам; <keyword1>Отражение атаки</keyword1> вместо этого возвращает всю атаку её атакующему; <keyword2>Отражённые</keyword2> эффекты нельзя <keyword3>отразить</keyword3> снова; Заряды не суммируются"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "557132a6f263fe5329118fd8ef7d3b463df37769eadbfbe5b171396d0cfc8786",
+    "sourceHash": "a82bc55b9af9c1bd8c42a87411445b37bf5f8194b9eea7ffc36e986896b46811",
     "text": "<keyword0>Отражает</keyword0> следующее <keyword1>горение</keyword1>; Прямой урон всё равно проходит; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "1b9bf7c0e5dab00291f4abd6b9b5ae152a2b3834919c54be4f53b67066d7bacf",
+    "sourceHash": "688b4659c858af259ee5f232404110981403e65f8e7d3f3027e0fdfc693a8c14",
     "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "51f82c78fd95f8ba45d13a0ee48afcfeeb234393036d5adbe7f8fdc559fb8a30",
+    "sourceHash": "77bd7a336c52ab39443368361c6066706d607555341f4d31285be7fa55a7f1a7",
     "text": "Катушка лент: иммунитет к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "05cf47da5ac7ce2d136159c88be1bb1ed66354273e9e2d42758ef746f07c9973",
+    "sourceHash": "0ca65674c05fc5360947bfbe4bd67e239f4fb96662825d2d3ee14dfc1db3ebd7",
     "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
+  },
+  "content.status.springTide.v9686824085c1ef98.rule": {
+    "reviewed": true,
+    "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
+    "sourceHash": "fe3f21c817be6c73e280f8a9bbda78849a3e006bde7ba2e63035ba3611de2a87",
+    "text": "Весенний прилив: следующая карта типа «<keyword0>Вода</keyword0>» разыгрывается дважды"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "bcac3c2309de7550cd5722bf68709a7f907901b555266381485c65699d7968e0",
+    "sourceHash": "a2bd3abda24c9c54a0bd66cfdc30ee85aab048988f5706fcac455287871a0a4d",
     "text": "Драконья зубочистка: следующая атака также вызывает <keyword0>рассеивание</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "c869a76a6d4b7ea5421422a9529d1d5e84441d37ccac834603e817ae8a7d1742",
+    "sourceHash": "893031823f40a48739d99b01aba49e2d59a25a04e069548e2836a3aa36b506a5",
     "text": "Повернуть время вспять: следующая атака может повториться"
   },
   "content.talent.armor.armored-surge.name": {
@@ -8327,6 +8333,18 @@
     "sourceHash": "4c6837763f915c5651a24ef018080bf1975627642beec98ea20945448e7b58c4",
     "text": "Урон типа «<keyword0>Физический</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
   },
+  "content.talent.burn.combustion.name": {
+    "reviewed": true,
+    "source": "Combustion",
+    "sourceHash": "266931d0cd374059151fc344ed0a82e9aaca456afca40a426c0933922930003a",
+    "text": "Возгорание"
+  },
+  "content.talent.burn.combustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% against Poisoned or <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "0ec60d75d2c6826a03fd556d38117ca68020b1fd75a98634cb5c3e3dbbb58d04",
+    "text": "Урон от <keyword0>горения</keyword0> увеличен на {{value0}}% против отравленных врагов или врагов с <keyword1>кровотечением</keyword1>"
+  },
   "content.talent.burn.fire-resistance.name": {
     "reviewed": true,
     "source": "Fire Resistance",
@@ -8363,6 +8381,18 @@
     "sourceHash": "a585d914a039e9ef08f30cbdaa77607db51ee0dd4c35a7caee065195309fd9e2",
     "text": "Первое <keyword0>горение</keyword0> в каждом бою бесплатно"
   },
+  "content.talent.burn.hearthfire.name": {
+    "reviewed": true,
+    "source": "Hearthfire",
+    "sourceHash": "5341f470afced99e59883cf93ba38d669bc893b7f193af4ac17eb10aec65d926",
+    "text": "Огонь очага"
+  },
+  "content.talent.burn.hearthfire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits against <keyword1>Burning</keyword1> enemies restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "055b4c45c99213668da77d3a0787808d6d6144b4a6236690f0e0c4a1e6434909",
+    "text": "Попадания типа «<keyword0>Горение</keyword0>» по <keyword1>горящим</keyword1> врагам восстанавливают {{value0}} <keyword2>здоровья</keyword2>"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -8374,6 +8404,18 @@
     "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
     "sourceHash": "b8741fcd07d449f9f43ef653bd714bb80d840b1ac058e168d73eb576b6a5b3f4",
     "text": "Попадания типа «<keyword0>Горение</keyword0>» с шансом {{value0}}% также наносят <keyword1>оглушающего</keyword1> урона"
+  },
+  "content.talent.burn.heat-haze.name": {
+    "reviewed": true,
+    "source": "Heat Haze",
+    "sourceHash": "cfbb85f01bacfd797d14c49740903d44151997be33eabfd2fac94bd577f730be",
+    "text": "Марево"
+  },
+  "content.talent.burn.heat-haze.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "0154e3bec90fa5f16b47bbece456cbb9db7da664ff1c84931e3b5aab3d976c29",
+    "text": "Получите {{value0}}% к шансу эффекта «<keyword0>Уклонение</keyword0>» против <keyword1>горящих</keyword1> врагов"
   },
   "content.talent.burn.melting-point.name": {
     "reviewed": true,
@@ -8519,6 +8561,18 @@
     "sourceHash": "4be7becae6fa7e92df57e36521bad7362fe4d674452a6b95cd7b585e6edfe0da",
     "text": "При <keyword0>уклонении</keyword0> <keyword1>очистите</keyword1> своё накопление <keyword2>оглушения</keyword2> и <keyword3>заморозки</keyword3>"
   },
+  "content.talent.dodge.veil-of-mist.name": {
+    "reviewed": true,
+    "source": "Veil of Mist",
+    "sourceHash": "466fc5924a2804f92c7723f589dd220216585443c2f607a572a8ab91f3705d4b",
+    "text": "Покров тумана"
+  },
+  "content.talent.dodge.veil-of-mist.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance while you have <keyword1>Block</keyword1>",
+    "sourceHash": "df9d841fd223f9b80688d762edd4e752780f40cf80c927603ebafca7920dad04",
+    "text": "Получите {{value0}}% к шансу эффекта «<keyword0>Уклонение</keyword0>», пока у вас есть <keyword1>блок</keyword1>"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
@@ -8602,6 +8656,18 @@
     "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
     "sourceHash": "2d10411358139dfc9fd4aae84efa4c77578851e8fcf50dc0eb3172e4be510a08",
     "text": "Когда вы <keyword0>замораживаете</keyword0> врага, снимите весь его запас <keyword1>блока</keyword1>"
+  },
+  "content.talent.freeze.permafrost.name": {
+    "reviewed": true,
+    "source": "Permafrost",
+    "sourceHash": "438c9adff709b3688e0ddf17e5b617879246b267dfc1cb11949af3d0ab690a07",
+    "text": "Вечная мерзлота"
+  },
+  "content.talent.freeze.permafrost.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Block</keyword0> does not decay while an enemy is <keyword1>Frozen</keyword1>",
+    "sourceHash": "3e9c76350a96012274c053d906fadc3666d20ae96c287e4b6cb0bb879acd2bde",
+    "text": "Ваш <keyword0>блок</keyword0> не убывает, пока враг <keyword1>заморожен</keyword1>"
   },
   "content.talent.freeze.thaw-dividend.name": {
     "reviewed": true,
@@ -8891,6 +8957,18 @@
     "sourceHash": "6fc17c971657368398f4b205863b78e2c161d05f991f44bc95da7c0378ba2b43",
     "text": "Получаемый урон типа «<keyword0>Свет</keyword0>» уменьшается вдвое"
   },
+  "content.talent.light.daybreak.name": {
+    "reviewed": true,
+    "source": "Daybreak",
+    "sourceHash": "83abf7898c4f19ea02779696f6e9f27c1069fcc99d82b306e70a66813dc52a8f",
+    "text": "Рассвет"
+  },
+  "content.talent.light.daybreak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits restore {{value0}} <keyword1>Health</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "60740f10c1faf3478450911ea225cceb5c9a7616b759b196c1e34eacae009574",
+    "text": "Попадания типа «<keyword0>Свет</keyword0>» восстанавливают {{value0}} <keyword1>здоровья</keyword1>, пока у вас есть <keyword2>блок</keyword2>"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
@@ -8975,6 +9053,18 @@
     "sourceHash": "30b5176c3532a4b0b5b9c35241d1abb8bfec2646ae349ce2bf1ba5efc7dc9303",
     "text": "Урон типа «<keyword0>Свет</keyword0>» с вероятностью {{value0}}% даёт золото в размере потерянного врагом <keyword1>здоровья</keyword1>"
   },
+  "content.talent.mana.arcane-discharge.name": {
+    "reviewed": true,
+    "source": "Arcane Discharge",
+    "sourceHash": "62ae32d08f86119e890034ae8cb5b2f3ab273fc48b3667c57221d51a9a4936f5",
+    "text": "Магический разряд"
+  },
+  "content.talent.mana.arcane-discharge.rule": {
+    "reviewed": true,
+    "source": "Spending your last <keyword0>Mana</keyword0> deals {{value0}} <keyword1>Stun</keyword1> damage to a random enemy",
+    "sourceHash": "889d3daf5ae0f929d232eaa0baa5444c736e095591f1096ea46eed9149a67185",
+    "text": "Трата последней единицы <keyword0>маны</keyword0> наносит {{value0}} ед. урона типа «<keyword1>Оглушение</keyword1>» случайному врагу"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -8998,6 +9088,18 @@
     "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
     "sourceHash": "c2d7ccc986d6a018d24d3ea7a7a682886a2c47b9f19c2b3857ae2e5e3a58f0d3",
     "text": "Каждое живое выставленное существо восстанавливает {{value0}} <keyword0>здоровья</keyword0> за каждую полученную единицу <keyword1>маны</keyword1>"
+  },
+  "content.talent.mana.astral-veil.name": {
+    "reviewed": true,
+    "source": "Astral Veil",
+    "sourceHash": "5bdadf506b12a3e877458cfc9f967918bcd740cb6432d10c1e8d026553b72d61",
+    "text": "Астральная завеса"
+  },
+  "content.talent.mana.astral-veil.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance for each point of <keyword1>Mana</keyword1> you have",
+    "sourceHash": "6a9e1158ccf97ddcbc6e2486f0b4229dee45f103dfc511fe08452819f8b17435",
+    "text": "Получите {{value0}}% к шансу эффекта «<keyword0>Уклонение</keyword0>» за каждую единицу вашей <keyword1>маны</keyword1>"
   },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
@@ -9227,6 +9329,18 @@
     "sourceHash": "1f202b51cc21c70c0d49ef55eecdf3a83a3725cd3eb1dc9319e50c5add5043e4",
     "text": "<keyword0>Физический</keyword0> урон с вероятностью {{value0}}% также наносит урон <keyword1>оглушением</keyword1>"
   },
+  "content.talent.physical.juggernaut.name": {
+    "reviewed": true,
+    "source": "Juggernaut",
+    "sourceHash": "4ce8cf680864fac4e2aa7e15a28bdf8295a46e47b62972dab6885936cc7bd715",
+    "text": "Джаггернаут"
+  },
+  "content.talent.physical.juggernaut.rule": {
+    "reviewed": true,
+    "source": "When a <keyword0>Physical</keyword0> attack breaks enemy <keyword1>Block</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "b624540a50e940ff30e3c37c86e4f839e36435b868dcb7541ba6f5862426b14b",
+    "text": "Когда <keyword0>физическая</keyword0> атака пробивает <keyword1>блок</keyword1> врага, получите {{value0}} <keyword2>брони</keyword2>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
@@ -9262,6 +9376,18 @@
     "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
     "sourceHash": "6203b1b5ec1b74cd24e2baf93ce4a77c3136a5176563007814005a08e7e0ea23",
     "text": "<keyword0>Физические</keyword0> <keyword1>критические попадания</keyword1> взрывают <keyword2>кровотечение</keyword2>"
+  },
+  "content.talent.physical.savagery.name": {
+    "reviewed": true,
+    "source": "Savagery",
+    "sourceHash": "df42f4240e817cc8e68b14fac36d3d030ded6805a770007ecfe31df99cffe989",
+    "text": "Свирепость"
+  },
+  "content.talent.physical.savagery.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> attacks gain {{value0}}% <keyword1>Critical Hit</keyword1> chance against <keyword2>Bleeding</keyword2> or <keyword3>Stunned</keyword3> enemies",
+    "sourceHash": "d6af30ad54bf409ef2ad38abccf5d906c9d9aa5a39cd0d5703c8d1a23f155370",
+    "text": "<keyword0>Физические</keyword0> атаки получают {{value0}}% к шансу <keyword1>критического удара</keyword1> против <keyword2>кровоточащих</keyword2> или <keyword3>оглушённых</keyword3> врагов"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -9491,6 +9617,18 @@
     "sourceHash": "a75fed3bb89ccf592db92898259889dcfc4ded7c63a6cfa3f653e893f9481a17",
     "text": "<keyword0>Оглушение</keyword0> врага снимает всю его <keyword1>броню</keyword1>"
   },
+  "content.talent.stun.static-charge.name": {
+    "reviewed": true,
+    "source": "Static Charge",
+    "sourceHash": "0c2e71249e92cb81692b06825b77e5d3559a9ffd614908af03fe0e77e16854f6",
+    "text": "Статический заряд"
+  },
+  "content.talent.stun.static-charge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> attacks deal {{value0}}% more damage against enemies with <keyword1>Block</keyword1> or <keyword2>Armor</keyword2>",
+    "sourceHash": "8e14a8f0e8f6d4aa0494cfac7e4db9de40ec6500d500ccd5f836971e624d3c40",
+    "text": "Атаки типа «<keyword0>Оглушение</keyword0>» наносят на {{value0}}% больше урона врагам с <keyword1>блоком</keyword1> или <keyword2>бронёй</keyword2>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -9539,6 +9677,18 @@
     "sourceHash": "a70ebacbfa9015595b07cca44c4491d8570bd67944d913faad99f9876513ceb2",
     "text": "Попадания типа «<keyword0>Вода</keyword0>» снимают {{value0}} <keyword1>брони</keyword1>"
   },
+  "content.talent.water.frigid-current.name": {
+    "reviewed": true,
+    "source": "Frigid Current",
+    "sourceHash": "55e0acead813257f7ed175a197d144e39726c82a38af901e38b80f48c619a288",
+    "text": "Ледяное течение"
+  },
+  "content.talent.water.frigid-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "62947ccc03ab731f42991d53932a043baede883f34c4647e625045fca5f724f8",
+    "text": "Урон типа «<keyword0>Вода</keyword0>» добавляет вдвое меньше накопления эффекта «<keyword1>Заморозка</keyword1>»"
+  },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
     "source": "High Tide",
@@ -9550,6 +9700,18 @@
     "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
     "sourceHash": "e7f1a9e4158b4b64ad1c2bf488e9fa5f399f63c0f4b00684c7d02bb178408cf9",
     "text": "Атаки типа «<keyword0>Вода</keyword0>» наносят на {{value0}}% больше урона, пока у вас есть <keyword1>блок</keyword1>"
+  },
+  "content.talent.water.living-water.name": {
+    "reviewed": true,
+    "source": "Living Water",
+    "sourceHash": "5a3b65c2445f40d2b7064e203e916246e691c6558db9084ae2a066c334b96817",
+    "text": "Живая вода"
+  },
+  "content.talent.water.living-water.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against enemies without <keyword1>Armor</keyword1> restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "8da404ae985a47e9eb7c4ee4b7c45466082c482767815e1dd97aa40f2d37cdc6",
+    "text": "Попадания типа «<keyword0>Вода</keyword0>» по врагам без <keyword1>брони</keyword1> восстанавливают {{value0}} <keyword2>здоровья</keyword2>"
   },
   "content.talent.water.pressure.name": {
     "reviewed": true,
@@ -9586,6 +9748,30 @@
     "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
     "sourceHash": "f2cd5f313c45d9c176a8d273a25e90e6a7c821157b76b91c9478c1ee28a18104",
     "text": "Попадания типа «<keyword0>Вода</keyword0>» дают {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.talent.water.spring-tide.name": {
+    "reviewed": true,
+    "source": "Spring Tide",
+    "sourceHash": "a18a338ac597847121be91fb9a9350ce449921fbe5fb140ff2db89235c7a553f",
+    "text": "Весенний прилив"
+  },
+  "content.talent.water.spring-tide.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Cleanse</keyword0> a harmful effect, your next <keyword1>Water</keyword1> card plays twice",
+    "sourceHash": "cccc0286b9e7770f643f9455dec3abdf31af3865eec1944b54a56b8187ba9e66",
+    "text": "Когда вы <keyword0>очищаете</keyword0> вредный эффект, ваша следующая карта типа «<keyword1>Вода</keyword1>» разыгрывается дважды"
+  },
+  "content.talent.water.storm-surge.name": {
+    "reviewed": true,
+    "source": "Storm Surge",
+    "sourceHash": "e50434ad397248b9ae212ed8ba761b41fb6a253ab47fe22a0bc8230ae7f759c3",
+    "text": "Штормовой прилив"
+  },
+  "content.talent.water.storm-surge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2> enemies restore {{value0}} <keyword3>Mana</keyword3>",
+    "sourceHash": "b8bc51f770abef3e0b2f8d3a75e28a3497964305b2b8a68ce10026faf9b8342a",
+    "text": "Попадания типа «<keyword0>Вода</keyword0>» по <keyword1>оглушённым</keyword1> или <keyword2>замороженным</keyword2> врагам восстанавливают {{value0}} <keyword3>маны</keyword3>"
   },
   "controller.circle": {
     "reviewed": true,

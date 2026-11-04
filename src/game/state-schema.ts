@@ -25,6 +25,7 @@ const combatStateSchema = z
     riposte: z.boolean(),
     freeNature: z.boolean(),
     freeLight: z.boolean(),
+    springTide: z.boolean().optional(),
     freeCard: z.boolean(),
     oasisLeech: z.boolean(),
     acrobatReady: z.boolean(),

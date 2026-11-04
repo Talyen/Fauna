@@ -18,6 +18,14 @@
   --battle-hand-lift: 0px;
   --hand-fan-rest-drop: 12px;
   --battle-creature-width: var(--battle-fitted-width, var(--art-landscape-width));
+  --battle-hand-width: calc(var(--battle-creature-width) * 3 / 4);
+  --battle-hand-height: var(--battle-creature-width);
+  --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
+  --hand-side-clearance: calc(var(--battle-hand-width) * 0.32);
+  --battle-hand-available: calc(
+    100dvw - var(--page-inline-gutter) * 2 - var(--battle-pile-width) * 2 - var(--battle-dock-gap) * 2 -
+      var(--hand-side-clearance) * 2
+  );
   --battle-target-rail-width: clamp(180px, 14vw, 280px);
   --battle-readout-line-height: max(24px, calc(var(--text-secondary) * 1.4));
   gap: var(--screen-item-gap);
@@ -306,13 +314,13 @@
 }
 .battle-screen .health-forecast {
   position: absolute;
-  top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height) - 1px);
+  top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height));
   left: 0;
   width: 100%;
   height: var(--battle-health-height);
   margin: 0;
   pointer-events: none;
-  transform-origin: 50% calc(var(--battle-health-height) + 1px - var(--battle-creature-width) * 3 / 8);
+  transform-origin: 50% calc(var(--battle-health-height) - var(--battle-creature-width) * 3 / 8);
   transition: scale var(--motion-hover) ease-out;
 }
 /* Own the single combatant frame above the separate Health overlay. */
@@ -375,10 +383,10 @@
 /* Clip against the full artwork silhouette so the thin bar tapers at its corners. */
 .battle-screen .health-bar-surface {
   position: absolute;
-  inset: auto 1px 0;
-  height: calc(var(--battle-creature-width) * 3 / 4 - 2px);
+  inset: auto 0 0;
+  height: calc(var(--battle-creature-width) * 3 / 4);
   overflow: hidden;
-  border-radius: calc(var(--radius) - 1px);
+  border-radius: var(--radius);
 }
 .battle-screen .health-forecast .progress-track {
   position: absolute;
@@ -708,10 +716,6 @@
   color: var(--gold-pale);
 }
 
-/* The live wallet and toolbar require a clear row above both creature rows. */
-.battle-screen {
-  padding-top: var(--control-height);
-}
 .battle-gold {
   z-index: 10;
 }

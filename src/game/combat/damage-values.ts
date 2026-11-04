@@ -58,6 +58,8 @@ export function modifiedDamage(
       damage += source.block * (talentRule("block.sacred-shield").percent / 100);
     if (type === "stun" && hasTalent(state, "block.impact-guard"))
       damage += source.block * (talentRule("block.impact-guard").percent / 100);
+    if (type === "stun" && (target.block > 0 || stats.armor > 0) && hasTalent(state, "stun.static-charge"))
+      damage *= 1 + talentRule("stun.static-charge").percent / 100;
     if (
       type === "physical" &&
       hasTalent(state, "physical.finish-him") &&
@@ -103,6 +105,8 @@ export function modifiedDamage(
     if (stats.controlled === "stun" && hasTalent(state, "stun.exploit-weakness")) damage *= 2;
     if (type === "poison" && stats.bleed > 0 && hasTalent(state, "bleed.septic-shock"))
       damage *= 1 + talentRule("bleed.septic-shock").percent / 100;
+    if (type === "burn" && (stats.poison > 0 || stats.bleed > 0) && hasTalent(state, "burn.combustion"))
+      damage *= 1 + talentRule("burn.combustion").percent / 100;
   }
   if (!offensiveOnly && alliedTarget) {
     if (

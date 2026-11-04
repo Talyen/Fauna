@@ -10,7 +10,7 @@ import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
 import { promoteBufferedCards, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { playEnemyAbility } from "./enemy-action";
-import { passiveAmount } from "../progression";
+import { hasTalent, passiveAmount } from "../progression";
 import {
   ensureCombat,
   removeEffects,
@@ -61,6 +61,12 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
   if (allied && state.boons.includes("caravan-rug") && state.reserves.some((ally) => ally.id === unit.id))
     return;
   if (allied && state.boons.includes("winterseed") && ensureCombat(unit).controlled === "freeze") return;
+  if (
+    allied &&
+    hasTalent(state, "freeze.permafrost") &&
+    livingBattlefield(state, "enemy").some((enemy) => enemy.combat?.controlled === "freeze")
+  )
+    return;
   const retained = retainedBlock(unit, allied ? state : undefined);
   unit.block =
     allied && state.boons.includes("geode-anvil")

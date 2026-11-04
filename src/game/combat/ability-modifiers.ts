@@ -49,12 +49,17 @@ export function beforeAbility(
 }
 export function talentRepeat(
   state: GameState,
+  actor: Combatant,
   keywords: readonly ProgressionKeyword[],
   enemy: boolean,
   events: GameEvent[],
 ) {
   if (enemy) return false;
+  const stats = ensureCombat(actor);
+  const springTide = keywords.includes("water") && !!stats[talentRule("water.spring-tide").state];
+  if (springTide) stats[talentRule("water.spring-tide").state] = false;
   return (
+    springTide ||
     (keywords.includes("burn") && talentChance(state, "burn.flash-fire", events)) ||
     (keywords.includes("freeze") && talentChance(state, "freeze.winter-s-grasp", events)) ||
     (keywords.includes("nature") && talentChance(state, "nature.overgrowth", events)) ||

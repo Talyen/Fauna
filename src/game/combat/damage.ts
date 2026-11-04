@@ -40,6 +40,7 @@ import {
   damageRewards,
   poisonStun,
   bleedFreeze,
+  waterFreeze,
   waterFollowups,
   attackProcs,
   thornRetaliation,
@@ -67,7 +68,7 @@ export function shareDodge(
     else firstId = target.id;
     const stats = ensureCombat(target);
     if (stats.negate || stats.attackReflection || target.id === sharedNegate?.recipientId) continue;
-    const dodge = dodgeChance(state, target);
+    const dodge = dodgeChance(state, target, source);
     if (dodge > 0 && succeeds(state, dodge / 100, false, events)) return true;
   }
   return false;
@@ -446,7 +447,7 @@ export function* resolveHit(
           stats.burn > 0 &&
           state.boons.includes("solstice-concertina")
         ) &&
-        (dodge = dodgeChance(state, target)) > 0 &&
+        (dodge = dodgeChance(state, target, source)) > 0 &&
         succeeds(state, dodge / 100, !alliedTarget, events)))
   ) {
     if (
@@ -569,9 +570,16 @@ export function* resolveHit(
     type === "physical" &&
     ensureCombat(source)[talentRule("physical.riposte").state];
   const criticalProtected = alliedTarget && stats.armor > 0 && state.boons.includes("honeycomb-frame");
+  const savageryBonus =
+    playerAttack &&
+    type === "physical" &&
+    (stats.bleed > 0 || stats.controlled === "stun") &&
+    hasTalent(state, "physical.savagery")
+      ? talentRule("physical.savagery").percent / 100
+      : 0;
   const criticalChance = criticalProtected
     ? 0
-    : 0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
+    : 0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100 + savageryBonus;
   const critical =
     direct &&
     !criticalProtected &&
@@ -753,10 +761,11 @@ export function* resolveHit(
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (playerDirect && source.health > 0 && type === "water") {
-    yield* waterFollowups(context, erode);
+    yield* waterFollowups(context, erode, wasStunned);
   }
   if (policy.buildup && effectDamage > 0 && source.health > 0) {
     const bleedBefore = stats.bleed;
+    const burnBefore = stats.burn;
     const lightningForkTargets =
       playerAttack && type === "stun" && state.boons.includes("lightning-fork")
         ? battlefield(state, "enemy").filter(
@@ -797,6 +806,7 @@ export function* resolveHit(
     }
     yield* poisonStun(context, effectDamage);
     yield* bleedFreeze(context, effectDamage);
+    yield* waterFreeze(context, effectDamage);
     if (playerDirect && source.health > 0)
       yield* attackProcs(
         context,
@@ -804,6 +814,7 @@ export function* resolveHit(
         {
           partingCut: !!partingCut,
           bleedBefore,
+          burnBefore,
           leech: !!leech,
           blessedLeech,
           suppressed: statusResult.suppressed,
@@ -828,6 +839,7 @@ export function* resolveHit(
   if (!policy.buildup && effectDamage > 0) {
     yield* poisonStun(context, effectDamage);
     yield* bleedFreeze(context, effectDamage);
+    yield* waterFreeze(context, effectDamage);
   }
   if (playerHit && type === "burn" && dealt > 0 && target.health > 0 && state.boons.includes("ash-bowl")) {
     const removed = Math.min(stats.thorns, boonRule("ash-bowl").thorns);

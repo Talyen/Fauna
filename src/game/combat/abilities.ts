@@ -64,7 +64,7 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
   const encoreRepeat = encore(state, actor, events);
   const abilityRepeat =
     def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
-  const repeat = talentRepeat(state, keywords, enemy, events);
+  const repeat = talentRepeat(state, actor, keywords, enemy, events);
   const sundialRepeat =
     !enemy &&
     def.effect === "attack" &&

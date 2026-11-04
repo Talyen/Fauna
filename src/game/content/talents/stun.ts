@@ -9,4 +9,5 @@ export const STUN_TALENTS = [
   talent("stun.concussive-force", "Concussive Force", 3),
   talent("stun.stun-insight", "Stun Insight", 3),
   talent("stun.stun-surge", "Stun Surge", 3),
+  talent("stun.static-charge", "Static Charge", 3),
 ] as const;

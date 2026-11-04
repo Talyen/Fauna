@@ -7,4 +7,7 @@ export const BURN_TALENTS = [
   talent("burn.heat-exhaustion", "Heat Exhaustion", 2),
   talent("burn.smoldering", "Smoldering", 2),
   talent("burn.fire-resistance", "Fire Resistance", 3),
+  talent("burn.heat-haze", "Heat Haze", 3),
+  talent("burn.hearthfire", "Hearthfire", 3),
+  talent("burn.combustion", "Combustion", 3),
 ] as const;

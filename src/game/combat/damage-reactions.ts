@@ -180,7 +180,7 @@ export function* dodgeResponse(
   }
 }
 export function* blockDepletionRewards(
-  { state, source, target, events }: HitContext,
+  { state, source, target, type, events }: HitContext,
   { depletedBlock, blockSpent }: HitPayment,
   attack: boolean,
 ): Resolution<void> {
@@ -207,6 +207,16 @@ export function* blockDepletionRewards(
       });
     yield* reaction("triggerArmorBreak", state, depletion, events);
   }
+  if (
+    !alliedTarget &&
+    !isEnemy(source) &&
+    depletedBlock &&
+    attack &&
+    type === "physical" &&
+    source.health > 0 &&
+    hasTalent(state, "physical.juggernaut")
+  )
+    yield* reaction("grantArmor", state, source, talentRule("physical.juggernaut").amount, events);
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
     yield* reaction(
       "hit",
@@ -412,15 +422,44 @@ export function* bleedFreeze(
   if (amount <= 0) return;
   yield* applyResolvedStatus(state, source, target, amount, "freeze", events);
 }
+export function* waterFreeze(
+  { state, source, target, type, events }: HitContext,
+  damage: number,
+): Resolution<void> {
+  if (
+    type !== "water" ||
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    !hasTalent(state, "water.frigid-current")
+  )
+    return;
+  const amount = Math.round(damage / talentRule("water.frigid-current").divisor);
+  if (amount <= 0) return;
+  yield* applyResolvedStatus(state, source, target, amount, "freeze", events);
+}
 export function* waterFollowups(
-  { state, source, events }: HitContext,
+  { state, source, target, events, frozenAtStart }: HitContext,
   erode: (amount: number) => void,
+  wasStunned = false,
 ): Resolution<void> {
   if (hasTalent(state, "water.seafoam"))
     yield* reaction("grantBlock", state, source, talentRule("water.seafoam").amount, events);
   if (hasTalent(state, "water.erosion")) {
     erode(talentRule("water.erosion").amount);
   }
+  if (source.health > 0 && ensureCombat(target).armor === 0 && hasTalent(state, "water.living-water"))
+    yield* reaction("restoreHealth", source, talentRule("water.living-water").amount, events, false, state);
+  if (
+    source.health > 0 &&
+    (wasStunned ||
+      frozenAtStart ||
+      target.combat?.controlled === "stun" ||
+      target.combat?.controlled === "freeze") &&
+    hasTalent(state, "water.storm-surge")
+  )
+    yield* reaction("gainMana", state, talentRule("water.storm-surge").amount, events);
   if (talentChance(state, "water.cleansing-current", events))
     yield* reaction(
       "removeEffects",
@@ -438,12 +477,14 @@ export function* attackProcs(
   {
     partingCut,
     bleedBefore,
+    burnBefore = 0,
     leech,
     blessedLeech,
     suppressed,
   }: {
     partingCut: boolean;
     bleedBefore: number;
+    burnBefore?: number;
     leech: boolean;
     blessedLeech: boolean;
     suppressed: boolean;
@@ -485,8 +526,12 @@ export function* attackProcs(
       if (proc("nature.entangle"))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     }
-    if (type === "burn" && proc("burn.heat-exhaustion"))
-      yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
+    if (type === "burn") {
+      if (burnBefore > 0 && hasTalent(state, "burn.hearthfire"))
+        yield* reaction("restoreHealth", source, talentRule("burn.hearthfire").amount, events, false, state);
+      if (proc("burn.heat-exhaustion"))
+        yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
+    }
     if (type === "poison") {
       if (proc("poison.hemotoxin"))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
@@ -502,6 +547,8 @@ export function* attackProcs(
       if (proc("bleed.bloodrush")) draw(state, 1, events);
     }
     if (type === "light") {
+      if (source.block > 0 && hasTalent(state, "light.daybreak"))
+        yield* reaction("restoreHealth", source, talentRule("light.daybreak").amount, events, false, state);
       if (proc("light.scorching-light"))
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
       if (lost > 0 && proc("light.tithe")) gainGold(state, lost, events);

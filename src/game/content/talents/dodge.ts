@@ -9,4 +9,5 @@ export const DODGE_TALENTS = [
   talent("dodge.tailwind", "Tailwind", 3),
   talent("dodge.finding-rhythm", "Finding Rhythm", 3),
   talent("dodge.perfect-timing", "Perfect Timing", 3),
+  talent("dodge.veil-of-mist", "Veil of Mist", 3),
 ] as const;

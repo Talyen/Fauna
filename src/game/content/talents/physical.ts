@@ -8,4 +8,6 @@ export const PHYSICAL_TALENTS = [
   talent("physical.rupture", "Rupture", 2),
   talent("physical.riposte", "Riposte", 3),
   talent("physical.unrelenting", "Unrelenting", 3),
+  talent("physical.savagery", "Savagery", 3),
+  talent("physical.juggernaut", "Juggernaut", 3),
 ] as const;

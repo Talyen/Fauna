@@ -9,4 +9,5 @@ export const FREEZE_TALENTS = [
   talent("freeze.cold-resistance", "Cold Resistance", 3),
   talent("freeze.cryo-preservation", "Cryo-preservation", 3),
   talent("freeze.thaw-dividend", "Thaw Dividend", 3),
+  talent("freeze.permafrost", "Permafrost", 3),
 ] as const;

@@ -38,13 +38,26 @@ import {
   Gem,
   Battery,
   RotateCcw,
+  Feather,
+  MountainSnow,
+  Sunrise,
+  CloudLightning,
+  Orbit,
+  WandSparkles,
+  Crosshair,
+  Hammer,
+  ThermometerSun,
+  FlameKindling,
+  Sparkles,
+  Waves,
+  GlassWater,
 } from "lucide-react";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
 import { KEYWORDS, keywordLabel, availablePoints, canBuyTalent, type Keyword } from "../../game/progression";
-import { TALENTS } from "../../game/content";
+import { TALENTS, type TalentId } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/navigation/input";
@@ -66,6 +79,23 @@ const originalTalentSymbols = {
   leech: [Heart, Link],
   mana: [Gem, Battery],
 };
+const designedTalentSymbols: Partial<Record<TalentId, typeof Swords>> = {
+  "dodge.veil-of-mist": Feather,
+  "freeze.permafrost": MountainSnow,
+  "light.daybreak": Sunrise,
+  "stun.static-charge": CloudLightning,
+  "mana.astral-veil": Orbit,
+  "mana.arcane-discharge": WandSparkles,
+  "physical.savagery": Crosshair,
+  "physical.juggernaut": Hammer,
+  "burn.heat-haze": ThermometerSun,
+  "burn.hearthfire": FlameKindling,
+  "burn.combustion": Sparkles,
+  "water.frigid-current": Snowflake,
+  "water.storm-surge": Zap,
+  "water.spring-tide": Waves,
+  "water.living-water": GlassWater,
+};
 const talentSymbols = Object.fromEntries(
   KEYWORDS.flatMap((keyword) => {
     const talents = TALENTS.filter((talent) => talent.keyword === keyword);
@@ -76,7 +106,9 @@ const talentSymbols = Object.fromEntries(
         .flat()
         .filter((symbol) => !original.includes(symbol)),
     ];
-    return talents.map((talent, index) => [talent.id, symbols[index]!] as const);
+    return talents.map(
+      (talent, index) => [talent.id, designedTalentSymbols[talent.id] ?? symbols[index]!] as const,
+    );
   }),
 );
 const talentTrees = new Map(
