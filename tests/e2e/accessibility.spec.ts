@@ -24,7 +24,7 @@ test("home, settings, battle, pause and rewards meet automated accessibility che
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page, run());
   await scan(page, "home");
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   for (const name of ["Display", "Sound", "Battle"]) {
     await page.getByRole("tab", { name, exact: true }).click();
     await scan(page, `settings-${name.toLowerCase()}`);
