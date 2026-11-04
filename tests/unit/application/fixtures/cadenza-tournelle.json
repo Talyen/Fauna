@@ -1,5 +1,6 @@
 {
-  "version": 77,
+  "version": 78,
+  "draftStarted": true,
   "discovery": {
     "encountered": [
       "tournelle",

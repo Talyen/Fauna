@@ -10271,12 +10271,6 @@
     "sourceHash": "e58a3d38f341057cc29ce2ac2747965b9af5db24f72be1fc620a819149b0a553",
     "text": "Вернуться в забег"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
-    "text": "Настройки"
-  },
   "menu.talentPoints": {
     "forms": {
       "few": "Доступно {{count}} очка таланта",

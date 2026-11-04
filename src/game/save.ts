@@ -88,7 +88,9 @@ function validateCollection(state: GameState) {
   const encounters = state.discovery.encountered;
   const encountered = encounters.length > 1 ? new Set(encounters) : undefined;
   invalid((encountered !== undefined && encountered.size !== encounters.length) || !unique(state.boons));
-  invalid(state.phase === "draft" && state.boons.length > 0);
+  invalid(
+    state.phase === "draft" && (state.boons.length > 0 || (!state.draftStarted && state.selected.length > 0)),
+  );
   let hasRecruited = false;
   for (const { id } of SPECIES) {
     if (state.discovery.recruited[id] === undefined) continue;

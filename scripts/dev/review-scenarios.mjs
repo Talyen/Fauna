@@ -649,11 +649,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Open menu").click();
     await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   }
-  if (["recruit", "recruit-replacement", "recruit-team-preview", "inspection"].includes(scenario.name)) {
-    await button("Continue").click();
-  }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-    await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
       await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();

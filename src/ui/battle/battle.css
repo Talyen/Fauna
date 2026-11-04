@@ -711,3 +711,11 @@
   min-height: var(--control-height);
   color: var(--gold-pale);
 }
+
+/* The live wallet and toolbar require a clear row above both creature rows. */
+.battle-screen {
+  padding-top: var(--control-height);
+}
+.battle-gold {
+  z-index: 10;
+}

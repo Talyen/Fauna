@@ -23,9 +23,10 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>) {
       const hand = root.querySelector<HTMLElement>(".hand-section");
       const handTop = hand?.getBoundingClientRect().top ?? root.getBoundingClientRect().bottom;
       const clearance = parseFloat(css.getPropertyValue("--battle-hand-hover-clearance"));
+      const top = parseFloat(css.paddingTop) || 0;
       const availableHeight = Math.min(
-        root.clientHeight - parseFloat(css.paddingBottom),
-        handTop - root.getBoundingClientRect().top - clearance,
+        root.clientHeight - parseFloat(css.paddingBottom) - top,
+        handTop - root.getBoundingClientRect().top - clearance - top,
       );
       // Each rail keeps enough room for target rules and the symmetric controls beside the board.
       const minimumRail = parseFloat(getComputedStyle(rail).minWidth);

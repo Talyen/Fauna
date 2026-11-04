@@ -10271,12 +10271,6 @@
     "sourceHash": "5d6540b878a890951455ca976facdfd745840047ff31f6c9870744e5d1e0ef94",
     "text": "ランに戻る"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
-    "text": "設定"
-  },
   "menu.talentPoints": {
     "forms": {
       "other": "使用可能なタレントポイント：{{count}}"

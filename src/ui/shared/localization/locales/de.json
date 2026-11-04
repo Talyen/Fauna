@@ -10271,12 +10271,6 @@
     "sourceHash": "4010e86ff86b951af79633c55754279c8dd8b28a022796b6a6c1dbfdd57b6609",
     "text": "Zurück zum Lauf"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "76a8d3ab8aa74e0e80669139101dfc48eda2ae1648a5a32bb285938db20fa384",
-    "text": "Einstellungen"
-  },
   "menu.talentPoints": {
     "forms": {
       "one": "{{count}} Talentpunkt verfügbar",

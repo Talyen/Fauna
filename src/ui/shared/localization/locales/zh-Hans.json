@@ -10271,12 +10271,6 @@
     "sourceHash": "e6f72320c944f81ef62e47b3d8c1748447988ecd050a1276c7fca60d8c6217ca",
     "text": "返回冒险"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
-    "text": "设置"
-  },
   "menu.talentPoints": {
     "forms": {
       "other": "可用天赋点：{{count}}"

@@ -10271,12 +10271,6 @@
     "sourceHash": "2a520a6739696e826ce6c521483694a310eb74331e912ed9efa3fe906a0171d6",
     "text": "Voltar à jornada"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "c817944288e8f67f488da20dbd3a5b7845a6d027284f85e660c2ea4297c85d2a",
-    "text": "Configurações"
-  },
   "menu.talentPoints": {
     "forms": {
       "many": "{{count}} pontos de talento disponíveis",

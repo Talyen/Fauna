@@ -10271,12 +10271,6 @@
     "sourceHash": "be9a4d430460a04b31ff17efd6ce7992223fad9f0e18d3c8063b3ab9e5efe679",
     "text": "Volver a la aventura"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "c9427be40e03a6fc43788b83d61904cfecc7f4117960099f7d135add90f890d2",
-    "text": "Ajustes"
-  },
   "menu.talentPoints": {
     "forms": {
       "many": "{{count}} puntos de talento disponibles",

@@ -6,9 +6,9 @@ import { act, cleanup, render, screen, waitFor, within } from "@testing-library/
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
-import { encodeSave } from "../../../src/game/save";
+import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept, run, winBattle, merchantDestination } from "../../support/game";
-import { createGame } from "../../../src/game/engine";
+import { createGame, dispatch } from "../../../src/game/engine";
 import { App } from "../../../src/ui/App";
 
 screenTestEnvironment();
@@ -87,6 +87,42 @@ it("returns from starter selection without changing offers or committed choices"
   } finally {
     cleanup();
     await session.dispose();
+  }
+});
+
+it("resumes an unchosen starter draft after restarting and can end it", async () => {
+  const platform = createBrowserPlatform(localStorage);
+  const first = createSession(platform, 7);
+  await first.load();
+  const user = userEvent.setup();
+  render(<App session={first} />);
+  await user.click(screen.getByRole("button", { name: "Play" }));
+  const started = first.store.getState().game;
+  expect(started.draftStarted).toBe(true);
+  const replacement = dispatch(started, { type: "newRun", seed: 123 });
+  expect(replacement.accepted).toBe(false);
+  expect(replacement.state).toBe(started);
+  const picked = accept(started, { type: "draft", species: started.starterOffers[0]! });
+  expect(() => decodeSave(JSON.stringify({ ...picked, draftStarted: false }))).toThrow();
+  await user.click(screen.getByRole("button", { name: "Back" }));
+  expect(screen.getByRole("button", { name: "Continue" })).toBeTruthy();
+  cleanup();
+  await first.dispose();
+
+  const resumed = createSession(platform, 99);
+  await resumed.load();
+  render(<App session={resumed} />);
+  try {
+    expect(screen.getByRole("button", { name: "Continue" })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(resumed.store.getState().game).toEqual(started);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    await user.click(screen.getByRole("button", { name: "End Run" }));
+    expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
+    expect(resumed.store.getState().game.draftStarted).toBe(false);
+  } finally {
+    cleanup();
+    await resumed.dispose();
   }
 });
 

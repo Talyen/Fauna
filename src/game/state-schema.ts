@@ -143,6 +143,7 @@ const shared = z.object({
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
+  draftStarted: z.boolean(),
   team: z.array(creature).max(3),
   reserves: z.array(creature).max(4),
   cards: z

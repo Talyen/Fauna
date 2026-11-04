@@ -10271,12 +10271,6 @@
     "sourceHash": "8fd5ce88d669c070d8efabb94eb76d6a5edc493aea95b7c9bfd0fed7362ea301",
     "text": "Retour à la partie"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "47a61800549bfca08b4827359eddae0ad45c2b0211ec14aa9864e229b439a982",
-    "text": "Paramètres"
-  },
   "menu.talentPoints": {
     "forms": {
       "many": "{{count}} points de talent disponibles",
