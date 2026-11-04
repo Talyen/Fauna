@@ -49,10 +49,8 @@
   height: 20px;
   flex: none;
 }
-.effect-shine-icon-fill {
-  width: 100%;
-  height: 100%;
-  background-clip: border-box;
+.effect-shine-icon-gradient {
+  animation: effect-icon-shine 4.8s linear infinite;
 }
 :is(.action-card, .creature-card) > .effect-shine-border {
   inset: calc(-1 * var(--border-art-width));
@@ -96,21 +94,31 @@
     background-position: 0% 50%;
   }
 }
+@keyframes effect-icon-shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .effect-shine-border,
-  .effect-shine-text {
+  .effect-shine-text,
+  .effect-shine-icon-gradient {
     animation: none;
     transition: none;
   }
 }
 @supports not (background-clip: text) {
-  .effect-shine-text:not(.effect-shine-icon-fill) {
+  .effect-shine-text {
     color: var(--foreground);
     background-image: none !important;
   }
 }
 
-body:has(.effect-backdrop[data-effects-active="false"]) :is(.effect-shine-border, .effect-shine-text),
-[inert] :is(.effect-shine-border, .effect-shine-text) {
+body:has(.effect-backdrop[data-effects-active="false"])
+  :is(.effect-shine-border, .effect-shine-text, .effect-shine-icon-gradient),
+[inert] :is(.effect-shine-border, .effect-shine-text, .effect-shine-icon-gradient) {
   animation-play-state: paused;
 }

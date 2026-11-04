@@ -1,4 +1,12 @@
-import { useId, type CSSProperties, type ReactNode, type Ref } from "react";
+import {
+  cloneElement,
+  useId,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+  type SVGProps,
+} from "react";
 import { Button, type ButtonProps } from "../../../components/ui/button";
 import type { KeywordId } from "../../../game/keywords";
 import { effectPalette, type EffectTone } from "./palettes";
@@ -56,28 +64,27 @@ function shineGradient(keywords: readonly KeywordId[], tone?: EffectTone, readab
   return `linear-gradient(in oklab 90deg, ${band}, ${band}, ${colors[0]})`;
 }
 
-/** Paint the icon mask with the same CSS gradient and motion policy as short labels. */
+/** Paint the icon strokes with the same palette as short labels. */
 export function ShineIcon({
   children,
   keywords = [],
 }: {
-  children: ReactNode;
+  children: ReactElement<SVGProps<SVGSVGElement>>;
   keywords?: readonly KeywordId[];
 }) {
-  const mask = useId();
+  const gradient = useId();
+  const colors = effectPalette(keywords).text;
+  const stops = [...colors, "var(--effect-highlight)", ...colors, "var(--effect-highlight)", colors[0]!];
   return (
     <svg className="effect-shine-icon" viewBox="0 0 24 24" aria-hidden="true">
       <defs>
-        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-          <g color="var(--effect-highlight)">{children}</g>
-        </mask>
+        <linearGradient id={gradient} className="effect-shine-icon-gradient" x1="0" x2="200%" y1="0" y2="0">
+          {stops.map((color, index) => (
+            <stop key={index} offset={`${(index / (stops.length - 1)) * 100}%`} stopColor={color} />
+          ))}
+        </linearGradient>
       </defs>
-      <foreignObject width="24" height="24" mask={`url(#${mask})`}>
-        <div
-          className="effect-shine-text effect-shine-icon-fill"
-          style={{ backgroundImage: shineGradient(keywords) }}
-        />
-      </foreignObject>
+      {cloneElement(children, { stroke: `url(#${gradient})` })}
     </svg>
   );
 }

@@ -117,10 +117,12 @@ describe("artwork-first inspection", () => {
         expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(rules);
         expect(details.container.textContent).toBe(`GuardianOvergrowth${rules}`);
         expect(details.container.querySelector(".effect-shine-icon")).toBeTruthy();
-        for (const selector of [".creature-trait-name .effect-shine-text", ".effect-shine-icon-fill"])
-          expect(details.container.querySelector(selector)?.getAttribute("style")).toContain(
-            "--keyword-block",
-          );
+        expect(
+          details.container.querySelector(".creature-trait-name .effect-shine-text")?.getAttribute("style"),
+        ).toContain("--keyword-block");
+        expect(
+          details.container.querySelector(".effect-shine-icon stop")?.getAttribute("stop-color"),
+        ).toContain("--keyword-block");
         expect(store.getState().game).toBe(game);
       }
       expect(command).not.toHaveBeenCalled();
