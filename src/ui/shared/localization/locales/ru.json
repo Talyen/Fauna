@@ -11059,12 +11059,6 @@
     "sourceHash": "3caa8e48187f0c3e9072200be3bf2d205ab1aad0985300e8da4a528f355623b8",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.keywordXp": {
-    "reviewed": true,
-    "source": "{{keyword}} XP",
-    "sourceHash": "e8f9f158698f1ddb7c38f90a7e4d5354576d292af616dc1c2266575b49ebe31d",
-    "text": "Опыт: {{keyword}}"
-  },
   "talents.pages": {
     "reviewed": true,
     "source": "Talent pages",
@@ -11132,11 +11126,5 @@
     "source": "{{name}}, unlocked",
     "sourceHash": "d2180684ec91fc1402625b13e8c27d85ce5e13b545c02d2256a3ac27c6cf173e",
     "text": "{{name}}, открыто"
-  },
-  "talents.xpProgress": {
-    "reviewed": true,
-    "source": "{{current}} / {{required}} XP",
-    "sourceHash": "cdfa45bc6aab421ece7e111268bab3b728a7d7813c5e27918b18425ff53e34f4",
-    "text": "{{current}} / {{required}} опыта"
   }
 }
