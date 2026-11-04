@@ -947,9 +947,6 @@
   "talents.detailTitle": {
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.pages": {
-    "text": "Talent pages"
-  },
   "talents.pointsAvailable": {
     "forms": {
       "one": "{{count}} point available",

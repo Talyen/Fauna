@@ -11050,12 +11050,6 @@
     "sourceHash": "59c29e6c48d4b7e49e852a416ad5c8bbaec0545cdea3f7d56b8635da40bee978",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "970014842449a55625201e6831a300a7b258adefda4387ffd335a2e4e656c79e",
-    "text": "タレントページ"
-  },
   "talents.pointsAvailable": {
     "forms": {
       "other": "使用可能なポイント：{{count}}"
