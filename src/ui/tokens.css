@@ -159,12 +159,12 @@
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
   --tooltip-travel: 2px;
   --feedback-duration: 1100ms;
-  --feedback-text: calc(37.8px * var(--text-scale, 1));
+  --feedback-text: calc(34px * var(--text-scale, 1));
   --feedback-pop-scale: 2;
   --feedback-hold-scale: 1.8;
   --feedback-icon-gap: 6px;
   --feedback-critical-radius: 8px;
-  --feedback-rise: 240px;
+  --feedback-rise: 200px;
   --feedback-reposition: 150ms;
   --feedback-outline: 1.5px;
   --feedback-critical: #fcd34d;

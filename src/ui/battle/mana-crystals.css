@@ -6,7 +6,6 @@
   height: var(--control-height);
   padding: 4px;
   background: transparent;
-  cursor: help;
 }
 .mana-gem {
   width: var(--mana-crystal-size);

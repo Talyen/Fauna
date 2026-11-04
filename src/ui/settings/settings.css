@@ -62,7 +62,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: var(--control-height);
-  cursor: pointer;
+  cursor: inherit;
 }
 .settings-screen {
   max-width: var(--settings-screen-width);
