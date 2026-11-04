@@ -10,7 +10,7 @@ The first journey starts with one creature chosen from three seeded offers in `F
 
 Later journeys draft up to three distinct collected ordinary species. Each round offers up to three species not already chosen. When fewer than three ordinary species are collected, draft only that many; offers never repeat a species to fill space. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. An early loss cannot prevent another journey.
 
-Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit starts the journey automatically, including when resuming a completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
+Starting the draft commits its offers; returning to the main menu or restarting preserves them even before the first choice. Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit starts the journey automatically, including when resuming a completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
 
 ### Formation
 

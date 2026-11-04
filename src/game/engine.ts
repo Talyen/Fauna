@@ -45,6 +45,7 @@ export function createGame(seed = 1): GameState {
     wins: 0,
     selected: [],
     starterOffers: [],
+    draftStarted: false,
     reserves: [],
     keywordXP: {},
     battleXP: {},
@@ -99,6 +100,8 @@ function resolve(
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
   )
     return reject(state, "Choose a valid journey seed.");
+  if (command.type === "newRun" && state.phase === "draft" && state.draftStarted)
+    return reject(state, "End the current journey first.");
   if (
     command.type === "draft" &&
     (!state.starterOffers.includes(command.species) ||
@@ -170,7 +173,7 @@ function resolve(
     (!KEYWORDS.includes(command.keyword) || !state.talents.some((id) => id.startsWith(`${command.keyword}.`)))
   )
     return reject(state, "There are no talents to reset in this category.");
-  if (command.type === "abandon" && state.phase === "draft" && state.selected.length === 0)
+  if (command.type === "abandon" && state.phase === "draft" && !state.draftStarted)
     return reject(state, "There is no journey to end.");
   const visit = state.support;
   if (command.type === "enterSupport" && (!canVisitMerchant(state) || !visit || visit.id !== command.visit))
@@ -198,6 +201,7 @@ function resolve(
     draft.revision++;
     switch (command.type) {
       case "draft": {
+        draft.draftStarted = true;
         draft.selected.push(command.species);
         offerStarters(draft);
         break;
@@ -385,6 +389,7 @@ function resolve(
         const fresh = createGame(command.seed);
         Object.assign(draft, fresh, {
           revision: state.revision + 1,
+          draftStarted: true,
           rng: command.seed >>> 0,
           discovery: {
             encountered: [...state.discovery.encountered],
@@ -402,6 +407,7 @@ function resolve(
         draft.support = null;
         draft.expedition.recruit = null;
         if (draft.phase === "draft") {
+          draft.draftStarted = false;
           draft.selected = [];
           offerStarters(draft);
           break;

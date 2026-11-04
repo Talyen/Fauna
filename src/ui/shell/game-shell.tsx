@@ -60,7 +60,6 @@ export function GameShell({ session }: { session: Session }) {
     collectionControls: Controls = useRef(null);
   const [preferences, updatePreferences] = useDevicePreferences();
   const { audio, autoEndTurn, controller } = preferences;
-  const [draftStarted, setDraftStarted] = useState(false);
   const [navigationState, transition] = useReducer(
     (state: Parameters<typeof shellNavigation>[0], action: Parameters<typeof shellNavigation>[1]) =>
       measurePerformance("navigation-intent", () => shellNavigation(state, action), { action: action.type }),
@@ -81,9 +80,7 @@ export function GameShell({ session }: { session: Session }) {
   const controllerKind =
     controller === "auto" ? detectedController : controller === "steam-deck" ? "xbox" : controller;
   const controllerPrompts = localizedControllerPrompts(controllerKind, i18n);
-  const active =
-    !["victory", "defeat"].includes(game.phase) &&
-    (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
+  const active = !["victory", "defeat"].includes(game.phase) && (game.phase !== "draft" || game.draftStarted);
   const replacement = pendingReplacement(game);
   const surface = activeSurface(navigationState, !!replacement, view.overlayActive || view.cloud.blocking);
   const { modal, menu, inspection, paused } = surface;
@@ -324,7 +321,6 @@ export function GameShell({ session }: { session: Session }) {
         if (!home || active) {
           transition({ type: "play" });
         } else if (send({ type: "newRun", seed: Date.now() >>> 0 })) {
-          setDraftStarted(true);
           transition({ type: "play" });
         }
       }}
@@ -333,7 +329,6 @@ export function GameShell({ session }: { session: Session }) {
       onEndJourney={() => {
         if (send({ type: "abandon" })) {
           focus.rememberAction(null);
-          setDraftStarted(false);
           transition({ type: game.phase === "draft" ? "home" : "play" });
         }
       }}
