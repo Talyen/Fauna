@@ -33,7 +33,7 @@ it.each(["home", "pause"] as const)(
         for (const [exit, back] of ["Escape", "Back", "Open menu"].entries()) {
           // Retain every page/exit pair and both origins per page without their Cartesian product
           if (((index + exit) % 2 === 0 ? "home" : "pause") !== origin) continue;
-          const action = page === "Settings" && origin === "home" ? "Options" : page;
+          const action = page === "Settings" ? "Options" : page;
           act(() => screen.getByRole("button", { name: action }).focus());
           await user.keyboard("{Enter}");
           expect(screen.getByRole("heading", { name: page })).toBeTruthy();
@@ -135,7 +135,7 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
   try {
     await user.click(screen.getByRole("button", { name: "Play" }));
     const revision = session.store.getState().game.revision;
-    for (const dismiss of ["Continue", "Escape", "outside"]) {
+    for (const dismiss of ["Return to Run", "Escape", "outside"]) {
       const opener = screen.getByRole("button", { name: "Open menu" });
       expect(opener.getAttribute("aria-expanded")).toBe("false");
       await user.click(opener);
@@ -145,12 +145,13 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
         within(menu)
           .getAllByRole("button")
           .map((button) => button.textContent?.trim()),
-      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Settings", "End journey", "Save & quit"]);
+      ).toEqual(["Return to Run", "Main Menu", "Collection", "Talents", "Options", "End Run", "Quit"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();
-      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue" }));
-      if (dismiss === "Continue") await user.click(screen.getByRole("button", { name: "Continue" }));
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Return to Run" }));
+      if (dismiss === "Return to Run")
+        await user.click(screen.getByRole("button", { name: "Return to Run" }));
       else if (dismiss === "Escape") await user.keyboard("{Escape}");
       else await user.click(document.body);
       await waitFor(() => expect(screen.queryByRole("dialog", { name: "Pause menu" })).toBeNull());
@@ -225,7 +226,7 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     expect(session.store.getState().game).toBe(bought);
     await user.keyboard("{Escape}{Escape}");
     cue(false, "pause");
-    await user.click(screen.getByRole("button", { name: "Main menu" }));
+    await user.click(screen.getByRole("button", { name: "Main Menu" }));
     cue(false, "home");
     await user.click(screen.getByRole("button", { name: "Talents" }));
     await user.click(screen.getByRole("button", { name: "Physical talents" }));

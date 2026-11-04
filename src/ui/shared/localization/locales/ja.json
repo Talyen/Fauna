@@ -10193,11 +10193,11 @@
     "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
     "text": "続ける"
   },
-  "menu.endJourney": {
+  "menu.endRun": {
     "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "c963abcb44670e530b94c63aec5760ef88f93de9d59a34b79eb7f93699feaab5",
-    "text": "旅を終える"
+    "source": "End Run",
+    "sourceHash": "829378b5594ebcb9d8c4a9115bea9e7609aea48a4c2e48529b64bf34b9850acf",
+    "text": "ランを終了"
   },
   "menu.logo": {
     "reviewed": true,
@@ -10209,6 +10209,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
+    "text": "メインメニュー"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "3a43dd98cd1ffa72a04df53b7d1a58f351abd4a72ba23ac5f1fab370117381a2",
     "text": "メインメニュー"
   },
   "menu.options": {
@@ -10229,17 +10235,23 @@
     "sourceHash": "0c97f1e1514b1c140bfd1b26ffdbe71ba2d0c0a8fad3399e313de39a018deca8",
     "text": "プレイ"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "8fd7233856448a954cd1b94badcc269ee590889501d8e453c5222b2d1ba96983",
-    "text": "保存して終了"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "8391bd7569ff670ca43acfea3007279521bee7f20e260b2afb3ae8fddcb8d958",
     "text": "終了"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "ae79a71e9ff41af743df2ca8f4d4e011e61d5f0acb709b963cc6ef0beb5f64fe",
+    "text": "戦闘に戻る"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "5d6540b878a890951455ca976facdfd745840047ff31f6c9870744e5d1e0ef94",
+    "text": "ランに戻る"
   },
   "menu.settings": {
     "reviewed": true,

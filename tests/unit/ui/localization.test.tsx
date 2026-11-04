@@ -1024,6 +1024,7 @@ it("distinguishes removed effects, empty removals and cleansed buildup", () => {
 it("changes menu messages and accessible counts without replacing the focused action", () => {
   const actions = {
     home: true,
+    battle: false,
     active: false,
     hasBoons: false,
     talentPoints: 2,

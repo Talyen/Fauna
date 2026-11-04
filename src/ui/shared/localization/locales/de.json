@@ -10193,11 +10193,11 @@
     "sourceHash": "f207404f10e031ca0f3dc006b4d8b1cb40de5ab3fe269bc852bf89965cfa2636",
     "text": "Weiter"
   },
-  "menu.endJourney": {
+  "menu.endRun": {
     "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "ea59d24b687011d5f84a9d2fd4fddf723ad1e4ac05f0a968a9d3e609159cfd8a",
-    "text": "Reise beenden"
+    "source": "End Run",
+    "sourceHash": "67b68844baa710aa7512906924e697fd30690963f7d3291921152ad4398db3d8",
+    "text": "Lauf beenden"
   },
   "menu.logo": {
     "reviewed": true,
@@ -10209,6 +10209,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "7e108822e7929a01d2aa6792234246fe437e2f34c10d618d19c40b6e2a3b015c",
+    "text": "Hauptmenü"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "50ffe7d424943ecdc8ae4773cfc0c81a2bf5d07511b4050bddf510de594ab740",
     "text": "Hauptmenü"
   },
   "menu.options": {
@@ -10229,17 +10235,23 @@
     "sourceHash": "6d9985e1ac0beb47eb3067288bf1a514c5a46d82fdfd06392074f30e95d4c6a8",
     "text": "Spielen"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "50742b43bdba6e47b98b2de5e8b2b4edfc270b5d5c785ce4173bc4dbf7e881b3",
-    "text": "Speichern und beenden"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "8b376c7889af6d5899d49b21df7937663573ca2b99eda3671ed5b66001980c20",
     "text": "Beenden"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "0999102c5c1026cf2e134b7f866ba48363199210ab0ae69583f8eaed423ee63b",
+    "text": "Zurück zum Kampf"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "4010e86ff86b951af79633c55754279c8dd8b28a022796b6a6c1dbfdd57b6609",
+    "text": "Zurück zum Lauf"
   },
   "menu.settings": {
     "reviewed": true,

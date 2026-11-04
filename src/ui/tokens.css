@@ -117,10 +117,8 @@
   --menu-icon-collection: var(--gold-light);
   --menu-icon-boons: #f472b6;
   --menu-icon-settings: #a1a1aa;
-  --menu-icon-end: var(--destructive-text);
-  --menu-icon-home: var(--primary);
-  --menu-icon-quit: #fb923c;
-  --menu-icon-quit-home: #fb7185;
+  --menu-icon-end: #f87171;
+  --menu-icon-quit: #fb7185;
   --menu-icon-skip: #a3e635;
   --icon-size: 20px;
   --empty-icon-size: 24px;

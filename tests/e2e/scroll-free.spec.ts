@@ -217,7 +217,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         await page.keyboard.press("Escape");
       }
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Settings", exact: true }).click();
+      await page.getByRole("button", { name: "Options", exact: true }).click();
       for (const name of ["Display", "Sound", "Battle"]) {
         await page.getByRole("tab", { name, exact: true }).click();
         const panel = page.getByRole("tabpanel");
@@ -237,9 +237,9 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         });
       }
       await page.keyboard.press("Escape");
-      await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+      await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
       expect(await state(page)).toEqual(before);
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
+      await page.getByRole("button", { name: "Return to Battle", exact: true }).click();
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
     });
 

@@ -67,7 +67,7 @@
   border-color: var(--border);
 }
 .game-button:is(.control-outline, .control-ghost).end-journey {
-  color: var(--destructive-text);
+  color: var(--menu-icon-end);
 }
 .game-button:is(.control-outline, .control-ghost):not(:disabled):not([aria-disabled="true"]):active {
   background: var(--accent);

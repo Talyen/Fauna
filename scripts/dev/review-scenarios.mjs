@@ -527,7 +527,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       await next.click();
     await opener.click();
   } else if (["settings", "collection", "talents"].includes(menu)) {
-    await button(menu[0].toUpperCase() + menu.slice(1)).click();
+    await button(menu === "settings" ? "Options" : menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name === "starter") {
     await page.evaluate(() => {
       window.reviewOriginalNow = Date.now;
@@ -663,7 +663,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "journey-results") {
     await button("Open menu").click();
-    await button("End journey").click();
+    await button("End Run").click();
     await expect(page.getByRole("heading", { name: "Returned home", exact: true })).toBeVisible();
   }
   if (scenario.name === "inspection") {

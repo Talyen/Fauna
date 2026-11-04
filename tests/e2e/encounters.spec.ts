@@ -31,7 +31,7 @@ for (const [width, enlarged, encounter] of [
     await resume(page);
     if (enlarged) {
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Settings", exact: true }).click();
+      await page.getByRole("button", { name: "Options", exact: true }).click();
       await page.getByRole("radio", { name: "125%", exact: true }).click();
       await page.keyboard.press("Escape");
       await page.keyboard.press("Escape");

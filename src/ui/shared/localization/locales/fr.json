@@ -10193,11 +10193,11 @@
     "sourceHash": "ca17cb18acf33b58e3753f2e31ba4c45f835495d9e4cb4a3d3ae210d42a624df",
     "text": "Continuer"
   },
-  "menu.endJourney": {
+  "menu.endRun": {
     "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "03c14ce62b6058fe565ced5260031012a5f1c8621b5245424352b51549ce02c2",
-    "text": "Terminer le voyage"
+    "source": "End Run",
+    "sourceHash": "b046e29485dc314739bd53cc4a8722b0bd045eee6032a793298d93533aab0a8c",
+    "text": "Terminer la partie"
   },
   "menu.logo": {
     "reviewed": true,
@@ -10209,6 +10209,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "bbc7b126f0ac48c0f8bde64e65551f08c96092d8dd73278e441aea3fe27b0332",
+    "text": "Menu principal"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "ea217279138cd5323a5a6675b0dd5771887fff667c3433c289d6a16d0a35120d",
     "text": "Menu principal"
   },
   "menu.options": {
@@ -10229,17 +10235,23 @@
     "sourceHash": "7275b7a32408b5bed0e34c040c37ea59ed8e3ce31b39c90b9e0f01de7158f826",
     "text": "Jouer"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "e0de69190ac43c7345f16eb59bd0e9569629a2209c1c500aa6a894f8092fa23b",
-    "text": "Enregistrer et quitter"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "07d7b1daff4afb38613210c4744302eed93d36bd833b35e96ab0fd95ba0a2d8e",
     "text": "Quitter"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "700ba6c94d72e51b951c7260deef4611113b58a6ae96a59e770a63239e5b6805",
+    "text": "Retour au combat"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "8fd5ce88d669c070d8efabb94eb76d6a5edc493aea95b7c9bfd0fed7362ea301",
+    "text": "Retour à la partie"
   },
   "menu.settings": {
     "reviewed": true,

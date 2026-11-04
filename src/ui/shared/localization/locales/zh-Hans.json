@@ -10193,11 +10193,11 @@
     "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
     "text": "继续"
   },
-  "menu.endJourney": {
+  "menu.endRun": {
     "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "18122ff0bba80be682e445146b5da59fc7e8e39e5e7e30808a0236c8ec511a96",
-    "text": "结束旅程"
+    "source": "End Run",
+    "sourceHash": "25fd2073c2750b41c620e9c6478b9b32677843015b43ca3ee1c59051db74b9d0",
+    "text": "结束冒险"
   },
   "menu.logo": {
     "reviewed": true,
@@ -10209,6 +10209,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
+    "text": "主菜单"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "4511f198080d5ed974ac9148fd067ae3aeb1127424f6ed82077a5f86ae581f66",
     "text": "主菜单"
   },
   "menu.options": {
@@ -10229,17 +10235,23 @@
     "sourceHash": "0881cb77235d342cc58f16666c67adb5f2f094c5466182037001953a2b5725e0",
     "text": "开始"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "90e80d85f4a395a7c0c1ab89774164efc2be0984c1b7c7785ec3e1698cf7fa49",
-    "text": "保存并退出"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "600f8be57c03ea62d5828b1845eb0007b255d644cf9662df258a652cbbe97a79",
     "text": "退出"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "5068f254f814999f51be4f8fcce5edfea27a9be966e1153d5793baf00d69191a",
+    "text": "返回战斗"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "e6f72320c944f81ef62e47b3d8c1748447988ecd050a1276c7fca60d8c6217ca",
+    "text": "返回冒险"
   },
   "menu.settings": {
     "reviewed": true,
