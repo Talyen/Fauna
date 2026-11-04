@@ -257,29 +257,11 @@
     "sourceHash": "ba814e3c469cc951d4875fbf25d5fc5d1f69d177b15cf0fa93484cf29d562d22",
     "text": "{{name}} +{{level}}"
   },
-  "collection.all": {
+  "collection.fauna": {
     "reviewed": true,
-    "source": "All",
-    "sourceHash": "fa20407d8c2f40e7db9e834bc0c4b295d24e8c8ff6df5dd492b24223daf9398c",
-    "text": "全部"
-  },
-  "collection.collected": {
-    "reviewed": true,
-    "source": "Collected",
-    "sourceHash": "6bda57f283d2a73e2ae08d1a49280c8c48de1d70a236fc95d19561adcfd81897",
-    "text": "已收集"
-  },
-  "collection.empty": {
-    "reviewed": true,
-    "source": "No creatures in this view",
-    "sourceHash": "9f72b8b03dead1e499cc23961ed573098ee2d20fef7a0098d1b89387b3ebbdd2",
-    "text": "此视图中没有生物"
-  },
-  "collection.filter": {
-    "reviewed": true,
-    "source": "Collection filter",
-    "sourceHash": "1dcdd4fec608e53d3b44a24903bbfbe88cc706b6c30a7d42e66b07ab589b3dde",
-    "text": "收藏筛选"
+    "source": "Fauna",
+    "sourceHash": "f7b760775aa6246a69e7cd67f751682e2c150dec1ab5a2967249e4761e8b6dd7",
+    "text": "Fauna"
   },
   "collection.inspect": {
     "reviewed": true,
@@ -305,11 +287,11 @@
     "sourceHash": "d225fb3a55baeb45db3accb482c5e3d31c0c8f12a3b1be2d6bd00c8d6834aa9f",
     "text": "{{name}}：{{rank}} / {{maximum}} 星"
   },
-  "collection.uncollected": {
+  "collection.views": {
     "reviewed": true,
-    "source": "Uncollected",
-    "sourceHash": "08b7f2067ffe90d5e4dafdbff61184c588db331d404efa8638ece95592d4a8d2",
-    "text": "未收集"
+    "source": "Collection views",
+    "sourceHash": "334848e99c4e79155f7f91005aff34af6977e1f628bfff6aac8152d16bb65fc8",
+    "text": "收藏视图"
   },
   "common.cancel": {
     "reviewed": true,

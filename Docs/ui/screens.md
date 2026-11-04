@@ -31,7 +31,7 @@ Collection, Talents, Settings and Glossary open full screen from either menu, in
 | Full-roster recruitment / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                                |
 | Other journey screens                                   | Return home without reversing committed gameplay                                                                   |
 
-Inspection has no visible Back button; X/outside click closes the entire Dialog overlay. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
+Inspection has no visible Back button; X/outside click closes the entire Dialog overlay. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same tab, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
 
 Journey headings offer read-only Deck inspection; closing restores the Deck opener. During drafting, Deck reflects already chosen starters. [Screen headings](#screen-headings) own geometry and control placement.
 
@@ -75,13 +75,11 @@ Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and con
 
 ## Collection
 
-Use a centered title, All/Collected/Uncollected tabs, a gallery and pagination. Order collected species first. Collected artwork shows five external progress stars; name/details appear on hover/focus and activation opens the shared inspector. Uncollected artwork rests in grayscale, with no tooltip, kit details or unlock requirement. Browsing never grants discovery.
+Use a centered title, Fauna and Boons tabs, a gallery and pagination. Fauna orders collected species first. Collected artwork shows five external progress stars and activation opens the shared inspector. Uncollected artwork rests in grayscale and cannot be activated. All creatures show their name and passive details on hover or intentional focus; uncollected creatures use their base passive. Browsing never grants discovery.
 
-Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest; it cannot be activated. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
+Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
-Reserve two gallery rows and a footer slot. Measured width chooses one to four columns independently of item count before reducing artwork. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the filter when neither remains.
-
-Each filter remembers its first visible creature while mounted. Resize keeps that anchor on a visible page; shorter lists clamp the page. Inspection returns to the same filter, page and creature focus. Paging is instant.
+Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows with standard section gaps around the grid and reserve a footer slot. Measured width chooses one to four columns independently of item count before reducing artwork. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
 
 ## Talents
 

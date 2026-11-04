@@ -257,29 +257,11 @@
     "sourceHash": "5c38a8e78dbddaf89d6314288f037f23fbb3f7f92924459447506f24c267852e",
     "text": "{{name}} +{{level}}"
   },
-  "collection.all": {
+  "collection.fauna": {
     "reviewed": true,
-    "source": "All",
-    "sourceHash": "1ade44d8a42d370f1281f9ce61dd41bd85b5f58fdd0bc06a8e869268339f1b9c",
-    "text": "Tout"
-  },
-  "collection.collected": {
-    "reviewed": true,
-    "source": "Collected",
-    "sourceHash": "70eb4ff31973824fe5da3597f8de4c0f3172babc5f822af1db43ebd551e392e6",
-    "text": "Collectionnées"
-  },
-  "collection.empty": {
-    "reviewed": true,
-    "source": "No creatures in this view",
-    "sourceHash": "ee1d1b36b03871c5123c71ad8944b23e41acabc4dd58278888f2b87796e2f8c3",
-    "text": "Aucune créature dans cette vue"
-  },
-  "collection.filter": {
-    "reviewed": true,
-    "source": "Collection filter",
-    "sourceHash": "4452c939c1f8cab5fdcfcaa7a7c889df9ab2dc8fac3673c11c46b15e361d9bd7",
-    "text": "Filtre de collection"
+    "source": "Fauna",
+    "sourceHash": "5572fe870d6a94ab6c44b1c32881a6eb1364be5ce989281ed4fc4e81c7643a98",
+    "text": "Fauna"
   },
   "collection.inspect": {
     "reviewed": true,
@@ -305,11 +287,11 @@
     "sourceHash": "e125c11be70f8e88a42ce362c54d4565c661494767dd36836c8fb80a79cec198",
     "text": "{{name}} : {{rank}} étoiles sur {{maximum}}"
   },
-  "collection.uncollected": {
+  "collection.views": {
     "reviewed": true,
-    "source": "Uncollected",
-    "sourceHash": "e1d47cd4bf11aa8c4a9389e25b365a803229cb2fdcf657acb1ae4fc4ea52f652",
-    "text": "Non collectionnées"
+    "source": "Collection views",
+    "sourceHash": "c7a1ef1103980139dabce8a95e8c1a906cc635269c3ea1f7d6d951f9ed6ea22a",
+    "text": "Vues de la collection"
   },
   "common.cancel": {
     "reviewed": true,

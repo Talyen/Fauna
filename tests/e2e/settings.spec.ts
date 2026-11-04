@@ -5,18 +5,18 @@ import { reloadHome, test, seed } from "./support/session";
 test("shadcn tabs and settings retain native keyboard behavior and game navigation", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  const all = page.getByRole("tab", { name: "All", exact: true });
+  const all = page.getByRole("tab", { name: "Fauna", exact: true });
   await all.focus();
   await page.keyboard.press("ArrowRight");
-  const known = page.getByRole("tab", { name: "Collected", exact: true });
+  const known = page.getByRole("tab", { name: "Boons", exact: true });
   await expect(known).toBeFocused();
   await expect(known).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel")).toHaveAttribute(
     "aria-labelledby",
     (await known.getAttribute("id")) as string,
   );
-  await page.keyboard.press("d");
-  await expect(page.getByRole("tab", { name: "Uncollected", exact: true })).toBeFocused();
+  await page.keyboard.press("a");
+  await expect(page.getByRole("tab", { name: "Fauna", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();

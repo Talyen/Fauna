@@ -128,17 +128,8 @@
   "card.upgradedName": {
     "text": "{{name}} +{{level}}"
   },
-  "collection.all": {
-    "text": "All"
-  },
-  "collection.collected": {
-    "text": "Collected"
-  },
-  "collection.empty": {
-    "text": "No creatures in this view"
-  },
-  "collection.filter": {
-    "text": "Collection filter"
+  "collection.fauna": {
+    "text": "Fauna"
   },
   "collection.inspect": {
     "text": "Inspect {{name}}"
@@ -152,8 +143,8 @@
   "collection.stars": {
     "text": "{{name}}: {{rank}} of {{maximum}} stars"
   },
-  "collection.uncollected": {
-    "text": "Uncollected"
+  "collection.views": {
+    "text": "Collection views"
   },
   "common.cancel": {
     "text": "Cancel"

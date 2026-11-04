@@ -16,21 +16,9 @@
 }
 .collection-content {
   width: 100%;
-  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: var(--screen-section-gap);
-}
-.collection-gallery {
-  min-height: calc(
-    var(--collection-rows) *
-      (var(--art-landscape-width) * 3 / 4 + var(--screen-item-gap) + var(--collection-rank-height)) +
-      (var(--collection-rows) - 1) * var(--screen-item-gap)
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 .collection-grid {
   width: 100%;
@@ -38,6 +26,10 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--screen-item-gap);
+}
+.collection-grid[data-view="boons"] {
+  align-self: center;
+  max-width: calc(var(--art-portrait-width) * 4 + var(--screen-item-gap) * 3);
 }
 .collection-grid > * {
   flex: 0 0 auto;
@@ -48,8 +40,7 @@
   align-items: center;
   gap: var(--screen-item-gap);
 }
-.collection-entry > .collection-stars,
-.collection-entry > .collection-uncollected {
+.collection-entry > .collection-stars {
   display: flex;
   align-items: center;
   min-height: var(--collection-rank-height);
@@ -67,10 +58,6 @@
   color: var(--primary);
   fill: currentColor;
 }
-.collection-uncollected {
-  color: var(--muted-foreground);
-  font-size: var(--text-secondary);
-}
 .collection-pagination {
   min-height: var(--control-height);
   display: flex;
@@ -84,40 +71,34 @@
 .locked-species > .creature-card {
   transition: scale var(--motion-hover) ease-out;
 }
-.locked-species > .creature-card:focus {
+:root[data-focus="visible"] .collection-boon:focus,
+:root[data-focus="visible"] .locked-species:focus {
   outline: none;
 }
-.locked-species > .creature-card:hover,
-:root[data-focus="visible"] .locked-species > .creature-card:focus {
+:root[data-focus="visible"] .collection-boon:focus > .action-card > .effect-shine-border {
+  opacity: 1;
+  --shine-width: 3px;
+}
+.locked-species:hover > .creature-card,
+:root[data-focus="visible"] .locked-species:focus > .creature-card {
   scale: var(--hover-scale);
 }
-.locked-species > .creature-card:hover > img,
-:root[data-focus="visible"] .locked-species > .creature-card:focus > img {
+.locked-species:hover > .creature-card > img,
+:root[data-focus="visible"] .locked-species:focus > .creature-card > img {
   filter: none;
 }
-.locked-species > .creature-card:hover > .effect-shine-border,
-:root[data-focus="visible"] .locked-species > .creature-card:focus > .effect-shine-border {
+.locked-species:hover > .creature-card > .effect-shine-border,
+:root[data-focus="visible"] .locked-species:focus > .creature-card > .effect-shine-border {
   opacity: 1;
   --shine-width: 3px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .locked-species > .creature-card:hover,
-  :root[data-focus="visible"] .locked-species > .creature-card:focus {
+  .locked-species:hover > .creature-card,
+  :root[data-focus="visible"] .locked-species:focus > .creature-card {
     scale: 1;
     transition: none;
   }
 }
-.collection-entry {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--screen-item-gap);
-}
-.collection-entry p {
-  font-size: var(--text-secondary);
-  color: var(--muted-foreground);
-}
-
 .collection-gallery-page {
   flex: 1;
   min-height: 0;

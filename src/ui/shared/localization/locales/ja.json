@@ -257,29 +257,11 @@
     "sourceHash": "c18c09b884f81cf2fcfef4aeecb58a9f15ad21c7f915276f36f957425db74444",
     "text": "{{name}} +{{level}}"
   },
-  "collection.all": {
+  "collection.fauna": {
     "reviewed": true,
-    "source": "All",
-    "sourceHash": "c7ecdf521033d19bea087e4194e0bc846bc014a187d7657b3e68669a23aeb358",
-    "text": "すべて"
-  },
-  "collection.collected": {
-    "reviewed": true,
-    "source": "Collected",
-    "sourceHash": "4c69d9562726b2fc113907069ac1af80f442ea9468cbd4fb2682af9521ebd0af",
-    "text": "収集済み"
-  },
-  "collection.empty": {
-    "reviewed": true,
-    "source": "No creatures in this view",
-    "sourceHash": "dfe49aa3952794c492a2bae78f1f78a499ff6c6bc62d6ce061881083709c58f1",
-    "text": "この画面にクリーチャーはいません"
-  },
-  "collection.filter": {
-    "reviewed": true,
-    "source": "Collection filter",
-    "sourceHash": "72e8d35b572dbf28477b51470f265dc4493f396ad6391d1f5b9c5bb717577e2f",
-    "text": "コレクションの絞り込み"
+    "source": "Fauna",
+    "sourceHash": "8dc14f5b891b8392cf7f5dfe6198f3ba20943325d203e39e6028abc3f7b97ec2",
+    "text": "Fauna"
   },
   "collection.inspect": {
     "reviewed": true,
@@ -305,11 +287,11 @@
     "sourceHash": "1538b8e9b46d87a6d42782c096bcb5867606767dd4d401717532293f43d04c53",
     "text": "{{name}}：星{{rank}} / {{maximum}}"
   },
-  "collection.uncollected": {
+  "collection.views": {
     "reviewed": true,
-    "source": "Uncollected",
-    "sourceHash": "1eb47856d45185c76a953da5eb10289b7e84f19624c85f9efe71fc0341e045bb",
-    "text": "未収集"
+    "source": "Collection views",
+    "sourceHash": "62eb0ba122394d6076168141b11185bd1ab290e9321c70706ae44cd4674e921d",
+    "text": "コレクションの表示"
   },
   "common.cancel": {
     "reviewed": true,

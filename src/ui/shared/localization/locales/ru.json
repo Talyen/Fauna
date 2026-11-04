@@ -257,29 +257,11 @@
     "sourceHash": "985679792d19a36b4692c2a21a1b7462a1c7a0baf6913b81fadf6ee60760d5f4",
     "text": "{{name}} +{{level}}"
   },
-  "collection.all": {
+  "collection.fauna": {
     "reviewed": true,
-    "source": "All",
-    "sourceHash": "5b4361ccfb68340dbf44fda8e9bcacfae1d96c9bfa74fc5da542bf4cb8c26494",
-    "text": "Все"
-  },
-  "collection.collected": {
-    "reviewed": true,
-    "source": "Collected",
-    "sourceHash": "e4421d58ac9f105b3cb4f1a95096a617686a2bc83461877cca04335262632d80",
-    "text": "Собраны"
-  },
-  "collection.empty": {
-    "reviewed": true,
-    "source": "No creatures in this view",
-    "sourceHash": "f270792afdda00f34378991cb7f3dce7ab6766f03021fbc1ef66d5e10db93b98",
-    "text": "В этом разделе нет существ"
-  },
-  "collection.filter": {
-    "reviewed": true,
-    "source": "Collection filter",
-    "sourceHash": "2149bbef853397a92baf3dd252e31a9c75bb4c6095da9246610f42c42a2d5068",
-    "text": "Фильтр коллекции"
+    "source": "Fauna",
+    "sourceHash": "37c89d190c83366a0fd622a31dbc06219652d31a74c9e264471d9ecf0db91bf7",
+    "text": "Fauna"
   },
   "collection.inspect": {
     "reviewed": true,
@@ -305,11 +287,11 @@
     "sourceHash": "5af8ee83d84466d0d9d95245e89a0ac06e105819e94e2a54e54a73801b6483eb",
     "text": "{{name}}: {{rank}} из {{maximum}} звёзд"
   },
-  "collection.uncollected": {
+  "collection.views": {
     "reviewed": true,
-    "source": "Uncollected",
-    "sourceHash": "adba27a0f1e9cbed76c38b3be0189fbce42ed018545f52f6402c4bbe19704bfc",
-    "text": "Не собраны"
+    "source": "Collection views",
+    "sourceHash": "84d11e7b6f65c993454e150312f275090b6fd92b3fbac68d953a5c8e7c4dec2d",
+    "text": "Разделы коллекции"
   },
   "common.cancel": {
     "reviewed": true,

@@ -32,25 +32,22 @@ test("Collection inspection returns through nested details to the unchanged batt
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
-  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  await expect(page.getByRole("button", { name: /^Inspect / })).toHaveCount(0);
   await locked.hover();
-  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await expect(page.getByRole("tooltip")).not.toHaveCount(0);
   await expect(artwork).toHaveCSS("filter", "none");
   await expect(locked.locator(".effect-shine-border")).toHaveCSS("opacity", "1");
-  await expect(locked).toHaveCSS("scale", "1.035");
+  await expect(locked.locator(".creature-card")).toHaveCSS("scale", "1.035");
   await locked.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
-  await expect(locked).toHaveCSS("scale", "none");
+  await expect(locked.locator(".creature-card")).toHaveCSS("scale", "none");
   await page.keyboard.press("Tab");
   await locked.focus();
   await expect(artwork).toHaveCSS("filter", "none");
   await expect(locked.locator(".effect-shine-border")).toHaveCSS("opacity", "1");
   await page.keyboard.press("Enter");
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await page.getByRole("tab", { name: "All", exact: true }).click();
   await page.getByRole("button", { name: "Inspect Emberback", exact: true }).click();
   const details = page.locator(".creature-inspection");
   await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Molten Shell");
@@ -75,7 +72,7 @@ test("Collection inspection returns through nested details to the unchanged batt
   expect(await state(page)).toEqual(fixture);
 });
 
-test("Collection keeps a later-page creature and focus through live resize and filter changes", async ({
+test("Collection keeps a later-page creature and focus through live resize and tab changes", async ({
   page,
 }) => {
   const fixture = produce(run(7), (game) => {
@@ -99,9 +96,18 @@ test("Collection keeps a later-page creature and focus through live resize and f
   await expect(opener).toBeFocused();
   await expect(next).toBeDisabled();
   await expectScrollFree(page);
-  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  await expect(page.getByRole("img", { name: "No creatures in this view" })).toBeVisible();
-  await page.getByRole("tab", { name: "All", exact: true }).click();
+  await page.getByRole("tab", { name: "Boons", exact: true }).click();
+  await expect(page.locator(".collection-boon")).toHaveCount(8);
+  const boonRows = await page.locator(".collection-boon").evaluateAll((cards) => {
+    const counts = new Map<number, number>();
+    for (const card of cards) {
+      const top = Math.round(card.getBoundingClientRect().top);
+      counts.set(top, (counts.get(top) ?? 0) + 1);
+    }
+    return [...counts.values()];
+  });
+  expect(boonRows).toEqual([4, 4]);
+  await page.getByRole("tab", { name: "Fauna", exact: true }).click();
   await expect(opener).toBeVisible();
   await expect(next).toBeDisabled();
   await page.setViewportSize({ width: 1920, height: 1080 });
