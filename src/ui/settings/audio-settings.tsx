@@ -1,5 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
-import { AudioLines, Music, Volume2, VolumeX, Power } from "lucide-react";
+import { AudioLines, Music, Volume2, VolumeX } from "lucide-react";
 import { Slider } from "../../components/ui/slider";
 import type { AudioPreferences } from "./preferences";
 import { SettingRow, SettingToggle } from "./settings-controls";
@@ -14,12 +14,6 @@ export function AudioSettings({
   return (
     <section aria-label={i18n.message("settings.audio", "Audio")}>
       <h2 className="settings-heading">{i18n.message("settings.audio", "Audio")}</h2>
-      <SettingToggle
-        icon={Power}
-        label={i18n.message("settings.sound", "Sound")}
-        checked={value.enabled}
-        onChange={(enabled) => update({ enabled })}
-      />
       {(
         [
           [
@@ -50,7 +44,7 @@ export function AudioSettings({
             <Slider
               min={0}
               max={100}
-              step={10}
+              step={1}
               value={[value[key]]}
               onValueChange={([volume]) => {
                 if (volume !== undefined) update({ [key]: volume });

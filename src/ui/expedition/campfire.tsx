@@ -14,6 +14,7 @@ import { Keyword } from "../shared/keyword-text";
 export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (command: Command) => boolean }) {
   const i18n = useMessages();
   const creatures = [...game.team, ...game.reserves];
+  const rested = game.expedition.lastRoom === "campfire";
   return (
     <Screen className="campfire-screen">
       <ScreenHeading back={() => send({ type: "leaveCampfire" })}>
@@ -44,23 +45,36 @@ export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (com
               tone="health"
             />
             <p>
-              <MessageParts
-                template={i18n.template(
-                  "campfire.healthAndRest",
-                  "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
-                )}
-                values={{
-                  health: creature.health.toLocaleString(i18n.locale),
-                  maximum: species(creature.species).health.toLocaleString(i18n.locale),
-                  keyword: <Keyword id="health" className="rule-keyword" />,
-                  amount: campfireRecovery(creature).toLocaleString(i18n.locale),
-                }}
-              />
+              {rested ? (
+                <>
+                  {creature.health.toLocaleString(i18n.locale)}/
+                  {species(creature.species).health.toLocaleString(i18n.locale)}{" "}
+                  <Keyword id="health" className="rule-keyword" />
+                </>
+              ) : (
+                <MessageParts
+                  template={i18n.template(
+                    "campfire.healthAndRest",
+                    "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+                  )}
+                  values={{
+                    health: creature.health.toLocaleString(i18n.locale),
+                    maximum: species(creature.species).health.toLocaleString(i18n.locale),
+                    keyword: <Keyword id="health" className="rule-keyword" />,
+                    amount: campfireRecovery(creature).toLocaleString(i18n.locale),
+                  }}
+                />
+              )}
             </p>
           </div>
         )}
       </PagedItems>
-      <Button onClick={() => send({ type: "rest" })}>{i18n.message("campfire.rest", "Rest")}</Button>
+      <Button
+        className="primary-menu-action"
+        onClick={() => send({ type: rested ? "leaveCampfire" : "rest" })}
+      >
+        {rested ? i18n.message("menu.continue", "Continue") : i18n.message("campfire.rest", "Rest")}
+      </Button>
     </Screen>
   );
 }

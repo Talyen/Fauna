@@ -6,11 +6,7 @@ import { policy } from "../../support/game";
 import { state } from "./session";
 
 export async function continueToRecruit(page: Page) {
-  const earnings = page.getByRole("heading", { name: "Last battle earnings", exact: true });
-  const recruits = page.getByRole("heading", { name: "Choose a Recruit", exact: true });
-  await expect(earnings.or(recruits)).toBeVisible();
-  if (await earnings.isVisible()) await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await expect(recruits).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Recruit / }).first()).toBeVisible();
 }
 
 export async function step(
@@ -27,6 +23,8 @@ export async function step(
     await activate(page.getByRole("button", { name: "Visit Campfire", exact: true }));
   } else if (c.type === "rest") {
     await activate(page.getByRole("button", { name: /^Rest/ }));
+  } else if (c.type === "leaveCampfire" || c.type === "start") {
+    await activate(page.getByRole("button", { name: "Continue", exact: true }));
   } else if (c.type === "recruit") {
     await continueToRecruit(page);
     await expect(page.locator(".boon-choice")).toHaveCount(0);

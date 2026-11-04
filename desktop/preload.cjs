@@ -59,6 +59,7 @@ const bridge = Object.freeze({
     };
   },
   getSteamLanguage: () => ipcRenderer.invoke("fauna:steam-language"),
+  clearSave: () => ipcRenderer.invoke("fauna:clear"),
   readCandidates: () => ipcRenderer.invoke("fauna:read"),
   writeSave: (/** @type {string} */ data, /** @type {string[]} */ recoverable = []) =>
     ipcRenderer.invoke("fauna:write", data, recoverable),

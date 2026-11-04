@@ -10,7 +10,7 @@ test("Wisterelle targets a chosen backup, cancels safely, restores an ally and d
 }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, wisterelleBattle());
   await resume(page);
   const ability = (name: string) => page.locator(`.hand [data-card-id="ally-0:wisterelle-${name}"]`);

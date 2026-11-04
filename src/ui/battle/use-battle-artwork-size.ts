@@ -59,10 +59,11 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>, handC
           (parseFloat(root.style.getPropertyValue("--battle-hand-lift")) || 0)
         : root.getBoundingClientRect().bottom;
       const clearance = parseFloat(css.getPropertyValue("--battle-hand-hover-clearance"));
-      // The 10% reduction supplies the clearance for lifting the original fan.
+      const top = parseFloat(css.paddingTop) || 0;
+      // The 10% reduction supplies clearance for lifting the original fan.
       const availableHeight = Math.min(
-        root.clientHeight - paddingBottom + priorLift,
-        handTop - root.getBoundingClientRect().top - clearance,
+        root.clientHeight - paddingBottom + priorLift - top,
+        handTop - root.getBoundingClientRect().top - clearance - top,
       );
       // Each rail keeps enough room for target rules and the symmetric controls beside the board.
       const minimumRail = parseFloat(getComputedStyle(rail).minWidth);

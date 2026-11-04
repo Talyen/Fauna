@@ -35,12 +35,12 @@ async function createDisplay({
   bigPicture = process.env.SteamTenfoot === "1",
 }) {
   const file = path.join(directory, "display.json");
-  /** @type {{mode: "windowed" | "fullscreen", bounds: import("electron").Rectangle | null}} */
+  /** @type {{mode: "windowed" | "borderless-fullscreen" | "fullscreen", bounds: import("electron").Rectangle | null}} */
   let preferences = { mode: bigPicture ? "fullscreen" : "windowed", bounds: null };
   if (!isolated)
     try {
       const value = JSON.parse(await fs.readFile(file, "utf8"));
-      if (["windowed", "fullscreen"].includes(value.mode)) preferences = value;
+      if (["windowed", "borderless-fullscreen", "fullscreen"].includes(value.mode)) preferences = value;
     } catch {
       /* Missing/invalid optional device preferences use defaults. */
     }
@@ -80,7 +80,9 @@ async function createDisplay({
     mode:
       window && !window.isDestroyed()
         ? window.isFullScreen() || window.isSimpleFullScreen?.()
-          ? "fullscreen"
+          ? preferences.mode === "borderless-fullscreen"
+            ? "borderless-fullscreen"
+            : "fullscreen"
           : "windowed"
         : preferences.mode,
   });
@@ -105,16 +107,22 @@ async function createDisplay({
     clearTimeout(timer);
     timer = setTimeout(write, 250);
   };
-  /** @param {"windowed" | "fullscreen"} mode */
+  /** @param {"windowed" | "borderless-fullscreen" | "fullscreen"} mode */
   const apply = async (mode) => {
-    if (disposed || !window || window.isDestroyed() || !["windowed", "fullscreen"].includes(mode))
+    if (
+      disposed ||
+      !window ||
+      window.isDestroyed() ||
+      !["windowed", "borderless-fullscreen", "fullscreen"].includes(mode)
+    )
       throw new Error("Invalid display request.");
     if (isolated) return read();
-    if (mode === "fullscreen" && read().mode === "windowed") preferences.bounds = window.getBounds();
-    if (process.platform === "darwin") window.setSimpleFullScreen(mode === "fullscreen");
-    else if (window.isFullScreen() !== (mode === "fullscreen")) {
+    if (mode !== "windowed" && read().mode === "windowed") preferences.bounds = window.getBounds();
+    preferences.mode = mode;
+    if (process.platform === "darwin") window.setSimpleFullScreen(mode !== "windowed");
+    else if (window.isFullScreen() !== (mode !== "windowed")) {
       await new Promise((resolve, reject) => {
-        const event = mode === "fullscreen" ? "enter-full-screen" : "leave-full-screen";
+        const event = mode !== "windowed" ? "enter-full-screen" : "leave-full-screen";
         const done = () => {
           clearTimeout(timeout);
           resolve(undefined);
@@ -124,8 +132,19 @@ async function createDisplay({
           reject(new Error("Display transition did not complete."));
         }, 2000);
         window.once(event, done);
-        window.setFullScreen(mode === "fullscreen");
+        window.setFullScreen(mode !== "windowed");
       });
+    }
+    if (process.platform !== "darwin") {
+      // Match Alchemy: renderer fullscreen distinguishes Fullscreen from Borderless Fullscreen.
+      await window.webContents
+        ?.executeJavaScript?.(
+          mode === "fullscreen"
+            ? "document.fullscreenElement || document.documentElement.requestFullscreen?.()"
+            : "document.fullscreenElement ? document.exitFullscreen?.() : undefined",
+          true,
+        )
+        .catch(() => undefined);
     }
     if (mode === "windowed") {
       const next = bounds();
@@ -137,7 +156,7 @@ async function createDisplay({
     write();
     return read();
   };
-  /** @param {"windowed" | "fullscreen"} mode */
+  /** @param {"windowed" | "borderless-fullscreen" | "fullscreen"} mode */
   const set = (mode) => {
     const result = transition.then(() => apply(mode));
     transition = result.catch(() => {});
@@ -156,8 +175,8 @@ async function createDisplay({
       window.on("resize", remember);
       window.on("enter-full-screen", publish);
       window.on("leave-full-screen", publish);
-      if (!isolated && preferences.mode === "fullscreen")
-        void set("fullscreen").catch(() =>
+      if (!isolated && preferences.mode !== "windowed")
+        void set(preferences.mode).catch(() =>
           publishState({ ...read(), error: "Could not restore fullscreen." }),
         );
     },

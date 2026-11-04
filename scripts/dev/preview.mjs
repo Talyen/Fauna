@@ -5,7 +5,7 @@ import { mkdir, realpath, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { reviewOptions } from "./review-options.mjs";
-import { reviewScenario, openReviewScenario } from "./review-scenarios.mjs";
+import { reviewScenario, openReviewScenario, applyReviewTextScale } from "./review-scenarios.mjs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { previewDesktopEnvironment } from "../lib/desktop-environment.mjs";
 
@@ -107,11 +107,9 @@ export async function preview(args = process.argv.slice(2)) {
           console.log(`Battle sample seed: ${scenario.seed}; replay with --seed ${scenario.seed}`);
         await openReviewScenario(page, session.url, scenario, options.scale);
       } else {
-        await page.addInitScript(
-          (scale) => localStorage.setItem("fauna.text-scale", String(scale)),
-          options.scale,
-        );
         await page.goto(session.url);
+        await page.locator(".app:not([inert])").waitFor({ state: "visible" });
+        await applyReviewTextScale(page, options.scale);
       }
       browser.on("disconnected", () => void session.close());
     } else if (options.mode === "desktop") {

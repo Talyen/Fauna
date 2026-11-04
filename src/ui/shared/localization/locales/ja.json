@@ -251,6 +251,12 @@
     "sourceHash": "c18c09b884f81cf2fcfef4aeecb58a9f15ad21c7f915276f36f957425db74444",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "10769c91a7b96a7d3f7d0bf43ae88bc7de3abd07414444c519b7dfb523316c60",
+    "text": "このクリーチャーを仲間にすると詳細が表示されます"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -263,12 +269,6 @@
     "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
     "text": "{{name}}を調べる"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "644e5db23c0bb6c641fee5bb755ae7b017306c30aeb78d89b1e859eb6fe37c00",
-    "text": "未解放の種"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -280,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "1538b8e9b46d87a6d42782c096bcb5867606767dd4d401717532293f43d04c53",
     "text": "{{name}}：星{{rank}} / {{maximum}}"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "86605cb256a9307e33bb8b08243ecd2e7440649141bfa9f0ef635c5b64a5621a",
+    "text": "未発見"
   },
   "collection.views": {
     "reviewed": true,
@@ -298,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
     "text": "読み込み中…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
+    "text": "キャンセル"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -9557,6 +9569,12 @@
     "sourceHash": "d10b9eb2ef7cc6e1b3706580dba596da39f3f69d61405572d37b700b707c2fc1",
     "text": "デッキは空です"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "b2f29409c716b6081dd94373e0284fe664830bbb1105e5087ec320d29cb54b8b",
+    "text": "手札の超過分"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9695,17 +9713,17 @@
     "sourceHash": "2cabe282e113d0594f1ecc752b9ad04989e308edc5e0c17f31450614cb89ad30",
     "text": "特性"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "1312aec86632c4a63233c99d57c6f4779941c55b6068cd80c19e17d0db01e8da",
-    "text": "第{{act}}幕 · 部屋{{room}} / {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "84c74beb67e6595e182fc15a00cfd100b2058340d92a113cd98ee2210218a75e",
     "text": "ボス：{{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "26717022ee34b5c5a1f598eb5849733a15a2efbdf8b17ae0792b601ec2fa814b",
+    "text": "行き先を選択"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10247,12 +10265,6 @@
     "sourceHash": "5d6540b878a890951455ca976facdfd745840047ff31f6c9870744e5d1e0ef94",
     "text": "ランに戻る"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
-    "text": "設定"
-  },
   "menu.talentPoints": {
     "forms": {
       "other": "使用可能なタレントポイント：{{count}}"
@@ -10588,12 +10600,6 @@
     "sourceHash": "dda7825baa782002172db08961c9dcc8df0b256e154d049ab697d5d423db16cb",
     "text": "Faunaはこの画面を表示できませんでした。再試行しています…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "59c06015219f39f3e051ba153ee5dcd2bc6e5cc77675d1f4c328fd6c24f6563f",
-    "text": "現在、進行状況を保存できません。再試行中はFaunaを開いたままにしてください"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10696,17 +10702,17 @@
     "sourceHash": "5ba8a12f61f4cc8abea42fa33dd42e2fad06afafde509097e953627deefb9259",
     "text": "帰還"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
+    "text": "勝利"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "d7228d6866c9fe3c2363c9dbb4bcfbb1ea1f0a42fb7fda2d59cba2211fc89d85",
     "text": "祝福を選ぶ"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "cab1a741a359f02b8c5efb5c5c016aa9c2ed53487c632856dd566c2f2c1afff6",
-    "text": "仲間を選ぶ"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10738,6 +10744,24 @@
     "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
     "text": "スキップ"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "0963bd13ee052115052c5936a3618ca56cc49a75de5e2928e238609429b57d03",
+    "text": "保存できませんでした"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "c39fead3ec78dd8247ea5814692388709c6353362631f30ccfafd3203785aeed",
+    "text": "再試行"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "7c89b383ea3d743ac5c0dc79d060d92afe700baf358da12814d520bf25faf805",
+    "text": "保存中…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10762,23 +10786,41 @@
     "sourceHash": "b49b81f30cef0f95d07c21d156c60c0b2e6f74b0c4107050a2de31f21e5d8ceb",
     "text": "戦闘"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "a2df906d8da0e98b8f1a6e91276817647553656444c1466d0354c058215bbfef",
+    "text": "ボーダーレスフルスクリーン"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "699535f4c1e42ea9e668064a390d7cc8474d9c21adbe4d2734e6ba35b7ac3c78",
+    "text": "明るさ"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "18942ccc7684aaa981a644684b425821ea7d4d920a3157c37b7d8b1dbcd31f53",
     "text": "設定カテゴリ"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "358c3a1978781cc24543abe6405f7a46f3d551855d0ee29f103d97dcdda60c09",
+    "text": "すべての進行状況を消去して最初から始めますか？この操作は取り消せません"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "93630926b1580c1bc6d0149f0466e639b68a7efa26e70cb00cfe51ecf4d41d23",
+    "text": "セーブデータを消去"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "967155197934051356442b3043fa1de33768cd942a511e3b5fad46b0e6679b3c",
     "text": "言語選択を閉じる"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "449890a8bf947bd8d05af1f779e516c7d0593e88afc52823b9c8fc7d014dcb5b",
-    "text": "コントローラーの表示"
   },
   "settings.display": {
     "reviewed": true,
@@ -10816,17 +10858,23 @@
     "sourceHash": "6c5a63d32c447bac6ac6ec6ae26edf6cb5485f7f536af48e4c7ba70081d7664a",
     "text": "全画面"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "e1964786b670f4fd7ccd10d2cdb2375c433d20e189632606b5d2bdd86eb9b74a",
+    "text": "ゲームサイズ"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "b886fb0fd0b5907493cad0e821824a312ee0d7c4f2d8a762a5b9d801438a8362",
+    "text": "ゲームプレイ"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "e5d35a7360f1c07578c3bab6669d2c7f360bf3b109558154b4ea5df73fc7ea9f",
     "text": "背景の光"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "b1cfa0c3ecd3e78bdc66a967f137e2abaa675cd1ad83f40a84749e25d65a2840",
-    "text": "背景の光の値"
   },
   "settings.language": {
     "reviewed": true,
@@ -10839,12 +10887,6 @@
     "source": "Choose a language",
     "sourceHash": "f352c70304334870065ff6370a58fbd82271a96ac8f6d004743ced3fc71ed576",
     "text": "言語を選択"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "9b57beddd4c3e7a3107a37c369b1f4fbf3a3406e7dd636cb3fbbd9fb06fdb388",
-    "text": "言語：{{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -10888,35 +10930,47 @@
     "sourceHash": "2cebd8fc8400ffc7418cfb04c269021356bf1a63e6fbef5612ab2b776621b3ce",
     "text": "バックグラウンドで消音"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "68d5d4d2dfa9bf51bcef07d4e85db4f416fb35b4ef2ade36d065d2b561c069c6",
+    "text": "その他"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "bbc2687aa34f93df94ce9ec818b16ce8a779c7662bc929c30cf059e18e97b7f8",
     "text": "背景の粒子"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "f401c468eb1ad969f50025ed51649e3c4890ace56484f96ee479435c8ea5b0cd",
-    "text": "背景の粒子の値"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "5e8bbb7ffc76b844a2b15b60ec363a6e814cfa5383ca980c3d9227665fe41c1b",
+    "text": "自動戦闘の設定を記憶"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "2074faee923a8512b4fcecde2744ec0bf124327078771018d49984f081686685",
+    "text": "初期値に戻す"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "d1cf86482ea6b8169c969de233cbd524cd23f0f4fa9c9d2deb4e0ffd71a948b7",
+    "text": "リセットとセーブデータ"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "d81b8c0313f5fe2f225cd0facdefe8789524f049d5b8da3e21611d371c0ef873",
+    "text": "セーブデータ"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "3baf8d8dd3dcde573d27d0ef4cf1d5fd38a15f2935bdc61f5b346f1ef1b61a64",
     "text": "音声"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "085894484ebe210f9624e0fbcc6e578ba7fb822647ab1b949021ba5d22e64276",
-    "text": "文字サイズ"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "d3757860d4dad6c88695fc83c492be2194d198748bae205c5e1ff8de8ac04bed",
-    "text": "ツールチップ {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11072,6 +11126,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "eb8ae9d968e3855bab510ce12487fb1917b6cf26e5dab30b8d17145d03bd8a57",
     "text": "{{keyword}}のタレントをリセット"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "29401f278f05b3969b5f926a9805f8f881c60c1983ebcfb6c9bcf12ab7920b97",
+    "text": "すべてのタレントをリセット"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "ecfa3acde0c97cfd66aff61d7074e56265ae7dd5fd00cd2a9089486e1cf3467e",
+    "text": "すべてのタレントポイントが返還されます。"
   },
   "talents.row": {
     "reviewed": true,

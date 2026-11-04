@@ -65,7 +65,7 @@ for (const [width, height, scale, reduced] of [
     await page.addInitScript(
       ({ save, scale }) => {
         localStorage.setItem("fauna.save.v1", save);
-        localStorage.setItem("fauna.text-scale", scale);
+        localStorage.setItem("fauna.test.text-scale", scale);
         localStorage.setItem("fauna.auto-end-turn", "false");
         localStorage.setItem("fauna.audio.v1", JSON.stringify({ enabled: false }));
       },

@@ -6,7 +6,7 @@ import { EmptyState } from "../empty-state";
 import { ActionCard } from "./cards";
 
 import { cardActor } from "../../../game/card-actors";
-import { species, speciesCards } from "../../../game/content";
+import { definition, species, speciesCards } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
 import type { Inspection } from "../inspection-model";
 
@@ -45,8 +45,40 @@ export function DeckCards({
       : game.cards;
   const pileIds = pile ? new Set(game.battle?.[pile] ?? []) : undefined;
   const cards = (pile ? deck.filter((card) => pileIds!.has(card.id)) : deck.slice()).sort(
-    (a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id),
+    (a, b) =>
+      i18n
+        .content(`content.card.${a.definitionId}.name`, definition(a.definitionId).name)
+        .localeCompare(
+          i18n.content(`content.card.${b.definitionId}.name`, definition(b.definitionId).name),
+          i18n.locale,
+        ) || a.id.localeCompare(b.id),
   );
+  const renderCard = (card: (typeof deck)[number]) => {
+    const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;
+    return (
+      <ActionCard
+        key={card.id}
+        card={card}
+        actor={owner}
+        modifiers={game}
+        ownerName={
+          card.ownerId === null
+            ? i18n.content("content.keyword.food.label", "Food")
+            : i18n.content(`content.species.${owner.species}.name`, species(owner.species).name)
+        }
+        onClick={() => inspect?.({ card })}
+        onInspect={inspect ? () => inspect({ card }) : undefined}
+      />
+    );
+  };
+
+  const overflow =
+    pile === "draw"
+      ? (game.battle?.buffer ?? []).flatMap((id) => {
+          const card = deck.find((entry) => entry.id === id);
+          return card ? [card] : [];
+        })
+      : [];
   return (
     <>
       {cards.length === 0 ? (
@@ -62,29 +94,25 @@ export function DeckCards({
       ) : null}
       <PagedItems
         items={cards}
-        pageSize={compact ? 3 : 6}
+        pageSize={compact || overflow.length > 0 ? 3 : 6}
         className="deck-grid"
         label={i18n.message("deck.pages", "Deck pages")}
       >
-        {(card) => {
-          const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;
-          return (
-            <ActionCard
-              key={card.id}
-              card={card}
-              actor={owner}
-              modifiers={game}
-              ownerName={
-                card.ownerId === null
-                  ? i18n.content("content.keyword.food.label", "Food")
-                  : i18n.content(`content.species.${owner.species}.name`, species(owner.species).name)
-              }
-              onClick={() => inspect?.({ card })}
-              onInspect={inspect ? () => inspect({ card }) : undefined}
-            />
-          );
-        }}
+        {renderCard}
       </PagedItems>
+      {overflow.length ? (
+        <section>
+          <h2>{i18n.message("deck.handOverflow", "Hand Overflow")}</h2>
+          <PagedItems
+            items={overflow}
+            pageSize={3}
+            className="deck-grid"
+            label={i18n.message("deck.pages", "Deck pages")}
+          >
+            {renderCard}
+          </PagedItems>
+        </section>
+      ) : null}
     </>
   );
 }

@@ -208,6 +208,16 @@ export async function reviewScenario(server, name, { seed } = {}) {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     game = createGame(42);
   }
+  if (name === "draw-pile") {
+    game = structuredClone(game);
+    while (game.battle.hand.length < 6) game.battle.hand.push(game.battle.draw.shift());
+    game.battle.buffer = game.battle.draw.splice(0, 2);
+    for (let index = 0; index < 8; index++) {
+      const card = { ...game.cards[0], id: `copy-${game.battle.copySerial++}`, temporary: true };
+      game.cards.push(card);
+      game.battle.draw.push(card.id);
+    }
+  }
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
     game = fullRosterReward();
   }
@@ -522,18 +532,18 @@ export async function reviewScenario(server, name, { seed } = {}) {
 
 export async function openReviewScenario(page, origin, scenario, scale) {
   await page.addInitScript(
-    ({ save, scale }) => {
+    ({ save }) => {
       // Reloads retain committed interactions instead of restoring the original fixture.
       if (sessionStorage.getItem("fauna.review.seeded")) return;
       localStorage.setItem("fauna.save.v1", save);
-      localStorage.setItem("fauna.text-scale", String(scale));
       sessionStorage.setItem("fauna.review.seeded", "1");
     },
-    { save: scenario.save, scale },
+    { save: scenario.save },
   );
   await page.goto(origin);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible({ timeout: 30000 });
   await expect(page.locator("#startup-splash")).toHaveCount(0);
+  await applyReviewTextScale(page, scale);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
@@ -656,10 +666,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
   }
   if (scenario.name === "talent-tree")
-    await page.locator('.talents-screen button[aria-label$=" talents"]').first().click();
+    await page.locator(".talents-screen [data-talent-keyword]").first().click();
   if (["settings-sound", "settings-battle"].includes(scenario.name))
     await page
-      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Battle", exact: true })
+      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Gameplay", exact: true })
       .click();
   if (["draw-pile", "discard-pile"].includes(scenario.name))
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
@@ -673,11 +683,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Open menu").click();
     await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   }
-  if (["recruit", "recruit-replacement", "recruit-team-preview", "inspection"].includes(scenario.name)) {
-    await button("Continue").click();
-  }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-    await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
       await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
@@ -697,4 +704,12 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (scenario.name === "battle-rewards") await expect(page.getByLabel("Last battle earnings")).toBeVisible();
   if (scenario.name.startsWith("merchant"))
     await expect(page.getByRole("region", { name: "Boon Merchant stock" })).toBeVisible();
+}
+
+/** Independent text stress stays available after replacing Text Size with Game Size. */
+export async function applyReviewTextScale(page, scale = 1) {
+  await page.evaluate((scale) => {
+    const density = Number(getComputedStyle(document.documentElement).getPropertyValue("--ui-density")) || 1;
+    document.documentElement.style.setProperty("--text-scale", String(density * scale));
+  }, scale);
 }

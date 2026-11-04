@@ -7,7 +7,7 @@ import { layoutViolations } from "./support/layout-contract";
 test("persistent saving failure fits both sizes and clears after automatic recovery", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   const fixture = run();
   await seed(page, fixture);
   await page.evaluate(() => {

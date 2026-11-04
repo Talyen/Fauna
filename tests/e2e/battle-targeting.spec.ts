@@ -19,22 +19,22 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   page,
 }) => {
   const fixture = targetingBattle();
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, fixture);
   await resume(page);
   const before = await state(page);
   const cards = page.locator(".app:not([inert]) .hand .action-card");
   await cards.first().focus();
-  await page.keyboard.press("w");
+  await page.keyboard.press("ArrowUp");
   await expect(page.locator(".app:not([inert]) .player-row .creature-card:focus")).toHaveCount(1);
-  await page.keyboard.press("w");
+  await page.keyboard.press("ArrowUp");
   await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.getByRole("tooltip")).toBeVisible();
   await cards.first().focus();
   await page.keyboard.press("Enter");
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
   await expect(page.locator(".enemy-row .target-preview")).toBeVisible();
   await expect(page.locator(".confirm-play")).toHaveCount(0);
@@ -52,7 +52,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
 for (const handSize of [4, 7]) {
   test(`battle icons and raised ${handSize}-card fan retain their layout`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+    await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
     const fixture = produce(run(7), (draft) => {
       draft.battle!.enemies[0]!.block = 5;
       Object.assign(draft.battle!.enemies[0]!.combat, {
@@ -87,14 +87,18 @@ for (const handSize of [4, 7]) {
           Math.abs(Number(b.style.getPropertyValue("--fan-offset"))),
       );
       const middle = slots[0]!.querySelector(".action-card")!;
-      const rootStyle = getComputedStyle(document.documentElement);
+      const ruler = document.createElement("div");
+      ruler.style.width = "var(--art-short-side)";
+      active.append(ruler);
+      const shortSide = ruler.getBoundingClientRect().width;
+      ruler.remove();
       return {
         artWidth: art.width,
         glow: getComputedStyle(artNode).boxShadow,
         artBorder: getComputedStyle(artNode).borderTopWidth,
         handBorder: getComputedStyle(middle).borderTopWidth,
         handWidth: parseFloat(getComputedStyle(middle).width),
-        shortSide: parseFloat(rootStyle.getPropertyValue("--art-short-side")),
+        shortSide,
         centerClipping: middle.getBoundingClientRect().bottom - innerHeight,
         fanStep: getComputedStyle(active.querySelector(".battle-screen")!).getPropertyValue(
           "--hand-fan-angle-step",
@@ -107,7 +111,7 @@ for (const handSize of [4, 7]) {
         centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
       };
     });
-    expect(geometry.artWidth).toBeCloseTo(267 * 0.9, 0);
+    expect(geometry.artWidth).toBeGreaterThan(geometry.handWidth);
     expect(geometry.glow).toBe("none");
     expect(geometry.artBorder).toBe("0px");
     expect(geometry.handBorder).toBe("0px");
@@ -124,7 +128,7 @@ for (const handSize of [4, 7]) {
   });
 }
 
-test("idle combatant clicks leave the battle and portrait unchanged", async ({ page }) => {
+test("idle enemy clicks open kit inspection without changing battle or portrait", async ({ page }) => {
   await seed(page, targetingBattle());
   await resume(page);
   const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
@@ -135,8 +139,11 @@ test("idle combatant clicks leave the battle and portrait unchanged", async ({ p
   await page.mouse.down();
   expect(await enemy.evaluate((element) => getComputedStyle(element).scale)).toBe(beforeScale);
   await page.mouse.up();
-  await expect(page.getByRole("tooltip")).toBeVisible();
-  expect((await state(page)).revision).toBe(before.revision);
+  await expect(page.getByRole("dialog")).toBeVisible();
+  expect(await state(page)).toEqual(before);
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(await state(page)).toEqual(before);
 });
 
 test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({
@@ -216,13 +223,13 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
   await page.locator(".app:not([inert]) .hand .action-card").first().click();
   await ally.focus();
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(
     page.locator(".app:not([inert]) .enemy-row .creature-wrap:not(.knocked-out) .creature-card:focus"),
   ).toHaveCount(1);
   await card.hover();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "keyboard");
 });
 

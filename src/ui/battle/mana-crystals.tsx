@@ -13,7 +13,8 @@ export function ManaCrystals({
   previewCost?: number;
 }) {
   const i18n = useMessages();
-  const slots = Math.max(mana, maximum);
+  const total = Math.max(mana, maximum);
+  const slots = Math.min(9, total);
   const [glints, setGlints] = useState<number[]>([]);
   const glint = (index: number) =>
     setGlints((previous) => {
@@ -32,7 +33,7 @@ export function ManaCrystals({
       }
       variant="ghost"
       className="mana"
-      data-overflow-row={slots > 6}
+      data-overflow-row={false}
       aria-label={i18n.message("battle.mana", "Mana {{mana}} of {{maximum}}", { mana, maximum })}
       onFocus={() => {
         if (document.documentElement.dataset.focus === "visible")
@@ -48,6 +49,7 @@ export function ManaCrystals({
           onPointerEnter={() => glint(index)}
           aria-hidden="true"
         >
+          {index === 8 && total > 9 ? <span className="mana-overflow">+{total - 9}</span> : null}
           <span className="mana-socket" />
           <span className="mana-empty" />
           <span className="mana-full" />

@@ -94,7 +94,9 @@ export function BattleScreen({
   onManualStart,
   openPile,
   openingDraw = false,
+  inspectEnemy,
 }: {
+  inspectEnemy?: (id: string) => void;
   game: BattleState;
   send: (command: Command) => boolean;
   controls: Controls;
@@ -200,7 +202,7 @@ export function BattleScreen({
                     if (enemyTarget && enemy.health > 0)
                       play({ type: "play", cardId: selected, targetId: enemy.id });
                   }
-                : undefined
+                : () => inspectEnemy?.(enemy.id)
             }
             label={
               selected && enemyTarget && enemy.health > 0

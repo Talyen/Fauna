@@ -128,26 +128,36 @@ it.each([false, true])(
     expect(vi.getTimerCount()).toBe(0);
   },
 );
-it.each(["0.75", "1", "1.25", "invalid", "2"])(
-  "applies only supported saved text sizes before modules: %s",
-  (raw) => {
-    const setProperty = vi.fn();
-    runInNewContext(readFileSync("public/startup-preferences.js", "utf8"), {
-      localStorage: { getItem: () => raw },
-      document: { documentElement: { style: { setProperty } } },
-    });
-    if (["0.75", "1", "1.25"].includes(raw)) expect(setProperty).toHaveBeenCalledWith("--text-scale", raw);
-    else expect(setProperty).not.toHaveBeenCalled();
-  },
-);
-it("tolerates blocked preference storage", () => {
-  expect(() =>
-    runInNewContext(readFileSync("public/startup-preferences.js", "utf8"), {
-      localStorage: {
-        getItem: () => {
-          throw new Error("blocked");
-        },
+it.each([
+  ["0.75", 0.8],
+  ["1", 1],
+  ["1.25", 1.2],
+  ["invalid", 1],
+  ["2", 1.2],
+])("applies bounded Game Size before modules: %s", (raw, expected) => {
+  const setProperty = vi.fn();
+  const getItem = vi.fn(() => raw);
+  runInNewContext(readFileSync("public/startup-preferences.js", "utf8"), {
+    localStorage: { getItem },
+    innerWidth: 1280,
+    innerHeight: 720,
+    document: { documentElement: { style: { setProperty } } },
+  });
+  expect(getItem).toHaveBeenCalledWith("fauna.game-scale");
+  expect(setProperty).toHaveBeenCalledWith("--text-scale", String(expected));
+  expect(setProperty).toHaveBeenCalledWith("--ui-density", String(expected));
+});
+it("fits first paint at wide viewports even when preference storage is blocked", () => {
+  const setProperty = vi.fn();
+  runInNewContext(readFileSync("public/startup-preferences.js", "utf8"), {
+    localStorage: {
+      getItem: () => {
+        throw new Error("blocked");
       },
-    }),
-  ).not.toThrow();
+    },
+    innerWidth: 1920,
+    innerHeight: 1080,
+    document: { documentElement: { style: { setProperty } } },
+  });
+  expect(setProperty).toHaveBeenCalledWith("--text-scale", "1.3599999999999999");
 });

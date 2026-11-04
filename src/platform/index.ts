@@ -12,6 +12,7 @@ export function createPlatform(): Platform {
     diagnostics: browserDiagnostics(),
     getSteamLanguage: bridge.getSteamLanguage,
     saves: {
+      clear: bridge.clearSave ? () => bridge.clearSave!() : undefined,
       readCandidates: () => bridge.readCandidates(),
       async write(data, isRecoverable) {
         const recoverable: string[] = [];

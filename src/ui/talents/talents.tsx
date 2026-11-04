@@ -1,3 +1,4 @@
+import { Confirmation } from "../shared/confirmation";
 import { useMessages } from "../shared/localization/message-context";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
@@ -118,6 +119,7 @@ export function Talents({
   const keywordName = (id: Keyword) => i18n.content(`content.keyword.${id}.label`, keywordLabel(id));
   const [keyword, setKeyword] = useState<Keyword | null>(null);
   const [treeReset, setTreeReset] = useState(0);
+  const [resetAll, setResetAll] = useState(false);
   const [purchased, setPurchased] = useState<string | null>(null);
   const lastKeyword = useRef<Keyword | null>(null);
   const screen = useRef<HTMLElement>(null);
@@ -198,22 +200,35 @@ export function Talents({
           back={keyword ? () => setKeyword(null) : openMenu}
           openMenu={openMenu}
           trailing={
-            keyword ? (
+            <>
+              {" "}
               <Button
                 variant="ghost"
                 size="icon"
                 className="compact-icon-control"
-                aria-label={i18n.message("talents.reset", "Reset {{keyword}} talents", {
-                  keyword: keywordName(keyword),
-                })}
-                disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
-                onClick={() => {
-                  if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
-                }}
+                aria-label={i18n.message("talents.resetAll", "Reset all talents")}
+                disabled={!game.talents.length}
+                onClick={() => setResetAll(true)}
               >
                 <RotateCcw aria-hidden="true" />
               </Button>
-            ) : null
+              {keyword ? (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="compact-icon-control"
+                  aria-label={i18n.message("talents.reset", "Reset {{keyword}} talents", {
+                    keyword: keywordName(keyword),
+                  })}
+                  disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
+                  onClick={() => {
+                    if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
+                  }}
+                >
+                  <RotateCcw aria-hidden="true" />
+                </Button>
+              ) : null}
+            </>
           }
         >
           {keyword ? keywordName(keyword) : i18n.message("menu.talents", "Talents")}
@@ -374,6 +389,19 @@ export function Talents({
           </div>
         </>
       )}
+      <Confirmation
+        open={resetAll}
+        title={i18n.message("talents.resetAll", "Reset all talents")}
+        description={i18n.message("talents.resetAllDescription", "This will refund all your talent points")}
+        confirmLabel={i18n.message("talents.resetAll", "Reset all talents")}
+        onClose={() => setResetAll(false)}
+        onConfirm={() => {
+          if (send({ type: "resetTalents" })) {
+            setResetAll(false);
+            setTreeReset((value) => value + 1);
+          }
+        }}
+      />
     </Screen>
   );
 }

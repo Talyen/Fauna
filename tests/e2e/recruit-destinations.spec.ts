@@ -16,7 +16,7 @@ test("Recruit details and four destination options fit enlarged text and recruit
   });
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.addInitScript(() => {
-    localStorage.setItem("fauna.text-scale", "1.25");
+    localStorage.setItem("fauna.test.text-scale", "1.25");
     localStorage.setItem("fauna.tooltip-scale", "1.25");
   });
   await seed(page, game);
