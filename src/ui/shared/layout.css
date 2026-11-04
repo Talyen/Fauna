@@ -257,3 +257,10 @@ body,
   border-radius: var(--radius-control);
   padding: var(--space-3);
 }
+.app.in-battle .save-notice {
+  left: var(--page-inline-gutter);
+  translate: none;
+  max-width: var(--battle-target-rail-width);
+  flex-wrap: wrap;
+  justify-content: center;
+}
