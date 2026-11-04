@@ -84,6 +84,7 @@ export const SCENARIOS = [
   "journey-room",
   "journey-boss",
   "home",
+  "home-talent-points",
   "campfire",
   "boon",
   "new-boons-1",
@@ -144,7 +145,6 @@ export const SCENARIOS = [
   "merchant-bargain-unavailable",
   "merchant",
   "merchant-unavailable",
-  "glossary",
   "talents",
   "talent-tree",
   "collection-creature",
@@ -187,6 +187,7 @@ export async function reviewScenario(server, name) {
     : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
       ? winBattle()
       : run();
+  if (name === "home-talent-points") game = { ...game, keywordXP: { ...game.keywordXP, physical: 10 } };
   if (name === "starter") {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     game = createGame(42);
@@ -525,7 +526,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
       await next.click();
     await opener.click();
-  } else if (["settings", "collection", "talents", "glossary"].includes(menu)) {
+  } else if (["settings", "collection", "talents"].includes(menu)) {
     await button(menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name === "starter") {
     await page.evaluate(() => {
@@ -538,7 +539,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       delete window.reviewOriginalNow;
     });
     await expect(page.locator(".draft-screen")).toBeVisible();
-  } else if (scenario.name !== "home") {
+  } else if (!["home", "home-talent-points"].includes(scenario.name)) {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
   }

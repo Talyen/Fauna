@@ -10,9 +10,9 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Settings and Save & quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, Save & quit waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
 
-Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
+Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
 [Journey rules](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End journey outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
 
@@ -21,7 +21,7 @@ Collection, Talents, Settings and Glossary open full screen from either menu, in
 | Surface                                                 | Back / Escape / controller B                                                                                       |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Pause                                                   | Dismiss to its opener                                                                                              |
-| Collection, Settings, Glossary, Talents overview        | Restore the originating menu and its corresponding choice                                                          |
+| Collection, Settings, Talents overview                  | Restore the originating menu and its corresponding choice                                                          |
 | Talent tree                                             | Return to the overview; the hamburger still opens the originating menu directly                                    |
 | Creature-parent action inspection                       | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
 | Direct hand/deck action inspection                      | Close to its opener, without creating a creature parent                                                            |
@@ -47,15 +47,15 @@ Apply the [copy and layout rule](../UI.md#copy-and-layout) throughout these scre
 
 Use a balanced header frame up to 640px wide (920px for the Merchant wallet and translated title): Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](#back-and-focus-return), previewing chosen starters during drafting.
 
-Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
+Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. The menu trigger follows Alchemy's 44px surface, muted 24px icon and active appearance. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
-Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
+Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
-Both menus show spendable talent points beside Talents with an accessible description; the count disappears when spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
+Main menu shows a red dot beside Talents when points are available; Pause shows the count. Both provide an accessible description, and the indicator disappears when points are spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
 
 ## Starter draft
 
@@ -69,17 +69,17 @@ Outside battle, use one centered shadcn Dialog panel over the shared dimmed back
 
 [Inspection CSS](../../src/ui/inspection/inspection.css) fits the ability row to the panel width and remaining viewport height, capped by the 184px `--inspection-ability-max-width` per portrait. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
-Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
+Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded keyword definitions. Inspection has no Recruit/Choose action.
 
 [Back and focus return](#back-and-focus-return) owns inspection nesting and dismissal; the accessible X is named Close inspection. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
-Use a centered title, Fauna and Boons tabs, a gallery and pagination. Fauna orders collected species first. Collected artwork shows five external progress stars and activation opens the shared inspector. Uncollected artwork rests in grayscale and cannot be activated. All creatures show their name and passive details on hover or intentional focus; uncollected creatures use their base passive. Browsing never grants discovery.
+Use a centered title, Fauna and Boons tabs, a gallery and pagination. Fauna orders collected species first. Activating collected artwork opens the shared inspector. Uncollected artwork rests in grayscale and cannot be activated. All creatures show their name and passive details on hover or intentional focus; collected creatures show five progress stars beside the name, while uncollected creatures use their base passive. Browsing never grants discovery.
 
 Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
-Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows, with up to three Fauna or four Boons per row. Measured width may reduce the column count before reducing artwork. Reserve a consistent gallery and footer area so the heading, tabs and pagination stay fixed across tabs and pages. Center the grid vertically in its gallery area and reserve star-tier space beneath every Fauna card, including uncollected creatures, so row spacing stays consistent. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
+Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows, with up to three Fauna or four Boons per row. Measured width may reduce the column count before reducing artwork. Reserve a consistent gallery and footer area so the heading, tabs and pagination stay fixed across tabs and pages. Center the grid vertically in its gallery area. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
 
 ## Talents
 
@@ -137,10 +137,6 @@ Controller prompts detect known browser device IDs; Steam Input may expose an Xb
 Changes persist immediately outside progression and Cloud. Tooltip size changes tooltip type/width without scaling artwork. Sound changes apply live without replaying actions. Sliders retain native keyboard behavior; W/A/S/D and controller navigation adjust horizontally and move between rows vertically.
 
 Cloud and diagnostics have no Settings surface, status or Retry control. [Recovery policy](../UI.md#recovery-and-persistent-failures) owns player consequences. Native fullscreen/overlay acceptance belongs to [Release](../RELEASE.md).
-
-## Glossary
-
-Use the shared secondary-scrolling recipe, keeping menus and Back outside the reading region and its final rule reachable. Definitions come from the [gameplay glossary](../KEYWORDS.md#glossary-and-terminology).
 
 ## Deck, piles and owned Boons
 

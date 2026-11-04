@@ -6,6 +6,8 @@ import { produce } from "immer";
 import { createSession } from "../../../src/application/session";
 import { soleReplacement } from "../../../src/application/battle-policy";
 import { freshCombat } from "../../../src/game/combat/index";
+import { dispatch } from "../../../src/game/engine";
+import { setBattleCards } from "../../support/cards";
 import { encodeSave } from "../../../src/game/save";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { App } from "../../../src/ui/App";
@@ -124,6 +126,71 @@ it("automatically fills the final knockout after the player chooses the first ba
     expect(screen.queryByRole("dialog", { name: "Choose a replacement" })).toBeNull();
     await session.flush();
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[1].id).toBe("backup-moth");
+  } finally {
+    cleanup();
+    await session.dispose();
+  }
+});
+
+it("ends after the last card even with Mana remaining, while preserving manual and free plays", () => {
+  const initial = produce(run(), (draft) => {
+    const guard = draft.cards.find((card) => card.definitionId === "mossguard-guard")!;
+    setBattleCards(draft, [guard.id]);
+    draft.battle!.mana = 4;
+  });
+  const cardId = initial.battle!.hand[0]!;
+  const manual = dispatch(initial, { type: "play", cardId, autoEndTurn: false });
+  const automatic = dispatch(initial, { type: "play", cardId, autoEndTurn: true });
+  expect(manual.accepted).toBe(true);
+  expect(manual.state.battle!.mana).toBe(3);
+  expect(manual.state.battle!.turn).toBe(initial.battle!.turn);
+  expect(automatic.accepted).toBe(true);
+  expect(automatic.state.battle!.turn).toBe(initial.battle!.turn + 1);
+
+  const withFreeFood = produce(initial, (draft) => {
+    draft.battle!.mana = 1;
+    draft.boons.push("blossom-cake-stand");
+    const food = {
+      id: "copy-0",
+      definitionId: "food-mana-berries",
+      ownerId: null,
+      temporary: true as const,
+      level: 0,
+    };
+    draft.cards.push(food);
+    draft.battle!.copySerial = 1;
+    draft.battle!.hand.push(food.id);
+  });
+  const next = dispatch(withFreeFood, { type: "play", cardId, autoEndTurn: true });
+  expect(next.accepted).toBe(true);
+  expect(next.state.battle!.mana).toBe(0);
+  expect(next.state.battle!.turn).toBe(initial.battle!.turn);
+  expect(next.state.battle!.hand).toContain("copy-0");
+});
+
+it.each([true, false])("respects auto-end preference %s on resuming an unplayable turn", async (enabled) => {
+  const initial = produce(run(7), (draft) => {
+    draft.battle!.mana = 0;
+  });
+  localStorage.setItem("fauna.auto-end-turn", String(enabled));
+  localStorage.setItem("fauna.save.v1", encodeSave(initial));
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  render(<App session={session} />);
+  try {
+    await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+    if (enabled) {
+      await waitFor(() =>
+        expect(session.store.getState().game.battle!.turn).toBeGreaterThan(initial.battle!.turn),
+      );
+      await session.flush();
+      expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.turn).toBeGreaterThan(
+        initial.battle!.turn,
+      );
+    } else {
+      await new Promise((resolve) => setTimeout(resolve, 350));
+      expect(session.store.getState().game.battle!.turn).toBe(initial.battle!.turn);
+    }
   } finally {
     cleanup();
     await session.dispose();

@@ -370,6 +370,18 @@ export function createSession(
       return store.getState().saveStatus !== "error";
     },
     quit() {
+      if (platform.closeTab && !disposed) {
+        if (quitting) return quitting;
+        quitting = Promise.resolve()
+          .then(async () => {
+            await drainWrites();
+            if (!disposed && store.getState().saveStatus !== "error") platform.closeTab?.();
+          })
+          .finally(() => {
+            quitting = undefined;
+          });
+        return quitting;
+      }
       if (!platform.quit || disposed) return Promise.resolve();
       if (quitting) return quitting;
       // Own native quit before prepareClose publishes to subscribers.

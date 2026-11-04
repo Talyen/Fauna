@@ -1,4 +1,4 @@
-import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
@@ -47,6 +47,48 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   expect((await state(page)).revision).toBe(before.revision + 1);
   await expect(page.locator(".health-number,.intent,.battle-status,.pile-counts")).toHaveCount(0);
   await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
+});
+
+test("short battles keep the hand at the bottom and statuses below portraits", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const fixture = produce(run(7), (draft) => {
+    draft.battle!.enemies[0]!.combat.thorns = 3;
+  });
+  await seed(page, fixture);
+  await resume(page);
+  const geometry = await page.evaluate(() => {
+    const active = document.querySelector(".app:not([inert])")!;
+    const art = active.querySelector(".enemy-row .creature-card")!.getBoundingClientRect();
+    const status = active.querySelector(".enemy-row .combat-status")!.getBoundingClientRect();
+    const hand = active.querySelector(".hand")!.getBoundingClientRect();
+    return {
+      statusBelow: status.top >= art.bottom - 1,
+      centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
+      handCenter: Math.abs(hand.left + hand.width / 2 - innerWidth / 2),
+      handBottom: hand.bottom,
+      horizontal: getComputedStyle(active.querySelector(".hand")!).flexDirection === "row",
+    };
+  });
+  expect(geometry.statusBelow).toBe(true);
+  expect(geometry.centered).toBeLessThanOrEqual(1);
+  expect(geometry.handCenter).toBeLessThanOrEqual(1);
+  expect(geometry.handBottom).toBeGreaterThanOrEqual(720);
+  expect(geometry.horizontal).toBe(true);
+});
+
+test("idle combatant clicks leave the battle and portrait unchanged", async ({ page }) => {
+  await seed(page, targetingBattle());
+  await resume(page);
+  const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+  const before = await state(page);
+  await enemy.hover();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  const beforeScale = await enemy.evaluate((element) => getComputedStyle(element).scale);
+  await page.mouse.down();
+  expect(await enemy.evaluate((element) => getComputedStyle(element).scale)).toBe(beforeScale);
+  await page.mouse.up();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  expect((await state(page)).revision).toBe(before.revision);
 });
 
 test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({
@@ -136,9 +178,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "keyboard");
 });
 
-test("navigation returns to the nearest remaining card; denial is visual and respects motion", async ({
-  page,
-}) => {
+test("navigation returns to the nearest remaining card; invalid targets do nothing", async ({ page }) => {
   const fixture = targetingBattle();
   await seed(page, fixture);
   await resume(page);
@@ -151,32 +191,8 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   const before = await state(page);
   await cards.first().click();
   const unavailable = page.locator(".app:not([inert]) .player-row .invalid-target").first();
-  await unavailable.evaluate((element) => {
-    // Observe after React handles the real click, before a slow driver round trip
-    // can outlast the short denial animation.
-    document.addEventListener("click", (event) => {
-      if (!(event.target instanceof Node) || !element.contains(event.target)) return;
-      element.setAttribute(
-        "data-denial-motion",
-        String(
-          element
-            .getAnimations()
-            .some(
-              (animation) =>
-                animation.effect instanceof KeyframeEffect &&
-                animation.effect.getKeyframes().some((frame) => "translate" in frame),
-            ),
-        ),
-      );
-    });
-  });
   await unavailable.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(unavailable).toHaveAttribute("data-denial-motion", "true");
   expect((await state(page)).revision).toBe(before.revision);
-  await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await settleScreen(page);
-  await unavailable.click();
-  await expect(unavailable).toHaveAttribute("data-denial-motion", "false");
+  await expect(page.locator(".battle-screen")).not.toHaveAttribute("data-selected-card", "");
 });

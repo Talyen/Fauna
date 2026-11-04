@@ -20,6 +20,7 @@ export interface Platform {
   getSteamLanguage?: () => Promise<string | null>;
   desktop: boolean;
   quit?: () => Promise<void>;
+  closeTab?: () => void;
   onCloseRequested?: (listener: () => Promise<boolean>) => () => void;
 }
 export interface DesktopBridge {

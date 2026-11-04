@@ -43,7 +43,7 @@ Artwork cards, the hand fan, targeting, Mana crystals, combat feedback and forec
 
 ArtCard is the sole artwork surface, with exactly one contained image at its native [aspect ratio](CONTENT.md#artwork-contracts). Never stretch or crop the image; the [battle hand](ui/battle.md#layout) retains its sole authored bottom-edge clipping exception. Battlefield Health bars and status icons sit inside the bottom of the artwork; other text/UI stays outside. Ordinary names/rules use hover/focus details, with [inspection](ui/screens.md#creature-and-action-inspection) and [Collection](ui/screens.md#collection) defining disclosure. Use shared color, text-size and radius tokens. [Design-system checks](DESIGN_SYSTEM.md) enforce source ownership; token-based inline styles and local motion/geometry are allowed, with interaction styling/radii assessed in rendered review.
 
-Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop; definitions remain in the Glossary. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
+Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
 
 ## Recovery and persistent failures
 
@@ -85,6 +85,8 @@ Disabled artwork stays inspectable without scale or border emphasis. Reduced mot
 All non-art controls provide at least 44px hit height. Icons have accessible labels and are paired with values or names. Color alone never conveys availability or selection.
 
 ### Input and focus
+
+Dragging across the game does not select text or artwork; editable text remains selectable.
 
 Mouse, W/A/S/D/Tab, and standard-mapped controller actions share the same commands and focus paths. Enter/Space and the controller confirm button activate focused controls; the controller back button or Escape returns one level. Prompts follow the detected controller family or the player's saved override. Nested dialogs own their focus and restore a connected, enabled opener; fallback goes to the current screen. Text enlargement, reduced motion, and sound preferences persist independently of game saves. Larger text retains its selected size except when a talent tree must shrink to fit; reflow and explicit pages keep content and controls reachable without hidden clipping. Pause, inspection and navigation do not alter the game revision.
 

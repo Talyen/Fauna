@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "e3df304555d1934a79f1324fd19a5668d4277776eba11cc4991a9c5e89f771da",
-    "text": "Réglage facultatif; Après une carte jouée ou une permutation, termine votre tour si vous n’avez plus de <keyword0>Mana</keyword0>, aucune carte jouable et aucun remplacement en attente; Vous pouvez toujours choisir Terminer le tour sans confirmation"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "16d4ae88b97199f8b58d922c537e97ac4546ccacea92f03859c4b57c57ca2dea",
+    "text": "Réglage facultatif; Termine votre tour si vous n’avez aucune carte jouable et aucun remplacement en attente; Vous pouvez toujours choisir Terminer le tour sans confirmation"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,
@@ -9665,30 +9665,6 @@
     "sourceHash": "c5edcf51de3665a87eb53b9bfdf4ea1974d9995d9692878662a9e075a6045c5f",
     "text": "Gains du dernier combat"
   },
-  "glossary.controllerHelp": {
-    "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
-    "sourceHash": "f60379d6b2d6ff6e1e997f3298b2c8e3adb6c3d5a67bc6994d7e303e0e1e17f4",
-    "text": "Utilisez la croix directionnelle ou le stick gauche pour naviguer ; {{confirm}} active ; {{inspect}} examine les images hors combat ; {{back}} revient en arrière ; {{endTurn}} termine le tour"
-  },
-  "glossary.entries": {
-    "reviewed": true,
-    "source": "Glossary entries",
-    "sourceHash": "43ecfa7ee048e01a1c8995fca632f257f4d1898976ec087f2c66885ea1e75efd",
-    "text": "Entrées du glossaire"
-  },
-  "glossary.keyboardHelp": {
-    "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
-    "sourceHash": "fd49d123545fdcdb219f83da97c4d11e16f27640cb742b3c5515d09430b2a217",
-    "text": "W/A/S/D ou Tab pour naviguer ; A/D change de cible ; Entrée active ; I ou clic droit examine les images hors combat ; Échap revient en arrière"
-  },
-  "glossary.title": {
-    "reviewed": true,
-    "source": "Glossary & controls",
-    "sourceHash": "c083affa1232aef10bc976cc33a286c6b2e96eba5588ef3f9301bec5c59b9a18",
-    "text": "Glossaire et commandes"
-  },
   "inspection.abilities": {
     "reviewed": true,
     "source": "Abilities",
@@ -10222,12 +10198,6 @@
     "source": "End journey",
     "sourceHash": "03c14ce62b6058fe565ced5260031012a5f1c8621b5245424352b51549ce02c2",
     "text": "Terminer le voyage"
-  },
-  "menu.glossary": {
-    "reviewed": true,
-    "source": "Glossary",
-    "sourceHash": "9d40b730eb4500fa55f1bee3b7747f2e66e402ac1f222223cbe96dd83a577ccc",
-    "text": "Glossaire"
   },
   "menu.logo": {
     "reviewed": true,

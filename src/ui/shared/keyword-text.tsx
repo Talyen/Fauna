@@ -19,7 +19,7 @@ export function Keyword({ id, className }: { id: KeywordId; className?: string }
   );
 }
 
-/** Labels stay readable without color; definitions remain in the menu Glossary. */
+/** Labels stay readable without color. */
 export function KeywordText({
   text,
   id,

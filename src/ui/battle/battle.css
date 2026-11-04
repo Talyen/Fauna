@@ -272,11 +272,16 @@
 }
 .battle-screen .combatant-details {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--screen-item-gap);
-  min-height: var(--target-readout-height);
-  padding-top: var(--screen-item-gap);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  min-height: calc(var(--control-height) + 4px);
+  padding-top: 4px;
+}
+/* Keep room for both status controls and a forecast in rows that have effects. */
+.battle-screen :is(.enemy-row, .player-row):has(.combat-status) .combatant-details {
+  min-height: calc(var(--control-height) + var(--text-secondary) * 1.4 + 4px);
 }
 .battle-screen .battle-readout,
 .battle-screen .target-preview {
@@ -377,12 +382,13 @@
   .health-forecast {
   scale: var(--hover-scale);
 }
-.battle-screen .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):active) .health-forecast {
-  scale: var(--pressed-scale);
+:root .app .battle-screen .creature-card:not(:disabled):not([aria-disabled="true"]):active {
+  scale: var(--hover-scale);
+  border-color: transparent;
 }
 .battle-screen .combat-stats {
   min-width: 0;
-  min-height: var(--control-height);
+  min-height: 0;
   padding-top: 0;
   overflow: visible;
   flex-wrap: wrap;
@@ -630,12 +636,9 @@
 }
 
 .battle-screen .combat-status {
+  order: -1;
   flex-shrink: 0;
   pointer-events: auto;
-  position: absolute;
-  top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height) - var(--control-height));
-  left: 50%;
-  translate: -50% 0;
   flex-wrap: nowrap;
   z-index: 2;
 }
