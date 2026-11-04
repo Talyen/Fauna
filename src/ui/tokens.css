@@ -35,6 +35,8 @@
   --selected: var(--ring);
   --mana-glint: #e6faffcc;
   --health: var(--keyword-health);
+  --battle-player-color: #4ade80;
+  --battle-enemy-color: var(--keyword-health);
   --block: var(--keyword-block);
   --font-ui: "Inter Variable", Inter, sans-serif;
   --font-name: var(--font-ui);

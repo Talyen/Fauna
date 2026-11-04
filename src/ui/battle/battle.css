@@ -38,6 +38,15 @@
 .player-row .creature-card {
   width: var(--battle-creature-width);
 }
+.enemy-row {
+  --battle-team-color: var(--battle-enemy-color);
+}
+.player-row {
+  --battle-team-color: var(--battle-player-color);
+}
+:root .app .battle-screen :is(.enemy-row, .player-row) .creature-card {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--battle-team-color) 35%, transparent);
+}
 .target-control {
   display: flex;
   flex: 0 0 auto;
@@ -354,6 +363,12 @@
   width: 100%;
   height: var(--battle-health-height);
   border-radius: var(--radius-round);
+}
+.battle-screen .player-row .health-forecast .progress-track {
+  color: var(--battle-player-color);
+}
+.battle-screen .player-row .health-forecast .progress-track[data-direction="gain"] .progress-current {
+  background: currentColor;
 }
 .battle-screen .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):hover) .health-forecast,
 :root[data-focus="visible"]
