@@ -257,14 +257,14 @@ it(
       const tree = within(screen.getByRole("main"));
       const talents = TALENTS.filter((talent) => talent.keyword === keyword);
       const rows = [...new Set(talents.map((talent) => talent.row))];
-      for (const [index, row] of rows.entries()) {
+      expect(tree.queryByRole("button", { name: "Next page" })).toBeNull();
+      for (const row of rows) {
         const names: string[] = talents.filter((entry) => entry.row === row).map((talent) => talent.name);
         expect(
           tree
             .getAllByRole("button", { name: (name) => names.includes(name) })
             .map((button) => button.getAttribute("aria-label")),
         ).toEqual(names);
-        if (index < rows.length - 1) fireEvent.click(tree.getByRole("button", { name: "Next page" }));
       }
       fireEvent.click(screen.getByRole("button", { name: "Back" }));
     }
@@ -273,7 +273,7 @@ it(
   ciTimeout(15_000),
 );
 
-it("purchases a paged physical talent only after its prerequisites", async () => {
+it("purchases a physical talent only after its prerequisites", async () => {
   const game = produce(run(), (state) => {
     state.keywordXP.physical = 10000;
   });
@@ -284,14 +284,11 @@ it("purchases a paged physical talent only after its prerequisites", async () =>
     const tree = within(screen.getByRole("main"));
     const talents = TALENTS.filter((talent) => talent.keyword === "physical");
     const later = talents.find((talent) => talent.row === 1)!;
-    await user.click(tree.getByLabelText("Next page", { selector: "button" }));
     expect(tree.getByLabelText(later.name, { selector: "button" }).getAttribute("aria-disabled")).toBe(
       "true",
     );
-    await user.click(tree.getByLabelText("Previous page", { selector: "button" }));
     for (const talent of talents.filter((talent) => talent.row === 0))
       await user.click(tree.getByLabelText(talent.name, { selector: "button" }));
-    await user.click(tree.getByLabelText("Next page", { selector: "button" }));
     expect(tree.getByLabelText(later.name, { selector: "button" }).getAttribute("aria-disabled")).toBe(
       "false",
     );

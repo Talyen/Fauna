@@ -3,7 +3,7 @@ import { useEffectMetadata } from "./effects/effects";
 import { KEYWORD_DEFINITIONS, type KeywordId } from "../../game/keywords";
 import { useRuleText } from "./localization/rule-catalog";
 import type { RuleMessage } from "./localization/rule-message";
-import { Fragment } from "react";
+import { Fragment, type CSSProperties } from "react";
 
 /** Format complete translated card rules without changing their catalog identity. */
 export function cardRuleLines(text: string) {
@@ -25,11 +25,13 @@ export function KeywordText({
   id,
   structured,
   lines = false,
+  keywordColorVariables = false,
 }: {
   text: string;
   id?: string;
   structured?: RuleMessage;
   lines?: boolean;
+  keywordColorVariables?: boolean;
 }) {
   const metadata = useEffectMetadata();
   return useRuleText(text, id, structured).map((part, index) =>
@@ -38,6 +40,11 @@ export function KeywordText({
         key={index}
         className="rule-keyword"
         data-keyword={part.keyword}
+        style={
+          keywordColorVariables
+            ? ({ "--rule-keyword-color": `var(--keyword-${part.keyword})` } as CSSProperties)
+            : undefined
+        }
         {...metadata}
         data-effect-keywords={part.keyword}
       >
