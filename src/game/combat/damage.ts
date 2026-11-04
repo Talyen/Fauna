@@ -13,7 +13,7 @@ import {
   enemyReflectionRecipients,
 } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
-import { roll } from "../random";
+import { hasOffensiveObserver, observeOffensive, roll } from "../random";
 import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
@@ -551,9 +551,18 @@ export function* resolveHit(
     state.battle.meteoriteUsed = true;
     damage *= boonRule("meteorite").multiplier;
   }
+  const offensiveBase = damage;
   // Chain strength is the original absorbed amount, not a second application of attack bonuses
   if (options.origin !== "chain")
     damage = modifiedDamage(state, source, target, damage, type, options, attack);
+  if (hasOffensiveObserver(state))
+    observeOffensive(state, {
+      sourceId: source.id,
+      targetId: target.id,
+      damageType: type,
+      primary: options.origin === "ability" && options.primaryAttack === true,
+      amount: modifiedDamage(state, source, target, offensiveBase, type, options, attack, true),
+    });
   const riposte =
     direct &&
     alliedSource &&

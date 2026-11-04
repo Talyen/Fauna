@@ -665,8 +665,8 @@
   max-width: 100%;
 }
 .battle-screen .status-icon {
-  flex: 0 0 24px;
-  width: 24px;
+  flex: 0 0 max(24px, var(--icon-size));
+  width: max(24px, var(--icon-size));
 }
 :root .app .battle-screen :is(.creature-card, .hand .action-card) {
   --border-art-width: 0px;
@@ -688,4 +688,29 @@
   color: var(--foreground);
   font-weight: 600;
   text-align: center;
+}
+
+.boon-control {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 3 * (var(--control-height) + var(--screen-item-gap)));
+  z-index: 10;
+}
+.battle-gold {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 4 * (var(--control-height) + var(--screen-item-gap)));
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  color: var(--gold-pale);
+}
+
+/* The live wallet and toolbar require a clear row above both creature rows. */
+.battle-screen {
+  padding-top: var(--control-height);
+}
+.battle-gold {
+  z-index: 10;
 }

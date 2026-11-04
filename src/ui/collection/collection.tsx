@@ -148,7 +148,7 @@ export function Collection({
                             className="locked-species"
                             tabIndex={0}
                             role="img"
-                            aria-label={i18n.message("collection.locked", "Locked species")}
+                            aria-label={i18n.message("collection.undiscovered", "Undiscovered")}
                           >
                             <ArtCard
                               aspect="creature"
@@ -159,7 +159,13 @@ export function Collection({
                           </div>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <CreatureDetails progression={game} kind={creature.id} />
+                          <strong>{i18n.message("collection.undiscovered", "Undiscovered")}</strong>
+                          <p>
+                            {i18n.message(
+                              "collection.discover",
+                              "Recruit this creature to reveal its details",
+                            )}
+                          </p>
                         </TooltipContent>
                       </Tooltip>
                     );

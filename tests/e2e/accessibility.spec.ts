@@ -40,7 +40,7 @@ test("home, settings, battle, pause and rewards meet automated accessibility che
   await seed(page, winBattle());
   await resume(page);
   await continueToRecruit(page);
-  await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
   await scan(page, "recruit");
   await seed(page, bossReward());
   await resume(page);

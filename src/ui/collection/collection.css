@@ -15,7 +15,6 @@
   gap: var(--screen-section-gap);
 }
 .collection-content {
-  --collection-creature-scale: calc(var(--art-creature-scale) * 1.08);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -28,13 +27,13 @@
   justify-content: center;
   align-content: center;
   height: calc(
-    max(var(--art-long-side), var(--art-short-side) * var(--collection-creature-scale)) * 2 +
+    max(var(--art-long-side), var(--art-short-side) * var(--art-collection-creature-scale)) * 2 +
       var(--screen-item-gap)
   );
   gap: var(--screen-item-gap);
 }
 .collection-grid[data-view="fauna"] {
-  --art-landscape-width: calc(var(--art-short-side) * 4 / 3 * var(--collection-creature-scale));
+  --art-landscape-width: var(--art-collection-landscape-width);
   align-self: center;
   max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
 }

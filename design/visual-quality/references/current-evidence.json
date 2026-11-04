@@ -1,4 +1,5 @@
 {
+  "frameRetention": "Historical screenshots removed on 2026-11-04 because they depict superseded UI; capture details remain as a record",
   "status": "User-directed Merchant spacing and header symmetry; aesthetic acceptance pending",
   "sourceSha256": {
     "src/main.tsx": "89f5cf7773e0bc4fbc9b35b3bcda0436ea9ef130e551054feabdea8a7c751352",

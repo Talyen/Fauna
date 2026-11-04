@@ -19,7 +19,7 @@ test("records battle and menu frame pacing with background effects at zero and f
   await page.bringToFront();
   const observations = [];
   for (const intensity of [0, 100]) {
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.getByRole("button", { name: "Options", exact: true }).click();
     await slider(page, "Background Glow", intensity);
     await slider(page, "Background Particles", intensity);
     await page.keyboard.press("Escape");
@@ -52,7 +52,7 @@ test("records battle and menu frame pacing with background effects at zero and f
       observations.push({ scene, intensity, ...sample });
       if (scene === "battle") {
         await page.getByRole("button", { name: "Open menu", exact: true }).click();
-        await page.getByRole("button", { name: "Main menu", exact: true }).click();
+        await page.getByRole("button", { name: "Main Menu", exact: true }).click();
       }
     }
   }

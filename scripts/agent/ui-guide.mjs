@@ -1,3 +1,4 @@
+import { randomInt } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { SCENARIOS } from "../dev/review-scenarios.mjs";
@@ -10,10 +11,14 @@ export function uiGuide(tier, scenario) {
     process.platform === "darwin"
       ? 'python3 "$HOME/Developer/.coordination/heavy_lane.py" --owner "$CODEX_THREAD_ID" --wait 900 --timeout 300 -- '
       : "";
+  const seed = scenario === "battle" ? randomInt(0, 0x100000000) : undefined;
   const capture = (label) =>
-    `${lane}npm run capture:task -- --scenario ${scenario} --tier ${tier} --label ${label}`;
+    `${lane}npm run capture:task -- --scenario ${scenario} --tier ${tier} --label ${label}${seed !== undefined ? ` --seed ${seed}` : ""}`;
   return [
     `UI review: ${tier}; scenario ${scenario}`,
+    ...(seed !== undefined
+      ? [`Battle lineup seed: ${seed}; reuse it for matching before/after states.`]
+      : []),
     ...(process.platform === "darwin"
       ? ["The capture command uses this chat’s CODEX_THREAD_ID for shared host admission."]
       : []),

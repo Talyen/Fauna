@@ -1,7 +1,23 @@
 import type { GameState } from "./types";
 
 export type RandomDecision = { kind: "chance"; threshold: number } | { kind: "index"; size: number };
-export type DecisionSource = ((decision: RandomDecision | undefined) => number) & { step?: () => void };
+export type DecisionSource = ((decision: RandomDecision | undefined) => number) & {
+  step?: () => void;
+  offensive?: (packet: OffensivePacket) => void;
+};
+export interface OffensivePacket {
+  sourceId: string;
+  targetId: string;
+  amount: number;
+  damageType: import("./content").DamageType;
+  primary: boolean;
+}
+export function hasOffensiveObserver(state: GameState) {
+  return !!sources.get(state)?.offensive;
+}
+export function observeOffensive(state: GameState, packet: OffensivePacket) {
+  sources.get(state)?.offensive?.(packet);
+}
 // A source belongs to one ephemeral Immer draft, never to a saved or published snapshot.
 const sources = new WeakMap<GameState, DecisionSource>();
 export function observeDecisions(draft: GameState, source: DecisionSource) {

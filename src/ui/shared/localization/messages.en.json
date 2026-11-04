@@ -125,20 +125,23 @@
   "card.upgradedName": {
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "text": "Recruit this creature to reveal its details"
+  },
   "collection.fauna": {
     "text": "Fauna"
   },
   "collection.inspect": {
     "text": "Inspect {{name}}"
   },
-  "collection.locked": {
-    "text": "Locked species"
-  },
   "collection.pages": {
     "text": "Collection pages"
   },
   "collection.stars": {
     "text": "{{name}}: {{rank}} of {{maximum}} stars"
+  },
+  "collection.undiscovered": {
+    "text": "Undiscovered"
   },
   "collection.views": {
     "text": "Collection views"
@@ -148,6 +151,9 @@
   },
   "common.loading": {
     "text": "Loading…"
+  },
+  "confirmation.cancel": {
+    "text": "Cancel"
   },
   "controller.circle": {
     "text": "Circle"
@@ -199,6 +205,9 @@
   },
   "deck.empty": {
     "text": "Deck is empty"
+  },
+  "deck.handOverflow": {
+    "text": "Hand Overflow"
   },
   "deck.pages": {
     "text": "Deck pages"
@@ -269,11 +278,11 @@
   "inspection.trait": {
     "text": "Trait"
   },
-  "journey.actRoom": {
-    "text": "Act {{act}} · Room {{room}} of {{total}}"
-  },
   "journey.boss": {
     "text": "Boss: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "text": "Choose Destination"
   },
   "journey.combat": {
     "text": "Combat"
@@ -545,9 +554,6 @@
   "menu.returnToRun": {
     "text": "Return to Run"
   },
-  "menu.settings": {
-    "text": "Settings"
-  },
   "menu.talentPoints": {
     "forms": {
       "one": "{{count}} talent point available",
@@ -716,9 +722,6 @@
   "recovery.display": {
     "text": "Fauna could not display this screen; trying again…"
   },
-  "recovery.save": {
-    "text": "Progress cannot be saved right now; keep Fauna open while it retries"
-  },
   "recruit.incoming": {
     "text": "Incoming creature"
   },
@@ -770,11 +773,11 @@
   "results.returned": {
     "text": "Returned home"
   },
+  "results.victory": {
+    "text": "Victory"
+  },
   "rewards.chooseBoon": {
     "text": "Choose a Boon"
-  },
-  "rewards.chooseRecruit": {
-    "text": "Choose a Recruit"
   },
   "rewards.new": {
     "text": "New!"
@@ -791,6 +794,15 @@
   "rewards.skip": {
     "text": "Skip"
   },
+  "save.failed": {
+    "text": "Couldn’t save"
+  },
+  "save.retry": {
+    "text": "Retry"
+  },
+  "save.saving": {
+    "text": "Saving…"
+  },
   "settings.audio": {
     "text": "Audio"
   },
@@ -803,14 +815,23 @@
   "settings.battle": {
     "text": "Battle"
   },
+  "settings.borderless": {
+    "text": "Borderless Fullscreen"
+  },
+  "settings.brightness": {
+    "text": "Brightness"
+  },
   "settings.categories": {
     "text": "Settings categories"
   },
+  "settings.clearConfirm": {
+    "text": "Clear all progress and start fresh? This cannot be undone"
+  },
+  "settings.clearSave": {
+    "text": "Clear Save Data"
+  },
   "settings.closeLanguage": {
     "text": "Close language"
-  },
-  "settings.controllerPrompts": {
-    "text": "Controller prompts"
   },
   "settings.display": {
     "text": "Display"
@@ -830,20 +851,20 @@
   "settings.fullscreen": {
     "text": "Fullscreen"
   },
+  "settings.gameSize": {
+    "text": "Game Size"
+  },
+  "settings.gameplay": {
+    "text": "Gameplay"
+  },
   "settings.glow": {
     "text": "Background Glow"
-  },
-  "settings.glowValue": {
-    "text": "Background Glow value"
   },
   "settings.language": {
     "text": "Language"
   },
   "settings.languageDescription": {
     "text": "Choose a language"
-  },
-  "settings.languageValue": {
-    "text": "Language: {{language}}"
   },
   "settings.master": {
     "text": "Master"
@@ -866,20 +887,26 @@
   "settings.muteBackground": {
     "text": "Mute in background"
   },
+  "settings.other": {
+    "text": "Other"
+  },
   "settings.particles": {
     "text": "Background Particles"
   },
-  "settings.particlesValue": {
-    "text": "Background Particles value"
+  "settings.rememberAutoplay": {
+    "text": "Remember Auto-Battle Preference"
+  },
+  "settings.resetDefault": {
+    "text": "Reset to Default"
+  },
+  "settings.resetSave": {
+    "text": "Reset & Save Data"
+  },
+  "settings.saveData": {
+    "text": "Save Data"
   },
   "settings.sound": {
     "text": "Sound"
-  },
-  "settings.textSize": {
-    "text": "Text size"
-  },
-  "settings.tooltipPercent": {
-    "text": "Tooltip {{value}}%"
   },
   "settings.tooltipSize": {
     "text": "Tooltip size"
@@ -958,6 +985,12 @@
   },
   "talents.reset": {
     "text": "Reset {{keyword}} talents"
+  },
+  "talents.resetAll": {
+    "text": "Reset all talents"
+  },
+  "talents.resetAllDescription": {
+    "text": "This will refund all your talent points"
   },
   "talents.row": {
     "text": "Row {{row}}"

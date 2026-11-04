@@ -30,6 +30,49 @@
   object-fit: contain;
   border-radius: calc(var(--radius) - var(--border-art-width));
 }
+.art-slices {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - var(--border-art-width));
+  pointer-events: none;
+}
+.art-slices > img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.art-slices > img:first-child,
+.art-slices > img:last-child {
+  object-position: 75% center;
+}
+.art-slices[data-slices="2"] > img {
+  width: 60%;
+}
+.art-slices[data-slices="2"] > img:first-child {
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 66.667% 100%, 0 100%);
+}
+.art-slices[data-slices="2"] > img:last-child {
+  right: 0;
+  clip-path: polygon(33.333% 0, 100% 0, 100% 100%, 0 100%);
+}
+.art-slices[data-slices="3"] > img:first-child {
+  left: 0;
+  width: 40%;
+  clip-path: polygon(0 0, 100% 0, 66.667% 100%, 0 100%);
+}
+.art-slices[data-slices="3"] > img:nth-child(2) {
+  left: 26.667%;
+  width: 46.666%;
+  clip-path: polygon(28.571% 0, 100% 0, 71.429% 100%, 0 100%);
+}
+.art-slices[data-slices="3"] > img:last-child {
+  right: 0;
+  width: 40%;
+  clip-path: polygon(33.333% 0, 100% 0, 100% 100%, 0 100%);
+}
 .control-art-effect {
   position: absolute;
   inset: 0;

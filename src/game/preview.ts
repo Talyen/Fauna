@@ -1,9 +1,14 @@
 import { previewCard } from "./engine";
 import type { CommandResult, GameState } from "./types";
-import type { RandomDecision } from "./random";
+import type { OffensivePacket, RandomDecision } from "./random";
 
 export type PlayProjection =
-  | { kind: "complete"; outcomes: readonly CommandResult[]; replays: number }
+  | {
+      kind: "complete";
+      outcomes: readonly CommandResult[];
+      replays: number;
+      offensive?: readonly (readonly OffensivePacket[])[];
+    }
   | { kind: "unknown"; reason: "hidden" | "budget"; replays: number };
 class Fork extends Error {
   constructor(readonly decision: RandomDecision) {
@@ -20,6 +25,7 @@ class Unresolved extends Error {
 export function projectPlay(state: GameState, cardId: string, targetId?: string): PlayProjection {
   const pending: number[][] = [[]];
   const outcomes: CommandResult[] = [];
+  const offensive: OffensivePacket[][] = [];
   let replays = 0;
   let steps = 0;
   const step = () => {
@@ -32,6 +38,7 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
       const choices = pending.pop()!;
       let index = 0;
       try {
+        const packets: OffensivePacket[] = [];
         outcomes.push(
           previewCard(
             state,
@@ -58,10 +65,12 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
               },
               {
                 step,
+                offensive: (packet: OffensivePacket) => packets.push(packet),
               },
             ),
           ),
         );
+        offensive.push(packets);
       } catch (error) {
         if (!(error instanceof Fork)) throw error;
         const decision = error.decision;
@@ -74,7 +83,7 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
         }
       }
     }
-    return { kind: "complete", outcomes, replays };
+    return { kind: "complete", outcomes, replays, offensive };
   } catch (error) {
     if (!(error instanceof Unresolved)) throw error;
     // An incomplete set cannot establish bounds or guarantee a consequence.

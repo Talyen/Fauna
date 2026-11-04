@@ -134,14 +134,13 @@ it(
       await user.click(screen.getByRole("button", { name: "Rest" }));
       await session.flush();
       const after = session.store.getState().game;
-      expect(after.phase).toBe("teamSelection");
+      expect(after.phase).toBe("campfire");
       expect(after.team.map((creature) => creature.health)).toEqual([10, 19, 30]);
-      const recovery = screen.getByRole("status", { name: "Rest recovery" });
-      expect(recovery.textContent).toContain("10 → 19 Health · +9");
-      expect(
-        within(recovery).getByRole("progressbar", { name: "Emberback Health" }).getAttribute("aria-valuenow"),
-      ).toBe("19");
-      expect(after.encounter).toBe(before.encounter + 1);
+      expect(after.encounter).toBe(before.encounter);
+      await user.click(screen.getByRole("button", { name: "Continue" }));
+      await session.flush();
+      expect(session.store.getState().game.phase).toBe("teamSelection");
+      expect(session.store.getState().game.encounter).toBe(before.encounter + 1);
       expect(after.keywordXP).toEqual(before.keywordXP);
       expect(after.currency).toBe(before.currency);
       expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();

@@ -61,7 +61,8 @@ for (const [width, enlarged, outcome] of [
     await seed(page, game);
     if (enlarged) {
       await page.getByRole("button", { name: "Options", exact: true }).click();
-      await page.getByRole("radio", { name: "125%", exact: true }).click();
+      await page.getByRole("slider", { name: "Game Size", exact: true }).focus();
+      await page.keyboard.press("End");
       await page.keyboard.press("Escape");
     }
     await resume(page);
@@ -96,7 +97,7 @@ for (const [width, enlarged, outcome] of [
     if (outcome === "victory") {
       expect(game.phase).toBe("recruit");
       expect(game.reward!.recruits).toEqual([defeatedBoss]);
-      await expect(page.getByRole("heading", { name: "Last battle earnings", exact: true })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
       await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
       await reloadHome(page);
       await resume(page);
@@ -138,7 +139,7 @@ for (const input of ["keyboard", "controller"] as const)
   test(`boss victory commits rewards with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+    await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
     const fixture = victoryReady(
       accept(
         produce(run(7), (draft) => {

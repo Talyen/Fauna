@@ -16,12 +16,12 @@ test("last mana saves the full turn before immediate close and does not replay o
     d.battle!.discard = [];
   });
   await seed(page, run(8));
-  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.evaluate(() => localStorage.setItem("fauna.game-scale", "1.2"));
   await seed(page, fixture);
-  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
+  expect(await page.evaluate(() => localStorage.getItem("fauna.game-scale"))).toBe("1.2");
   await reloadHome(page);
   expect(await state(page)).toEqual(fixture);
-  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
+  expect(await page.evaluate(() => localStorage.getItem("fauna.game-scale"))).toBe("1.2");
   await resume(page);
   await page.locator(".app:not([inert]) .hand .action-card").click();
   await saved(page);

@@ -52,7 +52,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
 
 test("the whole talent tree stays reachable without pages", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   const press = await gamepad(page);
   await seed(page, run());
   await page.getByRole("button", { name: "Talents", exact: true }).click();

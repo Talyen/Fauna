@@ -1,4 +1,5 @@
 {
+  "frameRetention": "Historical screenshots removed on 2026-11-04 because they depict superseded UI; capture details remain as a record",
   "status": "User-directed sizing implemented; rendered appearance not separately accepted",
   "browser": "Chromium",
   "reducedMotion": true,

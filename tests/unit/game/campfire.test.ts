@@ -16,22 +16,30 @@ it.each([22, 21, 20, 1])("uses the exact 30%% missing Health threshold at %s/30"
   if (health > 21) expect(result.state).toBe(s);
   else expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
-it.each([0, 1, 2, 3, 4, 5, 6, 7])("resting at encounter %s advances the room", (encounter) => {
-  const s = produce(destinations(), (d) => {
-    d.encounter = encounter;
-    d.journey!.victories = d.encounter;
-    d.journey!.victories = encounter;
-    d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
-    d.team[0]!.health = 21;
-  });
-  const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });
-  expect(rested.team[0]!.health).toBe(30);
-  expect(rested.expedition!.lastRoom).toBe("campfire");
-  expect(rested.encounter).toBe(encounter + 1);
-  expect(rested.journey).toEqual(s.journey);
-  expect(canVisitCampfire(rested)).toBe(false);
-  expect(decodeSave(encodeSave(rested))).toEqual(rested);
-});
+it.each([0, 1, 2, 3, 4, 5, 6, 7])(
+  "resting at encounter %s saves its result before Continue advances the room",
+  (encounter) => {
+    const s = produce(destinations(), (d) => {
+      d.encounter = encounter;
+      d.journey!.victories = d.encounter;
+      d.journey!.victories = encounter;
+      d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
+      d.team[0]!.health = 21;
+    });
+    const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });
+    expect(rested.team[0]!.health).toBe(30);
+    expect(rested.expedition!.lastRoom).toBe("campfire");
+    expect(rested.encounter).toBe(encounter);
+    expect(rested.phase).toBe("campfire");
+    expect(dispatch(decodeSave(encodeSave(rested)), { type: "rest" }).accepted).toBe(false);
+    const continued = accept(rested, { type: "leaveCampfire" });
+    expect(continued.encounter).toBe(encounter + 1);
+    expect(continued.phase).toBe("teamSelection");
+    expect(rested.journey).toEqual(s.journey);
+    expect(canVisitCampfire(rested)).toBe(false);
+    expect(decodeSave(encodeSave(rested))).toEqual(rested);
+  },
+);
 it("counts reserves and restores knocked-out reserves without overfilling healthy allies", () => {
   const s = produce(run(), (d) => {
     prepareDestination(d);

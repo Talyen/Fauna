@@ -13,6 +13,7 @@ import { chosenRecipients, inspectCardPlay } from "../../src/game/play-queries";
 import { playTargeting } from "../../src/game/mending";
 import { produce } from "immer";
 import { encounterPacks } from "./encounter-packs";
+import { generateEncounterPack } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId, type BoonId } from "../../src/game/content";
 import type {
@@ -54,7 +55,11 @@ export function starterJourney(seed: number, kind: SpeciesId) {
   return accept(accept(initial, { type: "draft", species: kind }), { type: "start" });
 }
 /** A progressed lineup fixture for multi-creature combat coverage. */
-export function teamRun(seed: number, kinds: SpeciesId[]) {
+export function teamRun(
+  seed: number,
+  kinds: SpeciesId[],
+  enemies: SpeciesId[] | "random" = ["emberback", "pollenmoth", "mossguard"],
+) {
   let s = createGame(seed);
   s = produce(s, (d) => {
     d.selected = [kinds[0]!];
@@ -77,7 +82,11 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
     prepareDestination(d);
     d.encounter = 2;
     d.journey!.victories = 2;
-    d.expedition = { pack: ["emberback", "pollenmoth", "mossguard"], recruit: null, lastRoom: null };
+    d.expedition = {
+      pack: enemies === "random" ? generateEncounterPack(d) : enemies,
+      recruit: null,
+      lastRoom: null,
+    };
   });
   return accept(s, { type: "beginBattle" });
 }
@@ -202,7 +211,8 @@ export function policy(s: GameState): Command {
     return canVisitCampfire(s) ? { type: "visitCampfire" } : { type: "beginBattle" };
   if (s.phase === "recruit") return recruitChoice(s);
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
-  if (s.phase === "campfire") return { type: "rest" };
+  if (s.phase === "campfire")
+    return { type: s.expedition.lastRoom === "campfire" ? "leaveCampfire" : "rest" };
   const b = s.battle!;
   const fallen = s.team.find((c) => c.health <= 0);
   const backup = s.reserves.find((c) => c.health > 0);

@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { useId } from "react";
 import { creatureKeywords } from "../shared/effects/palettes";
 import { ShineText } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
@@ -18,7 +19,7 @@ import type { Command, StateAt, GameEvent } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
-import { bossEncounter, encounterSource, ROOMS_PER_ACT } from "../../game/encounters";
+import { bossEncounter, encounterSource } from "../../game/encounters";
 type Props = {
   game: StateAt<"teamSelection">;
   send: (command: Command) => boolean;
@@ -31,8 +32,10 @@ export function TeamSelection({
   purchase,
 }: Props & { recovery?: GameEvent[]; purchase?: StateAt<"support">["support"] }) {
   const i18n = useMessages();
+  const opponentsId = useId();
   const boss = bossEncounter(game);
-  const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;
+  const enemies = encounterSource(game).enemies;
+  const bossEnemy = boss ? enemies[0]! : null;
   const bossName =
     bossEnemy && bossEnemy.name === species(bossEnemy.species).name
       ? i18n.content(`content.species.${bossEnemy.species}.name`, bossEnemy.name)
@@ -41,11 +44,7 @@ export function TeamSelection({
     <Screen className="destinations-screen">
       <header className="destination-heading">
         <ScreenHeading>
-          {i18n.message("journey.actRoom", "Act {{act}} · Room {{room}} of {{total}}", {
-            act: Math.floor(game.encounter / ROOMS_PER_ACT) + 1,
-            room: (game.encounter % ROOMS_PER_ACT) + 1,
-            total: ROOMS_PER_ACT,
-          })}
+          {bossName ?? i18n.message("journey.chooseDestination", "Choose Destination")}
         </ScreenHeading>
       </header>
       <section
@@ -116,14 +115,23 @@ export function TeamSelection({
               </TooltipContent>
             </Tooltip>
           ) : (
-            <ArtCard
-              aspect="creature"
-              artwork={assetUrl("encounter.combat")}
-              data-encounter
-              effectKeywords={["physical"]}
-              aria-label={i18n.message("journey.combat", "Combat")}
-              onClick={() => send({ type: "beginBattle" })}
-            />
+            <>
+              <ArtCard
+                aspect="creature"
+                artwork={assetUrl(`creature.${enemies[0]!.species}`)}
+                artworkSlices={enemies.map((enemy) => assetUrl(`creature.${enemy.species}`))}
+                data-encounter
+                effectKeywords={["physical"]}
+                aria-label={i18n.message("journey.combat", "Combat")}
+                aria-describedby={opponentsId}
+                onClick={() => send({ type: "beginBattle" })}
+              />
+              <span id={opponentsId} className="sr-only">
+                {enemies
+                  .map((enemy) => i18n.content(`content.species.${enemy.species}.name`, enemy.name))
+                  .join(", ")}
+              </span>
+            </>
           )}
           <h2>
             {bossEnemy ? (

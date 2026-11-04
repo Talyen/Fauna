@@ -9,6 +9,7 @@ import type { CombatState } from "../../../game/types";
 import { ControlArtEffect } from "./control-art-effect";
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
+  artworkSlices?: readonly string[];
   aspect: "creature" | "action";
   presentation?: boolean;
   shine?: boolean;
@@ -25,6 +26,7 @@ type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
 export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtCard(
   {
     artwork,
+    artworkSlices,
     aspect,
     presentation = false,
     shine: showShine = true,
@@ -40,15 +42,22 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   },
   ref,
 ) {
-  const image = (
-    <img
-      src={artwork}
-      width={aspect === "creature" ? 800 : 600}
-      height={aspect === "creature" ? 600 : 800}
-      alt=""
-      draggable={false}
-    />
-  );
+  const image =
+    artworkSlices && artworkSlices.length > 1 ? (
+      <span className="art-slices" data-slices={artworkSlices.length} aria-hidden="true">
+        {artworkSlices.map((slice) => (
+          <img key={slice} src={slice} alt="" draggable={false} />
+        ))}
+      </span>
+    ) : (
+      <img
+        src={artwork}
+        width={aspect === "creature" ? 800 : 600}
+        height={aspect === "creature" ? 600 : 800}
+        alt=""
+        draggable={false}
+      />
+    );
   const keywords = effectKeywords ?? (effectText === undefined ? undefined : visualKeywords(effectText));
   const metadata = useEffectMetadata(keywords, effectTone);
   const palette = effectPalette(keywords, urgent ? "death" : effectTone);

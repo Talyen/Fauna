@@ -251,6 +251,12 @@
     "sourceHash": "5c38a8e78dbddaf89d6314288f037f23fbb3f7f92924459447506f24c267852e",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "6afbd08bb9c10ac54a9bfc211a37a8c73e3a548b576a63a70cf60f9635ec7586",
+    "text": "Recrutez cette créature pour révéler ses détails"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -263,12 +269,6 @@
     "sourceHash": "53bc8e0e9a0b22a32f7663e1b756f1f6386dd2c3f783099488a95a114096584c",
     "text": "Examiner {{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "03c4a00515c25cd6116deefffdcd1566aa1f99d28364b4ee83a4aaf02770abb1",
-    "text": "Espèce verrouillée"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -280,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "e125c11be70f8e88a42ce362c54d4565c661494767dd36836c8fb80a79cec198",
     "text": "{{name}} : {{rank}} étoiles sur {{maximum}}"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "89da11006a75c1067d7ace0ec9eda2e6ebfeb5ffbfd2918d7cc39e9594ffbf8f",
+    "text": "Non découvert"
   },
   "collection.views": {
     "reviewed": true,
@@ -298,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "46ca41bfed8aa1f6c06b67c52d2831f2fc27ca0feb9cdefcc1d5a6de903eeefa",
     "text": "Chargement…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "7a9a28b671b3c3fcddc6ca46a75fcbc43e7ca320da117cbce2fdad8e07843b70",
+    "text": "Annuler"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -9677,6 +9689,12 @@
     "sourceHash": "6e8d0c614d337893fa3c5561b9895d04674e39e62189ca30fc884638b77f606a",
     "text": "Le deck est vide"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "5cae8d3b6cbfd86d1aa8f99f37faa8ceb18194350de4c8724d4a514cb9db1c50",
+    "text": "Surplus de main"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9815,17 +9833,17 @@
     "sourceHash": "fdf741c4d6f7f5a00bdf6f889bee73de966a8de6d7d6e8eeb67ac135bb37ca63",
     "text": "Trait"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "ccd03f54344dda9ae98e812fe9e431cfe1b822ab10e85c43d80952f9f80369fd",
-    "text": "Acte {{act}} · Salle {{room}} sur {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "6c6249e58ffb1bbcc9f1efd73819069855d60489fad07ad33a5384bb8f3a7c90",
     "text": "Boss : {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "f41108ed36ab606d98d0d691437e693363190a6c480c7f5b34e7c08109caf991",
+    "text": "Choisir une destination"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10367,12 +10385,6 @@
     "sourceHash": "8fd5ce88d669c070d8efabb94eb76d6a5edc493aea95b7c9bfd0fed7362ea301",
     "text": "Retour à la partie"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "47a61800549bfca08b4827359eddae0ad45c2b0211ec14aa9864e229b439a982",
-    "text": "Paramètres"
-  },
   "menu.talentPoints": {
     "forms": {
       "many": "{{count}} points de talent disponibles",
@@ -10710,12 +10722,6 @@
     "sourceHash": "c7164835cc2b1205c15eb1dcfb84293640a1c9fcc36942d7c8e8ee5534bd5c43",
     "text": "Fauna ne peut pas afficher cet écran ; nouvelle tentative en cours…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "8290dedec4e3feb5c318c11eb3a518c395b82b224ac5959420e821cc5a64e99c",
-    "text": "La progression ne peut pas être enregistrée pour le moment ; laissez Fauna ouvert pendant les nouvelles tentatives"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10818,17 +10824,17 @@
     "sourceHash": "76a39cabc6c7fc8b602cf4a4b822a96d05472c24f9535ce5e7451aa87abbfe21",
     "text": "Retour à la maison"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "d535f43d9b42c714871469d0d26143850ad834d9dd4b3bc69d34406146e6ad0c",
+    "text": "Victoire"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "ca5d509a0eb2142c63f5cae956276a8b1b9f9072b18b2349886d07ac0ba46243",
     "text": "Choisissez une bénédiction"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "3f62299c351a1e0aad1d01f3ce19176ecff8e756431ce6f53c440d9b24796719",
-    "text": "Choisissez une recrue"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10860,6 +10866,24 @@
     "sourceHash": "ae9542d574d0066334ba241295de8e4128d7ecd82e97e4fe36f0823942c8c2dc",
     "text": "Passer"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "b055e20d6f2a15caaee508f966eb709d0a89bfb238d7ef3a0b75582ca73c0ff1",
+    "text": "Sauvegarde impossible"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "a027e0a438e2ba68ef7bcbecc536dae5b76c667929cdbe124121bdff9c21cded",
+    "text": "Réessayer"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "f1c26921190181ddf7c9c255d9146bc37e7d2a14aded6f187ef31959f7160a1a",
+    "text": "Sauvegarde…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10884,23 +10908,41 @@
     "sourceHash": "065c281999ff6611405e2f34e256217fc6219d7618af39798878c927a15cc167",
     "text": "Combat"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "eef014d33a725ae9fa996a221ec29714b220a69feeea13f88e7ce2766a658f17",
+    "text": "Plein écran sans bordure"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "bf3fdfadeeea7de67c98736296768f1d2946dc7f8234a424ee580cdcbbe1da70",
+    "text": "Luminosité"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "468bbe8d553a4875ec8539793f459561d97ec2d1e1f6355cf8d22cb816c197ef",
     "text": "Catégories des paramètres"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "20ae58b9b26121c6728dce30253101aca000cdd2f8378096d38f746f26e5e8bf",
+    "text": "Effacer toute la progression et recommencer ? Cette action est irréversible"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "ba3db81ab23e1128f82aab0c3b3555fb89e23d4deef686c2dcfa9d431d974a7e",
+    "text": "Effacer les sauvegardes"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "bbc4fce7a95006472de994c8080585aae7d42f3884cd3b42e31f3d82586ecee1",
     "text": "Fermer la sélection de langue"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "734fdcd6bfbfcfa2d3ed92124c3eb300870b1848d320e5604a27804e3ede0e26",
-    "text": "Icônes de manette"
   },
   "settings.display": {
     "reviewed": true,
@@ -10938,17 +10980,23 @@
     "sourceHash": "b09880b82208a291736764a05d30426c547013346cc99f180e686388716ae18b",
     "text": "Plein écran"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "51953441709159dd6dd162edcc3e5f00989555d4702419c798c9637142b8ab8c",
+    "text": "Taille du jeu"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "5d12c8d986f55d750884eec4dc0132db5ac5441924d0a75b0879dbd722ce0c34",
+    "text": "Jouabilité"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "5cda604d04356c0e5bd29f117d7b80dbbea6a06648f5ba79dbca91e8d3018dea",
     "text": "Lueur d’arrière-plan"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "f3b5b2d7b5a5d54e4d408d4f93ee146948523c1568b564c8d89a94724303ccf2",
-    "text": "Valeur de la lueur d’arrière-plan"
   },
   "settings.language": {
     "reviewed": true,
@@ -10961,12 +11009,6 @@
     "source": "Choose a language",
     "sourceHash": "f27417d05fa1edc86ce3b18cb559bb73be78624018d9a17e6a5e9b8bec39f2a9",
     "text": "Choisir une langue"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "13027dc77ec7ad9424f85eeb0d2bfd3de6aea650c2e7e17609497158b7a635ad",
-    "text": "Langue : {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -11010,35 +11052,47 @@
     "sourceHash": "370ed23f5afbc4048ab252041500841683619f32751cfdb0b8793045dc4fd1b4",
     "text": "Couper le son en arrière-plan"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "1ed72d249b2cefc2898f6ff81b980a60cf10593370dfaf45b179ed06a676de3a",
+    "text": "Autres"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "80119d67013c07497e8e1290e324e6260ad268bac0d0d69c7fcb37a38127bd67",
     "text": "Particules d’arrière-plan"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "d5e757e0cb7e35b5962b993f95ce7d4336422265f46a1e2acb61a8bca6bd61b3",
-    "text": "Valeur des particules d’arrière-plan"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "e139d0ee55cc214309c1777e1344c42d349b878dd06d2cb73fab8a4d795c9137",
+    "text": "Mémoriser le combat automatique"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "86ac640c1b293302f0f34c3076847a62d55f84a732fbcceb333c32969687e4e8",
+    "text": "Rétablir les paramètres par défaut"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "3a599e082f35ed964774d0c8ce23e5af92819ff98916b85baedc3bb12400d799",
+    "text": "Réinitialisation et sauvegarde"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "83f34c39277e64fd92c02ff8dcbb0c217258a6c4d4904efdec5bd459b1f1a5f3",
+    "text": "Sauvegarde"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "44b82356f0040e899f033d876383ab8017791b27fd14cf6b5f0b8abaf51a5ed3",
     "text": "Son"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "b92477cbf0bf40feb68d4192cf73dca42096723ede3dc9a3ae71effdc4a6980f",
-    "text": "Taille du texte"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "6065f534e1ca676b13ccb6b6252d3bec5b78cd1a0b2409cf9b204049b3ff1565",
-    "text": "Infobulle {{value}} %"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11196,6 +11250,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "1ec894842a2bfbde9f19614b018cd7fb6b943e2ad4eec989846ab3d52ea24827",
     "text": "Réinitialiser les talents : {{keyword}}"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "5395c501c89766b3dad3e88aa16c3543c133d61110e623e97e7c79595b28ccde",
+    "text": "Réinitialiser tous les talents"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "0a7ac49cfcfff4d35663eb32546e740ca02be157b8515033da078a7cf732a8df",
+    "text": "Tous vos points de talent seront remboursés"
   },
   "talents.row": {
     "reviewed": true,

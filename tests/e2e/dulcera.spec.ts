@@ -8,7 +8,7 @@ test("Dulcera's abilities restore, protect and exchange the visible team with ke
 }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, dulceraBattle());
   await resume(page);
 

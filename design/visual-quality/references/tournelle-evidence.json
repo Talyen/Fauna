@@ -1,4 +1,5 @@
 {
+  "frameRetention": "Historical screenshots removed on 2026-11-04 because they depict superseded UI; capture details remain as a record",
   "baseCommit": "d217ef3f9b6a8d495910d9836c308817088c3b6f",
   "conditions": "Chromium fresh saves; reduced motion; 1280x720 at 125% text and 1920x1080 at 100% text",
   "images": [

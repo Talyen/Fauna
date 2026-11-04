@@ -333,7 +333,7 @@ function validateSupport(state: GameState) {
             !visit.stock.some((r) => r.boon === visit.purchased))),
     );
   }
-  if (state.phase === "campfire") invalid(state.expedition.lastRoom === "campfire" || !needsCampfire(state));
+  if (state.phase === "campfire" && state.expedition.lastRoom !== "campfire") invalid(!needsCampfire(state));
 }
 
 function validateRewards(state: GameState) {

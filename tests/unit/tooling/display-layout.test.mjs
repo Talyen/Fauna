@@ -67,3 +67,48 @@ it("drains an admitted native display transition before disposal completes", asy
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+it("restores the saved borderless display mode instead of promoting it to fullscreen", async () => {
+  const { EventEmitter } = await import("node:events");
+  const { mkdtemp, readFile, writeFile, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const path = await import("node:path");
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-display-restore-"));
+  await writeFile(
+    path.join(directory, "display.json"),
+    JSON.stringify({ mode: "borderless-fullscreen", bounds: null }),
+  );
+  const platform = vi.spyOn(process, "platform", "get").mockReturnValue("win32");
+  const window = new EventEmitter();
+  let full = false;
+  const executeJavaScript = vi.fn(async () => undefined);
+  Object.assign(window, {
+    isDestroyed: () => false,
+    isFullScreen: () => full,
+    getBounds: () => ({ x: 0, y: 0, width: 1440, height: 900 }),
+    setBounds: vi.fn(),
+    setFullScreen: (value) => {
+      full = value;
+      window.emit(value ? "enter-full-screen" : "leave-full-screen");
+    },
+    webContents: { executeJavaScript },
+  });
+  const manager = await createDisplay({
+    directory,
+    screen: { getAllDisplays: () => [{ workArea: { x: 0, y: 0, width: 1920, height: 1080 } }] },
+  });
+  try {
+    manager.attach(window);
+    await vi.waitFor(() => expect(executeJavaScript).toHaveBeenCalled());
+    expect(manager.read().mode).toBe("borderless-fullscreen");
+    expect(executeJavaScript.mock.calls[0][0]).toContain("exitFullscreen");
+    await manager.dispose();
+    expect(JSON.parse(await readFile(path.join(directory, "display.json"), "utf8")).mode).toBe(
+      "borderless-fullscreen",
+    );
+  } finally {
+    await manager.dispose();
+    platform.mockRestore();
+    await rm(directory, { recursive: true, force: true });
+  }
+});

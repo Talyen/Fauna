@@ -55,6 +55,13 @@ async function waitForStartup(page: Page) {
   }
   await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  // Stress text independently of the player's whole-game sizing preference.
+  await page.evaluate(() => {
+    const scale = Number(localStorage.getItem("fauna.test.text-scale") ?? "1");
+    const density = Number(getComputedStyle(document.documentElement).getPropertyValue("--ui-density")) || 1;
+    if ([0.75, 1, 1.25].includes(scale))
+      document.documentElement.style.setProperty("--text-scale", String(density * scale));
+  });
 }
 export async function seed(page: Page, game = createGame(7)) {
   const initial = page.url() === "about:blank";

@@ -20,8 +20,8 @@ for (const locale of locales) {
     await seed(page, run());
     const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
     await page.getByRole("button", { name: "Options", exact: true }).click();
-    await page.getByRole("button", { name: "Language: English", exact: true }).click();
-    await page.getByRole("radio", { name: languages[locale].name, exact: true }).click();
+    await page.getByRole("combobox", { name: "Language", exact: true }).click();
+    await page.getByRole("option", { name: languages[locale].name, exact: true }).click();
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect.poll(() => page.evaluate((saveKey) => localStorage.getItem(saveKey), key)).toBe(before);
 
@@ -55,7 +55,7 @@ for (const locale of locales) {
     await seed(page, merchantDestination());
     await page.evaluate((language) => {
       localStorage.setItem("fauna.language.v1", language);
-      localStorage.setItem("fauna.text-scale", "1.25");
+      localStorage.setItem("fauna.test.text-scale", "1.25");
     }, locale);
     await page.reload({ waitUntil: "domcontentloaded" });
     await page.clock.fastForward(5500);
@@ -99,7 +99,7 @@ test("keeps French reward levels on one line with room for their keyword", async
   await seed(page, winBattle());
   await page.evaluate(() => {
     localStorage.setItem("fauna.language.v1", "fr");
-    localStorage.setItem("fauna.text-scale", "1.25");
+    localStorage.setItem("fauna.test.text-scale", "1.25");
   });
   await page.reload({ waitUntil: "domcontentloaded" });
   await page.clock.fastForward(5500);
@@ -164,7 +164,7 @@ for (const locale of locales) {
     await seed(page, run());
     await page.evaluate((language) => {
       localStorage.setItem("fauna.language.v1", language);
-      localStorage.setItem("fauna.text-scale", "1.25");
+      localStorage.setItem("fauna.test.text-scale", "1.25");
     }, locale);
     await page.reload({ waitUntil: "domcontentloaded" });
     await page.clock.fastForward(5500);
