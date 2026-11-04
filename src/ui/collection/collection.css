@@ -15,6 +15,7 @@
   gap: var(--screen-section-gap);
 }
 .collection-content {
+  --collection-creature-scale: calc(var(--art-creature-scale) * 1.08);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -27,19 +28,15 @@
   justify-content: center;
   align-content: center;
   height: calc(
-    max(
-        var(--art-long-side),
-        var(--art-short-side) * var(--art-creature-scale) + var(--screen-item-gap) +
-          var(--collection-rank-height)
-      ) *
-      2 + var(--screen-item-gap)
+    max(var(--art-long-side), var(--art-short-side) * var(--collection-creature-scale)) * 2 +
+      var(--screen-item-gap)
   );
   gap: var(--screen-item-gap);
 }
 .collection-grid[data-view="fauna"] {
+  --art-landscape-width: calc(var(--art-short-side) * 4 / 3 * var(--collection-creature-scale));
   align-self: center;
   max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
-  row-gap: calc(var(--screen-item-gap) * 1.5 + var(--collection-rank-height));
 }
 .collection-grid[data-view="boons"] {
   align-self: center;
@@ -48,21 +45,15 @@
 .collection-grid > * {
   flex: 0 0 auto;
 }
-.collection-entry {
-  position: relative;
+.game-tooltip .card-details > .collection-details-heading:first-child {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-}
-.collection-entry > .collection-stars {
-  position: absolute;
-  top: calc(100% + var(--screen-item-gap) / 2);
-  display: flex;
-  align-items: center;
-  min-height: var(--collection-rank-height);
+  gap: var(--space-2);
 }
 .collection-stars {
-  display: flex;
+  display: inline-flex;
+  flex: none;
   gap: var(--space-1);
   color: var(--muted-foreground);
 }

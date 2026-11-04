@@ -123,7 +123,6 @@
   --menu-icon-quit: #fb923c;
   --menu-icon-skip: #a3e635;
   --icon-size: 20px;
-  --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
   --unavailable-opacity: 0.45;
   --pressed-scale: 0.98;

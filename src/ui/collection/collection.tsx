@@ -106,34 +106,41 @@ export function Collection({
                     const isKnown = known(creature.id);
                     const stars = isKnown ? creatureStars(game, creature.id) : 0;
                     return isKnown ? (
-                      <div className="collection-entry" key={creature.id}>
-                        <CreatureCard
-                          progression={game}
-                          kind={creature.id}
-                          onClick={() => showCreature(creature.id)}
-                          onInspect={() => showCreature(creature.id)}
-                          label={i18n.message("collection.inspect", "Inspect {{name}}", {
-                            name: i18n.content(`content.species.${creature.id}.name`, creature.name),
-                          })}
-                        />
-                        <span
-                          className="collection-stars"
-                          role="img"
-                          aria-label={i18n.message(
-                            "collection.stars",
-                            "{{name}}: {{rank}} of {{maximum}} stars",
-                            {
-                              name: i18n.content(`content.species.${creature.id}.name`, creature.name),
-                              rank: stars,
-                              maximum: MAX_CREATURE_STARS,
-                            },
-                          )}
-                        >
-                          {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
-                            <Star key={index} aria-hidden="true" data-earned={index < stars} />
-                          ))}
-                        </span>
-                      </div>
+                      <CreatureCard
+                        key={creature.id}
+                        progression={game}
+                        kind={creature.id}
+                        onClick={() => showCreature(creature.id)}
+                        onInspect={() => showCreature(creature.id)}
+                        label={i18n.message("collection.inspect", "Inspect {{name}}", {
+                          name: i18n.content(`content.species.${creature.id}.name`, creature.name),
+                        })}
+                        tooltipContent={
+                          <CreatureDetails
+                            progression={game}
+                            kind={creature.id}
+                            nameSuffix={
+                              <span
+                                className="collection-stars"
+                                role="img"
+                                aria-label={i18n.message(
+                                  "collection.stars",
+                                  "{{name}}: {{rank}} of {{maximum}} stars",
+                                  {
+                                    name: i18n.content(`content.species.${creature.id}.name`, creature.name),
+                                    rank: stars,
+                                    maximum: MAX_CREATURE_STARS,
+                                  },
+                                )}
+                              >
+                                {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                                  <Star key={index} aria-hidden="true" data-earned={index < stars} />
+                                ))}
+                              </span>
+                            }
+                          />
+                        }
+                      />
                     ) : (
                       <Tooltip key={creature.id}>
                         <TooltipTrigger asChild>
