@@ -5,12 +5,13 @@ import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
 import { bossEncounter } from "../../game/encounters";
 import { pendingReplacement } from "../../game/team";
+import { hasAvailablePlay } from "../../game/play-queries";
+import { MAX_BATTLE_TURN } from "../../game/state-limits";
 import { soleReplacement } from "../../application/battle-policy";
 import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
 import { HomeScreen } from "../menu/home-screen";
-import { GlossaryScreen } from "../menu/glossary-screen";
 import { MenuActions, type MenuPage } from "../menu/menu-actions";
 import { Screen, ScreenHeading, HeaderNavigation } from "../shared/navigation/screen";
 import { captureSwapMotion } from "../battle/swap-motion";
@@ -135,6 +136,33 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     },
     [session, autoEndTurn, setAutoplay],
   );
+  useEffect(() => {
+    if (
+      !autoEndTurn ||
+      route !== "play" ||
+      surface.top !== "page" ||
+      !view.ready ||
+      view.closing ||
+      game.phase !== "battle" ||
+      game.battle.turn >= MAX_BATTLE_TURN ||
+      pendingReplacement(game) ||
+      hasAvailablePlay(game)
+    )
+      return;
+    // Yield between consecutive unplayable turns so the player can pause or change settings.
+    const timer = setTimeout(() => {
+      const current = session.store.getState();
+      if (
+        current.game === game &&
+        current.ready &&
+        !current.closing &&
+        !current.overlayActive &&
+        !current.cloud.blocking
+      )
+        session.command({ type: "endTurn" });
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing]);
   const automaticReplacementFocus = useRef(false);
   const automaticMerchantFocus = useRef(false);
   useLayoutEffect(() => {
@@ -376,13 +404,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                     inspect={inspect}
                   />
                 ) : null}
-                {route === "glossary" ? (
-                  <GlossaryScreen
-                    back={backFromPage}
-                    controller={mode === "controller"}
-                    prompts={controllerPrompts}
-                  />
-                ) : null}
                 {route === "settings" ? (
                   <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                     <header className="collection-heading">
@@ -404,6 +425,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       value={{
                         back: () => transition({ type: "home" }),
                         openMenu,
+                        menuOpen: surface.top === "pause",
                         deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
                           game.phase,
                         )
@@ -415,8 +437,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="menu-button compact-icon-control"
+                          className="menu-button menu-trigger"
                           data-menu-anchor
+                          aria-expanded={surface.top === "pause"}
                           aria-label={i18n.message("battle.openMenu", "Open menu")}
                           onClick={openMenu}
                         >

@@ -41,7 +41,6 @@ import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import type { TargetForecast } from "../../../src/ui/battle/play-preview-model";
 import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
-import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
 import { GLOSSARY } from "../../../src/game/glossary";
 import { MessageParts } from "../../../src/ui/shared/localization/message-parts";
@@ -1868,29 +1867,6 @@ it("extracts glossary terms and definitions from the actual game vocabulary", ()
       expect(rule?.text, `${entry.id} ${kind}`).toBe(ruleMessage(entry[kind]).template);
     }
   }
-});
-
-it("renders localized glossary rules with keyword identity and leaves authored vocabulary unchanged", () => {
-  const entry = GLOSSARY.find((item) => item.id === "keyword.burn")!;
-  const catalog: MessageCatalog = {
-    "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
-    "content.glossary.keyword.burn.definition.rule": {
-      source: ruleMessage(entry.definition).template,
-      text: "Les coups de <keyword0>Brûlure</keyword0> accumulent leurs dégâts avant le <keyword1>Blocage</keyword1>",
-    },
-  };
-  renderLocalized(<GlossaryScreen back={() => {}} />, catalog);
-  expect(screen.getAllByText("Brûlure").every((node) => node.getAttribute("data-keyword") === "burn")).toBe(
-    true,
-  );
-  expect(
-    screen.getByText(
-      (_text, node) =>
-        node?.tagName === "DD" &&
-        node.textContent === "Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
-    ),
-  ).toBeTruthy();
-  expect(entry.term).toBe("Burn");
 });
 
 it("localizes exact battle previews without changing their committed values", () => {

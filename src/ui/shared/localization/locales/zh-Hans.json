@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "58f64a1629caa4d18edbbd1b27c33e333a7a9b4395607e4009404f0169cca746",
-    "text": "可选设置; 打牌或换人后，若没有<keyword0>法力</keyword0>、可打出的牌或待完成的替换，就结束回合; 也可随时选择结束回合，无需确认"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "10d31e93cbe87ce78300b29d31f11d315a4da7716972bd8cb9ddbd4e2491fc75",
+    "text": "可选设置; 没有可打出的牌且没有待完成的替换时，结束回合; 也可随时选择结束回合，无需确认"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,
@@ -9665,30 +9665,6 @@
     "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
     "text": "上场战斗的收益"
   },
-  "glossary.controllerHelp": {
-    "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
-    "sourceHash": "a35097c86a3273fc0f4ba955263e63f7b8d1f5266e34bb7eecd45c3ab3ce80e2",
-    "text": "使用方向键或左摇杆导航；{{confirm}}执行；{{inspect}}在战斗外查看图画；{{back}}返回；{{endTurn}}结束回合"
-  },
-  "glossary.entries": {
-    "reviewed": true,
-    "source": "Glossary entries",
-    "sourceHash": "062ee016bb5ef45aca46790f7d8c5fdda4b514e5916abf47cfc623ddb3cbc2a4",
-    "text": "词汇表条目"
-  },
-  "glossary.keyboardHelp": {
-    "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
-    "sourceHash": "04adfe61e222730e8fbdded0e6bd05b11cd9f4d0ed55929292b86f664e572aae",
-    "text": "使用 W/A/S/D 或 Tab 导航；A/D 切换目标；Enter 执行；I 或右键在战斗外查看图画；Escape 返回"
-  },
-  "glossary.title": {
-    "reviewed": true,
-    "source": "Glossary & controls",
-    "sourceHash": "c6b9e03941fa32cf8489de17ee434ada745f8c589a2f6172472431dc485ba1a0",
-    "text": "词汇表与操作"
-  },
   "inspection.abilities": {
     "reviewed": true,
     "source": "Abilities",
@@ -10222,12 +10198,6 @@
     "source": "End journey",
     "sourceHash": "18122ff0bba80be682e445146b5da59fc7e8e39e5e7e30808a0236c8ec511a96",
     "text": "结束旅程"
-  },
-  "menu.glossary": {
-    "reviewed": true,
-    "source": "Glossary",
-    "sourceHash": "5dfde89af12293409fb335723116e5ec70abe48733a2fb3f5b845e57026c401b",
-    "text": "词汇表"
   },
   "menu.logo": {
     "reviewed": true,
@@ -11049,12 +11019,6 @@
     "source": "{{keyword}} · {{name}}",
     "sourceHash": "ee5865e754e46d719c08a815ed5905785f1f4cf8af1191b168d0ab59b50bd7d5",
     "text": "{{keyword}} · {{name}}"
-  },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "c2b405f5d4d966798dcca39203203a055a5dad22fae6c63dc8c91c2b8ebdd278",
-    "text": "天赋页面"
   },
   "talents.pointsAvailable": {
     "forms": {

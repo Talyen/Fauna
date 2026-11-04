@@ -2,7 +2,12 @@ import { useMessages } from "../localization/message-context";
 import { createContext, useContext, type ComponentPropsWithRef, type ReactNode } from "react";
 import { ArrowLeft, Menu, Layers } from "lucide-react";
 import { Button } from "../../../components/ui/button";
-export const HeaderNavigation = createContext<{ back: () => void; openMenu: () => void; deck?: () => void }>({
+export const HeaderNavigation = createContext<{
+  back: () => void;
+  openMenu: () => void;
+  menuOpen?: boolean;
+  deck?: () => void;
+}>({
   back: () => {},
   openMenu: () => {},
 });
@@ -54,8 +59,9 @@ export function ScreenHeading({
         <Button
           variant="ghost"
           size="icon"
-          className="compact-icon-control"
+          className="menu-trigger"
           data-menu-anchor
+          aria-expanded={navigation.menuOpen ?? false}
           aria-label={i18n.message("battle.openMenu", "Open menu")}
           onClick={openMenu ?? navigation.openMenu}
         >

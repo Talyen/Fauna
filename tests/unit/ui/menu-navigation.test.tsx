@@ -28,15 +28,14 @@ it.each(["home", "pause"] as const)(
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
       const game = session.store.getState().game;
-      for (const [index, page] of ["Collection", "Talents", "Settings", "Glossary"].entries()) {
+      expect(screen.queryByRole("button", { name: "Glossary" })).toBeNull();
+      for (const [index, page] of ["Collection", "Talents", "Settings"].entries()) {
         for (const [exit, back] of ["Escape", "Back", "Open menu"].entries()) {
           // Retain every page/exit pair and both origins per page without their Cartesian product
           if (((index + exit) % 2 === 0 ? "home" : "pause") !== origin) continue;
           act(() => screen.getByRole("button", { name: page }).focus());
           await user.keyboard("{Enter}");
-          expect(
-            screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
-          ).toBeTruthy();
+          expect(screen.getByRole("heading", { name: page })).toBeTruthy();
           expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
           if (page === "Collection")
             expect(document.activeElement).toBe(screen.getByRole("button", { name: "Back" }));
@@ -101,8 +100,15 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
     const revision = session.store.getState().game.revision;
     for (const dismiss of ["Continue", "Escape", "outside"]) {
       const opener = screen.getByRole("button", { name: "Open menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("false");
       await user.click(opener);
       const menu = screen.getByRole("dialog", { name: "Pause menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("true");
+      expect(
+        within(menu)
+          .getAllByRole("button")
+          .map((button) => button.textContent?.trim()),
+      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Settings", "End journey"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();
@@ -174,7 +180,6 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
     await user.click(slam);
     expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Next page" }));
     const fists = screen.getByRole("button", { name: "Armored Fists" });
     expect(within(fists).getByText("Requires 1 point")).toBeTruthy();
     const bought = session.store.getState().game;

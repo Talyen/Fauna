@@ -566,8 +566,8 @@ h3 {
   filter: grayscale(0.85);
   opacity: 0.85;
 }
-.talent-node[data-owned="false"][data-available="false"] .talent-effect .rule-keyword {
-  color: inherit;
+.talent-node .talent-effect .rule-keyword {
+  color: color-mix(in srgb, var(--rule-keyword-color) 45%, var(--talent-card-accent-light));
 }
 .talent-node[data-purchased="true"] {
   animation: talent-purchased var(--motion-battle);

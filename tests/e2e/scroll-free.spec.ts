@@ -187,7 +187,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       );
     });
 
-    test("Talents, Glossary and Settings", async ({ page }) => {
+    test("Talents and Settings", async ({ page }) => {
       await seed(page, layoutGame());
       const exhaustive = width === 1280 && height === 720 && scale === 1.25;
       const before = await state(page);
@@ -206,14 +206,16 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await captureScreen(page, {
             path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
           });
-        await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
+        const tree = page.locator(".talents-screen");
+        await expect(tree.getByRole("button", { name: "Next page" })).toHaveCount(0);
+        await expectScrollFree(page);
+        const lastTalent = tree.locator(".talent-node").last();
+        await lastTalent.focus();
+        await expect(lastTalent).toBeInViewport();
+        await expectScrollFree(page);
         await page.keyboard.press("Escape");
       }
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Glossary", exact: true }).click();
-      await captureScreen(page, { path: `reports/scroll-free/glossary-${width}-${height}-${scale}.png` });
-      await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));
-      await page.keyboard.press("Escape");
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       for (const name of ["Display", "Sound", "Battle"]) {
         await page.getByRole("tab", { name, exact: true }).click();

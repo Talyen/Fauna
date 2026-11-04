@@ -7,6 +7,8 @@
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
+  --menu-panel-fill: rgb(12 10 7);
+  --menu-panel-border: rgb(255 253 245 / 8%);
   --primary: #cd9b51;
   --primary-foreground: #251e18;
   --secondary: var(--card);
@@ -63,7 +65,6 @@
   --compact-icon-size: 16px;
   --main-menu-logo-width: calc(var(--art-long-side) * 2.3);
   --main-menu-button-width: max(180px, calc(168px * var(--text-scale, 1)));
-  --pause-menu-width: 240px;
   --settings-screen-width: 640px;
   --menu-screen-width: 800px;
   --screen-heading-width: 640px;
@@ -76,7 +77,6 @@
   );
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
-  --glossary-page-min-height: 320px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -116,14 +116,12 @@
   --menu-icon-talents: #a78bfa;
   --menu-icon-collection: var(--gold-light);
   --menu-icon-boons: #f472b6;
-  --menu-icon-glossary: #2dd4bf;
   --menu-icon-settings: #a1a1aa;
   --menu-icon-end: var(--destructive-text);
   --menu-icon-home: var(--primary);
   --menu-icon-quit: #fb923c;
   --menu-icon-skip: #a3e635;
   --icon-size: 20px;
-  --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
   --unavailable-opacity: 0.45;
   --pressed-scale: 0.98;
@@ -171,7 +169,7 @@
   --feedback-critical: #fcd34d;
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
-  --talent-tree-screen-width: 1160px;
+  --talent-tree-screen-width: 1216px;
   --talent-category-label-size: calc(20px * var(--text-scale, 1));
   --talent-category-label-line-height: calc(28px * var(--text-scale, 1));
   --talent-category-caption-width: calc(110px * var(--text-scale, 1));
@@ -184,10 +182,8 @@
   --talent-card-available-border: #b9bcb3;
   --talent-card-accent-light: #f6eddf;
   --talent-card-shadow: rgb(0 0 0 / 35%);
-  --talent-card-width: 280px;
+  --talent-card-width: 278px;
   --talent-card-min-height: 174px;
-  --talent-page-rows: 2;
-  --talent-page-row-height: calc(var(--text-body) * 10 + var(--space-8));
   --art-standard-short-side: 200px;
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
@@ -283,7 +279,6 @@
 @media (max-height: 900px) {
   :root {
     --art-short-side: var(--art-compact-short-side);
-    --talent-page-rows: 1;
   }
 }
 @media (max-height: 760px) {

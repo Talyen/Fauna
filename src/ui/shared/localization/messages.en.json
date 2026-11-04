@@ -254,18 +254,6 @@
   "earnings.lastBattle": {
     "text": "Last battle earnings"
   },
-  "glossary.controllerHelp": {
-    "text": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn"
-  },
-  "glossary.entries": {
-    "text": "Glossary entries"
-  },
-  "glossary.keyboardHelp": {
-    "text": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back"
-  },
-  "glossary.title": {
-    "text": "Glossary & controls"
-  },
   "inspection.abilities": {
     "text": "Abilities"
   },
@@ -532,9 +520,6 @@
   },
   "menu.endJourney": {
     "text": "End journey"
-  },
-  "menu.glossary": {
-    "text": "Glossary"
   },
   "menu.logo": {
     "text": "Fauna logo"
@@ -946,9 +931,6 @@
   },
   "talents.detailTitle": {
     "text": "{{keyword}} · {{name}}"
-  },
-  "talents.pages": {
-    "text": "Talent pages"
   },
   "talents.pointsAvailable": {
     "forms": {

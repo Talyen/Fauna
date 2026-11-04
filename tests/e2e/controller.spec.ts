@@ -31,7 +31,6 @@ test("manual controller prompts persist and disconnection pauses without changin
   await expect(page.locator(".app:not([inert]) .autoplay-control")).toHaveAttribute("aria-pressed", "false");
   await page.clock.fastForward(2000);
   expect(await state(page)).toEqual(before);
-  await page.getByRole("button", { name: "Glossary", exact: true }).click();
   await page.evaluate(() =>
     Object.defineProperty(navigator, "getGamepads", {
       configurable: true,
@@ -42,12 +41,10 @@ test("manual controller prompts persist and disconnection pauses without changin
     () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
   );
   await press(13);
-  await expect(
-    page.getByText(
-      /Cross activates; Square inspects artwork outside battle; Circle goes back; Triangle ends the turn/,
-    ),
-  ).toBeVisible();
-  await captureScreen(page, { path: "playstation-controls.png" });
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await press(1);
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toHaveCount(0);
+  expect(await state(page)).toEqual(before);
 });
 
 test("controller edges, inspect and pause do not repeat a held confirm", async ({ page }) => {

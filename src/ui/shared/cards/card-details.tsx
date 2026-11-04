@@ -9,6 +9,7 @@ import { cardCost } from "../../../game/ability-rules";
 import type { Creature, Card, GameState } from "../../../game/types";
 import { CardRules } from "../combat/combat-values";
 import { actionDisplay } from "./action-display";
+import type { ReactNode } from "react";
 export function ActionDetails({
   card,
   ownerName,
@@ -46,10 +47,12 @@ export function CreatureDetails({
   progression,
   kind,
   name,
+  nameSuffix,
 }: {
   kind: SpeciesId;
   progression?: Pick<GameState, "discovery">;
   name?: string;
+  nameSuffix?: ReactNode;
 }) {
   const i18n = useMessages();
   const info = species(kind);
@@ -57,8 +60,9 @@ export function CreatureDetails({
   const keywords = visualKeywords(passive.description);
   return (
     <div className="card-details">
-      <strong>
+      <strong className={nameSuffix ? "collection-details-heading" : undefined}>
         {!name || name === info.name ? i18n.content(`content.species.${kind}.name`, info.name) : name}
+        {nameSuffix}
       </strong>
       <div className="creature-trait-name">
         <Sparkles aria-hidden="true" data-keyword={keywords[0] ?? "physical"} />

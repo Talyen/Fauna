@@ -74,7 +74,7 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
         break;
     }
     if (route === "talents" && talentControls.current?.(action)) return;
-    if (["talents", "collection", "settings", "glossary"].includes(route)) {
+    if (["talents", "collection", "settings"].includes(route)) {
       backFromPage();
       return;
     }

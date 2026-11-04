@@ -55,11 +55,16 @@ it("shows uncollected creature and Boon details on hover without activating eith
     </TooltipProvider>,
   );
   const user = userEvent.setup();
+  const collected = screen.getByRole("button", { name: "Inspect Mossguard" });
+  expect(screen.queryByRole("img", { name: /Mossguard: .* stars/ })).toBeNull();
+  await user.hover(collected);
+  expect(await screen.findByRole("img", { name: "Mossguard: 0 of 5 stars" })).toBeTruthy();
   const locked = screen.getAllByRole("img", { name: "Locked species" })[0]!;
   await user.hover(locked);
   expect((await screen.findByRole("tooltip")).textContent).toContain(
     SPECIES.find((entry) => entry.id !== "mossguard")!.name,
   );
+  expect(screen.queryByRole("img", { name: /stars/ })).toBeNull();
   await user.click(locked);
   expect(inspect).not.toHaveBeenCalled();
   await user.click(screen.getByRole("tab", { name: "Boons" }));
@@ -107,7 +112,9 @@ it("keeps localized creature details and inspection identity", async () => {
       </TooltipProvider>
     </MessageProvider>,
   );
-  expect(screen.getByRole("img", { name: "Mossguard : 2 étoiles sur 5" })).toBeTruthy();
-  await userEvent.click(screen.getByRole("button", { name: "Examiner Mossguard" }));
+  const creature = screen.getByRole("button", { name: "Examiner Mossguard" });
+  await userEvent.hover(creature);
+  expect(await screen.findByRole("img", { name: "Mossguard : 2 étoiles sur 5" })).toBeTruthy();
+  await userEvent.click(creature);
   expect(inspect).toHaveBeenCalledWith({ species: "mossguard", speciesKit: true });
 });
