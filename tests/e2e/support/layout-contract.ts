@@ -91,13 +91,6 @@ export function layoutViolations() {
       failures.push("dialog is not centered in the viewport");
   }
   const elements = new Set(roots.flatMap((root) => [root, ...root.querySelectorAll("*")]));
-  const scrollRegion = (el: Element | null): el is HTMLElement =>
-    el instanceof HTMLElement &&
-    el.hasAttribute("data-scroll-region") &&
-    !!el.closest(".settings-screen, .help-dialog, .talents-screen") &&
-    el.getAttribute("role") === "region" &&
-    el.tabIndex === 0 &&
-    !!(el.getAttribute("aria-label") || el.getAttribute("aria-labelledby"));
   for (const el of elements) {
     if (!(el instanceof HTMLElement) || invisible(el)) continue;
     // Only the authored hand fan may overlap and cross the bottom edge.
@@ -105,11 +98,7 @@ export function layoutViolations() {
     const css = getComputedStyle(el);
     const name = describe(el);
     const scrolling = /^(auto|scroll)$/.test(css.overflowX) || /^(auto|scroll)$/.test(css.overflowY);
-    if (scrolling && !scrollRegion(el)) failures.push(`${name} is a scroll area`);
-    if (scrollRegion(el) && el.scrollWidth > el.clientWidth + 1)
-      failures.push(`${name} scrolls horizontally`);
-    const ancestor = el.parentElement?.closest("[data-scroll-region]") ?? null;
-    const region = scrollRegion(ancestor) ? ancestor.getBoundingClientRect() : null;
+    if (scrolling) failures.push(`${name} is a scroll area`);
     // Visible overflow can intentionally extend into a containing layout's reserved space
     // (for example external combat effects). Bounds below still check every visible child.
     const clipsX =
@@ -153,9 +142,7 @@ export function layoutViolations() {
     );
     if (
       !progressFill &&
-      (box.left < -1 ||
-        box.right > innerWidth + 1 ||
-        (!region && (box.top < -1 || box.bottom > innerHeight + 1)))
+      (box.left < -1 || box.right > innerWidth + 1 || box.top < -1 || box.bottom > innerHeight + 1)
     )
       failures.push(`${name} is outside the viewport`);
     if (el.matches('button:not(:disabled), [role="switch"], [role="radio"], [role="slider"], [role="tab"]')) {
@@ -171,22 +158,17 @@ export function layoutViolations() {
         [middleX, box.bottom - insetY],
       ];
       if (
-        points
-          .filter(
-            ([x, y]) =>
-              !region || (x! >= region.left && x! <= region.right && y! >= region.top && y! <= region.bottom),
+        points.some(([x, y]) => {
+          const hit = document.elementFromPoint(x!, y!);
+          // Battlefield status controls intentionally overlap their own portrait.
+          if (
+            el.matches(".battle-screen .creature-card") &&
+            hit?.closest(".combat-status") &&
+            hit.closest(".creature-wrap") === el.closest(".creature-wrap")
           )
-          .some(([x, y]) => {
-            const hit = document.elementFromPoint(x!, y!);
-            // Battlefield status controls intentionally overlap their own portrait.
-            if (
-              el.matches(".battle-screen .creature-card") &&
-              hit?.closest(".combat-status") &&
-              hit.closest(".creature-wrap") === el.closest(".creature-wrap")
-            )
-              return false;
-            return !hit || !el.contains(hit);
-          })
+            return false;
+          return !hit || !el.contains(hit);
+        })
       )
         failures.push(`${name} is obscured`);
       if ((el.closest("label, .ui-slider") ?? el).getBoundingClientRect().height < 43.5)
@@ -199,7 +181,7 @@ export function layoutViolations() {
 export async function expectScrollFree(page: Page) {
   await expect
     .poll(() => page.evaluate(layoutViolations), {
-      message: "Player UI must fit with accessible, bounded secondary scrolling and no hidden clipping",
+      message: "Player UI must fit without scrolling or hidden clipping",
     })
     .toEqual([]);
 }

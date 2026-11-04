@@ -14,21 +14,6 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       ),
     ).at(-1) ?? document;
   const focused = document.activeElement as HTMLElement | null;
-  if (
-    focused?.matches("[data-scroll-region]") &&
-    (root === document || root.contains(focused)) &&
-    (direction === "up" || direction === "down")
-  ) {
-    const top = focused.scrollTop;
-    const maximum = focused.scrollHeight - focused.clientHeight;
-    if ((direction === "down" && top < maximum - 1) || (direction === "up" && top > 1)) {
-      focused.scrollBy({
-        top: (direction === "up" ? -1 : 1) * focused.clientHeight * 0.75,
-        behavior: "instant",
-      });
-      return;
-    }
-  }
   const composite = focused?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]');
   if (composite && (root === document || root.contains(composite))) {
     const horizontal = composite.getAttribute("aria-orientation") !== "vertical";
@@ -56,19 +41,6 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
   if (!buttons.includes(current)) {
     buttons[0]!.focus({ preventScroll: true });
     return;
-  }
-  const stack = current.closest<HTMLElement>("[data-nav-stack]");
-  if (
-    stack &&
-    getComputedStyle(stack).flexDirection === "column" &&
-    (direction === "up" || direction === "down")
-  ) {
-    const peers = buttons.filter((button) => stack.contains(button));
-    const next = peers[peers.indexOf(current) + (direction === "up" ? -1 : 1)];
-    if (next) {
-      next.focus({ preventScroll: true });
-      return;
-    }
   }
   const region = current.closest<HTMLElement>('[data-nav-layout="rows"]');
   if (region && (root === document || root.contains(region))) {

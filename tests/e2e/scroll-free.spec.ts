@@ -58,7 +58,7 @@ test("automatic cloud recovery and desktop Settings fit both sizes with enlarged
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });
@@ -69,7 +69,7 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
   for (let count = 0; count < 100; count++) {
     await check(count);
     const next = root.getByRole("button", { name: "Next page", exact: true });
-    if (!(await next.count())) return;
+    if (!(await next.count()) || (await next.isDisabled())) return;
     await next.click();
   }
   throw new Error("Pagination did not terminate");
@@ -132,7 +132,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         await expectScrollFree(page);
         const cards = page.locator(".collection-grid .creature-card");
         const count = await cards.count();
-        const lastPage = !(await page.getByRole("button", { name: "Next page", exact: true }).count());
+        const next = page.getByRole("button", { name: "Next page", exact: true });
+        const lastPage = !(await next.count()) || (await next.isDisabled());
         const indices = exhaustive
           ? Array.from({ length: count }, (_, index) => index)
           : [...new Set([...(pageIndex === 0 ? [0] : []), ...(lastPage ? [count - 1] : [])])];

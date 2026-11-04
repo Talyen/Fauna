@@ -40,7 +40,7 @@ export function mountGame(splash: StartupSplash) {
     return (
       <LocalizationProvider steamLanguage={() => steamLanguage}>
         <GameErrorBoundary diagnostics={session.diagnostics}>
-          <App session={session} desktop={platform.desktop} />
+          <App session={session} />
         </GameErrorBoundary>
       </LocalizationProvider>
     );

@@ -43,29 +43,13 @@ test("persistent saving failure fits both sizes and clears after automatic recov
   expect(await state(page)).toEqual(recovered);
 });
 
-test("layout checks permit only named, focusable secondary scroll regions and still catch clipping", async ({
-  page,
-}) => {
+test("layout checks reject scrolling and hidden clipping", async ({ page }) => {
   await page.setContent(
     '<main class="app settings-screen"><div data-scroll-region role="region" aria-label="Rules" tabindex="0" style="height:80px;overflow-y:auto;overflow-x:hidden"><p style="height:200px">First</p><button style="height:44px">Last</button></div></main>',
   );
-  expect(await page.evaluate(layoutViolations)).toEqual([]);
-  await page.locator("[data-scroll-region]").evaluate((el) => {
-    el.removeAttribute("aria-label");
-  });
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("scroll area"))).toBe(true);
-  await page.locator("[data-scroll-region]").evaluate((el) => {
-    el.setAttribute("aria-label", "Rules");
-  });
-  await page.locator("main").evaluate((el) => {
-    el.setAttribute("class", "app battle-screen");
-  });
-  expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("scroll area"))).toBe(true);
-  await page.locator("main").evaluate((el) => {
-    el.setAttribute("class", "app settings-screen");
-  });
-  await page.locator("[data-scroll-region]").evaluate((el) => {
-    el.style.overflowY = "hidden";
+  await page.locator("[data-scroll-region]").evaluate((element) => {
+    element.style.overflowY = "hidden";
   });
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("clipped content"))).toBe(
     true,

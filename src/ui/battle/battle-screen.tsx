@@ -380,7 +380,7 @@ export function BattleScreen({
             </div>
           </div>
           <section className="hand-section" aria-label={i18n.message("battle.actionHand", "Action hand")}>
-            <div className="hand" data-nav-stack>
+            <div className="hand">
               {visibleHand.map((id, index, hand) => {
                 const card = cardsById.get(id)!,
                   owner = cardActor(game, card)!,

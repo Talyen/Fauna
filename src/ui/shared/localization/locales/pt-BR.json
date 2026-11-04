@@ -10229,6 +10229,12 @@
     "sourceHash": "0b1c2368284f406284443743a0a61ffac4990b740f0a1f57aa2b897dce264091",
     "text": "Menu principal"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "94dde3cf2001befd956b01f7b18f66f3deb708b414b6c7a2c2041abd1b176839",
+    "text": "Opções"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10242,6 +10248,12 @@
     "text": "Jogar"
   },
   "menu.quit": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "1729da8c545d50a31405c65061a23b58355b048b7db1056f8da4752782d6d1a6",
+    "text": "Sair"
+  },
+  "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "1729da8c545d50a31405c65061a23b58355b048b7db1056f8da4752782d6d1a6",

@@ -123,6 +123,8 @@ export function Talents({
   const [purchased, setPurchased] = useState<string | null>(null);
   const lastKeyword = useRef<Keyword | null>(null);
   const screen = useRef<HTMLElement>(null);
+  const treeContent = useRef<HTMLDivElement>(null);
+  const [treeFit, setTreeFit] = useState({ scale: 1, height: 0 });
   useEffect(() => {
     if (!purchased) return;
     const timer = setTimeout(() => setPurchased(null), motionValue("--motion-battle"));
@@ -148,6 +150,41 @@ export function Talents({
       if (controlsRef) controlsRef.current = null;
     };
   }, [keyword, controlsRef, treeReset]);
+  useLayoutEffect(() => {
+    const main = screen.current;
+    const stage = main?.parentElement;
+    const content = treeContent.current;
+    const heading = main?.querySelector<HTMLElement>(".talents-heading");
+    const points = main?.querySelector<HTMLElement>(".talent-points");
+    if (!keyword || !main || !stage || !content || !heading || !points) return;
+    const fit = () => {
+      const naturalHeight = content.offsetHeight;
+      const stageHeight = stage.clientHeight;
+      if (!naturalHeight || !stageHeight) return;
+      const style = getComputedStyle(main);
+      const reserved =
+        heading.offsetHeight +
+        points.offsetHeight +
+        2 * (Number.parseFloat(style.rowGap) || 0) +
+        (Number.parseFloat(style.paddingTop) || 0) +
+        (Number.parseFloat(style.paddingBottom) || 0);
+      const scale = Math.min(1, Math.max(0, stageHeight - reserved) / naturalHeight);
+      const height = naturalHeight * scale;
+      setTreeFit((current) =>
+        Math.abs(current.scale - scale) < 0.0001 && Math.abs(current.height - height) < 0.1
+          ? current
+          : { scale, height },
+      );
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    for (const element of [stage, content, heading, points]) observer.observe(element);
+    window.addEventListener("resize", fit);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", fit);
+    };
+  }, [keyword, treeReset]);
   const points = keyword ? availablePoints(game, keyword) : 0;
   const tree = keyword ? talentTrees.get(keyword)! : undefined;
   return (
@@ -237,23 +274,16 @@ export function Talents({
         </div>
       ) : (
         <>
-          {/* A named scrolling region makes every tier reachable without pagination. */}
-          {/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- The named region needs focus for keyboard and controller scrolling */}
           <div
             key={`${keyword}:${treeReset}`}
-            className="secondary-scroll-region talent-tree-viewport"
-            data-scroll-region
+            className="talent-tree-viewport"
             role="region"
             aria-label={i18n.message("talents.category", "{{keyword}} talents", {
               keyword: keywordName(keyword),
             })}
-            tabIndex={0}
-            onFocusCapture={(event) => {
-              if (event.target instanceof HTMLElement && event.target.matches(".talent-node"))
-                event.target.scrollIntoView?.({ block: "nearest", inline: "nearest", behavior: "instant" });
-            }}
+            style={{ height: treeFit.height, "--talent-fit": treeFit.scale } as CSSProperties}
           >
-            <div className="talent-tree">
+            <div className="talent-tree" ref={treeContent}>
               {tree!.rows.map((row) => (
                 <div
                   className="talent-row"
@@ -348,7 +378,6 @@ export function Talents({
               ))}
             </div>
           </div>
-          {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
           <div className="talent-points" aria-live="polite" aria-atomic="true">
             {points > 0
               ? i18n.plural(

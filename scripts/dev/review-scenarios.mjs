@@ -84,6 +84,7 @@ export const SCENARIOS = [
   "journey-room",
   "journey-boss",
   "home",
+  "home-talent-points",
   "campfire",
   "boon",
   "new-boons-1",
@@ -186,6 +187,7 @@ export async function reviewScenario(server, name) {
     : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
       ? winBattle()
       : run();
+  if (name === "home-talent-points") game = { ...game, keywordXP: { ...game.keywordXP, physical: 10 } };
   if (name === "starter") {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     game = createGame(42);
@@ -537,7 +539,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       delete window.reviewOriginalNow;
     });
     await expect(page.locator(".draft-screen")).toBeVisible();
-  } else if (scenario.name !== "home") {
+  } else if (!["home", "home-talent-points"].includes(scenario.name)) {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
   }

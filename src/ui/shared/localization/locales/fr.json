@@ -10229,6 +10229,12 @@
     "sourceHash": "bbc7b126f0ac48c0f8bde64e65551f08c96092d8dd73278e441aea3fe27b0332",
     "text": "Menu principal"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "04a3a4c7b5258e0450aaf53a71c950f941754cdec02ddd18e6c231f268724d62",
+    "text": "Options"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10242,6 +10248,12 @@
     "text": "Jouer"
   },
   "menu.quit": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "07d7b1daff4afb38613210c4744302eed93d36bd833b35e96ab0fd95ba0a2d8e",
+    "text": "Quitter"
+  },
+  "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "07d7b1daff4afb38613210c4744302eed93d36bd833b35e96ab0fd95ba0a2d8e",

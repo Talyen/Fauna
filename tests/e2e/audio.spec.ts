@@ -92,7 +92,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
     ),
   ).toBe(true);
   await reloadHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();
 });

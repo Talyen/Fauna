@@ -51,7 +51,7 @@ it("applies and resets device settings without changing progression", async () =
   const user = userEvent.setup({ pointerEventsCheck: 0 });
   render(<App session={session} />);
   const game = session.store.getState().game;
-  await user.click(screen.getByRole("button", { name: "Settings" }));
+  await user.click(screen.getByRole("button", { name: "Options" }));
   const size = screen.getByRole("slider", { name: "Game Size" });
   act(() => size.focus());
   await user.keyboard("{Home}{ArrowRight}");

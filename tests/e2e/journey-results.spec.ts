@@ -60,7 +60,7 @@ for (const [width, enlarged, outcome] of [
     }
     await seed(page, game);
     if (enlarged) {
-      await page.getByRole("button", { name: "Settings", exact: true }).click();
+      await page.getByRole("button", { name: "Options", exact: true }).click();
       await page.getByRole("radio", { name: "125%", exact: true }).click();
       await page.keyboard.press("Escape");
     }

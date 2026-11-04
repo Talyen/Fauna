@@ -536,6 +536,9 @@
   "menu.mainMenu": {
     "text": "Main menu"
   },
+  "menu.options": {
+    "text": "Options"
+  },
   "menu.pause": {
     "text": "Pause menu"
   },
@@ -543,6 +546,9 @@
     "text": "Play"
   },
   "menu.quit": {
+    "text": "Quit"
+  },
+  "menu.quitShort": {
     "text": "Quit"
   },
   "menu.settings": {

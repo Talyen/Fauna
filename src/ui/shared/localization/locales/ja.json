@@ -10229,6 +10229,12 @@
     "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
     "text": "メインメニュー"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "f886af42b34aef00e16b4f6f6bed5ab920932b1267a0879777b7bea40f6b2e99",
+    "text": "オプション"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10242,6 +10248,12 @@
     "text": "プレイ"
   },
   "menu.quit": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "8391bd7569ff670ca43acfea3007279521bee7f20e260b2afb3ae8fddcb8d958",
+    "text": "終了"
+  },
+  "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
     "sourceHash": "8391bd7569ff670ca43acfea3007279521bee7f20e260b2afb3ae8fddcb8d958",

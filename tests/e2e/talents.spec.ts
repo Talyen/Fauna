@@ -69,11 +69,11 @@ test("the whole talent tree stays reachable without pages", async ({ page }) => 
   await expect(last).toBeFocused();
   const withinRegion = await last.evaluate((element) => {
     const bounds = element.getBoundingClientRect();
-    const region = element.closest("[data-scroll-region]")!.getBoundingClientRect();
-    return bounds.top >= region.top && bounds.bottom <= region.bottom;
+    const region = element.closest(".talent-tree-viewport")!.getBoundingClientRect();
+    return bounds.top >= region.top - 1 && bounds.bottom <= region.bottom + 1;
   });
   expect(withinRegion).toBe(true);
-  await expect.poll(() => tree.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+  await expect(tree).not.toHaveAttribute("data-scroll-region");
   await page.keyboard.press("Escape");
   await expect(burn).toBeFocused();
   await page.getByRole("button", { name: "Armor talents", exact: true }).click();
@@ -84,5 +84,5 @@ test("the whole talent tree stays reachable without pages", async ({ page }) => 
     .locator(".talent-node")
     .evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().top));
   expect(new Set(rows).size).toBe(1);
-  expect(await armor.evaluate((element) => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+  await expect(armor).not.toHaveAttribute("data-scroll-region");
 });

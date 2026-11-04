@@ -120,6 +120,7 @@
   --menu-icon-end: var(--destructive-text);
   --menu-icon-home: var(--primary);
   --menu-icon-quit: #fb923c;
+  --menu-icon-quit-home: #fb7185;
   --menu-icon-skip: #a3e635;
   --icon-size: calc(20px * var(--ui-density, 1));
   --empty-icon-size: calc(24px * var(--ui-density, 1));
@@ -158,12 +159,12 @@
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
   --tooltip-travel: calc(2px * var(--ui-density, 1));
   --feedback-duration: 1100ms;
-  --feedback-text: calc(37.8px * var(--text-scale, 1));
+  --feedback-text: calc(34px * var(--text-scale, 1));
   --feedback-pop-scale: 2;
   --feedback-hold-scale: 1.8;
   --feedback-icon-gap: calc(6px * var(--ui-density, 1));
   --feedback-critical-radius: calc(8px * var(--ui-density, 1));
-  --feedback-rise: calc(240px * var(--ui-density, 1));
+  --feedback-rise: calc(200px * var(--ui-density, 1));
   --feedback-reposition: 150ms;
   --feedback-outline: calc(1.5px * var(--ui-density, 1));
   --feedback-critical: #fcd34d;

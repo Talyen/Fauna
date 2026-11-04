@@ -153,47 +153,17 @@ it("skips mounted inactive settings panels during vertical navigation", () => {
   }
 });
 
-it("scrolls a focused reading region with controller navigation and leaves it at the top boundary", () => {
-  const root = document.createElement("div");
-  root.innerHTML = '<button id="back">Back</button><div data-scroll-region tabindex="0"></div>';
-  document.body.append(root);
-  const region = root.querySelector<HTMLElement>("[data-scroll-region]")!;
-  Object.defineProperties(region, { clientHeight: { value: 200 }, scrollHeight: { value: 800 } });
-  region.scrollTop = 100;
-  region.scrollBy = vi.fn();
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
-    return { x: 0, y: this === region ? 100 : 0, width: 100, height: 44 } as DOMRect;
-  });
-  try {
-    region.focus();
-    moveFocus("down");
-    expect(region.scrollBy).toHaveBeenCalledWith({ top: 150, behavior: "instant" });
-    expect(document.activeElement).toBe(region);
-    moveFocus("up");
-    expect(region.scrollBy).toHaveBeenLastCalledWith({ top: -150, behavior: "instant" });
-    region.scrollTop = 0;
-    moveFocus("up");
-    expect(document.activeElement?.id).toBe("back");
-  } finally {
-    root.remove();
-  }
-});
-
-it("keeps an open dialog's input scope ahead of background reading-region scrolling", () => {
+it("keeps input in an open dialog when background controls are focused", () => {
   const root = document.createElement("div");
   root.innerHTML =
-    '<div data-scroll-region tabindex="0"></div><div role="dialog" data-state="open"><button>Close</button></div>';
+    '<button id="background">Background</button><div role="dialog" data-state="open"><button>Close</button></div>';
   document.body.append(root);
-  const region = root.querySelector<HTMLElement>("[data-scroll-region]")!;
-  Object.defineProperties(region, { clientHeight: { value: 200 }, scrollHeight: { value: 800 } });
-  region.scrollBy = vi.fn();
+  const background = root.querySelector<HTMLButtonElement>("#background")!;
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   try {
-    region.focus();
+    background.focus();
     moveFocus("down");
-    expect(region.scrollBy).not.toHaveBeenCalled();
-    expect(document.activeElement).toBe(root.querySelector("button"));
+    expect(document.activeElement).toBe(root.querySelector('[role="dialog"] button'));
   } finally {
     root.remove();
   }

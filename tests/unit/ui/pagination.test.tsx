@@ -87,13 +87,13 @@ it("does not reclaim focus when a previously used page control becomes disabled 
 
 it("supports count-free pagination with accessible controls and boundary focus", async () => {
   const change = vi.fn();
-  const view = render(<PageControls page={0} pages={2} change={change} showCount={false} />);
+  const view = render(<PageControls page={0} pages={2} change={change} />);
   expect(screen.queryByRole("status")).toBeNull();
   expect(screen.getByRole("navigation").textContent).toBe("");
   const next = screen.getByRole("button", { name: "Next page" });
   await userEvent.click(next);
   expect(change).toHaveBeenCalledWith(1);
-  view.rerender(<PageControls page={1} pages={2} change={change} showCount={false} />);
+  view.rerender(<PageControls page={1} pages={2} change={change} />);
   expect((next as HTMLButtonElement).disabled).toBe(true);
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Previous page" }));
 });

@@ -276,8 +276,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0;
-  min-height: calc(var(--control-height) * 2 + 4px);
+  min-height: calc(var(--control-height) + 4px);
   padding-top: 4px;
+}
+/* Keep room for both status controls and a forecast in rows that have effects. */
+.battle-screen :is(.enemy-row, .player-row):has(.combat-status) .combatant-details {
+  min-height: calc(var(--control-height) + var(--text-secondary) * 1.4 + 4px);
 }
 .battle-screen .battle-readout,
 .battle-screen .target-preview {
@@ -384,7 +388,7 @@
 }
 .battle-screen .combat-stats {
   min-width: 0;
-  min-height: var(--control-height);
+  min-height: 0;
   padding-top: 0;
   overflow: visible;
   flex-wrap: wrap;

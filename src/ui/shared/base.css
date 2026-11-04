@@ -31,21 +31,39 @@
   --radius-4xl: 32px;
 }
 
+html {
+  cursor:
+    url("./assets/pointer-c-shaded.webp") 0 0,
+    auto;
+}
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
   background: var(--background);
+  user-select: none;
+}
+input,
+textarea,
+[contenteditable=""],
+[contenteditable="true"],
+[contenteditable="plaintext-only"] {
+  user-select: text;
 }
 @layer base {
   button {
     font: inherit;
-    cursor: pointer;
     touch-action: manipulation;
   }
-  button:disabled {
-    cursor: default;
+  button,
+  a,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  summary {
+    cursor: inherit;
   }
 }
 h1,
