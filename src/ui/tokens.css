@@ -170,7 +170,7 @@
   --feedback-critical: #fcd34d;
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
-  --talent-tree-screen-width: 1160px;
+  --talent-tree-screen-width: 1216px;
   --talent-category-label-size: calc(20px * var(--text-scale, 1));
   --talent-category-label-line-height: calc(28px * var(--text-scale, 1));
   --talent-category-caption-width: calc(110px * var(--text-scale, 1));
@@ -183,10 +183,8 @@
   --talent-card-available-border: #b9bcb3;
   --talent-card-accent-light: #f6eddf;
   --talent-card-shadow: rgb(0 0 0 / 35%);
-  --talent-card-width: 280px;
+  --talent-card-width: 278px;
   --talent-card-min-height: 174px;
-  --talent-page-rows: 2;
-  --talent-page-row-height: calc(var(--text-body) * 10 + var(--space-8));
   --art-standard-short-side: 200px;
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
@@ -282,7 +280,6 @@
 @media (max-height: 900px) {
   :root {
     --art-short-side: var(--art-compact-short-side);
-    --talent-page-rows: 1;
   }
 }
 @media (max-height: 760px) {

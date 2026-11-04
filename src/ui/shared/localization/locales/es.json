@@ -11052,12 +11052,6 @@
     "sourceHash": "f0d23c1b3a47553422c4551d8ed12d9b5135a2fbd3e72879725196ef7e88da95",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "c22c58c6f1a0f10955e26e5764f6660a4af8690cc3f431daa44aa373c92e853d",
-    "text": "Páginas de talentos"
-  },
   "talents.pointsAvailable": {
     "forms": {
       "many": "{{count}} puntos disponibles",

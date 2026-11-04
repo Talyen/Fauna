@@ -11053,12 +11053,6 @@
     "sourceHash": "3caa8e48187f0c3e9072200be3bf2d205ab1aad0985300e8da4a528f355623b8",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "ca81cef174188bb25fc331532e82ef3b240b2c9ac5342fea62c87fba79e97463",
-    "text": "Страницы талантов"
-  },
   "talents.pointsAvailable": {
     "forms": {
       "few": "Доступно {{count}} очка",
