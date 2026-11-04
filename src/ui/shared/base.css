@@ -32,7 +32,9 @@
 }
 
 html {
-  cursor: url("./assets/pointer-c-shaded.webp") 0 0, auto;
+  cursor:
+    url("./assets/pointer-c-shaded.webp") 0 0,
+    auto;
 }
 * {
   box-sizing: border-box;
