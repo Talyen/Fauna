@@ -48,8 +48,8 @@ it("retains usable display controls after a failed preference read without an al
     render(<DisplaySettings session={session} />);
   });
   expect(screen.queryByRole("alert")).toBeNull();
-  expect(screen.getByRole("radio", { name: "Windowed" }).getAttribute("aria-checked")).toBe("true");
-  expect(screen.getByRole("radio", { name: "Fullscreen" }).hasAttribute("disabled")).toBe(false);
+  expect(screen.getByRole("combobox", { name: "Display mode" }).textContent).toBe("Windowed");
+  expect(screen.getByRole("combobox", { name: "Display mode" }).hasAttribute("disabled")).toBe(false);
   await session.dispose();
 });
 

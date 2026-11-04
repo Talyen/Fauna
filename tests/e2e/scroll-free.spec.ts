@@ -218,7 +218,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       }
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Options", exact: true }).click();
-      for (const name of ["Display", "Sound", "Battle"]) {
+      for (const name of ["Display", "Sound", "Gameplay", "Other"]) {
         await page.getByRole("tab", { name, exact: true }).click();
         const panel = page.getByRole("tabpanel");
         await expect(panel).toBeVisible();

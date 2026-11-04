@@ -35,8 +35,18 @@ export async function expectTalentOverview(page: Page) {
       ),
     );
     const actual = arts[0]!.getBoundingClientRect().width;
+    const probe = document.createElement("div");
+    Object.assign(probe.style, {
+      position: "absolute",
+      visibility: "hidden",
+      width: "var(--talent-category-art-max-width)",
+      height: "0",
+    });
+    overview.append(probe);
+    const artworkLimit = probe.getBoundingClientRect().width;
+    probe.remove();
     const largest = Math.min(
-      parseFloat(getComputedStyle(overview).getPropertyValue("--talent-category-art-max-width")),
+      artworkLimit,
       categories[0]!.getBoundingClientRect().width,
       ((viewport.clientHeight - parseFloat(getComputedStyle(overview).rowGap) * 2) / 3 -
         captions -

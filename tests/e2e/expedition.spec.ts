@@ -15,6 +15,8 @@ test("one starter grows a lineup and reaches a committed journey outcome", async
   const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
+  expect((await state(page)).team).toEqual([]);
+  await activate(page.getByRole("button", { name: "Continue", exact: true }));
   expect((await state(page)).team.map((unit) => unit.id)).toEqual(["ally-0"]);
   let deployedThree = false;
   let resumed = false;

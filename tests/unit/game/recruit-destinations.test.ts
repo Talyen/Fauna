@@ -64,7 +64,9 @@ it("advances after Campfire and reload, then suppresses consecutive Campfires", 
     draft.team[0]!.health = 1;
   });
   const visiting = accept(before, { type: "visitCampfire" });
-  const rested = accept(decodeSave(encodeSave(visiting)), { type: "rest" });
+  const healed = accept(decodeSave(encodeSave(visiting)), { type: "rest" });
+  expect(healed.encounter).toBe(before.encounter);
+  const rested = accept(decodeSave(encodeSave(healed)), { type: "leaveCampfire" });
   expect(rested.encounter).toBe(before.encounter + 1);
   expect(rested.expedition!.lastRoom).toBe("campfire");
   expect(canVisitCampfire(rested)).toBe(false);

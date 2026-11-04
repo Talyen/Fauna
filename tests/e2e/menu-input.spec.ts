@@ -142,11 +142,9 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
   await pad.press(15);
   await expect(page.getByRole("tab", { name: "Sound", exact: true })).toBeFocused();
-  const sound = page.getByRole("switch", { name: "Sound", exact: true });
+  const sound = page.getByRole("slider", { name: "Master volume", exact: true });
   await pad.press(13);
   await expect(sound).toBeFocused();
-  await pad.press(0);
-  await expect(sound).not.toBeChecked();
   const master = page.getByRole("slider", { name: "Master volume", exact: true });
   await master.focus();
   await pad.press(14);
@@ -185,11 +183,11 @@ test("background keyboard input cannot activate journey commands", async ({ page
 test("pointer use suppresses navigation focus until a fresh key press", async ({ page }) => {
   await openHome(page);
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator(".app")).toHaveAttribute("data-focus", "visible");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "visible");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator(".app")).toHaveAttribute("data-focus", "visible");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "visible");
 });
 test("controller can dismiss Pause or end the journey immediately", async ({ page }) => {
   const pad = await controller(page);

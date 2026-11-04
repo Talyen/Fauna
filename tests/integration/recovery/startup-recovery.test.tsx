@@ -28,6 +28,15 @@ beforeEach(() => {
   renderState.broken = true;
   vi.mocked(validateContent).mockReset();
   vi.mocked(warmImages).mockClear();
+  vi.stubGlobal(
+    "matchMedia",
+    vi.fn((media: string) => ({
+      media,
+      matches: false,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    })),
+  );
   vi.useFakeTimers();
   vi.spyOn(performance, "now").mockReturnValue(0);
   const shell = new DOMParser().parseFromString(readFileSync("index.html", "utf8"), "text/html");
@@ -40,6 +49,7 @@ afterEach(async () => {
   document.body.replaceChildren();
   vi.useRealTimers();
   vi.restoreAllMocks();
+  vi.unstubAllGlobals();
 });
 it("reveals the existing recovery owner after an initial render failure without replaying preparation", async () => {
   vi.spyOn(console, "error").mockImplementation(() => {});

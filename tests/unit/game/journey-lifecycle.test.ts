@@ -109,7 +109,8 @@ describe("journey lifecycle and deterministic replay", () => {
       if (canVisitCampfire(state)) {
         step({ type: "visitCampfire" });
         expect(state.phase).toBe("campfire");
-        step({ type: room % 2 ? "leaveCampfire" : "rest" });
+        if (room % 2 === 0) step({ type: "rest" });
+        step({ type: "leaveCampfire" });
         expect(state.phase).toBe("teamSelection");
         if (room % 2 === 0) expect(state.team[0]!.health).toBeGreaterThan(1);
         else expect(state.team[0]!.health).toBe(1);

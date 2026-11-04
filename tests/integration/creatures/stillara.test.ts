@@ -54,6 +54,10 @@ it("grants Mana after payment, before automatic end turn, with caps and unchange
   for (const mana of [1, 3, 4]) {
     const game = produce(ready(), (draft) => {
       draft.battle!.mana = mana;
+      setBattleCards(draft, [
+        draft.battle!.hand[0]!,
+        draft.cards.find((card) => card.definitionId === "mossguard-guard")!.id,
+      ]);
     });
     const result = play(game, true);
     expect(result.accepted).toBe(true);

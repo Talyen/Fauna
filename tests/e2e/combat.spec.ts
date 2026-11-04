@@ -32,13 +32,15 @@ test("Campfire fits both sizes, heals once, resumes and enters the boss", async 
   expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
   await reloadHome(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(rested);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
   await page.getByRole("button", { name: /^Boss: / }).click();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
   expect(saved.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
-  expect(saved.expedition?.pack).toEqual(rested.expedition!.pack);
+  expect(saved.encounter).toBe(rested.encounter + 1);
+  expect(saved.expedition?.pack).toEqual(authoredPack(saved.encounter));
 });
 
 test("mouse targeting previews without committing and stays stable across live resize", async ({ page }) => {

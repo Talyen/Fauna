@@ -861,7 +861,10 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   state.boons = ["resonant-chimes"];
   state.battle!.cardsPlayedThisTurn = 2;
   const card = state.cards.find((c) => definition(c.definitionId).effect === "guard")!;
-  setBattleCards(state, [card.id]);
+  setBattleCards(state, [
+    card.id,
+    state.cards.find((other) => other.definitionId === "mossguard-attack")!.id,
+  ]);
   state.battle!.mana = definition(card.definitionId).cost;
   const targetId = card.ownerId!;
   const preview = previewCard(state, card.id, targetId);

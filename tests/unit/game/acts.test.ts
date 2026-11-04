@@ -61,6 +61,8 @@ describe("three-act journey", () => {
       draft.expedition.lastRoom = "combat";
     });
     state = accept(accept(state, { type: "visitCampfire" }), { type: "rest" });
+    expect(state.encounter).toBe(1);
+    state = accept(decodeSave(encodeSave(state)), { type: "leaveCampfire" });
     expect(state.encounter).toBe(2);
     expect(state.team[0]!.health).toBeGreaterThan(1);
     expect(decodeSave(encodeSave(state))).toEqual(state);

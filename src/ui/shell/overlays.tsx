@@ -118,6 +118,7 @@ export function ShellOverlays({
         <Dialog key={replacement.id} open>
           <DialogContent
             className="swap-dialog"
+            data-native-escape
             data-nav-layout="rows"
             showCloseButton={false}
             onOpenAutoFocus={(event) => {

@@ -77,7 +77,8 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
-  await page.getByRole("switch", { name: "Sound", exact: true }).click();
+  await page.getByRole("slider", { name: "Master volume", exact: true }).focus();
+  await page.keyboard.press("Home");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Return to Battle" }).click();
   const mediaCount = (await observed()).media.length;
@@ -94,5 +95,8 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await reloadHome(page);
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
-  await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();
+  await expect(page.getByRole("slider", { name: "Master volume", exact: true })).toHaveAttribute(
+    "aria-valuenow",
+    "0",
+  );
 });

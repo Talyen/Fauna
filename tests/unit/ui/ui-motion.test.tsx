@@ -18,7 +18,7 @@ afterEach(() => {
 
 it("shows overflow Mana in the existing crystals and previews spending it", () => {
   const view = render(<ManaCrystals mana={8} maximum={6} previewCost={1} />);
-  expect(view.getByRole("button", { name: "Mana 8 of 6" }).dataset.overflowRow).toBe("true");
+  expect(view.getByRole("button", { name: "Mana 8 of 6" }).dataset.overflowRow).toBe("false");
   expect(view.container.querySelectorAll('.mana-gem[data-filled="true"]')).toHaveLength(8);
   expect(view.container.querySelectorAll('.mana-gem[data-preview-spent="true"]')).toHaveLength(1);
   view.rerender(<ManaCrystals mana={5} maximum={6} />);

@@ -111,8 +111,9 @@ try {
           await page.getByRole("button", { name: "Close inspection", exact: true }).click();
           await page.getByRole("button", { name: "Back", exact: true }).click();
         } else if (step.kind === "settings") {
-          await page.getByRole("button", { name: "Settings", exact: true }).click();
-          await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
+          await page.getByRole("button", { name: "Options", exact: true }).click();
+          await page.getByRole("slider", { name: "Tooltip size", exact: true }).focus();
+          await page.keyboard.press("End");
           await page.getByRole("button", { name: "Back", exact: true }).click();
         } else {
           await page.getByRole("button", { name: "Talents", exact: true }).click();

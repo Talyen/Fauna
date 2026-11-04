@@ -99,6 +99,10 @@ it("still asks when two living backups can be chosen", async () => {
     await userEvent.click(screen.getByRole("button", { name: "Continue" }));
     const dialog = await screen.findByRole("dialog", { name: "Choose a replacement" });
     expect(dialog).toBeTruthy();
+    const focused = document.activeElement;
+    await userEvent.keyboard("{Escape}");
+    expect(document.activeElement).toBe(focused);
+    expect(screen.getByRole("dialog", { name: "Choose a replacement" })).toBe(dialog);
     expect(session.store.getState().game).toEqual(initial);
     await userEvent.click(screen.getByRole("button", { name: "Captoad, backup" }));
     expect(session.store.getState().game.team[0]!.id).toBe("backup-toad");

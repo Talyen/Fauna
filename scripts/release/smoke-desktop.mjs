@@ -44,7 +44,8 @@ try {
     .locator(".deck-grid img")
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Close deck", exact: true }).click();
-  await window.locator("[data-encounter]").first().click();
+  await window.getByRole("button", { name: "Continue", exact: true }).click();
+  await window.getByRole("button", { name: "Combat", exact: true }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const inspected = await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data);
@@ -63,7 +64,7 @@ try {
   await inspection.waitFor();
   await window.keyboard.press("Escape");
   await window.getByRole("button", { name: "Open menu", exact: true }).click();
-  await window.getByRole("button", { name: "Continue", exact: true }).click();
+  await window.getByRole("button", { name: "Return to Battle", exact: true }).click();
   if ((await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== inspected)
     throw new Error("Collection browsing changed the saved battle.");
   // Exercise required knockout replacement through the renderer and desktop storage.

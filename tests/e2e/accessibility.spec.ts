@@ -25,7 +25,7 @@ test("home, settings, battle, pause and rewards meet automated accessibility che
   await seed(page, run());
   await scan(page, "home");
   await page.getByRole("button", { name: "Options", exact: true }).click();
-  for (const name of ["Display", "Sound", "Battle"]) {
+  for (const name of ["Display", "Sound", "Gameplay", "Other"]) {
     await page.getByRole("tab", { name, exact: true }).click();
     await scan(page, `settings-${name.toLowerCase()}`);
   }

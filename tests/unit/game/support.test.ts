@@ -103,6 +103,8 @@ it("prepares a new room after Campfire rest and reload", () => {
   s = accept(s, { type: "visitCampfire" });
   s = decodeSave(encodeSave(s));
   s = accept(s, { type: "rest" });
+  expect(s.encounter).toBe(room);
+  s = accept(decodeSave(encodeSave(s)), { type: "leaveCampfire" });
   expect(s.encounter).toBe(room + 1);
   expect(s.expedition.lastRoom).toBe("campfire");
   expect(decodeSave(encodeSave(s))).toEqual(s);

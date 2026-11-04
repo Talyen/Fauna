@@ -20,7 +20,7 @@ import {
 } from "../../../src/game/combat/index";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import { NEW_BOON_EFFECTS } from "../../support/boons";
-import { CORNUCOPIA_CARD_ID, replenishJourneyCards } from "../../../src/game/journey-cards";
+import { replenishJourneyCards } from "../../../src/game/journey-cards";
 import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
@@ -357,7 +357,7 @@ it("all ten approved rules retain current-format ownership through reload withou
   const state = requireBattle(structuredClone(run()));
   state.boons = BOONS.filter((boon) => Object.hasOwn(NEW_BOON_EFFECTS, boon.id)).map((boon) => boon.id);
   replenishJourneyCards(state);
-  state.battle.draw.push(CORNUCOPIA_CARD_ID);
+  setBattleCards(state, state.battle.hand);
   const next = decodeSave(encodeSave(state));
   expect(next).toEqual(state);
   const before = encodeSave(next);

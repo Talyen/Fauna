@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { authoredPack, accept, prepareDestination, run } from "../support/game";
+import { setBattleCards } from "../support/cards";
 import { ownedCards } from "../../src/game/team";
 import { freshCombat } from "../../src/game/combat/index";
 import { createPearls, summonEcho } from "../../src/game/combat/legendary";
@@ -71,10 +72,11 @@ test("enemy Echoes are targetable without being roster creatures", async ({ page
   const fixture = produce(accept(destination, { type: "beginBattle" }), (draft) => {
     summonEcho(draft as BattleState, draft.battle!.enemies[0]!, "enemy", 6, []);
     const card = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(draft, [
+      card.id,
+      draft.cards.find((entry) => entry.definitionId === "mossguard-guard")!.id,
+    ]);
+    draft.rng = 42;
   });
   await seed(page, fixture);
   await page.getByRole("button", { name: "Continue", exact: true }).click();

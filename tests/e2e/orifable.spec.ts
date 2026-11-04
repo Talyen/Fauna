@@ -10,7 +10,7 @@ test("Food uses shared targeting, consumes only after a play and resumes without
   await seed(page, game);
   await resume(page);
   const apple = page.locator('.app:not([inert]) .hand [aria-label^="Apple,"]');
-  await expect(apple).toHaveAccessibleName(/Apple, Food, 1 mana, Restore 6 Health; Consume/);
+  await expect(apple).toHaveAccessibleName(/Apple, Food, 1 mana, Restore 6 Health, Consume/);
   const before = await state(page);
   await apple.click();
   await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeVisible();

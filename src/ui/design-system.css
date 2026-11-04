@@ -66,7 +66,10 @@
   color: var(--foreground);
   border-color: var(--border);
 }
-.game-button:is(.control-outline, .control-ghost).end-journey {
+.game-button:is(.control-outline, .control-ghost).end-journey,
+.game-button:is(.control-outline, .control-ghost).end-journey:not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover {
   color: var(--menu-icon-end);
 }
 .game-button:is(.control-outline, .control-ghost):not(:disabled):not([aria-disabled="true"]):active {
@@ -99,6 +102,10 @@
 .compact-icon-control {
   position: relative;
   isolation: isolate;
+}
+.game-button.compact-icon-control {
+  width: max(var(--control-height), var(--compact-control-size));
+  height: max(var(--control-height), var(--compact-control-size));
 }
 .game-button:is(.control-outline, .control-ghost).compact-icon-control,
 .game-button:is(.control-outline, .control-ghost).compact-icon-control:not(:disabled):not(

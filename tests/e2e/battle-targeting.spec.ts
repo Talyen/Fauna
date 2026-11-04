@@ -40,6 +40,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await expect(page.locator(".confirm-play")).toHaveCount(0);
   expect((await state(page)).revision).toBe(before.revision);
   await page.keyboard.press("Escape");
+  await page.keyboard.press("Tab");
   await cards.nth(1).focus();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
@@ -140,6 +141,7 @@ test("idle enemy clicks open kit inspection without changing battle or portrait"
   const before = await state(page);
   await enemy.hover();
   await expect(page.getByRole("tooltip")).toBeVisible();
+  await settleScreen(page);
   const beforeScale = await enemy.evaluate((element) => getComputedStyle(element).scale);
   await page.mouse.down();
   expect(await enemy.evaluate((element) => getComputedStyle(element).scale)).toBe(beforeScale);
@@ -244,6 +246,7 @@ test("navigation returns to the nearest remaining card; invalid targets do nothi
   await resume(page);
   const cards = page.locator(".app:not([inert]) .hand .action-card");
   const last = await cards.nth(2).getAttribute("data-card-id");
+  await page.keyboard.press("Tab");
   await cards.nth(1).focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("Enter");

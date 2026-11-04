@@ -210,7 +210,12 @@ describe("knockout replacements", () => {
     expect(decodeSave(encodeSave(game))).toEqual(game);
     const command = chooseBattleCommand(game);
     expect(command).toEqual({ type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
-    const next = accept(game, command);
+    const next = accept(game, {
+      type: "swap",
+      activeId: "ally-0",
+      reserve: "recruit-pollenmoth",
+      autoEndTurn: false,
+    });
     expect(next.team[0]!.combat!.controlled).toBe("freeze");
     expect(next.team[0]!.combat!.controlTurns).toBe(1);
     expect(next.team[0]!.combat!.freeze).toBe(0);

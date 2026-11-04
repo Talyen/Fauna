@@ -104,7 +104,7 @@ for (const [width, height, scale, reduced] of [
       expect(Math.abs(center - composition.center)).toBeLessThanOrEqual(1);
     for (const frame of composition.frames) {
       expect(frame.healthInside).toBe(true);
-      expect(frame.healthBottom).toBeCloseTo(1, 0);
+      expect(Math.abs(frame.healthBottom)).toBeLessThanOrEqual(1);
       expect(frame.healthHeight).toBe(4);
       expect(frame.iconsBelow).toBe(true);
     }

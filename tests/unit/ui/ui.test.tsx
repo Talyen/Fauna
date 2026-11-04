@@ -58,6 +58,7 @@ describe("player interface", () => {
     const committed = session.store.getState().game;
     render(<App session={session} />);
     const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
@@ -163,7 +164,7 @@ describe("player interface", () => {
     });
     expect(
       screen.getByRole("heading", {
-        name: `Act ${Math.floor(encounter / 10) + 1} · Room ${(encounter % 10) + 1} of 10`,
+        name: encounter === 0 ? "Choose Destination" : encounterSource(game).enemies[0]!.name,
       }),
     ).toBeTruthy();
     if (encounter !== 0) {
@@ -292,13 +293,13 @@ describe("player interface", () => {
           ] as const) {
             const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
             await inspect(frame.querySelector<HTMLButtonElement>("button")!, name);
-            if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
+            if (block) expect(frame.querySelector('[data-status-id="block"]')).toBeTruthy();
           }
         } else {
           expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
           await inspect(screen.getByRole("button", { name: "Reedstag, backup" }), "Reedstag");
           expect(
-            document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]'),
+            document.querySelector('[data-actor-id="reserve-copy"] [data-status-id="block"]'),
           ).toBeTruthy();
         }
         expect(session.store.getState().game).toEqual(fixture);
@@ -322,8 +323,7 @@ it("allows play and explains unavailable saving when browser storage access is d
     await session.load();
     render(<App session={session} />);
     expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
-    expect(screen.queryByRole("alert")).toBeNull();
-    expect(screen.getByRole("status").textContent).toContain("Progress cannot be saved");
+    expect(screen.getByRole("alert").textContent).toContain("Progress cannot be saved");
     expect(session.store.getState().loadFailed).toBe(true);
     await session.dispose();
   } finally {

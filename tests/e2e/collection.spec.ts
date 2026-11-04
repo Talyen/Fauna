@@ -28,7 +28,7 @@ test("Collection inspection returns through nested details to the unchanged batt
     return [...counts.values()];
   });
   expect(rows).toEqual([3, 3]);
-  const locked = page.getByRole("img", { name: "Locked species" }).first();
+  const locked = page.getByRole("img", { name: "Undiscovered" }).first();
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
@@ -67,7 +67,7 @@ test("Collection inspection returns through nested details to the unchanged batt
   await expect(page.getByRole("button", { name: "Inspect Emberback", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Return to Battle", exact: true }).click();
   await expect(page.getByRole("main", { name: "Battlefield", exact: true })).toBeVisible();
   expect(await state(page)).toEqual(fixture);
 });

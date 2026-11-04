@@ -120,7 +120,7 @@ it("keeps the permanent Boss kit intact when Pearl generation fills the battle-c
 it("stops Riptide and its RNG after a nested Cleanse reaction defeats the Water source", () => {
   const before = produce(requireBattle(teamRun(42, ["bloomquail", "coralcurl", "mossguard"])), (draft) => {
     draft.discovery.recruited.bloomquail = 6;
-    draft.keywordXP.water = 1000;
+    draft.keywordXP.water = 1_000_000;
     draft.talents = TALENTS.filter((talent) => talent.keyword === "water").map((talent) => talent.id);
     draft.boons = ["orbit-armillary", "story-puzzle-cube"];
     draft.battle.puzzleProgress = ["burn", "bleed"];

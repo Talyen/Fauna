@@ -126,7 +126,10 @@ export function connectInput(
     if (event.key === "Escape" && target?.closest('[data-native-escape][data-state="open"]')) return;
     if (
       target?.closest("[data-radix-select-content]") ||
-      (target?.getAttribute("role") === "combobox" && target.getAttribute("aria-expanded") === "true")
+      (target?.getAttribute("role") === "combobox" &&
+        (target.getAttribute("aria-expanded") === "true" ||
+          event.key === "ArrowUp" ||
+          event.key === "ArrowDown"))
     )
       return;
     const mapping: Record<string, InputAction> = {

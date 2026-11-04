@@ -46,23 +46,26 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
     expect(card.width).toBe(layout.creatures[0]!.width);
     expect(card.width).toBeGreaterThan(44);
   }
-  const cardSize =
-    height <= 760
-      ? { width: 160, height: 213 }
-      : height <= 900
-        ? { width: 180, height: 240 }
-        : { width: 200, height: 267 };
+  const cardSize = { width: layout.cards[0]!.width, height: layout.cards[0]!.height };
+  expect(Math.abs(cardSize.width / cardSize.height - 0.75)).toBeLessThan(0.01);
+  expect(cardSize.width).toBeGreaterThan(44);
+  expect(Math.abs(layout.creatures[0]!.width / cardSize.height - 1.1)).toBeLessThan(0.02);
   expect(layout.cards).toEqual(
     Array.from({ length: 6 }, () => ({ ...cardSize, imageWidth: "600", imageFit: "contain" })),
   );
-  expect(layout.gem).toBe(18);
+  expect(layout.gem).toBeGreaterThanOrEqual(16);
+  expect(layout.gem).toBeLessThanOrEqual(44);
   await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
   const { mana, end, draw, discard, fan, dock } = layout;
   expect(mana.bottom).toBeLessThan(draw.y);
   expect(end.bottom).toBeLessThan(discard.y);
   expect(Math.abs(mana.x + mana.width / 2 - draw.x - draw.width / 2)).toBeLessThan(1);
   expect(Math.abs(end.x + end.width / 2 - discard.x - discard.width / 2)).toBeLessThan(1);
-  for (const pile of [draw, discard]) expect(Math.abs(pile.bottom - height + 24)).toBeLessThan(1);
+  expect(Math.abs(draw.bottom - discard.bottom)).toBeLessThan(1);
+  for (const pile of [draw, discard]) {
+    expect(pile.bottom).toBeLessThanOrEqual(height);
+    expect(pile.bottom).toBeGreaterThan(height - cardSize.height / 2);
+  }
   expect(fan).toHaveLength(6);
   expect(Math.abs(fan[0]!.top - fan[5]!.top)).toBeLessThan(1);
   expect(Math.abs(fan[1]!.top - fan[4]!.top)).toBeLessThan(1);

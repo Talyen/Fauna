@@ -25,7 +25,9 @@ describe("uncommitted previews", () => {
     ).toBe(6);
     expect(preview.events.some((e) => e.kind === "knockout" && e.targetId === "enemy-0")).toBe(true);
     expect(JSON.stringify(original)).toBe(serialized);
-    expect(dispatch(original, { type: "play", cardId: card, targetId: "enemy-0" })).toEqual(preview);
+    expect(
+      dispatch(original, { type: "play", cardId: card, targetId: "enemy-0", autoEndTurn: false }),
+    ).toEqual(preview);
     expect(previewCard(original, card, "ally-0").accepted).toBe(false);
   });
   it("reports absorbed block separately and caps damage at actual health lost", () => {

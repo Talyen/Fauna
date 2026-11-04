@@ -308,8 +308,12 @@ it("previews actor and ally effects separately, then commits only the activated 
   );
   const actor = container.querySelector('[data-actor-id="ally-0"]')!;
   const recipient = container.querySelector('[data-actor-id="ally-1"]')!;
-  expect(actor.querySelector(".target-preview")?.textContent).toContain("Dodge 0 → 10");
-  expect(recipient.querySelector(".target-preview")?.textContent).toContain("0 → 6");
+  expect(
+    container.querySelector('[data-forecast-for="ally-0"] .target-preview')?.getAttribute("aria-label"),
+  ).toContain("Dodge 0 → 10");
+  expect(
+    container.querySelector('[data-forecast-for="ally-1"] .target-preview')?.getAttribute("aria-label"),
+  ).toContain("Block 0 to 6");
   expect(actor.hasAttribute("data-acting")).toBe(true);
   expect(actor.hasAttribute("data-active-target")).toBe(false);
   expect(recipient.hasAttribute("data-active-target")).toBe(true);

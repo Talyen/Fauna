@@ -2,7 +2,7 @@ import { expectControlColors } from "./support/control-colors";
 import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect, type Page } from "@playwright/test";
-import { reloadHome, test, seed, state } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { merchantDestination, run } from "../support/game";
 import { BOONS } from "../../src/game/content";
 
@@ -44,6 +44,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
     await seed(page, fixture);
+    await resume(page);
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
     await page.keyboard.press("Enter");
@@ -55,7 +56,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       if (!exhaustive && index > 0 && index + 2 < BOONS.length) continue;
       for (const boon of BOONS.slice(index, index + 2)) {
         await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
-        await expect(dialog).toContainText(boon.text);
+        for (const clause of boon.text.split(/;\s*/)) await expect(dialog).toContainText(clause);
       }
       await settleScreen(page);
       await dialog

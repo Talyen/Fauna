@@ -124,15 +124,16 @@ describe("keyword progression and rewards", () => {
     expect(ended.battleXP).toEqual({});
     expect(decodeSave(encodeSave(ended))).toEqual(ended);
   });
-  it("buys either talent first, enforces category budgets, and resets without losing XP", () => {
+  it("buys prerequisite talents first, enforces category budgets, and resets without losing XP", () => {
     expect([9, 10, 39, 40, 99, 100].map(talentPoints)).toEqual([0, 1, 1, 2, 2, 3]);
     let s = produce(run(), (d) => {
       d.keywordXP = { burn: 40, block: 10 };
     });
     const card = s.cards.find((c) => c.definitionId === "emberback-furnace-breath")!;
     expect(cardCost(card, s)).toBe(1);
-    s = accept(s, { type: "buyTalent", talentId: "burn.melting-point" });
+    expect(dispatch(s, { type: "buyTalent", talentId: "burn.melting-point" }).state).toBe(s);
     s = accept(s, { type: "buyTalent", talentId: "burn.flashpoint" });
+    s = accept(s, { type: "buyTalent", talentId: "burn.melting-point" });
     expect(cardCost(card, s)).toBe(0);
     expect(dispatch(s, { type: "buyTalent", talentId: "burn.flashpoint" }).accepted).toBe(false);
     expect(dispatch(s, { type: "buyTalent", talentId: "burn.potency" }).accepted).toBe(false);
@@ -250,7 +251,7 @@ it("awards a team-wide Block play once rather than once per recipient", () => {
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
   });
-  const next = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
+  const next = accept(s, { type: "play", autoEndTurn: false, cardId: s.battle!.hand[0]! });
   expect(next.battleXP.block).toBe(1);
   expect(next.team.every((c) => c.block === 2)).toBe(true);
 });

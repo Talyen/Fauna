@@ -23,7 +23,7 @@ test("Dulcera's abilities restore, protect and exchange the visible team with ke
 
   await ability("meadow-shelter").focus();
   await page.keyboard.press("Enter");
-  await expect(allies.getByLabel("Block 2", { exact: true })).toHaveCount(3);
+  await expect(allies.locator('[data-status-id="block"]')).toHaveCount(3);
   await expect(page.getByRole("button", { name: "Mana 3 of 4", exact: true })).toBeVisible();
 
   await ability("hushed-waters").focus();

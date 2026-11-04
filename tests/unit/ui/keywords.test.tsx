@@ -180,7 +180,9 @@ describe("keyword foundation", () => {
     expect(html).not.toContain('data-keyword="consume"');
     const pearl = renderToStaticMarkup(<CardRules card={PEARL} value={2} />);
     expect(pearl).toMatch(/<span\b[^>]*\bdata-keyword="consume"[^>]*>Consume<\/span>/);
-    expect(pearl.replace(/<[^>]+>/g, "")).toBe("Consume; Gain 2 Block or 2 Mana at random");
+    expect(pearl.replace(/<br\s*\/?\s*>/g, "\n").replace(/<[^>]+>/g, "")).toBe(
+      "Consume\nGain 2 Block or 2 Mana at random",
+    );
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");
     expect(unsafe).not.toContain("<script>");

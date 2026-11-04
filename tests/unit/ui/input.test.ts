@@ -5,6 +5,27 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
+it("leaves opening arrows to a focused closed dropdown", () => {
+  const trigger = document.createElement("button");
+  trigger.setAttribute("role", "combobox");
+  trigger.setAttribute("aria-expanded", "false");
+  document.body.append(trigger);
+  const actions = vi.fn();
+  const close = connectInput(actions, () => {});
+  try {
+    trigger.focus();
+    for (const key of ["ArrowUp", "ArrowDown"]) {
+      const event = new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true });
+      trigger.dispatchEvent(event);
+      expect(event.defaultPrevented).toBe(false);
+      expect(document.activeElement).toBe(trigger);
+    }
+    expect(actions).not.toHaveBeenCalled();
+  } finally {
+    close();
+    trigger.remove();
+  }
+});
 it("leaves Escape to an open native dialog without blurring its focused control", () => {
   const dialog = document.createElement("div");
   dialog.dataset.nativeEscape = "";

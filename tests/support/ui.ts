@@ -3,7 +3,10 @@ import { cleanup } from "@testing-library/react";
 
 /** Opt-in browser substitutes for screen tests; sizing and animation tests own their mocks */
 export function screenTestEnvironment({ visible = false } = {}) {
+  let scrollIntoView: PropertyDescriptor | undefined;
   beforeEach(() => {
+    scrollIntoView = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "scrollIntoView");
+    Object.defineProperty(HTMLElement.prototype, "scrollIntoView", { configurable: true, value: vi.fn() });
     vi.stubGlobal(
       "ResizeObserver",
       class {
@@ -24,5 +27,7 @@ export function screenTestEnvironment({ visible = false } = {}) {
     localStorage.clear();
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
+    if (scrollIntoView) Object.defineProperty(HTMLElement.prototype, "scrollIntoView", scrollIntoView);
+    else Reflect.deleteProperty(HTMLElement.prototype, "scrollIntoView");
   });
 }

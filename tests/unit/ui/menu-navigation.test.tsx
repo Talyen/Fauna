@@ -145,7 +145,7 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
         within(menu)
           .getAllByRole("button")
           .map((button) => button.textContent?.trim()),
-      ).toEqual(["Return to Run", "Main Menu", "Collection", "Talents", "Options", "End Run", "Quit"]);
+      ).toEqual(["Return to Run", "Main Menu", "Collection", "Talents", "Options", "End Run"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();

@@ -46,7 +46,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await expect(burn).toHaveAccessibleDescription("3 points available");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Return to Battle", exact: true }).click();
   expect((await state(page)).battle).toEqual(fixture.battle);
 });
 

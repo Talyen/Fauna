@@ -121,6 +121,12 @@ function renderLocalized(children: ReactNode, catalog: MessageCatalog = french, 
   );
 }
 
+function renderedRuleText(element: Element) {
+  const copy = element.cloneNode(true) as Element;
+  for (const lineBreak of copy.querySelectorAll("br")) lineBreak.replaceWith("\n");
+  return copy.textContent;
+}
+
 function renderRules(
   cards: ComponentProps<typeof CardRules>[],
   catalog: MessageCatalog = french,
@@ -133,7 +139,7 @@ function renderRules(
   );
   return {
     ...view,
-    rules: [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+    rules: [...view.container.querySelectorAll(".action-effect")].map(renderedRuleText),
   };
 }
 
@@ -633,7 +639,7 @@ it("localizes campfire health and committed recovery without changing the rest o
   if (before.phase !== "campfire") throw new Error("Expected campfire");
   const result = dispatch(before, { type: "rest" });
   expect(result.accepted).toBe(true);
-  expect(result.state.encounter).toBe(before.encounter + 1);
+  expect(result.state.encounter).toBe(before.encounter);
   const { container, rerender } = renderMessages(
     <TooltipProvider>
       <Campfire game={before} send={() => true} />
@@ -691,14 +697,16 @@ it.each([
   }
 });
 
-it("shows the creature health detail in the selected language", async () => {
+it("keeps creature tooltips to the localized name and passive", async () => {
   renderMessages(
     <TooltipProvider>
       <CreatureCard kind="mossguard" actorId="ally-1" health={5} maxHealth={32} />
     </TooltipProvider>,
   );
   await userEvent.setup().hover(screen.getByRole("button", { name: "Mossguard" }));
-  expect((await screen.findByRole("tooltip")).textContent).toContain("Santé 5/32");
+  const tooltip = await screen.findByRole("tooltip");
+  expect(tooltip.textContent).toContain("Prolifération");
+  expect(tooltip.textContent).not.toContain("5/32");
 });
 
 it("localizes shared Negate only when the bearer can be identified", () => {
@@ -1710,10 +1718,10 @@ it("presents the reviewed Light and healing bounce tiers with their distinct cha
       <CreatureDetails kind="pollenmoth" progression={maximum} />
     </>,
   );
-  const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
+  const rules = [...view.container.querySelectorAll(".card-details p")].map(renderedRuleText);
   expect(rules).toEqual([
     "Les dégâts de Lumière rebondissent une fois",
-    "Les dégâts de Lumière rebondissent deux fois ; la restauration de Santé a 50% de chances de rebondir une fois",
+    "Les dégâts de Lumière rebondissent deux fois\nla restauration de Santé a 50% de chances de rebondir une fois",
     "Les dégâts de Lumière et la restauration de Santé rebondissent deux fois",
   ]);
 });
@@ -1734,7 +1742,7 @@ it("presents Russian fallen-ally card counts with the right grammatical forms", 
     russian,
     "ru",
   );
-  const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
+  const rules = [...view.container.querySelectorAll(".card-details p")].map(renderedRuleText);
   expect(rules).toEqual([
     "Оатара может разыграть за ход 1 карту павших союзников",
     "Оатара может разыграть за ход 2 карты павших союзников",
@@ -2021,10 +2029,10 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
     </LocalizationProvider>,
   );
   expect(
-    screen.getByRole("button", { name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé ; Consommer" }),
+    screen.getByRole("button", { name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé, Consommer" }),
   ).toBeTruthy();
   expect(screen.getByText("Santé").getAttribute("data-keyword")).toBe("health");
-  expect(view.container.textContent).toContain("Restaure 12 Santé ; Consommer");
+  expect(renderedRuleText(view.container)).toContain("Restaure 12 Santé\nConsommer");
   const teamBuff = produce(run(), (draft) => {
     draft.boons.push("pumpkin-tureen");
   });
@@ -2038,10 +2046,10 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
   );
   expect(
     screen.getByRole("button", {
-      name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé à tous les alliés ; Consommer",
+      name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé à tous les alliés, Consommer",
     }),
   ).toBeTruthy();
-  expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
+  expect(renderedRuleText(view.container)).toContain("Restaure 12 Santé à tous les alliés\nConsommer");
 });
 
 it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
@@ -2054,7 +2062,9 @@ it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
       <CardRules card={berries} modifiers={game} />
     </LocalizationProvider>,
   );
-  expect(view.container.textContent).toBe("Gagne 2 Mana ; restaure 2 Santé à tous les alliés ; Consommer");
+  expect(renderedRuleText(view.container)).toBe(
+    "Gagne 2 Mana\nrestaure 2 Santé à tous les alliés\nConsommer",
+  );
   const doubled = produce(game, (draft) => {
     draft.boons.push("nectar-dipper");
   });
@@ -2063,7 +2073,9 @@ it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
       <CardRules card={berries} value={4} modifiers={doubled} />
     </LocalizationProvider>,
   );
-  expect(view.container.textContent).toBe("Gagne 4 Mana ; restaure 4 Santé à tous les alliés ; Consommer");
+  expect(renderedRuleText(view.container)).toBe(
+    "Gagne 4 Mana\nrestaure 4 Santé à tous les alliés\nConsommer",
+  );
 });
 
 it("presents reviewed draw and Mana variants with their actual values", () => {
@@ -2075,8 +2087,8 @@ it("presents reviewed draw and Mana variants with their actual values", () => {
     { card: enemyCard(card), value: 2 },
   ]);
   expect(view.rules).toEqual([
-    "Piochez 1 carte ; Gagnez 1 Mana",
-    "Piochez 2 cartes ; Gagnez 1 Mana",
+    "Piochez 1 carte\nGagnez 1 Mana",
+    "Piochez 2 cartes\nGagnez 1 Mana",
     "Piochez 1 carte",
     "Piochez 2 cartes",
   ]);
@@ -2093,9 +2105,9 @@ it("presents reviewed draw and Mana variants with their actual values", () => {
     "ru",
   );
   expect(russianView.rules).toEqual([
-    "Добор карт: 1; Получено маны: 1",
-    "Добор карт: 2; Получено маны: 1",
-    "Добор карт: 5; Получено маны: 1",
+    "Добор карт: 1\nПолучено маны: 1",
+    "Добор карт: 2\nПолучено маны: 1",
+    "Добор карт: 5\nПолучено маны: 1",
   ]);
 });
 
@@ -2134,7 +2146,7 @@ it("presents shared Dodge and reflected attack card rules", () => {
     { card: definition("oathara-travelers-ward") },
   ]);
   expect(view.rules).toEqual([
-    "Gagnez 30% d’Esquive jusqu’à votre prochain tour ; Piochez 1 carte",
+    "Gagnez 30% d’Esquive jusqu’à votre prochain tour\nPiochez 1 carte",
     "Gagnez 30% d’Esquive jusqu’à votre prochain tour",
     "Renvoyez la prochaine attaque",
   ]);
@@ -2148,8 +2160,8 @@ it("presents translated composite swap and Stun card rules", () => {
     { card: definition("chimecricket-attack"), value: 4 },
   ]);
   expect(view.rules).toEqual([
-    "Échangez avec un allié en réserve au hasard ; Piochez 2 cartes",
-    "Infligez 4 dégâts d’Étourdissement ; Piochez 1 carte",
+    "Échangez avec un allié en réserve au hasard\nPiochez 2 cartes",
+    "Infligez 4 dégâts d’Étourdissement\nPiochez 1 carte",
   ]);
   expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
 });

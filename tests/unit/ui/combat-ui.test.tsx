@@ -8,7 +8,7 @@ import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { KEYWORDS, keywordLabel } from "../../../src/game/progression";
-import { TALENTS } from "../../../src/game/content";
+import { TALENTS, definition } from "../../../src/game/content";
 import { authoredPack, prepareDestination, run } from "../../support/game";
 import { Talents } from "../../../src/ui/talents/talents";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -74,7 +74,11 @@ it(
       const ids = cards.map((card) => card.dataset.cardId);
       const expected = before.cards
         .filter((card) => before.battle!.draw.includes(card.id))
-        .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id))
+        .sort(
+          (a, b) =>
+            definition(a.definitionId).name.localeCompare(definition(b.definitionId).name) ||
+            a.id.localeCompare(b.id),
+        )
         .map((card) => card.id);
       expect(ids).toEqual(expected.slice(0, 3));
       const allIds = [...ids];
@@ -144,7 +148,7 @@ it(
       expect(after.keywordXP).toEqual(before.keywordXP);
       expect(after.currency).toBe(before.currency);
       expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
-      expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(after);
+      expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(session.store.getState().game);
       await user.click(screen.getByRole("button", { name: "Combat" }));
       expect(session.store.getState().game.phase).toBe("battle");
       expect(screen.queryByRole("status", { name: "Rest recovery" })).toBeNull();
@@ -251,7 +255,10 @@ it(
       </TooltipProvider>,
     );
     expect(
-      screen.getAllByRole("button", { name: / talents$/ }).map((button) => button.getAttribute("aria-label")),
+      screen
+        .getAllByRole("button", { name: / talents$/ })
+        .filter((button) => button.hasAttribute("data-talent-keyword"))
+        .map((button) => button.getAttribute("aria-label")),
     ).toEqual(KEYWORDS.map((keyword) => `${keywordLabel(keyword)} talents`));
     for (const keyword of KEYWORDS) {
       fireEvent.click(view.container.querySelector(`[data-talent-keyword="${keyword}"]`)!);

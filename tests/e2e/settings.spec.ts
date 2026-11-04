@@ -25,16 +25,22 @@ test("slider fill and thumb follow pointer drags across the track", async ({ pag
       const x = bounds.x + (bounds.width * percent) / 100;
       await page.mouse.move(x, y + 15, { steps: 5 });
       await expect(thumb).toHaveAttribute("aria-valuenow", String(percent));
-      const geometry = await slider.evaluate((element) => {
-        const track = element.querySelector(".ui-slider-track")!.getBoundingClientRect();
-        const range = element.querySelector(".ui-slider-range")!.getBoundingClientRect();
-        const thumb = element.querySelector('[role="slider"]')!.getBoundingClientRect();
-        return { trackLeft: track.left, rangeRight: range.right, thumbCenter: thumb.left + thumb.width / 2 };
+      await expect
+        .poll(async () =>
+          slider.evaluate((element) => {
+            const track = element.querySelector(".ui-slider-track")!.getBoundingClientRect();
+            const range = element.querySelector(".ui-slider-range")!.getBoundingClientRect();
+            const thumb = element.querySelector('[role="slider"]')!.getBoundingClientRect();
+            const center = thumb.left + thumb.width / 2;
+            return Math.abs(center - (range.width ? range.right : track.left));
+          }),
+        )
+        .toBeLessThan(1);
+      const center = await thumb.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.left + rect.width / 2;
       });
-      expect(Math.abs(geometry.thumbCenter - x)).toBeLessThan(1);
-      expect(
-        Math.abs(geometry.thumbCenter - (percent ? geometry.rangeRight : geometry.trackLeft)),
-      ).toBeLessThan(1);
+      expect(Math.abs(center - x)).toBeLessThan(1);
     }
     await page.mouse.up();
   }

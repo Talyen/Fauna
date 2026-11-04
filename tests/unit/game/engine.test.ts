@@ -99,7 +99,7 @@ describe("game commands", () => {
       d.battle!.enemies[0]!.health = 18;
       d.rng = 42;
     });
-    const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
+    const r = dispatch(s, { type: "play", autoEndTurn: false, cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
     expect(r.state.battle!.mana).toBe(3);
     expect(r.state.battle!.enemies[0]!.health).toBe(14);
@@ -151,7 +151,7 @@ describe("game commands", () => {
         e.combat.controlled = "stun";
       });
     });
-    s = accept(s, { type: "play", cardId: guard.id, targetId: "ally-0" });
+    s = accept(s, { type: "play", autoEndTurn: false, cardId: guard.id, targetId: "ally-0" });
     expect(s.team[0]!.block).toBe(6);
     s = accept(s, { type: "endTurn" });
     expect(s.team[0]!.health).toBe(32);
@@ -270,9 +270,9 @@ describe("creature traits and deck circulation", () => {
       d.battle!.hand = [attack.id, heal.id];
       d.battle!.draw = d.cards.filter((c) => ![attack.id, heal.id].includes(c.id)).map((c) => c.id);
     });
-    s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
+    s = accept(s, { type: "play", autoEndTurn: false, cardId: attack.id, targetId: "enemy-0" });
     expect(s.battle!.enemies[0]!.health).toBe(s.battle!.enemies[0]!.maxHealth - 6);
-    s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
+    s = accept(s, { type: "play", autoEndTurn: false, cardId: heal.id, targetId: "ally-2" });
     expect(s.team[2]!.health).toBe(13);
     expect(s.battleXP.health).toBe(1);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -281,7 +281,7 @@ describe("creature traits and deck circulation", () => {
       d.battle!.hand = [heal.id];
       d.battle!.mana = 3;
     });
-    const healed = accept(knocked, { type: "play", cardId: heal.id });
+    const healed = accept(knocked, { type: "play", autoEndTurn: false, cardId: heal.id });
     expect(healed.team[2]!.health).toBe(0);
   });
   it("deals Thorns on landed attacks even when Block absorbs all damage", () => {
