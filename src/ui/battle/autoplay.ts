@@ -59,18 +59,20 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
   useEffect(
     () =>
       session.store.subscribe((current) => {
-        if (
-          current.game.phase !== "battle" ||
-          current.closing ||
-          current.saveStatus !== "saved" ||
-          !current.ready
-        )
-          setEnabled(false);
+        if (current.game.phase !== "battle" || current.closing || !current.ready) setEnabled(false);
       }),
     [session, setEnabled],
   );
   useEffect(() => {
-    if (!enabled || paused || !foreground || view.closing || view.game.phase !== "battle") return;
+    if (
+      !enabled ||
+      paused ||
+      !foreground ||
+      view.closing ||
+      view.saveStatus !== "saved" ||
+      view.game.phase !== "battle"
+    )
+      return;
     const revision = view.game.revision;
     return scheduleAutoplay(() => {
       const current = session.store.getState();
@@ -99,6 +101,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     view.game.revision,
     view.game.phase,
     view.closing,
+    view.saveStatus,
     setEnabled,
   ]);
   return [enabled, setEnabled] as const;

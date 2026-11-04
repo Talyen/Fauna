@@ -49,10 +49,10 @@ it("supports category and all-category refunds without changing XP", () => {
   const initial = produce(run(), (draft) => {
     draft.keywordXP.burn = 100;
     draft.keywordXP.mana = 100;
-    draft.talents = ["burn.flashpoint", "mana.manaburn"];
+    draft.talents = ["burn.flashpoint", "mana.wellspring"];
   });
   const category = accept(initial, { type: "resetTalents", keyword: "burn" });
-  expect(category.talents).toEqual(["mana.manaburn"]);
+  expect(category.talents).toEqual(["mana.wellspring"]);
   const all = accept(category, { type: "resetTalents" });
   expect(all.talents).toEqual([]);
   expect(all.keywordXP).toEqual(initial.keywordXP);

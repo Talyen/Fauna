@@ -192,6 +192,16 @@ export async function reviewScenario(server, name) {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     game = createGame(42);
   }
+  if (name === "draw-pile") {
+    game = structuredClone(game);
+    while (game.battle.hand.length < 6) game.battle.hand.push(game.battle.draw.shift());
+    game.battle.buffer = game.battle.draw.splice(0, 2);
+    for (let index = 0; index < 8; index++) {
+      const card = { ...game.cards[0], id: `copy-${game.battle.copySerial++}`, temporary: true };
+      game.cards.push(card);
+      game.battle.draw.push(card.id);
+    }
+  }
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
     game = fullRosterReward();
   }

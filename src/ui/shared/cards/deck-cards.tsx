@@ -94,7 +94,7 @@ export function DeckCards({
       ) : null}
       <PagedItems
         items={cards}
-        pageSize={compact ? 3 : 6}
+        pageSize={compact || overflow.length > 0 ? 3 : 6}
         className="deck-grid"
         label={i18n.message("deck.pages", "Deck pages")}
       >
@@ -105,7 +105,7 @@ export function DeckCards({
           <h2>{i18n.message("deck.handOverflow", "Hand Overflow")}</h2>
           <PagedItems
             items={overflow}
-            pageSize={compact ? 3 : 6}
+            pageSize={3}
             className="deck-grid"
             label={i18n.message("deck.pages", "Deck pages")}
           >
