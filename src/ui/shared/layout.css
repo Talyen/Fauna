@@ -163,20 +163,6 @@ body,
 .app {
   overflow: clip;
 }
-.secondary-scroll-region {
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: var(--muted-foreground) var(--background);
-  padding: var(--space-2);
-}
-:root[data-focus="visible"] .secondary-scroll-region:focus {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-}
 .save-notice {
   flex: 0 0 auto;
   text-align: center;

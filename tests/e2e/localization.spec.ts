@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import type { LANGUAGES as Languages } from "../../src/ui/shared/localization/languages";
 import { run } from "../support/game";
 import { key, seed, test } from "./support/session";
+import { expectScrollFree } from "./support/layout-contract";
 
 const directory = "src/ui/shared/localization";
 const languages = JSON.parse(readFileSync(`${directory}/languages.json`, "utf8")) as typeof Languages;
@@ -149,3 +150,32 @@ test("keeps unavailable talent rules readable without allowing a purchase", asyn
   await page.keyboard.press("Enter");
   expect(await page.evaluate((saveKey) => localStorage.getItem(saveKey), key)).toBe(before);
 });
+
+for (const locale of locales) {
+  test(`keeps ${locale} talent trees within the viewport`, async ({ page }) => {
+    test.skip(!languages[locale].qualified, "The language is not yet qualified");
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await seed(page, run());
+    await page.evaluate((language) => {
+      localStorage.setItem("fauna.language.v1", language);
+      localStorage.setItem("fauna.text-scale", "1.25");
+    }, locale);
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await page.clock.fastForward(5500);
+    await page.clock.resume();
+    const catalog = JSON.parse(readFileSync(`${directory}/locales/${locale}.json`, "utf8")) as Record<
+      string,
+      { text: string }
+    >;
+    await expect(page.getByRole("navigation", { name: catalog["menu.mainMenu"]!.text })).toBeVisible();
+    await page.getByRole("button", { name: catalog["menu.talents"]!.text, exact: true }).click();
+    const ids = await page
+      .locator("[data-talent-keyword]")
+      .evaluateAll((buttons) => buttons.map((button) => button.getAttribute("data-talent-keyword")!));
+    for (const id of ids) {
+      await page.locator(`[data-talent-keyword="${id}"]`).click();
+      await expectScrollFree(page);
+      await page.getByRole("button", { name: catalog["navigation.back"]!.text, exact: true }).click();
+    }
+  });
+}

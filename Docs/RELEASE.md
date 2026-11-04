@@ -70,7 +70,7 @@ Verify the current Steam Partner identity and application setup for each candida
 
 ## Display acceptance
 
-Qualify every [supported viewport](UI.md#layout-artwork-size-and-spacing) at normal and 125% text with the largest tooltip setting. Follow bounded-scrolling rules and exercise reading regions with mouse, keyboard and controller. First launch in Big Picture (`SteamTenfoot=1`) defaults to fullscreen; an existing device preference wins. Native checks also cover windowed/fullscreen transitions, restored bounds, monitor removal and high DPI. Renderer CSS size differs from native frame size and OS scaling; smaller work areas remain unsupported. Record results in the candidate checklist.
+Qualify every [supported viewport](UI.md#layout-artwork-size-and-spacing) at normal and 125% text with the largest tooltip setting. Verify every screen fits without scrolling, and exercise reading-page navigation with mouse, keyboard and controller. First launch in Big Picture (`SteamTenfoot=1`) defaults to fullscreen; an existing device preference wins. Native checks also cover windowed/fullscreen transitions, restored bounds, monitor removal and high DPI. Renderer CSS size differs from native frame size and OS scaling; smaller work areas remain unsupported. Record results in the candidate checklist.
 
 ## Candidate signing and qualification
 
