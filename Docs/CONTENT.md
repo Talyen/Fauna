@@ -46,7 +46,9 @@ and descriptions; [execution](../src/game/combat/ability-handlers.ts) owns recip
 
 ## Content provenance
 
-On October 23, 2026, the project owner confirmed that all player-facing content was produced by them using AI. The [owner declaration](../assets/content-provenance.json) covers artwork, music, sound effects and text; per-asset source locations and hashes remain in the manifest, including copies from Alchemy. This is pre-generated content; no live generation service runs in the game. [Store preparation](STEAM_STORE.md) owns the disclosure draft. Retain applicable generation-service terms and required attribution with source materials; this declaration does not itself grant rights.
+The [October 23 owner declaration](../assets/content-provenance.json) records artwork, music, sound effects and text as pre-generated AI content. Preserve that historical record, but do not treat its blanket sound-effect claim as current provenance: `Alchemy: THIRD_PARTY_NOTICES.md` records the owner's later clarification that sound effects are not AI-generated and their sources and distribution terms still require review. Fauna's manifest identifies its sound selections as copies from that shared library. Reconcile those selections with their actual sources and terms before release; neither the older declaration nor copied bytes establishes their origin or permission.
+
+The manifest owns per-asset locations, hashes and rights notes. Retain applicable generation-service terms and required attribution with source materials. No live generation service runs in the game. [Store preparation](STEAM_STORE.md) owns the draft disclosure for artwork, music, written content and translations; sound-effect provenance remains an explicit open release item.
 
 ## Artwork contracts
 
@@ -158,15 +160,15 @@ Food costs 1 Mana and has no species or creature owner. Generated Food lasts onl
 
 Food survives its creator falling, swapping out, or a Legendary formation change. It remains drawable and recoverable, and Well Read copies retain neutral ownership. Unplayed Food discards and recycles normally. An accepted play Consumes the played card after resolution; a pending Dancing Double resolves its effects twice before that single consumption. Rejection preserves the card and RNG. Preview uses the same resolution on detached state.
 
-Cornucopia adds a journey-owned Mana Berries card to the deck when acquired. Its card remains visible between battles and survives formation changes; consuming it removes only the current battle's copy, and battle settlement replenishes the journey card. Other generated Food remains battle-only.
+Cornucopia adds a journey-owned Mana Berries card and Toadstool Breadbox adds a journey-owned Trail Bread when acquired. [Journey cards](../src/game/journey-cards.ts) own their stable identities and replenishment. Both remain visible between battles and survive formation changes; consuming one removes only the current battle's copy, and battle settlement replenishes it. Other generated Food remains battle-only.
 
-Food does not spend creature free-card charges, use creature-specific ability repeats or increment an acting creature's card counters. It remains usable while creatures are controlled; general team accepted-play effects, keyword XP, recipient modifiers, talents and Boons retain their ordinary rules. Neutral cards are represented explicitly in the save schema: supported temporary Food and Cornucopia's journey-owned Mana Berries are level zero and have no owner. The current [save format](../src/game/save-format.json) rejects obsolete development saves rather than migrating them.
+Food does not spend creature free-card charges, use creature-specific ability repeats or increment an acting creature's card counters. It remains usable while creatures are controlled; general team accepted-play effects, keyword XP, recipient modifiers, talents and Boons retain their ordinary rules. Neutral cards are represented explicitly in the save schema: supported temporary Food and both Boon-granted journey cards are level zero and have no owner. Validation requires each journey card's exact identity and corresponding Boon; outside battle both owned grants must be present. The current [save format](../src/game/save-format.json) rejects obsolete development saves rather than migrating them.
 
 Aerostat's [Well Provisioned](content/creatures/aerostat.md) supplies Food before opening draws each battle. Orifable's [Care Package](content/creatures/orifable.md#abilities-and-progression) and Aerostat's Parcel Drop create additional Food during combat through the same generation owner. Well Provisioned restores its tier's starting supplies each new battle; extra combat-created Food expires with that battle. [Food artwork prompts](content/creatures/orifable-art-prompts.md) retain original generation provenance.
 
 ## Battle pile artwork
 
-The user authorized unchanged 420×560 Alchemy copies for `pile.draw`, `pile.discard` and `card.back`. The manifest records their sources under `public/art/battle/`; preserve source-library originals and placeholders; earlier prepared outputs remain recoverable from Git. Flying discards match the source top-card bounds: x=25/420, y=25/560, width=328/420, height=432/560. Display keeps the 3:4 ratio.
+`pile.draw`, `pile.discard` and `card.back` use the full-resolution Drive originals under `public/art/battle/`, replacing the earlier reduced Alchemy copies. The manifest retains exact sources and reuse authorization; preserve originals and prepare derivatives through the shared pipeline. [Hand motion](../src/ui/battle/hand-motion.tsx) uses normalized top-card bounds for flying discards: x=25/420, y=25/560, width=328/420, height=432/560. Those fractions describe geometry, not required source dimensions. Display keeps the 3:4 ratio.
 
 ## Creature references
 

@@ -20,8 +20,8 @@ For isolated task checkouts, previews and verification, start with [Contributing
 Build a five-creature roster, deploying up to three ordinary creatures or one Legendary. Each ability has a base cost of 1 Mana. Recruit teammates, buy journey Boons and recover at Campfires between battles. Collection, keyword XP, talents and Gold persist between journeys. [Journey rules](Docs/EXPEDITION_DESIGN.md) explain formation, encounters and progression.
 
 - Mouse: select cards and targets; hover over artwork for details; right-click pins inspection outside battle
-- Keyboard: W/A/S/D navigate, Enter/Space activate, I inspects outside battle, Escape cancels or opens the menu; Tab remains available
-- Standard controller: D-pad/left stick navigate, south confirms, east returns, west inspects outside battle and north ends the turn; prompts detect Xbox, PlayStation or Nintendo labels, with manual Xbox, Steam Deck, PlayStation and Nintendo choices in [Settings](Docs/ui/screens.md#settings); non-standard mappings are unsupported
+- Keyboard: arrow keys navigate, Enter/Space activate, I inspects outside battle and Escape cancels or opens the menu; Tab/Shift+Tab traverse controls and F7 traverses backward
+- Controller through Steam Input: map controls to the same keyboard and pointer actions; [Settings and input](Docs/ui/screens.md#settings) describe the game interface, and [Steam setup](Docs/RELEASE.md#steam-setup) owns recommended bindings and hardware qualification
 
 Accepted commands save automatically. Desktop close drains queued saves; abrupt browser/process termination cannot guarantee pending writes. See the [save contract](Docs/ARCHITECTURE.md#save-contract) and [development-save policy](AGENTS.md#development-saves).
 
@@ -35,6 +35,8 @@ Accepted commands save automatically. Desktop close drains queued saves; abrupt 
 - [Development tools](Docs/DEVELOPMENT_TOOLS.md): previews, replay, balance and performance; [script map](scripts/README.md): implementations
 - [Localization](Docs/LOCALIZATION.md): enabled languages, translation authoring and review scope
 - [CI](Docs/CI.md): hosted verification and evidence; [Release](Docs/RELEASE.md): shipping gates and platform qualification
+- [Test maintenance](tests/README.md): coverage value, fixtures and retirement; [resource efficiency](Docs/RESOURCE_EFFICIENCY.md): disk/memory evidence and cleanup
+- [Roadmap](Docs/ROADMAP.md): current capabilities and proposals; [Steam Store preparation](Docs/STEAM_STORE.md): disclosure and qualified claims
 - [Design references](design/visual-quality/README.md) and [interactive studies](design/README.md): visual direction and sandbox previews
 
 Alchemy informed the technology and some selected media; Fauna has its own implementation and no runtime dependency on Alchemy. Asset provenance lives in the manifest and linked source records.

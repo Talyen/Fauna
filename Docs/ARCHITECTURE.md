@@ -15,6 +15,21 @@ This guide owns runtime boundaries, command transactions and persistence. [Journ
 
 [Boundary checks](../scripts/checks/boundaries.mjs) enforce imports and ambient-capability restrictions. Knip checks unused code. [Test maintenance](../tests/README.md) and the [script map](../scripts/README.md) own their respective organization.
 
+## Common implementation paths
+
+Trace the owning rule through its consumers before editing. Use these entry points for common changes.
+
+| Change                               | Start and follow through                                                                                                                                                                                                  |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gameplay command or phase transition | [Admission](../src/game/command-phases.ts) and [engine](../src/game/engine.ts), then [session command/save publication](../src/application/session.ts); test accepted and rejected outcomes                               |
+| Ability, passive, Talent or Boon     | [Content procedures](CONTENT.md#adding-ability-mechanics), [modifier ownership](#modifier-ownership), shared queries, execution, previews and Auto-play; preserve descriptions and localization                           |
+| Persisted field or format            | [Save contract](#save-contract), [state schema](../src/game/state-schema.ts), [semantic validation](../src/game/save.ts) and current-format fixtures; inspect platform/package consumers of the shared version            |
+| Screen, navigation or focus          | [Shell owners](#presentation-owners), [screen contract](ui/screens.md), shared controls and the [rendered review procedure](UI.md#required-review); presentation issues commands and consumes committed snapshots         |
+| Saving, Cloud, close or recovery     | [Session](../src/application/session.ts), [platform ports](../src/platform/ports.ts) and the relevant [recovery owner](UI.md#recovery-owners); verify admission, ordering, stale completion and disposal at that boundary |
+| Artwork, sound or translated text    | [Prepared assets](CONTENT.md#prepared-assets), [audio ownership](#presentation-owners) and [localization](LOCALIZATION.md#text-change-workflow); author originals/catalogs and regenerate explicit outputs                |
+
+Keep gameplay changes in the pure game layer, save ordering in the application and I/O behind platform ports. A screen callback, animation completion or storage adapter must not become another owner of gameplay settlement.
+
 ## Command resolution and previews
 
 `team` and `reserves` are the authoritative ordered creature arrays; together they contain at most one individual of each species. Owned species and deployed IDs are derived; saves contain no roster or lineup mirrors. Every phase carries expedition state, and encounters consume committed packs. [Journey rules](EXPEDITION_DESIGN.md#encounters) own room progression, recruitment and starter eligibility.
@@ -145,7 +160,7 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 ### Save validation details
 
-[The save format](../src/game/save-format.json) owns the UTF-8 payload limit used by decoding, browser writes and native storage; oversized writes reject before rotating checkpoints. [Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, reserved battle identity namespaces, distinct positive Bleed Leech obligations per source, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated cards require distinct IDs alongside complete permanent kits; creature-owned copies require valid battle ownership. Neutral ownership permits supported temporary level-zero Food and Cornucopia's journey-owned Mana Berries, with its identity and Boon ownership validated. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
+[The save format](../src/game/save-format.json) owns the UTF-8 payload limit used by decoding, browser writes and native storage; oversized writes reject before rotating checkpoints. [Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, reserved battle identity namespaces, distinct positive Bleed Leech obligations per source, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated cards require distinct IDs alongside complete permanent kits; creature-owned copies require valid battle ownership. Neutral ownership permits supported temporary level-zero Food and the journey-owned Mana Berries and Trail Bread from Cornucopia and Toadstool Breadbox; their exact identities, definitions and Boon ownership are validated, and owned journey cards must be present outside battle. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
 
 ## Discovery and diagnostics
 

@@ -1,6 +1,6 @@
 # Release qualification record
 
-Use this record with [release readiness](RELEASE.md) for each candidate. Copy it into the candidate's retained evidence and fill in actual observations. An unchecked item remains unverified; source tests and browser gamepad simulation do not satisfy native or hardware acceptance. Do not enter credentials, account identifiers, saves or crash dumps in this document.
+Use this record with [release readiness](RELEASE.md) for each candidate. Copy it into the candidate's retained evidence and fill in actual observations. An unchecked item remains unverified; source tests and browser keyboard simulation of Steam Input do not satisfy native or hardware acceptance. Do not enter credentials, account identifiers, saves or crash dumps in this document.
 
 ## Candidate identity
 
@@ -24,6 +24,7 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 
 - [ ] Complete the [Steam setup procedure](RELEASE.md#steam-setup) and retain configuration/publication evidence:
 - [ ] Record the completed content survey and Store review from [Store preparation](STEAM_STORE.md):
+- [ ] Resolve the [shared sound-effect provenance conflict](CONTENT.md#content-provenance), identifying actual sources, distribution terms and required attribution for the candidate's selections:
 - [ ] Record the confirmed privacy/support policy and consent process for local diagnostics:
 - Optional signed installer setup/evidence, only for the selected distribution path: [signing procedure](RELEASE.md#candidate-signing-and-qualification)
 
@@ -51,8 +52,8 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 ## Physical controls and Steam Deck
 
 - [ ] Complete battle, targeting, swaps, rewards, settings, inspection and pause flows with each intended physical controller
-- [ ] Disconnect/reconnect during navigation, targeting and a modal; active-controller disconnection stops autoplay and opens pause without automatic resume; verify reachable focus, no repeated activation and usable prompts
-- [ ] Check Automatic and manual Xbox, Steam Deck, PlayStation and Nintendo prompts, including Steam Input emulation; publish a recommended configuration for each supported controller family
+- [ ] Disconnect/reconnect during navigation, targeting and a modal; verify no stuck or repeated input, reachable focus and a usable return to play; record Steam Input behavior separately from the game's focus-loss and overlay pause behavior
+- [ ] Publish and exercise the recommended Steam Input keyboard/pointer configuration for each supported controller and Deck; verify navigation, confirmation, Back, inspection, dropdowns and sliders without controller-family settings
 - [ ] On Deck, verify text and target readability on the handheld display, overlay and intended bindings
 - [ ] Exercise sleep/resume during battle and while Cloud work is pending, then quit and resume
 - [ ] Check cold offline launch, frame pacing, battery use and an extended journey through the intended Proton/native path

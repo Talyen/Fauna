@@ -96,7 +96,7 @@ No dependency or build-cache copying is added. Creation reports logical bytes om
 and cloned, plus population/first-status time; APFS extent sharing means these are
 not measured physical savings. Existing task checkouts retain their configuration.
 
-[The storage helper](lib/worktree-storage.mjs) checks literal compatibility markers in the target commit before omitting source assets. Keep these markers aligned with the build's output-validation owner when changing npm hooks or Vite setup. The current marker still requires the removed `prebuild` hook, so current-main tasks fall back to full assets despite validation now living in the active-assets plugin; this affects checkout storage, not build validation.
+[The storage helper](lib/worktree-storage.mjs) checks literal compatibility markers in the target commit before omitting source assets: Vite's active-assets plugin and output-only public-directory behavior, the `predev` output check and the prepared lookup. Keep these markers aligned with their owners when changing npm hooks or Vite setup. Compatible revisions use code-only checkouts; older or incompatible revisions retain full assets. The printed `Storage:` result reports the actual choice.
 
 [Contributing](../CONTRIBUTING.md#worktrees-and-integration) owns the review/commit/finish procedure. Implementation details for integration:
 

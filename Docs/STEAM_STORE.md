@@ -6,11 +6,11 @@
 
 ## AI content disclosure draft
 
-Owner confirmation on October 23, 2026: all player-facing content was created by the project owner using AI. The [provenance declaration](../assets/content-provenance.json) and [asset manifest](../assets/manifest.json) retain the scope and individual source locations.
+The [content provenance contract](CONTENT.md#content-provenance) distinguishes the recorded owner declaration from the later correction for shared sound effects. The [asset manifest](../assets/manifest.json) retains individual source locations. Resolve sound-effect origins and distribution terms before submission; the older blanket AI declaration is insufficient for those reused selections.
 
 Suggested wording for the pre-generated AI section of the Steam Content Survey:
 
-> Fauna's artwork, music, sound effects, written game content and translations were created by the developer using AI tools during development. The game ships prepared content and does not generate content with AI during gameplay.
+> Fauna's artwork, music, written game content and translations were created by the developer using AI tools during development. The game ships prepared content and does not generate content with AI during gameplay.
 
 Review the final survey wording against the actual release candidate. Valve requires disclosure of shipped AI-generated player-facing content; ordinary development-assistance tooling is not the focus. Answer live generation as absent while the shipped application remains entirely offline and has no generation service. See Valve's [Content Survey](https://partner.steamgames.com/doc/gettingstarted/contentsurvey).
 
