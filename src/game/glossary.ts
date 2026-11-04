@@ -73,7 +73,7 @@ export const GLOSSARY = [
     id: "auto-end-turn",
     term: "Auto-end turn",
     definition:
-      "Optional setting; After a card play or swap, ends your turn if you have no Mana, no playable cards and no pending replacement; You can always choose End turn without confirmation",
+      "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
   },
   {
     id: "deaths-door",

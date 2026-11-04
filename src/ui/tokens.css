@@ -7,6 +7,8 @@
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
+  --menu-panel-fill: rgb(12 10 7);
+  --menu-panel-border: rgb(255 253 245 / 8%);
   --primary: #cd9b51;
   --primary-foreground: #251e18;
   --secondary: var(--card);
@@ -63,7 +65,6 @@
   --compact-icon-size: 16px;
   --main-menu-logo-width: calc(var(--art-long-side) * 2.3);
   --main-menu-button-width: max(180px, calc(168px * var(--text-scale, 1)));
-  --pause-menu-width: 240px;
   --settings-screen-width: 640px;
   --menu-screen-width: 800px;
   --screen-heading-width: 640px;
@@ -121,7 +122,6 @@
   --menu-icon-quit: #fb923c;
   --menu-icon-skip: #a3e635;
   --icon-size: 20px;
-  --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
   --unavailable-opacity: 0.45;
   --pressed-scale: 0.98;
