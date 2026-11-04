@@ -45,6 +45,7 @@ export const SCENARIOS = [
   "cavalleaf-collection",
   "cavalleaf-rank-five",
   "brumalyn-battle",
+  "brumalyn-card-details",
   "brumalyn-collection",
   "brumalyn-rank-five",
   "brumalyn-targeting",
@@ -571,6 +572,11 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "brumalyn-targeting")
     await page.locator('.hand [data-card-id="ally-0:brumalyn-rime-pounce"]').click();
+  if (scenario.name === "brumalyn-card-details") {
+    await page.keyboard.press("Tab");
+    await page.locator('.hand [data-card-id="ally-0:brumalyn-warmth-ward"]').focus();
+    await expect(page.getByRole("tooltip")).toBeVisible();
+  }
   if (scenario.name === "parhelion-targeting")
     await page.locator('.hand [data-card-id="ally-0:parhelion-whiteout-waltz"]').click();
   if (scenario.name === "orifable-targeting") {

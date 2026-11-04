@@ -2,6 +2,7 @@ import { cardRulePresentation } from "../localization/card-rule-id";
 import { useRuleText } from "../localization/rule-catalog";
 import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
+import { ShineBorder } from "../effects/treatments";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl, minionArtwork } from "../assets";
@@ -10,6 +11,7 @@ import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { actionDisplay } from "./action-display";
+import { cardRuleLines } from "../keyword-text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
 import { species } from "../../../game/content";
@@ -177,6 +179,14 @@ export function CreatureCard({
               <CombatStatus combat={combat} sharedDodge={sharedDodge} sharedImmunity={sharedImmunity} />
             ) : null}
           </div>
+          {battlePortrait && health !== 0 && combat?.grace ? (
+            <ShineBorder
+              className="battle-urgent-frame"
+              colors={effectPalette([], "death").border}
+              duration={4}
+              width={3}
+            />
+          ) : null}
         </div>
       </div>
     </div>
@@ -300,7 +310,7 @@ export function ActionCard({
     name: nameLabel,
     owner: ownerName,
     mana: modifiers ? cardCost(card, modifiers) : def.cost,
-    effect: effectLabel,
+    effect: cardRuleLines(effectLabel).replaceAll("\n", ", "),
   });
   useEffectBaseline(selected ? effectPalette(visualKeywords(rule.text)) : null, 1);
   const artwork = (

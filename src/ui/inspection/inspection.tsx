@@ -227,6 +227,7 @@ export function Inspector({
                   <KeywordText
                     text={passive.description}
                     id={`content.species.${kind}.passive.${passive.rank}.rule`}
+                    lines
                   />
                 </p>
               </section>

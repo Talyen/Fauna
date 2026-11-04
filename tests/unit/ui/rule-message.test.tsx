@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
-import { KeywordText } from "../../../src/ui/shared/keyword-text";
+import { cardRuleLines, KeywordText } from "../../../src/ui/shared/keyword-text";
+import { CardRules } from "../../../src/ui/shared/combat/combat-values";
+import { definition } from "../../../src/game/content";
 import { renderRuleMessage, ruleMessage } from "../../../src/ui/shared/localization/rule-message";
 
 describe("localizable rule messages", () => {
@@ -96,4 +98,29 @@ it("keeps literal markup safe and preserves the original English", () => {
       .map((part) => part.text)
       .join(""),
   ).toBe(source);
+});
+
+it("renders each localized card effect on its own line while preserving keywords", () => {
+  const source = "Deal 12 Burn damage; gain 3 Block";
+  const template = ruleMessage(source).template;
+  const html = renderToStaticMarkup(
+    <RuleCatalogProvider
+      catalog={{
+        [template]: "<keyword1>Blocage</keyword1> {{value1}}；<keyword0>Brûlure</keyword0> {{value0}}",
+      }}
+    >
+      <KeywordText text={source} lines />
+    </RuleCatalogProvider>,
+  );
+  expect(html).toContain('data-keyword="block"');
+  expect(html).toContain('data-keyword="burn"');
+  expect(html.replace(/<br\s*\/>/g, "\n").replace(/<[^>]+>/g, "")).toBe("Blocage 3\nBrûlure 12");
+  expect(cardRuleLines("First / Second; Third；Fourth")).toBe("First\nSecond\nThird\nFourth");
+});
+
+it("shows actual multi-effect action cards as separate lines", () => {
+  const html = renderToStaticMarkup(<CardRules card={definition("brumalyn-warmth-ward")} />);
+  expect(html.replace(/<br\s*\/>/g, "\n").replace(/<[^>]+>/g, "")).toBe(
+    "Restore 1 Health to all allies\nCleanse Freeze build-up from all allies",
+  );
 });

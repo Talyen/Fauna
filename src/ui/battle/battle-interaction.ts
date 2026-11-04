@@ -9,6 +9,7 @@ import { returnFocus } from "../shared/navigation/focus";
 import type { Controls, InputAction } from "../shared/navigation/input";
 import { motionValue } from "../shared/motion-values";
 import { battlefieldPresentation, orderedTargets, targetElement } from "./battle-targets";
+import { visualClone } from "../shared/visual-clone";
 
 interface Selection {
   selected: string | null;
@@ -91,6 +92,27 @@ export function useBattleInteraction({
   }, [denial]);
 
   const focusAfterCommand = useRef<number | null>(null);
+  const playedCard = useRef<string | null>(null);
+  const ghosts = useRef(new Set<Animation>());
+  useEffect(() => {
+    const cancel = () => ghosts.current.forEach((animation) => animation.cancel());
+    const motion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const motionChange = () => {
+      if (motion?.matches) cancel();
+    };
+    motion?.addEventListener?.("change", motionChange);
+    window.addEventListener("blur", cancel);
+    window.addEventListener("resize", cancel);
+    return () => {
+      cancel();
+      motion?.removeEventListener?.("change", motionChange);
+      window.removeEventListener("blur", cancel);
+      window.removeEventListener("resize", cancel);
+    };
+  }, []);
+  useEffect(() => {
+    if (clearSelection) ghosts.current.forEach((animation) => animation.cancel());
+  }, [clearSelection]);
   const enemyRow = battlefieldView(game, "enemy"),
     playerRow = battlefieldView(game, "player");
   const drawable = drawableOwnerIds(game);
@@ -123,7 +145,75 @@ export function useBattleInteraction({
   const setTarget = (id: string) => update({ type: "target", id, side: enemyTarget ? "enemy" : "ally" });
 
   const play = (command: Command) => {
-    if (!send(command)) return;
+    const source =
+      command.type === "play"
+        ? Array.from(board.current?.querySelectorAll<HTMLElement>(".hand [data-card-id]") ?? []).find(
+            (element) => element.dataset.cardId === command.cardId,
+          )
+        : undefined;
+    const rect = source?.getBoundingClientRect();
+    const clone = source && rect?.width ? visualClone(source) : null;
+    const matrix =
+      source && typeof DOMMatrixReadOnly !== "undefined"
+        ? new DOMMatrixReadOnly(getComputedStyle(source).transform)
+        : null;
+    const slot = source?.closest<HTMLElement>(".hand-slot");
+    const slotMatrix =
+      slot && typeof DOMMatrixReadOnly !== "undefined"
+        ? new DOMMatrixReadOnly(getComputedStyle(slot).transform)
+        : null;
+    const angle =
+      (((matrix ? Math.atan2(matrix.b, matrix.a) : 0) +
+        (slotMatrix ? Math.atan2(slotMatrix.b, slotMatrix.a) : 0)) *
+        180) /
+      Math.PI;
+    const width = source?.offsetWidth;
+    const height = source?.offsetHeight;
+    const destination = command.type === "play" ? targetElement(board.current, command.targetId) : null;
+    const targetRect = destination?.getBoundingClientRect() ?? board.current?.getBoundingClientRect();
+    playedCard.current = command.type === "play" ? command.cardId : null;
+    if (!send(command)) {
+      playedCard.current = null;
+      return;
+    }
+    if (clone && rect && targetRect && !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      const x = targetRect.left + targetRect.width / 2 - (rect.left + rect.width / 2);
+      const y =
+        (destination ? targetRect.top + targetRect.height * 0.95 : targetRect.top + targetRect.height * 0.3) -
+        (rect.top + rect.height / 2);
+      Object.assign(clone.style, {
+        position: "fixed",
+        left: `${rect.left + (rect.width - (width ?? rect.width)) / 2}px`,
+        top: `${rect.top + (rect.height - (height ?? rect.height)) / 2}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+        margin: "0",
+        zIndex: "40",
+        pointerEvents: "none",
+        scale: "1",
+      });
+      document.body.append(clone);
+      const animation = clone.animate(
+        [
+          { opacity: 0.98, transform: `rotate(${angle}deg)`, easing: "cubic-bezier(0.16,1,0.3,1)" },
+          {
+            offset: 0.75,
+            opacity: 1,
+            transform: `translate(${x * 0.88}px, ${y * 0.88}px) scale(1.07) rotate(${angle * 0.15}deg)`,
+            easing: "linear",
+          },
+          { opacity: 0, transform: `translate(${x}px, ${y}px) scale(0.8) rotate(0deg)` },
+        ],
+        { duration: 600, fill: "both" },
+      );
+      ghosts.current.add(animation);
+      const remove = () => {
+        ghosts.current.delete(animation);
+        clone.remove();
+      };
+      animation.onfinish = remove;
+      animation.oncancel = remove;
+    }
     update({ type: "played" });
     focusAfterCommand.current = navigateFocus
       ? Math.max(0, visibleHand.indexOf(command.type === "play" ? command.cardId : ""))
@@ -226,5 +316,6 @@ export function useBattleInteraction({
     chooseCard,
     play,
     cancel,
+    playedCard,
   };
 }

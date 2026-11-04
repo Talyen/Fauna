@@ -197,8 +197,8 @@
   --screen-section-gap: 24px;
   --screen-item-gap: 12px;
   --hand-overlap: 48px;
-  --hand-fan-angle-step: 6deg;
-  --hand-fan-drop-step: 5px;
+  --hand-fan-angle-step: 4.2deg;
+  --hand-fan-drop-step: 10px;
   --hand-rest-inset: 0px;
   --mana-crystal-size: 18px;
   --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
