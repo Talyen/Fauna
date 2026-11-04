@@ -119,12 +119,13 @@
 }
 .hand-slot {
   --fan-angle: calc(var(--fan-offset) * var(--hand-fan-angle-step));
-  --fan-drop: calc(var(--fan-offset) * var(--fan-offset) * var(--hand-fan-drop-step));
+  --fan-drop: calc(12px + var(--fan-distance) * var(--hand-fan-drop-step));
   flex: 0 0 var(--battle-hand-width);
   width: var(--battle-hand-width);
   pointer-events: auto;
   transform: translateY(var(--fan-drop)) rotate(var(--fan-angle));
-  transform-origin: 50% 100%;
+  transform-origin: center;
+  transition: transform 220ms ease-out;
   position: relative;
   z-index: var(--fan-order);
 }
@@ -150,12 +151,23 @@
 .hand-slot:has(.selected) {
   z-index: 10;
 }
-.hand-slot .action-card:hover,
-.app[data-focus="visible"] .hand-slot .action-card:focus {
-  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1));
+.hand-slot:has(.action-card:hover:not([aria-disabled="true"])),
+.app[data-focus="visible"] .hand-slot:has(.action-card:focus:not([aria-disabled="true"])) {
+  transform: translateY(-14px) rotate(calc(var(--fan-offset) * 2.6deg));
 }
-.hand-slot .action-card.selected {
-  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1));
+.hand-slot:has(.action-card.selected) {
+  transform: translateY(-22px) rotate(calc(var(--fan-offset) * 2.6deg));
+}
+@media (prefers-reduced-motion: reduce) {
+  .hand-slot {
+    transition: none;
+  }
+}
+.battle-screen :is(.creature-card, .hand .action-card, .battle-pile .action-card) {
+  border-color: transparent;
+}
+.battle-screen .battle-pile .action-card::after {
+  display: none;
 }
 .target-line {
   position: absolute;
@@ -271,6 +283,62 @@
   pointer-events: none;
   transform-origin: 50% calc(var(--battle-health-height) + 1px - var(--battle-creature-width) * 3 / 8);
   transition: scale var(--motion-hover) ease-out;
+}
+/* Repeat the solid interaction frame above the separate Health overlay. */
+.battle-screen .combatant-reaction::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
+  left: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
+  width: calc(100% + 2 * (var(--hover-frame-width) - var(--hover-frame-overlap)));
+  height: calc(
+    var(--battle-creature-width) * 3 / 4 + 2 * (var(--hover-frame-width) - var(--hover-frame-overlap))
+  );
+  border: var(--hover-frame-width) solid transparent;
+  border-radius: calc(var(--radius) + var(--hover-frame-width) - var(--hover-frame-overlap));
+  pointer-events: none;
+  transition:
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out;
+}
+.battle-screen
+  .creature-wrap:not([data-valid-target])
+  .combatant-reaction:has(
+    > .creature-card:not([aria-disabled="true"]):not([data-effect-urgent]):hover
+  )::after,
+:root[data-focus="visible"]
+  .battle-screen
+  .creature-wrap:not([data-valid-target])
+  .combatant-reaction:has(
+    > .creature-card:not([aria-disabled="true"]):not([data-effect-urgent]):focus
+  )::after {
+  border-color: var(--primary);
+  scale: var(--hover-scale);
+}
+.battle-screen .battle-urgent-frame {
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: calc(var(--battle-creature-width) * 3 / 4);
+  border-radius: var(--radius);
+  opacity: 0;
+  transition:
+    opacity var(--motion-hover),
+    scale var(--motion-hover) ease-out;
+}
+.battle-screen .creature-card[data-effect-urgent] > .effect-shine-border {
+  visibility: hidden;
+}
+.battle-screen
+  .creature-wrap:not([data-valid-target])
+  .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):hover)
+  > .battle-urgent-frame,
+:root[data-focus="visible"]
+  .battle-screen
+  .creature-wrap:not([data-valid-target])
+  .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):focus)
+  > .battle-urgent-frame {
+  opacity: 1;
+  scale: var(--hover-scale);
 }
 /* Clip against the full artwork silhouette so the thin bar tapers at its corners. */
 .battle-screen .health-bar-surface {
@@ -549,6 +617,15 @@
 .battle-screen .combat-status {
   flex-shrink: 0;
   pointer-events: auto;
+  position: absolute;
+  top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height) - var(--control-height));
+  left: 50%;
+  translate: -50% 0;
+  flex-wrap: nowrap;
+  z-index: 2;
+}
+.battle-screen .combat-status .status-icon svg {
+  filter: drop-shadow(0 0 2px var(--background)) drop-shadow(0 0 1px var(--foreground));
 }
 .card-transfer {
   overflow: hidden;

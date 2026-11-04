@@ -1,6 +1,6 @@
 import { startPerformanceSpan, measurePerformance, type SpanEnd } from "../../lib/performance";
 import { motionValue } from "../shared/motion-values";
-import { Component, createRef, type ReactNode } from "react";
+import { Component, createRef, type ReactNode, type RefObject } from "react";
 import { assetUrl } from "../shared/assets";
 import { visualClone } from "../shared/visual-clone";
 type Pose = {
@@ -18,6 +18,7 @@ type Props = {
   opening?: boolean;
   paused: boolean;
   cardIds: readonly string[];
+  playedCard?: RefObject<string | null>;
   children: ReactNode;
 };
 // Alchemy uses the CSS ease-in-out curve for one uninterrupted half-turn.
@@ -142,6 +143,8 @@ export class HandMotion extends Component<Props> {
     const removed: [string, Pose][] = [];
     const added: [string, Pose][] = [];
     for (const entry of before) if (newTurn || !after.has(entry[0])) removed.push(entry);
+    const played = this.props.playedCard?.current;
+    if (this.props.playedCard) this.props.playedCard.current = null;
     removed.reverse();
     for (const entry of after) if (newTurn || !before.has(entry[0])) added.push(entry);
     for (const [id, pose] of after) {
@@ -182,6 +185,7 @@ export class HandMotion extends Component<Props> {
       const duration =
         motionValue("--motion-hand-flight") / (items.length >= 4 ? 1.6 : items.length === 3 ? 1.4 : 1);
       for (const [, pose] of items) {
+        if (!draw && pose.node.dataset.cardId === played) continue;
         // Unplayed Consume cards still discard; played ones leave the battle inventory.
         if (!draw && pose.node.dataset.consume && !this.props.cardIds.includes(pose.node.dataset.cardId!))
           continue;
