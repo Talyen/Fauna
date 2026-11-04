@@ -139,9 +139,7 @@ it("applies independent preferences live, normalizes malformed storage and persi
       "false",
     );
     await user.keyboard("{Escape}");
-    await waitFor(() =>
-      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Options" })),
-    );
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: "Options" })));
   } finally {
     await session.dispose();
   }
