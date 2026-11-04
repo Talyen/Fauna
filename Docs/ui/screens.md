@@ -51,7 +51,7 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Options and Quit Buttons. Conditional choices add rows; center a lone final choice. Use Alchemy's Swords, violet WandSparkles, gold BookOpen, zinc Cog and rose Power icons for those respective actions. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Options and Quit Buttons. Conditional choices add rows; center a lone final choice. Use Alchemy's Swords, violet WandSparkles, gold BookOpen, zinc Cog and rose Power icons for those respective actions. At 1280×720 and default Game Size, buttons are 180px wide with a 44px minimum height, 16px labels and 12px gaps. Dimensions grow with automatic density and Game Size; hit height never falls below 44px. These are rendered CSS dimensions, not Alchemy's virtual-stage units. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End Run. There is no title, close icon or dimmed backdrop. Return to Battle/Run, outside click or Escape/controller B dismisses it and returns focus.
 

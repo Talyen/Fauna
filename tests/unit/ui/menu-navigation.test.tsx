@@ -36,7 +36,7 @@ it.each(["home", "pause"] as const)(
           const action = page === "Settings" ? "Options" : page;
           act(() => screen.getByRole("button", { name: action }).focus());
           await user.keyboard("{Enter}");
-          expect(screen.getByRole("heading", { name: page })).toBeTruthy();
+          expect(screen.getByRole("heading", { name: action })).toBeTruthy();
           expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
           if (page === "Collection")
             expect(document.activeElement).toBe(screen.getByRole("button", { name: "Back" }));
