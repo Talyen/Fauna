@@ -68,6 +68,12 @@
   max-width: 100%;
   border: 0;
   background: transparent;
+  transition: scale var(--motion-hover) ease-out;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .menu-logo.creature-card:hover {
+    scale: var(--hover-scale);
+  }
 }
 .menu-choices {
   display: grid;
