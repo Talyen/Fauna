@@ -93,7 +93,7 @@ Owned borders use a lightened keyword color; available borders are light neutral
 
 ### Earnings and choices
 
-Show battle earnings above the Recruit offers: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. An unchosen recruitment resumes directly to these offers; a banked full-roster recruit resumes directly at the replacement choice.
+Show a battle earnings screen first, with keyword-colored icons/level labels and compact progress bars, then a separate Gold row and Continue. Continue opens a separate Recruit screen without changing gameplay state. An unchosen recruitment resumes at earnings; a banked full-roster recruit resumes directly at the replacement choice. Material rewards are not currently authored.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Activating starter or reward artwork recruits immediately; hover or focus shows details and the inspection shortcut opens the full kit without recruiting. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 

@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { winBattle, bossReward } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 import { expectScrollFree } from "./support/layout-contract";
+import { continueToRecruit } from "./support/journey";
 
 async function layouts(page: Page, name: string, check?: () => Promise<void>) {
   for (const [width, height, scale] of [
@@ -31,8 +32,8 @@ for (const [name, create] of [
     await seed(page, fixture);
     await resume(page);
     if (fixture.phase === "recruit") {
-      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
-      await expect(page.locator(".recruit-options")).toHaveCount(1);
+      await expect(page.getByRole("heading", { name: "Last battle earnings", exact: true })).toBeVisible();
+      await expect(page.locator(".recruit-options")).toHaveCount(0);
       await layouts(page, "earnings", async () => {
         expect(
           await page.getByLabel("Last battle earnings").evaluate((receipt) => {
@@ -52,6 +53,9 @@ for (const [name, create] of [
           }),
         ).toEqual({ earningsBelowXP: true, matchingColors: true });
       });
+      expect(await state(page)).toEqual(fixture);
+      await continueToRecruit(page);
+      await expect(page.getByLabel("Last battle earnings")).toHaveCount(0);
       await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
     }
     const cards = page.locator(".reward-option");
@@ -94,7 +98,7 @@ for (const [name, create] of [
     expect(await state(page)).toEqual(committed);
   });
 
-test("many earned keywords remain pageable beside the Recruit choice", async ({ page }) => {
+test("many earned keywords remain pageable before the Recruit choice", async ({ page }) => {
   const fixture = produce(winBattle(), (game) => {
     const xp = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 5]));
     game.journey!.lastBattle!.xp = xp;
@@ -116,5 +120,6 @@ test("many earned keywords remain pageable beside the Recruit choice", async ({ 
   }
   expect(pages).toBeGreaterThan(1);
   expect(await state(page)).toEqual(fixture);
+  await continueToRecruit(page);
   await expect(page.getByRole("button", { name: /^Recruit / }).first()).toBeVisible();
 });

@@ -83,6 +83,10 @@
   flex-direction: column;
   justify-content: center;
 }
+.battle-reward-summary {
+  align-items: center;
+  gap: var(--screen-section-gap);
+}
 .reward-heading {
   display: flex;
   justify-content: space-between;

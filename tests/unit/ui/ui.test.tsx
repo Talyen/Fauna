@@ -45,7 +45,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await session.dispose();
   });
-  it("shows earnings with recruitment without committing or granting rewards again", async () => {
+  it("separates earnings from recruitment without committing or granting rewards again", async () => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
@@ -59,8 +59,8 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "Last battle earnings", level: 1 })).toBeTruthy();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -74,7 +74,10 @@ describe("player interface", () => {
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(session.store.getState().game).toBe(committed);
     expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
+    expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
+    expect(session.store.getState().game).toBe(committed);
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     const incoming = game.reward!.recruits[0]!;
     const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });

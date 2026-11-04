@@ -129,6 +129,7 @@ export const SCENARIOS = [
   "unknown-targeting",
   "pause",
   "team-selection-pause",
+  "starter",
   "recruit",
   "recruit-replacement",
   "recruit-team-preview",
@@ -185,6 +186,10 @@ export async function reviewScenario(server, name) {
     : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
       ? winBattle()
       : run();
+  if (name === "starter") {
+    const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
+    game = createGame(42);
+  }
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
     game = fullRosterReward();
   }
@@ -521,6 +526,17 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await opener.click();
   } else if (["settings", "collection", "talents", "glossary"].includes(menu)) {
     await button(menu[0].toUpperCase() + menu.slice(1)).click();
+  } else if (scenario.name === "starter") {
+    await page.evaluate(() => {
+      window.reviewOriginalNow = Date.now;
+      Date.now = () => 42;
+    });
+    await button("Play").click();
+    await page.evaluate(() => {
+      Date.now = window.reviewOriginalNow;
+      delete window.reviewOriginalNow;
+    });
+    await expect(page.locator(".draft-screen")).toBeVisible();
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
@@ -625,6 +641,9 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(button("Open menu")).toBeFocused();
     await button("Open menu").click();
     await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  }
+  if (["recruit", "recruit-replacement", "recruit-team-preview", "inspection"].includes(scenario.name)) {
+    await button("Continue").click();
   }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
