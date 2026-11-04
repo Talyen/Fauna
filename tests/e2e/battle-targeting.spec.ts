@@ -87,18 +87,22 @@ for (const handSize of [4, 7]) {
           Math.abs(Number(b.style.getPropertyValue("--fan-offset"))),
       );
       const middle = slots[0]!.querySelector(".action-card")!;
-      const ruler = document.createElement("div");
-      ruler.style.width = "var(--art-short-side)";
-      active.append(ruler);
-      const shortSide = ruler.getBoundingClientRect().width;
-      ruler.remove();
+      const handCss = getComputedStyle(middle);
+      const handWidth = parseFloat(handCss.width);
+      const handHeight = parseFloat(handCss.height);
       return {
         artWidth: art.width,
         glow: getComputedStyle(artNode).boxShadow,
         artBorder: getComputedStyle(artNode).borderTopWidth,
         handBorder: getComputedStyle(middle).borderTopWidth,
-        handWidth: parseFloat(getComputedStyle(middle).width),
-        shortSide,
+        artworkAreaRatio: (art.width * art.height) / (handWidth * handHeight),
+        frameTop: art.top,
+        toolbarBottom: active.querySelector(".autoplay-control")!.getBoundingClientRect().bottom,
+        healthGaps: [...active.querySelectorAll(".creature-wrap")].map((wrap) => {
+          const artwork = wrap.querySelector(".creature-card")!.getBoundingClientRect();
+          const bar = wrap.querySelector(".health-forecast .progress-track")!.getBoundingClientRect();
+          return Math.abs(artwork.bottom - bar.bottom);
+        }),
         centerClipping: middle.getBoundingClientRect().bottom - innerHeight,
         fanStep: getComputedStyle(active.querySelector(".battle-screen")!).getPropertyValue(
           "--hand-fan-angle-step",
@@ -111,11 +115,12 @@ for (const handSize of [4, 7]) {
         centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
       };
     });
-    expect(geometry.artWidth).toBeGreaterThan(geometry.handWidth);
+    expect(geometry.artworkAreaRatio).toBeCloseTo(1, 3);
+    expect(geometry.frameTop).toBeLessThan(geometry.toolbarBottom);
+    expect(geometry.healthGaps.every((gap) => gap < 0.1)).toBe(true);
     expect(geometry.glow).toBe("none");
     expect(geometry.artBorder).toBe("0px");
     expect(geometry.handBorder).toBe("0px");
-    expect(geometry.handWidth).toBeCloseTo(geometry.shortSide, 0);
     expect(geometry.centerClipping).toBeGreaterThan(0);
     expect(geometry.centerClipping).toBeLessThanOrEqual(4.1);
     expect(geometry.fanStep.trim()).toBe("4.2deg");

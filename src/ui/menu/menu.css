@@ -102,8 +102,8 @@
   justify-content: center;
   text-align: center;
   height: auto;
-  min-height: calc(64px * var(--ui-density, 1));
-  font-size: var(--text-title);
+  min-height: max(var(--control-height), calc(44px * var(--ui-density, 1)));
+  font-size: var(--text-body);
   white-space: normal;
 }
 .menu-choices > .primary-menu-action,

@@ -10,7 +10,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("settles height-constrained artwork instead of alternating sizes as observers fire", () => {
+it("settles equal-area artwork as the hand and both combatant rows resize together", () => {
   let resized = () => {};
   let frame: FrameRequestCallback = () => {};
   const observe = vi.fn();
@@ -32,16 +32,15 @@ it("settles height-constrained artwork instead of alternating sizes as observers
   vi.stubGlobal("cancelAnimationFrame", vi.fn());
   vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(1280);
   vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(720);
-  const height = (node: HTMLElement) =>
-    ((parseFloat(node.closest<HTMLElement>("main")!.style.getPropertyValue("--battle-fitted-width")) || 214) *
-      3) /
-    4;
+  const longSide = (node: HTMLElement) =>
+    parseFloat(node.closest<HTMLElement>("main")!.style.getPropertyValue("--battle-fitted-width")) || 214;
+  const height = (node: HTMLElement) => (longSide(node) * 3) / 4;
   vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockImplementation(function (this: HTMLElement) {
     return Math.round(height(this));
   });
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     return {
-      top: this.matches(".hand-section") ? 469.75 : 0,
+      top: this.matches(".hand-section") ? 720 - longSide(this) : 0,
       bottom: 720,
       height: this.matches(".enemy-row, .player-row") ? height(this) + 68 : 720,
     } as DOMRect;
@@ -51,9 +50,9 @@ it("settles height-constrained artwork instead of alternating sizes as observers
     columnGap: "12px",
     paddingLeft: "0px",
     paddingRight: "0px",
-    paddingBottom: "0px",
+    paddingBottom: `${longSide(node) + 12}px`,
     minWidth: "100px",
-    height: node.matches(".creature-card") ? `${height(node)}px` : "720px",
+    height: node.matches(".creature-card") ? `${height(node)}px` : `${longSide(node)}px`,
     getPropertyValue: (token: string) => (token === "--control-height" ? "44px" : "0px"),
   }));
   function Board() {
@@ -80,7 +79,7 @@ it("settles height-constrained artwork instead of alternating sizes as observers
     });
     sizes.push(board.style.getPropertyValue("--battle-fitted-width"));
   }
-  expect(new Set(sizes)).toEqual(new Set(["192.6px"]));
+  expect(new Set(sizes)).toEqual(new Set(["201.6px"]));
   view.unmount();
   expect(disconnect).toHaveBeenCalledOnce();
 });
