@@ -39,6 +39,7 @@ import {
   publishHit,
   damageRewards,
   poisonStun,
+  bleedFreeze,
   waterFollowups,
   attackProcs,
   thornRetaliation,
@@ -605,9 +606,44 @@ export function* resolveHit(
     !armorFirst && appliesArmor ? armoredDamage(damage + blocked, stats.armor) : damage + blocked;
   if (alliedTarget && depletedBlock && damage > 0 && state.boons.includes("glassleaf-shield"))
     damage = Math.round(damage / boonRule("glassleaf-shield").divisor);
+  let sharedBlocked = 0;
+  const sharedDepletions: { ally: Combatant; payment: HitPayment }[] = [];
+  if (alliedTarget && depletedBlock && damage > 0 && state.boons.includes("loom-beater")) {
+    for (const ally of battlefield(state, "player")) {
+      if (damage <= 0) break;
+      if (ally.id === target.id || ally.health <= 0 || ally.block <= 0) continue;
+      const allyPayment = blockPayment(damage, ally.block, blockEfficiency(state, ally, type, source));
+      if (allyPayment.spent <= 0) continue;
+      ally.block -= allyPayment.spent;
+      damage = allyPayment.remaining;
+      sharedBlocked += allyPayment.absorbed;
+      events.push({
+        kind: "block",
+        actorId: source.id,
+        targetId: ally.id,
+        amount: -allyPayment.absorbed,
+        text: `${unitName(ally)} blocks ${allyPayment.absorbed} damage`,
+      });
+      if (ally.block === 0)
+        sharedDepletions.push({
+          ally,
+          payment: {
+            damage: allyPayment.absorbed,
+            lost: 0,
+            dealt: allyPayment.absorbed,
+            blocked: allyPayment.absorbed,
+            blockSpent: allyPayment.spent,
+            depletedBlock: true,
+            critical,
+          },
+        });
+    }
+  }
+  let armorReduced = 0;
   if (!armorFirst && appliesArmor) {
     const reduced = armoredDamage(damage, stats.armor);
-    armorReducedDamage = reduced < damage;
+    armorReduced = damage - reduced;
+    armorReducedDamage = armorReduced > 0;
     damage = reduced;
   }
   const criticalBonusDamage = critical
@@ -618,7 +654,7 @@ export function* resolveHit(
   if (alliedTarget && type === "burn" && state.boons.includes("hearth-coal"))
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
-  const dealt = Math.min(effectDamage, blocked + lost);
+  const dealt = Math.min(effectDamage, blocked + sharedBlocked + lost);
   if (
     armorReducedDamage &&
     !(alliedTarget && type === "poison" && state.boons.includes("nebula-weld-clamp")) &&
@@ -645,6 +681,8 @@ export function* resolveHit(
     critical,
   };
   yield* blockDepletionRewards(context, facts, attack);
+  for (const entry of sharedDepletions)
+    yield* blockDepletionRewards({ ...context, target: entry.ally }, entry.payment, false);
   publishHit(context, facts, options);
   yield* damageRewards(context, facts, policy);
   if (
@@ -710,12 +748,23 @@ export function* resolveHit(
   }
   if (policy.buildup && effectDamage > 0 && source.health > 0) {
     const bleedBefore = stats.bleed;
+    const lightningForkTargets =
+      playerAttack && type === "stun" && state.boons.includes("lightning-fork")
+        ? battlefield(state, "enemy").filter(
+            (enemy) => enemy.id !== target.id && enemy.health > 0 && ensureCombat(enemy).stun > 0,
+          )
+        : undefined;
+    const statusAmount =
+      effectDamage +
+      (playerAttack && type === "burn" && state.boons.includes("courtly-handwarmer")
+        ? ensureCombat(source).armor
+        : 0);
     const statusResult = yield* reaction(
       "applyHarmfulStatus",
       state,
       source,
       target,
-      effectDamage *
+      statusAmount *
         (playerAttack && type === "burn" && blocked > 0 && state.boons.includes("chestnut-roaster")
           ? boonRule("chestnut-roaster").multiplier
           : 1),
@@ -732,7 +781,13 @@ export function* resolveHit(
       const amount = Math.round(effectDamage / boonRule("moonpath-divider").divisor);
       if (other && amount > 0) yield* applyResolvedStatus(state, source, other, amount, "freeze", events);
     }
+    if (lightningForkTargets?.length) {
+      for (const other of lightningForkTargets)
+        if (other.health > 0 && source.health > 0 && ensureCombat(other).stun > 0)
+          yield* applyResolvedStatus(state, source, other, effectDamage, "stun", events);
+    }
     yield* poisonStun(context, effectDamage);
+    yield* bleedFreeze(context, effectDamage);
     if (playerDirect && source.health > 0)
       yield* attackProcs(
         context,
@@ -761,7 +816,10 @@ export function* resolveHit(
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
   }
-  if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
+  if (!policy.buildup && effectDamage > 0) {
+    yield* poisonStun(context, effectDamage);
+    yield* bleedFreeze(context, effectDamage);
+  }
   if (playerHit && type === "burn" && dealt > 0 && target.health > 0 && state.boons.includes("ash-bowl")) {
     const removed = Math.min(stats.thorns, boonRule("ash-bowl").thorns);
     stats.thorns -= removed;
@@ -868,6 +926,16 @@ export function* resolveHit(
     const recipient = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
     if (recipient)
       yield* reaction("hit", state, source, recipient, blocked, "water", events, { origin: "chain" });
+  }
+  if (
+    armorReduced > 0 &&
+    playerHit &&
+    options.origin !== "chain" &&
+    state.boons.includes("vein-survey-chain")
+  ) {
+    const recipient = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
+    if (recipient)
+      yield* reaction("hit", state, source, recipient, armorReduced, type, events, { origin: "chain" });
   }
   if (
     blockSpent > 0 &&

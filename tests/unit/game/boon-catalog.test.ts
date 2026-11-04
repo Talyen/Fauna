@@ -1,7 +1,11 @@
 import { expect, it } from "vitest";
 import { BOONS } from "../../../src/game/content";
 import { validateContent } from "../../../src/game/content-validation";
-import { CORNUCOPIA_CARD_ID, replenishJourneyCards } from "../../../src/game/journey-cards";
+import {
+  CORNUCOPIA_CARD_ID,
+  TOADSTOOL_BREADBOX_CARD_ID,
+  replenishJourneyCards,
+} from "../../../src/game/journey-cards";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import prepared from "../../../src/assets/prepared.json";
 import { NEW_BOON_EFFECTS } from "../../support/boons";
@@ -19,6 +23,10 @@ it.each(Object.entries(NEW_BOON_EFFECTS))(
     if (boon.id === "cornucopia") {
       replenishJourneyCards(state);
       state.battle.draw.push(CORNUCOPIA_CARD_ID);
+    }
+    if (boon.id === "toadstool-breadbox") {
+      replenishJourneyCards(state);
+      state.battle.draw.push(TOADSTOOL_BREADBOX_CARD_ID);
     }
     expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
   },

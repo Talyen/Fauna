@@ -81,6 +81,8 @@ export function* restoreHealth(
     });
     if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("groves-favor"))
       yield* reaction("grantStatus", unit, "thorns", boonRule("groves-favor").thorns, events, state);
+    if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("sunwell-ewer"))
+      state.battle.sunwellBonus = Math.min(1_000_000, state.battle.sunwellBonus + gain);
   }
   if (gain > 0 && state?.phase === "battle") {
     const side = isEnemy(unit) ? "enemy" : "player";

@@ -27,6 +27,13 @@
     "text": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "reference": "Repeated attacks cannot be Dodged"
   },
+  "content.boon.amber-spatula.name": {
+    "text": "Amber Spatula"
+  },
+  "content.boon.amber-spatula.rule": {
+    "text": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "reference": "Half the Block lost through decay restores Health to that ally"
+  },
   "content.boon.apiary-smoker.name": {
     "text": "Apiary Smoker"
   },
@@ -250,6 +257,13 @@
   "content.boon.coronation-cloche.rule": {
     "text": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "reference": "Nullify protects allied effects from Purge"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "text": "Courtly Handwarmer"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "text": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "reference": "Burn hits apply extra Burn equal to the attacker’s Armor"
   },
   "content.boon.crater-punch.name": {
     "text": "Crater Punch"
@@ -643,6 +657,20 @@
     "text": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
     "reference": "When an ally Dodges an attack, deal 2 Stun damage to the attacker"
   },
+  "content.boon.lightning-fork.name": {
+    "text": "Lightning Fork"
+  },
+  "content.boon.lightning-fork.rule": {
+    "text": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "reference": "Stun hits also add their Stun buildup to other enemies with Stun buildup"
+  },
+  "content.boon.loom-beater.name": {
+    "text": "Loom Beater"
+  },
+  "content.boon.loom-beater.rule": {
+    "text": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "reference": "When an ally’s Block breaks, other allies’ Block absorbs the remaining damage"
+  },
   "content.boon.lovers-knot.name": {
     "text": "Lovers Knot"
   },
@@ -1007,6 +1035,13 @@
     "text": "An ally’s immunity to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> protects all allies",
     "reference": "An ally’s immunity to Stun and Freeze protects all allies"
   },
+  "content.boon.rime-spindle.name": {
+    "text": "Rime Spindle"
+  },
+  "content.boon.rime-spindle.rule": {
+    "text": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "reference": "Bleed damage adds half as much Freeze buildup"
+  },
   "content.boon.ripple-mirror.name": {
     "text": "Ripple Mirror"
   },
@@ -1069,6 +1104,13 @@
   "content.boon.sandfold-parasol.rule": {
     "text": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "reference": "When an ally Dodges, other allies Dodge the same attack"
+  },
+  "content.boon.second-sundial.name": {
+    "text": "Second Sundial"
+  },
+  "content.boon.second-sundial.rule": {
+    "text": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "reference": "Light attacks against Blinded enemies play twice"
   },
   "content.boon.shelter-lantern.name": {
     "text": "Shelter Lantern"
@@ -1161,6 +1203,13 @@
     "text": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
     "reference": "Physical hits apply 1 Bleed to enemies with Armor"
   },
+  "content.boon.starhook.name": {
+    "text": "Starhook"
+  },
+  "content.boon.starhook.rule": {
+    "text": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "reference": "Purging an effect from an enemy makes your next attack a Critical Hit"
+  },
   "content.boon.story-puzzle-cube.name": {
     "text": "Story Puzzle Cube"
   },
@@ -1181,6 +1230,13 @@
   "content.boon.sundering-charm.rule": {
     "text": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "reference": "Your Physical and Stun hits remove 2 enemy Armor before damage"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "text": "Sunwell Ewer"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "text": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "reference": "Healing an ally adds the Health restored to your next Light attack"
   },
   "content.boon.tattered-pages.name": {
     "text": "Tattered Pages"
@@ -1238,6 +1294,13 @@
     "text": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
     "reference": "Thorns cannot decay below 1"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "text": "Toadstool Breadbox"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "text": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "reference": "Add Trail Bread to your deck; allies receiving Food keep their Block next turn"
+  },
   "content.boon.treaty-teapot.name": {
     "text": "Treaty Teapot"
   },
@@ -1265,6 +1328,13 @@
   "content.boon.vanishing-hat.rule": {
     "text": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "reference": "Allies can Dodge enemy Purge"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "text": "Vein Survey Chain"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "text": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "reference": "Damage reduced by enemy Armor is dealt to another enemy"
   },
   "content.boon.velvet-whisk.name": {
     "text": "Velvet Whisk"

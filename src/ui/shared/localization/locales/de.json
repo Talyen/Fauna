@@ -347,6 +347,18 @@
     "sourceHash": "d8a90f291b70e94d22bf86f7f8e32bfdc402396979abdb15f7a16ca16eff4bf8",
     "text": "Wiederholten Angriffen kann nicht <keyword0>ausgewichen</keyword0> werden"
   },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "48379110e3493e6072d858adc991b2e9c30027eb84df4d1d2bfad6ea8d4d7020",
+    "text": "Bernsteinspatel"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "7751f49f02ce18e144016950dac1f9784556d1a25dbed5183d7ab906ff0ad047",
+    "text": "Die Hälfte des durch Verfall verlorenen <keyword0>Blocks</keyword0> stellt bei diesem Verbündeten <keyword1>Gesundheit</keyword1> wieder her"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
@@ -730,6 +742,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "8c8a0bfac250c1ac48cee654951a248d4c075dc8b525554148a4c1f891ec4ec6",
     "text": "<keyword0>Aufheben</keyword0> schützt verbündete Effekte vor <keyword1>Bannen</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "a34ca307a51653c2393f4207d83486b701ec6bae3700edbe671c484f08bf7057",
+    "text": "Höfischer Handwärmer"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "965f1158cbcee26b11a16a2b0ee0bd2b210fab01fb469c274a27548768b22dca",
+    "text": "<keyword0>Brand</keyword0>-Treffer fügen zusätzlichen <keyword1>Brand</keyword1> in Höhe der <keyword2>Rüstung</keyword2> des Angreifers zu"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1403,6 +1427,30 @@
     "sourceHash": "33ddc8dad9ae45e4e57d016d33aa6d63456f99d6d8ef03ee81ae2a7f806ee89e",
     "text": "Wenn ein Verbündeter einem Angriff <keyword0>ausweicht</keyword0>, erleidet der Angreifer {{value0}} <keyword1>Betäubungs</keyword1>-Schaden"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "10fadb9de025a323dcb9a2c639ef95e689988d4b7cad376af1794471860aa8a6",
+    "text": "Blitzgabel"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "5f18f5026bd594dfaae0e5744e40e927d5c5a6732b63cb5d59ba0ac2347e688e",
+    "text": "<keyword0>Betäubungs</keyword0>-Treffer fügen ihren <keyword1>Betäubungs</keyword1>-Aufbau auch anderen Gegnern mit <keyword2>Betäubungs</keyword2>-Aufbau hinzu"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "cbe74deaee9451ff7ed1e20dd1cfac0034b8ed25437eb6cde117e0df56ec1bb4",
+    "text": "Webkamm"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "cf1f264d48248444d987ae95346982fadc4930eefcc1a215e0fd50f818390185",
+    "text": "Wenn der <keyword0>Block</keyword0> eines Verbündeten bricht, fängt der <keyword1>Block</keyword1> anderer Verbündeter den verbleibenden Schaden ab"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2027,6 +2075,18 @@
     "sourceHash": "26decdde2ab5b901322475a5f2d0ee823fb31ad1a478cb119369284725e67fbb",
     "text": "Die Immunität eines Verbündeten gegen <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> schützt alle Verbündeten"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "fdcd362235f1e02ceb9a1ef47fab0fa41a8f897fbe10ce30e7ef8a1acfd69f79",
+    "text": "Raureifspindel"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "2dad8b932e135a684acf698b40df7081bd27464e31d0d1ad2bd191055c8b85d3",
+    "text": "<keyword0>Blutungs</keyword0>-Schaden fügt halb so viel <keyword1>Frost</keyword1>-Aufbau hinzu"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2134,6 +2194,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "15685884edb4e37ce44fb482e8a972d1f7a592f8dc33567a6c57aadf519f739a",
     "text": "Wenn ein Verbündeter <keyword0>ausweicht</keyword0>, <keyword1>weichen</keyword1> auch die anderen Verbündeten demselben Angriff aus"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "cc0d4e779f58e37d1b81e0dac76b2b120124364a18b4149744c94cbcfcd0b3a3",
+    "text": "Zweite Sonnenuhr"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "13060247f2c7c182dbbf3735f46510856557718dc8d3e19e1c71e967c5d402ea",
+    "text": "<keyword0>Licht</keyword0>-Angriffe gegen <keyword1>geblendete</keyword1> Gegner werden zweimal ausgespielt"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2291,6 +2363,18 @@
     "sourceHash": "6699ec3fb812b511e6f3bda84804f0fabfcb59ce6672b71556459a6907e28755",
     "text": "<keyword0>Physische</keyword0> Treffer verursachen {{value0}} <keyword1>Blutung</keyword1> bei Gegnern mit <keyword2>Rüstung</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "77c4369939d1edc1f4e64911721f33103aa9deac6272678e300c0673f4150351",
+    "text": "Sternhaken"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "edda7efb5bf01cc73daf8833817c6f4abb90e51fe1826dd191bb46f1cf3ba111",
+    "text": "Wird ein Effekt von einem Gegner <keyword0>gebannt</keyword0>, wird dein nächster Angriff zu einem <keyword1>Kritischen Treffer</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2326,6 +2410,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "0a62b9d6b4183b0e5f4c464298ac4da2c964f6ac025da3d0c97c63ae12450122",
     "text": "Deine <keyword0>physischen</keyword0> und <keyword1>Betäubungs</keyword1>-Treffer entfernen vor dem Schaden {{value0}} gegnerische <keyword2>Rüstung</keyword2>"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "bba1327f07ec700c1de0051f6d60fa0a779c696606c748782ae159dc3e1c9dda",
+    "text": "Sonnenbrunnen-Krug"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "bd721d3635fb82f2ad37081f3df793b980f28fb5bf475707ad28f137d663960c",
+    "text": "Das <keyword0>Heilen</keyword0> eines Verbündeten fügt deinem nächsten <keyword2>Licht</keyword2>-Angriff die wiederhergestellte <keyword1>Gesundheit</keyword1> hinzu"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2423,6 +2519,18 @@
     "sourceHash": "c7bfbba29c1d0c635da4db91df1c031fd5d142ade05305b70c1b6be0707962d4",
     "text": "<keyword0>Dornen</keyword0> können nicht unter {{value0}} verfallen"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "f521b2b39f6c953dff9e0b965464b0e608b4c2966844b7580da4eb563b9f35b2",
+    "text": "Pilz-Brotkasten"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "e461611a180b2f8af5fa947555f69272d193663f563c8228ef453f223f75ab15",
+    "text": "Füge deinem Deck Wanderbrot hinzu; Verbündete, die <keyword0>Nahrung</keyword0> erhalten, behalten im nächsten Zug ihren <keyword1>Block</keyword1>"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2470,6 +2578,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "54f3bb700d4bdddf43b88b4689bb3383959e69169792e306d23b8f7aad5e5511",
     "text": "Verbündete können gegnerischem <keyword1>Bannen</keyword1> <keyword0>ausweichen</keyword0>"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "e1a43efb32bd73891a48ff9aafb255669816b19e601596813d65bca376fae51f",
+    "text": "Erzader-Messkette"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "01acda18722b1d6b77c951ecaf13bf46091e0b47d5b086a244bdf4b120023dca",
+    "text": "Durch gegnerische <keyword0>Rüstung</keyword0> verringerter Schaden wird einem anderen Gegner zugefügt"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,

@@ -54,6 +54,10 @@ for (const { id } of SPECIES) {
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
   const before = unit.block;
   const allied = !isEnemy(unit);
+  if (allied && state.boons.includes("toadstool-breadbox") && ensureCombat(unit).breadboxReady) {
+    ensureCombat(unit).breadboxReady = false;
+    return;
+  }
   if (allied && state.boons.includes("caravan-rug") && state.reserves.some((ally) => ally.id === unit.id))
     return;
   if (allied && state.boons.includes("winterseed") && ensureCombat(unit).controlled === "freeze") return;
@@ -78,6 +82,8 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
   }
   if (allied && state.boons.includes("pleated-pagoda"))
     grantArmor(state, unit, Math.round(lost / boonRule("pleated-pagoda").divisor), events);
+  if (allied && state.boons.includes("amber-spatula"))
+    restoreHealth(unit, Math.round(lost / boonRule("amber-spatula").divisor), events, false, state);
 }
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
