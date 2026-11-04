@@ -101,8 +101,15 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
     const revision = session.store.getState().game.revision;
     for (const dismiss of ["Continue", "Escape", "outside"]) {
       const opener = screen.getByRole("button", { name: "Open menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("false");
       await user.click(opener);
       const menu = screen.getByRole("dialog", { name: "Pause menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("true");
+      expect(
+        within(menu)
+          .getAllByRole("button")
+          .map((button) => button.textContent?.trim()),
+      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Glossary", "Settings", "End journey"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();
@@ -174,7 +181,6 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
     await user.click(slam);
     expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Next page" }));
     const fists = screen.getByRole("button", { name: "Armored Fists" });
     expect(within(fists).getByText("Requires 1 point")).toBeTruthy();
     const bought = session.store.getState().game;

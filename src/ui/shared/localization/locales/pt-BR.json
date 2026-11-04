@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "cb69e7deb7c0c8752bc94cc085b9ca2052beba91ee0561769a7abee5e7769fa7",
-    "text": "Configuração opcional; Após jogar uma carta ou trocar, encerra seu turno se não houver <keyword0>Mana</keyword0>, cartas jogáveis nem substituição pendente; Você sempre pode escolher Encerrar turno sem confirmação"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "eb3d887e1a19e41d629a71d2947679ea47f43e444c14071486797b00f1923c06",
+    "text": "Configuração opcional; Encerra seu turno se não houver cartas jogáveis nem substituição pendente; Você sempre pode escolher Encerrar turno sem confirmação"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,
@@ -11051,12 +11051,6 @@
     "source": "{{keyword}} · {{name}}",
     "sourceHash": "d25aa3127068dab9408451b413433caf9f830de31dc99c2c657b80afafa9f263",
     "text": "{{keyword}} · {{name}}"
-  },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "b21139ea56b31736accf5611d4913dfddab28e08c700fe78c8c796316a11b9fd",
-    "text": "Páginas de talentos"
   },
   "talents.pointsAvailable": {
     "forms": {

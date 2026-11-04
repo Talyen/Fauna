@@ -3,7 +3,6 @@ import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
 import { assetUrl } from "../shared/assets";
 import { KeywordText } from "../shared/keyword-text";
@@ -223,103 +222,118 @@ export function Talents({
         </div>
       ) : (
         <>
-          <PagedItems
+          {/* A named scrolling region makes every tier reachable without pagination. */}
+          {/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- The named region needs focus for keyboard and controller scrolling */}
+          <div
             key={`${keyword}:${treeReset}`}
-            className="talent-tree"
-            label={i18n.message("talents.pages", "Talent pages")}
-            pageSize={1}
-            adaptive={{ columns: 1, rows: 4 }}
-            items={tree!.rows}
+            className="secondary-scroll-region talent-tree-viewport"
+            data-scroll-region
+            role="region"
+            aria-label={i18n.message("talents.category", "{{keyword}} talents", {
+              keyword: keywordName(keyword),
+            })}
+            tabIndex={0}
+            onFocusCapture={(event) => {
+              if (event.target instanceof HTMLElement && event.target.matches(".talent-node"))
+                event.target.scrollIntoView?.({ block: "nearest", inline: "nearest", behavior: "instant" });
+            }}
           >
-            {(row) => (
-              <div
-                className="talent-row"
-                key={row}
-                data-nav-row
-                aria-label={i18n.message("talents.row", "Row {{row}}", { row: row + 1 })}
-              >
-                {tree!.talents
-                  .filter((t) => t.row === row)
-                  .map((t) => {
-                    const talentName = i18n.content(`content.talent.${t.id}.name`, t.name);
-                    const categoryName = i18n.content(
-                      `content.keyword.${keyword}.label`,
-                      keywordLabel(keyword),
-                    );
-                    const TalentSymbol = talentSymbols[t.id]!;
-                    const owned = game.talents.includes(t.id),
-                      available = canBuyTalent(game, t.id);
-                    const earlierRowsOwned = tree!.talents.every(
-                      (talent) => talent.row >= t.row || game.talents.includes(talent.id),
-                    );
-                    const status = owned
-                      ? i18n.message("talents.unlocked", "Unlocked")
-                      : available
-                        ? i18n.message("talents.unlockOne", "Unlock · 1 point")
-                        : !earlierRowsOwned
-                          ? points > 0
-                            ? i18n.message("talents.requiresRows", "Requires all earlier rows")
-                            : i18n.message(
-                                "talents.requiresPointAndRows",
-                                "Requires 1 point and all earlier rows",
-                              )
-                          : i18n.message("talents.requiresPoint", "Requires 1 point");
-                    return (
-                      <Tooltip key={t.id}>
-                        <TooltipTrigger asChild>
-                          <Button
-                            effectKeywords={[keyword]}
-                            variant="outline"
-                            className="talent-node"
-                            aria-label={
-                              owned
-                                ? i18n.message("talents.unlockedName", "{{name}}, unlocked", {
-                                    name: talentName,
-                                  })
-                                : talentName
-                            }
-                            aria-disabled={!available}
-                            aria-describedby={`${t.id}-effect ${t.id}-status`}
-                            data-owned={owned}
-                            style={{ "--talent-accent": `var(--keyword-${keyword})` } as CSSProperties}
-                            data-purchased={purchased === t.id || undefined}
-                            data-available={available}
-                            onClick={() => {
-                              if (available && send({ type: "buyTalent", talentId: t.id }))
-                                setPurchased(t.id);
-                            }}
-                          >
-                            <span className="talent-card-heading">
-                              <span data-keyword={keyword}>
-                                <TalentSymbol className="talent-icon" aria-hidden="true" />
+            <div className="talent-tree">
+              {tree!.rows.map((row) => (
+                <div
+                  className="talent-row"
+                  key={row}
+                  data-nav-row
+                  aria-label={i18n.message("talents.row", "Row {{row}}", { row: row + 1 })}
+                >
+                  {tree!.talents
+                    .filter((t) => t.row === row)
+                    .map((t) => {
+                      const talentName = i18n.content(`content.talent.${t.id}.name`, t.name);
+                      const categoryName = i18n.content(
+                        `content.keyword.${keyword}.label`,
+                        keywordLabel(keyword),
+                      );
+                      const TalentSymbol = talentSymbols[t.id]!;
+                      const owned = game.talents.includes(t.id),
+                        available = canBuyTalent(game, t.id);
+                      const earlierRowsOwned = tree!.talents.every(
+                        (talent) => talent.row >= t.row || game.talents.includes(talent.id),
+                      );
+                      const status = owned
+                        ? i18n.message("talents.unlocked", "Unlocked")
+                        : available
+                          ? i18n.message("talents.unlockOne", "Unlock · 1 point")
+                          : !earlierRowsOwned
+                            ? points > 0
+                              ? i18n.message("talents.requiresRows", "Requires all earlier rows")
+                              : i18n.message(
+                                  "talents.requiresPointAndRows",
+                                  "Requires 1 point and all earlier rows",
+                                )
+                            : i18n.message("talents.requiresPoint", "Requires 1 point");
+                      return (
+                        <Tooltip key={t.id}>
+                          <TooltipTrigger asChild>
+                            <Button
+                              effectKeywords={[keyword]}
+                              variant="outline"
+                              className="talent-node"
+                              aria-label={
+                                owned
+                                  ? i18n.message("talents.unlockedName", "{{name}}, unlocked", {
+                                      name: talentName,
+                                    })
+                                  : talentName
+                              }
+                              aria-disabled={!available}
+                              aria-describedby={`${t.id}-effect ${t.id}-status`}
+                              data-owned={owned}
+                              style={{ "--talent-accent": `var(--keyword-${keyword})` } as CSSProperties}
+                              data-purchased={purchased === t.id || undefined}
+                              data-available={available}
+                              onClick={() => {
+                                if (available && send({ type: "buyTalent", talentId: t.id }))
+                                  setPurchased(t.id);
+                              }}
+                            >
+                              <span className="talent-card-heading">
+                                <span data-keyword={keyword}>
+                                  <TalentSymbol className="talent-icon" aria-hidden="true" />
+                                </span>
+                                <span className="talent-name">{talentName}</span>
                               </span>
-                              <span className="talent-name">{talentName}</span>
-                            </span>
-                            <span className="talent-effect" id={`${t.id}-effect`}>
+                              <span className="talent-effect" id={`${t.id}-effect`}>
+                                <KeywordText
+                                  text={t.text}
+                                  id={`content.talent.${t.id}.rule`}
+                                  keywordColorVariables
+                                />
+                              </span>
+                              <span className="sr-only" id={`${t.id}-status`}>
+                                {status}
+                              </span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <strong>
+                              {i18n.message("talents.detailTitle", "{{keyword}} · {{name}}", {
+                                keyword: categoryName,
+                                name: talentName,
+                              })}
+                            </strong>
+                            <p>
                               <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
-                            </span>
-                            <span className="sr-only" id={`${t.id}-status`}>
-                              {status}
-                            </span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <strong>
-                            {i18n.message("talents.detailTitle", "{{keyword}} · {{name}}", {
-                              keyword: categoryName,
-                              name: talentName,
-                            })}
-                          </strong>
-                          <p>
-                            <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    );
-                  })}
-              </div>
-            )}
-          </PagedItems>
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      );
+                    })}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
           <div className="talent-points" aria-live="polite" aria-atomic="true">
             {points > 0
               ? i18n.plural(

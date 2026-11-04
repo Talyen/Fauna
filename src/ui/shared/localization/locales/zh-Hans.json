@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "58f64a1629caa4d18edbbd1b27c33e333a7a9b4395607e4009404f0169cca746",
-    "text": "可选设置; 打牌或换人后，若没有<keyword0>法力</keyword0>、可打出的牌或待完成的替换，就结束回合; 也可随时选择结束回合，无需确认"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "10d31e93cbe87ce78300b29d31f11d315a4da7716972bd8cb9ddbd4e2491fc75",
+    "text": "可选设置; 没有可打出的牌且没有待完成的替换时，结束回合; 也可随时选择结束回合，无需确认"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,
@@ -11049,12 +11049,6 @@
     "source": "{{keyword}} · {{name}}",
     "sourceHash": "ee5865e754e46d719c08a815ed5905785f1f4cf8af1191b168d0ab59b50bd7d5",
     "text": "{{keyword}} · {{name}}"
-  },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "c2b405f5d4d966798dcca39203203a055a5dad22fae6c63dc8c91c2b8ebdd278",
-    "text": "天赋页面"
   },
   "talents.pointsAvailable": {
     "forms": {

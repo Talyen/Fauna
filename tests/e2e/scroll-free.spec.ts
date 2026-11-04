@@ -206,7 +206,13 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await captureScreen(page, {
             path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
           });
-        await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
+        const tree = page.locator(".talents-screen");
+        await expect(tree.getByRole("button", { name: "Next page" })).toHaveCount(0);
+        await expectScrollFree(page);
+        const lastTalent = tree.locator(".talent-node").last();
+        await lastTalent.focus();
+        await expect(lastTalent).toBeInViewport();
+        await expectScrollFree(page);
         await page.keyboard.press("Escape");
       }
       await page.getByRole("button", { name: "Open menu", exact: true }).click();

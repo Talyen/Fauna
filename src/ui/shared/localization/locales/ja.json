@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "dee112a0e64f6360334e82ff79eb9589a02b4268e2010e6aa3c756af86ff7b61",
-    "text": "任意の設定; カード使用か交代後、<keyword0>マナ</keyword0>も使えるカードもなく、交代待ちでもない場合にターンを終了する; ターン終了はいつでも確認なしで選べる"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "58b0eaaa2bfd1a9403c5419f0a303a26741b25057d9713bf9e8d73be95ec6f61",
+    "text": "任意の設定; 使えるカードがなく、交代待ちでもない場合にターンを終了する; ターン終了はいつでも確認なしで選べる"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,
@@ -11049,12 +11049,6 @@
     "source": "{{keyword}} · {{name}}",
     "sourceHash": "59c29e6c48d4b7e49e852a416ad5c8bbaec0545cdea3f7d56b8635da40bee978",
     "text": "{{keyword}} · {{name}}"
-  },
-  "talents.pages": {
-    "reviewed": true,
-    "source": "Talent pages",
-    "sourceHash": "970014842449a55625201e6831a300a7b258adefda4387ffd335a2e4e656c79e",
-    "text": "タレントページ"
   },
   "talents.pointsAvailable": {
     "forms": {

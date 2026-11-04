@@ -15,6 +15,9 @@
 .talents-screen[data-view="overview"] {
   max-width: none;
 }
+.talents-screen[data-view="tree"] {
+  max-height: 100%;
+}
 .talents-screen .talents-heading {
   flex-shrink: 0;
   margin: 0;
@@ -152,18 +155,17 @@
     animation: none;
   }
 }
+.talent-tree-viewport {
+  flex: 0 1 auto;
+  width: 100%;
+  scrollbar-gutter: stable both-edges;
+}
 .talent-tree {
-  min-height: calc(
-    var(--talent-page-rows) * var(--talent-page-row-height) + (var(--talent-page-rows) - 1) *
-      var(--screen-item-gap)
-  );
-  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
   width: 100%;
   margin-inline: auto;
-  max-width: var(--talent-tree-screen-width);
 }
 .talent-row {
   display: flex;

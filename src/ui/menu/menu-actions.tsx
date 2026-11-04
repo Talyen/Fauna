@@ -32,6 +32,17 @@ export function MenuActions({
   onQuit,
 }: MenuActionsProps) {
   const i18n = useMessages();
+  const collection = (
+    <Button
+      effectTone="gold"
+      variant={home ? "outline" : "ghost"}
+      data-menu-action="collection"
+      onClick={() => onNavigate("collection")}
+    >
+      <PawPrint aria-hidden="true" className="menu-icon-collection" />
+      {i18n.message("menu.collection", "Collection")}
+    </Button>
+  );
   return (
     <>
       <Button
@@ -44,6 +55,13 @@ export function MenuActions({
         <Swords aria-hidden="true" />
         {home && !active ? i18n.message("menu.play", "Play") : i18n.message("menu.continue", "Continue")}
       </Button>
+      {!home ? (
+        <Button variant="ghost" onClick={onHome}>
+          <House aria-hidden="true" className="menu-icon-home" />
+          {i18n.message("menu.mainMenu", "Main menu")}
+        </Button>
+      ) : null}
+      {!home ? collection : null}
       <Button
         variant={home ? "outline" : "ghost"}
         effectTone="talents"
@@ -68,15 +86,7 @@ export function MenuActions({
           </span>
         ) : null}
       </Button>
-      <Button
-        effectTone="gold"
-        variant={home ? "outline" : "ghost"}
-        data-menu-action="collection"
-        onClick={() => onNavigate("collection")}
-      >
-        <PawPrint aria-hidden="true" className="menu-icon-collection" />
-        {i18n.message("menu.collection", "Collection")}
-      </Button>
+      {home ? collection : null}
       {active && hasBoons ? (
         <Button
           effectTone="talents"
@@ -107,16 +117,13 @@ export function MenuActions({
         {i18n.message("menu.settings", "Settings")}
       </Button>
       {!home && active ? (
-        <Button variant="ghost" className="end-journey" onClick={onEndJourney}>
-          <LogOut aria-hidden="true" className="menu-icon-end" />
-          {i18n.message("menu.endJourney", "End journey")}
-        </Button>
-      ) : null}
-      {!home ? (
-        <Button variant="ghost" onClick={onHome}>
-          <House aria-hidden="true" className="menu-icon-home" />
-          {i18n.message("menu.mainMenu", "Main menu")}
-        </Button>
+        <>
+          <div className="pause-menu-separator" aria-hidden="true" />
+          <Button variant="ghost" className="end-journey" onClick={onEndJourney}>
+            <LogOut aria-hidden="true" className="menu-icon-end" />
+            {i18n.message("menu.endJourney", "End journey")}
+          </Button>
+        </>
       ) : null}
       {desktop ? (
         <Button variant="ghost" busy={closing} onClick={onQuit}>
