@@ -64,6 +64,7 @@ function normalizePreferences(value: unknown): DevicePreferences {
     autoEndTurn: typeof candidate.autoEndTurn === "boolean" ? candidate.autoEndTurn : true,
     controller:
       candidate.controller === "xbox" ||
+      candidate.controller === "steam-deck" ||
       candidate.controller === "playstation" ||
       candidate.controller === "nintendo"
         ? candidate.controller

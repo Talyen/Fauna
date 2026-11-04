@@ -77,7 +77,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const controllerKind = controller === "auto" ? detectedController : controller;
+  const controllerKind =
+    controller === "auto" ? detectedController : controller === "steam-deck" ? "xbox" : controller;
   const controllerPrompts = localizedControllerPrompts(controllerKind, i18n);
   const active =
     !["victory", "defeat"].includes(game.phase) &&

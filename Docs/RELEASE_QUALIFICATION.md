@@ -52,7 +52,7 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 
 - [ ] Complete battle, targeting, swaps, rewards, settings, inspection and pause flows with each intended physical controller
 - [ ] Disconnect/reconnect during navigation, targeting and a modal; active-controller disconnection stops autoplay and opens pause without automatic resume; verify reachable focus, no repeated activation and usable prompts
-- [ ] Check Automatic and manual Xbox/Deck, PlayStation and Nintendo prompts, including Steam Input emulation; publish a recommended configuration for each supported controller family
+- [ ] Check Automatic and manual Xbox, Steam Deck, PlayStation and Nintendo prompts, including Steam Input emulation; publish a recommended configuration for each supported controller family
 - [ ] On Deck, verify text and target readability on the handheld display, overlay and intended bindings
 - [ ] Exercise sleep/resume during battle and while Cloud work is pending, then quit and resume
 - [ ] Check cold offline launch, frame pacing, battery use and an extended journey through the intended Proton/native path

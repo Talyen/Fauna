@@ -97,6 +97,8 @@ it("applies independent preferences live, normalizes malformed storage and persi
     await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
     await user.click(screen.getByRole("radio", { name: "PlayStation" }));
     expect(localStorage.getItem("fauna.controller-prompts")).toBe("playstation");
+    await user.click(screen.getByRole("radio", { name: "Steam Deck" }));
+    expect(localStorage.getItem("fauna.controller-prompts")).toBe("steam-deck");
     await user.click(screen.getByRole("tab", { name: "Sound" }));
     for (const label of ["Master volume", "Music volume", "Sound effects volume"])
       expect(screen.getByRole("slider", { name: label }).getAttribute("aria-valuenow")).toBe("50");
@@ -128,7 +130,7 @@ it("applies independent preferences live, normalizes malformed storage and persi
     expect(screen.getByRole("radio", { name: "75%" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
-    expect(screen.getByRole("radio", { name: "PlayStation" }).getAttribute("aria-checked")).toBe("true");
+    expect(screen.getByRole("radio", { name: "Steam Deck" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("false");
     await user.click(screen.getByRole("tab", { name: "Sound" }));
     expect(screen.getByRole("slider", { name: "Master volume" }).getAttribute("aria-valuenow")).toBe("0");

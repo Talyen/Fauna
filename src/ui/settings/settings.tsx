@@ -175,14 +175,21 @@ export function Settings({
             aria-label={i18n.message("settings.controllerPrompts", "Controller prompts")}
             value={controller}
             onValueChange={(value) => {
-              if (value === "auto" || value === "xbox" || value === "playstation" || value === "nintendo")
+              if (
+                value === "auto" ||
+                value === "xbox" ||
+                value === "steam-deck" ||
+                value === "playstation" ||
+                value === "nintendo"
+              )
                 update({ controller: value });
             }}
           >
             {(
               [
                 ["auto", i18n.message("settings.automatic", "Automatic")],
-                ["xbox", "Xbox / Deck"],
+                ["xbox", "Xbox"],
+                ["steam-deck", "Steam Deck"],
                 ["playstation", "PlayStation"],
                 ["nintendo", "Nintendo"],
               ] as const
