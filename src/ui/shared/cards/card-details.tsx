@@ -8,7 +8,7 @@ import { species, type SpeciesId } from "../../../game/content";
 import { cardCost } from "../../../game/ability-rules";
 import type { Creature, Card, GameState } from "../../../game/types";
 import { CardRules } from "../combat/combat-values";
-import { actionDisplay } from "./action-display";
+import { actionDisplay, offensiveCardValue } from "./action-display";
 import type { ReactNode } from "react";
 export function ActionDetails({
   card,
@@ -16,8 +16,12 @@ export function ActionDetails({
   actor,
   modifiers,
   compact = false,
+  valueOverride,
+  powerOverride = 1,
 }: {
   card: Card;
+  valueOverride?: number;
+  powerOverride?: number;
   compact?: boolean;
   ownerName: string;
   actor?: Creature;
@@ -39,7 +43,13 @@ export function ActionDetails({
       {card.temporary && !def.consume ? (
         <p>{i18n.message("card.copy", "Copy · Lasts for this battle")}</p>
       ) : null}
-      <CardRules card={def} modifiers={modifiers} level={card.level} value={value} />
+      <CardRules
+        card={def}
+        modifiers={modifiers}
+        power={powerOverride}
+        level={card.level}
+        value={valueOverride ?? offensiveCardValue(card, actor, modifiers) ?? value}
+      />
     </div>
   );
 }

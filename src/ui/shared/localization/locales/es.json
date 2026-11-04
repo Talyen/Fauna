@@ -65,12 +65,6 @@
     "sourceHash": "cab9cd2c6b56342a00f6207e6886f4cf1ff9a8a176d728f8a8032153020ac593",
     "text": "{{amount}} de daño de {{type}}"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "efe0a39b777c513eadb8bbd7d84d8103b48615bd35d0c82e799537bf0e444312",
-    "text": "Páginas de efectos de combate"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",
@@ -257,6 +251,12 @@
     "sourceHash": "67da3695dfa6cac4eb4d2d345c6a6cfb96e523786c8c8b641c841fb7104c2205",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "93e8dc958643107f63fdeac9167d60e87b3ce203ad432dfe26d37bc5a8f73718",
+    "text": "Recluta a esta criatura para revelar sus detalles"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -269,12 +269,6 @@
     "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
     "text": "Examinar a {{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "3a1243378d0059f8900caf288ca61eb10ca8994cb77f533dcc4e6220f8fab62a",
-    "text": "Especie bloqueada"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -286,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "28c79d30aad38eda347e4aa8c6016debc0995072e724a1822cb1b386ed74e7da",
     "text": "{{name}}: {{rank}} de {{maximum}} estrellas"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "0a80daf832046e63155ff48f067c29489df0c5a2d6fa2b17d43cca445c7a2a19",
+    "text": "Sin descubrir"
   },
   "collection.views": {
     "reviewed": true,
@@ -304,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "3dc785246de4d8761dd23972f5c9fef611a39f01a91ed6f6963f6a60d33208af",
     "text": "Cargando…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "e1457ed1e2bf91a58fef5969d4d92ee1114d30375c35fcbd660affc5f4d92f91",
+    "text": "Cancelar"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -352,6 +358,18 @@
     "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "sourceHash": "f7864b5beefb4d35bf2d4892147366988bfc20ed42c1e996f7709060556d9936",
     "text": "Los ataques repetidos no se pueden <keyword0>esquivar</keyword0>"
+  },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "61b7f839f608a9fc035cb2ff45e9fb30ade05dca3a6a51326f09112df5e6fa87",
+    "text": "Espátula de ámbar"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "13565545c34a855878591a18737dde4cf7590d40b4b320934e8614fa642ca43a",
+    "text": "La mitad del <keyword0>Bloqueo</keyword0> perdido por disminución restaura <keyword1>Salud</keyword1> a ese aliado"
   },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
@@ -736,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "904d4678341181c0ab70fbf6e459e7203486b7c7b75776ed6a6ad0d23ee6d756",
     "text": "La <keyword0>Nulificación</keyword0> protege los efectos aliados de la <keyword1>Purga</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "33a2b1a117e328cd3c59cf3c3c30e66842a3dadaeef10a1b9540968090fa57a4",
+    "text": "Calientamanos cortesano"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "9143b087b38193d149955049c63f91deeebbca887c1f4f7efc2f0b928ba4b713",
+    "text": "Los impactos de <keyword0>Quemadura</keyword0> aplican <keyword1>Quemadura</keyword1> adicional igual a la <keyword2>Armadura</keyword2> del atacante"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1409,6 +1439,30 @@
     "sourceHash": "38e1852de5dc2a6485da3f98346bfe03933999f162a8af59937e0286dcd1a4cb",
     "text": "Cuando un aliado <keyword0>esquiva</keyword0> un ataque, inflige {{value0}} de daño de <keyword1>Aturdimiento</keyword1> al atacante"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "dc2e99656714370e82e808044396e3c50e37626257ec7a96e650400310a973f7",
+    "text": "Diapasón de relámpago"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "964688616751d905d12ef65ca885499ef90caa808a8821f3a0cf0dffed1648d6",
+    "text": "Los impactos de <keyword0>Aturdimiento</keyword0> también añaden su acumulación de <keyword1>Aturdimiento</keyword1> a otros enemigos con acumulación de <keyword2>Aturdimiento</keyword2>"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "817fee394229828bb64a54fde1f545e9009adfc720a7131906bbf93f387c7a61",
+    "text": "Peine de telar"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "53c9596a3c0512cede75b6572f8ea19a6079fe2ffde1be105f66f70c496a2923",
+    "text": "Cuando se rompe el <keyword0>Bloqueo</keyword0> de un aliado, el <keyword1>Bloqueo</keyword1> de otros aliados absorbe el daño restante"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2033,6 +2087,18 @@
     "sourceHash": "823bd9938d514bf4a5d6f41f8aa7d32097f747a988cea7985cb5fc220bcd11a0",
     "text": "La inmunidad de un aliado al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1> protege a todos los aliados"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "ede87894d606647d0840806cf365eae0f347f3ae98d1683b79be83df9fba2fc3",
+    "text": "Huso de escarcha"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "3ad0817e981da18fed9504be6bb5bfe41f3dac9f6d243a23ba428169ec081bc5",
+    "text": "El daño de <keyword0>Sangrado</keyword0> añade la mitad de esa cantidad como acumulación de <keyword1>Congelación</keyword1>"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2140,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "0935ea0e127403d54a1bc4df2b8723ee5383c6d911430b0f4a5c45390b6a2135",
     "text": "Cuando un aliado <keyword0>esquiva</keyword0>, los demás aliados también <keyword1>esquivan</keyword1> ese mismo ataque"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "d7e9b5fa4ea1f9bffaf1e141a05e49ce0a823f3ae7f7c79ef3e2c9c58c171f09",
+    "text": "Segundo reloj de sol"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "264cb059bb45d1eb05e00d167aa1d5c308092957bc2f61f6ec6068928251a7c9",
+    "text": "Los ataques de <keyword0>Luz</keyword0> contra enemigos <keyword1>Cegados</keyword1> se juegan dos veces"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2297,6 +2375,18 @@
     "sourceHash": "09641c4ecadeec823e8d1e8e005f38c120960c66f5f17aed5b07773533913d0d",
     "text": "Los impactos <keyword0>Físicos</keyword0> aplican {{value0}} de <keyword1>Sangrado</keyword1> a enemigos con <keyword2>Armadura</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "af40794dd5087220d89c5ee4237301bcdef63cc3b23cf1487885bbedbcd18809",
+    "text": "Garfio estelar"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "50f46ccf9522dc33a6eb2445ede78350ce3e258ad934d5dfe9a34b7de4531800",
+    "text": "<keyword0>Purgar</keyword0> un efecto de un enemigo convierte tu próximo ataque en un <keyword1>Golpe crítico</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2332,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "7826414237f98e41f6723b1e748cbf9179562f78aa51e34a70ce12a9522558e1",
     "text": "Tus impactos <keyword0>Físicos</keyword0> y de <keyword1>Aturdimiento</keyword1> eliminan {{value0}} de <keyword2>Armadura</keyword2> enemiga antes del daño"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "32c97b38f4fbcdb320e7297deb738baded5dd30a6052973b17af1d0abafe77ad",
+    "text": "Jarro del pozo solar"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "3d6243675e6b11f1a48e61ac1bcb87bd5a029b020edd8b601ddae91c69e4f478",
+    "text": "<keyword0>Curar</keyword0> a un aliado añade la <keyword1>Salud</keyword1> restaurada a tu próximo ataque de <keyword2>Luz</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2429,6 +2531,18 @@
     "sourceHash": "aff936a0a0f0c40e3c334128afa2584fbf0affcd64310e4d88b073926000c3cb",
     "text": "Las <keyword0>Espinas</keyword0> no pueden disminuir por debajo de {{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "ed04b5e0b25fda825da4bc258620706e10bc41068416c3b0597fbf8cb703a188",
+    "text": "Panera de seta"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "7c73b3c1a5488d117310a579eceaebc372b70a741385e8ccec516e53ee1f049d",
+    "text": "Añade Pan de viaje a tu mazo; los aliados que reciben <keyword0>Comida</keyword0> conservan su <keyword1>Bloqueo</keyword1> el próximo turno"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2476,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "002e373d3266f267382322b6572ea7c94f7d304de5b033a2889c3e22302e14b0",
     "text": "Los aliados pueden <keyword0>esquivar</keyword0> la <keyword1>Purga</keyword1> enemiga"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "647fea9780289ff350306ed676230eb64e8b831902bb020e60fdab9ded3170a8",
+    "text": "Cadena de veta"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "2c5939e31748cd3f737f912bfff48fa33484f26bd38a8c2497f46d8de25a1d99",
+    "text": "El daño reducido por la <keyword0>Armadura</keyword0> enemiga se inflige a otro enemigo"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -9749,6 +9875,12 @@
     "sourceHash": "cfb6ba0697d59cce6c02cdde2626a55196d8d8a89f214287b8763a390b76b8a2",
     "text": "El mazo está vacío"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "98d3b89c3bdd6b2d2e912b27b3a7c21184915990844e04a713a48475809bf599",
+    "text": "Exceso de mano"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9887,17 +10019,17 @@
     "sourceHash": "1960ec6375c89c145c4c5dd158daa425df982aab4c43811df1f837ea09720150",
     "text": "Rasgo"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "4ff87e5f6d5675cfce0ce35650adda0bfef75ba8052a03d65a2b66d63243e4b9",
-    "text": "Acto {{act}} · Sala {{room}} de {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "42224f14c44f5851102535bc51e149035609a1dfb4c83df15dc84a7697f507d2",
     "text": "Jefe: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "6936c2ee79314b6136170f9e3c68fdc8989f52e698e5888eb43476d75f12a86d",
+    "text": "Elegir destino"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10439,12 +10571,6 @@
     "sourceHash": "be9a4d430460a04b31ff17efd6ce7992223fad9f0e18d3c8063b3ab9e5efe679",
     "text": "Volver a la aventura"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "c9427be40e03a6fc43788b83d61904cfecc7f4117960099f7d135add90f890d2",
-    "text": "Ajustes"
-  },
   "menu.talentPoints": {
     "forms": {
       "many": "{{count}} puntos de talento disponibles",
@@ -10782,12 +10908,6 @@
     "sourceHash": "bffe27b0afd1cea1d9335808960cbbde3e5ab2d45ef9de3ddc9ef1e7a012cfaf",
     "text": "Fauna no pudo mostrar esta pantalla; se está intentando de nuevo…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "d957ecd0a87c9074cc297e6efbf91dec309257905f43eb77b6605dbb09f56f59",
-    "text": "No se puede guardar el progreso ahora; mantén Fauna abierto mientras se vuelve a intentar"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10890,17 +11010,17 @@
     "sourceHash": "c2e1b2dc9284280f650784e57c3f340fd8e8f229c030d32da08f977e4c4b8ca5",
     "text": "Regreso a casa"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "13099ad277f529808dcc20b29b7256639c359126ce7b604c2aa955022db9dcc8",
+    "text": "Victoria"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "b9d325be7751fec0925c6d59f2cab20d339f136a3c68c1f43447559da6a9f867",
     "text": "Elige una bendición"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "422b83aef5dc46a5857ca2ae35d5626e5eb3fee2f2f5c06293c5327bd3708adc",
-    "text": "Elige una criatura"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10932,6 +11052,24 @@
     "sourceHash": "f677c5db0d852dc933a20c6b15bf73ff0148710ff674d4779e32011536cc815f",
     "text": "Omitir"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "bcd1291caf0839105626622c9a31dfb6c98c99894e8ed664263eaee0df34a13a",
+    "text": "No se pudo guardar"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "26504947373b375c16ba3b2d459957aecaf8d86babe5da4e7954c3d358824805",
+    "text": "Reintentar"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "53380dbad8f292cd82d5181809ff3e584cec9b681f1da340e0f990cd6c48b21e",
+    "text": "Guardando…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10956,23 +11094,41 @@
     "sourceHash": "fff649559ab7dbe915bb5d47655d3a5c431d4fd049cf75d1b15f8471b4fb6766",
     "text": "Combate"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "575d75446fda222745218c0b8236e38f0a2dd69dea67c232b668bb6fcc731a87",
+    "text": "Pantalla completa sin bordes"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "0e2418a43ed952bf7dc468fbef75f02ab64e12d41edfbd017f338eb1156f6ffc",
+    "text": "Brillo"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "7a69afd3f1f3ea1a356726864fc555c9df76b177cafbef00d4c6f5d46614f269",
     "text": "Categorías de ajustes"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "08dacbc9a73280d1abebada75a7e0fb28ee9c7d50eb0b706081cb452cb4e39f5",
+    "text": "¿Borrar todo el progreso y empezar de nuevo? Esta acción no se puede deshacer"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "11d2d1db494710e87a7c2225eb6c82aebe1eadf3c4604b041df639826daa374a",
+    "text": "Borrar datos guardados"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "39a97bacaf0fb2acf2f4d0f55034f13ffd41000ec34cb179330e459a4e6cf1d0",
     "text": "Cerrar selección de idioma"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "7c2978e7fc3f931ad109f8273315d0ccc1cb0adb8426f4e78b9bc4e8d5f2262f",
-    "text": "Indicaciones del mando"
   },
   "settings.display": {
     "reviewed": true,
@@ -11010,17 +11166,23 @@
     "sourceHash": "9596f4064afadc73d6467ecec498f17e3e0e76daab48e7223389418a74554740",
     "text": "Pantalla completa"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "10c7b7944c78c9b8d2ae6b71199b609853710c105f15825bfb92777764e9e7fb",
+    "text": "Tamaño del juego"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "f18a45e42cd86385cd86e12b5170266b9889bf6891487179a512727c40d96687",
+    "text": "Jugabilidad"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "626f7a5c3bfea685a0ded9bd64cf66af903cb17fe7ea1ce067a1ed7d8f9c6d37",
     "text": "Resplandor del fondo"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "6a0c3b9670083852df2548e8791aa69eb087065ef5f4a1ccf44831cb55565e2e",
-    "text": "Valor del resplandor de fondo"
   },
   "settings.language": {
     "reviewed": true,
@@ -11033,12 +11195,6 @@
     "source": "Choose a language",
     "sourceHash": "acef80deff49722b5bef952d7ae9fe9e401c4a89ccbaa3d6393f80d1e2e70e52",
     "text": "Elige un idioma"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "52f4385f5524fe07304e31b7e7ff06381bfe7227eefa8cb2a867dbc04bc12bc4",
-    "text": "Idioma: {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -11082,35 +11238,47 @@
     "sourceHash": "a57e7d15358b9f72f9a3b62bc818401e63adc7f96c58ad94f37aaf38c9761091",
     "text": "Silenciar en segundo plano"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "842590624068403f82dc36f68dff7a1278e581a78935a7c1e160bad7dfd6b07d",
+    "text": "Otros"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "40e4eaf10b0aa6a4a884de1a07ecd96f6b020a73188511e5a70d50d54d224f37",
     "text": "Partículas del fondo"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "30854cd51936522baba06a3175350f84c230e1a3fc2408c87c3cf23199e5ff18",
-    "text": "Valor de las partículas de fondo"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "bf3139ef9518a03fa6c495abe2a04887ee8ac45b6b7c3809f0ced1f6858dd4de",
+    "text": "Recordar preferencia de combate automático"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "4a321b4f8b776ee1dec2ea82bc9c734ff23c64e4060bbf01902a5aa208377c86",
+    "text": "Restablecer"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "2e5feedab128f486e6d86ac0e3cef33c9abe4d4148301654835060fa6efbb0b0",
+    "text": "Reinicio y datos guardados"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "aaa48f4d278df8d87d07068d18dae5b10a579fb20427c28f18d277d5630ec149",
+    "text": "Datos guardados"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "0bc75f0e70d258b814443eddacbb9c2cb94e968832b959a8b5e6a2f0565dd1d1",
     "text": "Sonido"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "8f93a54953c50e87c2d5a53d268b638f07ad540dce357a18da47d765a52c0f4d",
-    "text": "Tamaño del texto"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "09007ac2a7e283c42df6e75497922fb16ec8698d55e272c38ce8f1139acac52e",
-    "text": "Descripción {{value}} %"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11268,6 +11436,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "adcb4de03d1f303adec74fde24c496c90ec5e269203cdc5eec3bb64923ed0c35",
     "text": "Restablecer talentos de {{keyword}}"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "02c05e6546394f62f259312cbc016243f9c956000e54b1accef6b17492a2ff29",
+    "text": "Restablecer todos los talentos"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "3a205875f897c5dce8899f7726cfc2e1e3cd33703a26e5250975bf20694f6e6f",
+    "text": "Esto devolverá todos tus puntos de talento"
   },
   "talents.row": {
     "reviewed": true,

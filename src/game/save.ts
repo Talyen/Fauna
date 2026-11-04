@@ -21,7 +21,7 @@ import { gameStateSchema } from "./state-schema";
 import { SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter, ROOMS_PER_ACT } from "./encounters";
 import type { BattleState, GameState } from "./types";
-import { CORNUCOPIA_CARD_ID } from "./journey-cards";
+import { CORNUCOPIA_CARD_ID, TOADSTOOL_BREADBOX_CARD_ID } from "./journey-cards";
 function unique(values: readonly unknown[]) {
   return uniqueBy(values, (value) => value);
 }
@@ -205,6 +205,8 @@ export function validateRoster(state: GameState) {
   let teamById: Map<string, (typeof state.team)[number]> | undefined;
   let cornucopia: boolean | undefined;
   const hasCornucopia = () => (cornucopia ??= state.boons.includes("cornucopia"));
+  let toadstoolBreadbox: boolean | undefined;
+  const hasToadstoolBreadbox = () => (toadstoolBreadbox ??= state.boons.includes("toadstool-breadbox"));
   invalid(
     state.cards.some((card) => {
       if (
@@ -216,6 +218,15 @@ export function validateRoster(state: GameState) {
           !hasCornucopia())
       )
         return true;
+      if (
+        card.id === TOADSTOOL_BREADBOX_CARD_ID &&
+        (card.ownerId !== null ||
+          card.definitionId !== "food-trail-bread" ||
+          card.level !== 0 ||
+          card.temporary ||
+          !hasToadstoolBreadbox())
+      )
+        return true;
       if (card.ownerId === null)
         return (
           !!card.borrowedFrom ||
@@ -225,7 +236,10 @@ export function validateRoster(state: GameState) {
             (card.temporary ||
               (card.id === CORNUCOPIA_CARD_ID &&
                 card.definitionId === "food-mana-berries" &&
-                hasCornucopia()))
+                hasCornucopia()) ||
+              (card.id === TOADSTOOL_BREADBOX_CARD_ID &&
+                card.definitionId === "food-trail-bread" &&
+                hasToadstoolBreadbox()))
           )
         );
       if (!teamById) {
@@ -260,8 +274,10 @@ export function validateRoster(state: GameState) {
       );
     }),
   );
-  if (state.phase !== "battle")
+  if (state.phase !== "battle") {
     invalid(state.cards.some((card) => card.id === CORNUCOPIA_CARD_ID) !== hasCornucopia());
+    invalid(state.cards.some((card) => card.id === TOADSTOOL_BREADBOX_CARD_ID) !== hasToadstoolBreadbox());
+  }
   invalid(
     state.cards.some(
       (card) =>
@@ -317,7 +333,7 @@ function validateSupport(state: GameState) {
             !visit.stock.some((r) => r.boon === visit.purchased))),
     );
   }
-  if (state.phase === "campfire") invalid(state.expedition.lastRoom === "campfire" || !needsCampfire(state));
+  if (state.phase === "campfire" && state.expedition.lastRoom !== "campfire") invalid(!needsCampfire(state));
 }
 
 function validateRewards(state: GameState) {
@@ -402,6 +418,7 @@ function validateBattle(state: BattleState) {
         enemy.combat.acrobatReady ||
         enemy.combat.moonseedReady ||
         enemy.combat.toothpickReady ||
+        enemy.combat.breadboxReady ||
         enemy.combat.slipperCard !== null ||
         enemy.combat.deathDoorUsed ||
         enemy.combat.grace > 0 ||
@@ -512,6 +529,7 @@ function validateMinions(state: BattleState) {
             unit.combat.acrobatReady ||
             unit.combat.moonseedReady ||
             unit.combat.toothpickReady ||
+            unit.combat.breadboxReady ||
             unit.combat.slipperCard !== null)) ||
         unit.combat.deathDoorUsed ||
         unit.combat.grace > 0,

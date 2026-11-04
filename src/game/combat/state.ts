@@ -23,6 +23,7 @@ export function freshCombat(): CombatState {
     acrobatReady: false,
     moonseedReady: false,
     toothpickReady: false,
+    breadboxReady: false,
     slipperCard: null,
     reflect: false,
     reflectBurn: false,

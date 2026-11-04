@@ -89,6 +89,14 @@ function createStorage(directory) {
       queue = operation.catch(() => {});
       return operation;
     },
+    clear() {
+      const operation = queue.then(async () => {
+        for (const file of [primary, `${primary}.bak1`, `${primary}.bak2`, `${primary}.tmp`])
+          await fs.rm(file, { force: true });
+      });
+      queue = operation.catch(() => {});
+      return operation;
+    },
     drain() {
       return queue;
     },

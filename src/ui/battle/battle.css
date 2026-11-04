@@ -1,7 +1,9 @@
 .battle-screen {
   height: 100%;
   overflow: visible;
-  padding-bottom: calc(var(--battle-hand-height) - var(--hand-rest-inset) + var(--screen-item-gap));
+  padding-bottom: calc(
+    var(--battle-hand-height) - var(--hand-rest-inset) + var(--screen-item-gap) + var(--battle-hand-lift, 0px)
+  );
   margin: auto;
   display: grid;
   grid-template-columns: minmax(var(--battle-target-rail-width), 1fr) max-content minmax(
@@ -13,6 +15,8 @@
   align-items: start;
   position: relative;
   isolation: isolate;
+  --battle-hand-lift: 0px;
+  --hand-fan-rest-drop: 12px;
   --battle-creature-width: var(--battle-fitted-width, var(--art-landscape-width));
   --battle-target-rail-width: clamp(180px, 14vw, 280px);
   --battle-readout-line-height: max(24px, calc(var(--text-secondary) * 1.4));
@@ -40,14 +44,8 @@
 .player-row .creature-card {
   width: var(--battle-creature-width);
 }
-.enemy-row {
-  --battle-team-color: var(--battle-enemy-color);
-}
-.player-row {
-  --battle-team-color: var(--battle-player-color);
-}
 :root .app .battle-screen :is(.enemy-row, .player-row) .creature-card {
-  box-shadow: 0 0 14px color-mix(in srgb, var(--battle-team-color) 35%, transparent);
+  box-shadow: none;
 }
 .target-control {
   display: flex;
@@ -69,7 +67,7 @@
   max-width: calc(var(--battle-hand-width) * 6 - var(--hand-overlap) * 5 + var(--hand-side-clearance) * 2);
   min-width: 0;
   padding-inline: var(--hand-side-clearance);
-  translate: 0 var(--page-block-gutter);
+  translate: 0 calc(var(--page-block-gutter) - var(--battle-hand-lift));
   pointer-events: none;
   z-index: 3;
 }
@@ -130,7 +128,7 @@
 }
 .hand-slot {
   --fan-angle: calc(var(--fan-offset) * var(--hand-fan-angle-step));
-  --fan-drop: calc(12px + var(--fan-distance) * var(--hand-fan-drop-step));
+  --fan-drop: calc(var(--hand-fan-rest-drop) + var(--fan-distance) * var(--hand-fan-drop-step));
   flex: 0 0 var(--battle-hand-width);
   width: var(--battle-hand-width);
   pointer-events: auto;
@@ -277,13 +275,6 @@
   gap: 0;
   min-height: calc(var(--battle-readout-line-height) + 4px);
   padding-top: 4px;
-}
-/* Block has its own edge of the readout; status glyphs remain centered. */
-.battle-screen .combatant-details .combat-stats {
-  position: absolute;
-  top: calc(var(--battle-creature-width) * 3 / 4 + 4px);
-  right: 0;
-  max-width: calc((100% - var(--control-height) * 3 - var(--screen-item-gap) * 2) / 2);
 }
 .target-outcomes {
   grid-area: 1 / 3 / 3 / 4;
@@ -670,12 +661,16 @@
   pointer-events: auto;
   flex-wrap: nowrap;
   z-index: 2;
+  gap: var(--space-1);
+  max-width: 100%;
 }
-:root .app .battle-screen .combat-status .pagination .game-button {
-  background: transparent;
+.battle-screen .status-icon {
+  flex: 0 0 max(24px, var(--icon-size));
+  width: max(24px, var(--icon-size));
 }
-.battle-screen .combat-status .status-icon svg {
-  filter: drop-shadow(0 0 2px var(--background)) drop-shadow(0 0 1px var(--foreground));
+:root .app .battle-screen :is(.creature-card, .hand .action-card) {
+  --border-art-width: 0px;
+  border-width: 0;
 }
 .card-transfer {
   overflow: hidden;
@@ -693,4 +688,29 @@
   color: var(--foreground);
   font-weight: 600;
   text-align: center;
+}
+
+.boon-control {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 3 * (var(--control-height) + var(--screen-item-gap)));
+  z-index: 10;
+}
+.battle-gold {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 4 * (var(--control-height) + var(--screen-item-gap)));
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  color: var(--gold-pale);
+}
+
+/* The live wallet and toolbar require a clear row above both creature rows. */
+.battle-screen {
+  padding-top: var(--control-height);
+}
+.battle-gold {
+  z-index: 10;
 }

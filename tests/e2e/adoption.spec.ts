@@ -13,7 +13,7 @@ test("unaffordable Merchant details leave the price and exit visible", async ({ 
   expect(unavailable).toBeGreaterThanOrEqual(0);
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
   await seed(page, fixture);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
@@ -42,7 +42,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+    await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
     await seed(page, fixture);
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
@@ -174,7 +174,8 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
       }
     }
   }
-  await page.getByRole("radio", { name: "125%", exact: true }).click();
+  await page.getByRole("slider", { name: "Game Size", exact: true }).focus();
+  await page.keyboard.press("End");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const art = page.getByRole("button", { name: "Inspect Mossguard", exact: true });

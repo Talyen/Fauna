@@ -10,7 +10,7 @@ import { useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
-import { actionDisplay } from "./action-display";
+import { actionDisplay, offensiveCardValue } from "./action-display";
 import { cardRuleLines } from "../keyword-text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
@@ -186,10 +186,20 @@ export function CreatureCard({
             {preview ? (
               preview
             ) : readout && health !== undefined && (actorId || enemyId) ? (
-              <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
+              <BattleReadout
+                view={battlePortrait ? "portrait" : "all"}
+                health={health}
+                maxHealth={maxHealth ?? info.health}
+                block={block}
+              />
             ) : null}
             {readout ? (
-              <CombatStatus combat={combat} sharedDodge={sharedDodge} sharedImmunity={sharedImmunity} />
+              <CombatStatus
+                combat={combat}
+                block={battlePortrait ? block : 0}
+                sharedDodge={sharedDodge}
+                sharedImmunity={sharedImmunity}
+              />
             ) : null}
           </div>
           {battlePortrait && health !== 0 && combat?.grace ? (
@@ -294,8 +304,12 @@ export function ActionCard({
   actor,
   tooltips = true,
   onDenied,
+  valueOverride,
+  powerOverride = 1,
 }: {
   card: Card;
+  valueOverride?: number;
+  powerOverride?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -311,7 +325,13 @@ export function ActionCard({
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers);
-  const rule = cardRulePresentation(def, card.level, value, 1, modifiers);
+  const rule = cardRulePresentation(
+    def,
+    card.level,
+    valueOverride ?? (tooltipOpen ? offensiveCardValue(card, actor, modifiers) : undefined) ?? value,
+    powerOverride,
+    modifiers,
+  );
   const effectLabel = useRuleText(rule.text, rule.id, rule.message)
     .map((part) => part.text)
     .join("");
@@ -369,7 +389,15 @@ export function ActionCard({
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
-        <ActionDetails compact card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
+        <ActionDetails
+          compact
+          card={card}
+          ownerName={ownerName}
+          actor={actor}
+          modifiers={modifiers}
+          valueOverride={valueOverride}
+          powerOverride={powerOverride}
+        />
       </TooltipContent>
     </Tooltip>
   );

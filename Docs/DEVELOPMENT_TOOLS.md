@@ -31,6 +31,8 @@ npm run ui:guide -- layout battle
 | `--desktop`                           | Isolated Electron profile, inherited Node/performance modes cleared and real Steam disabled; browser seeding options do not apply                                                           |
 | No browser/desktop flag               | Start only the owned server                                                                                                                                                                 |
 
+The general `battle` scenario chooses a fresh random team and enemy pack from the ordinary Fauna roster on each invocation. Capture evidence records the seed and both lineups; replay it with `--scenario battle --seed 12345`. The layout guide prints one shared seed in both capture commands so before/after checkpoints remain comparable. Named creature, boss and regression scenarios retain their fixed fixtures.
+
 Scenarios use fresh browser contexts; reload preserves commands committed after seeding. Capture owns and closes its quiet preview, waits for finite transitions/artwork, checks layout and rejects browser errors. It writes a unique directory under `reports/` containing the validated checkpoint/hash, render-input identity, conditions, frame paths and completion status. Preparation, browser or layout failures retain errors and any capturable diagnostic frames with `complete: false`.
 
 Compare matching checkpoint hashes and conditions, inspect the frames, and exercise changed interactions separately. Capture cannot approve appearance or test an interaction on its own. The older [Merchant study capture](../design/visual-quality/capture.mjs) covers additional purchase/inspection states.

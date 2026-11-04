@@ -1,17 +1,15 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
-import { Swords, Gift, House, BookOpen, WandSparkles, Cog, Power } from "lucide-react";
+import { Swords, House, Power, BookOpen, WandSparkles, Cog } from "lucide-react";
 
 export type MenuPage = "talents" | "collection" | "settings";
 interface MenuActionsProps {
   home: boolean;
   battle: boolean;
   active: boolean;
-  hasBoons: boolean;
   talentPoints: number;
   closing: boolean;
   onContinue: () => void;
-  onBoons: () => void;
   onNavigate: (page: MenuPage) => void;
   onEndJourney: () => void;
   onHome: () => void;
@@ -21,11 +19,9 @@ export function MenuActions({
   home,
   battle,
   active,
-  hasBoons,
   talentPoints,
   closing,
   onContinue,
-  onBoons,
   onNavigate,
   onEndJourney,
   onHome,
@@ -67,7 +63,7 @@ export function MenuActions({
           {i18n.message("menu.mainMenuAction", "Main Menu")}
         </Button>
       ) : null}
-      {!home ? collection : null}
+      {collection}
       <Button
         variant={home ? "outline" : "ghost"}
         effectTone="talents"
@@ -92,18 +88,7 @@ export function MenuActions({
           </span>
         ) : null}
       </Button>
-      {home ? collection : null}
-      {active && hasBoons ? (
-        <Button
-          effectTone="talents"
-          variant={home ? "outline" : "ghost"}
-          data-menu-action="boons"
-          onClick={onBoons}
-        >
-          <Gift aria-hidden="true" className="menu-icon-boons" />
-          {i18n.message("menu.boons", "Boons")}
-        </Button>
-      ) : null}
+
       <Button
         effectTone="settings"
         variant={home ? "outline" : "ghost"}
@@ -122,10 +107,12 @@ export function MenuActions({
           </Button>
         </>
       ) : null}
-      <Button variant={home ? "outline" : "ghost"} busy={closing} onClick={onQuit}>
-        <Power aria-hidden="true" className="menu-icon-quit" />
-        {i18n.message("menu.quitShort", "Quit")}
-      </Button>
+      {home ? (
+        <Button className="menu-quit" variant="outline" busy={closing} onClick={onQuit}>
+          <Power aria-hidden="true" className="menu-icon-quit" />
+          {i18n.message("menu.quitShort", "Quit")}
+        </Button>
+      ) : null}
     </>
   );
 }

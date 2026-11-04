@@ -28,7 +28,7 @@ test("automatic cloud recovery and desktop Settings fit both sizes with enlarged
   const files = Object.fromEntries(remote.map((entry) => [cloudName(entry), JSON.stringify(entry)]));
   await page.addInitScript(
     ({ identity, files, save }) => {
-      localStorage.setItem("fauna.text-scale", "1.25");
+      localStorage.setItem("fauna.test.text-scale", "1.25");
       window.faunaDesktop = {
         readCandidates: async () => [{ source: "local", data: save }],
         writeSave: async () => {},
@@ -113,7 +113,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.setViewportSize({ width, height });
       await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
       await page.addInitScript((scale) => {
-        localStorage.setItem("fauna.text-scale", String(scale));
+        localStorage.setItem("fauna.test.text-scale", String(scale));
         localStorage.setItem("fauna.tooltip-scale", "1.25");
       }, scale);
     });

@@ -65,12 +65,6 @@
     "sourceHash": "55c48e9f1a1b8e2ff74a05f14fafdc05edb0a927188956f13b5b4f2fdf23a194",
     "text": "{{type}}: {{amount}} урона"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "7c0bba4830e902249d18a3c61cd311d013d18c57547157a13a73dca946f23657",
-    "text": "Страницы боевых эффектов"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",
@@ -257,6 +251,12 @@
     "sourceHash": "985679792d19a36b4692c2a21a1b7462a1c7a0baf6913b81fadf6ee60760d5f4",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "1eea5f831c4d5af69d553dfefc77fda924d02a477d52b5ac7f5281afacf1bb02",
+    "text": "Наймите это существо, чтобы узнать подробности"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -269,12 +269,6 @@
     "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
     "text": "Осмотреть: {{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "6a4cf465ea4c6484527330869b25557ce9bdb9e21ef522b5fbba532b42551a44",
-    "text": "Неоткрытый вид"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -286,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "5af8ee83d84466d0d9d95245e89a0ac06e105819e94e2a54e54a73801b6483eb",
     "text": "{{name}}: {{rank}} из {{maximum}} звёзд"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "f99b10bf5d6ab261525ab28b3c5cd8a42fecc4152c5d7251ea8c11c04335cd57",
+    "text": "Не открыто"
   },
   "collection.views": {
     "reviewed": true,
@@ -304,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
+    "text": "Отмена"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -352,6 +358,18 @@
     "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "sourceHash": "802946d391815be0b0997183977e56ea3dc6edbf8597a90f2f6236e78f845b09",
     "text": "От повторных атак нельзя <keyword0>уклониться</keyword0>"
+  },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "8afc19b6c2929fe0e5aeeff61124bb6e67998f25c37e06a223c6979fc66a7c47",
+    "text": "Янтарная лопатка"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "0a982dc8f6ddd5b6546cc77a13eaf33335aeecd28cac73eff334d860f9468247",
+    "text": "Половина <keyword0>блока</keyword0>, потерянного при угасании, восстанавливает <keyword1>здоровье</keyword1> этому союзнику"
   },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
@@ -736,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "6febb7ca875be7c41690a4d6989efda7bfddc599961a1e4e51de888f71c4d41a",
     "text": "<keyword0>Аннулирование</keyword0> защищает эффекты союзников от <keyword1>рассеивания</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "37092f36d06613b2962bf9fe4a8ce0acb0f60628dc7103e02a99101875c4cd1d",
+    "text": "Придворная грелка"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "2162cf50e5425a95239f4ffe751387ea49e8fcef407600990c901503763cd727",
+    "text": "Попадания <keyword0>горением</keyword0> накладывают дополнительное <keyword1>горение</keyword1>, равное <keyword2>броне</keyword2> атакующего"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1409,6 +1439,30 @@
     "sourceHash": "a6d89f694051930fd7e2b19fa8a03a3c7234d8a5c0d79c8999f66157f3abb382",
     "text": "Когда союзник <keyword0>уклоняется</keyword0> от атаки, нанесите атакующему {{value0}} урона <keyword1>оглушением</keyword1>"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "657ed585bedeb4b9ac0d59a85cacd7be39c48bcaed17cb9879c89972657bb142",
+    "text": "Грозовой камертон"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "904d2c2e22e1afd6771bdb5be1a40188546c71fbdfb16e4207e376594fdabcc4",
+    "text": "Удары <keyword0>оглушением</keyword0> также добавляют своё накопление <keyword1>оглушения</keyword1> другим врагам с накоплением <keyword2>оглушения</keyword2>"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "2363ce43e473639c796e44756c4c81f1a6c8a09f07ae15104af006bb4289a5dd",
+    "text": "Ткацкий гребень"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "d4d311a25f24e4ab6644322755e649c4e78bc2a0c93b3a903b83c2bcd644f11d",
+    "text": "Когда <keyword0>блок</keyword0> союзника пробит, <keyword1>блок</keyword1> других союзников поглощает оставшийся урон"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2033,6 +2087,18 @@
     "sourceHash": "830c1f4f6129ae8b5fe7a586dde91db1998c80ea87c6a7c72e5439232342eeb7",
     "text": "Иммунитет одного союзника к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1> защищает всех союзников"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "6943bb52947583bef94b03c8e1629c1d3884f9236fb72f32517f3f528db5f0df",
+    "text": "Морозное веретено"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "4464ac38da894b2403f7e357529da7bedb873d2379e666fa01f3a44f072d251a",
+    "text": "Урон от <keyword0>кровотечения</keyword0> добавляет накопление <keyword1>заморозки</keyword1> в размере половины урона"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2140,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "14f1aae64a1c3b6c104aa44212cc1228d1a8e6b599d3a89b0462501e8f7765b8",
     "text": "Когда союзник <keyword0>уклоняется</keyword0>, остальные союзники тоже <keyword1>уклоняются</keyword1> от той же атаки"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "a7d34066005d9c58ebaece3a94ed79d8f794dbe41d9642532edc717abbc2af42",
+    "text": "Двойные солнечные часы"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "bfa35100ee6e6a1832ce6a0bef2aebdbcfc9e09e3551eeda4877984b13895f52",
+    "text": "Атаки <keyword0>света</keyword0> против <keyword1>ослеплённых</keyword1> врагов срабатывают дважды"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2297,6 +2375,18 @@
     "sourceHash": "cb66ca8066b1cadc1975d0984921cf2261ae59406beac3f165f68324f193869d",
     "text": "<keyword0>Физические</keyword0> попадания накладывают {{value0}} <keyword1>кровотечения</keyword1> на врагов с <keyword2>бронёй</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "f1a893b7bec3b5d3d6fb2c40764a2fe467011ad01383ac4229c314fe9a467f3f",
+    "text": "Звёздный крюк"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "ab94e448921b871c45e32343a9a2e772b2ab94b2247173dfc5cba0afe129f4e3",
+    "text": "<keyword0>Рассеивание</keyword0> эффекта с врага делает вашу следующую атаку <keyword1>критическим ударом</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2332,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "bf2189031c768abafd044fbc42d6a126bed8539f22b555db508f5d46bcf324e8",
     "text": "Ваши <keyword0>физические</keyword0> попадания и попадания <keyword1>оглушением</keyword1> снимают {{value0}} вражеской <keyword2>брони</keyword2> до нанесения урона"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "d1501234e8f2af5a2a9c37513fc4ad15ae6c2c8b2ff27efd64ee032d00139696",
+    "text": "Кувшин солнечного ключа"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "b1504e41c1d70c63db0843e4d0422796aae32794df1b222e87fc461ca04166e3",
+    "text": "<keyword0>Исцеление</keyword0> союзника добавляет восстановленное <keyword1>здоровье</keyword1> к вашей следующей атаке <keyword2>света</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2429,6 +2531,18 @@
     "sourceHash": "02ce305e38fdff4b7bc944f9eaea9b03392326416f1d0b7d9bbe85407da9ced0",
     "text": "<keyword0>Шипы</keyword0> не могут угаснуть ниже {{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "6def2a4c7af8fd811dc2190979a0348af55f51f429b2c2564f46d5c8b199af06",
+    "text": "Грибная хлебница"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "89c7ec04f0b3e149bd4113398a5a70e3fd333fd66d484cc0c458becc97c22804",
+    "text": "Добавьте Дорожный хлеб в колоду; союзники, получившие <keyword0>еду</keyword0>, сохраняют свой <keyword1>блок</keyword1> в следующем ходу"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2476,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "567d08dc8378875a60a83f46ea75bb354064148693e8f8332b60a12b56158c24",
     "text": "Союзники могут <keyword0>уклоняться</keyword0> от вражеского <keyword1>рассеивания</keyword1>"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "8d172dd1c7543aba29805752d4f9d8c839bc92411256e39366f51a032e4f3b2a",
+    "text": "Рудная мерная цепь"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "42a4272e211a28cb72561a72c03044a6a4fc1308e914c571f824da6a486b2847",
+    "text": "Урон, уменьшенный вражеской <keyword0>бронёй</keyword0>, наносится другому врагу"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -9749,6 +9875,12 @@
     "sourceHash": "127e6f2ef47c86b7ea9f7d9cfd1b0ac55f6fcc16db232de6ddcf1c0f44705a92",
     "text": "Колода пуста"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "29b594b325f90c7885410c637452a8ef4fcc1101190334c59d62efd6d68afd5d",
+    "text": "Переполнение руки"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9887,17 +10019,17 @@
     "sourceHash": "bf9b5183ac3a4326d7b7693c86f7c0adb180df89f1ba1f86853dd123e7609064",
     "text": "Черта"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "db231e279d31c104e1b9dceeb86e9a63e13ee8854d6cea9d7d1125efc290b356",
-    "text": "Акт {{act}} · Комната {{room}} из {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "1d3cf1220651a0dec79803d89517188c11132f378e19b00200d59c4370cbc63c",
     "text": "Босс: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "cbbfc79de4fad2cf20a2c5a6a8b27c9fd117a38e5b2cc855a2700a6bf7729036",
+    "text": "Выберите пункт назначения"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10439,12 +10571,6 @@
     "sourceHash": "e58a3d38f341057cc29ce2ac2747965b9af5db24f72be1fc620a819149b0a553",
     "text": "Вернуться в забег"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
-    "text": "Настройки"
-  },
   "menu.talentPoints": {
     "forms": {
       "few": "Доступно {{count}} очка таланта",
@@ -10783,12 +10909,6 @@
     "sourceHash": "e864363694ee679c9abed318a6e2d125a3a7227b846aa1221d7302ee836073a1",
     "text": "Fauna не удалось показать этот экран; повторная попытка…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "bd77e86301a4c8cd133f091ae674511953a759825095261d556a9f7666ed1e10",
-    "text": "Сейчас не удаётся сохранить прогресс; не закрывайте Fauna, пока выполняется повторная попытка"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10891,17 +11011,17 @@
     "sourceHash": "73fdf569e55ed58f1d5ecd954da7a92e028f3b36b76c1431048921ac58528889",
     "text": "Возвращение домой"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
+    "text": "Победа"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "2b4c282d41e60812d45afe89dc2c63e12ecf7d6d660f15504ef215abed9d1e3b",
     "text": "Выберите благословение"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "ac5be7863b2253b758900c6cdd535451bcf69b1004ae85fc4d0303532deef850",
-    "text": "Выберите существо"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10933,6 +11053,24 @@
     "sourceHash": "b5de5806b02f7d1c06603fcce9ef31bdf5f685b1969099c11922d336824c2465",
     "text": "Пропустить"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "287ff50bef577a83dd5db1220f8b401e30b92a9ce041300e5f56c256858c9a4f",
+    "text": "Не удалось сохранить"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "6d43d7e305bdd0e4ecbea61f10f489a9acdb56133417fe8555797c2eebddd9ef",
+    "text": "Повторить"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "70c32e6a19691560fb649769fc7b720a1baa4001715ee546979983de1c1b88f2",
+    "text": "Сохранение…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10957,23 +11095,41 @@
     "sourceHash": "ca6edf4934f3e3c2e561cad7dd6efcf37d991d206bade5e25eb0a8b1a25fdfef",
     "text": "Бой"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "ed5c4be77a2449393741cb097a0e5521529b262e84ac58f8b0a8f75c36a7760c",
+    "text": "Полноэкранный без рамки"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "10b123593d9806f04c33277e05a9e91fa02bf092b5ab4ee596038f00b207ca32",
+    "text": "Яркость"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "61ac7ecdff55f8a20839396b79807e1284abd88321ca5cff289b08374372ab4b",
     "text": "Категории настроек"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "8c604d2576b9f7396663ce63926419382ea7c8ca1049791a6a7a51f0e89b0b32",
+    "text": "Удалить весь прогресс и начать заново? Это действие нельзя отменить"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "9605872c9ce4274d9da7c85edc1ecc1fdb37fc6e7956b846dac9c10aa4c0975e",
+    "text": "Удалить сохранения"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "cb42385506e2c097746f356b2ad6e691b5f101e799e996c9383f7c9055cbbf83",
     "text": "Закрыть выбор языка"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "f07d65fe4d67ad5dbdecaf3e7776d70ac6b26859a73b014de29896163db97f3a",
-    "text": "Подсказки контроллера"
   },
   "settings.display": {
     "reviewed": true,
@@ -11011,17 +11167,23 @@
     "sourceHash": "f768fd55499b029ddb6c383185b39243262a76101c8cc2f35fff60483b8fb36f",
     "text": "Полный экран"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "c2332955f671e6d08fd8bfb3e1a4142903f429690d08876af0e59971f1f93ed4",
+    "text": "Масштаб игры"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "0c6c60127b3c4da08ab339308340c919df75715e446c80058e27814479105543",
+    "text": "Игра"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "e19f2852dbdd847e292eb7df78a57a00f009fbb1d7a1a3f998da60f9d2d07db6",
     "text": "Свечение фона"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "56cd3e40f2665551d48ffaa90e267e988a5c654e7161a989e32b8bac6ef4d9d0",
-    "text": "Значение свечения фона"
   },
   "settings.language": {
     "reviewed": true,
@@ -11034,12 +11196,6 @@
     "source": "Choose a language",
     "sourceHash": "6029fe85256831cc5a53d0401f85382cab36485d5c58eb204652cd6763b03fa6",
     "text": "Выберите язык"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "dfc1558c22750d6518cb6ebce6222fbc898753d9ea00d36022286ab934b6b317",
-    "text": "Язык: {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -11083,35 +11239,47 @@
     "sourceHash": "04eb540b5262e5bcb36fa3b09f98e2988ccd806ef5af25cf085f9d9f08bd0f8f",
     "text": "Выключать звук в фоне"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "236ddcb1962a28242cf17714dfbe184e159fa54cdb29f91fa5f5208647b26525",
+    "text": "Прочее"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "11180432ca411ba4d80aac56de5ac37cc4737cecdfe0d5dca62c8bad571df06a",
     "text": "Частицы фона"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "2c5d17339ee15fdf65af18f920bbbf15f50efbad96e6ac62edce1ae5d4e6edad",
-    "text": "Значение частиц фона"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "6fb2378dd6d3cf6020001c61c62f7348d36d0ff74d03a4109560883d6e855a54",
+    "text": "Запоминать выбор автобоя"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "5e4d6bea166aefcc0acea2a570b6efa251ee078838907e6a250809e55731aa96",
+    "text": "По умолчанию"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "c7885b49ff7bf0ca79aeb33dbbc3c0f13a252834fcb59790c1d945cde32db5bb",
+    "text": "Сброс и сохранения"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "51f176eb9c63e652bdea82742cb53e5a9b6016c11fde060b7b89addc09a8b1e3",
+    "text": "Сохранения"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "60901ba6412d7223cd23b06652134bef5d25adc5abc3ff8897284a07f9b90874",
     "text": "Звук"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "161b78c3600d0a7357ee9908c564c3b1fcda3f6ed93cb6db083f5efd462b1312",
-    "text": "Размер текста"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "73423c7cf773ecc344e82fe006187c6265868d556b576465e632b96269962063",
-    "text": "Подсказка {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11270,6 +11438,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "a565345135365f0aceb345dff4f6453e8e484ccde4dc67277e44e43dc815fed1",
     "text": "Сбросить таланты: {{keyword}}"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "995bae398c0e16f24c3a0295eb9949cd81cbd223f9faeeeda47b5764c31d1c3a",
+    "text": "Сбросить все таланты"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "19288498e4193c3cd9aded66b27bb08ab938f47f0c04cd69637d0e789196c1e2",
+    "text": "Это вернёт все ваши очки талантов"
   },
   "talents.row": {
     "reviewed": true,

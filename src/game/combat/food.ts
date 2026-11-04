@@ -84,6 +84,7 @@ export function useFood(
   );
   const repeat = takeCardRepeat(state, "player");
   let toothpick: boolean | undefined;
+  let breadbox: boolean | undefined;
   let waffle: boolean | undefined;
   let whisk: boolean | undefined;
   for (let play = 0; play < (repeat ? 2 : 1); play++) {
@@ -96,6 +97,8 @@ export function useFood(
           restoreHealth(ally, (healing ??= cornucopiaHealing(state)), events, false, state, true);
           if ((whisk ??= state.boons.includes("velvet-whisk")))
             grantTemporaryDodge(state, ally, boonRule("velvet-whisk").dodge, events);
+          if ((breadbox ??= state.boons.includes("toadstool-breadbox")))
+            ensureCombat(ally).breadboxReady = true;
         }
       }
     } else {
@@ -110,6 +113,8 @@ export function useFood(
         if (target.health <= 0 || isDepartedMinion(state, target)) continue;
         if ((toothpick ??= state.boons.includes("dragons-toothpick")))
           ensureCombat(target).toothpickReady = true;
+        if ((breadbox ??= state.boons.includes("toadstool-breadbox")))
+          ensureCombat(target).breadboxReady = true;
         if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
         else if (def.effect === "guard") grantBlock(state, target, value, events);
         if ((waffle ??= state.boons.includes("crown-waffle-iron")) && target.block > 0)

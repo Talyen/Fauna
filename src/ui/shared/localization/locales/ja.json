@@ -65,12 +65,6 @@
     "sourceHash": "ed9bd984c55d6166a8e05fc1b014b97a77456418f337e63a04240fb64fe865c4",
     "text": "{{type}}ダメージ {{amount}}"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "dd574aeaa510b0be20dd0227ddd0bbaa3783ee1b9b4e292134e23c38879d70c1",
-    "text": "戦闘効果のページ"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",
@@ -257,6 +251,12 @@
     "sourceHash": "c18c09b884f81cf2fcfef4aeecb58a9f15ad21c7f915276f36f957425db74444",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "10769c91a7b96a7d3f7d0bf43ae88bc7de3abd07414444c519b7dfb523316c60",
+    "text": "このクリーチャーを仲間にすると詳細が表示されます"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -269,12 +269,6 @@
     "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
     "text": "{{name}}を調べる"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "644e5db23c0bb6c641fee5bb755ae7b017306c30aeb78d89b1e859eb6fe37c00",
-    "text": "未解放の種"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -286,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "1538b8e9b46d87a6d42782c096bcb5867606767dd4d401717532293f43d04c53",
     "text": "{{name}}：星{{rank}} / {{maximum}}"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "86605cb256a9307e33bb8b08243ecd2e7440649141bfa9f0ef635c5b64a5621a",
+    "text": "未発見"
   },
   "collection.views": {
     "reviewed": true,
@@ -304,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
     "text": "読み込み中…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
+    "text": "キャンセル"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -352,6 +358,18 @@
     "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "sourceHash": "dc78e39b876ec65494afcd236f1a1a0841149b69a7948c4a62196899bf609689",
     "text": "繰り返し攻撃は<keyword0>回避</keyword0>できない"
+  },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "096872c07daaa7132979543fb13dda25cc0f7d1425d6103a952fcd083f9612b2",
+    "text": "アンバーのヘラ"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "d004a2d007b355b011490c1c2a6768a41e22cf007ff34e5d6d22685ce4c73b51",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の半分だけその味方の<keyword1>体力</keyword1>を回復する"
   },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
@@ -736,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "f9ea56341e0834e2fb1897449dc2fb1613352cc8eea61805ae60c54967d069e8",
     "text": "<keyword0>無効化</keyword0>は味方の効果を<keyword1>強化解除</keyword1>から守る"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "846cdd466e9212a8bead2030edcd8cd85aa5a9f4613ccbe51f839830e0820cce",
+    "text": "宮廷のカイロ"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "c47d3c1f7ed65fb911b7866f08b1e6acbeee4b1509b9f8734e2f8f16a6e686e1",
+    "text": "<keyword0>炎上</keyword0>ヒットは攻撃者の<keyword2>装甲</keyword2>に等しい追加の<keyword1>炎上</keyword1>を付与する"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1409,6 +1439,30 @@
     "sourceHash": "272d3d8e2d22e25070d4024e4f8f95e1157659c15dd1e32d8e7315888db1edb3",
     "text": "味方が攻撃を<keyword0>回避</keyword0>すると、攻撃者に<keyword1>スタン</keyword1>ダメージを{{value0}}与える"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "58270dbae59f9b84d5f16cff63edeaa0aaebd703af59a34164256c8f0ac5aa76",
+    "text": "雷の音叉"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "4256563851696b81b6b3fc7d26389ffeb378bde287588c1541ee954928523f5f",
+    "text": "<keyword0>スタン</keyword0>ヒットは、すでに<keyword2>スタン</keyword2>蓄積がある他の敵にもその<keyword1>スタン</keyword1>蓄積を加える"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "7e149708d2e2b4eb4ce7a854ba5e494ed2ce93be7394c455373418d0529c15c8",
+    "text": "織り機のくし"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "d023bc8f31e3c52cb215d2d40be813241440f47fdc2d7a7e6a4d5372278e0437",
+    "text": "味方の<keyword0>ブロック</keyword0>が壊れると、他の味方の<keyword1>ブロック</keyword1>が残りのダメージを吸収する"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2033,6 +2087,18 @@
     "sourceHash": "ec4d08fcf2e2111d380af1dad2cfb450db983f7aaa22dfa25eb92423d80a5805",
     "text": "味方1体の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性が味方全員を守る"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "5aa2388a2391b66ccfdde67e102a28cf4d13a5140f0bed2d5b528c9e295b314b",
+    "text": "霜の糸巻き"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "27491572a93868d4d7fa831289a2cc5c08e571c6501695a7b4d248d08f9e4720",
+    "text": "<keyword0>出血</keyword0>ダメージはその半分の<keyword1>凍結</keyword1>蓄積を加える"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2140,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "804ee41c7b19685c75a5bc5f561f6a18fdbd5e62119901f82f12aa7acfdf7f20",
     "text": "味方が<keyword0>回避</keyword0>すると、他の味方も同じ攻撃を<keyword1>回避</keyword1>する"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "b01f0f63e955b1b3975d3745d8dccd1db0c066f81e17ad9868d6f843a2fafd02",
+    "text": "二重の日時計"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "fe555c68c238f3241c8935af65483dbd01039a0b6736b8e8cab1d9f1f0dae1b1",
+    "text": "<keyword1>盲目</keyword1>状態の敵に対する<keyword0>光</keyword0>攻撃は2回発動する"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2297,6 +2375,18 @@
     "sourceHash": "cf893173dd92d86c5e1db48b83291cc792b75927235a1e91148e474a669abe35",
     "text": "<keyword0>物理</keyword0>ヒットは<keyword2>装甲</keyword2>を持つ敵に<keyword1>出血</keyword1>を{{value0}}付与"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "f43c72e736484a66ded98b57934d2eb1852e6028c5a744929bc1b9204d0ba4ab",
+    "text": "星のフック"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "c2b91d357a27b8c3b8cbf70d0281ca62e36afd6c98d01dd025dd5c482db3c5f7",
+    "text": "敵の効果を<keyword0>強化解除</keyword0>すると、次の攻撃が<keyword1>クリティカル</keyword1>になる"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2332,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "ca7e4bfd9a7b224769d7ab99c9d9671bdd712e618233d000a387c39fb31766be",
     "text": "自分の<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のヒットは、ダメージ前に敵の<keyword2>装甲</keyword2>を{{value0}}取り除く"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "82e9a521ddfaea38948207b31f67ddab661e753e008a6651535b8d3de8d37eb8",
+    "text": "太陽の泉の水差し"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "bd7e394be2138078cef85e132218036e806944999a6274544cfdc14bec9084db",
+    "text": "味方を<keyword0>回復</keyword0>すると、回復した<keyword1>体力</keyword1>が次の<keyword2>光</keyword2>攻撃に加わる"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2429,6 +2531,18 @@
     "sourceHash": "b6344bfb53fd1e781d69335d39ca39874c6329490bcc7c46071fc7a114e87ca6",
     "text": "<keyword0>棘</keyword0>は減衰しても{{value0}}を下回らない"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "6b90f74bce3e96aa7e3ac4eaa307aecfc88eeb38dac6fad2e937f379e34e8a65",
+    "text": "キノコのパン箱"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "f85f3902c7de3b4f4878c8cb21b7a57da06cb4d5cddcdce08e76f2514314e26e",
+    "text": "デッキに旅のパンを加える；<keyword0>食料</keyword0>を受け取った味方は次のターンも<keyword1>ブロック</keyword1>を維持する"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2476,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "e91ffbba6a6e671bbb367a5ead84abca698f1ffac375b73013e90af72ab7c7ba",
     "text": "味方は敵の<keyword1>強化解除</keyword1>を<keyword0>回避</keyword0>できる"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "508e64f60a45af5a57d46077bf4ad094aac262bf477fc2b179ac0590c1996df0",
+    "text": "鉱脈の鎖"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "7b23987fb4146e9ad732212a602ac5b37c288d7b1dcf2ff2ee13b3bd99507f98",
+    "text": "敵の<keyword0>装甲</keyword0>で軽減されたダメージを別の敵に与える"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -9749,6 +9875,12 @@
     "sourceHash": "d10b9eb2ef7cc6e1b3706580dba596da39f3f69d61405572d37b700b707c2fc1",
     "text": "デッキは空です"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "b2f29409c716b6081dd94373e0284fe664830bbb1105e5087ec320d29cb54b8b",
+    "text": "手札の超過分"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9887,17 +10019,17 @@
     "sourceHash": "2cabe282e113d0594f1ecc752b9ad04989e308edc5e0c17f31450614cb89ad30",
     "text": "特性"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "1312aec86632c4a63233c99d57c6f4779941c55b6068cd80c19e17d0db01e8da",
-    "text": "第{{act}}幕 · 部屋{{room}} / {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "84c74beb67e6595e182fc15a00cfd100b2058340d92a113cd98ee2210218a75e",
     "text": "ボス：{{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "26717022ee34b5c5a1f598eb5849733a15a2efbdf8b17ae0792b601ec2fa814b",
+    "text": "行き先を選択"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10439,12 +10571,6 @@
     "sourceHash": "5d6540b878a890951455ca976facdfd745840047ff31f6c9870744e5d1e0ef94",
     "text": "ランに戻る"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
-    "text": "設定"
-  },
   "menu.talentPoints": {
     "forms": {
       "other": "使用可能なタレントポイント：{{count}}"
@@ -10780,12 +10906,6 @@
     "sourceHash": "dda7825baa782002172db08961c9dcc8df0b256e154d049ab697d5d423db16cb",
     "text": "Faunaはこの画面を表示できませんでした。再試行しています…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "59c06015219f39f3e051ba153ee5dcd2bc6e5cc77675d1f4c328fd6c24f6563f",
-    "text": "現在、進行状況を保存できません。再試行中はFaunaを開いたままにしてください"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10888,17 +11008,17 @@
     "sourceHash": "5ba8a12f61f4cc8abea42fa33dd42e2fad06afafde509097e953627deefb9259",
     "text": "帰還"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
+    "text": "勝利"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "d7228d6866c9fe3c2363c9dbb4bcfbb1ea1f0a42fb7fda2d59cba2211fc89d85",
     "text": "祝福を選ぶ"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "cab1a741a359f02b8c5efb5c5c016aa9c2ed53487c632856dd566c2f2c1afff6",
-    "text": "仲間を選ぶ"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10930,6 +11050,24 @@
     "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
     "text": "スキップ"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "0963bd13ee052115052c5936a3618ca56cc49a75de5e2928e238609429b57d03",
+    "text": "保存できませんでした"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "c39fead3ec78dd8247ea5814692388709c6353362631f30ccfafd3203785aeed",
+    "text": "再試行"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "7c89b383ea3d743ac5c0dc79d060d92afe700baf358da12814d520bf25faf805",
+    "text": "保存中…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10954,23 +11092,41 @@
     "sourceHash": "b49b81f30cef0f95d07c21d156c60c0b2e6f74b0c4107050a2de31f21e5d8ceb",
     "text": "戦闘"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "a2df906d8da0e98b8f1a6e91276817647553656444c1466d0354c058215bbfef",
+    "text": "ボーダーレスフルスクリーン"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "699535f4c1e42ea9e668064a390d7cc8474d9c21adbe4d2734e6ba35b7ac3c78",
+    "text": "明るさ"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "18942ccc7684aaa981a644684b425821ea7d4d920a3157c37b7d8b1dbcd31f53",
     "text": "設定カテゴリ"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "358c3a1978781cc24543abe6405f7a46f3d551855d0ee29f103d97dcdda60c09",
+    "text": "すべての進行状況を消去して最初から始めますか？この操作は取り消せません"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "93630926b1580c1bc6d0149f0466e639b68a7efa26e70cb00cfe51ecf4d41d23",
+    "text": "セーブデータを消去"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "967155197934051356442b3043fa1de33768cd942a511e3b5fad46b0e6679b3c",
     "text": "言語選択を閉じる"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "449890a8bf947bd8d05af1f779e516c7d0593e88afc52823b9c8fc7d014dcb5b",
-    "text": "コントローラーの表示"
   },
   "settings.display": {
     "reviewed": true,
@@ -11008,17 +11164,23 @@
     "sourceHash": "6c5a63d32c447bac6ac6ec6ae26edf6cb5485f7f536af48e4c7ba70081d7664a",
     "text": "全画面"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "e1964786b670f4fd7ccd10d2cdb2375c433d20e189632606b5d2bdd86eb9b74a",
+    "text": "ゲームサイズ"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "b886fb0fd0b5907493cad0e821824a312ee0d7c4f2d8a762a5b9d801438a8362",
+    "text": "ゲームプレイ"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "e5d35a7360f1c07578c3bab6669d2c7f360bf3b109558154b4ea5df73fc7ea9f",
     "text": "背景の光"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "b1cfa0c3ecd3e78bdc66a967f137e2abaa675cd1ad83f40a84749e25d65a2840",
-    "text": "背景の光の値"
   },
   "settings.language": {
     "reviewed": true,
@@ -11031,12 +11193,6 @@
     "source": "Choose a language",
     "sourceHash": "f352c70304334870065ff6370a58fbd82271a96ac8f6d004743ced3fc71ed576",
     "text": "言語を選択"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "9b57beddd4c3e7a3107a37c369b1f4fbf3a3406e7dd636cb3fbbd9fb06fdb388",
-    "text": "言語：{{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -11080,35 +11236,47 @@
     "sourceHash": "2cebd8fc8400ffc7418cfb04c269021356bf1a63e6fbef5612ab2b776621b3ce",
     "text": "バックグラウンドで消音"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "68d5d4d2dfa9bf51bcef07d4e85db4f416fb35b4ef2ade36d065d2b561c069c6",
+    "text": "その他"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "bbc2687aa34f93df94ce9ec818b16ce8a779c7662bc929c30cf059e18e97b7f8",
     "text": "背景の粒子"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "f401c468eb1ad969f50025ed51649e3c4890ace56484f96ee479435c8ea5b0cd",
-    "text": "背景の粒子の値"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "5e8bbb7ffc76b844a2b15b60ec363a6e814cfa5383ca980c3d9227665fe41c1b",
+    "text": "自動戦闘の設定を記憶"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "2074faee923a8512b4fcecde2744ec0bf124327078771018d49984f081686685",
+    "text": "初期値に戻す"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "d1cf86482ea6b8169c969de233cbd524cd23f0f4fa9c9d2deb4e0ffd71a948b7",
+    "text": "リセットとセーブデータ"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "d81b8c0313f5fe2f225cd0facdefe8789524f049d5b8da3e21611d371c0ef873",
+    "text": "セーブデータ"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "3baf8d8dd3dcde573d27d0ef4cf1d5fd38a15f2935bdc61f5b346f1ef1b61a64",
     "text": "音声"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "085894484ebe210f9624e0fbcc6e578ba7fb822647ab1b949021ba5d22e64276",
-    "text": "文字サイズ"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "d3757860d4dad6c88695fc83c492be2194d198748bae205c5e1ff8de8ac04bed",
-    "text": "ツールチップ {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11264,6 +11432,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "eb8ae9d968e3855bab510ce12487fb1917b6cf26e5dab30b8d17145d03bd8a57",
     "text": "{{keyword}}のタレントをリセット"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "29401f278f05b3969b5f926a9805f8f881c60c1983ebcfb6c9bcf12ab7920b97",
+    "text": "すべてのタレントをリセット"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "ecfa3acde0c97cfd66aff61d7074e56265ae7dd5fd00cd2a9089486e1cf3467e",
+    "text": "すべてのタレントポイントが返還されます。"
   },
   "talents.row": {
     "reviewed": true,

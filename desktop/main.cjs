@@ -158,6 +158,7 @@ void app.whenReady().then(async () => {
   handle("fauna:overlay-state", () => steam.overlay());
   handle("fauna:display-read", () => display.read());
   handle("fauna:display-set", (mode) => display.set(mode));
+  handle("fauna:clear", () => storage.clear());
   handle("fauna:read", () => storage.readCandidates());
   handle("fauna:write", (data, recoverable) => storage.write(data, recoverable));
   handle("fauna:quit", () => app.quit());

@@ -65,12 +65,6 @@
     "sourceHash": "3f1cc622c5ff1d2f8cdaf4f6999e15c277d035763740443caca5c09114988437",
     "text": "{{amount}} 点{{type}}伤害"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "de09d4225852b5f7701119057f3ee4fcf05c2996ce47d874d43a1fd8f0fc6984",
-    "text": "战斗效果页面"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",
@@ -257,6 +251,12 @@
     "sourceHash": "ba814e3c469cc951d4875fbf25d5fc5d1f69d177b15cf0fa93484cf29d562d22",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "28e8ddaad0baff9e7c5fdcc263835886e9c411aca36789a2c708ad42d315b25a",
+    "text": "招募此生物以查看详细信息"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -269,12 +269,6 @@
     "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
     "text": "查看{{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "000d85fc98e6578a6cdeba4ad5d173cf38b82e2380d2c7a3a4d6fd052436d4fe",
-    "text": "未解锁的物种"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -286,6 +280,12 @@
     "source": "{{name}}: {{rank}} of {{maximum}} stars",
     "sourceHash": "d225fb3a55baeb45db3accb482c5e3d31c0c8f12a3b1be2d6bd00c8d6834aa9f",
     "text": "{{name}}：{{rank}} / {{maximum}} 星"
+  },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "2c42844eb81ade5a8034335bf78ec8696f38a66ecce9fe6db26da1155f91b38c",
+    "text": "未发现"
   },
   "collection.views": {
     "reviewed": true,
@@ -304,6 +304,12 @@
     "source": "Loading…",
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
+    "text": "取消"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -352,6 +358,18 @@
     "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "sourceHash": "d5edf851b6211047577c1a9a0dc84ac061f342e180f0e7de0220369d62333bfe",
     "text": "重复攻击无法被<keyword0>闪避</keyword0>"
+  },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "87643b0f79dd06e745e5c88e8e13893a6873a72bb10486b96070a90517f275c6",
+    "text": "蜜蜡木勺"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "9b3053c42e6c015ebbf1d38f0b52e4c9616e72fcf84bdf6204b533b1b4ab30ba",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有一半为该盟友恢复<keyword1>生命</keyword1>"
   },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
@@ -736,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "901da5036481b45eadfc3b5c263e23f3a73ccee572e8810ad663b1790c54e064",
     "text": "<keyword0>无效化</keyword0>保护盟友效果免受<keyword1>驱散</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "05d235becae414f7803b9f71bafa918d2cb64e0fc30f521c98203fe16ea5260a",
+    "text": "宫廷暖手炉"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "d9dbc4d87aa602f33e575198c0eff8133521d655af227b22d84d49af502dece0",
+    "text": "<keyword0>灼烧</keyword0>命中会施加等同于攻击者<keyword2>护甲</keyword2>的额外<keyword1>灼烧</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1409,6 +1439,30 @@
     "sourceHash": "ae175e6b788516ef859e8e82314b2b36751f8413897eb29daa60c50bf716e93f",
     "text": "盟友<keyword0>闪避</keyword0>攻击时，对攻击者造成{{value0}}点<keyword1>眩晕</keyword1>伤害"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "0dd96d0298394451b92c89feab65a9bf2c52ac62c6bcb3a21fadc5d7d23edda5",
+    "text": "雷霆音叉"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "54d8f4edee3fc759ee6bbe0e2b20645b588cd5193037a5145436d13d2eec5901",
+    "text": "<keyword0>眩晕</keyword0>命中还会将其<keyword1>眩晕</keyword1>累积施加给其他有<keyword2>眩晕</keyword2>累积的敌人"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "50e36df53aae25061aa8d026f09db3096138e4198bee74e820e5646a8d37673b",
+    "text": "织机木梳"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "0492627b32cf674ae6d98a5e68602f5763edc6d38de15e53e117e069f6c687a7",
+    "text": "盟友的<keyword0>格挡</keyword0>被击破时，其他盟友的<keyword1>格挡</keyword1>吸收剩余伤害"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2033,6 +2087,18 @@
     "sourceHash": "6763ff5860041939fba042b106215195b387c76ae2c49853bc181dab8cea3aaa",
     "text": "一名友方对<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>的免疫会保护所有友方"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "a680d34e02f0c7ae0433aa267687e1b98d55d2e6e92a2155a30e8285e6079df5",
+    "text": "霜晶线轴"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "e6a9fe914f50a345d014595dd4f8c26dedbe1b59640faf5342c154e5282fb5c2",
+    "text": "<keyword0>流血</keyword0>伤害会增加相当于伤害一半的<keyword1>冻结</keyword1>累积"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2140,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "6ee1b7f4197ffac2b9c688cc54ddc73fc350ba5066a82e0d7c48b3ffdcc3c9a8",
     "text": "一名友方<keyword0>闪避</keyword0>时，其他友方也会<keyword1>闪避</keyword1>同一次攻击"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "3165703a64ffccc69baa4b6bfe471ac3e4022b35c116954c13a586f47766c172",
+    "text": "双影日盘"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "d9b1de7917bd33b407ba47fd43503deb752b2a1b39e39b8860ab081bdc1a2b38",
+    "text": "对<keyword1>致盲</keyword1>敌人的<keyword0>光</keyword0>攻击会触发两次"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2297,6 +2375,18 @@
     "sourceHash": "5bcf5d59056b7be03e93eacc6106468c588828b92e7fc67280d8eeaa20166c20",
     "text": "<keyword0>物理</keyword0>命中会对拥有<keyword2>护甲</keyword2>的敌人施加{{value0}}点<keyword1>流血</keyword1>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "6602eebc8b69d521d9b6c967fce8bc43e9cefea2a96c7086acf8f28df492443b",
+    "text": "星月弯刀"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "3603e96557fb5753a365268bcd52e6031272ee1f5422f410e7e4f356e567a44e",
+    "text": "<keyword0>驱散</keyword0>敌人的一个效果会使你的下次攻击必定<keyword1>暴击</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2332,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "3dc04d502c87f2aed1228d0df2795996f37a583e5942ee0c904199c47d6d8d0c",
     "text": "你的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>命中在造成伤害前移除敌人{{value0}}点<keyword2>护甲</keyword2>"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "419b8d249e679be80f10d556ca64dff922c3673f9f9cf9239727d9714b186fa3",
+    "text": "日泉水壶"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "794c38d603f37766cfd4c21c721160286ca7eba661199866b3b63a80eff41dd2",
+    "text": "<keyword0>治疗</keyword0>盟友会将恢复的<keyword1>生命</keyword1>加到你的下次<keyword2>光</keyword2>攻击上"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2429,6 +2531,18 @@
     "sourceHash": "dd3676067eb3607d50367f9702e205c40b2827b76ee3fa8e449ac9bd36ef8959",
     "text": "<keyword0>荆棘</keyword0>衰减时不会低于{{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "5ff6687a3028fa0695a10f8387fc9bb912ef381f6519a19d426a7d894e1d98a1",
+    "text": "蘑菇面包盒"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "68ca36a9aa651dc34824d47b5057d2668f48b1ae437d2d0c35ddc438f08df0db",
+    "text": "将旅途面包加入牌组；获得<keyword0>食物</keyword0>的盟友在下回合保留<keyword1>格挡</keyword1>"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2476,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "5748145defc42d5e40f12eaf80f634fc976cfbf76d7de6e8dd653cd2607c04e2",
     "text": "盟友可以<keyword0>闪避</keyword0>敌人的<keyword1>驱散</keyword1>"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "62a2016a1553cc6da5305b87bb44a6742f20dbbaeaab07d2f44025420e28801a",
+    "text": "矿脉量索"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "be55cda6d66dd53d307d1c7d4fbb2c0d0f1a95f72e736e063dd36b4e6fe4e301",
+    "text": "被敌人<keyword0>护甲</keyword0>减免的伤害会造成给另一名敌人"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -9749,6 +9875,12 @@
     "sourceHash": "b4c6a16b7287767af9b69a15345f45dc241fd455ef239f6fc565d6ffafe57b99",
     "text": "牌组为空"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "4d80b9380b79f250d88eb50df7729c1512923a433e99e6ac06ee5851fd132726",
+    "text": "待入手牌"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9887,17 +10019,17 @@
     "sourceHash": "d334931dac1262c4e67fb3ebb45750f5be2f45f678d39c0d5ef342a52042fae1",
     "text": "特性"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "357192ab275db0b8d06a30f50ce88b8cc5f6bb70f887124275d7e9b37a92ec1d",
-    "text": "第{{act}}幕 · 房间{{room}} / {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "1137b5fc4933c67c2bc3e25dd61859bbd8369f58100326b0004cb46a52d95164",
     "text": "首领：{{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "4e16d16732cec02c87f3e5d4a163b1f1045f7d4910739b16495e858046548eba",
+    "text": "选择目的地"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10439,12 +10571,6 @@
     "sourceHash": "e6f72320c944f81ef62e47b3d8c1748447988ecd050a1276c7fca60d8c6217ca",
     "text": "返回冒险"
   },
-  "menu.settings": {
-    "reviewed": true,
-    "source": "Settings",
-    "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
-    "text": "设置"
-  },
   "menu.talentPoints": {
     "forms": {
       "other": "可用天赋点：{{count}}"
@@ -10780,12 +10906,6 @@
     "sourceHash": "21227b26da5fca3667002f8b3dcef0400b4e1d590487bc626ee0f2d1621f177a",
     "text": "Fauna无法显示此画面，正在重试…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
-    "text": "目前无法保存进度；请在重试期间保持Fauna运行"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10888,17 +11008,17 @@
     "sourceHash": "04c4231281a20d6d7597aedef8abea83c02b0b198af27892b530d1d156c91acc",
     "text": "已返回家园"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
+    "text": "胜利"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "22d8a7bc17ac182e492678e2b2bfd6b3477dd65da97cd5c75a16afcf2dbd5a24",
     "text": "选择一个祝福"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "fce61f8d57a19e0436d3b25ea1e0bae87000725aa482f142b8c78c76e18f6248",
-    "text": "选择一名新伙伴"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10930,6 +11050,24 @@
     "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
     "text": "跳过"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "5f2c0df2dcf9845533b4e0339d36fd03a5e3007b31c9d3af217b299be6c2e452",
+    "text": "无法保存"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "16ff8c73075aa0435e50c4b88df955027a16d82df63f6866fd9870f1cbfa0d4d",
+    "text": "重试"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "3f5a25f67c90464e87033e02031dd61679d1ff447718daed39f05bbe07a3e863",
+    "text": "正在保存…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10954,23 +11092,41 @@
     "sourceHash": "25ee0a137b561bfcd921b2d804230029d24008f02714cb0cfabe95be451ab456",
     "text": "战斗"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "12687098fb699e1a4c734f18e45ee5046db0e3fefcad1b5bfa1b79d362452fe8",
+    "text": "无边框全屏"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "d98eb4cc5098d9a02f91028ffdc2b2a371ef52dc1ceab1f8b470f403901b9c30",
+    "text": "亮度"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "2df6c38dc7709774840713115fee4611558d8defcebeeb0f52f5db6db34079c4",
     "text": "设置分类"
   },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "7da8678e58655a3887edb2a9368c2b1e947a28454fcba42d64b8f312e8db0473",
+    "text": "清除所有进度并重新开始？此操作无法撤销"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "97e932795eaae9f2eb36555c900a471a2f1a3ffe608ec61912d3aa87c9e0cee0",
+    "text": "清除存档数据"
+  },
   "settings.closeLanguage": {
     "reviewed": true,
     "source": "Close language",
     "sourceHash": "ffde8961b814d3affbd2f4d58c200b8848cd932bbde8831b35a17e3ea7b24ba3",
     "text": "关闭语言选择"
-  },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "582689332beef408aee49f0a71cad41fc8eca7e2460089ddd7525f5fa43da538",
-    "text": "手柄提示"
   },
   "settings.display": {
     "reviewed": true,
@@ -11008,17 +11164,23 @@
     "sourceHash": "966a5239212887c0d7a8d8fffd6e7913252376a4b4a0355e3a8305eee6719f97",
     "text": "全屏"
   },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "66844b06731484404cc67b9763afa31097286a8c1487f4954886e7e3e5d6cc4a",
+    "text": "游戏尺寸"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "6ae49e01e25153ebbac3394371eee95bc5b15a2ea031985fdbe3e4fb294de219",
+    "text": "游戏"
+  },
   "settings.glow": {
     "reviewed": true,
     "source": "Background Glow",
     "sourceHash": "448bdf57d26142e5ea4eac3fffaec38e112d24a225c98fc48e222b169ea7525e",
     "text": "背景辉光"
-  },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "b14cb59f460c914ec50c878eaeeeb505dd16950a1c69394dedf23334edc7859b",
-    "text": "背景辉光数值"
   },
   "settings.language": {
     "reviewed": true,
@@ -11031,12 +11193,6 @@
     "source": "Choose a language",
     "sourceHash": "85f07a5828e74a11060354ad2d9cbd09c683f6d5dd05eb640bde30e7fc16c5d7",
     "text": "选择语言"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "81172c353253329a25e42a7e2b0d0ed84d5960cf2aead9dfe12cb1c5845b7841",
-    "text": "语言：{{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -11080,35 +11236,47 @@
     "sourceHash": "de0e92022b940f1a36c594f2bd9bc7ef7510548372dce7e547d23d324453e3c1",
     "text": "后台静音"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "8c862f56c410d74738ce7fe911a372f9d2fd2d15d45c5339dc5f57e1f28d0015",
+    "text": "其他"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
     "sourceHash": "09e31ecc56bd99ea9f79947043195888785944bb8eab72f6469f877734b0ca50",
     "text": "背景粒子"
   },
-  "settings.particlesValue": {
+  "settings.rememberAutoplay": {
     "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "0b0e6e78efd5435c6ad1f9f25cc8b630ee5bc6a6dcb316577fcbdf9a63592dbc",
-    "text": "背景粒子数值"
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "420cf230a6923372b8189aa7230421a3fa76c91c45a06b5524677727db7ef74f",
+    "text": "记住自动战斗偏好"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "2a43612ce7238fed94ade79c88f1ec6b0fca2fde38128be88f0a0ff0bfeec68e",
+    "text": "恢复默认"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "53016739d2ac10e52a7334ee89244313590b2f9371b44fe6a5b622a544e28f0e",
+    "text": "重置与存档数据"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "d3df9bab846d8ae3fc06241a060f074c2aeb16e8b9fee202ff023b80aeda3d3f",
+    "text": "存档数据"
   },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "4bf9716880de75ea132500b7d6b091d074067931769358c4529f21f55137afcf",
     "text": "声音"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "99d39dd931827da66396d376d4a0736bbb856146c52b877b19c2f21d5bd1c3fd",
-    "text": "文字大小"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "4ffbdb4a09e7e250511224bc05e26730ee95fb3fdcbee9e81eb48d86a7b43d19",
-    "text": "提示 {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,
@@ -11264,6 +11432,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "d82f96135f27aef7356a8046e41600f2a1f8fa1ab7d1f13e42e1027b330e644d",
     "text": "重置{{keyword}}天赋"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "3f463cd646c505b7d157b7a321393cb6e473d75526dc47dd7bee6b78c4031be8",
+    "text": "重置所有天赋"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "55959fedbe5c0854fc07c92b92ada451050db4387d5b14dc41972c77cd2d5db8",
+    "text": "将返还全部天赋点。"
   },
   "talents.row": {
     "reviewed": true,

@@ -65,9 +65,20 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
   const abilityRepeat =
     def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
   const repeat = talentRepeat(state, actor, keywords, enemy, events);
+  const sundialRepeat =
+    !enemy &&
+    def.effect === "attack" &&
+    def.damageType === "light" &&
+    state.boons.includes("second-sundial") &&
+    (def.target === "allEnemies"
+      ? livingOpponents(state, action).some((unit) => !!unit.combat?.blind)
+      : !!target?.combat?.blind);
   for (
     let play = 0;
-    play < (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat ? 2 : 1);
+    play <
+    (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat || sundialRepeat
+      ? 2
+      : 1);
     play++
   ) {
     if (
@@ -87,7 +98,10 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
           : !target || target.health <= 0))
     )
       break;
-    if (play === 1 && (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat))
+    if (
+      play === 1 &&
+      (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat || tideRepeat || sundialRepeat)
+    )
       emitSupport(events, actor.id, {
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
@@ -96,11 +110,19 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
     if (toothpickPurge) stats.toothpickReady = false;
     const oasisLeech = def.effect === "attack" && !enemy && stats[boonRule("oasis-seed").state];
     if (oasisLeech) stats[boonRule("oasis-seed").state] = false;
+    const sunwellBonus =
+      def.effect === "attack" && !enemy && def.damageType === "light" && state.boons.includes("sunwell-ewer")
+        ? state.battle.sunwellBonus
+        : 0;
+    if (sunwellBonus) state.battle.sunwellBonus = 0;
+    const starhookCritical =
+      def.effect === "attack" && !enemy && state.boons.includes("starhook") && state.battle.starhookReady;
+    if (starhookCritical) state.battle.starhookReady = false;
     const criticalBonus =
       def.effect === "attack"
         ? Math.max(
             openingCriticalBonus(state, actor),
-            def.criticalWhenLastCard && action.lastCardInHand ? 100 : 0,
+            (def.criticalWhenLastCard && action.lastCardInHand) || starhookCritical ? 100 : 0,
           )
         : 0;
     const repeatedPrecision = play > 0 && !enemy && state.boons.includes("aether-gramophone");
@@ -135,6 +157,7 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
       oasisLeech,
       additionalTarget,
       toothpickPurge,
+      sunwellBonus,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,

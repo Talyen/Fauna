@@ -37,7 +37,7 @@ const startupLayouts = [
 
 test("one splash survives delayed React and reveals a ready menu at both sizes", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await page.addInitScript(() => localStorage.setItem("fauna.game-scale", "1.2"));
   const errors: string[] = [];
   page.on("response", (response) => {
     if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
@@ -45,6 +45,7 @@ test("one splash survives delayed React and reveals a ready menu at both sizes",
   const allowReact = await holdStartupResource(page, /\/(?:src\/main\.tsx|assets\/main-[^/]+\.js)(?:\?.*)?$/);
   const allowArt = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`);
   await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.2"));
   const splash = page.getByRole("status", { name: "Loading Fauna" });
   await expect(splash).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
@@ -56,14 +57,14 @@ test("one splash survives delayed React and reveals a ready menu at both sizes",
     await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue("--text-scale").trim(),
     ),
-  ).toBe("1.25");
+  ).toBe("1.2");
   await captureFrame(page, { path: "pre-react-1280.png" });
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1"));
   const wideBefore = await splashSnapshot(splash);
   await captureFrame(page, { path: "pre-react-1920.png" });
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.25"));
+  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.2"));
   await expect(page.locator("#startup-splash-phrase")).not.toHaveText("Adventure awaits…");
   allowReact();
   // Main CSS has arrived; the same title must keep its geometry and animation clock.

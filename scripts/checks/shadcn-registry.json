@@ -34,5 +34,9 @@
   "slider": {
     "dependency": "@radix-ui/react-slider",
     "source": "https://ui.shadcn.com/r/styles/new-york/slider.json"
+  },
+  "select": {
+    "dependency": "@radix-ui/react-select",
+    "source": "https://ui.shadcn.com/r/styles/new-york/select.json"
   }
 }

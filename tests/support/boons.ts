@@ -172,4 +172,15 @@ export const NEW_BOON_EFFECTS = {
   "dune-shuttle": "Drawing an ally's card grants them 1 Block",
   "story-puzzle-cube": "Applying three different harmful effects Purges the last enemy affected",
   "mineral-bookend": "Drawing the last card in your draw pile grants 2 Block to all allies",
+
+  "amber-spatula": "Half the Block lost through decay restores Health to that ally",
+  "second-sundial": "Light attacks against Blinded enemies play twice",
+  "vein-survey-chain": "Damage reduced by enemy Armor is dealt to another enemy",
+  "sunwell-ewer": "Healing an ally adds the Health restored to your next Light attack",
+  "rime-spindle": "Bleed damage adds half as much Freeze buildup",
+  "toadstool-breadbox": "Add Trail Bread to your deck; allies receiving Food keep their Block next turn",
+  "loom-beater": "When an ally’s Block breaks, other allies’ Block absorbs the remaining damage",
+  "courtly-handwarmer": "Burn hits apply extra Burn equal to the attacker’s Armor",
+  "lightning-fork": "Stun hits also add their Stun buildup to other enemies with Stun buildup",
+  starhook: "Purging an effect from an enemy makes your next attack a Critical Hit",
 } as const;

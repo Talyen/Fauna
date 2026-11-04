@@ -1,5 +1,5 @@
 {
-  "version": 78,
+  "version": 79,
   "draftStarted": true,
   "discovery": {
     "encountered": [
@@ -81,6 +81,7 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
+        "breadboxReady": false,
         "slipperCard": null,
         "dodgeFreezeRetaliation": 0
       }
@@ -134,6 +135,7 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
+        "breadboxReady": false,
         "slipperCard": null,
         "dodgeFreezeRetaliation": 0
       }
@@ -185,6 +187,7 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
+        "breadboxReady": false,
         "slipperCard": null,
         "dodgeFreezeRetaliation": 0
       }
@@ -236,6 +239,7 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
+        "breadboxReady": false,
         "slipperCard": null,
         "dodgeFreezeRetaliation": 0
       }
@@ -287,6 +291,7 @@
         "fallenCardsPlayedThisTurn": 0,
         "moonseedReady": false,
         "toothpickReady": false,
+        "breadboxReady": false,
         "slipperCard": null,
         "dodgeFreezeRetaliation": 0
       }
@@ -413,6 +418,7 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
+          "breadboxReady": false,
           "slipperCard": null,
           "dodgeFreezeRetaliation": 0
         },
@@ -474,6 +480,7 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
+          "breadboxReady": false,
           "slipperCard": null,
           "dodgeFreezeRetaliation": 0
         },
@@ -551,6 +558,7 @@
           "fallenCardsPlayedThisTurn": 0,
           "moonseedReady": false,
           "toothpickReady": false,
+          "breadboxReady": false,
           "slipperCard": null,
           "dodgeFreezeRetaliation": 0
         },
@@ -576,7 +584,9 @@
       "player": false,
       "enemy": false
     },
-    "puzzleProgress": []
+    "puzzleProgress": [],
+    "sunwellBonus": 0,
+    "starhookReady": false
   },
   "reward": null,
   "journey": {

@@ -1499,27 +1499,16 @@ it("changes language from Settings and returns focus without changing the journe
   );
   try {
     fireEvent.click(screen.getByRole("button", { name: "Options" }));
-    const opener = screen.getByRole("button", { name: "Language: Automatic" });
+    const opener = screen.getByRole("combobox", { name: "Language" });
     opener.focus();
-    fireEvent.click(opener);
-    const dialog = await screen.findByRole("dialog", { name: "Language" });
-    expect(dialog).toBeTruthy();
-    const frenchChoice = screen.getByRole("radio", { name: "Français" });
+    fireEvent.keyDown(opener, { key: "ArrowDown" });
+    const frenchChoice = await screen.findByRole("option", { name: "Français" });
     frenchChoice.focus();
     fireEvent.keyDown(frenchChoice, { key: "Enter" });
-    expect(await screen.findByRole("dialog", { name: "Langue" })).toBeTruthy();
-    expect(opener.getAttribute("aria-label")).toBe("Langue : Français");
+    await waitFor(() => expect(screen.queryByRole("listbox")).toBeNull());
     expect(session.store.getState().game).toBe(before);
     expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
-    fireEvent.keyDown(document, { key: "Escape" });
-    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
     await waitFor(() => expect(document.activeElement).toBe(opener));
-    fireEvent.click(opener);
-    expect(await screen.findByRole("dialog", { name: "Langue" })).toBeTruthy();
-    fireEvent.keyDown(document, { key: "Escape" });
-    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
-    await waitFor(() => expect(document.activeElement).toBe(opener));
-    expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
   } finally {
     view.unmount();
     await session.dispose();

@@ -1,9 +1,13 @@
 (() => {
+  let scale = 1;
   try {
-    const scale = Number(localStorage.getItem("fauna.text-scale") ?? "1");
-    if ([0.75, 1, 1.25].includes(scale))
-      document.documentElement.style.setProperty("--text-scale", String(scale));
+    const stored = Number(localStorage.getItem("fauna.game-scale") ?? "1");
+    if (Number.isFinite(stored)) scale = Math.max(0.8, Math.min(1.2, Math.round(stored * 20) / 20));
   } catch {
     // Optional preferences never gate first paint.
   }
+  const fit = Math.min(innerWidth / 1280, innerHeight / 720);
+  const density = (fit <= 1 ? fit : 1 + (fit - 1) * 0.72) * scale;
+  document.documentElement.style.setProperty("--ui-density", String(density));
+  document.documentElement.style.setProperty("--text-scale", String(density));
 })();

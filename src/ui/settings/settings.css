@@ -124,3 +124,33 @@
   display: grid;
   gap: var(--screen-item-gap);
 }
+
+.settings-select {
+  min-height: var(--control-height);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--control-fill);
+  color: var(--foreground);
+  font: inherit;
+}
+.settings-select:focus-visible {
+  outline: 2px solid var(--muted-foreground);
+}
+.settings-panel[data-state="active"] {
+  animation: settings-panel-entry 150ms ease-out;
+}
+@keyframes settings-panel-entry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .settings-panel[data-state="active"] {
+    animation: none;
+  }
+}

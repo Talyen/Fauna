@@ -17,6 +17,7 @@ export function modifiedDamage(
   type: DamageType,
   options: DamagePacket,
   attack: boolean,
+  offensiveOnly = false,
 ) {
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
@@ -107,7 +108,7 @@ export function modifiedDamage(
     if (type === "burn" && (stats.poison > 0 || stats.bleed > 0) && hasTalent(state, "burn.combustion"))
       damage *= 1 + talentRule("burn.combustion").percent / 100;
   }
-  if (alliedTarget) {
+  if (!offensiveOnly && alliedTarget) {
     if (
       stats.nullify &&
       (type === "burn" || type === "poison" || type === "bleed") &&
@@ -129,7 +130,7 @@ export function modifiedDamage(
     )
       damage *= 0.5;
   }
-  if (type === "burn" || type === "freeze") {
+  if (!offensiveOnly && (type === "burn" || type === "freeze")) {
     const protectors = battlefieldView(state, alliedTarget ? "player" : "enemy");
     // Use the strongest deployed protection; swaps and knockouts change it immediately.
     const deployed = protectors.some((unit) => unit.id === target.id);

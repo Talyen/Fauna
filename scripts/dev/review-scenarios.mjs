@@ -1,3 +1,4 @@
+import { randomInt } from "node:crypto";
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
@@ -82,6 +83,8 @@ export const SCENARIOS = [
   "oathara-collection",
   "oathara-resurrection",
   "journey-room",
+  "journey-three",
+  "journey-destinations",
   "journey-boss",
   "home",
   "home-talent-points",
@@ -176,21 +179,46 @@ const creatureFixtures = [
 ];
 
 /** Reuse the same current-format gameplay fixtures as browser regressions. */
-export async function reviewScenario(server, name) {
+export async function reviewScenario(server, name, { seed } = {}) {
   if (!SCENARIOS.includes(name))
     throw new Error(`Unknown scenario: ${name}. Choose ${SCENARIOS.join(", ")}.`);
-  const { run, winBattle, fullRosterReward, merchantDestination, accept, bossReward } =
+  if (seed !== undefined && (name !== "battle" || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff))
+    throw new Error("Use a whole-number --seed from 0 to 4294967295 with the battle sample");
+  const { run, teamRun, winBattle, fullRosterReward, merchantDestination, accept, bossReward } =
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
-  let game = name.startsWith("merchant")
-    ? merchantDestination(name.startsWith("merchant-bargain") ? ["bargain-scales"] : [])
-    : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
-      ? winBattle()
-      : run();
+  const battleSeed = name === "battle" ? (seed ?? randomInt(0, 0x100000000)) : undefined;
+  let sample;
+  if (name === "battle") {
+    const { SPECIES } = await server.ssrLoadModule("/src/game/content.ts");
+    const { shuffle } = await server.ssrLoadModule("/src/game/random.ts");
+    const lineup = shuffle(
+      { rng: battleSeed },
+      SPECIES.filter((entry) => !entry.legendary).map((entry) => entry.id),
+    ).slice(0, 3);
+    sample = teamRun(battleSeed, lineup, "random");
+  }
+  let game =
+    sample ??
+    (name.startsWith("merchant")
+      ? merchantDestination(name.startsWith("merchant-bargain") ? ["bargain-scales"] : [])
+      : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
+        ? winBattle()
+        : run());
   if (name === "home-talent-points") game = { ...game, keywordXP: { ...game.keywordXP, physical: 10 } };
   if (name === "starter") {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     game = createGame(42);
+  }
+  if (name === "draw-pile") {
+    game = structuredClone(game);
+    while (game.battle.hand.length < 6) game.battle.hand.push(game.battle.draw.shift());
+    game.battle.buffer = game.battle.draw.splice(0, 2);
+    for (let index = 0; index < 8; index++) {
+      const card = { ...game.cards[0], id: `copy-${game.battle.copySerial++}`, temporary: true };
+      game.cards.push(card);
+      game.battle.draw.push(card.id);
+    }
   }
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
     game = fullRosterReward();
@@ -313,10 +341,25 @@ export async function reviewScenario(server, name) {
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name === "inspection") game = winBattle();
-  if (name === "journey-room" || name === "journey-boss") {
+  if (name === "journey-destinations") {
+    const { produce } = await server.ssrLoadModule("immer");
+    game = produce(merchantDestination(), (draft) => {
+      draft.team[0].health = 1;
+      draft.expedition.recruit = "wisterelle";
+      draft.expedition.lastRoom = "combat";
+    });
+  }
+  if (name === "journey-room" || name === "journey-three" || name === "journey-boss") {
     const { starterJourney, authoredPack } = await server.ssrLoadModule("/tests/support/game.ts");
     game = starterJourney(42, "mossguard");
-    if (name === "journey-boss") {
+    if (name === "journey-three") {
+      const { produce } = await server.ssrLoadModule("immer");
+      game = produce(game, (draft) => {
+        draft.encounter = 2;
+        draft.expedition = { pack: authoredPack(2), recruit: null, lastRoom: "combat" };
+        draft.support = null;
+      });
+    } else if (name === "journey-boss") {
       const { produce } = await server.ssrLoadModule("immer");
       game = produce(game, (draft) => {
         draft.encounter = 9;
@@ -487,7 +530,15 @@ export async function reviewScenario(server, name) {
   return {
     name,
     save,
-    seed: name.startsWith("merchant") || name === "team-selection-pause" ? 7 : 42,
+    seed: battleSeed ?? (name.startsWith("merchant") || name === "team-selection-pause" ? 7 : 42),
+    ...(name === "battle"
+      ? {
+          lineup: {
+            allies: game.team.map((unit) => unit.species),
+            enemies: game.battle.enemies.map((unit) => unit.species),
+          },
+        }
+      : {}),
     fixture: creatureFixtures.includes(creature)
       ? `tests/support/${creature}.ts`
       : ["uncertain-targeting", "unknown-targeting"].includes(name)
@@ -498,18 +549,18 @@ export async function reviewScenario(server, name) {
 
 export async function openReviewScenario(page, origin, scenario, scale) {
   await page.addInitScript(
-    ({ save, scale }) => {
+    ({ save }) => {
       // Reloads retain committed interactions instead of restoring the original fixture.
       if (sessionStorage.getItem("fauna.review.seeded")) return;
       localStorage.setItem("fauna.save.v1", save);
-      localStorage.setItem("fauna.text-scale", String(scale));
       sessionStorage.setItem("fauna.review.seeded", "1");
     },
-    { save: scenario.save, scale },
+    { save: scenario.save },
   );
   await page.goto(origin);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible({ timeout: 30000 });
   await expect(page.locator("#startup-splash")).toHaveCount(0);
+  await applyReviewTextScale(page, scale);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   const [creature, view] = scenario.name.split(/-(.+)/);
@@ -632,10 +683,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
   }
   if (scenario.name === "talent-tree")
-    await page.locator('.talents-screen button[aria-label$=" talents"]').first().click();
+    await page.locator(".talents-screen [data-talent-keyword]").first().click();
   if (["settings-sound", "settings-battle"].includes(scenario.name))
     await page
-      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Battle", exact: true })
+      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Gameplay", exact: true })
       .click();
   if (["draw-pile", "discard-pile"].includes(scenario.name))
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
@@ -649,11 +700,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Open menu").click();
     await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   }
-  if (["recruit", "recruit-replacement", "recruit-team-preview", "inspection"].includes(scenario.name)) {
-    await button("Continue").click();
-  }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-    await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
       await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
@@ -673,4 +721,12 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (scenario.name === "battle-rewards") await expect(page.getByLabel("Last battle earnings")).toBeVisible();
   if (scenario.name.startsWith("merchant"))
     await expect(page.getByRole("region", { name: "Boon Merchant stock" })).toBeVisible();
+}
+
+/** Independent text stress stays available after replacing Text Size with Game Size. */
+export async function applyReviewTextScale(page, scale = 1) {
+  await page.evaluate((scale) => {
+    const density = Number(getComputedStyle(document.documentElement).getPropertyValue("--ui-density")) || 1;
+    document.documentElement.style.setProperty("--text-scale", String(density * scale));
+  }, scale);
 }

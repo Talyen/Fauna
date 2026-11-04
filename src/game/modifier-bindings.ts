@@ -442,6 +442,21 @@ export const modifierImplementations = freeze(
       "smugglers-map": ["./combat/battle-modifiers#victoryGoldBonus"],
       "frozen-pocketwatch": ["./combat/statuses#applyHarmfulStatus"],
       "lucky-clover": ["./combat/damage-reactions#damageRewards"],
+      "amber-spatula": ["./combat/turns#decayBlock"],
+      "second-sundial": ["./combat/abilities#executeAbility"],
+      "vein-survey-chain": ["./combat/damage#resolveHit"],
+      "sunwell-ewer": ["./combat/protection#restoreHealth", "./combat/abilities#executeAbility"],
+      "rime-spindle": ["./combat/damage-reactions#bleedFreeze"],
+      "toadstool-breadbox": [
+        "./journey-cards#replenishJourneyCards",
+        "./combat/food#useFood",
+        "./combat/turns#decayBlock",
+        "./save#validateRoster",
+      ],
+      "loom-beater": ["./combat/damage#resolveHit"],
+      "courtly-handwarmer": ["./combat/damage#resolveHit"],
+      "lightning-fork": ["./combat/damage#resolveHit"],
+      starhook: ["./combat/statuses#removeEffects", "./combat/abilities#executeAbility"],
     } satisfies Record<BoonId, Binding>,
     passives: {
       mendTheBroken: [
@@ -533,6 +548,8 @@ export const modifierQueries = freeze(
       "crater-punch": ["./ability-facts#ordinaryAttackEvaluator"],
       "tuning-fork-charm": ["./combat/damage-values#armorApplies"],
       "sundering-charm": ["./ability-facts#ordinaryAttackEvaluator"],
+      "sunwell-ewer": ["./ability-facts#ordinaryAttackEvaluator"],
+      starhook: ["./ability-facts#ordinaryAttackEvaluator"],
       rainkeeper: ["./ability-rules#manaCapacity"],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
