@@ -33,7 +33,8 @@ it.each(["home", "pause"] as const)(
         for (const [exit, back] of ["Escape", "Back", "Open menu"].entries()) {
           // Retain every page/exit pair and both origins per page without their Cartesian product
           if (((index + exit) % 2 === 0 ? "home" : "pause") !== origin) continue;
-          act(() => screen.getByRole("button", { name: page }).focus());
+          const action = page === "Settings" && origin === "home" ? "Options" : page;
+          act(() => screen.getByRole("button", { name: action }).focus());
           await user.keyboard("{Enter}");
           expect(screen.getByRole("heading", { name: page })).toBeTruthy();
           expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
@@ -51,7 +52,7 @@ it.each(["home", "pause"] as const)(
           if (back === "Escape") await user.keyboard("{Escape}");
           else await user.click(screen.getByRole("button", { name: back }));
           await waitFor(() =>
-            expect(document.activeElement).toBe(screen.getByRole("button", { name: page })),
+            expect(document.activeElement).toBe(screen.getByRole("button", { name: action })),
           );
           expect(session.store.getState().game, `${page} via ${back}`).toBe(game);
         }
@@ -108,7 +109,7 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
         within(menu)
           .getAllByRole("button")
           .map((button) => button.textContent?.trim()),
-      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Settings", "End journey"]);
+      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Settings", "End journey", "Save & quit"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();

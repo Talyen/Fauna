@@ -148,7 +148,7 @@ for (const [group, layouts] of [
 test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page, run());
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.evaluate(() => document.fonts.ready);
   const dialog = page.getByRole("main", { name: "Settings", exact: true });
   const tabs = ["Display", "Sound", "Battle"].map((name) => dialog.getByRole("tab", { name, exact: true }));
@@ -197,7 +197,7 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
     fontSize * 1.25,
   );
   await reloadHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
 });

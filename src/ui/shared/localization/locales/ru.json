@@ -10211,6 +10211,12 @@
     "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
     "text": "Главное меню"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "386ff9fa02e205e1d24a73caccc5b2c1266fafce465320867979156378c558e8",
+    "text": "Настройки"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10228,6 +10234,12 @@
     "source": "Save & quit",
     "sourceHash": "6a9787f36ae111a2dba230a8db3c98e75aff0a14ddc71c92515349f7ccf48fd1",
     "text": "Сохранить и выйти"
+  },
+  "menu.quitShort": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "c7cd9e1b64c7fe7f0ce60007bf353de344b662046ffe9df1feade5fc84c85dbc",
+    "text": "Выйти"
   },
   "menu.settings": {
     "reviewed": true,
