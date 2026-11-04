@@ -17,7 +17,13 @@
   isolation: isolate;
   --battle-hand-lift: 0px;
   --hand-fan-rest-drop: 12px;
-  --battle-creature-width: var(--battle-fitted-width, var(--art-landscape-width));
+  --battle-creature-width: min(
+    var(--battle-fitted-width, var(--art-landscape-width)),
+    calc(
+      var(--battle-artwork-pixels) / var(--artwork-pixel-ratio, 2) / var(--hover-scale) /
+        max(calc(var(--discard-back-width) / 100%), calc(var(--discard-back-height) / 100%))
+    )
+  );
   --battle-hand-width: calc(var(--battle-creature-width) * 3 / 4);
   --battle-hand-height: var(--battle-creature-width);
   --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
@@ -683,6 +689,14 @@
 }
 .card-transfer {
   overflow: hidden;
+}
+.hand-slot,
+.card-transfer {
+  /* The discard flip enlarges its back image to align with the top card in the pile. */
+  --artwork-motion-scale: max(
+    calc(var(--discard-back-width) / 100%),
+    calc(var(--discard-back-height) / 100%)
+  );
 }
 .card-transfer img.discard-card-back {
   position: absolute;

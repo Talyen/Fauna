@@ -1,0 +1,13 @@
+{
+  "url": "./prepared/objects/c780e5ac7fc34351414312c4ee2814c67d59b78f33d491b8184b8626d24a8f63/asset.webp",
+  "sourceHash": "df408282ba2eafb930e76762d35c43a4f05f04bc0e221d4c76d7954685f43047",
+  "recipeHash": "00ee132120c6af45c48e0207be552f68681b88d71c1f63cce38a81114fe2d0ca",
+  "recipe": "card-webp",
+  "settingsHash": "52763d3b79f87e18f3aa06d526630a6a4aadc314e22d8e79cc69b9ac5ef7c1e0",
+  "outputHash": "f8e20ba6105d4f8c7be7ea1209e4550feddc1d9e35b7639baf0589ec10cf413c",
+  "sourceBytes": 1821703,
+  "outputBytes": 1344834,
+  "width": 1080,
+  "height": 1440,
+  "alpha": false
+}

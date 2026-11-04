@@ -180,6 +180,18 @@ describe("lightweight local verification", () => {
     expect(formatSelection(root, ["missing.ts"]).files).toEqual([]);
   });
 
+  it("keeps binary media in bounded formatting batches without dropping coverage", () => {
+    const root = fixture();
+    const files = ["public/art/large.png", "public/prepared/asset.webp", "src/game.ts"];
+    for (const file of files.slice(0, 2)) {
+      mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      writeFixture(root, file, "x".repeat(2_000_000));
+    }
+    expect(formatSelection(root, files).batches).toEqual([files]);
+    writeFixture(root, "src/large.ts", " ".repeat(256_001));
+    expect(formatSelection(root, [...files, "src/large.ts"]).batches).toEqual([files, ["src/large.ts"]]);
+  });
+
   it("checks large files individually and reports a complete plan before execution", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 })),

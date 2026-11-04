@@ -71,8 +71,8 @@ body {
   position: absolute;
   top: var(--leaf-y);
   left: 0;
-  width: 12px;
-  height: 16px;
+  width: min(12px, calc(36px / var(--artwork-pixel-ratio, 2)));
+  height: auto;
   animation: startup-leaf-drift 2.5s linear var(--leaf-delay) infinite both;
 }
 @keyframes startup-word-fade {

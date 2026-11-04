@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
-import { assetUrl } from "./ui/shared/assets";
+import { assetUrl, battleArtworkLongEdge, manaArtworkPixels } from "./ui/shared/assets";
+import { installArtworkDensity } from "./ui/shared/artwork-density";
 import { LocalizationProvider } from "./ui/shared/localization/provider";
 import { QUALIFIED_LANGUAGES } from "./ui/shared/localization/languages";
 import { GameErrorBoundary } from "./ui/shared/diagnostics";
@@ -16,7 +17,10 @@ import "@fontsource-variable/inter/wght-italic.css";
 import "./ui/styles.css";
 for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
+document.documentElement.style.setProperty("--battle-artwork-pixels", `${battleArtworkLongEdge}px`);
+document.documentElement.style.setProperty("--mana-artwork-pixels", `${manaArtworkPixels}px`);
 export function mountGame(splash: StartupSplash) {
+  const releaseArtworkDensity = installArtworkDensity();
   const platform = createPlatform();
   const steamLanguage =
     QUALIFIED_LANGUAGES.length > 1
@@ -52,6 +56,7 @@ export function mountGame(splash: StartupSplash) {
   const onPageHide = (event: PageTransitionEvent) => {
     if (event.persisted) return;
     disposed = true;
+    releaseArtworkDensity();
     releasePerformance();
     startup.dispose();
     splash.dispose();
@@ -72,6 +77,7 @@ export function mountGame(splash: StartupSplash) {
   );
   const dispose = async () => {
     disposed = true;
+    releaseArtworkDensity();
     releasePerformance();
     startup.dispose();
     splash.dispose();

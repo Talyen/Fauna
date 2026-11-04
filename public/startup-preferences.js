@@ -10,4 +10,8 @@
   const density = (fit <= 1 ? fit : 1 + (fit - 1) * 0.72) * scale;
   document.documentElement.style.setProperty("--ui-density", String(density));
   document.documentElement.style.setProperty("--text-scale", String(density));
+  document.documentElement.style.setProperty(
+    "--artwork-pixel-ratio",
+    String(Math.max(2, globalThis.devicePixelRatio || 1)),
+  );
 })();

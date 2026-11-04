@@ -61,7 +61,11 @@ export function formatSelection(root, paths) {
   let batch = [],
     bytes = 0;
   for (const file of files) {
-    const size = lstatSync(path.join(root, file)).size;
+    // Prettier ignores these binary formats; their bytes do not consume parser
+    // memory. Keep them in the selection without spawning a process per image.
+    const size = /\.(?:png|jpe?g|webp|woff2?|mp3|ogg|wav)$/i.test(file)
+      ? 0
+      : lstatSync(path.join(root, file)).size;
     if (
       batch.length &&
       (batch.length >= 50 ||

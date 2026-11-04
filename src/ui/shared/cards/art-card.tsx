@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, type CSSProperties } from "react";
 import { Button, type ButtonProps } from "../../../components/ui/button";
 import type { KeywordId } from "../../../game/keywords";
 import { effectPalette, visualKeywords, type EffectTone } from "../effects/palettes";
@@ -7,9 +7,11 @@ import { ShineBorder } from "../effects/treatments";
 import { cn } from "../../../lib/utils";
 import type { CombatState } from "../../../game/types";
 import { ControlArtEffect } from "./control-art-effect";
+import { artworkWidth } from "../assets";
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
   artworkSlices?: readonly string[];
+  allowUpscaling?: boolean;
   aspect: "creature" | "action";
   presentation?: boolean;
   shine?: boolean;
@@ -27,6 +29,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   {
     artwork,
     artworkSlices,
+    allowUpscaling = false,
     aspect,
     presentation = false,
     shine: showShine = true,
@@ -38,10 +41,22 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     urgent = false,
     acting = false,
     control = null,
+    style,
     ...props
   },
   ref,
 ) {
+  const rasterWidths = (artworkSlices?.length ? artworkSlices : [artwork])
+    .map((url) => artworkWidth(url, aspect))
+    .filter((width) => width !== undefined);
+  const pixelWidth = rasterWidths.length ? Math.min(...rasterWidths) : undefined;
+  const artworkStyle =
+    !allowUpscaling && pixelWidth
+      ? ({
+          ...style,
+          "--artwork-max-width": `calc(${pixelWidth}px / var(--artwork-pixel-ratio, 2) / var(--hover-scale) / var(--artwork-motion-scale, 1))`,
+        } as CSSProperties)
+      : style;
   const image =
     artworkSlices && artworkSlices.length > 1 ? (
       <span className="art-slices" data-slices={artworkSlices.length} aria-hidden="true">
@@ -73,6 +88,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
         role="img"
         aria-label={props["aria-label"]}
         tabIndex={props.tabIndex}
+        style={artworkStyle}
         {...metadata}
       >
         {image}
@@ -84,6 +100,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     <Button
       ref={ref}
       {...props}
+      style={artworkStyle}
       {...metadata}
       data-art-keyword={keywords?.[0]}
       data-effect-art={keywords !== undefined || undefined}

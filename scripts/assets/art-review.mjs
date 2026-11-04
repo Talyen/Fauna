@@ -26,7 +26,7 @@ export async function artReview(repository = root) {
     const image = (filename) =>
       `<img src="${escape(pathToFileURL(filename).href)}" alt="${escape(entry.id)}">`;
     rows.push(
-      `<section><h2>${escape(entry.id)}</h2><p>${record.width} × ${record.height}; ${(record.sourceBytes / 1024).toFixed(1)} → ${(record.outputBytes / 1024).toFixed(1)} KiB${entry.recipe === "copy" ? "; unchanged source" : "; lossless WebP; up to 480 CSS px at 2×"}</p><div>${source ? `<figure>${image(source)}<figcaption>Original</figcaption></figure>` : ""}<figure>${image(file)}<figcaption>Prepared</figcaption></figure></div></section>`,
+      `<section><h2>${escape(entry.id)}</h2><p>${record.width} × ${record.height}; ${(record.sourceBytes / 1024).toFixed(1)} → ${(record.outputBytes / 1024).toFixed(1)} KiB${entry.recipe === "copy" ? "; unchanged source" : "; lossless WebP; up to 480 CSS px at 3× before hover"}</p><div>${source ? `<figure>${image(source)}<figcaption>Original</figcaption></figure>` : ""}<figure>${image(file)}<figcaption>Prepared</figcaption></figure></div></section>`,
     );
     // The contact sheet samples every newly encoded selection at card size.
     if (entry.recipe === "card-webp")

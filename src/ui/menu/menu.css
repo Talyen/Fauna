@@ -81,7 +81,7 @@
 }
 .menu-logo.creature-card {
   width: var(--main-menu-logo-width);
-  max-width: 100%;
+  max-width: min(100%, var(--artwork-max-width, 100%));
   border: 0;
   background: transparent;
   transition: scale var(--motion-hover) ease-out;

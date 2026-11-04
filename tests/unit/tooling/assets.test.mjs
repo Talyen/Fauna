@@ -191,14 +191,14 @@ it("encodes retina-sized artwork without cropping, enlargement, alpha loss or lo
   await writeFile(path.join(repository, "source.png"), png);
   const receipt = await assets({ repository, mode: "prepare" });
   const record = receipt.records[entry.id];
-  expect([record.width, record.height, record.alpha]).toEqual([960, 720, true]);
+  expect([record.width, record.height, record.alpha]).toEqual([1440, 1080, true]);
   const prepared = await readFile(path.join(repository, "public", record.url.slice(2)));
   const expected = await sharp(png)
-    .resize({ width: 960, height: 960, fit: "inside", withoutEnlargement: true })
+    .resize({ width: 1440, height: 1440, fit: "inside", withoutEnlargement: true })
     .raw()
     .toBuffer();
   // Fully transparent pixels have no visible RGB meaning; compare flattened pixels.
-  const expectedVisible = await sharp(expected, { raw: { width: 960, height: 720, channels: 4 } })
+  const expectedVisible = await sharp(expected, { raw: { width: 1440, height: 1080, channels: 4 } })
     .flatten({ background: "#11100f" })
     .raw()
     .toBuffer();
@@ -213,6 +213,36 @@ it("encodes retina-sized artwork without cropping, enlargement, alpha loss or lo
   await writeFile(path.join(repository, "source.png"), png.subarray(0, 60));
   await expect(assets({ repository, mode: "prepare" })).rejects.toThrow();
   expect(await readFile(path.join(repository, "src/assets/prepared.json"), "utf8")).toBe(pointer);
+});
+
+it("prepares original JPEG artwork without changing the source or accepting a disguised format", async () => {
+  const repository = temporaryDirectory("fauna-jpeg-");
+  const entry = {
+    id: "boon.test",
+    origin: "repository",
+    source: "source.jpeg",
+    output: "test.webp",
+    kind: "art",
+    recipe: "card-webp",
+    provenance: "fixture",
+    rights: "test",
+  };
+  await mkdir(path.join(repository, "assets"));
+  await writeFile(
+    path.join(repository, "assets/manifest.json"),
+    JSON.stringify({ version: 2, assets: [entry] }),
+  );
+  const original = await sharp({ create: { width: 60, height: 80, channels: 3, background: "#aabbcc" } })
+    .jpeg()
+    .toBuffer();
+  const source = path.join(repository, entry.source);
+  await writeFile(source, original);
+  const receipt = await assets({ repository, mode: "prepare" });
+  expect([receipt.records[entry.id].width, receipt.records[entry.id].height]).toEqual([60, 80]);
+  expect(await readFile(source)).toEqual(original);
+  await writeFile(source, await sharp(original).png().toBuffer());
+  await expect(assets({ repository, mode: "prepare" })).rejects.toThrow("Unsupported or corrupt image .jpeg");
+  expect(await assets({ repository })).toEqual(receipt);
 });
 
 it("rejects overlapping preparation and invalidates changed recipes without losing old objects", async () => {

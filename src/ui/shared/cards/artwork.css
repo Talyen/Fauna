@@ -11,6 +11,7 @@
   border: var(--border-art-width) solid var(--border-art);
   background: var(--surface);
   border-radius: var(--radius);
+  max-width: var(--artwork-max-width, none);
 }
 .creature-card {
   aspect-ratio: var(--art-creature-ratio);

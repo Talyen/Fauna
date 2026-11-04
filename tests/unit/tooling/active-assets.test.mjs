@@ -40,7 +40,7 @@ it("emits exactly the active inventory without originals, old generations, recei
   await plugin.buildStart();
   const runtime = plugin.transform("", path.join(repository, "src/assets/prepared.json"));
   expect(runtime.code).toBe(
-    `export default ${JSON.stringify({ records: { [entry.id]: { url: receipt.records[entry.id].url } } })};`,
+    `export default ${JSON.stringify({ records: { [entry.id]: { url: receipt.records[entry.id].url, width: 1600, height: 1200 } } })};`,
   );
   expect(
     plugin.transform("", path.join(repository, "src/assets/prepared.json").replaceAll("\\", "/")),

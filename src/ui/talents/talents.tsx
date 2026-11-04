@@ -276,6 +276,7 @@ export function Talents({
                   <ArtCard
                     aspect="action"
                     artwork={assetUrl(`keyword.${artwork[id]}`)}
+                    allowUpscaling
                     effectKeywords={[id]}
                     shine={false}
                     hoverShimmer

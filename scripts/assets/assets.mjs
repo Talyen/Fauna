@@ -53,7 +53,7 @@ export function validateManifest(manifest) {
     if (
       entry.recipe === "card-webp" &&
       (entry.kind !== "art" ||
-        ![".png", ".webp"].includes(path.extname(entry.source)) ||
+        ![".png", ".webp", ".jpg", ".jpeg"].includes(path.extname(entry.source)) ||
         path.extname(entry.output) !== ".webp")
     )
       throw new Error(`Invalid artwork recipe ${entry.id}`);

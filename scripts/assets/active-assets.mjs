@@ -7,8 +7,9 @@ import { fileHash } from "../lib/file-integrity.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 // Total prepared media, including music. JavaScript has its own measured budget.
-// 367 active objects measured 264.72 MiB; 318 MiB provides about 20% headroom.
-const MAX_MEDIA_MIB = 318;
+// 448 active objects measured 682.44 MiB after restoring full-resolution originals
+// and raising lossless artwork to 1440px for Retina displays; about 20% headroom.
+const MAX_MEDIA_MIB = 820;
 const MAX_MEDIA_BYTES = MAX_MEDIA_MIB * 1024 * 1024;
 const MAX_ART_BYTES = 3 * 1024 * 1024;
 function inventory(receipt) {
@@ -89,9 +90,16 @@ export function activeAssetsPlugin(repository = ROOT) {
         id.replaceAll("\\", "/") !== path.join(repository, "src/assets/prepared.json").replaceAll("\\", "/")
       )
         return;
-      // The renderer needs URLs; source hashes and encoder receipts remain in the media manifest.
+      // Rendering needs real pixel dimensions to avoid enlarging art past its display density.
+      // Source hashes and encoder receipts remain in the media manifest.
       const records = Object.fromEntries(
-        Object.entries(receipt.records).map(([key, record]) => [key, { url: record.url }]),
+        Object.entries(receipt.records).map(([key, record]) => [
+          key,
+          {
+            url: record.url,
+            ...(record.width ? { width: record.width, height: record.height } : {}),
+          },
+        ]),
       );
       return { code: `export default ${JSON.stringify({ records })};`, map: null };
     },
