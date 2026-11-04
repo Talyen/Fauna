@@ -6,8 +6,8 @@ Fauna is a single-player creature-collecting card battler. Use plain language an
 
 - Inspect status and relevant diffs before editing. Preserve unrelated work, scope patches and commits to task-owned paths, and re-read concurrently edited files. Ask only about ambiguous intent, unsafe merges, or consequential unresolved choices.
 - Complete the requested behavior and its blockers. Fix small understood adjacent issues; report substantial independent findings. Avoid broad cleanup or unsolicited audits. Reuse existing owners and libraries; justify new dependencies or abstractions with concrete consumers.
-- Read affected contracts and consumers, and update the canonical owner of changed invariants. Find filenames first, scope searches, and read relevant sections rather than dumping broad search results. For unclear failures, start with a compact failure digest and a specific hypothesis; reassess unproductive approaches and consult relevant history.
-- Prefer tests that protect player behavior, ownership, persistence, or boundary contracts. Avoid tests that mirror implementation or add little regression value; a documentation-only change does not need new tests.
+- Read affected contracts and consumers, and update the canonical owner of changed invariants. Find filenames first, scope searches, and read relevant sections rather than dumping broad search results. For unclear failures, use [failure-first triage](Docs/DEVELOPMENT_TOOLS.md#failure-first-triage): start with a compact digest and a specific hypothesis; reassess unproductive approaches and consult relevant history.
+- Follow the [test value policy](tests/README.md#test-value-and-coverage): protect consequential player behavior, ownership, persistence and boundary contracts at the cheapest effective layer. Avoid redundant or implementation-mirroring tests; documentation-only changes need no new tests.
 - Never discard unrelated work with destructive Git commands. Use fresh browser contexts for experiments instead of deleting player saves. Close only preview processes or sessions opened for this task; never terminate another task's verification lane.
 
 ## Worktrees and integration
@@ -31,6 +31,7 @@ Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, com
 - [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/ui/screens.md#navigation-and-menus), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
 - [Gameplay vocabulary](Docs/KEYWORDS.md#glossary-and-terminology): `src/game/glossary.ts`.
 - [Run and verification commands](CONTRIBUTING.md#verification), [release and platform verification boundaries](Docs/RELEASE.md).
+- [Documentation maintenance](CONTRIBUTING.md#documentation-scope): canonical ownership, factual checks and the distinction between current contracts, proposals and historical evidence.
 
 ## Development saves
 
@@ -45,6 +46,7 @@ Development saves are disposable. There are no released player saves to preserve
 - Every creature must define all six passive tiers with different gameplay effects at each tier, typically by scaling values. Changed wording or effect order alone does not count; each tier replaces the complete previous passive.
 - Effect descriptions never contain periods; use concise clauses. Card descriptions display separate clauses on separate lines without semicolons or slash separators, including action, creature and Boon cards. Authored and localized rules may retain separators as internal formatting delimiters. This applies to abilities, passives, talents, Boons and keyword/glossary rules.
 - Keep displayed rules consistent with effects, preserve accessible names and make outcomes clear without sound. Reuse the [recovery owners](Docs/UI.md#recovery-owners) for failure handling; screens must not invent retries or save recovery.
+- Keep every enabled language current when player-facing text changes. Settle English wording, then translate and semantically review the affected [localization packet](Docs/LOCALIZATION.md#text-change-workflow) before integration; checks never translate text for you.
 - Use the [shared layout recipes](Docs/UI.md#shared-layout-recipes), tokens, ArtCard and registered shadcn controls. The [UI contract](Docs/UI.md) owns viewport fit, artwork, typography, spacing and interaction details; change a shared owner when a screen needs a reusable capability.
 - Avoid taglines, avoid helper text, avoid secondary labels - if a screen needs them to make sense, fix the layout instead. Follow the [UI copy rule](Docs/UI.md#copy-and-layout).
 

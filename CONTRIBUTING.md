@@ -64,11 +64,15 @@ On this Mac, wrap the outermost capture or rendered inspection command with `pyt
 
 ### Advanced selection and diagnostics
 
-Use the [tool selection reference](Docs/DEVELOPMENT_TOOLS.md#task-selection-and-diagnostics) for base overrides, review layers, remembered suites and bounded investigations. Moving or retiring a required suite requires updating the owner registry, including changed/deleted CI-owned entries. `verify` aliases `verify:changed`; `test:full` and `check:full` retain full-suite coverage on every branch when run in CI or with the explicit local opt-in.
+Use [failure-first triage](Docs/DEVELOPMENT_TOOLS.md#failure-first-triage) for unclear failures and the [tool selection reference](Docs/DEVELOPMENT_TOOLS.md#task-selection-and-diagnostics) for base overrides, review layers, remembered suites and bounded investigations. Moving or retiring a required suite requires updating the owner registry, including changed/deleted CI-owned entries. `verify` aliases `verify:changed`; `test:full` and `check:full` retain full-suite coverage on every branch when run in CI or with the explicit local opt-in.
 
 ### Documentation scope
 
-Markdown changes check maintained links, anchors, file references and npm examples across the repository. Link durable guides for discovery and prefix foreign file references with their repository.
+Markdown changes check maintained links, anchors, file references and npm script names across the repository. Link durable guides for discovery and prefix foreign file references with their repository. `npm run docs:check` also runs separately without building or testing the game. It checks command names even in fenced examples; it does not validate command arguments, external URLs, semantic accuracy or whether a workflow succeeds. Document reachability is advisory. Historical records under `Docs/task-evidence/` are excluded from live contracts.
+
+Walk an affected procedure from its documented entry point. Verify prerequisites, flags, defaults, outputs and recovery against the command implementation and its consumers, not just `package.json`. Check a safe read-only example when useful; do not build, publish or delete merely to validate prose. Follow the [execution policy](#execution-and-evidence).
+
+Keep one owner for each rule and link from consumers. When docs, tests and implementation disagree, establish the intended contract and inspect focused history before deciding which is stale. Do not rewrite a requirement merely to match a product defect. Distinguish current behavior, proposed design, explicit user selections and historical evidence; a dated pass or selected illustration does not approve a later implementation. The [architecture routes](Docs/ARCHITECTURE.md#common-implementation-paths) locate the relevant owners.
 
 Keep current rules and procedures in their owning guides; link to source for catalog values. Remove superseded plans, dated task logs and stale measurements instead of maintaining a documentation archive. Preserve active design direction, asset provenance and release qualification evidence where they are needed for future work. Use `reports/` for task captures and keep required evidence with its release candidate.
 

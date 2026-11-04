@@ -5,9 +5,9 @@
 - [Preview and capture](#task-checkouts-and-previews), [focused interactions](#focused-routes-and-seeded-interactions)
 - [Content audit](#content-checks), [media and listening](#prepared-media-and-sound-desk)
 - [Headless journeys](#headless-journeys), [paired balance](#paired-balance-reports), [findings](#ranked-balance-findings)
-- [Performance](#reproducible-performance-captures), [native/reachable scenarios](#native-and-reachable-performance-scenarios), [compiler trial](#periodic-performance-and-compiler-trial)
+- [Performance](#performance-investigation-and-interpretation), [native/reachable scenarios](#native-and-reachable-performance-scenarios), [compiler trial](#periodic-performance-and-compiler-trial)
 - [Disk and memory inventory, budgets and maintenance](RESOURCE_EFFICIENCY.md)
-- [Diagnostics](#local-diagnostics), [task selection](#task-selection-and-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
+- [Failure triage](#failure-first-triage), [diagnostics](#local-diagnostics), [task selection](#task-selection-and-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
 
 Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.
 
@@ -60,6 +60,8 @@ Descriptions derive from structured effects or shared rule parameters where supp
 See [Content and artwork](CONTENT.md#prepared-assets) for manifest authoring, preparation, receipts and source checks. `npm run audio:review` generates ignored review inputs. `npm run audio:review -- --serve` opens an explicitly served local Sound desk on a free port; run it for listening only when requested. It serves only registered prepared media and the review page.
 
 The desk compares current assignments with any prepared candidate of the same kind, offers original or level-matched playback, and saves local choices against the manifest identity. Playback stops on another audition, selection changes, page hiding, or Stop. Export choices explicitly; auditioning and choosing never install replacements. Exported source/output hashes identify the exact recording. Adopt a choice by updating the manifest and preparing again. Listening and device/mix acceptance remain separate from successful metadata checks.
+
+For a changed assignment, retain the source/provenance and exported selection identity, compare recordings at matched levels, then hear the assigned cue or music in its actual flow. Check repeated cues, transitions, volume/background mute and interruption or teardown where affected. A good isolated audition does not establish a comfortable combat mix, and a quiet preview cannot establish listening quality. Use the existing [audio runtime](ARCHITECTURE.md#presentation-owners); sound follows committed outcomes and never controls gameplay or saves.
 
 ## Headless journeys
 
@@ -154,6 +156,16 @@ Report and case completion must be boolean, completed metrics must be valid inte
 
 At least five samples are needed for review-level statistical findings. Extreme 0%/100% success, small samples and noisy paired effects remain watch items; zero observed variance at an extreme is not certainty. Within each severity, findings rank by threshold-relative magnitude and then stable ID, retaining case/journal references. Career success comparisons are observational, with differing recruitment and policy choices; investigate individual matchups before attributing causation. One-checkpoint experiments remain explicitly small samples. No findings does not establish balanced content or a human win rate.
 
+## Performance investigation and interpretation
+
+Start with a concrete player workload and suspected cost. Capture a complete baseline, locate the slow action or frame in its evidence, change that owner, then replay the same checkpoint and actions for comparison. Use [capture/replay](#reproducible-performance-captures) and [hitch attribution](#hitch-attribution-and-deep-traces) under the existing execution policy; the examples below do not authorize local profiling.
+
+Match runtime, machine, viewport/DPR, motion, cold/warm mode and recording/trace settings. Check the actual build and action identities, not report names. If variation obscures the result, use bounded matched repetitions in CI or an explicitly authorized investigation and report the variation; do not choose only the best trial. Check directly affected neighboring workloads when the change could move cost elsewhere.
+
+Fixture inventory and a reached screen do not prove that an effect triggered or an interaction was measured. State which actions and phases completed and what remained uncovered. Frame percentiles describe sampled callback intervals, not GPU presentation or sustained headroom above the display's refresh rate. Heap/DOM/media observations are diagnostic signals; growth alone does not prove a leak. Use [resource measurements](RESOURCE_EFFICIENCY.md#inventory-and-budgets) for process-memory interpretation.
+
+An optimization needs repeatable evidence for its claimed cost and preserved player behavior. Better timings do not establish artwork, animation, sound or interaction parity; use matched [rendered review](UI.md#required-review) and relevant behavioral protection. Headless policy speed, renderer frame pacing, build time and package size are different measurements.
+
 ## Reproducible performance captures
 
 For a bounded battle investigation, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. Diagnostic mode uses the same execution policy as the capture/replay commands below.
@@ -189,6 +201,22 @@ The React Compiler is enabled in ordinary development and production builds. The
 ## Combat resolution trace
 
 For a focused deterministic investigation, call `traceCombat` from [combat-trace.ts](../src/tooling/combat-trace.ts) with a root operation, its ordinary arguments, and the same state and event array. Each enter/exit record contains the operation, depth, detached state (including RNG) and events. [The focused regression](../tests/unit/game/combat-trace.test.ts) demonstrates a Thorns child reaction and compares its result with ordinary resolution. The trace covers only the explicitly invoked root; it does not capture other operations or install a global observer. Snapshots can be large, so use it for focused scenarios, not routine play. It is diagnostic evidence, not proof of preview or full-journey parity.
+
+## Failure-first triage
+
+Start an unclear failure with the command/scenario, source identity, failing assertion or contract and a specific hypothesis. Read the compact output or CI job summary first, then open the smallest relevant fixture, report or trace. A known hypothesis can go directly to its evidence; avoid dumping complete logs or generated bundles into context.
+
+| Failure                     | Useful first evidence                                                                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Local task gate             | Its selected paths and first failed category; [task status](#review-and-owner-lookup) distinguishes current-source receipts from unknown or deferred checks  |
+| Focused regression          | The failing assertion and nearest fixture; rerun one exact suite with `npm test -- <suite>`, optionally `-t <test-name>`, and confirm a nonzero test count   |
+| Hosted CI                   | Exact commit, job and attempt; [CI summaries and artifacts](CI.md#reports-and-scheduling) locate unit failures, browser attachments and missing evidence     |
+| Browser interaction         | Failed case/project, committed checkpoint, page errors and its screenshot or trace; separate product ordering from fixture, timing and environment failures  |
+| Headless journey or balance | Completion flag, initial checkpoint, attempted-command journal and failing case; incomplete work never becomes a defeat or balanced result                   |
+| Performance                 | The scenario's hitch summary, overlapping action and raw timeline; add a deep trace only when attribution is needed                                          |
+| Content or media            | Stable ID/field from the audit, current manifest selection and source/output receipt; structural validation does not prove rule meaning or listening quality |
+
+Reproduce the relevant ordering, change one understood cause and recheck the same contract. Do not add retries, refresh baselines or weaken assertions to hide a product defect. A single isolated pass does not resolve a concurrent or intermittent failure. Keep the original failed evidence and use fresh output directories where runners require them. [Contributing](../CONTRIBUTING.md#execution-and-evidence) owns local budgets; triage does not authorize broader suites or heavy diagnostics.
 
 ## Local diagnostics
 

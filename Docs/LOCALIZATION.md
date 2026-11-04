@@ -51,6 +51,17 @@ helpers, content, game rules, startup code and other attributes, and may include
 non-player literals. Review each candidate in context and separately enumerate the
 missing surfaces. Do not infer completion from the count.
 
+## Text-change workflow
+
+English may evolve in the isolated task without translating each experiment. Once wording settles:
+
+1. Extract English with `npm run localization:extract`, then prepare one [translation packet](#translation-packets) for affected messages across every enabled target language
+2. Translate pending results and review meaning in a separate pass: actor, timing, conditions, quantities, negation, permanence and glossary consistency. Preserve named parameters and semantic tags
+3. Apply the reviewed packet, commit the affected catalogs and generated imports, and prepare fonts if glyph coverage changed
+4. Inspect affected localized flows under [UI review](UI.md#required-review), then run the ordinary task gate. Structural freshness does not establish grammatical or rendered quality
+
+If integration incorporates changed English or terminology, refresh the packet and review affected results in the task checkout before retrying. Keep translation work outside the integration lock. Checks and builds validate existing catalogs; they never call a translation service or repair wording.
+
 ## Explicit UI messages
 
 Migrated components use `useMessages()` as `i18n`. Call `i18n.message` with a
