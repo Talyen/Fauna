@@ -44,7 +44,7 @@ it("browses Fauna and Boons without changing progression and remembers each tab'
   expect(game).toEqual(before);
 });
 
-it("shows uncollected creature and Boon details on hover without activating either", async () => {
+it("conceals uncollected creatures and shows Boon details on hover without activating either", async () => {
   const game = produce(createGame(), (draft) => {
     draft.discovery.recruited = { mossguard: 1 };
   });
@@ -59,9 +59,10 @@ it("shows uncollected creature and Boon details on hover without activating eith
   expect(screen.queryByRole("img", { name: /Mossguard: .* stars/ })).toBeNull();
   await user.hover(collected);
   expect(await screen.findByRole("img", { name: "Mossguard: 0 of 5 stars" })).toBeTruthy();
-  const locked = screen.getAllByRole("img", { name: "Locked species" })[0]!;
+  const locked = screen.getAllByRole("img", { name: "Undiscovered" })[0]!;
   await user.hover(locked);
-  expect((await screen.findByRole("tooltip")).textContent).toContain(
+  expect((await screen.findByRole("tooltip")).textContent).toContain("Undiscovered");
+  expect(screen.getByRole("tooltip").textContent).not.toContain(
     SPECIES.find((entry) => entry.id !== "mossguard")!.name,
   );
   expect(screen.queryByRole("img", { name: /stars/ })).toBeNull();

@@ -659,52 +659,22 @@
   text-align: center;
 }
 
-/* At short heights, move the hand beside the battlefield so both rows can
-   retain collection-sized artwork without covering their external readouts. */
-@media (max-height: 800px) {
-  .battle-screen {
-    --battle-target-rail-width: 120px;
-    --battle-hand-side: 1;
-    --battle-hand-hover-clearance: 0px;
-    --battle-hand-height: 150px;
-    --battle-hand-width: calc(var(--battle-hand-height) * 3 / 4);
-    --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
-    padding-bottom: 0;
-  }
-  .battle-screen .hand-toolbar {
-    justify-content: space-between;
-  }
-  .battle-screen .hand-section {
-    position: fixed;
-    top: 64px;
-    right: var(--page-inline-gutter);
-    bottom: 280px;
-    width: var(--battle-hand-width);
-    max-width: none;
-    padding: 0;
-    translate: none;
-  }
-  .battle-screen .hand {
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .battle-screen .hand-slot {
-    flex-basis: var(--battle-hand-height);
-    transform: none;
-  }
-  .battle-screen .hand-slot + .hand-slot {
-    margin-left: 0;
-    margin-top: min(
-      -30px,
-      calc((100dvh - 344px - var(--battle-hand-height) * var(--hand-count)) / max(1, var(--hand-count) - 1))
-    );
-  }
-  .battle-screen .hand-slot:has(.action-card:hover:not([aria-disabled="true"])),
-  .app[data-focus="visible"] .battle-screen .hand-slot:has(.action-card:focus:not([aria-disabled="true"])) {
-    transform: translateX(-14px);
-  }
-  .battle-screen .hand-slot:has(.action-card.selected) {
-    transform: translateX(-22px);
-  }
+.battle-screen {
+  --battle-target-rail-width: clamp(120px, 12vw, 200px);
+}
+.boon-control {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 3 * (var(--control-height) + var(--screen-item-gap)));
+  z-index: 10;
+}
+.battle-gold {
+  position: absolute;
+  top: var(--space-4);
+  right: calc(var(--space-6) + 4 * (var(--control-height) + var(--screen-item-gap)));
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  color: var(--gold-pale);
 }

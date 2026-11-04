@@ -10,7 +10,7 @@ The first journey starts with one creature chosen from three seeded offers in `F
 
 Later journeys draft up to three distinct collected ordinary species. Each round offers up to three species not already chosen. When fewer than three ordinary species are collected, draft only that many; offers never repeat a species to fill space. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. An early loss cannot prevent another journey.
 
-Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit starts the journey automatically, including when resuming a completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
+Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit shows the completed starter team; Continue starts the journey, including after reloading the completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
 
 ### Formation
 
@@ -68,7 +68,7 @@ Battle settlement banks XP even on defeat. Returning home banks pending accepted
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Purchase      | Immediate through the menu, including during a journey; every talent is eventually obtainable, without an active loadout or purchase confirmation |
 | Prerequisites | Follow [keyword categories and rows](KEYWORDS.md#classification-and-progression); each talent has a distinct effect                               |
-| Reset         | Refund the whole category while retaining XP; available at any time and effects update immediately; no individual refunds                         |
+| Reset         | Refund the whole category immediately or confirm a refund across every category; retain XP and apply effects immediately; no individual refunds   |
 | Point pacing  | Cumulative thresholds 10, 40, 100, 180 and 280 XP; point n requires total XP `10 × n × (n + 1) − 10 × min(n, 2)`                                  |
 
 Point pacing is initial tuning adapted from Alchemy. [progression.ts](../src/game/progression.ts) owns calculations; the [talent catalog](../src/game/content/talents.ts) owns stat bonuses and interactions. [Talent presentation](ui/screens.md#talents) owns browsing, visible rules and availability.
@@ -128,7 +128,7 @@ Each turn normally restores four shared Mana and draws four cards, with explicit
 
 Auto-end turn is enabled by default and advances when no legal cards remain in hand, including when Mana is exhausted; legal free plays remain available. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
 
-Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
+Auto-play starts off unless Remember Auto-Battle Preference restores the player’s prior setting. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
 Development builds expose Skip combat beside the battle menu and Auto-play. It settles ordinary victory rewards with only XP earned by actual plays, preserves roster Health and rejects repeated settlement. Production cannot use it.
 
@@ -138,9 +138,9 @@ Recruit and Boon Merchant roll independently at 25% when preparing ordinary room
 
 ### Campfire
 
-Offer Campfire when any roster member, including backup or knockout, is missing at least 30% maximum Health, unless Campfire was the last visited room. Entering commits a saved visit; Rest is its only recovery action. Rest restores 30% maximum Health to the whole roster, capped at full, and completes the room.
+Offer Campfire when any roster member, including backup or knockout, is missing at least 30% maximum Health, unless Campfire was the last visited room. Entering commits a saved visit; Rest is its only recovery action. Rest restores 30% maximum Health to the whole roster once, capped at full, and saves the completed visit.
 
-Resting prepares the next room. Leaving without resting cancels the visit without advancing, preserving the current enemy pack and Merchant offers; either suppresses Campfire until another room is visited. [Campfire presentation](ui/screens.md#campfire) owns recovery readouts.
+Continue after Rest prepares the next room; a completed visit remains resumable without healing again. Leaving without resting cancels the visit without advancing, preserving the current enemy pack and Merchant offers; either suppresses Campfire until another room is visited. [Campfire presentation](ui/screens.md#campfire) owns recovery readouts.
 
 ### Boon Merchant
 

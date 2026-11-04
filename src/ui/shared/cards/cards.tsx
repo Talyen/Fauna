@@ -10,7 +10,7 @@ import { useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
-import { actionDisplay } from "./action-display";
+import { actionDisplay, offensiveCardValue } from "./action-display";
 import { cardRuleLines } from "../keyword-text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
@@ -294,8 +294,10 @@ export function ActionCard({
   actor,
   tooltips = true,
   onDenied,
+  valueOverride,
 }: {
   card: Card;
+  valueOverride?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -311,7 +313,13 @@ export function ActionCard({
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers);
-  const rule = cardRulePresentation(def, card.level, value, 1, modifiers);
+  const rule = cardRulePresentation(
+    def,
+    card.level,
+    valueOverride ?? (tooltipOpen ? offensiveCardValue(card, actor, modifiers) : undefined) ?? value,
+    1,
+    modifiers,
+  );
   const effectLabel = useRuleText(rule.text, rule.id, rule.message)
     .map((part) => part.text)
     .join("");
@@ -369,7 +377,14 @@ export function ActionCard({
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
-        <ActionDetails compact card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
+        <ActionDetails
+          compact
+          card={card}
+          ownerName={ownerName}
+          actor={actor}
+          modifiers={modifiers}
+          valueOverride={valueOverride}
+        />
       </TooltipContent>
     </Tooltip>
   );

@@ -7,6 +7,7 @@ export interface SaveCandidate {
   data: string;
 }
 interface SaveStorage {
+  clear?(): Promise<void>;
   readCandidates(): Promise<SaveCandidate[]>;
   /** The application supplies validation when an adapter rotates recoverable checkpoints. */
   write(data: string, isRecoverable?: (data: string) => boolean): Promise<void>;
@@ -27,6 +28,7 @@ export interface DesktopBridge {
   display?: DisplayPort;
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;
+  clearSave?(): Promise<void>;
   readCandidates(): Promise<SaveCandidate[]>;
   /** Exact existing checkpoints approved by application validation for backup rotation. */
   writeSave(data: string, recoverable?: string[]): Promise<void>;
@@ -40,7 +42,7 @@ declare global {
 }
 
 export interface DisplayState {
-  mode: "windowed" | "fullscreen";
+  mode: "windowed" | "borderless-fullscreen" | "fullscreen";
   error?: string;
 }
 interface DisplayPort {

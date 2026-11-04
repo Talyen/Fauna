@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import { returnFocus } from "../shared/navigation/focus";
 import { starterCount } from "../../game/progression";
 
+import { Button } from "../../components/ui/button";
 import { CreatureCard } from "../shared/cards/cards";
 
 import { species } from "../../game/content";
@@ -20,10 +21,6 @@ export function Draft({ game, send, inspect }: Props) {
   const grid = useRef<HTMLDivElement>(null);
   const restore = useRef<number | null>(null);
   useLayoutEffect(() => {
-    if (game.selected.length === starterCount(game)) {
-      send({ type: "start" });
-      return;
-    }
     if (restore.current === null) return;
     const targets = grid.current?.querySelectorAll<HTMLElement>(".creature-card");
     returnFocus(targets?.[Math.min(restore.current, (targets?.length ?? 1) - 1)] ?? null);
@@ -46,6 +43,10 @@ export function Draft({ game, send, inspect }: Props) {
                   progression={game}
                   kind={s.id}
                   onClick={() => {
+                    if (game.selected.length === starterCount(game)) {
+                      inspect({ species: s.id });
+                      return;
+                    }
                     restore.current = index;
                     if (!send({ type: "draft", species: s.id })) restore.current = null;
                   }}
@@ -59,6 +60,11 @@ export function Draft({ game, send, inspect }: Props) {
           },
         )}
       </div>
+      {game.selected.length === starterCount(game) ? (
+        <Button className="primary-menu-action" onClick={() => send({ type: "start" })}>
+          {i18n.message("menu.continue", "Continue")}
+        </Button>
+      ) : null}
     </Screen>
   );
 }

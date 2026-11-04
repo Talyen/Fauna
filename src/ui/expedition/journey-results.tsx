@@ -6,11 +6,19 @@ import { PROGRESSION_KEYWORDS } from "../../game/keywords";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { ResultPresentation, AnimatedNumber } from "../shared/rewards/result-presentation";
 import { EmptyState } from "../shared/empty-state";
-import { Coins } from "lucide-react";
+import { Coins, Trophy } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import type { StateAt } from "../../game/types";
 import { KeywordProgressGrid } from "../shared/keyword-progress-grid";
-export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defeat">; home: () => void }) {
+export function JourneyResults({
+  game,
+  home,
+  openBoons,
+}: {
+  game: StateAt<"victory" | "defeat">;
+  home: () => void;
+  openBoons: () => void;
+}) {
   const i18n = useMessages();
   const summary = game.journey;
   const title =
@@ -38,7 +46,22 @@ export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defe
           }
         />
         <header className="journey-results-heading">
-          <ScreenHeading>{title}</ScreenHeading>
+          <ScreenHeading
+            trailing={
+              game.boons.length ? (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label={i18n.message("menu.boons", "Boons")}
+                  onClick={openBoons}
+                >
+                  <Trophy aria-hidden="true" />
+                </Button>
+              ) : undefined
+            }
+          >
+            {title}
+          </ScreenHeading>
         </header>
         {summary ? (
           <section className="journey-gains" aria-label={i18n.message("results.gains", "Journey gains")}>

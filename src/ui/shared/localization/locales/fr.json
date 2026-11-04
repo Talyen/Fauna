@@ -257,6 +257,12 @@
     "sourceHash": "5c38a8e78dbddaf89d6314288f037f23fbb3f7f92924459447506f24c267852e",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "6afbd08bb9c10ac54a9bfc211a37a8c73e3a548b576a63a70cf60f9635ec7586",
+    "text": "Recrutez cette créature pour révéler ses détails"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -287,6 +293,12 @@
     "sourceHash": "e125c11be70f8e88a42ce362c54d4565c661494767dd36836c8fb80a79cec198",
     "text": "{{name}} : {{rank}} étoiles sur {{maximum}}"
   },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "89da11006a75c1067d7ace0ec9eda2e6ebfeb5ffbfd2918d7cc39e9594ffbf8f",
+    "text": "Non découvert"
+  },
   "collection.views": {
     "reviewed": true,
     "source": "Collection views",
@@ -304,6 +316,12 @@
     "source": "Loading…",
     "sourceHash": "46ca41bfed8aa1f6c06b67c52d2831f2fc27ca0feb9cdefcc1d5a6de903eeefa",
     "text": "Chargement…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "7a9a28b671b3c3fcddc6ca46a75fcbc43e7ca320da117cbce2fdad8e07843b70",
+    "text": "Annuler"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -10225,9 +10243,9 @@
   },
   "menu.quit": {
     "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "e0de69190ac43c7345f16eb59bd0e9569629a2209c1c500aa6a894f8092fa23b",
-    "text": "Enregistrer et quitter"
+    "source": "Quit",
+    "sourceHash": "07d7b1daff4afb38613210c4744302eed93d36bd833b35e96ab0fd95ba0a2d8e",
+    "text": "Quitter"
   },
   "menu.settings": {
     "reviewed": true,
@@ -10722,6 +10740,24 @@
     "sourceHash": "ae9542d574d0066334ba241295de8e4128d7ecd82e97e4fe36f0823942c8c2dc",
     "text": "Passer"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "b055e20d6f2a15caaee508f966eb709d0a89bfb238d7ef3a0b75582ca73c0ff1",
+    "text": "Sauvegarde impossible"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "a027e0a438e2ba68ef7bcbecc536dae5b76c667929cdbe124121bdff9c21cded",
+    "text": "Réessayer"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "f1c26921190181ddf7c9c255d9146bc37e7d2a14aded6f187ef31959f7160a1a",
+    "text": "Sauvegarde…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10746,11 +10782,35 @@
     "sourceHash": "065c281999ff6611405e2f34e256217fc6219d7618af39798878c927a15cc167",
     "text": "Combat"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "eef014d33a725ae9fa996a221ec29714b220a69feeea13f88e7ce2766a658f17",
+    "text": "Plein écran sans bordure"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "bf3fdfadeeea7de67c98736296768f1d2946dc7f8234a424ee580cdcbbe1da70",
+    "text": "Luminosité"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "468bbe8d553a4875ec8539793f459561d97ec2d1e1f6355cf8d22cb816c197ef",
     "text": "Catégories des paramètres"
+  },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "20ae58b9b26121c6728dce30253101aca000cdd2f8378096d38f746f26e5e8bf",
+    "text": "Effacer toute la progression et recommencer ? Cette action est irréversible"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "ba3db81ab23e1128f82aab0c3b3555fb89e23d4deef686c2dcfa9d431d974a7e",
+    "text": "Effacer les sauvegardes"
   },
   "settings.closeLanguage": {
     "reviewed": true,
@@ -10799,6 +10859,18 @@
     "source": "Fullscreen",
     "sourceHash": "b09880b82208a291736764a05d30426c547013346cc99f180e686388716ae18b",
     "text": "Plein écran"
+  },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "51953441709159dd6dd162edcc3e5f00989555d4702419c798c9637142b8ab8c",
+    "text": "Taille du jeu"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "5d12c8d986f55d750884eec4dc0132db5ac5441924d0a75b0879dbd722ce0c34",
+    "text": "Jouabilité"
   },
   "settings.glow": {
     "reviewed": true,
@@ -10872,6 +10944,12 @@
     "sourceHash": "370ed23f5afbc4048ab252041500841683619f32751cfdb0b8793045dc4fd1b4",
     "text": "Couper le son en arrière-plan"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "1ed72d249b2cefc2898f6ff81b980a60cf10593370dfaf45b179ed06a676de3a",
+    "text": "Autres"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
@@ -10883,6 +10961,30 @@
     "source": "Background Particles value",
     "sourceHash": "d5e757e0cb7e35b5962b993f95ce7d4336422265f46a1e2acb61a8bca6bd61b3",
     "text": "Valeur des particules d’arrière-plan"
+  },
+  "settings.rememberAutoplay": {
+    "reviewed": true,
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "e139d0ee55cc214309c1777e1344c42d349b878dd06d2cb73fab8a4d795c9137",
+    "text": "Mémoriser le combat automatique"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "86ac640c1b293302f0f34c3076847a62d55f84a732fbcceb333c32969687e4e8",
+    "text": "Rétablir les paramètres par défaut"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "3a599e082f35ed964774d0c8ce23e5af92819ff98916b85baedc3bb12400d799",
+    "text": "Réinitialisation et sauvegarde"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "83f34c39277e64fd92c02ff8dcbb0c217258a6c4d4904efdec5bd459b1f1a5f3",
+    "text": "Sauvegarde"
   },
   "settings.sound": {
     "reviewed": true,
@@ -11058,6 +11160,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "1ec894842a2bfbde9f19614b018cd7fb6b943e2ad4eec989846ab3d52ea24827",
     "text": "Réinitialiser les talents : {{keyword}}"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "5395c501c89766b3dad3e88aa16c3543c133d61110e623e97e7c79595b28ccde",
+    "text": "Réinitialiser tous les talents"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "0a7ac49cfcfff4d35663eb32546e740ca02be157b8515033da078a7cf732a8df",
+    "text": "Tous vos points de talent seront remboursés"
   },
   "talents.row": {
     "reviewed": true,

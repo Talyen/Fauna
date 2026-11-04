@@ -10,6 +10,10 @@ export function createBrowserPlatform(storage?: Storage): Platform {
     desktop: false,
     diagnostics: browserDiagnostics(storage),
     saves: {
+      async clear() {
+        const source = storage ?? window.localStorage;
+        for (const key of SAVE_KEYS) source.removeItem(key);
+      },
       async readCandidates() {
         const source = storage ?? window.localStorage;
         const results: SaveCandidate[] = [];

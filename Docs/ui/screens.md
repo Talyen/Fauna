@@ -10,7 +10,7 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, and Settings. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+Main menu orders Continue/Play, Collection, Talents and Settings; desktop pairs Quit with Settings. Pause orders Continue, Main menu, Collection, Talents, Settings and End journey. Owned Boons open from battle and the journey recap. End journey is immediate, without confirmation, and appears only in Pause.
 
 Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
@@ -37,7 +37,7 @@ Journey headings offer read-only Deck inspection; closing restores the Deck open
 
 ### Battle and external pause
 
-Battle has no pinned inspection: right-click, I and controller X do not open it. Hover/focus details remain available. Escape/controller B cancels targeting first, then opens Pause. Manual card selection stops Auto-play; its per-battle control starts off. Development alone exposes Skip combat beside Auto-play, through the explicit session capability.
+Activating an enemy outside target selection opens its read-only passive and ability kit, without revealing its next action. Activating it while targeting still selects that recipient. Hover/focus details remain available. Escape cancels targeting first, then opens Pause. Manual card selection stops Auto-play; Remember Auto-Battle Preference can restore its prior setting in a new battle. Development alone exposes Skip combat beside Auto-play, through the explicit session capability.
 
 Steam overlay activation revokes commands, preserves higher-priority inspection, clears targeting, stops Auto-play and opens Pause. Closing the overlay does not resume automatically. Held confirmation must be released before acting again. [Input rules](../UI.md#interaction-states-and-accessibility) own modality/reconnect behavior; [Architecture](../ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns native admission.
 
@@ -59,7 +59,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 ## Starter draft
 
-Show up to three distinct offers at shared artwork sizes. Activating creature artwork recruits immediately; hover/focus shows the passive, and right-click, I or the controller inspection action opens the full kit without recruiting. Each card has an accessible Recruit name. Omit separate Recruit and Begin journey buttons: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
+Show up to three distinct offers at shared artwork sizes. Activating creature artwork recruits immediately; hover/focus shows the passive, and right-click, I or the controller inspection action opens the full kit without recruiting. Each card has an accessible Recruit name. The completed starter team remains visible with one Continue action; earlier picks remain committed on cancellation or reload. Omit separate Recruit buttons: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own Continue after the completed draft, saved choices, pools and Legendary eligibility.
 
 Shared creature hover/focus details show the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names use the short-label shine palette from keywords in the passive rules; icons use a solid keyword color and rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Omit current and maximum Health for combatants and inspectable backups. Echo minions have no passive; their tooltip contains their name.
 
@@ -85,7 +85,7 @@ Boons shows the complete read-only catalog, with name and rules on hover or inte
 
 The overview shows every category in centered rows of five, using Alchemy's category presentation: 16px column gaps, 14px row gaps, 6px between portrait and label, and bold 20px category names with text preferences respected. Portraits fit the available height up to Alchemy's 164.16px width. A red dot beside a category name indicates unspent points; its artwork's accessible description reports the count. Hover and keyboard focus show a gold frame and glow, a brief shimmer and a gold label; reduced motion suppresses the shimmer.
 
-Selecting artwork opens a dedicated tree. Arrange centered icon/name cards in Alchemy’s widening 1–2–3–4 tiers, centering incomplete tiers. Show effects on the cards, with unspent points beneath the tree; availability requirements are accessible to screen readers without instructional copy on cards or tooltips. Keep every tier in one bounded tree; scroll vertically when the full tree cannot fit, and bring focused talents into view. The header reset icon immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
+Selecting artwork opens a dedicated tree. Arrange centered icon/name cards in Alchemy’s widening 1–2–3–4 tiers, centering incomplete tiers. Show effects on the cards, with unspent points beneath the tree; availability requirements are accessible to screen readers without instructional copy on cards or tooltips. Keep every tier in one bounded tree; scroll vertically when the full tree cannot fit, and bring focused talents into view. The category reset immediately refunds that category. A separate Reset all talents action, including on the overview, confirms before refunding every category while retaining XP. Both actions are disabled without relevant allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 
 Owned borders use a lightened keyword color; available borders are light neutral and unavailable borders are muted neutral. Unavailable talent cards keep their rules readable, with muted names and effects indicating their state. Keyword text uses Alchemy’s lightened keyword colors, retaining a faint tint through the locked-state desaturation. Names use the foreground color; icons use a lightened keyword color, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border then fades to its owned color over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
@@ -93,7 +93,7 @@ Owned borders use a lightened keyword color; available borders are light neutral
 
 ### Earnings and choices
 
-Show a battle earnings screen first, with keyword-colored icons/level labels and compact progress bars, then a separate Gold row and Continue. Continue opens a separate Recruit screen without changing gameplay state. An unchosen recruitment resumes at earnings; a banked full-roster recruit resumes directly at the replacement choice. Material rewards are not currently authored.
+Show Victory with keyword earnings, Gold and the required recruitment choices on the same screen. Claiming a choice is immediate; no earnings Continue or reward confirmation is needed. A banked full-roster recruit resumes at its replacement choice.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Activating starter or reward artwork recruits immediately; hover or focus shows details and the inspection shortcut opens the full kit without recruiting. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 
@@ -105,11 +105,11 @@ Activating an existing creature immediately replaces it with the incoming recrui
 
 ## Journey results
 
-Show only outcome and permanent gains. Keywords use names, levels (earned points + 1) and progress bars without numeric XP gains/fractions or talent-point prompts. Omit teams, unlocks, statistics and temporary Boons. One centered Main menu action leaves results; there is no menu entry to reopen them. [Journey results](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own banking and ending behavior.
+Show outcome and permanent gains with Deck and Boon inspection controls. Keywords use names, levels (earned points + 1) and progress bars without numeric XP gains/fractions or talent-point prompts. Omit teams, unlocks and statistics; temporary Boons remain available through inspection. Deck and owned Boons remain inspectable through the recap controls. One centered Main menu action leaves results; there is no menu entry to reopen them. [Journey results](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own banking and ending behavior.
 
 ## Encounter and required replacement
 
-Show the act and room number out of ten and keep compact last-battle earnings visible until the next battle begins. Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
+Use Choose Destination for ordinary rooms and the boss name at boss entrances; keep compact last-battle earnings visible until the next battle begins. Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
 
 When exactly one living backup can replace a knockout, dispatch that replacement immediately. When multiple backups are available, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; repeat only while a choice remains, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. [Replacement rules](../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps) own resume.
 
@@ -119,24 +119,11 @@ Show creature artwork, Recruit and its species name. Its hover/focus details fol
 
 ## Settings
 
-Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Use the shared secondary-scrolling recipe for long panels.
+Settings uses Display, Sound, Gameplay and Other tabs in a centered area sized by the tallest panel, with invisible inert inactive panels and a brief fade. Long content scrolls vertically. Display offers a language dropdown, desktop Windowed/Borderless Fullscreen/Fullscreen, Brightness (50–150%), Game Size (80–120% in five-point steps), Tooltip size (90–125% in five-point steps), Background Glow and Background Particles. Automatic language follows Steam/system preferences with English fallback; only qualified languages are selectable.
 
-Use distinct Lucide icons, the shared 24px bold uppercase screen title, body-size uppercase pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
+Sound offers Master, Music and Sound effects volume, with one-point increments and percentage readouts, plus Mute in background. Gameplay offers Auto-end turn and Remember Auto-Battle Preference. Other offers Reset to Default and a confirmation before Clear Save Data. Reset restores device options and automatic language; clearing progress leaves device options intact and replaces progression through the application save lane.
 
-| Category             | Controls                                                                                                                                                                                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Display              | Language choice when more than one language is qualified; independent Text size and Tooltip size radios: 75%, 100%, 125%, default 100%; Background Glow and Background Particles: 0–100%, default 100% |
-| Sound                | Sound switch, Master/Music/Sound effects sliders with percentage readouts in 10-point steps (all default 50%), Mute in background                                                                      |
-| Battle               | Auto-end turn switch, enabled by default; Controller prompts radios: Automatic (default), Xbox, Steam Deck, PlayStation, Nintendo                                                                      |
-| Desktop Display only | Windowed/Fullscreen radios reflecting confirmed native state                                                                                                                                           |
-
-Language opens a dialog with Automatic and qualified languages named in their own languages. Selecting a language applies immediately without closing the dialog; Escape or controller Back closes it and returns focus to the language control. Automatic uses Steam's game language when available, then system preferences, with English fallback. The choice is device-local and does not alter a journey. Do not offer incomplete languages; [localization qualification](../LOCALIZATION.md#implementation-and-qualification) owns the remaining requirements.
-
-Controller prompts detect known browser device IDs; Steam Input may expose an Xbox identity for another controller, so manual selection takes precedence. Standard gamepad button positions remain unchanged. Losing the controller currently being used stops autoplay and opens pause during play; reconnecting does not resume.
-
-Changes persist immediately outside progression and Cloud. Tooltip size changes tooltip type/width without scaling artwork. Sound changes apply live without replaying actions. Sliders retain native keyboard behavior; W/A/S/D and controller navigation adjust horizontally and move between rows vertically.
-
-Cloud and diagnostics have no Settings surface, status or Retry control. [Recovery policy](../UI.md#recovery-and-persistent-failures) owns player consequences. Native fullscreen/overlay acceptance belongs to [Release](../RELEASE.md).
+Steam Input maps to the keyboard and pointer interfaces: arrows move focus spatially, Tab/Shift+Tab and F7 traverse, Enter/Space confirm, Escape dismisses the top surface. Dropdowns and sliders retain their native arrow behavior. There is no direct browser-gamepad polling or controller-family preference. System reduced-motion behavior remains supported by shared controls and effects. Device preferences remain separate from progression and Cloud.
 
 ## Deck, piles and owned Boons
 
@@ -146,7 +133,7 @@ Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discar
 
 The Campfire destination uses location artwork with Rest beneath it. Inside the visit, page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#campfire).
 
-Rest returns immediately to the next room’s offers, briefly presenting committed before/after meters and actual recovery for healed creatures, including backup. Navigation and battle remain available; reduced motion shows final meters.
+Rest commits recovery once and retains the healed roster with Continue. Reload restores this completed visit without another heal. Continue (or Back) then advances to the next room; leaving an unused Campfire still cancels without advancing.
 
 ## Boon Merchant
 

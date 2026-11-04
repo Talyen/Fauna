@@ -89,6 +89,7 @@ export function createSession(
   };
   let writes = Promise.resolve();
   let disposed = false;
+  let resetting = false;
   let disposal: Promise<void> | undefined;
   let generation = 0;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
@@ -329,7 +330,8 @@ export function createSession(
     load,
     command(command: Command) {
       const view = store.getState();
-      if (disposed || view.closing || view.overlayActive || view.cloud.blocking || !view.ready) return false;
+      if (disposed || resetting || view.closing || view.overlayActive || view.cloud.blocking || !view.ready)
+        return false;
       const end = startPerformanceSpan(
         "command-resolution",
         { command: command.type, revision: view.game.revision },
@@ -360,9 +362,36 @@ export function createSession(
       });
       return true;
     },
+    canClearProgress: !!platform.saves.clear,
+    clearProgress() {
+      const view = store.getState();
+      if (
+        disposed ||
+        resetting ||
+        view.closing ||
+        view.cloud.blocking ||
+        !view.ready ||
+        !platform.saves.clear
+      )
+        return;
+      resetting = true;
+      publish({ saveStatus: "saving" });
+      writes = writes
+        .then(() => platform.saves.clear!())
+        .then(() => {
+          if (disposed) return;
+          const game = createGame(seed);
+          resetting = false;
+          save(game, { game, events: [], eventPreviousGame: null, committedCommand: null });
+        })
+        .catch((error) => {
+          resetting = false;
+          saveFailed(error);
+        });
+    },
     retrySave() {
       const view = store.getState();
-      if (disposed || !view.ready || view.closing) return;
+      if (disposed || resetting || !view.ready || view.closing || view.saveStatus === "saving") return;
       save(view.game);
     },
     async flush() {

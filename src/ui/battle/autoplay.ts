@@ -59,7 +59,13 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
   useEffect(
     () =>
       session.store.subscribe((current) => {
-        if (current.game.phase !== "battle" || current.closing || !current.ready) setEnabled(false);
+        if (
+          current.game.phase !== "battle" ||
+          current.closing ||
+          current.saveStatus !== "saved" ||
+          !current.ready
+        )
+          setEnabled(false);
       }),
     [session, setEnabled],
   );
@@ -75,6 +81,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         !document.hasFocus() ||
         current.game.revision !== revision ||
         current.closing ||
+        current.saveStatus !== "saved" ||
         current.overlayActive ||
         current.cloud.blocking ||
         current.game.phase !== "battle"

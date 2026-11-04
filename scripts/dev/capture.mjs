@@ -85,6 +85,12 @@ export async function capture(args = process.argv.slice(2)) {
           layoutViolations,
           prepare: async () => {
             await openReviewScenario(page, session.url, scenario, scale);
+            // The product uses Game Size; keep this independent text-enlargement review condition.
+            await page.evaluate((scale) => {
+              const density =
+                Number(getComputedStyle(document.documentElement).getPropertyValue("--ui-density")) || 1;
+              document.documentElement.style.setProperty("--text-scale", String(density * scale));
+            }, scale);
             await page.mouse.move(0, 0);
             await settleScreen(page);
             await page

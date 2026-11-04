@@ -1,9 +1,10 @@
+import { Select, SelectValue, SelectTrigger, SelectContent, SelectItem } from "../../components/ui/select";
 import { useMessages } from "../shared/localization/message-context";
 import { Loading } from "../shared/loading";
 import { useEffect, useRef, useState } from "react";
 import type { Session } from "../../application/session";
 import type { DisplayState } from "../../platform/ports";
-import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
+
 export function DisplaySettings({ session }: { session: Session }) {
   const i18n = useMessages();
   const port = session.display;
@@ -47,43 +48,34 @@ export function DisplaySettings({ session }: { session: Session }) {
   return (
     <section>
       <h3 className="settings-heading">{i18n.message("settings.displayMode", "Display mode")}</h3>
-      <RadioGroup
-        aria-label={i18n.message("settings.displayMode", "Display mode")}
-        orientation="horizontal"
+      <Select
         value={state.mode}
         disabled={busy}
         onValueChange={(value) => {
-          if (value !== "windowed" && value !== "fullscreen") return;
+          if (value !== "windowed" && value !== "fullscreen" && value !== "borderless-fullscreen") return;
           setBusy(true);
           void port
             .set(value)
             .then((next) => {
               if (mounted.current) setState(next);
             })
-            .catch((error) => {
-              session.diagnostics.record("global", error);
-            })
+            .catch((error) => session.diagnostics.record("global", error))
             .finally(() => {
               if (mounted.current) setBusy(false);
             });
         }}
       >
-        {(["windowed", "fullscreen"] as const).map((value) => (
-          <label className="text-size-option" key={value}>
-            <RadioGroupItem
-              value={value}
-              aria-label={
-                value === "windowed"
-                  ? i18n.message("settings.windowed", "Windowed")
-                  : i18n.message("settings.fullscreen", "Fullscreen")
-              }
-            />
-            {value === "windowed"
-              ? i18n.message("settings.windowed", "Windowed")
-              : i18n.message("settings.fullscreen", "Fullscreen")}
-          </label>
-        ))}
-      </RadioGroup>
+        <SelectTrigger aria-label={i18n.message("settings.displayMode", "Display mode")}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="windowed">{i18n.message("settings.windowed", "Windowed")}</SelectItem>
+          <SelectItem value="borderless-fullscreen">
+            {i18n.message("settings.borderless", "Borderless Fullscreen")}
+          </SelectItem>
+          <SelectItem value="fullscreen">{i18n.message("settings.fullscreen", "Fullscreen")}</SelectItem>
+        </SelectContent>
+      </Select>
       {busy ? <Loading /> : null}
     </section>
   );

@@ -15,11 +15,6 @@
   display: block;
   flex: 0 0 auto;
 }
-.mana[data-overflow-row="true"] {
-  display: grid;
-  grid-template-columns: repeat(4, var(--mana-crystal-size));
-  height: auto;
-}
 .mana-socket {
   position: absolute;
   inset: -7%;
@@ -108,4 +103,21 @@
 
 .mana-gem[data-preview-spent="true"] .mana-full {
   opacity: 0.4;
+}
+
+.mana {
+  max-width: 100%;
+  gap: 3px;
+}
+.mana-gem {
+  flex-shrink: 1;
+  min-width: 8px;
+}
+.mana-overflow {
+  position: absolute;
+  z-index: 2;
+  bottom: -4px;
+  right: -8px;
+  font-size: var(--text-secondary);
+  color: var(--foreground);
 }

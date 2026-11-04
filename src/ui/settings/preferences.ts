@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { readPreference, writePreference } from "../../platform/preferences";
-import type { ControllerPreference } from "../shared/navigation/controller-prompts";
 
 export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 export interface AudioPreferences {
@@ -47,28 +46,32 @@ export interface DevicePreferences {
   scale: number;
   tooltipScale: number;
   autoEndTurn: boolean;
-  controller: ControllerPreference;
+  brightness: number;
+  rememberAutoplay: boolean;
+  autoplay: boolean;
 }
 export type PreferencesPatch = Omit<Partial<DevicePreferences>, "audio"> & {
   audio?: Partial<AudioPreferences>;
 };
 function normalizePreferences(value: unknown): DevicePreferences {
   const candidate = value && typeof value === "object" ? (value as Partial<DevicePreferences>) : {};
-  const scale = (candidate: unknown) => TEXT_SCALES.find((scale) => scale === candidate) ?? 1;
+  const scale = (value: unknown, min: number, max: number) =>
+    typeof value === "number" && Number.isFinite(value)
+      ? Math.max(min, Math.min(max, Math.round(value * 20) / 20))
+      : 1;
   return {
     audio: normalizeAudioPreferences(candidate.audio),
     glow: normalizeEffectIntensity(candidate.glow),
     particles: normalizeEffectIntensity(candidate.particles),
-    scale: scale(candidate.scale),
-    tooltipScale: scale(candidate.tooltipScale),
+    scale: scale(candidate.scale, 0.8, 1.2),
+    tooltipScale: scale(candidate.tooltipScale, 0.9, 1.25),
     autoEndTurn: typeof candidate.autoEndTurn === "boolean" ? candidate.autoEndTurn : true,
-    controller:
-      candidate.controller === "xbox" ||
-      candidate.controller === "steam-deck" ||
-      candidate.controller === "playstation" ||
-      candidate.controller === "nintendo"
-        ? candidate.controller
-        : "auto",
+    brightness:
+      typeof candidate.brightness === "number" && Number.isFinite(candidate.brightness)
+        ? Math.max(50, Math.min(150, candidate.brightness))
+        : 100,
+    rememberAutoplay: candidate.rememberAutoplay === true,
+    autoplay: candidate.autoplay === true,
   };
 }
 function readPreferences(): DevicePreferences {
@@ -86,10 +89,12 @@ function readPreferences(): DevicePreferences {
     audio,
     glow: intensity("fauna.background-glow"),
     particles: intensity("fauna.background-particles"),
-    scale: Number(readPreference("fauna.text-scale") ?? "1"),
+    scale: Number(readPreference("fauna.game-scale") ?? "1"),
     tooltipScale: Number(readPreference("fauna.tooltip-scale") ?? "1"),
     autoEndTurn: (readPreference("fauna.auto-end-turn") ?? "true") !== "false",
-    controller: readPreference("fauna.controller-prompts"),
+    brightness: intensity("fauna.brightness"),
+    rememberAutoplay: readPreference("fauna.remember-autoplay") === "true",
+    autoplay: readPreference("fauna.autoplay") === "true",
   });
 }
 
@@ -113,16 +118,29 @@ export function useDevicePreferences() {
       "fauna.audio.v1": JSON.stringify(preferences.audio),
       "fauna.background-glow": String(preferences.glow),
       "fauna.background-particles": String(preferences.particles),
-      "fauna.text-scale": String(preferences.scale),
+      "fauna.game-scale": String(preferences.scale),
       "fauna.tooltip-scale": String(preferences.tooltipScale),
       "fauna.auto-end-turn": String(preferences.autoEndTurn),
-      "fauna.controller-prompts": preferences.controller,
+      "fauna.brightness": String(preferences.brightness),
+      "fauna.remember-autoplay": String(preferences.rememberAutoplay),
+      "fauna.autoplay": String(preferences.autoplay),
     };
     for (const [key, value] of Object.entries(stored)) writePreference(key, value);
   }, [preferences]);
   useEffect(() => {
-    document.documentElement.style.setProperty("--text-scale", String(preferences.scale));
-    document.documentElement.style.setProperty("--tooltip-scale", String(preferences.tooltipScale));
-  }, [preferences.scale, preferences.tooltipScale]);
+    const apply = () => {
+      const fit = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      const density = (fit <= 1 ? fit : 1 + (fit - 1) * 0.72) * preferences.scale;
+      const style = document.documentElement.style;
+      style.setProperty("--ui-density", String(density));
+      style.setProperty("--text-scale", String(density));
+      style.setProperty("--tooltip-scale", String(density * preferences.tooltipScale));
+      style.setProperty("--game-brightness", String(preferences.brightness / 100));
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [preferences.scale, preferences.tooltipScale, preferences.brightness]);
   return [preferences, update] as const;
 }
+export const defaultDevicePreferences = normalizePreferences({});

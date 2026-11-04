@@ -2,7 +2,6 @@ import type { MutableRefObject } from "react";
 export type Controls = MutableRefObject<((action: InputAction) => boolean) | null>;
 
 import { isAvailableFocusTarget } from "./focus";
-import { controllerFamily, type ControllerFamily } from "./controller-prompts";
 
 // Game navigation forwards arrow events to Radix without changing the active input device.
 const bridgedKeys = new WeakSet<KeyboardEvent>();
@@ -150,200 +149,91 @@ export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAct
   }
   return actions;
 }
+/** Steam Input uses keyboard/pointer events through this same adapter. */
 export function connectInput(
   onAction: (action: InputAction) => void,
   onMode: (mode: "keyboard" | "controller" | "pointer", navigation: boolean) => void,
   externallySuspended: () => boolean = () => false,
-  controller: { detected?: (family: ControllerFamily) => void; disconnected?: () => void } = {},
 ) {
-  let interactionMode: "keyboard" | "controller" | "pointer" | undefined;
   let navigation = false;
   let suspended = document.visibilityState === "hidden";
-  let disposed = false;
-  let previous = new Set<InputAction>();
-  let connected = new Set<number>();
-  let activePad: number | undefined;
-  const blocked = new Set<InputAction>();
-  const repeatAt = new Map<InputAction, number>();
-  const changeMode = (mode: "keyboard" | "controller" | "pointer", navigating = navigation) => {
-    if (mode !== "controller") for (const action of previous) blocked.add(action);
-    if (mode === interactionMode && navigating === navigation) return;
-    interactionMode = mode;
-    navigation = navigating;
-    onMode(mode, navigation);
-  };
+  const publish = (keyboard: boolean) => onMode(keyboard ? "keyboard" : "pointer", navigation);
   const keyboard = (event: KeyboardEvent) => {
-    if (externallySuspended() || (event.repeat && ["Enter", " ", "Escape"].includes(event.key))) {
+    if (bridgedKeys.has(event)) return;
+    if (externallySuspended() || suspended || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.repeat && ["Enter", " ", "Escape"].includes(event.key)) {
       event.preventDefault();
       event.stopImmediatePropagation();
       return;
     }
-    if (suspended || bridgedKeys.has(event)) return;
+    const target = event.target instanceof HTMLElement ? event.target : null;
+    if (target?.matches("input, textarea, select") || target?.isContentEditable) return;
     if (
-      event.altKey ||
-      event.ctrlKey ||
-      event.metaKey ||
-      event.defaultPrevented ||
-      event.target instanceof HTMLInputElement ||
-      event.target instanceof HTMLTextAreaElement ||
-      (event.target instanceof HTMLElement && event.target.isContentEditable)
+      target?.closest("[data-radix-select-content]") ||
+      (target?.getAttribute("role") === "combobox" && target.getAttribute("aria-expanded") === "true")
     )
       return;
     const mapping: Record<string, InputAction> = {
-      a: "left",
-      A: "left",
-      d: "right",
-      D: "right",
-      w: "up",
-      W: "up",
-      s: "down",
-      S: "down",
+      ArrowLeft: "left",
+      ArrowRight: "right",
+      ArrowUp: "up",
+      ArrowDown: "down",
       Escape: "back",
       i: "inspect",
       I: "inspect",
     };
     const action = mapping[event.key];
-    const navigating =
-      (action && ["left", "right", "up", "down"].includes(action)) ||
-      [
-        "Tab",
-        "Enter",
-        " ",
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowUp",
-        "ArrowDown",
-        "Home",
-        "End",
-        "PageUp",
-        "PageDown",
-      ].includes(event.key);
-    if (action || navigating) changeMode("keyboard", navigating || navigation);
-    if (action) {
+    if (
+      (event.key === "Tab" || event.key === "F7" || ["left", "right", "up", "down"].includes(action ?? "")) &&
+      !event.repeat
+    )
+      navigation = true;
+    if (event.key === "Escape") {
+      navigation = false;
+      (document.activeElement as HTMLElement | null)?.blur();
+    }
+    publish(true);
+    if (event.key === "F7") {
       event.preventDefault();
-      if (event.repeat && (action === "back" || action === "inspect")) return;
-      onAction(action);
+      const controls = [
+        ...document.querySelectorAll<HTMLElement>('button, [tabindex="0"], input, select'),
+      ].filter(isAvailableFocusTarget);
+      const index = controls.indexOf(document.activeElement as HTMLElement);
+      controls[(index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length]?.focus();
+    } else if (action) {
+      if (target?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]') && action !== "back")
+        return;
+      event.preventDefault();
+      if (!event.repeat || !["back", "inspect"].includes(action)) onAction(action);
     }
   };
-  const keyup = (event: KeyboardEvent) => {
-    // WASD is translated into an arrow-key pair for composite shadcn widgets.
-    // Its physical keyup must not release Radix's arrow state before roving focus.
-    if (
-      /^[wasd]$/i.test(event.key) &&
-      event.target instanceof HTMLElement &&
-      event.target.closest('[role="tablist"], [role="radiogroup"]')
-    )
-      event.stopPropagation();
+  const pointer = () => {
+    navigation = false;
+    publish(false);
   };
-  let pointerPosition: { x: number; y: number } | undefined;
-  const pointer = (event: PointerEvent) => {
-    if (suspended) return;
-    const unchanged = pointerPosition?.x === event.clientX && pointerPosition?.y === event.clientY;
-    pointerPosition = { x: event.clientX, y: event.clientY };
-    if (event.type === "pointermove" && unchanged && !event.movementX && !event.movementY) return;
-    changeMode("pointer", false);
-  };
-  const wheel = () => {
-    if (!suspended) changeMode("pointer", false);
-  };
-  const suspend = () => {
+  const blur = () => {
     suspended = true;
-    previous.clear();
-    connected.clear();
-    repeatAt.clear();
-    changeMode(interactionMode ?? "pointer", false);
+    navigation = false;
+    publish(false);
   };
-  const resume = () => {
+  const focus = () => {
     suspended = document.visibilityState === "hidden";
   };
-  const visibility = () => {
-    if (document.visibilityState === "hidden") suspend();
-    else resume();
-  };
+  const visibility = () => (document.visibilityState === "hidden" ? blur() : focus());
   window.addEventListener("keydown", keyboard, true);
-  window.addEventListener("keyup", keyup, true);
   window.addEventListener("pointerdown", pointer, true);
   window.addEventListener("pointermove", pointer, true);
-  window.addEventListener("wheel", wheel, { capture: true, passive: true });
-  window.addEventListener("blur", suspend);
-  window.addEventListener("focus", resume);
+  window.addEventListener("wheel", pointer, true);
+  window.addEventListener("blur", blur);
+  window.addEventListener("focus", focus);
   document.addEventListener("visibilitychange", visibility);
-  let frame = 0;
-  const poll = (now: number) => {
-    if (disposed) return;
-    const actions = new Set<InputAction>();
-    const present = new Set<number>();
-    let pads: (Gamepad | null)[] = [];
-    try {
-      if (!suspended && !externallySuspended() && document.hasFocus()) pads = navigator.getGamepads?.() ?? [];
-    } catch {
-      // Restricted browser contexts may deny controller access; other input remains usable.
-    }
-    for (const [index, pad] of pads.entries()) {
-      if (!pad || pad.connected === false || pad.mapping !== "standard") continue;
-      present.add(index);
-      for (const action of gamepadActions(pad)) {
-        actions.add(action);
-        // A newly connected or resumed controller must release held controls.
-        if (!connected.has(index)) blocked.add(action);
-      }
-    }
-    connected = present;
-    if (
-      !suspended &&
-      !externallySuspended() &&
-      document.hasFocus() &&
-      activePad !== undefined &&
-      !present.has(activePad)
-    ) {
-      activePad = undefined;
-      if (interactionMode === "controller") controller.disconnected?.();
-    }
-    for (const action of blocked) if (!actions.has(action)) blocked.delete(action);
-    const revoked = () => {
-      if (disposed || suspended || externallySuspended() || !document.hasFocus()) {
-        // An earlier action in this sample can revoke admission synchronously.
-        for (const held of actions) blocked.add(held);
-        connected.clear();
-        repeatAt.clear();
-        return true;
-      }
-      return false;
-    };
-    for (const action of actions) {
-      if (revoked()) break;
-      if (blocked.has(action)) continue;
-      const directional = ["left", "right", "up", "down"].includes(action);
-      if (!previous.has(action) || (directional && now >= (repeatAt.get(action) ?? 0))) {
-        const pad = pads.find(
-          (pad) =>
-            pad?.connected !== false && pad?.mapping === "standard" && gamepadActions(pad).includes(action),
-        );
-        if (pad) {
-          activePad = pads.indexOf(pad);
-          controller.detected?.(controllerFamily(pad.id ?? ""));
-        }
-        changeMode("controller", navigation || directional || action === "confirm" || action === "inspect");
-        if (revoked()) break;
-        onAction(action);
-        if (revoked()) break;
-        if (directional) repeatAt.set(action, now + (previous.has(action) ? 160 : 350));
-      }
-    }
-    previous = actions;
-    if (!disposed) frame = requestAnimationFrame(poll);
-  };
-  frame = requestAnimationFrame(poll);
   return () => {
-    disposed = true;
-    cancelAnimationFrame(frame);
     window.removeEventListener("keydown", keyboard, true);
-    window.removeEventListener("keyup", keyup, true);
     window.removeEventListener("pointerdown", pointer, true);
     window.removeEventListener("pointermove", pointer, true);
-    window.removeEventListener("wheel", wheel, true);
-    window.removeEventListener("blur", suspend);
-    window.removeEventListener("focus", resume);
+    window.removeEventListener("wheel", pointer, true);
+    window.removeEventListener("blur", blur);
+    window.removeEventListener("focus", focus);
     document.removeEventListener("visibilitychange", visibility);
   };
 }

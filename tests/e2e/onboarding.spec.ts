@@ -42,7 +42,7 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
   await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: "0 of 5 stars", exact: true })).toBeVisible();
   await page.locator(".inspection-thumbnails .action-card").first().focus();
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator(".inspection.single-card")).toBeVisible();
@@ -67,6 +67,8 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
   await expect(mossguard).toBeFocused();
   expect(await state(page)).toEqual(initial);
   await mossguard.click();
+  expect((await state(page)).phase).toBe("draft");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("button", { name: "Begin journey", exact: true })).toHaveCount(0);
   expect((await state(page)).phase).toBe("teamSelection");
   await reloadHome(page);

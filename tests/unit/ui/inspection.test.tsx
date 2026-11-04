@@ -70,6 +70,7 @@ describe("artwork-first inspection", () => {
       }
       const kind = game.starterOffers.at(-1)!;
       await user.click(screen.getByRole("button", { name: `Recruit ${species(kind).name}` }));
+      await user.click(screen.getByRole("button", { name: "Continue" }));
       expect(session.store.getState().game.selected).toEqual([kind]);
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(session.store.getState().game.phase).toBe("teamSelection");

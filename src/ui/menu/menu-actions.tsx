@@ -1,17 +1,15 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
-import { Swords, Sparkles, PawPrint, Gift, Settings2, LogOut, House } from "lucide-react";
+import { Swords, Sparkles, PawPrint, Settings2, LogOut, House, Power } from "lucide-react";
 
 export type MenuPage = "talents" | "collection" | "settings";
 interface MenuActionsProps {
   home: boolean;
   active: boolean;
-  hasBoons: boolean;
   talentPoints: number;
   desktop: boolean;
   closing: boolean;
   onContinue: () => void;
-  onBoons: () => void;
   onNavigate: (page: MenuPage) => void;
   onEndJourney: () => void;
   onHome: () => void;
@@ -20,12 +18,10 @@ interface MenuActionsProps {
 export function MenuActions({
   home,
   active,
-  hasBoons,
   talentPoints,
   desktop,
   closing,
   onContinue,
-  onBoons,
   onNavigate,
   onEndJourney,
   onHome,
@@ -61,7 +57,7 @@ export function MenuActions({
           {i18n.message("menu.mainMenu", "Main menu")}
         </Button>
       ) : null}
-      {!home ? collection : null}
+      {collection}
       <Button
         variant={home ? "outline" : "ghost"}
         effectTone="talents"
@@ -86,18 +82,7 @@ export function MenuActions({
           </span>
         ) : null}
       </Button>
-      {home ? collection : null}
-      {active && hasBoons ? (
-        <Button
-          effectTone="talents"
-          variant={home ? "outline" : "ghost"}
-          data-menu-action="boons"
-          onClick={onBoons}
-        >
-          <Gift aria-hidden="true" className="menu-icon-boons" />
-          {i18n.message("menu.boons", "Boons")}
-        </Button>
-      ) : null}
+
       <Button
         effectTone="settings"
         variant={home ? "outline" : "ghost"}
@@ -116,10 +101,10 @@ export function MenuActions({
           </Button>
         </>
       ) : null}
-      {desktop ? (
-        <Button variant="ghost" busy={closing} onClick={onQuit}>
-          <LogOut aria-hidden="true" className="menu-icon-quit" />
-          {i18n.message("menu.quit", "Save & quit")}
+      {desktop && home ? (
+        <Button className="menu-quit" variant="outline" busy={closing} onClick={onQuit}>
+          <Power aria-hidden="true" className="menu-icon-quit" />
+          {i18n.message("menu.quit", "Quit")}
         </Button>
       ) : null}
     </>

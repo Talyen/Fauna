@@ -191,7 +191,7 @@ describe("player interface", () => {
     );
     await session.dispose();
   });
-  it("starts a resumed completed draft without requiring another confirmation", async () => {
+  it("resumes a completed draft and waits for Continue", async () => {
     const fresh = createGame(7);
     const chosen = fresh.starterOffers[0]!;
     const drafted = accept(fresh, { type: "draft", species: chosen });
@@ -199,6 +199,8 @@ describe("player interface", () => {
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     render(<App session={session} />);
+    await userEvent.setup().click(screen.getByRole("button", { name: "Continue" }));
+    expect(session.store.getState().game.phase).toBe("draft");
     await userEvent.setup().click(screen.getByRole("button", { name: "Continue" }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(
@@ -225,6 +227,7 @@ describe("player interface", () => {
     expect(screen.queryByRole("button", { name: "Begin journey" })).toBeNull();
     expect(session.store.getState().game.phase).toBe("draft");
     await user.click(screen.getByRole("button", { name: `Recruit ${species(starter).name}` }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(session.store.getState().game.team.map((unit) => unit.species)).toEqual([starter]);
     await session.dispose();

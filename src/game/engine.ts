@@ -167,11 +167,16 @@ function resolve(
     return reject(state, "That talent is not available.");
   if (
     command.type === "resetTalents" &&
-    (!KEYWORDS.includes(command.keyword) || !state.talents.some((id) => id.startsWith(`${command.keyword}.`)))
+    (command.keyword === undefined
+      ? state.talents.length === 0
+      : !KEYWORDS.includes(command.keyword) ||
+        !state.talents.some((id) => id.startsWith(`${command.keyword}.`)))
   )
     return reject(state, "There are no talents to reset in this category.");
   if (command.type === "abandon" && state.phase === "draft" && state.selected.length === 0)
     return reject(state, "There is no journey to end.");
+  if (command.type === "rest" && state.expedition?.lastRoom === "campfire")
+    return reject(state, "This Campfire has already been used.");
   const visit = state.support;
   if (command.type === "enterSupport" && (!canVisitMerchant(state) || !visit || visit.id !== command.visit))
     return reject(state, "That visit is unavailable.");
@@ -252,13 +257,13 @@ function resolve(
         break;
       case "leaveCampfire":
         if (draft.phase !== "campfire") throw new Error("Invalid Campfire departure.");
-        leaveCampfire(draft);
+        leaveCampfire(draft, draft.expedition.lastRoom === "campfire");
         break;
       case "rest":
         if (draft.phase !== "campfire") throw new Error("Invalid Campfire rest.");
         for (const row of [draft.team, draft.reserves])
           for (const creature of row) restoreHealth(creature, campfireRecovery(creature), events, true);
-        leaveCampfire(draft, true);
+        draft.expedition.lastRoom = "campfire";
         break;
       case "play": {
         if (draft.phase !== "battle") throw new Error("Invalid battle action.");
@@ -377,8 +382,10 @@ function resolve(
         draft.talents.push(command.talentId);
         break;
       case "resetTalents": {
-        const prefix = `${command.keyword}.`;
-        draft.talents = draft.talents.filter((id) => !id.startsWith(prefix));
+        draft.talents =
+          command.keyword === undefined
+            ? []
+            : draft.talents.filter((id) => !id.startsWith(`${command.keyword}.`));
         break;
       }
       case "newRun": {

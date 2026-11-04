@@ -40,7 +40,7 @@ export type Command =
   | { type: "chooseBoon"; boon: BoonId }
   | { type: "skipBoon" }
   | { type: "buyTalent"; talentId: string }
-  | { type: "resetTalents"; keyword: Keyword }
+  | { type: "resetTalents"; keyword?: Keyword }
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 interface EventContext {

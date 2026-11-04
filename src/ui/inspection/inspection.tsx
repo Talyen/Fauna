@@ -12,6 +12,7 @@ import { Star } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { ActionCard } from "../shared/cards/cards";
+import { enemyAbilityValue } from "../../game/ability-rules";
 import { definition, species, speciesCards } from "../../game/content";
 import type { Card } from "../../game/types";
 import { isAvailableFocusTarget, returnFocus } from "../shared/navigation/focus";
@@ -38,11 +39,15 @@ export function Inspector({
   const ally = creatureId
     ? (game.team.find((c) => c.id === creatureId) ?? game.reserves.find((c) => c.id === creatureId))
     : undefined;
+  const enemy =
+    "enemyId" in item && game.phase === "battle"
+      ? game.battle.enemies.find((unit) => unit.id === item.enemyId)
+      : undefined;
   const speciesKit = "speciesKit" in item && item.speciesKit;
   const actor = speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
-  const modifiers = speciesKit ? undefined : game;
-  const rank = kind === null ? 0 : creatureStars(game, kind);
-  const passive = kind === null ? null : creaturePassive(game, kind);
+  const modifiers = speciesKit || enemy ? undefined : game;
+  const rank = kind === null || enemy ? 0 : creatureStars(game, kind);
+  const passive = kind === null ? null : creaturePassive(enemy ? undefined : game, kind);
   const cards: Card[] =
     kind === null && rootCard
       ? [rootCard]
@@ -195,6 +200,9 @@ export function Inspector({
                           : i18n.content("content.keyword.food.label", "Food")
                       }
                       actor={actor}
+                      valueOverride={
+                        enemy ? enemyAbilityValue(enemy, definition(action.definitionId)) : undefined
+                      }
                       modifiers={modifiers}
                       onClick={() => setSelected(index)}
                       onInspect={() => setSelected(index)}
@@ -212,6 +220,7 @@ export function Inspector({
                   </ShineText>
                 </h2>
                 <span
+                  hidden={!!enemy}
                   className="inspection-stars"
                   role="img"
                   aria-label={i18n.message("inspection.stars", "{{rank}} of {{maximum}} stars", {

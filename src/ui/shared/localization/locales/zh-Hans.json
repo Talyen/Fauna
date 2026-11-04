@@ -257,6 +257,12 @@
     "sourceHash": "ba814e3c469cc951d4875fbf25d5fc5d1f69d177b15cf0fa93484cf29d562d22",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "28e8ddaad0baff9e7c5fdcc263835886e9c411aca36789a2c708ad42d315b25a",
+    "text": "招募此生物以查看详细信息"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -287,6 +293,12 @@
     "sourceHash": "d225fb3a55baeb45db3accb482c5e3d31c0c8f12a3b1be2d6bd00c8d6834aa9f",
     "text": "{{name}}：{{rank}} / {{maximum}} 星"
   },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "2c42844eb81ade5a8034335bf78ec8696f38a66ecce9fe6db26da1155f91b38c",
+    "text": "未发现"
+  },
   "collection.views": {
     "reviewed": true,
     "source": "Collection views",
@@ -304,6 +316,12 @@
     "source": "Loading…",
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
+    "text": "取消"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -10225,9 +10243,9 @@
   },
   "menu.quit": {
     "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "90e80d85f4a395a7c0c1ab89774164efc2be0984c1b7c7785ec3e1698cf7fa49",
-    "text": "保存并退出"
+    "source": "Quit",
+    "sourceHash": "600f8be57c03ea62d5828b1845eb0007b255d644cf9662df258a652cbbe97a79",
+    "text": "退出"
   },
   "menu.settings": {
     "reviewed": true,
@@ -10720,6 +10738,24 @@
     "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
     "text": "跳过"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "5f2c0df2dcf9845533b4e0339d36fd03a5e3007b31c9d3af217b299be6c2e452",
+    "text": "无法保存"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "16ff8c73075aa0435e50c4b88df955027a16d82df63f6866fd9870f1cbfa0d4d",
+    "text": "重试"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "3f5a25f67c90464e87033e02031dd61679d1ff447718daed39f05bbe07a3e863",
+    "text": "正在保存…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10744,11 +10780,35 @@
     "sourceHash": "25ee0a137b561bfcd921b2d804230029d24008f02714cb0cfabe95be451ab456",
     "text": "战斗"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "12687098fb699e1a4c734f18e45ee5046db0e3fefcad1b5bfa1b79d362452fe8",
+    "text": "无边框全屏"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "d98eb4cc5098d9a02f91028ffdc2b2a371ef52dc1ceab1f8b470f403901b9c30",
+    "text": "亮度"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "2df6c38dc7709774840713115fee4611558d8defcebeeb0f52f5db6db34079c4",
     "text": "设置分类"
+  },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "7da8678e58655a3887edb2a9368c2b1e947a28454fcba42d64b8f312e8db0473",
+    "text": "清除所有进度并重新开始？此操作无法撤销"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "97e932795eaae9f2eb36555c900a471a2f1a3ffe608ec61912d3aa87c9e0cee0",
+    "text": "清除存档数据"
   },
   "settings.closeLanguage": {
     "reviewed": true,
@@ -10797,6 +10857,18 @@
     "source": "Fullscreen",
     "sourceHash": "966a5239212887c0d7a8d8fffd6e7913252376a4b4a0355e3a8305eee6719f97",
     "text": "全屏"
+  },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "66844b06731484404cc67b9763afa31097286a8c1487f4954886e7e3e5d6cc4a",
+    "text": "游戏尺寸"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "6ae49e01e25153ebbac3394371eee95bc5b15a2ea031985fdbe3e4fb294de219",
+    "text": "游戏"
   },
   "settings.glow": {
     "reviewed": true,
@@ -10870,6 +10942,12 @@
     "sourceHash": "de0e92022b940f1a36c594f2bd9bc7ef7510548372dce7e547d23d324453e3c1",
     "text": "后台静音"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "8c862f56c410d74738ce7fe911a372f9d2fd2d15d45c5339dc5f57e1f28d0015",
+    "text": "其他"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
@@ -10881,6 +10959,30 @@
     "source": "Background Particles value",
     "sourceHash": "0b0e6e78efd5435c6ad1f9f25cc8b630ee5bc6a6dcb316577fcbdf9a63592dbc",
     "text": "背景粒子数值"
+  },
+  "settings.rememberAutoplay": {
+    "reviewed": true,
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "420cf230a6923372b8189aa7230421a3fa76c91c45a06b5524677727db7ef74f",
+    "text": "记住自动战斗偏好"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "2a43612ce7238fed94ade79c88f1ec6b0fca2fde38128be88f0a0ff0bfeec68e",
+    "text": "恢复默认"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "53016739d2ac10e52a7334ee89244313590b2f9371b44fe6a5b622a544e28f0e",
+    "text": "重置与存档数据"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "d3df9bab846d8ae3fc06241a060f074c2aeb16e8b9fee202ff023b80aeda3d3f",
+    "text": "存档数据"
   },
   "settings.sound": {
     "reviewed": true,
@@ -11054,6 +11156,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "d82f96135f27aef7356a8046e41600f2a1f8fa1ab7d1f13e42e1027b330e644d",
     "text": "重置{{keyword}}天赋"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "3f463cd646c505b7d157b7a321393cb6e473d75526dc47dd7bee6b78c4031be8",
+    "text": "重置所有天赋"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "55959fedbe5c0854fc07c92b92ada451050db4387d5b14dc41972c77cd2d5db8",
+    "text": "将返还全部天赋点。"
   },
   "talents.row": {
     "reviewed": true,

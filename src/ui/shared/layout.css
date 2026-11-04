@@ -227,3 +227,20 @@ body,
 [data-adaptive="true"] {
   min-height: var(--adaptive-page-height, 0px);
 }
+
+#root {
+  filter: brightness(var(--game-brightness, 1));
+}
+.screen-stage:not(:has(.battle-screen)) {
+  overflow-y: auto;
+}
+.save-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: max-content;
+  max-width: calc(100vw - var(--space-8));
+}
+:root[data-focus="visible"] button:focus {
+  outline-color: var(--muted-foreground);
+}

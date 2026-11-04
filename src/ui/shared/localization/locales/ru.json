@@ -257,6 +257,12 @@
     "sourceHash": "985679792d19a36b4692c2a21a1b7462a1c7a0baf6913b81fadf6ee60760d5f4",
     "text": "{{name}} +{{level}}"
   },
+  "collection.discover": {
+    "reviewed": true,
+    "source": "Recruit this creature to reveal its details",
+    "sourceHash": "1eea5f831c4d5af69d553dfefc77fda924d02a477d52b5ac7f5281afacf1bb02",
+    "text": "Наймите это существо, чтобы узнать подробности"
+  },
   "collection.fauna": {
     "reviewed": true,
     "source": "Fauna",
@@ -287,6 +293,12 @@
     "sourceHash": "5af8ee83d84466d0d9d95245e89a0ac06e105819e94e2a54e54a73801b6483eb",
     "text": "{{name}}: {{rank}} из {{maximum}} звёзд"
   },
+  "collection.undiscovered": {
+    "reviewed": true,
+    "source": "Undiscovered",
+    "sourceHash": "f99b10bf5d6ab261525ab28b3c5cd8a42fecc4152c5d7251ea8c11c04335cd57",
+    "text": "Не открыто"
+  },
   "collection.views": {
     "reviewed": true,
     "source": "Collection views",
@@ -304,6 +316,12 @@
     "source": "Loading…",
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
+  },
+  "confirmation.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
+    "text": "Отмена"
   },
   "content.boon.accordioned-bridge.name": {
     "reviewed": true,
@@ -10225,9 +10243,9 @@
   },
   "menu.quit": {
     "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "6a9787f36ae111a2dba230a8db3c98e75aff0a14ddc71c92515349f7ccf48fd1",
-    "text": "Сохранить и выйти"
+    "source": "Quit",
+    "sourceHash": "c7cd9e1b64c7fe7f0ce60007bf353de344b662046ffe9df1feade5fc84c85dbc",
+    "text": "Выход"
   },
   "menu.settings": {
     "reviewed": true,
@@ -10723,6 +10741,24 @@
     "sourceHash": "b5de5806b02f7d1c06603fcce9ef31bdf5f685b1969099c11922d336824c2465",
     "text": "Пропустить"
   },
+  "save.failed": {
+    "reviewed": true,
+    "source": "Couldn’t save",
+    "sourceHash": "287ff50bef577a83dd5db1220f8b401e30b92a9ce041300e5f56c256858c9a4f",
+    "text": "Не удалось сохранить"
+  },
+  "save.retry": {
+    "reviewed": true,
+    "source": "Retry",
+    "sourceHash": "6d43d7e305bdd0e4ecbea61f10f489a9acdb56133417fe8555797c2eebddd9ef",
+    "text": "Повторить"
+  },
+  "save.saving": {
+    "reviewed": true,
+    "source": "Saving…",
+    "sourceHash": "70c32e6a19691560fb649769fc7b720a1baa4001715ee546979983de1c1b88f2",
+    "text": "Сохранение…"
+  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",
@@ -10747,11 +10783,35 @@
     "sourceHash": "ca6edf4934f3e3c2e561cad7dd6efcf37d991d206bade5e25eb0a8b1a25fdfef",
     "text": "Бой"
   },
+  "settings.borderless": {
+    "reviewed": true,
+    "source": "Borderless Fullscreen",
+    "sourceHash": "ed5c4be77a2449393741cb097a0e5521529b262e84ac58f8b0a8f75c36a7760c",
+    "text": "Полноэкранный без рамки"
+  },
+  "settings.brightness": {
+    "reviewed": true,
+    "source": "Brightness",
+    "sourceHash": "10b123593d9806f04c33277e05a9e91fa02bf092b5ab4ee596038f00b207ca32",
+    "text": "Яркость"
+  },
   "settings.categories": {
     "reviewed": true,
     "source": "Settings categories",
     "sourceHash": "61ac7ecdff55f8a20839396b79807e1284abd88321ca5cff289b08374372ab4b",
     "text": "Категории настроек"
+  },
+  "settings.clearConfirm": {
+    "reviewed": true,
+    "source": "Clear all progress and start fresh? This cannot be undone",
+    "sourceHash": "8c604d2576b9f7396663ce63926419382ea7c8ca1049791a6a7a51f0e89b0b32",
+    "text": "Удалить весь прогресс и начать заново? Это действие нельзя отменить"
+  },
+  "settings.clearSave": {
+    "reviewed": true,
+    "source": "Clear Save Data",
+    "sourceHash": "9605872c9ce4274d9da7c85edc1ecc1fdb37fc6e7956b846dac9c10aa4c0975e",
+    "text": "Удалить сохранения"
   },
   "settings.closeLanguage": {
     "reviewed": true,
@@ -10800,6 +10860,18 @@
     "source": "Fullscreen",
     "sourceHash": "f768fd55499b029ddb6c383185b39243262a76101c8cc2f35fff60483b8fb36f",
     "text": "Полный экран"
+  },
+  "settings.gameSize": {
+    "reviewed": true,
+    "source": "Game Size",
+    "sourceHash": "c2332955f671e6d08fd8bfb3e1a4142903f429690d08876af0e59971f1f93ed4",
+    "text": "Масштаб игры"
+  },
+  "settings.gameplay": {
+    "reviewed": true,
+    "source": "Gameplay",
+    "sourceHash": "0c6c60127b3c4da08ab339308340c919df75715e446c80058e27814479105543",
+    "text": "Игра"
   },
   "settings.glow": {
     "reviewed": true,
@@ -10873,6 +10945,12 @@
     "sourceHash": "04eb540b5262e5bcb36fa3b09f98e2988ccd806ef5af25cf085f9d9f08bd0f8f",
     "text": "Выключать звук в фоне"
   },
+  "settings.other": {
+    "reviewed": true,
+    "source": "Other",
+    "sourceHash": "236ddcb1962a28242cf17714dfbe184e159fa54cdb29f91fa5f5208647b26525",
+    "text": "Прочее"
+  },
   "settings.particles": {
     "reviewed": true,
     "source": "Background Particles",
@@ -10884,6 +10962,30 @@
     "source": "Background Particles value",
     "sourceHash": "2c5d17339ee15fdf65af18f920bbbf15f50efbad96e6ac62edce1ae5d4e6edad",
     "text": "Значение частиц фона"
+  },
+  "settings.rememberAutoplay": {
+    "reviewed": true,
+    "source": "Remember Auto-Battle Preference",
+    "sourceHash": "6fb2378dd6d3cf6020001c61c62f7348d36d0ff74d03a4109560883d6e855a54",
+    "text": "Запоминать выбор автобоя"
+  },
+  "settings.resetDefault": {
+    "reviewed": true,
+    "source": "Reset to Default",
+    "sourceHash": "5e4d6bea166aefcc0acea2a570b6efa251ee078838907e6a250809e55731aa96",
+    "text": "По умолчанию"
+  },
+  "settings.resetSave": {
+    "reviewed": true,
+    "source": "Reset & Save Data",
+    "sourceHash": "c7885b49ff7bf0ca79aeb33dbbc3c0f13a252834fcb59790c1d945cde32db5bb",
+    "text": "Сброс и сохранения"
+  },
+  "settings.saveData": {
+    "reviewed": true,
+    "source": "Save Data",
+    "sourceHash": "51f176eb9c63e652bdea82742cb53e5a9b6016c11fde060b7b89addc09a8b1e3",
+    "text": "Сохранения"
   },
   "settings.sound": {
     "reviewed": true,
@@ -11060,6 +11162,18 @@
     "source": "Reset {{keyword}} talents",
     "sourceHash": "a565345135365f0aceb345dff4f6453e8e484ccde4dc67277e44e43dc815fed1",
     "text": "Сбросить таланты: {{keyword}}"
+  },
+  "talents.resetAll": {
+    "reviewed": true,
+    "source": "Reset all talents",
+    "sourceHash": "995bae398c0e16f24c3a0295eb9949cd81cbd223f9faeeeda47b5764c31d1c3a",
+    "text": "Сбросить все таланты"
+  },
+  "talents.resetAllDescription": {
+    "reviewed": true,
+    "source": "This will refund all your talent points",
+    "sourceHash": "19288498e4193c3cd9aded66b27bb08ab938f47f0c04cd69637d0e789196c1e2",
+    "text": "Это вернёт все ваши очки талантов"
   },
   "talents.row": {
     "reviewed": true,

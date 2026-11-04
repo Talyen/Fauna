@@ -27,13 +27,13 @@ import { JourneyResults } from "../expedition/journey-results";
 import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, Repeat, Pause, FastForward } from "lucide-react";
+import { Menu, Play, Pause, FastForward, Trophy, Coins } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
 import { BattleScreen } from "../battle/battle-screen";
 import type { Inspection } from "../shared/inspection-model";
-import { localizedControllerPrompts, type ControllerFamily } from "../shared/navigation/controller-prompts";
+
 import { type Controls, connectInput, type InputAction } from "../shared/navigation/input";
 import { returnFocus } from "../shared/navigation/focus";
 import { Draft } from "../expedition/draft";
@@ -59,7 +59,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     talentControls: Controls = useRef(null),
     collectionControls: Controls = useRef(null);
   const [preferences, updatePreferences] = useDevicePreferences();
-  const { audio, autoEndTurn, controller } = preferences;
+  const { audio, autoEndTurn } = preferences;
   const [draftStarted, setDraftStarted] = useState(false);
   const [navigationState, transition] = useReducer(
     (state: Parameters<typeof shellNavigation>[0], action: Parameters<typeof shellNavigation>[1]) =>
@@ -74,13 +74,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     [],
   );
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
-  const [detectedController, setDetectedController] = useState<ControllerFamily>("xbox");
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const controllerKind =
-    controller === "auto" ? detectedController : controller === "steam-deck" ? "xbox" : controller;
-  const controllerPrompts = localizedControllerPrompts(controllerKind, i18n);
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
@@ -113,7 +109,15 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   );
   const closeDialog = () => transition({ type: "closeDialog" });
   const closePause = () => transition({ type: "closePause" });
-  const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
+  const [autoplay, setAutoplay] = useAutoplay(session, paused || view.saveStatus !== "saved", autoEndTurn);
+  const toggleAutoplay = (enabled: boolean) => {
+    setAutoplay(enabled);
+    updatePreferences({ autoplay: enabled });
+  };
+  useEffect(() => {
+    if (route === "play" && game.phase === "battle" && preferences.rememberAutoplay && preferences.autoplay)
+      setAutoplay(true);
+  }, [game.phase, game.encounter, route, preferences.rememberAutoplay, session, setAutoplay]);
   useEffect(() => {
     if (route !== "play") setAutoplay(false);
   }, [route, setAutoplay]);
@@ -122,6 +126,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   useEffect(() => () => swapMotion.current?.cancel(), []);
   const send = useCallback(
     (command: Command) => {
+      if (session.store.getState().saveStatus !== "saved") return false;
       setAutoplay(false);
       swapMotion.current?.cancel();
       const motion = command.type === "swap" ? captureSwapMotion(command.activeId, command.reserve) : null;
@@ -142,6 +147,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       route !== "play" ||
       surface.top !== "page" ||
       !view.ready ||
+      view.saveStatus !== "saved" ||
       view.closing ||
       game.phase !== "battle" ||
       game.battle.turn >= MAX_BATTLE_TURN ||
@@ -155,6 +161,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       if (
         current.game === game &&
         current.ready &&
+        current.saveStatus === "saved" &&
         !current.closing &&
         !current.overlayActive &&
         !current.cloud.blocking
@@ -162,11 +169,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
         session.command({ type: "endTurn" });
     }, 250);
     return () => clearTimeout(timer);
-  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing]);
+  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing, view.saveStatus]);
   const automaticReplacementFocus = useRef(false);
   const automaticMerchantFocus = useRef(false);
   useLayoutEffect(() => {
-    if (surface.top !== "replacement" || !view.ready || view.closing) return;
+    if (surface.top !== "replacement" || !view.ready || view.saveStatus !== "saved" || view.closing) return;
     const current = session.store.getState();
     if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
     const command = soleReplacement(current.game, autoEndTurn);
@@ -177,6 +184,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     autoEndTurn,
     surface.top,
     view.ready,
+    view.saveStatus,
     view.closing,
     view.overlayActive,
     view.cloud.blocking,
@@ -192,12 +200,29 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     returnFocus(root.current?.querySelector<HTMLElement>(".hand .action-card, .end-turn") ?? null);
   }, [game, route, surface.top]);
   useLayoutEffect(() => {
-    if (route !== "play" || surface.top !== "page" || !view.ready || view.closing) return;
+    if (
+      route !== "play" ||
+      surface.top !== "page" ||
+      !view.ready ||
+      view.saveStatus !== "saved" ||
+      view.closing
+    )
+      return;
     const current = session.store.getState();
     if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
     if (game.phase === "support" && game.support.purchased)
       automaticMerchantFocus.current = session.command({ type: "leaveSupport", visit: game.support.id });
-  }, [session, game, route, surface.top, view.ready, view.closing, view.overlayActive, view.cloud.blocking]);
+  }, [
+    session,
+    game,
+    route,
+    surface.top,
+    view.ready,
+    view.saveStatus,
+    view.closing,
+    view.overlayActive,
+    view.cloud.blocking,
+  ]);
   useLayoutEffect(() => {
     if (!automaticMerchantFocus.current) return;
     if (route !== "play") {
@@ -267,13 +292,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       backFromPage,
       openMenu,
     });
-  const disconnectRef = useRef(() => {});
-  useEffect(() => {
-    disconnectRef.current = () => {
-      setAutoplay(false);
-      if (route === "play") showMenu();
-    };
-  }, [route, setAutoplay, showMenu]);
   const actionRef = useRef(input);
   useEffect(() => {
     actionRef.current = input;
@@ -297,7 +315,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
         });
       },
       () => session.store.getState().overlayActive,
-      { detected: setDetectedController, disconnected: () => disconnectRef.current() },
     );
     return () => {
       disconnect();
@@ -317,7 +334,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     <MenuActions
       home={home}
       active={active}
-      hasBoons={game.boons.length > 0}
       talentPoints={talentPoints}
       desktop={desktop}
       closing={view.closing}
@@ -329,7 +345,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
           transition({ type: "play" });
         }
       }}
-      onBoons={() => openModal("boons")}
       onNavigate={navigate}
       onEndJourney={() => {
         if (send({ type: "abandon" })) {
@@ -382,13 +397,21 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
             data-paused={paused || undefined}
             data-save-status={view.saveStatus}
           >
-            {view.saveUnavailable ? (
-              <p className="save-notice" role="status">
-                {i18n.message(
-                  "recovery.save",
-                  "Progress cannot be saved right now; keep Fauna open while it retries",
-                )}
-              </p>
+            {view.saveStatus !== "saved" || view.saveUnavailable ? (
+              <div
+                className="save-notice"
+                role={view.saveStatus === "error" || view.saveUnavailable ? "alert" : "status"}
+                aria-live="polite"
+              >
+                <span>
+                  {view.saveStatus === "saving"
+                    ? i18n.message("save.saving", "Saving…")
+                    : i18n.message("save.failed", "Couldn’t save")}
+                </span>
+                {view.saveStatus !== "saving" ? (
+                  <Button onClick={() => session.retrySave()}>{i18n.message("save.retry", "Retry")}</Button>
+                ) : null}
+              </div>
             ) : null}
             {!view.cloud.blocking ? (
               <>
@@ -415,7 +438,10 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       session={session}
                       preferences={preferences}
                       update={updatePreferences}
-                      openLanguage={() => openModal("language")}
+                      onClear={() => {
+                        session.clearProgress();
+                        transition({ type: "home" });
+                      }}
                     />
                   </Screen>
                 ) : null}
@@ -426,9 +452,16 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         back: () => transition({ type: "home" }),
                         openMenu,
                         menuOpen: surface.top === "pause",
-                        deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
-                          game.phase,
-                        )
+                        deck: [
+                          "draft",
+                          "teamSelection",
+                          "recruit",
+                          "boon",
+                          "support",
+                          "campfire",
+                          "victory",
+                          "defeat",
+                        ].includes(game.phase)
                           ? () => openModal("deck")
                           : undefined,
                       }}
@@ -464,10 +497,29 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           className="autoplay-control compact-icon-control"
                           aria-label={i18n.message("battle.autoplay", "Auto-play")}
                           aria-pressed={autoplay}
-                          onClick={() => setAutoplay(!autoplay)}
+                          onClick={() => toggleAutoplay(!autoplay)}
                         >
-                          {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
+                          {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
                         </Button>
+                      ) : null}
+                      {game.phase === "battle" ? (
+                        <>
+                          <span className="battle-gold">
+                            <Coins aria-hidden="true" />
+                            {game.currency.toLocaleString(i18n.locale)}
+                          </span>
+                          {game.boons.length ? (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="boon-control compact-icon-control"
+                              aria-label={i18n.message("menu.boons", "Boons")}
+                              onClick={() => openModal("boons")}
+                            >
+                              <Trophy aria-hidden="true" />
+                            </Button>
+                          ) : null}
+                        </>
                       ) : null}
                       {game.phase === "draft" ? (
                         <Draft game={game} send={send} inspect={inspect} />
@@ -500,9 +552,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           controls={gameControls}
                           bursts={bursts}
                           onDenied={deny}
-                          controller={mode === "controller"}
-                          endTurnPrompt={controllerKind === "playstation" ? "△" : controllerPrompts.endTurn}
-                          endTurnPromptLabel={controllerPrompts.endTurn}
+                          controller={false}
+                          inspectEnemy={(id) => {
+                            const enemy = game.battle.enemies.find((unit) => unit.id === id);
+                            if (enemy && !enemy.minion) inspect({ species: enemy.species, enemyId: id });
+                          }}
                           navigateFocus={navigation}
                         />
                       ) : game.phase === "recruit" || game.phase === "boon" ? (
@@ -514,7 +568,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           inspect={inspect}
                         />
                       ) : (
-                        <JourneyResults game={game} home={leaveResults} />
+                        <JourneyResults
+                          game={game}
+                          home={leaveResults}
+                          openBoons={() => openModal("boons")}
+                        />
                       )}
                     </HeaderNavigation.Provider>
                     <div className="sr-only" role="log" aria-live="polite">
