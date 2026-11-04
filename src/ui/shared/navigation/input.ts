@@ -103,24 +103,6 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
   }
   if (best) best.focus({ preventScroll: true });
 }
-export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAction[] {
-  const pressed = (i: number) => pad.buttons[i]?.pressed ?? false;
-  const actions: InputAction[] = [];
-  if (pressed(0)) actions.push("confirm");
-  if (pressed(1)) actions.push("back");
-  if (pressed(2)) actions.push("inspect");
-  if (pressed(3)) actions.push("endTurn");
-  // One direction per sample keeps diagonals from skipping grid items. The
-  // deliberate D-pad takes priority over an off-center stick.
-  const dpad = [14, 15, 12, 13].some(pressed);
-  const x = dpad ? Number(pressed(15)) - Number(pressed(14)) : (pad.axes[0] ?? 0);
-  const y = dpad ? Number(pressed(13)) - Number(pressed(12)) : (pad.axes[1] ?? 0);
-  if (Math.max(Math.abs(x), Math.abs(y)) > 0.55) {
-    if (Math.abs(x) > Math.abs(y)) actions.push(x < 0 ? "left" : "right");
-    else actions.push(y < 0 ? "up" : "down");
-  }
-  return actions;
-}
 /** Steam Input uses keyboard/pointer events through this same adapter. */
 export function connectInput(
   onAction: (action: InputAction) => void,

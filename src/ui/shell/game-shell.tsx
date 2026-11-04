@@ -550,7 +550,7 @@ export function GameShell({ session }: { session: Session }) {
                           controller={false}
                           inspectEnemy={(id) => {
                             const enemy = game.battle.enemies.find((unit) => unit.id === id);
-                            if (enemy && !enemy.minion) inspect({ species: enemy.species, enemyId: id });
+                            if (enemy) inspect({ species: enemy.species, enemyId: id });
                           }}
                           navigateFocus={navigation}
                         />

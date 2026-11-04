@@ -55,8 +55,8 @@ describe("Artisan Boons", () => {
   it("Second Sundial repeats Light attacks against Blinded enemies only", () => {
     const f = fixture();
     f.state.boons = ["second-sundial"];
-    const lightAttack = attackDefinition("sun-ray", "Sun Ray", 4, "light");
-    const physicalAttack = attackDefinition("root-strike", "Root Strike", 4, "physical");
+    const lightAttack = attackDefinition("dawncall-sun-ray", "Sun Ray", 4, "light");
+    const physicalAttack = attackDefinition("mossguard-root-strike", "Root Strike", 4, "physical");
 
     f.enemy.combat!.blind = true;
     executeAbility(
@@ -104,7 +104,7 @@ describe("Artisan Boons", () => {
     restoreHealth(f.ally, 3, f.events, false, f.state, true, f.ally);
     expect(f.state.battle.sunwellBonus).toBe(3);
 
-    const lightAttack = attackDefinition("sun-ray", "Sun Ray", 4, "light");
+    const lightAttack = attackDefinition("dawncall-sun-ray", "Sun Ray", 4, "light");
     const facts = ordinaryAttackFacts(f.state, f.ally, lightAttack, 4, f.enemy);
     expect(facts[0]?.lost).toBe(7);
 
@@ -116,7 +116,7 @@ describe("Artisan Boons", () => {
     expect(resumed.battle.sunwellBonus).toBe(3);
 
     // Physical attack does not consume sunwellBonus.
-    const physicalAttack = attackDefinition("root-strike", "Root Strike", 4, "physical");
+    const physicalAttack = attackDefinition("mossguard-root-strike", "Root Strike", 4, "physical");
     executeAbility(
       f.state,
       { side: "player", actor: f.ally, def: physicalAttack, value: 4, targetId: f.enemy.id },
@@ -234,7 +234,7 @@ describe("Artisan Boons", () => {
     expect(f.enemy.block).toBe(0);
     expect(f.state.battle.starhookReady).toBe(true);
 
-    const physicalAttack = attackDefinition("root-strike", "Root Strike", 5, "physical");
+    const physicalAttack = attackDefinition("mossguard-root-strike", "Root Strike", 5, "physical");
     expect(ordinaryAttackFacts(f.state, f.ally, physicalAttack, 5, f.enemy)[0]?.lost).toBe(10);
 
     executeAbility(

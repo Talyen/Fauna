@@ -1273,13 +1273,13 @@ it("keeps repeat talent decision order and stops on the first success", () => {
     decisions.push(decision);
     return decisions.length === 1 ? 0.9 : 0;
   });
-  expect(talentRepeat(state, ["nature", "burn"], false, [])).toBe(true);
+  expect(talentRepeat(state, state.team[0]!, ["nature", "burn"], false, [])).toBe(true);
   expect(decisions).toEqual([
     { kind: "chance", threshold: 0.1 },
     { kind: "chance", threshold: 0.1 },
   ]);
   decisions.length = 0;
-  expect(talentRepeat(state, ["nature", "burn"], true, [])).toBe(false);
+  expect(talentRepeat(state, state.team[0]!, ["nature", "burn"], true, [])).toBe(false);
   expect(decisions).toEqual([]);
 });
 

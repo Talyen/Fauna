@@ -23,9 +23,9 @@ it("persists completed starter selection and requires Continue exactly once", as
   await session.load();
   render(<App session={session} />);
   const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Continue" }));
   expect(session.store.getState().game).toEqual(drafted);
-  await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Continue" }));
   await session.flush();
   expect(session.store.getState().game.phase).toBe("teamSelection");
   expect(session.store.getState().game.team).toHaveLength(1);
@@ -82,12 +82,11 @@ it("opens a battle enemy kit without committing gameplay", async () => {
   await session.load();
   render(<App session={session} />);
   const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Continue" }));
   const enemy = game.battle!.enemies[0]!;
   await user.click(
     within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
       name: enemy.name,
-      exact: true,
     }),
   );
   expect(screen.getByRole("dialog", { name: species(enemy.species).name })).toBeTruthy();
@@ -122,13 +121,13 @@ it("shows save failure and retries the same committed outcome before accepting m
   await session.load();
   render(<App session={session} />);
   const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Play", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Play" }));
   await waitFor(() => expect(screen.getByRole("alert").textContent).toContain("Couldn’t save"));
   const committed = session.store.getState().game;
   await user.click(screen.getAllByRole("button", { name: /^Recruit / })[0]!);
   expect(session.store.getState().game).toBe(committed);
   fail = false;
-  await user.click(screen.getByRole("button", { name: "Retry", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Retry" }));
   await session.flush();
   expect(session.store.getState().game).toBe(committed);
   expect(screen.queryByRole("alert")).toBeNull();

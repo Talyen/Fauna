@@ -16,6 +16,19 @@ it.each(BOONS)("can evaluate $name without changing the journey", ({ id }) => {
   expect(JSON.stringify(state)).toBe(before);
 });
 
+it("requires both triggers for Artisan combinations and values their supplied Food", () => {
+  const light = teamRun(42, ["prismram"]);
+  const blind = teamRun(42, ["glintstride"]);
+  const healing = teamRun(42, ["dawncall"]);
+  expect(boonValue(light, "second-sundial")).toBe(0);
+  expect(boonValue(blind, "second-sundial")).toBeGreaterThan(0);
+  expect(boonValue(light, "sunwell-ewer")).toBe(0);
+  expect(boonValue(healing, "sunwell-ewer")).toBeGreaterThan(0);
+  expect(boonValue(light, "loom-beater")).toBe(0);
+  expect(boonValue(teamRun(42, ["prismram", "mossguard"]), "loom-beater")).toBeGreaterThan(0);
+  expect(boonValue(blind, "toadstool-breadbox")).toBeGreaterThan(0);
+});
+
 it("requires resurrection, backup, and acquired armor-stealing triggers for their Boons", () => {
   const solo = teamRun(42, ["mossguard"]);
   const resurrection = teamRun(42, ["oathara"]);

@@ -31,10 +31,9 @@ it.each([
     const user = userEvent.setup({ pointerEventsCheck: 0 });
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Continue" }));
       const opener = within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
         name: species(kind).name,
-        exact: true,
       });
       await user.click(opener);
       const thumbnail = within(screen.getByRole("dialog", { name: species(kind).name })).getByRole("button", {
@@ -71,21 +70,19 @@ it("omits unsupported enemy resource cards and player-only extras without changi
   const user = userEvent.setup({ pointerEventsCheck: 0 });
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     await user.click(
       within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
         name: "Neradora",
-        exact: true,
       }),
     );
-    const dialog = screen.getByRole("dialog", { name: "Neradora", exact: true });
+    const dialog = screen.getByRole("dialog", { name: "Neradora" });
     expect(within(dialog).queryByRole("button", { name: /^Tide Cup,/ })).toBeNull();
     expect(dialog.querySelectorAll(".action-card")).toHaveLength(2);
     await user.keyboard("{Escape}");
     await user.click(
       within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
         name: "Neradora",
-        exact: true,
       }),
     );
     const card = within(screen.getByRole("dialog", { name: "Neradora" })).getAllByRole("button", {
@@ -330,7 +327,7 @@ describe("artwork-first inspection", () => {
         const creature = document.querySelector<HTMLButtonElement>(`${row} .creature-card`)!;
         await user.click(creature);
         if (row === ".enemy-row") {
-          expect(screen.getByRole("dialog", { name: "Emberback", exact: true })).toBeTruthy();
+          expect(screen.getByRole("dialog", { name: "Emberback" })).toBeTruthy();
           await user.keyboard("{Escape}");
         }
         await user.pointer({ target: creature, keys: "[MouseRight]" });

@@ -403,6 +403,26 @@ function boonScorer(
         return 20;
       case "lucky-clover":
         return has.has("nature") ? 40 : 0;
+      case "amber-spatula":
+        return has.has("block") ? 60 : 0;
+      case "second-sundial":
+        return has.has("light") && hasBlind() ? 60 : 0;
+      case "vein-survey-chain":
+        return has.has("physical") || has.has("stun") ? 60 : 0;
+      case "sunwell-ewer":
+        return has.has("light") && canHeal() ? 60 : 0;
+      case "rime-spindle":
+        return has.has("bleed") ? 60 : 0;
+      case "toadstool-breadbox":
+        return has.has("block") ? 60 : 30;
+      case "loom-beater":
+        return kinds.length > 1 && has.has("block") ? 60 : 0;
+      case "courtly-handwarmer":
+        return has.has("burn") && has.has("armor") ? 60 : 0;
+      case "lightning-fork":
+        return has.has("stun") ? 60 : 0;
+      case "starhook":
+        return has.has("attack") && (has.has("purge") || kits().some((kit) => kit.purgeThorns)) ? 60 : 0;
       default: {
         const unhandled: never = boon;
         throw new Error(`Unhandled Boon: ${unhandled}`);

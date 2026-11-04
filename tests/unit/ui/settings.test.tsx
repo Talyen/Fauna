@@ -68,7 +68,7 @@ it("applies and resets device settings without changing progression", async () =
   act(() => master.focus());
   await user.keyboard("{Home}{ArrowRight}");
   expect(master.getAttribute("aria-valuenow")).toBe("1");
-  expect(screen.queryByRole("switch", { name: "Sound", exact: true })).toBeNull();
+  expect(screen.queryByRole("switch", { name: "Sound" })).toBeNull();
   await user.click(screen.getByRole("tab", { name: "Other" }));
   await user.click(screen.getByRole("button", { name: "Reset to Default" }));
   expect(session.store.getState().game).toBe(game);
@@ -86,15 +86,15 @@ it("Escape cancels Clear Save Data without leaving Options and restores the open
   const user = userEvent.setup({ pointerEventsCheck: 0 });
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "Options", exact: true }));
-    await user.click(screen.getByRole("tab", { name: "Other", exact: true }));
-    const opener = screen.getByRole("button", { name: "Clear Save Data", exact: true });
+    await user.click(screen.getByRole("button", { name: "Options" }));
+    await user.click(screen.getByRole("tab", { name: "Other" }));
+    const opener = screen.getByRole("button", { name: "Clear Save Data" });
     const game = session.store.getState().game;
     await user.click(opener);
     expect(screen.getByRole("dialog", { name: "Clear Save Data" })).toBeTruthy();
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).toBeNull();
-    expect(screen.getByRole("tab", { name: "Other", exact: true }).getAttribute("data-state")).toBe("active");
+    expect(screen.getByRole("tab", { name: "Other" }).getAttribute("data-state")).toBe("active");
     await waitFor(() => expect(document.activeElement).toBe(opener));
     expect(session.store.getState().game).toBe(game);
   } finally {
@@ -112,13 +112,13 @@ it("Escape cancels Reset all talents without leaving the tree or refunding point
   const user = userEvent.setup({ pointerEventsCheck: 0 });
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
-    await user.click(screen.getByRole("button", { name: "Physical talents", exact: true }));
-    const opener = screen.getByRole("button", { name: "Reset all talents", exact: true });
+    await user.click(screen.getByRole("button", { name: "Talents" }));
+    await user.click(screen.getByRole("button", { name: "Physical talents" }));
+    const opener = screen.getByRole("button", { name: "Reset all talents" });
     await user.click(opener);
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).toBeNull();
-    expect(screen.getByRole("region", { name: "Physical talents", exact: true })).toBeTruthy();
+    expect(screen.getByRole("region", { name: "Physical talents" })).toBeTruthy();
     await waitFor(() => expect(document.activeElement).toBe(opener));
     expect(session.store.getState().game.talents).toEqual(["physical.shield-slam"]);
   } finally {

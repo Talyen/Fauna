@@ -1,7 +1,6 @@
 import type { createMessageReader } from "../localization/messages";
 
 export type ControllerFamily = "xbox" | "playstation" | "nintendo";
-export type ControllerPreference = "auto" | "steam-deck" | ControllerFamily;
 export function controllerFamily(id: string): ControllerFamily {
   if (/playstation|dualsense|dualshock|sony|054c/i.test(id)) return "playstation";
   if (/nintendo|switch|joy-con/i.test(id)) return "nintendo";

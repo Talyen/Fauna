@@ -13,7 +13,7 @@ import { dispatch } from "../../../src/game/engine";
 import { availablePlays } from "../../../src/game/play-queries";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { prepareDestination, accept, run, teamRun } from "../../support/game";
+import { prepareDestination, accept, run, teamRun, requireBattle } from "../../support/game";
 
 function fixture() {
   const state = structuredClone(run(42));
@@ -299,7 +299,7 @@ describe("row 4 keyword completion talents", () => {
   });
 
   it("Arcane Discharge deals 3 Stun damage when spending the last point of Mana", () => {
-    const state = structuredClone(run(42));
+    const state = structuredClone(requireBattle(run(42)));
     state.talents = ["mana.arcane-discharge"];
     state.battle!.mana = 1;
     const command = availablePlays(state, false)[0]!.commands[0]!;
