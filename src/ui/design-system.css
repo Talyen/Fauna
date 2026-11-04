@@ -533,7 +533,6 @@ h3 {
   background: var(--talent-card-surface);
   color: var(--foreground);
   opacity: 1;
-  cursor: default;
 }
 .game-button.talent-node[data-owned="true"] {
   opacity: 1;
@@ -667,6 +666,5 @@ h3 {
 .merchant-offer > .game-button[aria-disabled="true"] {
   background: var(--muted);
   color: var(--muted-foreground);
-  cursor: default;
   opacity: 1;
 }
