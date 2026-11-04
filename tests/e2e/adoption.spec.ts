@@ -67,7 +67,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
           path: `reports/owned-boons${index === 0 ? "" : "-last"}-${width}-${height}.png`,
         });
     }
-    await expect(dialog.getByRole("button", { name: "Next page" })).toBeDisabled();
+    await expect(dialog.getByRole("button", { name: "Next page" })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
     expect(await state(page)).toEqual(fixture);

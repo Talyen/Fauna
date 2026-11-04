@@ -572,9 +572,6 @@ h3 {
     border-color: var(--primary);
   }
 }
-.collection-pagination button[data-unavailable="true"] {
-  visibility: hidden;
-}
 .ui-tabs-list .ui-tab {
   gap: var(--space-2);
 }
