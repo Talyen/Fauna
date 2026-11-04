@@ -522,7 +522,6 @@ h3 {
 .talent-node[data-keyword] {
   --keyword-icon-color: currentColor;
 }
-.talent-node .talent-name,
 .talent-node .talent-effect {
   color: var(--foreground);
 }

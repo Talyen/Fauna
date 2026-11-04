@@ -173,6 +173,7 @@ export function BattleScreen({
             key={enemy.id}
             enemy={enemy}
             battleSlot={slot}
+            battlePortrait
             sharedDodge={sharedDodgeChance(game, enemy)}
             tooltips={!selected}
             invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
@@ -219,6 +220,7 @@ export function BattleScreen({
             key={creature.id}
             creature={creature}
             battleSlot={slot}
+            battlePortrait
             sharedDodge={sharedDodgeChance(game, creature)}
             sharedImmunity={sharedControlImmunity(game, creature)}
             tooltips={!selected}

@@ -1,6 +1,6 @@
 import { useMessages } from "../localization/message-context";
 import { Sparkles } from "lucide-react";
-import { ShineIcon, ShineText } from "../effects/treatments";
+import { ShineText } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
 import { creaturePassive } from "../../../game/progression";
 import { KeywordText } from "../keyword-text";
@@ -61,9 +61,7 @@ export function CreatureDetails({
         {!name || name === info.name ? i18n.content(`content.species.${kind}.name`, info.name) : name}
       </strong>
       <div className="creature-trait-name">
-        <ShineIcon keywords={keywords}>
-          <Sparkles />
-        </ShineIcon>
+        <Sparkles aria-hidden="true" data-keyword={keywords[0] ?? "physical"} />
         <strong>
           <ShineText keywords={keywords}>
             {i18n.content(`content.species.${kind}.trait`, info.trait)}
