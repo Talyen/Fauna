@@ -65,12 +65,6 @@
     "sourceHash": "ed9bd984c55d6166a8e05fc1b014b97a77456418f337e63a04240fb64fe865c4",
     "text": "{{type}}ダメージ {{amount}}"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "dd574aeaa510b0be20dd0227ddd0bbaa3783ee1b9b4e292134e23c38879d70c1",
-    "text": "戦闘効果のページ"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",

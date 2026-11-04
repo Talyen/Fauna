@@ -1,4 +1,4 @@
-import { captureScreen } from "./support/rendered-evidence";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
@@ -49,52 +49,86 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
 });
 
-test("short battles use Collection-scale portraits with the hand at the bottom and statuses below", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
-  const fixture = produce(run(7), (draft) => {
-    draft.battle!.enemies[0]!.combat.thorns = 3;
+for (const handSize of [4, 7]) {
+  test(`battle icons and raised ${handSize}-card fan retain their layout`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
+    const fixture = produce(run(7), (draft) => {
+      draft.battle!.enemies[0]!.block = 5;
+      Object.assign(draft.battle!.enemies[0]!.combat, {
+        armor: 3,
+        thorns: 2,
+        dodge: 10,
+        burn: 1,
+        poison: 1,
+        bleed: 1,
+        stun: 1,
+        freeze: 1,
+      });
+      if (handSize === 7) draft.boons.push("facet-abacus");
+      draft.battle!.hand = draft.cards.slice(0, handSize).map((card) => card.id);
+      draft.battle!.draw = draft.cards.slice(handSize).map((card) => card.id);
+      draft.battle!.discard = [];
+    });
+    await seed(page, fixture);
+    await resume(page);
+    await page.mouse.move(0, 0);
+    await settleScreen(page);
+    const geometry = await page.evaluate(() => {
+      const active = document.querySelector(".app:not([inert])")!;
+      const artNode = active.querySelector(".enemy-row .creature-card")!;
+      const art = artNode.getBoundingClientRect();
+      const statusNode = active.querySelector(".enemy-row .combat-status")!;
+      const status = statusNode.getBoundingClientRect();
+      const icons = [...statusNode.querySelectorAll(".status-icon")];
+      const slots = [...active.querySelectorAll<HTMLElement>(".hand-slot")].sort(
+        (a, b) =>
+          Math.abs(Number(a.style.getPropertyValue("--fan-offset"))) -
+          Math.abs(Number(b.style.getPropertyValue("--fan-offset"))),
+      );
+      const middle = slots[0]!.querySelector(".action-card")!;
+      const ruler = document.createElement("div");
+      ruler.style.width = "var(--art-short-side)";
+      active.append(ruler);
+      const shortSide = ruler.getBoundingClientRect().width;
+      ruler.remove();
+      return {
+        artWidth: art.width,
+        glow: getComputedStyle(artNode).boxShadow,
+        artBorder: getComputedStyle(artNode).borderTopWidth,
+        handBorder: getComputedStyle(middle).borderTopWidth,
+        handWidth: parseFloat(getComputedStyle(middle).width),
+        shortSide,
+        centerClipping: middle.getBoundingClientRect().bottom - innerHeight,
+        fanStep: getComputedStyle(active.querySelector(".battle-screen")!).getPropertyValue(
+          "--hand-fan-angle-step",
+        ),
+        statusCount: icons.length,
+        statusText: statusNode.textContent,
+        paging: statusNode.querySelectorAll(".pagination").length,
+        iconFilters: icons.map((el) => getComputedStyle(el.querySelector("svg")!).filter),
+        iconBelow: icons.every((el) => el.querySelector("svg")!.getBoundingClientRect().top >= art.bottom),
+        centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
+      };
+    });
+    expect(geometry.artWidth).toBeGreaterThan(geometry.handWidth);
+    expect(geometry.glow).toBe("none");
+    expect(geometry.artBorder).toBe("0px");
+    expect(geometry.handBorder).toBe("0px");
+    expect(geometry.handWidth).toBeCloseTo(geometry.shortSide, 0);
+    expect(geometry.centerClipping).toBeGreaterThan(0);
+    expect(geometry.centerClipping).toBeLessThanOrEqual(4.1);
+    expect(geometry.fanStep.trim()).toBe("4.2deg");
+    expect(geometry.statusCount).toBe(8);
+    expect(geometry.statusText).toBe("");
+    expect(geometry.paging).toBe(0);
+    expect(geometry.iconFilters.every((filter) => filter === "none")).toBe(true);
+    expect(geometry.iconBelow).toBe(true);
+    expect(geometry.centered).toBeLessThanOrEqual(1);
   });
-  await seed(page, fixture);
-  await resume(page);
-  const geometry = await page.evaluate(() => {
-    const active = document.querySelector(".app:not([inert])")!;
-    const art = active.querySelector(".enemy-row .creature-card")!.getBoundingClientRect();
-    const status = active.querySelector(".enemy-row .combat-status")!.getBoundingClientRect();
-    const hand = active.querySelector(".hand")!.getBoundingClientRect();
-    const rootStyle = getComputedStyle(document.documentElement);
-    const shortSide = parseFloat(rootStyle.getPropertyValue("--art-short-side"));
-    const creatureScale = parseFloat(rootStyle.getPropertyValue("--art-creature-scale"));
-    const icon = active.querySelector(".enemy-row .status-icon svg")!.getBoundingClientRect();
-    const statusButton = active.querySelector(".enemy-row .status-icon")!.getBoundingClientRect();
-    return {
-      artworkWidth: art.width,
-      collectionWidth: ((shortSide * 4) / 3) * creatureScale * 1.08,
-      handCardWidth: parseFloat(getComputedStyle(active.querySelector(".hand .action-card")!).width),
-      shortSide,
-      iconBelow: icon.top >= art.bottom,
-      statusHitHeight: statusButton.height,
-      statusBelow: status.top >= art.bottom - 1,
-      centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
-      handCenter: Math.abs(hand.left + hand.width / 2 - innerWidth / 2),
-      handBottom: hand.bottom,
-      horizontal: getComputedStyle(active.querySelector(".hand")!).flexDirection === "row",
-    };
-  });
-  expect(geometry.artworkWidth).toBeGreaterThanOrEqual(geometry.collectionWidth);
-  expect(geometry.handCardWidth).toBeCloseTo(geometry.shortSide, 0);
-  expect(geometry.iconBelow).toBe(true);
-  expect(geometry.statusHitHeight).toBeGreaterThanOrEqual(44);
-  expect(geometry.statusBelow).toBe(true);
-  expect(geometry.centered).toBeLessThanOrEqual(1);
-  expect(geometry.handCenter).toBeLessThanOrEqual(1);
-  expect(geometry.handBottom).toBeGreaterThanOrEqual(720);
-  expect(geometry.horizontal).toBe(true);
-});
+}
 
-test("idle combatant clicks leave the battle and portrait unchanged", async ({ page }) => {
+test("idle enemy clicks open kit inspection without changing battle or portrait", async ({ page }) => {
   await seed(page, targetingBattle());
   await resume(page);
   const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
@@ -105,8 +139,11 @@ test("idle combatant clicks leave the battle and portrait unchanged", async ({ p
   await page.mouse.down();
   expect(await enemy.evaluate((element) => getComputedStyle(element).scale)).toBe(beforeScale);
   await page.mouse.up();
-  await expect(page.getByRole("tooltip")).toBeVisible();
-  expect((await state(page)).revision).toBe(before.revision);
+  await expect(page.getByRole("dialog")).toBeVisible();
+  expect(await state(page)).toEqual(before);
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(await state(page)).toEqual(before);
 });
 
 test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({

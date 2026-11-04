@@ -32,9 +32,6 @@
   "battle.damage": {
     "text": "{{amount}} {{type}} damage"
   },
-  "battle.effectPages": {
-    "text": "Combat effect pages"
-  },
   "battle.effects": {
     "text": "Combat effects"
   },

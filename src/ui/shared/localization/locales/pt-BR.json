@@ -65,12 +65,6 @@
     "sourceHash": "056401544f8838606e167636f2c7d484ec4de79d2a6c2545479e8e8b895e8023",
     "text": "{{amount}} de dano de {{type}}"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "c406f0e4d2f75e7c1f529bc6b45852ddf7b22c762c62aa50c2fa62533a8999c7",
-    "text": "Páginas de efeitos de combate"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",

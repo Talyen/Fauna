@@ -65,12 +65,6 @@
     "sourceHash": "bc86c72d8fbadf94231894e79b9df50730bd1ae57665ae9efae4d2ddc79be746",
     "text": "{{amount}} dégâts de {{type}}"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "729225599a70d45533ae46d0c5d0147b0bbca2ee208cf8e46e0f5dbc8e019a19",
-    "text": "Pages des effets de combat"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",

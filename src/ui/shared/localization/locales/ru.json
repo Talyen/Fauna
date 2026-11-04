@@ -65,12 +65,6 @@
     "sourceHash": "55c48e9f1a1b8e2ff74a05f14fafdc05edb0a927188956f13b5b4f2fdf23a194",
     "text": "{{type}}: {{amount}} урона"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "7c0bba4830e902249d18a3c61cd311d013d18c57547157a13a73dca946f23657",
-    "text": "Страницы боевых эффектов"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",

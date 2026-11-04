@@ -1,32 +1,36 @@
 import { useMessages } from "../localization/message-context";
 import { EffectButton } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
-import { PagedItems } from "../navigation/pagination";
 import { returnFocus } from "../navigation/focus";
 import { useStatusPresentation } from "./status-presentation";
 import { motionValue } from "../motion-values";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { Hourglass, Skull, Timer } from "lucide-react";
 import type { CombatState } from "../../../game/types";
-import { isKeywordId } from "../../../game/keywords";
+import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import { combatStatuses, statusOrder, type Status } from "./combat-status-model";
 import { KeywordIcon } from "../keyword-icon";
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "../../../components/ui/tooltip";
+const MAX_VISIBLE_STATUS_ICONS = 8;
 type AnimatedStatus = Status & { exit?: boolean; changed?: boolean };
 export function CombatStatus({
   combat,
+  block = 0,
   sharedDodge = 0,
   sharedImmunity = 0,
   details = false,
 }: {
   combat?: CombatState;
+  block?: number;
   sharedDodge?: number;
   sharedImmunity?: number;
   details?: boolean;
 }) {
   const i18n = useMessages();
   const entries = combatStatuses(combat, sharedDodge, sharedImmunity);
+  // Block belongs to the combatant, but shares the same icon row as transient effects.
+  if (block > 0) entries.unshift({ id: "block", count: block, text: KEYWORD_DEFINITIONS.block.label });
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState<AnimatedStatus[]>(entries);
@@ -36,7 +40,7 @@ export function CombatStatus({
     if (
       root.current &&
       focused?.closest(".combat-status") === root.current &&
-      !next.some((s) => s.id === focused?.dataset.statusId)
+      !next.slice(0, MAX_VISIBLE_STATUS_ICONS).some((s) => s.id === focused?.dataset.statusId)
     )
       returnFocus(
         root.current?.closest(".creature-wrap")?.querySelector<HTMLElement>(".creature-card") ?? null,
@@ -86,18 +90,7 @@ export function CombatStatus({
   const tile = (status: AnimatedStatus) => <StatusTile key={status.id} status={status} combat={combat} />;
   return (
     <div ref={root} className="combat-status" aria-label={i18n.message("battle.effects", "Combat effects")}>
-      {shown.length > 3 ? (
-        <PagedItems
-          items={shown}
-          pageSize={1}
-          className="combat-effect-page"
-          label={i18n.message("battle.effectPages", "Combat effect pages")}
-        >
-          {tile}
-        </PagedItems>
-      ) : (
-        shown.map(tile)
-      )}
+      {shown.slice(0, MAX_VISIBLE_STATUS_ICONS).map(tile)}
     </div>
   );
 }
