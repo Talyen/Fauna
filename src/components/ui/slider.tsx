@@ -29,7 +29,7 @@ const Slider = React.forwardRef<
         aria-label={label}
         aria-labelledby={labelledBy}
         aria-valuetext={valueText}
-        className="ui-slider-thumb flex h-[var(--control-height)] w-[var(--control-height)] items-center justify-center rounded-full after:h-[var(--space-5)] after:w-[var(--space-5)] after:rounded-full after:border after:border-primary after:bg-background transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+        className="ui-slider-thumb relative flex h-[var(--control-height)] w-px items-center justify-center rounded-full after:h-[var(--space-5)] after:w-[var(--space-5)] after:shrink-0 after:rounded-full after:border after:border-primary after:bg-background transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
       />
     </SliderPrimitive.Root>
   ),
