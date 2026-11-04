@@ -1,3 +1,4 @@
+import { randomInt } from "node:crypto";
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
@@ -176,17 +177,32 @@ const creatureFixtures = [
 ];
 
 /** Reuse the same current-format gameplay fixtures as browser regressions. */
-export async function reviewScenario(server, name) {
+export async function reviewScenario(server, name, { seed } = {}) {
   if (!SCENARIOS.includes(name))
     throw new Error(`Unknown scenario: ${name}. Choose ${SCENARIOS.join(", ")}.`);
-  const { run, winBattle, fullRosterReward, merchantDestination, accept, bossReward } =
+  if (seed !== undefined && (name !== "battle" || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff))
+    throw new Error("Use a whole-number --seed from 0 to 4294967295 with the battle sample");
+  const { run, teamRun, winBattle, fullRosterReward, merchantDestination, accept, bossReward } =
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
-  let game = name.startsWith("merchant")
-    ? merchantDestination(name.startsWith("merchant-bargain") ? ["bargain-scales"] : [])
-    : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
-      ? winBattle()
-      : run();
+  const battleSeed = name === "battle" ? (seed ?? randomInt(0, 0x100000000)) : undefined;
+  let sample;
+  if (name === "battle") {
+    const { SPECIES } = await server.ssrLoadModule("/src/game/content.ts");
+    const { shuffle } = await server.ssrLoadModule("/src/game/random.ts");
+    const lineup = shuffle(
+      { rng: battleSeed },
+      SPECIES.filter((entry) => !entry.legendary).map((entry) => entry.id),
+    ).slice(0, 3);
+    sample = teamRun(battleSeed, lineup, "random");
+  }
+  let game =
+    sample ??
+    (name.startsWith("merchant")
+      ? merchantDestination(name.startsWith("merchant-bargain") ? ["bargain-scales"] : [])
+      : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
+        ? winBattle()
+        : run());
   if (name === "home-talent-points") game = { ...game, keywordXP: { ...game.keywordXP, physical: 10 } };
   if (name === "starter") {
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
@@ -487,7 +503,15 @@ export async function reviewScenario(server, name) {
   return {
     name,
     save,
-    seed: name.startsWith("merchant") || name === "team-selection-pause" ? 7 : 42,
+    seed: battleSeed ?? (name.startsWith("merchant") || name === "team-selection-pause" ? 7 : 42),
+    ...(name === "battle"
+      ? {
+          lineup: {
+            allies: game.team.map((unit) => unit.species),
+            enemies: game.battle.enemies.map((unit) => unit.species),
+          },
+        }
+      : {}),
     fixture: creatureFixtures.includes(creature)
       ? `tests/support/${creature}.ts`
       : ["uncertain-targeting", "unknown-targeting"].includes(name)

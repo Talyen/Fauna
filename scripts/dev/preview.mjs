@@ -99,9 +99,14 @@ export async function preview(args = process.argv.slice(2)) {
       if (stopped) throw new Error("Preview canceled.");
       const context = await browser.newContext({ viewport: options.viewport, reducedMotion: "reduce" });
       const page = await context.newPage();
-      const scenario = options.scenario ? await reviewScenario(session.server, options.scenario) : null;
-      if (scenario) await openReviewScenario(page, session.url, scenario, options.scale);
-      else {
+      const scenario = options.scenario
+        ? await reviewScenario(session.server, options.scenario, { seed: options.seed })
+        : null;
+      if (scenario) {
+        if (scenario.lineup)
+          console.log(`Battle sample seed: ${scenario.seed}; replay with --seed ${scenario.seed}`);
+        await openReviewScenario(page, session.url, scenario, options.scale);
+      } else {
         await page.addInitScript(
           (scale) => localStorage.setItem("fauna.text-scale", String(scale)),
           options.scale,
