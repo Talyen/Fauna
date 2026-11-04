@@ -134,7 +134,7 @@ test("keeps unavailable talent rules readable without allowing a purchase", asyn
       });
       return 0.2126 * linear[0]! + 0.7152 * linear[1]! + 0.0722 * linear[2]!;
     };
-    return [".talent-effect", ".talent-status"].map((selector) => {
+    return [".talent-effect"].map((selector) => {
       const foreground = rgb(getComputedStyle(node.querySelector(selector)!).color);
       const visible = foreground.map(
         (channel, index) => channel * opacity + background[index]! * (1 - opacity),
@@ -143,7 +143,6 @@ test("keeps unavailable talent rules readable without allowing a purchase", asyn
     });
   });
   expect(contrast[0]).toBeGreaterThanOrEqual(4.5);
-  expect(contrast[1]).toBeGreaterThanOrEqual(4.5);
   const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
   await talent.focus();
   await expect(talent).toBeFocused();

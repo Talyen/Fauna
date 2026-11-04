@@ -202,10 +202,6 @@
   font-size: var(--text-rule);
   font-weight: 400;
 }
-.talent-status {
-  font-size: var(--text-secondary);
-  color: var(--muted-foreground);
-}
 .talent-node svg {
   width: 28px;
   height: 28px;

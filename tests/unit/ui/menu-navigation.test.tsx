@@ -174,6 +174,7 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
     await user.click(slam);
     expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Next page" }));
     const fists = screen.getByRole("button", { name: "Armored Fists" });
     expect(within(fists).getByText("Requires 1 point")).toBeTruthy();
     const bought = session.store.getState().game;
@@ -191,10 +192,10 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
       true,
     );
-    expect(
-      within(screen.getByRole("button", { name: "Armored Fists" })).getByText("Unlock · 1 point"),
-    ).toBeTruthy();
     expect(document.activeElement).toBe(screen.getByRole("button", { name: "Shield Slam" }));
+    expect(
+      within(screen.getByRole("button", { name: "Shield Slam" })).getByText("Unlock · 1 point"),
+    ).toBeTruthy();
     await user.keyboard("{Escape}");
     expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
     await user.keyboard("{Escape}");

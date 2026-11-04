@@ -542,9 +542,6 @@ h3 {
 .game-button.talent-node[data-available="true"] {
   border-color: var(--talent-card-available-border);
 }
-.game-button.talent-node[data-available="true"] .talent-status {
-  color: var(--primary);
-}
 .talent-node .talent-icon {
   color: color-mix(in srgb, var(--talent-accent) 45%, var(--talent-card-accent-light));
   opacity: 1;

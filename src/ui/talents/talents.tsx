@@ -298,10 +298,7 @@ export function Talents({
                             <span className="talent-effect" id={`${t.id}-effect`}>
                               <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                             </span>
-                            <span
-                              className={owned || available ? "sr-only" : "talent-status"}
-                              id={`${t.id}-status`}
-                            >
+                            <span className="sr-only" id={`${t.id}-status`}>
                               {status}
                             </span>
                           </Button>
@@ -316,7 +313,6 @@ export function Talents({
                           <p>
                             <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                           </p>
-                          <p>{status}</p>
                         </TooltipContent>
                       </Tooltip>
                     );

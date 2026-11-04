@@ -22,6 +22,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   const later = page.getByRole("button", { name: laterTalent.name, exact: true });
   if (!(await later.isVisible())) await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "true");
+  await expect(later).toHaveAccessibleDescription(/Requires all earlier rows/);
   const before = (await state(page)).revision;
   await later.focus();
   await page.keyboard.press("Enter");
