@@ -557,9 +557,6 @@
   "menu.returnToRun": {
     "text": "Return to Run"
   },
-  "menu.settings": {
-    "text": "Settings"
-  },
   "menu.talentPoints": {
     "forms": {
       "one": "{{count}} talent point available",
