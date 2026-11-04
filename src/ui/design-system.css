@@ -26,7 +26,11 @@
   scale: 1;
 }
 .game-button.control-primary:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--primary) 90%, var(--background));
   animation: primary-bloom 300ms ease-out forwards;
+}
+.game-button.control-destructive:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--destructive) 90%, var(--background));
 }
 @keyframes primary-bloom {
   0% {
@@ -49,7 +53,7 @@
 }
 .game-button.control-outline {
   border: 1px solid var(--border);
-  background: var(--background);
+  background: var(--control-fill);
   color: var(--foreground);
 }
 .game-button.control-outline:not(:disabled):not([aria-disabled="true"]):hover {
@@ -63,9 +67,15 @@
   scale: var(--pressed-scale);
   border-color: var(--primary);
 }
-.game-button:disabled,
-.game-button[aria-disabled="true"]:not(.creature-card):not(.action-card) {
-  opacity: var(--disabled-opacity);
+.game-button:is(.control-primary, .control-outline, .control-destructive):is(
+    :disabled,
+    [aria-disabled="true"]
+  ) {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+.game-button:is(.creature-card, .action-card):disabled {
+  opacity: 0.5;
 }
 .game-button svg {
   width: var(--icon-size);
@@ -96,7 +106,7 @@
   height: var(--compact-control-size);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--background);
+  background: var(--control-fill);
   z-index: -1;
   pointer-events: none;
   transition: inherit;
@@ -104,6 +114,9 @@
 .game-button.compact-icon-control:not(:disabled):not([aria-disabled="true"]):hover::before {
   border-color: var(--primary);
   background: var(--control-hover);
+}
+.game-button.compact-icon-control:is(:disabled, [aria-disabled="true"])::before {
+  background: var(--muted);
 }
 .game-button.compact-icon-control svg {
   width: var(--compact-icon-size);
@@ -140,7 +153,7 @@
   flex-shrink: 0;
   border: 2px solid var(--border);
   padding-inline: var(--space-3);
-  background: transparent;
+  background: var(--control-fill);
   color: var(--muted-foreground);
   font-weight: 400;
   box-shadow: none;
@@ -150,7 +163,7 @@
     background-color var(--motion-fast);
 }
 .ui-tabs-list .ui-tab[data-state="active"] {
-  background: var(--background);
+  background: var(--control-fill);
   color: var(--foreground);
   border-color: var(--primary);
   box-shadow: none;
@@ -159,6 +172,10 @@
   background: var(--control-hover);
   color: var(--foreground);
   border-color: var(--primary);
+}
+.ui-tabs-list .ui-tab:disabled {
+  background: var(--muted);
+  color: var(--muted-foreground);
 }
 .ui-tab svg {
   width: var(--icon-size);
@@ -590,9 +607,12 @@ h3 {
 .popover-content[data-state="closed"] {
   pointer-events: none;
 }
-:root[data-focus="visible"] .game-button.control-outline:focus {
-  background: var(--background);
+:root[data-focus="visible"] .game-button.control-outline:not([aria-disabled="true"]):focus {
+  background: var(--control-fill);
   border-color: transparent;
+}
+:root[data-focus="visible"] .game-button.control-outline.compact-icon-control:focus {
+  background: transparent;
 }
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus:active {
   scale: var(--pressed-scale);

@@ -96,9 +96,9 @@ A held stick cannot reclaim navigation after pointer/keyboard use until released
 
 | Surface      | Treatment                                                                                                                                                                                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Buttons      | Primary gold with hover bloom, destructive red, quiet controls neutral with opaque hover fills; press shrinks 2%, disabled 50%; busy text/spinner prevents repeated activation                          |
+| Buttons      | Opaque fills in every state: primary gold with hover bloom, destructive red, quiet controls neutral, disabled controls muted; press shrinks 2%; busy text/spinner prevents repeated activation          |
 | Artwork      | One keyword shine or neutral interaction frame on hover/focus; a chosen hand card stays raised without an extra selection border; unavailable/knockout opacity 45%, with grayscale for knockout         |
-| Tabs         | Centered with 12px gaps/padding, neutral 2px boundaries and gold selection/hover borders; regular labels, no strip, no selected-hover change; panels switch instantly                                   |
+| Tabs         | Centered with 12px gaps/padding, opaque fills, neutral 2px boundaries and gold selection/hover borders; regular labels, no strip, no selected-hover change; panels switch instantly                     |
 | Switches     | Gold/gray track, 150ms thumb travel, subtle hover brightening without growth                                                                                                                            |
 | Radios       | Gold outline/dot; hover brightens the existing outline; focus emphasizes the existing circle                                                                                                            |
 | Sliders      | Gold/gray track, ivory thumb, thin hover border and thicker focus/drag border; immediate values in 10-point steps                                                                                       |
