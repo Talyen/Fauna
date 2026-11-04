@@ -10,6 +10,7 @@ import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { actionDisplay } from "./action-display";
+import { cardRuleLines } from "../keyword-text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
 import { species } from "../../../game/content";
@@ -308,7 +309,7 @@ export function ActionCard({
     name: nameLabel,
     owner: ownerName,
     mana: modifiers ? cardCost(card, modifiers) : def.cost,
-    effect: effectLabel,
+    effect: cardRuleLines(effectLabel).replaceAll("\n", ", "),
   });
   useEffectBaseline(selected ? effectPalette(visualKeywords(rule.text)) : null, 1);
   const artwork = (

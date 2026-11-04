@@ -36,7 +36,7 @@ export function BoonName({ boon }: { boon: Boon }) {
 export function BoonText({ boon }: { boon: Boon }) {
   return (
     <p>
-      <KeywordText text={boon.text} id={`content.boon.${boon.id}.rule`} />
+      <KeywordText text={boon.text} id={`content.boon.${boon.id}.rule`} lines />
     </p>
   );
 }
