@@ -138,6 +138,8 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();
   await pad.press(1);
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+  await pad.press(15);
+  await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
   await pad.press(13);
   await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
   await pad.press(0);

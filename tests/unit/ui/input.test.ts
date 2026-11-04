@@ -5,6 +5,35 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
+it("leaves horizontal tabs for the next settings row while preserving native widget arrows", () => {
+  const root = document.createElement("div");
+  root.dataset.navLayout = "rows";
+  root.innerHTML = `<div data-nav-row role="tablist" aria-orientation="horizontal"><button role="tab">Sound</button></div>
+    <div data-nav-row><span id="master" role="slider" tabindex="0"></span></div>`;
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const actions = vi.fn((action: InputAction) => {
+    if (action === "down") moveFocus(action);
+  });
+  const close = connectInput(actions, () => {});
+  try {
+    const tab = root.querySelector<HTMLButtonElement>("button")!;
+    tab.focus();
+    const right = new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true, cancelable: true });
+    tab.dispatchEvent(right);
+    expect(right.defaultPrevented).toBe(false);
+    expect(actions).not.toHaveBeenCalled();
+    tab.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    expect(document.activeElement?.id).toBe("master");
+    const down = new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true, cancelable: true });
+    document.activeElement!.dispatchEvent(down);
+    expect(down.defaultPrevented).toBe(false);
+    expect(actions).toHaveBeenCalledTimes(1);
+  } finally {
+    close();
+    root.remove();
+  }
+});
 it.each(["Enter", " "])("enables navigation for %s activation of a focused control", (key) => {
   const button = document.createElement("button");
   document.body.append(button);

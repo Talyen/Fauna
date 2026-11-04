@@ -166,8 +166,13 @@ export function connectInput(
         (index + (event.key === "F7" || event.shiftKey ? -1 : 1) + controls.length) % controls.length
       ]?.focus();
     } else if (action) {
-      if (target?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]') && action !== "back")
-        return;
+      const widget = target?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]');
+      const leavesTabs =
+        widget?.getAttribute("role") === "tablist" &&
+        (widget.getAttribute("aria-orientation") === "vertical"
+          ? action === "left" || action === "right"
+          : action === "up" || action === "down");
+      if (widget && action !== "back" && !leavesTabs) return;
       event.preventDefault();
       if (!event.repeat || !["back", "inspect"].includes(action)) onAction(action);
     }
