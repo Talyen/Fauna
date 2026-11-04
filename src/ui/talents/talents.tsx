@@ -228,7 +228,7 @@ export function Talents({
             className="talent-tree"
             label={i18n.message("talents.pages", "Talent pages")}
             pageSize={1}
-            adaptive={{ columns: 1, rows: 3 }}
+            adaptive={{ columns: 1, rows: 4 }}
             items={tree!.rows}
           >
             {(row) => (
@@ -298,7 +298,10 @@ export function Talents({
                             <span className="talent-effect" id={`${t.id}-effect`}>
                               <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                             </span>
-                            <span className="talent-status" id={`${t.id}-status`}>
+                            <span
+                              className={owned || available ? "sr-only" : "talent-status"}
+                              id={`${t.id}-status`}
+                            >
                               {status}
                             </span>
                           </Button>

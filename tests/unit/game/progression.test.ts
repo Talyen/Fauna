@@ -30,6 +30,9 @@ it("caps each talent tree's budget and requires every earlier row after purchase
     const tree = TALENTS.filter((talent) => talent.keyword === keyword);
     const state = { talents: [] as (typeof TALENTS)[number]["id"][], keywordXP: { [keyword]: 1_000_000 } };
     expect(availablePoints(state, keyword)).toBe(tree.length);
+    expect(tree.map((talent) => talent.row)).toEqual(
+      tree.map((_, index) => (index < 1 ? 0 : index < 3 ? 1 : index < 6 ? 2 : 3)),
+    );
     for (const talent of tree) {
       const earlier = tree.filter((entry) => entry.row < talent.row);
       state.talents = earlier.map((entry) => entry.id);
@@ -50,6 +53,17 @@ it("caps each talent tree's budget and requires every earlier row after purchase
     state.keywordXP[keyword]++;
     expect(availablePoints(state, keyword)).toBe(1);
     expect(canBuyTalent(state, tree[0]!.id)).toBe(true);
+
+    const saved = produce(createGame(7), (draft) => {
+      draft.keywordXP[keyword] = xpThreshold(2);
+      draft.talents = [tree[1]!.id];
+    });
+    expect(() => decodeSave(encodeSave(saved))).toThrow();
+    const legal = produce(saved, (draft) => {
+      draft.talents.unshift(tree[0]!.id);
+    });
+    expect(decodeSave(encodeSave(legal))).toEqual(legal);
+    expect(() => decodeSave(encodeSave({ ...legal, version: legal.version - 1 }))).toThrow();
   }
 });
 

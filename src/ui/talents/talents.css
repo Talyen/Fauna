@@ -163,7 +163,7 @@
   gap: var(--screen-item-gap);
   width: 100%;
   margin-inline: auto;
-  max-width: calc(var(--talent-card-width) * 2 + var(--screen-item-gap));
+  max-width: var(--talent-tree-screen-width);
 }
 .talent-row {
   display: flex;
@@ -181,7 +181,7 @@
   width: var(--talent-card-width);
   min-height: var(--talent-card-min-height);
   height: auto;
-  padding: var(--space-4);
+  padding: var(--space-3);
   white-space: normal;
   text-align: center;
 }

@@ -546,8 +546,8 @@ h3 {
   color: var(--primary);
 }
 .talent-node .talent-icon {
-  color: var(--keyword-icon-color, currentColor);
-  opacity: 0.65;
+  color: color-mix(in srgb, var(--talent-accent) 45%, var(--talent-card-accent-light));
+  opacity: 1;
   transition:
     opacity var(--motion-fast),
     filter var(--motion-fast);
@@ -563,6 +563,14 @@ h3 {
 }
 .talent-node .talent-effect {
   color: var(--foreground);
+}
+.talent-node[data-owned="false"][data-available="false"] .talent-card-heading,
+.talent-node[data-owned="false"][data-available="false"] .talent-effect {
+  filter: grayscale(0.85);
+  opacity: 0.85;
+}
+.talent-node[data-owned="false"][data-available="false"] .talent-effect .rule-keyword {
+  color: inherit;
 }
 .talent-node[data-purchased="true"] {
   animation: talent-purchased var(--motion-battle);
