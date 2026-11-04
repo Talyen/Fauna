@@ -195,7 +195,7 @@
   --screen-item-gap: calc(12px * var(--ui-density, 1));
   --hand-overlap: calc(48px * var(--ui-density, 1));
   --hand-fan-angle-step: 4.2deg;
-  --hand-fan-drop-step: calc(10px * var(--ui-density, 1));
+  --hand-fan-drop-step: 10px;
   --hand-rest-inset: calc(0px * var(--ui-density, 1));
   --mana-crystal-size: calc(18px * var(--ui-density, 1));
   --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
