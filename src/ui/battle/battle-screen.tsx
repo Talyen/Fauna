@@ -193,13 +193,14 @@ export function BattleScreen({
                 />
               ) : undefined
             }
-            onClick={(element) => {
-              if (selected) {
-                if (enemyTarget && enemy.health > 0)
-                  play({ type: "play", cardId: selected, targetId: enemy.id });
-                else onDenied(element);
-              }
-            }}
+            onClick={
+              selected
+                ? () => {
+                    if (enemyTarget && enemy.health > 0)
+                      play({ type: "play", cardId: selected, targetId: enemy.id });
+                  }
+                : undefined
+            }
             label={
               selected && enemyTarget && enemy.health > 0
                 ? i18n.message("battle.target", "Target {{name}}", {
@@ -242,13 +243,14 @@ export function BattleScreen({
                 />
               ) : undefined
             }
-            onClick={(element) => {
-              if (selected) {
-                if (allyTarget && legalTargets.has(creature.id))
-                  play({ type: "play", cardId: selected, targetId: creature.id });
-                else onDenied(element);
-              }
-            }}
+            onClick={
+              selected
+                ? () => {
+                    if (allyTarget && legalTargets.has(creature.id))
+                      play({ type: "play", cardId: selected, targetId: creature.id });
+                  }
+                : undefined
+            }
             label={
               selected && allyTarget && legalTargets.has(creature.id)
                 ? i18n.message("battle.target", "Target {{name}}", {
@@ -376,7 +378,7 @@ export function BattleScreen({
             </div>
           </div>
           <section className="hand-section" aria-label={i18n.message("battle.actionHand", "Action hand")}>
-            <div className="hand">
+            <div className="hand" data-nav-stack>
               {visibleHand.map((id, index, hand) => {
                 const card = cardsById.get(id)!,
                   owner = cardActor(game, card)!,

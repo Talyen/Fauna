@@ -21,7 +21,10 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>) {
       const sampleHeight = parseFloat(getComputedStyle(sample).height) || sample.offsetHeight;
       const extra = rows.reduce((sum, row) => sum + row.getBoundingClientRect().height - sampleHeight, 0);
       const hand = root.querySelector<HTMLElement>(".hand-section");
-      const handTop = hand?.getBoundingClientRect().top ?? root.getBoundingClientRect().bottom;
+      const handTop =
+        css.getPropertyValue("--battle-hand-side").trim() === "1"
+          ? root.getBoundingClientRect().bottom
+          : (hand?.getBoundingClientRect().top ?? root.getBoundingClientRect().bottom);
       const clearance = parseFloat(css.getPropertyValue("--battle-hand-hover-clearance"));
       const availableHeight = Math.min(
         root.clientHeight - parseFloat(css.paddingBottom),

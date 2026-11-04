@@ -58,6 +58,19 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     buttons[0]!.focus({ preventScroll: true });
     return;
   }
+  const stack = current.closest<HTMLElement>("[data-nav-stack]");
+  if (
+    stack &&
+    getComputedStyle(stack).flexDirection === "column" &&
+    (direction === "up" || direction === "down")
+  ) {
+    const peers = buttons.filter((button) => stack.contains(button));
+    const next = peers[peers.indexOf(current) + (direction === "up" ? -1 : 1)];
+    if (next) {
+      next.focus({ preventScroll: true });
+      return;
+    }
+  }
   const region = current.closest<HTMLElement>('[data-nav-layout="rows"]');
   if (region && (root === document || root.contains(region))) {
     const rowSelector = "[data-nav-row]";

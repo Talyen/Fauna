@@ -121,9 +121,22 @@ export function CreatureCard({
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
       onClick={(event) => {
+        if (battlePortrait && !onClick) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
         setTooltipOpen(false);
         if (!disabled) onClick?.(event.currentTarget);
       }}
+      onPointerDown={
+        battlePortrait && !onClick
+          ? (event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+          : undefined
+      }
       onFocus={(event) => {
         if (
           (event.currentTarget.closest<HTMLElement>(".app")?.dataset.focus ??

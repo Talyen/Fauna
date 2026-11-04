@@ -1,4 +1,4 @@
-import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
@@ -47,6 +47,69 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   expect((await state(page)).revision).toBe(before.revision + 1);
   await expect(page.locator(".health-number,.intent,.battle-status,.pile-counts")).toHaveCount(0);
   await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
+});
+
+test("short battles keep a seven-card hand usable beside collection-sized artwork", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const fixture = produce(run(7), (draft) => {
+    draft.boons.push("facet-abacus");
+    draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
+    draft.battle!.draw = draft.cards.slice(7).map((card) => card.id);
+    draft.battle!.discard = [];
+    draft.battle!.enemies[0]!.combat.thorns = 3;
+  });
+  await seed(page, fixture);
+  await resume(page);
+  const hand = page.locator(".app:not([inert]) .hand .action-card");
+  await expect(hand).toHaveCount(7);
+  const art = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+  const status = page.locator(".app:not([inert]) .enemy-row .combat-status").first();
+  const geometry = await page.evaluate(() => {
+    const art = document
+      .querySelector(".app:not([inert]) .enemy-row .creature-card")!
+      .getBoundingClientRect();
+    const status = document
+      .querySelector(".app:not([inert]) .enemy-row .combat-status")!
+      .getBoundingClientRect();
+    const cards = [...document.querySelectorAll(".app:not([inert]) .hand .action-card")];
+    return {
+      width: art.width,
+      centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
+      below: status.top >= art.bottom - 1,
+      selectable: cards.every((card) => {
+        const box = card.getBoundingClientRect();
+        return (
+          document.elementFromPoint(box.left + box.width / 2, box.top + 12)?.closest(".action-card") === card
+        );
+      }),
+    };
+  });
+  await expect(art).toBeVisible();
+  await expect(status).toBeVisible();
+  expect(geometry.width).toBeGreaterThanOrEqual(300);
+  expect(geometry.below).toBe(true);
+  expect(geometry.centered).toBeLessThanOrEqual(1);
+  expect(geometry.selectable).toBe(true);
+  await hand.first().focus();
+  await page.keyboard.press("s");
+  await expect(hand.nth(1)).toBeFocused();
+  await page.keyboard.press("w");
+  await expect(hand.first()).toBeFocused();
+});
+
+test("idle combatant clicks leave the battle and portrait unchanged", async ({ page }) => {
+  await seed(page, targetingBattle());
+  await resume(page);
+  const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+  const before = await state(page);
+  await enemy.hover();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  const beforeScale = await enemy.evaluate((element) => getComputedStyle(element).scale);
+  await page.mouse.down();
+  expect(await enemy.evaluate((element) => getComputedStyle(element).scale)).toBe(beforeScale);
+  await page.mouse.up();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  expect((await state(page)).revision).toBe(before.revision);
 });
 
 test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({
@@ -136,9 +199,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "keyboard");
 });
 
-test("navigation returns to the nearest remaining card; denial is visual and respects motion", async ({
-  page,
-}) => {
+test("navigation returns to the nearest remaining card; invalid targets do nothing", async ({ page }) => {
   const fixture = targetingBattle();
   await seed(page, fixture);
   await resume(page);
@@ -151,32 +212,8 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   const before = await state(page);
   await cards.first().click();
   const unavailable = page.locator(".app:not([inert]) .player-row .invalid-target").first();
-  await unavailable.evaluate((element) => {
-    // Observe after React handles the real click, before a slow driver round trip
-    // can outlast the short denial animation.
-    document.addEventListener("click", (event) => {
-      if (!(event.target instanceof Node) || !element.contains(event.target)) return;
-      element.setAttribute(
-        "data-denial-motion",
-        String(
-          element
-            .getAnimations()
-            .some(
-              (animation) =>
-                animation.effect instanceof KeyframeEffect &&
-                animation.effect.getKeyframes().some((frame) => "translate" in frame),
-            ),
-        ),
-      );
-    });
-  });
   await unavailable.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(unavailable).toHaveAttribute("data-denial-motion", "true");
   expect((await state(page)).revision).toBe(before.revision);
-  await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await settleScreen(page);
-  await unavailable.click();
-  await expect(unavailable).toHaveAttribute("data-denial-motion", "false");
+  await expect(page.locator(".battle-screen")).not.toHaveAttribute("data-selected-card", "");
 });
