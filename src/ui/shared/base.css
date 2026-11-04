@@ -32,11 +32,9 @@
 }
 
 html {
+  /* Preserve the 26px pointer size until the display needs all 64 source pixels. */
   cursor:
-    image-set(
-        url("./assets/pointer-c-shaded.png")
-          calc(max(2.4615384615384617, var(--artwork-pixel-ratio, 2)) * 1dppx)
-      )
+    image-set(url("./assets/pointer-c-shaded.png") calc(max(64 / 26, var(--artwork-pixel-ratio, 2)) * 1dppx))
       0 0,
     auto;
 }

@@ -17,7 +17,7 @@ export function artworkWidth(url: string, aspect: "creature" | "action") {
   return Math.min(record.width, record.height * (aspect === "creature" ? 4 / 3 : 3 / 4));
 }
 
-/** One pixel budget keeps combatants and the hand at the same artwork area. */
+/** One pixel budget preserves the combatant/hand proportions when artwork is capped. */
 export const battleArtworkLongEdge = Math.min(
   ...Object.entries(records).flatMap(([id, record]) => {
     if (!/^(creature|action|minion|pile|card)\./.test(id)) return [];
