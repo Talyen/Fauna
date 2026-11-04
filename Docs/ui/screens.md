@@ -83,7 +83,7 @@ Boons shows the complete read-only catalog, with name and rules on hover or inte
 
 ## Talents
 
-The overview shows every category in centered rows of at most five, with 12px column gaps. Portrait artwork grows to the largest size fitting row width and remaining height, without a fixed cap; category labels and hover frames use solid colors. Reserve full-size category names (16px) and available-point labels (13px), respecting text preferences and fixed caption line boxes. If no category has points, omit the empty point-label space.
+The overview shows every category in centered rows of at most five, with 8px column gaps and 16px row gaps. Portrait artwork grows to the largest size fitting row width and remaining height, without a fixed cap; category labels and hover frames use solid colors. Reserve category names (14px) and available-point labels (13px), respecting text preferences and fixed caption line boxes. If no category has points, omit the empty point-label space.
 
 Selecting artwork opens a dedicated tree. Show available points, exact XP and Progress above compact icon/name cards with visible effects and availability requirements. Authored rows contain two talents, with a possible single final talent. Measure remaining height to page up to three rows. The category-named header reset immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 

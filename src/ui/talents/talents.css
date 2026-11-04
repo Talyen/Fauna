@@ -25,10 +25,14 @@
   place-items: center;
 }
 .talent-overview {
+  --talent-overview-column-gap: var(--space-2);
+  --talent-overview-row-gap: var(--space-4);
+  --talent-overview-art-gap: var(--space-1);
   --talent-overview-art-width: calc(
     (
-        100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) * 3 -
-          (var(--talent-overview-caption-height) + var(--screen-item-gap)) * 3
+        100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) -
+          var(--talent-overview-row-gap) * 2 -
+          (var(--talent-overview-caption-height) + var(--talent-overview-art-gap)) * 3
       ) *
       3 / 12
   );
@@ -36,15 +40,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: min(100%, calc(var(--talent-overview-column-width) * 5 + var(--screen-item-gap) * 4));
-  column-gap: var(--screen-item-gap);
-  row-gap: var(--screen-section-gap);
+  width: min(100%, calc(var(--talent-overview-column-width) * 5 + var(--talent-overview-column-gap) * 4));
+  column-gap: var(--talent-overview-column-gap);
+  row-gap: var(--talent-overview-row-gap);
 }
 .talent-overview:not(:has(.talent-category-points:not(:empty))) {
   --talent-overview-caption-height: var(--talent-category-label-line-height);
+  --talent-category-caption-width: calc(112px * var(--text-scale, 1));
 }
 .talent-category {
-  flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
+  flex: 0 0 calc((100% - var(--talent-overview-column-gap) * 4) / 5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +58,7 @@
 }
 .talent-category .action-card {
   width: min(100%, var(--talent-overview-art-width));
-  margin-bottom: var(--screen-item-gap);
+  margin-bottom: var(--talent-overview-art-gap);
 }
 .talent-category h2 {
   font-size: var(--talent-category-label-size);
