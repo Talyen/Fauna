@@ -184,11 +184,12 @@
 .ui-tabs-list .ui-tab::after {
   content: "";
   position: absolute;
-  inset: calc(-1 * (2px + var(--hover-frame-outset)));
-  border: var(--hover-frame-width) solid var(--tab-frame-color);
-  border-radius: calc(var(--radius) + var(--hover-frame-outset));
+  inset: -2px;
+  outline: var(--hover-frame-width) solid var(--tab-frame-color);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border-radius: var(--radius);
   pointer-events: none;
-  transition: border-color var(--motion-fast);
+  transition: outline-color var(--motion-fast);
 }
 .ui-tabs-list .ui-tab[data-state="active"] {
   --tab-frame-color: var(--primary);
