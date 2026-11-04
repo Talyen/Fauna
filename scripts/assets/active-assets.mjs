@@ -65,7 +65,7 @@ export async function verifyAssetBundle(directory, receipt) {
     const file = path.join(directory, url);
     const size = (await stat(file)).size;
     if ((await fileHash(file)) !== record.outputHash) throw new Error(`Build media changed: ${url}`);
-    if (/\.(webp|png|svg)$/.test(url) && size > MAX_ART_BYTES)
+    if (/\.(webp|png|svg|jpe?g)$/.test(url) && size > MAX_ART_BYTES)
       throw new Error(`Prepared artwork exceeds 3 MiB: ${url}`);
     total += size;
   }
