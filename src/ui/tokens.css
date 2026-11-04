@@ -63,7 +63,6 @@
   --compact-icon-size: 16px;
   --main-menu-logo-width: calc(var(--art-long-side) * 2.3);
   --main-menu-button-width: max(180px, calc(168px * var(--text-scale, 1)));
-  --pause-menu-width: 240px;
   --settings-screen-width: 640px;
   --menu-screen-width: 800px;
   --screen-heading-width: 640px;

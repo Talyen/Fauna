@@ -10,7 +10,7 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Glossary, Settings and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
 
 Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
@@ -47,13 +47,13 @@ Apply the [copy and layout rule](../UI.md#copy-and-layout) throughout these scre
 
 Use a balanced header frame up to 640px wide (920px for the Merchant wallet and translated title): Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](#back-and-focus-return), previewing chosen starters during drafting.
 
-Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
+Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. The menu trigger follows Alchemy's 44px surface, muted 24px icon and active appearance. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
 ## Main menu and Pause
 
 Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
-Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
+Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
 Both menus show spendable talent points beside Talents with an accessible description; the count disappears when spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
 

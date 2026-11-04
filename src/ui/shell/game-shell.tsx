@@ -404,6 +404,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       value={{
                         back: () => transition({ type: "home" }),
                         openMenu,
+                        menuOpen: surface.top === "pause",
                         deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
                           game.phase,
                         )
@@ -415,8 +416,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="menu-button compact-icon-control"
+                          className="menu-button menu-trigger"
                           data-menu-anchor
+                          aria-expanded={surface.top === "pause"}
                           aria-label={i18n.message("battle.openMenu", "Open menu")}
                           onClick={openMenu}
                         >

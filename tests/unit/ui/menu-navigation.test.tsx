@@ -101,8 +101,15 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
     const revision = session.store.getState().game.revision;
     for (const dismiss of ["Continue", "Escape", "outside"]) {
       const opener = screen.getByRole("button", { name: "Open menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("false");
       await user.click(opener);
       const menu = screen.getByRole("dialog", { name: "Pause menu" });
+      expect(opener.getAttribute("aria-expanded")).toBe("true");
+      expect(
+        within(menu)
+          .getAllByRole("button")
+          .map((button) => button.textContent?.trim()),
+      ).toEqual(["Continue", "Main menu", "Collection", "Talents", "Glossary", "Settings", "End journey"]);
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();
