@@ -192,7 +192,6 @@ export function Collection({
                   pages={totalPages}
                   change={change}
                   label={i18n.message("collection.pages", "Collection pages")}
-                  showCount={false}
                 />
               ) : null}
             </div>
