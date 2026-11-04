@@ -14,6 +14,8 @@
   position: relative;
   isolation: isolate;
   --battle-creature-width: var(--battle-fitted-width, var(--art-landscape-width));
+  --battle-target-rail-width: clamp(180px, 14vw, 280px);
+  --battle-readout-line-height: max(24px, calc(var(--text-secondary) * 1.4));
   gap: var(--screen-item-gap);
 }
 .screen-stage > .battle-screen {
@@ -196,9 +198,6 @@
 .battle-screen .creature-card {
   overflow: visible;
 }
-.battle-screen :is(.enemy-row, .player-row) {
-  padding: var(--target-bracket-gap);
-}
 .battle-screen [data-acting] :where(.creature-card) {
   outline: var(--target-actor-width) solid var(--muted-foreground);
   outline-offset: var(--selection-gap);
@@ -276,12 +275,39 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0;
-  min-height: calc(var(--control-height) + 4px);
+  min-height: calc(var(--battle-readout-line-height) + 4px);
   padding-top: 4px;
 }
-/* Keep room for both status controls and a forecast in rows that have effects. */
-.battle-screen :is(.enemy-row, .player-row):has(.combat-status) .combatant-details {
-  min-height: calc(var(--control-height) + var(--text-secondary) * 1.4 + 4px);
+/* Block has its own edge of the readout; status glyphs remain centered. */
+.battle-screen .combatant-details .combat-stats {
+  position: absolute;
+  top: calc(var(--battle-creature-width) * 3 / 4 + 4px);
+  right: 0;
+  max-width: calc((100% - var(--control-height) * 3 - var(--screen-item-gap) * 2) / 2);
+}
+.target-outcomes {
+  grid-area: 1 / 3 / 3 / 4;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
+  min-width: var(--battle-target-rail-width);
+  font-size: var(--text-secondary);
+  text-align: center;
+}
+.target-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.target-outcome:has(.combat-stats:empty) {
+  display: none;
+}
+.battle-screen .target-outcomes .target-preview[data-conditional] .combat-stats > span {
+  max-width: 100%;
+  white-space: normal;
 }
 .battle-screen .battle-readout,
 .battle-screen .target-preview {
@@ -635,12 +661,18 @@
   grid-row: 1;
 }
 
+/* Icon glyphs stay below the frame; their 44px hit targets overhang this compact row. */
 .battle-screen .combat-status {
+  height: var(--battle-readout-line-height);
+  align-items: center;
   order: -1;
   flex-shrink: 0;
   pointer-events: auto;
   flex-wrap: nowrap;
   z-index: 2;
+}
+:root .app .battle-screen .combat-status .pagination .game-button {
+  background: transparent;
 }
 .battle-screen .combat-status .status-icon svg {
   filter: drop-shadow(0 0 2px var(--background)) drop-shadow(0 0 1px var(--foreground));
