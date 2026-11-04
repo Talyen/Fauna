@@ -9,4 +9,5 @@ export const LIGHT_TALENTS = [
   talent("light.scorching-light", "Scorching Light", 3),
   talent("light.tithe", "Tithe", 3),
   talent("light.radiant-guard", "Radiant Guard", 3),
+  talent("light.daybreak", "Daybreak", 3),
 ] as const;

@@ -53,6 +53,25 @@ const recordedSpecies = SPECIES.filter(
 );
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));
+// New Talents have direct outcome assertions in distinct-talents.test.ts
+const NEW_TALENT_IDS = new Set([
+  "dodge.veil-of-mist",
+  "freeze.permafrost",
+  "light.daybreak",
+  "stun.static-charge",
+  "mana.astral-veil",
+  "mana.arcane-discharge",
+  "physical.savagery",
+  "physical.juggernaut",
+  "burn.heat-haze",
+  "burn.hearthfire",
+  "burn.combustion",
+  "water.frigid-current",
+  "water.storm-surge",
+  "water.spring-tide",
+  "water.living-water",
+]);
+const recordedTalents = TALENTS.filter((talent) => !NEW_TALENT_IDS.has(talent.id));
 // The reviewed October 26 baseline includes the Armor wear rule and current Auto-play scoring.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 // Neradora's six traces were updated when Undertow Knot changed from Water Thorns to Block and Cleanse.
@@ -61,14 +80,14 @@ const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, bo
 // The turn-start draw change updates Perfect Timing, Memento and Orifable traces; see task evidence.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
-    talents: digest(TALENTS),
+    talents: digest(recordedTalents),
     boons: digest(recordedBoons),
     passives: digest(recordedSpecies.map(({ id, passiveTiers }) => ({ id, passiveTiers }))),
   }).toMatchSnapshot();
 });
 
 const cases = [
-  ...TALENTS.map((talent) => ({
+  ...recordedTalents.map((talent) => ({
     name: talent.id,
     talent,
     boon: undefined,
@@ -123,15 +142,18 @@ it.each(cases)(
         if (scenario.talent) {
           const talent = scenario.talent;
           draft.keywordXP[talent.keyword] = 100000;
-          draft.talents = TALENTS.filter(
-            (other) => other.keyword === talent.keyword && (other.row < talent.row || other.id === talent.id),
-          ).map((other) => other.id);
+          draft.talents = recordedTalents
+            .filter(
+              (other) =>
+                other.keyword === talent.keyword && (other.row < talent.row || other.id === talent.id),
+            )
+            .map((other) => other.id);
         }
         if (scenario.boon) draft.boons = [scenario.boon.id];
         draft.discovery.recruited[scenario.species] = scenario.rank + 1;
         if (scenario.name === "combined reactions") {
-          draft.talents = TALENTS.map((talent) => talent.id);
-          for (const talent of TALENTS) draft.keywordXP[talent.keyword] = 100000;
+          draft.talents = recordedTalents.map((talent) => talent.id);
+          for (const talent of recordedTalents) draft.keywordXP[talent.keyword] = 100000;
           draft.boons = recordedBoons.map((boon) => boon.id);
         }
       }),

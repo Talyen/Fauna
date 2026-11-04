@@ -8,4 +8,6 @@ export const MANA_TALENTS = [
   talent("mana.arcane-frost", "Arcane Frost", 2),
   talent("mana.mana-shell", "Mana Shell", 3),
   talent("mana.arcane-mending", "Arcane Mending", 3),
+  talent("mana.astral-veil", "Astral Veil", 3),
+  talent("mana.arcane-discharge", "Arcane Discharge", 3),
 ] as const;

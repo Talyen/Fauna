@@ -94,6 +94,15 @@ const talentModifiers = freeze(
     ),
     "burn.smoldering": rule({ percent: 10 }, (p) => `Burn has a ${p.percent}% chance to not decay`),
     "burn.fire-resistance": { text: "Take half Burn damage" },
+    "burn.heat-haze": rule({ amount: 10 }, (p) => `Gain ${p.amount}% Dodge chance against Burning enemies`),
+    "burn.hearthfire": rule(
+      { amount: 2 },
+      (p) => `Burn hits against Burning enemies restore ${p.amount} Health`,
+    ),
+    "burn.combustion": rule(
+      { percent: 25 },
+      (p) => `Burn damage is increased by ${p.percent}% against Poisoned or Bleeding enemies`,
+    ),
     "dodge.lightfoot": rule({ amount: 5 }, (p) => `Gain ${p.amount}% Dodge chance`),
     "dodge.catch-breath": rule({ amount: 1 }, (p) => `Restore ${p.amount} Health when you Dodge`),
     "dodge.thornstep": rule({ amount: 1 }, (p) => `Gain ${p.amount} Thorns when you Dodge`),
@@ -115,6 +124,7 @@ const talentModifiers = freeze(
       { amount: 2 },
       (p) => `When you Dodge without Armor, gain ${p.amount} Armor`,
     ),
+    "dodge.veil-of-mist": rule({ amount: 10 }, (p) => `Gain ${p.amount}% Dodge chance while you have Block`),
     "freeze.bitter-cold": rule(
       { percent: 10 },
       (p) => `Reduce enemy Freeze thresholds by ${p.percent} percentage points`,
@@ -127,6 +137,7 @@ const talentModifiers = freeze(
     "freeze.cold-resistance": { text: "Take half Freeze damage" },
     "freeze.cryo-preservation": { text: "Poison does not decay on Frozen enemies" },
     "freeze.thaw-dividend": { text: "When an enemy recovers from Freeze, draw a card" },
+    "freeze.permafrost": { text: "Your Block does not decay while an enemy is Frozen" },
     "health.mending": rule({ percent: 10 }, (p) => `Receive ${p.percent}% more healing during combat`),
     "health.renewal": rule({ amount: 2 }, (p) => `Cleansing a harmful status restores ${p.amount} Health`),
     "health.last-resort": rule(
@@ -212,6 +223,10 @@ const talentModifiers = freeze(
       { percent: 10 },
       (p) => `Gaining Block has a ${p.percent}% chance to draw a Light card`,
     ),
+    "light.daybreak": rule(
+      { amount: 2 },
+      (p) => `Light hits restore ${p.amount} Health while you have Block`,
+    ),
     "mana.wellspring": rule(
       { amount: 1 },
       (p) => `End your turn with unspent Mana to gain ${p.amount} extra Mana next turn`,
@@ -231,6 +246,14 @@ const talentModifiers = freeze(
     "mana.arcane-mending": rule(
       { amount: 1 },
       (p) => `Each living deployed creature restores ${p.amount} Health per Mana gained`,
+    ),
+    "mana.astral-veil": rule(
+      { amount: 5 },
+      (p) => `Gain ${p.amount}% Dodge chance for each point of Mana you have`,
+    ),
+    "mana.arcane-discharge": rule(
+      { amount: 3 },
+      (p) => `Spending your last Mana deals ${p.amount} Stun damage to a random enemy`,
     ),
     "nature.bramblegrowth": rule(
       { percent: 10 },
@@ -277,6 +300,14 @@ const talentModifiers = freeze(
       text: "After you Dodge, your next Physical attack is guaranteed to Critical Hit",
     },
     "physical.unrelenting": { text: "Physical damage is doubled while you're below half Health" },
+    "physical.savagery": rule(
+      { percent: 15 },
+      (p) => `Physical attacks gain ${p.percent}% Critical Hit chance against Bleeding or Stunned enemies`,
+    ),
+    "physical.juggernaut": rule(
+      { amount: 3 },
+      (p) => `When a Physical attack breaks enemy Block, gain ${p.amount} Armor`,
+    ),
     "poison.necrosis": { text: "Poisoned enemies receive half as much healing" },
     "poison.torpor": { text: "Poisoned enemies cannot Dodge" },
     "poison.hemotoxin": rule(
@@ -320,6 +351,10 @@ const talentModifiers = freeze(
       { amount: 1 },
       (p) => `If you have no Mana, Stunning an enemy grants ${p.amount} Mana`,
     ),
+    "stun.static-charge": rule(
+      { percent: 25 },
+      (p) => `Stun attacks deal ${p.percent}% more damage against enemies with Block or Armor`,
+    ),
     "water.pressure": rule({ amount: 1 }, (p) => `Water attacks deal ${p.amount} more damage`),
     "water.seafoam": rule({ amount: 2 }, (p) => `Water hits grant ${p.amount} Block`),
     "water.high-tide": rule(
@@ -334,6 +369,19 @@ const talentModifiers = freeze(
     "water.riptide": rule(
       { percent: 20 },
       (p) => `Water hits have a ${p.percent}% chance to draw a Water card`,
+    ),
+    "water.frigid-current": { divisor: 2, text: "Water damage adds half as much Freeze buildup" },
+    "water.storm-surge": rule(
+      { amount: 1 },
+      (p) => `Water hits against Stunned or Frozen enemies restore ${p.amount} Mana`,
+    ),
+    "water.spring-tide": {
+      state: "springTide",
+      text: "When you Cleanse a harmful effect, your next Water card plays twice",
+    },
+    "water.living-water": rule(
+      { amount: 2 },
+      (p) => `Water hits against enemies without Armor restore ${p.amount} Health`,
     ),
   } as const,
   true,

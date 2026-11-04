@@ -7682,163 +7682,169 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "5f0bd0a0e897eded00e2790f57304e4c1121acf2f23f8b139d8c6c1f09ffb61b",
+    "sourceHash": "1c562de49209dbd5847159b0cd2f4d39838d41dd802f7fd932c7c16e95f9704d",
     "text": "Akrobatenkreisel: Dem nächsten Angriff kann nicht <keyword0>ausgewichen</keyword0> werden"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "1bbf1346319104664e6551e9990608e434868849a5d79318233fed7d7248c040",
+    "sourceHash": "6df28cf6b4fddb885199c95e0e76e75cda301eadd1da4a0a7ae605e6ff714346",
     "text": "<keyword0>Angriffsreflexion</keyword0>: Wirft den nächsten eingehenden Fähigkeitsangriff auf seinen Angreifer zurück; Verhindert dessen Schaden und schädliche Effekte auf dich; <keyword1>Reflektierte</keyword1> Angriffe können nicht erneut <keyword2>reflektiert</keyword2> werden; Hält bis zur Nutzung oder zum <keyword3>Bannen</keyword3>; Ist nicht stapelbar"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "b75748585f27672c15b7741d2bbd3416df1bfe31039b1e539df2860ff2d2c2cc",
+    "sourceHash": "ff5f4ed1fe522a1ea60a3f4b2dda741c2a75031ccd9d632ab1cd6064f46e99ce",
     "text": "<keyword0>Blindheit</keyword0>: Dein nächster Angriff verfehlt mit {{value0}}% Wahrscheinlichkeit alle Ziele; Endet nach diesem Angriff, ob Treffer oder Fehlschlag; Ein Fehlschlag zählt für jedes Ziel als <keyword1>Ausweichen</keyword1>; Ist nicht stapelbar"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "3cf5dc173bdb7be8cdb20dfd63a46972c245865531a80ca85e757d8f7d9ed617",
+    "sourceHash": "ae90cace56922969dc5b8c04feaea2549e9589b19f464ead0cc0aad778a5349a",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "74de824ae4faf1877fa69170001541507b4c59bbea3feb1251ace7ffa2c4f968",
+    "sourceHash": "bcd193f90ae9b7fe42982f470dbc96ef35d0fa5435e4a4fc97051e04aeaae7b0",
     "text": "Runde ausgesetzt"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "010706185d6b2e7479ac50545ed3906d880c9acd6d2255d80e04cb40c368f75a",
+    "sourceHash": "3bc9c9faee78c9f2a6439c2278e0a561de32fbf86e9793eff2e4e5cfce2e8b11",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runde"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "e3b71c80b5532769aee442d73cd474d54ddb5e197c6832fb5c1935e528b34c6f",
+    "sourceHash": "f3fc6cc2733c6bf302e547e321dac2e5d7fcb0569bed71a970a8b4259b41cc5c",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "a34c6715a39a1cae67284466917c09401285906dc1f4e66245d45f7962f7e779",
+    "sourceHash": "d621ff40a629beb06bf37fe1812008e50ee7e9e65aba11a58dfb137f4000f1fb",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runde"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "3827cc3de9072c27d33ee60b3185f68f42963218ea2be3d08785b8bc63126ff6",
+    "sourceHash": "486638db257474b00b29ce89bb5f085700d0f417dc0f41a669f98b57be20e3e2",
     "text": "Kontrollimmunität {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "33125a3f5db11c06021c0b39ccaf9b6b8b89c775bbea46cf29697eff54fffd3a",
+    "sourceHash": "c817e58dd83be3d8adb707223b32d57cc6bbd0c91b72edf3cec49c05daa5cd82",
     "text": "Kostenloses Nachsetzen: nächste Karte ist kostenlos"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "a447b3c5d860cad7eb7f622e4435fb46bc5b4b01d8d5e615e6f0349d36a2aac7",
+    "sourceHash": "d267ad3d4b87757b085202a456d02308bbea8ac9b40734ca78fabb713d5d795a",
     "text": "Göttliche Gunst: nächste <keyword0>Licht</keyword0>-Karte ist kostenlos"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "474df77ba0ef5fb08f82a7e9e891d2e5a197e4f6dde05dbac67d0c3be97e81b0",
+    "sourceHash": "4e232f27a71dc67dcfb13313c8f4735b0bb3964f58f98f5e843c15b9663f0c97",
     "text": "Windschritt: nächste <keyword0>Natur</keyword0>-Karte ist kostenlos"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "289671753ac23f9a12b80f7979bed9f0d95d83f6803a9e1470bcdbdc0d3a72f7",
+    "sourceHash": "87ba95e0ac771c4da5f5aac8219259cb75b7b22d9ce99041015f468a62f7d5bf",
     "text": "Nahtod {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "db7e422b0d12e8ce33010fb619825bb3ddf23a7431eaaf7683128dd40a39603e",
+    "sourceHash": "3be211e4c575071ebfbab42fe314a665c458386ee996905e65284f30f94e1d15",
     "text": "Mondsamen: Der nächste <keyword0>Dornen</keyword0>-Gegenschlag verursacht doppelten Schaden"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "549e36593d8ffcb78527208a203ab5a8aaf30b0cf002d39c8301cc185540eaf5",
+    "sourceHash": "7ab294a6a994627c56a4ebb17e120a4aaea39223bd2b270e90cd0bd0a1b99868",
     "text": "<keyword0>Abwehren</keyword0>: Verhindert den nächsten eingehenden Fähigkeitsangriff und seine schädlichen Effekte auf dich vor dem <keyword1>Ausweichen</keyword1>; <keyword2>Dornen</keyword2> schlagen trotzdem zurück; Hält bis zur Nutzung oder zum <keyword3>Bannen</keyword3>; Ist nicht stapelbar"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "5eca0ce0b99a569721c50a3a07052e55d129f30d3dfa476a480930b95a25a586",
+    "sourceHash": "8b687fd9b0882169c2aa09841cea879743cdea7e317dc94f1b32213a4f5c0708",
     "text": "Offene Flanke: nächster Angriff verursacht {{value0}} zusätzlichen <keyword0>physischen</keyword0> Schaden"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "ba29b94c0d94239bae989f72e41abf94661b11c2bf4763a627754c8774b0252b",
+    "sourceHash": "1c223aa444f1afb8b7dc418b738aa29154ffddbd64b1050ba34ec685f0c0ae8e",
     "text": "<keyword0>Aufheben</keyword0>: Verhindert die nächste Anwendung von <keyword1>Brand</keyword1>, <keyword2>Gift</keyword2>, <keyword3>Blutung</keyword3>, <keyword4>Betäubung</keyword4>, <keyword5>Frost</keyword5> oder <keyword6>Blindheit</keyword6>; Direkter Schaden und vorhandene Effekte bleiben unverändert; Hält bis zur Nutzung oder zum <keyword7>Bannen</keyword7>; Ist nicht stapelbar"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "32c87f054319c024501d199fd36230ae43d223483eaa925bc694235038c7771d",
+    "sourceHash": "fc62812045a7b394f2fdc9379e05bdc79aacfed96f0607db4238a04827c7ff3c",
     "text": "Den nächsten <keyword1>Frost</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "b0a65741c10815354e5c60f061181d6b780cdaf8092f66bce2a2e7245011126b",
+    "sourceHash": "efc75b180689bd94805a2e05186428f972ed35702e2543af0ff8cbf4db2ebc09",
     "text": "Oasensamen: nächster Angriff hat <keyword0>Lebensraub</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "a846be111b41858b2870c253e171d382504cf8574b00bc97b989cfa48d193e49",
+    "sourceHash": "be104022a8c6927cc5f9f5303de59e60d39408c5c56c67e52f3b77070b1da6e8",
     "text": "Abschiedsschnitt: nächster <keyword0>physischer</keyword0> Treffer verursacht die Hälfte seines Schadens zusätzlich als <keyword1>Blutungsschaden</keyword1>"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "2d3cd8511f5e0347fc0acccfd5d641c905fca058ff597c7a2fe6ec766a1754b2",
+    "sourceHash": "254dd158d7591bd8c803b0356952c38b1e8b388d9bda26877a50cd19c0a27687",
     "text": "<keyword0>Reflektieren</keyword0>: Leitet den angegebenen schädlichen Status auf einen zufälligen lebenden Gegner um; Direkter Schaden trifft dich weiterhin; <keyword1>Angriffsreflexion</keyword1> wirft stattdessen den gesamten Angriff auf den Angreifer zurück; <keyword2>Reflektierte</keyword2> Effekte können nicht erneut <keyword3>reflektiert</keyword3> werden; Ladungen sind nicht stapelbar"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "3bf69fb6d88471320c9b66fbee73ad04c1edc16f04f42abd5b349bbf964f06a8",
+    "sourceHash": "808038c42e68ab355106d7d436e3e370c875cccd1251321600081779c73bf9e5",
     "text": "Den nächsten <keyword1>Brand</keyword1> <keyword0>reflektieren</keyword0>; Direkter Schaden trifft weiterhin; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "5f54ffebb6eb296c42f9fc6424b259415676fa4b779a49c9660c51024ebd2893",
+    "sourceHash": "9221331d60812f5dc949ec1e184798642af5b71422fefdf8b51a4898b06c21c3",
     "text": "Rhythmus finden: +{{value0}}% Chance auf <keyword0>Ausweichen</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "2b316b7be0bc813a79eded72544e413781cdfe0ae29506c6ff43b28f64c5a2cc",
+    "sourceHash": "b8984a1892bb28e7a81aeda7e148ba6d80d5d1222d02f4cbfbb70ce87fb6b6db",
     "text": "Bandspule: immun gegen <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "7eb9a3f891e06a9a2c72584a90c58d3f0443cda3c127ec87dfba241e7a729879",
+    "sourceHash": "34c2dcd2f06cfa6842d411f652bd88a0b581563c66dedb66f9bcfee6e4ede7b3",
     "text": "Riposte: nächster <keyword0>physischer</keyword0> Angriff ist garantiert ein <keyword1>kritischer Treffer</keyword1>"
+  },
+  "content.status.springTide.v9686824085c1ef98.rule": {
+    "reviewed": true,
+    "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
+    "sourceHash": "d141c68d3bdab010d56d671f35933a1784353639c70bbe78974b9a211735474b",
+    "text": "Springflut: nächste <keyword0>Wasser</keyword0>-Karte wird zweimal gespielt"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "113868c91454b1cc107b962379204c2214407bdf1ad5939a83de76c795de2dc1",
+    "sourceHash": "8e709412548c70250b5853784abcd6a973f7e3efccb2b4af774a94b325608eaf",
     "text": "Drachenzahnstocher: Der nächste Angriff kann auch <keyword0>bannen</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "fbf10b7ef351ff158dd423995f3f62f70fd378329eaf67cd6b0e8ab307b651f2",
+    "sourceHash": "226985bad6abc04b2b0784f80db1019d72cfecb0b6d9d8c8f7f412ef8fd95f52",
     "text": "Die Zeit zurückdrehen: Der nächste Angriff kann wiederholt werden"
   },
   "content.talent.armor.armored-surge.name": {
@@ -8201,6 +8207,18 @@
     "sourceHash": "b955fc62255ac762b1256dc483073d131c1ec7edb25faeccb7c1b0fa5016bed4",
     "text": "Schaden vom Typ <keyword0>Physisch</keyword0> wird um {{value0}}% deines <keyword1>Blocks</keyword1> erhöht"
   },
+  "content.talent.burn.combustion.name": {
+    "reviewed": true,
+    "source": "Combustion",
+    "sourceHash": "8bb9bd0c63c807d11b0da3be1341457ada196bcbfce05bc7c4d15d9497dd8e5d",
+    "text": "Verbrennung"
+  },
+  "content.talent.burn.combustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% against Poisoned or <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "09adb44bef924da25682cb1342560b28be63de937a699d9c263df67ea1ddce5b",
+    "text": "Schaden vom Typ <keyword0>Brand</keyword0> ist gegen vergiftete oder <keyword1>blutende</keyword1> Gegner um {{value0}}% erhöht"
+  },
   "content.talent.burn.fire-resistance.name": {
     "reviewed": true,
     "source": "Fire Resistance",
@@ -8237,6 +8255,18 @@
     "sourceHash": "b88011ea51baa2909a27b72202d2efde924fadc9f1e9b846736690f4c1f00672",
     "text": "Dein erster <keyword0>Brand</keyword0> in jedem Kampf ist kostenlos"
   },
+  "content.talent.burn.hearthfire.name": {
+    "reviewed": true,
+    "source": "Hearthfire",
+    "sourceHash": "858f29e400a348d6fa9be027eeeb0e3dbe1eec0ff8cb9e4a863f8756d3ef0c73",
+    "text": "Herdfeuer"
+  },
+  "content.talent.burn.hearthfire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits against <keyword1>Burning</keyword1> enemies restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "8ad8c9f7116efdf482a9f547feca707eabb73abdceaa0c366b142bb98932ca7a",
+    "text": "<keyword0>Brand</keyword0>-Treffer gegen <keyword1>brennende</keyword1> Gegner stellen {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -8248,6 +8278,18 @@
     "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
     "sourceHash": "572d99f54f92182c7f5e120d4d549bb97e866b9d5b7c616451291fe0f5a3f15c",
     "text": "<keyword0>Brand</keyword0>-Treffer haben eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Betäubung</keyword1> zu verursachen"
+  },
+  "content.talent.burn.heat-haze.name": {
+    "reviewed": true,
+    "source": "Heat Haze",
+    "sourceHash": "8b6bb32e500719638bdac5e559eb2f251c0f34a94e8ede34a7846f1d78bfcfc6",
+    "text": "Hitzeflimmern"
+  },
+  "content.talent.burn.heat-haze.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "e771c44c4e57e569ea3b2133d7c48859ae59b7d8e89c225a227e808423ee94d4",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichchance</keyword0> gegen <keyword1>brennende</keyword1> Gegner"
   },
   "content.talent.burn.melting-point.name": {
     "reviewed": true,
@@ -8393,6 +8435,18 @@
     "sourceHash": "6b5517965131ab9c1a1fcbf9cacd44079c8e54ce0826c7ff2043c88b4f8456c1",
     "text": "Wenn du <keyword0>ausweichst</keyword0>, <keyword1>reinige</keyword1> deinen <keyword2>Betäubungs</keyword2>- und <keyword3>Frost</keyword3>-Aufbau"
   },
+  "content.talent.dodge.veil-of-mist.name": {
+    "reviewed": true,
+    "source": "Veil of Mist",
+    "sourceHash": "63f8055f8b9e4ec5d99b90743b8f75c033a8901a3e8a80d92dfdb87cc8ddaaab",
+    "text": "Nebelschleier"
+  },
+  "content.talent.dodge.veil-of-mist.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance while you have <keyword1>Block</keyword1>",
+    "sourceHash": "4008cda82461e6de32e0c82411e0ad8f19d5db75dd6379d066cf82f7b4fab90b",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichchance</keyword0>, solange du <keyword1>Block</keyword1> hast"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
@@ -8476,6 +8530,18 @@
     "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
     "sourceHash": "a821764c386b8ff8fdbf062a612d52c02487f8c385bc926563ce5ec6b2f1e03d",
     "text": "Wenn du einen Gegner <keyword0>einfrierst</keyword0>, entferne seinen gesamten <keyword1>Block</keyword1>"
+  },
+  "content.talent.freeze.permafrost.name": {
+    "reviewed": true,
+    "source": "Permafrost",
+    "sourceHash": "9e4d3af28eac5c5fd88b05445f571f42e8480566d1e24f31f8ed61558deb90d1",
+    "text": "Permafrost"
+  },
+  "content.talent.freeze.permafrost.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Block</keyword0> does not decay while an enemy is <keyword1>Frozen</keyword1>",
+    "sourceHash": "706f4bb4f2a98af7bca07012a9e049babacae7bedd5651375e39ed6a0b2ab36e",
+    "text": "Dein <keyword0>Block</keyword0> verfällt nicht, solange ein Gegner <keyword1>eingefroren</keyword1> ist"
   },
   "content.talent.freeze.thaw-dividend.name": {
     "reviewed": true,
@@ -8765,6 +8831,18 @@
     "sourceHash": "81daefbcfbfe2ce5567f895469a7bc4b6b404a5d4c2ab2e3a6fec8c353912017",
     "text": "Erleide halb so viel Schaden vom Typ <keyword0>Licht</keyword0>"
   },
+  "content.talent.light.daybreak.name": {
+    "reviewed": true,
+    "source": "Daybreak",
+    "sourceHash": "39418aafbcb2746ec4a36f9fde05ab355f92c2c1ce1735ae0cd3353d904ec784",
+    "text": "Tagesanbruch"
+  },
+  "content.talent.light.daybreak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits restore {{value0}} <keyword1>Health</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "23d92b8f526a9cb3d7f34da63cce1d291af4da8f357b9dbd3f28cbb2c8f1392e",
+    "text": "<keyword0>Licht</keyword0>-Treffer stellen {{value0}} <keyword1>Gesundheit</keyword1> wieder her, solange du <keyword2>Block</keyword2> hast"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
@@ -8849,6 +8927,18 @@
     "sourceHash": "7f71b65fc55ebe3dfda49e95b80a0344e2db0c274c8172251d080b5b8043be5b",
     "text": "Schaden vom Typ <keyword0>Licht</keyword0> hat eine Chance von {{value0}}%, Gold in Höhe der verlorenen gegnerischen <keyword1>Gesundheit</keyword1> zu gewähren"
   },
+  "content.talent.mana.arcane-discharge.name": {
+    "reviewed": true,
+    "source": "Arcane Discharge",
+    "sourceHash": "b6f5f7889c031e3ef7554246ca3d1209d67ef1dc6aa397bfb760653e960a2ce9",
+    "text": "Arkane Entladung"
+  },
+  "content.talent.mana.arcane-discharge.rule": {
+    "reviewed": true,
+    "source": "Spending your last <keyword0>Mana</keyword0> deals {{value0}} <keyword1>Stun</keyword1> damage to a random enemy",
+    "sourceHash": "8d6773fc7f1877dbda361b1f36ffad2a7e25f18fa8f7bbd3450ca571f1285955",
+    "text": "Das Ausgeben deines letzten <keyword0>Manas</keyword0> fügt einem zufälligen Gegner {{value0}} Schaden vom Typ <keyword1>Betäubung</keyword1> zu"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -8872,6 +8962,18 @@
     "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
     "sourceHash": "885b16b46323c17be5f990a0f7b6e38d23af85b98b9244352ced97fddccf2024",
     "text": "Jede lebende eingesetzte Kreatur stellt pro erhaltenem <keyword1>Mana</keyword1> {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.talent.mana.astral-veil.name": {
+    "reviewed": true,
+    "source": "Astral Veil",
+    "sourceHash": "0cd308efb2b715edcc20f2123a1a4b37c298a180c6f60a2e4b1c02cd67f02e2c",
+    "text": "Astralschleier"
+  },
+  "content.talent.mana.astral-veil.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance for each point of <keyword1>Mana</keyword1> you have",
+    "sourceHash": "419d0a9f2f49ad40336d4f6d3336dd1505aa235b36f2a031212b1beac4a38c2a",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichchance</keyword0> für jeden Punkt <keyword1>Mana</keyword1>, den du hast"
   },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
@@ -9101,6 +9203,18 @@
     "sourceHash": "d606f1dfeabc51e9bbee5c20f447ca41d7f571f8c83b16b969d2dc7568b43771",
     "text": "<keyword0>Physischer</keyword0> Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubungsschaden</keyword1> zu verursachen"
   },
+  "content.talent.physical.juggernaut.name": {
+    "reviewed": true,
+    "source": "Juggernaut",
+    "sourceHash": "d3e1a1a1e90b47193e433cdc2b95215a2df781087cede1eef5f4b893240b1772",
+    "text": "Koloss"
+  },
+  "content.talent.physical.juggernaut.rule": {
+    "reviewed": true,
+    "source": "When a <keyword0>Physical</keyword0> attack breaks enemy <keyword1>Block</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "0d0acfda1d4bba7ca1ab4726d53820f50b3b1a5af503bd35c17f58b370fa0cf7",
+    "text": "Wenn ein <keyword0>physischer</keyword0> Angriff gegnerischen <keyword1>Block</keyword1> bricht, erhalte {{value0}} <keyword2>Rüstung</keyword2>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
@@ -9136,6 +9250,18 @@
     "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
     "sourceHash": "61018638d8f76b22ad5b958b2f2ee0b5b4e46c2a1028d142acd971579baace62",
     "text": "<keyword0>Physische</keyword0> <keyword1>kritische Treffer</keyword1> lassen <keyword2>Blutung</keyword2> detonieren"
+  },
+  "content.talent.physical.savagery.name": {
+    "reviewed": true,
+    "source": "Savagery",
+    "sourceHash": "541d53e6569b668072e8b602c04b8bb500f99c90ace3f5eb560c660234a73a87",
+    "text": "Wildheit"
+  },
+  "content.talent.physical.savagery.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> attacks gain {{value0}}% <keyword1>Critical Hit</keyword1> chance against <keyword2>Bleeding</keyword2> or <keyword3>Stunned</keyword3> enemies",
+    "sourceHash": "939a6cbbd3ad12a22dc1be3344a70420fb4d68828aa7119cb1f51ad1805a48da",
+    "text": "<keyword0>Physische</keyword0> Angriffe erhalten {{value0}}% Chance auf einen <keyword1>kritischen Treffer</keyword1> gegen <keyword2>blutende</keyword2> oder <keyword3>betäubte</keyword3> Gegner"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -9365,6 +9491,18 @@
     "sourceHash": "b9b3692a91e3828d3917aa7712af9adc3a8dd8820310590c9e8482e63322ce61",
     "text": "Einen Gegner zu <keyword0>betäuben</keyword0> entfernt seine gesamte <keyword1>Rüstung</keyword1>"
   },
+  "content.talent.stun.static-charge.name": {
+    "reviewed": true,
+    "source": "Static Charge",
+    "sourceHash": "fc1edfea8cde31ec4d1897461b47edc3f8f1c107e562b80e4da3b16f640f69ac",
+    "text": "Statische Ladung"
+  },
+  "content.talent.stun.static-charge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> attacks deal {{value0}}% more damage against enemies with <keyword1>Block</keyword1> or <keyword2>Armor</keyword2>",
+    "sourceHash": "9e23eb0f42a84a30c933c4dd68209389207d5b5990c64f28f615c83942db4509",
+    "text": "<keyword0>Betäubungs</keyword0>-Angriffe verursachen {{value0}}% mehr Schaden gegen Gegner mit <keyword1>Block</keyword1> oder <keyword2>Rüstung</keyword2>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -9413,6 +9551,18 @@
     "sourceHash": "c547450eafa9f9cc45fdfab722215cdd0b684bd5f66ba017d729c2eb7354d2dc",
     "text": "<keyword0>Wasser</keyword0>-Treffer entfernen {{value0}} <keyword1>Rüstung</keyword1>"
   },
+  "content.talent.water.frigid-current.name": {
+    "reviewed": true,
+    "source": "Frigid Current",
+    "sourceHash": "ad2779802cb91d92b4e51ee29679074b4eff2ff43977d6ca436701aebddc42bb",
+    "text": "Eisige Strömung"
+  },
+  "content.talent.water.frigid-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "0655b00e8bf7bfa57ebca5f156ecbb9ad25af398b971fe400c57284ab5cdd4d0",
+    "text": "Schaden vom Typ <keyword0>Wasser</keyword0> fügt halb so viel <keyword1>Frost</keyword1>-Aufbau hinzu"
+  },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
     "source": "High Tide",
@@ -9424,6 +9574,18 @@
     "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
     "sourceHash": "0c4286fa5594131842e2f5b57cb25239a0d0ff71c7d2a929f71d086bb5c62e66",
     "text": "<keyword0>Wasser</keyword0>-Angriffe verursachen {{value0}}% mehr Schaden, solange du <keyword1>Block</keyword1> hast"
+  },
+  "content.talent.water.living-water.name": {
+    "reviewed": true,
+    "source": "Living Water",
+    "sourceHash": "b39854bac5f35652e4f6bff56f29ed77427e0e6571ea4313dca5816d0a6c3026",
+    "text": "Lebendiges Wasser"
+  },
+  "content.talent.water.living-water.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against enemies without <keyword1>Armor</keyword1> restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "0cc63858bc0f3d50f973f49a0f8d68d30c23a02983b6c9e647d4f4a85455b973",
+    "text": "<keyword0>Wasser</keyword0>-Treffer gegen Gegner ohne <keyword1>Rüstung</keyword1> stellen {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
   },
   "content.talent.water.pressure.name": {
     "reviewed": true,
@@ -9460,6 +9622,30 @@
     "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
     "sourceHash": "d59de5b5578f686589ffc7057480016730c5e877654889b91a45357203e17adb",
     "text": "<keyword0>Wasser</keyword0>-Treffer gewähren {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.talent.water.spring-tide.name": {
+    "reviewed": true,
+    "source": "Spring Tide",
+    "sourceHash": "e01f20c1a34b987c79520ecc807e16dd230e3fc1a3c7ebee53d6f38bed54193d",
+    "text": "Springflut"
+  },
+  "content.talent.water.spring-tide.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Cleanse</keyword0> a harmful effect, your next <keyword1>Water</keyword1> card plays twice",
+    "sourceHash": "19bcbad088b63dd8e691f375685e53aa3f48136980172e58b77eb67023e6ff42",
+    "text": "Wenn du einen schädlichen Effekt <keyword0>reinigst</keyword0>, wird deine nächste <keyword1>Wasser</keyword1>-Karte zweimal gespielt"
+  },
+  "content.talent.water.storm-surge.name": {
+    "reviewed": true,
+    "source": "Storm Surge",
+    "sourceHash": "9f19908c3fde0401265bc96f3cac1f010cac4bf82326e85c56368b0f6e621300",
+    "text": "Sturmflut"
+  },
+  "content.talent.water.storm-surge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2> enemies restore {{value0}} <keyword3>Mana</keyword3>",
+    "sourceHash": "b4c0efa201022b37c75685b5e946c358ad97ce5de5efd9bee961a7fb79f164c6",
+    "text": "<keyword0>Wasser</keyword0>-Treffer gegen <keyword1>betäubte</keyword1> oder <keyword2>eingefrorene</keyword2> Gegner stellen {{value0}} <keyword3>Mana</keyword3> wieder her"
   },
   "controller.circle": {
     "reviewed": true,

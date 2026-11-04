@@ -159,7 +159,7 @@ export function sharedControlImmunity(state: GameState, target: Combatant): numb
     if (unit.id !== target.id && unit.health > 0) turns = Math.max(turns, unit.combat?.cooldown ?? 0);
   return turns;
 }
-export function ownDodgeChance(state: GameState, unit: Combatant): number {
+export function ownDodgeChance(state: GameState, unit: Combatant, source?: Combatant): number {
   if (
     unit.health <= 0 ||
     (unit.combat?.controlled && (isEnemy(unit) || !state.boons.includes("quiet-pinwheel")))
@@ -168,6 +168,9 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
   const allied = !isEnemy(unit);
   const stats = unit.combat;
   if (!allied && (stats?.poison ?? 0) > 0 && hasTalent(state, "poison.torpor")) return 0;
+  const burningThreat = source
+    ? isEnemy(source) && (source.combat?.burn ?? 0) > 0
+    : !!state.battle?.enemies.some((enemy) => enemy.health > 0 && (enemy.combat?.burn ?? 0) > 0);
   return Math.min(
     75,
     5 +
@@ -176,6 +179,13 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
       (allied
         ? (stats?.[talentRule("dodge.finding-rhythm").state] ?? 0) +
           (hasTalent(state, "dodge.lightfoot") ? talentRule("dodge.lightfoot").amount : 0) +
+          (unit.block > 0 && hasTalent(state, "dodge.veil-of-mist")
+            ? talentRule("dodge.veil-of-mist").amount
+            : 0) +
+          (burningThreat && hasTalent(state, "burn.heat-haze") ? talentRule("burn.heat-haze").amount : 0) +
+          (hasTalent(state, "mana.astral-veil")
+            ? (state.battle?.mana ?? 0) * talentRule("mana.astral-veil").amount
+            : 0) +
           (hasTalent(state, "health.last-gasp") && unit.health < maximumHealth(unit) / 2
             ? talentRule("health.last-gasp").percent
             : 0)
@@ -183,7 +193,7 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
   );
 }
 /** Share intrinsic Dodge only; received aura bonuses never amplify another provider. */
-export function sharedDodgeChance(state: GameState, target: Combatant): number {
+export function sharedDodgeChance(state: GameState, target: Combatant, source?: Combatant): number {
   if (target.health <= 0) return 0;
   const allied = !isEnemy(target);
   const members = allied ? state.team : (state.battle?.enemies ?? []);
@@ -194,13 +204,13 @@ export function sharedDodgeChance(state: GameState, target: Combatant): number {
   for (const unit of row) {
     if (unit.id === target.id || unit.health <= 0) continue;
     const share = passiveAmount(allied ? state : undefined, unit.species, "shareDodge");
-    if (share) total += (ownDodgeChance(state, unit) * share) / 100;
+    if (share) total += (ownDodgeChance(state, unit, source) * share) / 100;
   }
   return total;
 }
-export function dodgeChance(state: GameState, target: Combatant): number {
-  const own = ownDodgeChance(state, target);
-  return own === 0 ? 0 : Math.min(75, own + sharedDodgeChance(state, target));
+export function dodgeChance(state: GameState, target: Combatant, source?: Combatant): number {
+  const own = ownDodgeChance(state, target, source);
+  return own === 0 ? 0 : Math.min(75, own + sharedDodgeChance(state, target, source));
 }
 export function addTemporaryDodge(unit: Combatant, amount: number, events: GameEvent[]) {
   if (unit.health <= 0) return 0;

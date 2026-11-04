@@ -110,7 +110,7 @@ Card XP comes from structured primary and supplemental effects and Leech metadat
 
 ### Talent rows
 
-The [authored talent catalog](../src/game/content/talents.ts) covers applicable Alchemy effects for these categories. The catalog order forms widening rows of one, two, three and four talents, with an incomplete final row when a category has fewer than ten. Buy talents within an open row in any order; complete every earlier row to open the next. Alchemy Holy uses Light, Health uses the Health category, and Mana Crystals use maximum Mana. Talents depending on Forge, Wish, Consume, Companion, Archery or losing Mana Crystals are excluded.
+The [authored talent catalog](../src/game/content/talents.ts) covers ten talents per category across widening rows of one, two, three and four talents. Buy talents within an open row in any order; complete every earlier row to open the next. Alchemy Holy uses Light, Health uses the Health category, and Mana Crystals use maximum Mana. Talents depending on Forge, Wish, Consume, Companion, Archery or losing Mana Crystals are excluded.
 
 ### Modifier timing
 

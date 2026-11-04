@@ -274,7 +274,9 @@ function resolve(
         const keywords = cardKeywordView(card);
         for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
-        battle.mana -= cardCost(card, draft, def, actor);
+        const cost = cardCost(card, draft, def, actor);
+        const spentLastMana = cost > 0 && battle.mana === cost;
+        battle.mana -= cost;
         if (card.ownerId !== null) {
           if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
           consumeCardGrants(actor, keywords);
@@ -305,7 +307,7 @@ function resolve(
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
         if (lastCardInHand) lastWarmth(draft, false, events);
-        afterPlayerCard(draft, events, def.species === null ? undefined : actor);
+        afterPlayerCard(draft, events, def.species === null ? undefined : actor, spentLastMana);
         fillHand(draft);
         if (!preview) settle(draft, events);
         break;

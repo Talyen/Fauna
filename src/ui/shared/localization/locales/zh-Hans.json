@@ -7682,163 +7682,169 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "1bce523491383517fba295a87c2d7c21c05173107a98b9b68d8b9f403b23889a",
+    "sourceHash": "4891cc3f2cc701e3c63921ec45f39de4fe4d5f42c7fb08081fe74f844dd008fa",
     "text": "杂技陀螺：下一次攻击无法被<keyword0>闪避</keyword0>"
   },
   "content.status.attackReflection.v013a620784742104.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "d863f807751e168bcd6d61582dadf05f567db3fbc45ff5a16e96da0a4d765dfd",
+    "sourceHash": "c24e3450fe57e7356a040fbef056991c0fc7b6e418b5b23dbe404033f2f072aa",
     "text": "<keyword0>攻击反射</keyword0>: 将下一次受到的技能攻击返还给攻击者; 防止该攻击对你造成伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.blind.v37b85a98a2799221.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "0c4ecaa82c0c3a2cda5541947b50e95dd5a6d35ddf8627fa570ef27d96955d41",
+    "sourceHash": "e82bc5644a59edf1da1941be77828adcf4c396bc45989a83d97f5ab17fe1728a",
     "text": "<keyword0>致盲</keyword0>: 下一次攻击有{{value0}}%概率对所有目标落空; 无论命中与否，该次攻击后结束; 落空视为每个目标都成功<keyword1>闪避</keyword1>; 不叠加"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "dd42463ca73f9a7cb568aa6c0960b54a5ca6f4e6912a5e66e3bf0e976442e3b3",
+    "sourceHash": "83ac0ced66f1c2dcab2d0aa253c420f46723f57ba4dcb22699499cda0b9fbf86",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "2336a92e4cf81f7a42d8dbbc20ef83ce561e317ed55a73616cdbc2acef7fef20",
+    "sourceHash": "7ffddcececfafa29b65bb6bd9b36daa9b1c9c566b2fcd95d4435a0bd0de29526",
     "text": "跳过回合"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "b22ff39384105c9b06d505f0da87e856a2d5dff95fd1ca053edd424a144cfcb9",
+    "sourceHash": "a9292fd8e707ed79f979f9ce8c2fe46dca39dcc35e0c92cfef93d4ef0a250a09",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "de54bb314d62edecf3763e18036a684906565bf0ac50f6b4e67c54984c5e89c1",
+    "sourceHash": "649d6c51299f88e3e0edbfc6ea674b1600481f8bef201294686fda5be4e33d81",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "0f7515e1efab848e8da585eac7c6e164e905d4cd84efbb148fbb1318058177e1",
+    "sourceHash": "227b364ff2a932388d416360140546fed2b1ee1366313d773b9d275e52b80f98",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "0e7b9b836ca2665ecbfad1f55da2105bf763ac38f20cfb36ab38ca35b9c3985f",
+    "sourceHash": "84e22f86887877220a7a2aae24ad3cb7f103ec35c54adb035987793f93f3aa5b",
     "text": "控制免疫 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "1131c71d3122d64244ff860a8d6797dcaae00eda4b05ceb42c144ad763c79f9c",
+    "sourceHash": "d770dd1fc647f92e7755f557ffb0de9816468b381911d257bee9bf0e9eb9b519",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "7022b734c96e64af01c07435443ebca45ab9d0d8b26b68704bdf0d55845a19b2",
+    "sourceHash": "01259df45ffb30ecedbfd43826ee321c792ec53653e25f59b72612e69d48e1f7",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "4cf1a63c3f95fee387a39b16fabf0864dd0a058101d4951d31f6471f48465425",
+    "sourceHash": "0ce9f245673b29f90697c50d7f3d9961d6b879fc2c1d6837e04c8137d516653a",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "e3c93593fe63545897a0526f9b4f76baa0087f87990f6e061512c92b60cfd535",
+    "sourceHash": "081ae66c14d179c73a0e8c5db16dea58695d0b33f6c4831cd0093fa874a74062",
     "text": "濒死 {{value0}}"
   },
   "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
     "reviewed": true,
     "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "4cb7d9e679c919c038ce72e6eb9a8c5e580d471e15d7c1d939db0353f609b98b",
+    "sourceHash": "584b4777fbc35182fa0a2b1a56b17e8a2ba4b92dbafb288a74f94b98c4c6ff49",
     "text": "月种：下次<keyword0>荆棘</keyword0>反击造成双倍伤害"
   },
   "content.status.negate.v0fea63d64804569b.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "c3ad1cecf3dc96f9ded1d44f50ceb0f8abfd54732b663b6925d14e0f52c2b0f3",
+    "sourceHash": "a5d249e77dd4a2375852ee6a66105d423a83f2a065bb482ee74bc5c212fabe0b",
     "text": "<keyword0>抵消</keyword0>: 在<keyword1>闪避</keyword1>判定前取消下一次受到的技能攻击及其对你的有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "9c202e15dea9060e6c677a80091848a4caa2ebef433079de8a0ac706f173a20b",
+    "sourceHash": "b4128370bb782fb619c2477471e4d4a665bcd6607c19447e51c162045885b79f",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.status.nullify.v497e819f2a2d6746.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "762f8562dc91fa8b97c645816b88d73c85d7395ac7c82fc17a55635985081a02",
+    "sourceHash": "3a829f5a8f9b4456a2aa3b4d5b4b874aa9c9cae3b15203b2daac1788205f2129",
     "text": "<keyword0>无效化</keyword0>: 防止下一次施加<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>、<keyword3>流血</keyword3>、<keyword4>眩晕</keyword4>、<keyword5>冻结</keyword5>或<keyword6>致盲</keyword6>; 直接伤害和已有状态不受影响; 持续至使用或被<keyword7>驱散</keyword7>; 不叠加"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "67d7d9e31c8a5af68cdf86c984ab0a15b9ea445f5949584ca7254dc8b01a6fc6",
+    "sourceHash": "25bd2b73ecf4a850f4973244481675ea8aee3892e50d2780fbb18a90e0e8389c",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "52acb75b9ae7d416db60301798a41d3446e5ef7f08d94bd31619ce220aae3f0b",
+    "sourceHash": "26e88d9aa57704299bfd675a8967e20dd20bad2f9cf80fd9cd84dde0af4359ff",
     "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "2a50e240205faf3111b4c1a2fead8fed3dbcaa7ef62092aaa438950462cdb732",
+    "sourceHash": "09f15372c303bb549c456ff6e752aa6fd80a202aefdb5a23f54a560825ff08a1",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
   },
   "content.status.reflect.ved0888b165975dfb.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "18d325c0adccaaf2e6a332b72085d577802fba3a6c36bfdfdb209907c753f912",
+    "sourceHash": "54914b98680ac6ab502105b1991ff865619b6268c36f1bfc15a5bfc6072a55a1",
     "text": "<keyword0>反射</keyword0>: 将指定的有害状态转移给一个随机存活敌人; 直接伤害仍会命中你; <keyword1>攻击反射</keyword1>则将整次攻击返还给攻击者; 被<keyword2>反射</keyword2>的效果不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "6134572960527e3beba7316e3ef737d3cf991e43618cee3a4af676e4071d54ca",
+    "sourceHash": "31e20e019772619daea0e9fc93318deafb78dc8fd5f8ef8bd12dcc4532a57dbf",
     "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "9fee2a9bed64b5db9af2c827d1314bc383d321ea6114690c0075fb123ba3d3d2",
+    "sourceHash": "a04b657f386fd2a389389b1f2682ae13997e27c17f055500798bb6cd8b554794",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "19152d715da11b6d9e5ffdda15096b3af3ce7c4344e9085e5bab279795c0c8d2",
+    "sourceHash": "8af4751770daf7358fc86df494c5436dc40747321bdb0529e957846a8c09404b",
     "text": "缎带线轴：免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "9cb3e2855292b38a2c0c6648a45280ff5d01e796c5a90d14186e44a6e73c95ef",
+    "sourceHash": "c5d775362b626a368504f9c814c3d989f1aef8c2b9e8f97048ac50fdfd39b22a",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
+  },
+  "content.status.springTide.v9686824085c1ef98.rule": {
+    "reviewed": true,
+    "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
+    "sourceHash": "0c5a865c87e3bc7e3fecd06f8037c70b0ab9523392ee6a9b10f0dd19cb53cedc",
+    "text": "春潮：下一张<keyword0>水</keyword0>牌发动两次"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "9a2e21d261da821a86347f827ae3a93f4e6458b1279b2a951d7effecda1f798d",
+    "sourceHash": "4128fc3fcfef0b4018f6b01c575ecd388146016787b5c7a9462969386f6ba3d8",
     "text": "龙牙签：下次攻击还会<keyword0>驱散</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "ef834f70869284ec4664c05df6ee4807ba34ce3651e39035e02e5c54ff44d9b6",
+    "sourceHash": "3fcd6c0584f35d694b3fb51cd5dc0ce8bfded9262f497ebb4fdf0f09d1bee8ba",
     "text": "逆转时潮：下次攻击可能重复"
   },
   "content.talent.armor.armored-surge.name": {
@@ -8201,6 +8207,18 @@
     "sourceHash": "6d7c560a046fbf6eab1d7899f4e30843ce8b24632d9fcaac9ddd52664da02263",
     "text": "<keyword0>物理</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
   },
+  "content.talent.burn.combustion.name": {
+    "reviewed": true,
+    "source": "Combustion",
+    "sourceHash": "72d097fe3cbe280b0a64eeac191b1d187f98e2abbf2eabbc6ced5f8094edd91e",
+    "text": "爆燃"
+  },
+  "content.talent.burn.combustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% against Poisoned or <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "0f0f8636bae21d6a8826508dc04da7495671a2b568a339016c49c057d84d0a22",
+    "text": "对中毒或处于<keyword1>流血</keyword1>状态的敌人造成的<keyword0>灼烧</keyword0>伤害提高{{value0}}%"
+  },
   "content.talent.burn.fire-resistance.name": {
     "reviewed": true,
     "source": "Fire Resistance",
@@ -8237,6 +8255,18 @@
     "sourceHash": "14d853bf3637807443c5c443c2cd8db2e76b7aeb0c42917218577b20109507fc",
     "text": "每场战斗的首次<keyword0>灼烧</keyword0>免费"
   },
+  "content.talent.burn.hearthfire.name": {
+    "reviewed": true,
+    "source": "Hearthfire",
+    "sourceHash": "23929110ea9a23dfcc563de34a3980a52e009fded38b08562df1c0bb166ed407",
+    "text": "炉火"
+  },
+  "content.talent.burn.hearthfire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits against <keyword1>Burning</keyword1> enemies restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6af3f2ffef80ab37f4a6adf245c235656120956b40ff6ea2fe1f59de172ada3a",
+    "text": "对处于<keyword1>灼烧</keyword1>状态的敌人造成<keyword0>灼烧</keyword0>命中时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -8248,6 +8278,18 @@
     "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
     "sourceHash": "7379364902f54384ca174e93af69f54c8a641612af2baa1ac7af7683e4446efd",
     "text": "<keyword0>灼烧</keyword0>命中有{{value0}}%几率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
+  "content.talent.burn.heat-haze.name": {
+    "reviewed": true,
+    "source": "Heat Haze",
+    "sourceHash": "eeaeb26d0d8d7af733bf40a9e20776793725c15353af31a617c7f3e5bd89c13e",
+    "text": "热浪"
+  },
+  "content.talent.burn.heat-haze.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "39f61a3c3f832b16af1ad178265821da49ffa9d95eb84c2a62ec89376dce973d",
+    "text": "对处于<keyword1>灼烧</keyword1>状态的敌人获得{{value0}}%<keyword0>闪避</keyword0>几率"
   },
   "content.talent.burn.melting-point.name": {
     "reviewed": true,
@@ -8393,6 +8435,18 @@
     "sourceHash": "8c8865beca8c2b5eebff59be9aa0dfaa01b3a068236c072fc054769bbda98d5e",
     "text": "<keyword0>闪避</keyword0>时，<keyword1>净化</keyword1>自身的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>积累"
   },
+  "content.talent.dodge.veil-of-mist.name": {
+    "reviewed": true,
+    "source": "Veil of Mist",
+    "sourceHash": "d91e099faa6b1fed5ca2f1b0d5bf30b20e71e47b516ea8e298b3f917b696d44d",
+    "text": "迷烟之幕"
+  },
+  "content.talent.dodge.veil-of-mist.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance while you have <keyword1>Block</keyword1>",
+    "sourceHash": "a8f0313f3e119cab42199b6632ddd77bb1b2a3a1991d4e78a8e5ebefac2255a8",
+    "text": "拥有<keyword1>格挡</keyword1>时获得{{value0}}%<keyword0>闪避</keyword0>几率"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
@@ -8476,6 +8530,18 @@
     "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
     "sourceHash": "95e0aef2342b918392aeed709b18e5d6375896984ca59dd1e5bc77056ba8d1d5",
     "text": "你使敌人<keyword0>冻结</keyword0>时，移除其全部<keyword1>格挡</keyword1>"
+  },
+  "content.talent.freeze.permafrost.name": {
+    "reviewed": true,
+    "source": "Permafrost",
+    "sourceHash": "76b2e3c91908246932e89620e222cfbbda66216bb79a4e43cc55b3fb4c757147",
+    "text": "永冻"
+  },
+  "content.talent.freeze.permafrost.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Block</keyword0> does not decay while an enemy is <keyword1>Frozen</keyword1>",
+    "sourceHash": "2891205c647f6559b630b7ffc1b9c101ba68283e1ad76813e4609128025f1a16",
+    "text": "有敌人处于<keyword1>冻结</keyword1>状态时，你的<keyword0>格挡</keyword0>不会衰减"
   },
   "content.talent.freeze.thaw-dividend.name": {
     "reviewed": true,
@@ -8765,6 +8831,18 @@
     "sourceHash": "5a58575542acc2e443a74c2baa7e4f42e5c14d82c960243fdc45799c853d775a",
     "text": "受到的<keyword0>光</keyword0>伤害减半"
   },
+  "content.talent.light.daybreak.name": {
+    "reviewed": true,
+    "source": "Daybreak",
+    "sourceHash": "abcd0787706c8c33604a0b48009b4cb798a989fe5e605e9ce503970640b2afa0",
+    "text": "晨光初现"
+  },
+  "content.talent.light.daybreak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits restore {{value0}} <keyword1>Health</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "bd0bbf4697b984742330db34da0ecf8e33af23959622f912d4499b97f9f10a5d",
+    "text": "拥有<keyword2>格挡</keyword2>时，<keyword0>光</keyword0>命中恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
@@ -8849,6 +8927,18 @@
     "sourceHash": "880f10b16c1204e07b5825f0ee0e9131052db419c2c7092f13e9421d41280e38",
     "text": "<keyword0>光</keyword0>伤害有{{value0}}%的概率获得等同于敌人损失的<keyword1>生命</keyword1>的金币"
   },
+  "content.talent.mana.arcane-discharge.name": {
+    "reviewed": true,
+    "source": "Arcane Discharge",
+    "sourceHash": "1e7059b20f7e0b4255202606604647f11eb6fc6e8fe1eed30e714a7378570238",
+    "text": "奥术放能"
+  },
+  "content.talent.mana.arcane-discharge.rule": {
+    "reviewed": true,
+    "source": "Spending your last <keyword0>Mana</keyword0> deals {{value0}} <keyword1>Stun</keyword1> damage to a random enemy",
+    "sourceHash": "547cb8c784c2acddef275cf7435b06c32a16f97662ff4a5e5280b61df96ce6a6",
+    "text": "消耗最后一点<keyword0>法力</keyword0>时，对随机一名敌人造成{{value0}}点<keyword1>眩晕</keyword1>伤害"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -8872,6 +8962,18 @@
     "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
     "sourceHash": "112b4b2c0b77275a741e05898f10f3f23fa0fd4501ddea8e19ce0247fd25861d",
     "text": "每获得1点<keyword1>法力</keyword1>，每个存活的上场生物恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.mana.astral-veil.name": {
+    "reviewed": true,
+    "source": "Astral Veil",
+    "sourceHash": "318d97be41ebe3973f8953ed9121f5290348f94305d8417023739e0332f59f89",
+    "text": "星界帷幕"
+  },
+  "content.talent.mana.astral-veil.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance for each point of <keyword1>Mana</keyword1> you have",
+    "sourceHash": "afbd8a6b5bc5e3c9f802d6f706e975bc86f234eafe843db1e22ca8ba721b9921",
+    "text": "每拥有一点<keyword1>法力</keyword1>，获得{{value0}}%<keyword0>闪避</keyword0>几率"
   },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
@@ -9101,6 +9203,18 @@
     "sourceHash": "1c681480c08a3a71eccc96f15552867ab07880f7395ad3e5cb9805e12ce013d4",
     "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率额外造成<keyword1>眩晕</keyword1>伤害"
   },
+  "content.talent.physical.juggernaut.name": {
+    "reviewed": true,
+    "source": "Juggernaut",
+    "sourceHash": "9845e258c6867e01c4b80fe0cfb82893a567c13ad4329a170cc7df90d793a378",
+    "text": "破阵重击"
+  },
+  "content.talent.physical.juggernaut.rule": {
+    "reviewed": true,
+    "source": "When a <keyword0>Physical</keyword0> attack breaks enemy <keyword1>Block</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "47e688f7fb17743cc8d728ef7992822faea1e6b1d2b9f9ff8424562bc690746c",
+    "text": "<keyword0>物理</keyword0>攻击击破敌人<keyword1>格挡</keyword1>时，获得{{value0}}点<keyword2>护甲</keyword2>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
@@ -9136,6 +9250,18 @@
     "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
     "sourceHash": "7de9432d0b82dab169e294886560466d17a7189739c83ce4736dd03c77409eb7",
     "text": "<keyword0>物理</keyword0><keyword1>暴击</keyword1>引爆<keyword2>流血</keyword2>"
+  },
+  "content.talent.physical.savagery.name": {
+    "reviewed": true,
+    "source": "Savagery",
+    "sourceHash": "3441322311d1573d9b1809a9549ca5bfa297dab8c5972c807edf398aa6417652",
+    "text": "猛烈"
+  },
+  "content.talent.physical.savagery.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> attacks gain {{value0}}% <keyword1>Critical Hit</keyword1> chance against <keyword2>Bleeding</keyword2> or <keyword3>Stunned</keyword3> enemies",
+    "sourceHash": "0a590c21a0d97baf6df9011b76d0468aa752bf3a807b6af84cb48bc2e09de26c",
+    "text": "<keyword0>物理</keyword0>攻击对处于<keyword2>流血</keyword2>或<keyword3>眩晕</keyword3>状态的敌人增加{{value0}}%<keyword1>暴击</keyword1>几率"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -9365,6 +9491,18 @@
     "sourceHash": "c1ab80f2b09089b0032c9a20c2211c09f69fa9d7b5f43453c9c4e8de8954eb7d",
     "text": "<keyword0>眩晕</keyword0>敌人时移除其全部<keyword1>护甲</keyword1>"
   },
+  "content.talent.stun.static-charge.name": {
+    "reviewed": true,
+    "source": "Static Charge",
+    "sourceHash": "a7f7131999f7cc46b4779733923195a2b29cef24845f685e5cbfa64e4e910df0",
+    "text": "静雷充能"
+  },
+  "content.talent.stun.static-charge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> attacks deal {{value0}}% more damage against enemies with <keyword1>Block</keyword1> or <keyword2>Armor</keyword2>",
+    "sourceHash": "e07e5fe5da486e4282b20eb58c15cfe82d3f0b5cbf70de25d48ec3bbf7c6d1dc",
+    "text": "<keyword0>眩晕</keyword0>攻击对拥有<keyword1>格挡</keyword1>或<keyword2>护甲</keyword2>的敌人造成的伤害提高{{value0}}%"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -9413,6 +9551,18 @@
     "sourceHash": "8b4ba67faa25fd18c5fb75a744cff1e7a78c962bef0c92dbda906214db8f5a59",
     "text": "<keyword0>水</keyword0>命中时移除{{value0}}点<keyword1>护甲</keyword1>"
   },
+  "content.talent.water.frigid-current.name": {
+    "reviewed": true,
+    "source": "Frigid Current",
+    "sourceHash": "a14941d20757a6a129a90706d1c3fcf461b082330b31b278479f8a4b7fcdfdc4",
+    "text": "寒流"
+  },
+  "content.talent.water.frigid-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "0b0bafeeb79a73cb88ec5a31974d1a8f5b356ac454f55e8eeb3804de5e5d385a",
+    "text": "<keyword0>水</keyword0>伤害额外附加其一半数值的<keyword1>冻结</keyword1>累积"
+  },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
     "source": "High Tide",
@@ -9424,6 +9574,18 @@
     "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
     "sourceHash": "0619fcec4c0cfb4607cb1325fabfb621bebaa599cb63b3d651ad4dfc32d86ad4",
     "text": "拥有<keyword1>格挡</keyword1>时，<keyword0>水</keyword0>攻击的伤害提高{{value0}}%"
+  },
+  "content.talent.water.living-water.name": {
+    "reviewed": true,
+    "source": "Living Water",
+    "sourceHash": "5349d5397849adca47421a52052eed6469f9526ac12c17f0b47d5c6f14fdbd5f",
+    "text": "活水"
+  },
+  "content.talent.water.living-water.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against enemies without <keyword1>Armor</keyword1> restore {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "3b6c74204d0238a606905835acacd75083d20f31e03c5987d566630bd4912bf4",
+    "text": "<keyword0>水</keyword0>命中没有<keyword1>护甲</keyword1>的敌人时恢复{{value0}}点<keyword2>生命</keyword2>"
   },
   "content.talent.water.pressure.name": {
     "reviewed": true,
@@ -9460,6 +9622,30 @@
     "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
     "sourceHash": "3f8792322a4ff901f08b225f92a716b55c4b88815120eb3367bfd95b32b40f11",
     "text": "<keyword0>水</keyword0>命中时获得{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.talent.water.spring-tide.name": {
+    "reviewed": true,
+    "source": "Spring Tide",
+    "sourceHash": "6dffc0028f300a0971acfcd09a68c9514527ea48bb7002f694c4092b45aff72d",
+    "text": "春潮"
+  },
+  "content.talent.water.spring-tide.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Cleanse</keyword0> a harmful effect, your next <keyword1>Water</keyword1> card plays twice",
+    "sourceHash": "1bac9b5f6e02eeafdcb44c627b4303f71d8d9b23594f30a3e1b4cd1c78b8a0bd",
+    "text": "<keyword0>净化</keyword0>有害效果时，下一张<keyword1>水</keyword1>牌发动两次"
+  },
+  "content.talent.water.storm-surge.name": {
+    "reviewed": true,
+    "source": "Storm Surge",
+    "sourceHash": "f1c471d03f5f3123d4236d28b3739ec61b5bdf69b626093e6a056c038b8821a5",
+    "text": "风暴潮"
+  },
+  "content.talent.water.storm-surge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits against <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2> enemies restore {{value0}} <keyword3>Mana</keyword3>",
+    "sourceHash": "468fa08e225d48209909ab56e399eacc56d6f947c4349797ba7487304b7dfcb2",
+    "text": "<keyword0>水</keyword0>命中处于<keyword1>眩晕</keyword1>或<keyword2>冻结</keyword2>状态的敌人时恢复{{value0}}点<keyword3>法力</keyword3>"
   },
   "controller.circle": {
     "reviewed": true,
