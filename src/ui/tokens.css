@@ -15,7 +15,8 @@
   --muted-foreground: #aaa092;
   --accent: #3b3935;
   --accent-foreground: var(--foreground);
-  --control-hover: #1c1a17;
+  --control-fill: #211f1c;
+  --control-hover: #302d28;
   --destructive: #ac3939;
   --destructive-text: #ef4444;
   --destructive-foreground: var(--foreground);
@@ -123,7 +124,6 @@
   --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
   --unavailable-opacity: 0.45;
-  --disabled-opacity: 0.5;
   --pressed-scale: 0.98;
   --target-actor-width: 1px;
   --target-bracket-width: 2px;

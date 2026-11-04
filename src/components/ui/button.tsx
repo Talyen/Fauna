@@ -7,19 +7,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "game-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "game-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-colors disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "control-primary bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "control-destructive bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "control-outline border border-input bg-secondary hover:bg-accent hover:text-accent-foreground",
-        secondary: "control-outline bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "control-outline border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        default: "control-primary bg-primary text-primary-foreground",
+        destructive: "control-destructive bg-destructive text-destructive-foreground",
+        outline: "control-outline border border-input bg-secondary",
+        secondary: "control-outline bg-secondary text-secondary-foreground",
+        ghost: "control-outline border border-input bg-background",
         art: "relative bg-transparent p-0 whitespace-normal text-left font-normal shadow-none",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "control-outline border border-input bg-background underline-offset-4 hover:underline",
       },
       size: {
         default: "h-[var(--control-height)] px-4 py-2",
