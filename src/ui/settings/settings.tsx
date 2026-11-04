@@ -49,7 +49,7 @@ export function Settings({
   const reset = () => {
     update(defaultDevicePreferences);
     language.setPreference("auto");
-    void session.display?.set("windowed");
+    void session.display?.set("windowed").catch((error) => session.diagnostics.record("global", error));
   };
   return (
     <>

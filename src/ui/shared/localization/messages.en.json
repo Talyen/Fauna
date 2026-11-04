@@ -545,9 +545,6 @@
   "menu.play": {
     "text": "Play"
   },
-  "menu.quit": {
-    "text": "Quit"
-  },
   "menu.quitShort": {
     "text": "Quit"
   },

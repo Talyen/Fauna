@@ -528,7 +528,10 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
               "Choose the requested starter when offered; otherwise use policy RNG",
             );
       case "campfire":
-        return decision({ type: "rest" }, "Recover missing roster Health and knockouts");
+        return decision(
+          { type: state.expedition.lastRoom === "campfire" ? "leaveCampfire" : "rest" },
+          "Recover missing roster Health and continue",
+        );
       case "support": {
         const visit = state.support!;
         if (visit.resolved)

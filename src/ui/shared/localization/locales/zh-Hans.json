@@ -275,12 +275,6 @@
     "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
     "text": "查看{{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "000d85fc98e6578a6cdeba4ad5d173cf38b82e2380d2c7a3a4d6fd052436d4fe",
-    "text": "未解锁的物种"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -9581,6 +9575,12 @@
     "sourceHash": "b4c6a16b7287767af9b69a15345f45dc241fd455ef239f6fc565d6ffafe57b99",
     "text": "牌组为空"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "4d80b9380b79f250d88eb50df7729c1512923a433e99e6ac06ee5851fd132726",
+    "text": "待入手牌"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9719,17 +9719,17 @@
     "sourceHash": "d334931dac1262c4e67fb3ebb45750f5be2f45f678d39c0d5ef342a52042fae1",
     "text": "特性"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "357192ab275db0b8d06a30f50ce88b8cc5f6bb70f887124275d7e9b37a92ec1d",
-    "text": "第{{act}}幕 · 房间{{room}} / {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "1137b5fc4933c67c2bc3e25dd61859bbd8369f58100326b0004cb46a52d95164",
     "text": "首领：{{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "4e16d16732cec02c87f3e5d4a163b1f1045f7d4910739b16495e858046548eba",
+    "text": "选择目的地"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10247,12 +10247,6 @@
     "sourceHash": "0881cb77235d342cc58f16666c67adb5f2f094c5466182037001953a2b5725e0",
     "text": "开始"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Quit",
-    "sourceHash": "600f8be57c03ea62d5828b1845eb0007b255d644cf9662df258a652cbbe97a79",
-    "text": "退出"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
@@ -10600,12 +10594,6 @@
     "sourceHash": "21227b26da5fca3667002f8b3dcef0400b4e1d590487bc626ee0f2d1621f177a",
     "text": "Fauna无法显示此画面，正在重试…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
-    "text": "目前无法保存进度；请在重试期间保持Fauna运行"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10708,17 +10696,17 @@
     "sourceHash": "04c4231281a20d6d7597aedef8abea83c02b0b198af27892b530d1d156c91acc",
     "text": "已返回家园"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
+    "text": "胜利"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "22d8a7bc17ac182e492678e2b2bfd6b3477dd65da97cd5c75a16afcf2dbd5a24",
     "text": "选择一个祝福"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "fce61f8d57a19e0436d3b25ea1e0bae87000725aa482f142b8c78c76e18f6248",
-    "text": "选择一名新伙伴"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10828,12 +10816,6 @@
     "sourceHash": "ffde8961b814d3affbd2f4d58c200b8848cd932bbde8831b35a17e3ea7b24ba3",
     "text": "关闭语言选择"
   },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "582689332beef408aee49f0a71cad41fc8eca7e2460089ddd7525f5fa43da538",
-    "text": "手柄提示"
-  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
@@ -10888,12 +10870,6 @@
     "sourceHash": "448bdf57d26142e5ea4eac3fffaec38e112d24a225c98fc48e222b169ea7525e",
     "text": "背景辉光"
   },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "b14cb59f460c914ec50c878eaeeeb505dd16950a1c69394dedf23334edc7859b",
-    "text": "背景辉光数值"
-  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
@@ -10905,12 +10881,6 @@
     "source": "Choose a language",
     "sourceHash": "85f07a5828e74a11060354ad2d9cbd09c683f6d5dd05eb640bde30e7fc16c5d7",
     "text": "选择语言"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "81172c353253329a25e42a7e2b0d0ed84d5960cf2aead9dfe12cb1c5845b7841",
-    "text": "语言：{{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -10966,12 +10936,6 @@
     "sourceHash": "09e31ecc56bd99ea9f79947043195888785944bb8eab72f6469f877734b0ca50",
     "text": "背景粒子"
   },
-  "settings.particlesValue": {
-    "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "0b0e6e78efd5435c6ad1f9f25cc8b630ee5bc6a6dcb316577fcbdf9a63592dbc",
-    "text": "背景粒子数值"
-  },
   "settings.rememberAutoplay": {
     "reviewed": true,
     "source": "Remember Auto-Battle Preference",
@@ -11001,18 +10965,6 @@
     "source": "Sound",
     "sourceHash": "4bf9716880de75ea132500b7d6b091d074067931769358c4529f21f55137afcf",
     "text": "声音"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "99d39dd931827da66396d376d4a0736bbb856146c52b877b19c2f21d5bd1c3fd",
-    "text": "文字大小"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "4ffbdb4a09e7e250511224bc05e26730ee95fb3fdcbee9e81eb48d86a7b43d19",
-    "text": "提示 {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,

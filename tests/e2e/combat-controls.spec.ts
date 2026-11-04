@@ -81,7 +81,7 @@ test("development skip wins once through normal rewards", async ({ page }) => {
   expect(skipBounds!.x + skipBounds!.width).toBeLessThan(autoBounds!.x);
   await skip.click();
   await continueToRecruit(page);
-  await expect(page.getByRole("heading", { name: "Choose a Recruit" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Victory" })).toBeVisible();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).currency))
     .toBe(initial.currency + 20);

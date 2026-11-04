@@ -275,12 +275,6 @@
     "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
     "text": "Осмотреть: {{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "6a4cf465ea4c6484527330869b25557ce9bdb9e21ef522b5fbba532b42551a44",
-    "text": "Неоткрытый вид"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -9581,6 +9575,12 @@
     "sourceHash": "127e6f2ef47c86b7ea9f7d9cfd1b0ac55f6fcc16db232de6ddcf1c0f44705a92",
     "text": "Колода пуста"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "29b594b325f90c7885410c637452a8ef4fcc1101190334c59d62efd6d68afd5d",
+    "text": "Переполнение руки"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9719,17 +9719,17 @@
     "sourceHash": "bf9b5183ac3a4326d7b7693c86f7c0adb180df89f1ba1f86853dd123e7609064",
     "text": "Черта"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "db231e279d31c104e1b9dceeb86e9a63e13ee8854d6cea9d7d1125efc290b356",
-    "text": "Акт {{act}} · Комната {{room}} из {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "1d3cf1220651a0dec79803d89517188c11132f378e19b00200d59c4370cbc63c",
     "text": "Босс: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "cbbfc79de4fad2cf20a2c5a6a8b27c9fd117a38e5b2cc855a2700a6bf7729036",
+    "text": "Выберите пункт назначения"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10247,12 +10247,6 @@
     "sourceHash": "f9fb63cff13337d939cb9dfbb1617d729340a75fe028655f94edcab21b6df589",
     "text": "Играть"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Quit",
-    "sourceHash": "c7cd9e1b64c7fe7f0ce60007bf353de344b662046ffe9df1feade5fc84c85dbc",
-    "text": "Выход"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
@@ -10603,12 +10597,6 @@
     "sourceHash": "e864363694ee679c9abed318a6e2d125a3a7227b846aa1221d7302ee836073a1",
     "text": "Fauna не удалось показать этот экран; повторная попытка…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "bd77e86301a4c8cd133f091ae674511953a759825095261d556a9f7666ed1e10",
-    "text": "Сейчас не удаётся сохранить прогресс; не закрывайте Fauna, пока выполняется повторная попытка"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10711,17 +10699,17 @@
     "sourceHash": "73fdf569e55ed58f1d5ecd954da7a92e028f3b36b76c1431048921ac58528889",
     "text": "Возвращение домой"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
+    "text": "Победа"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "2b4c282d41e60812d45afe89dc2c63e12ecf7d6d660f15504ef215abed9d1e3b",
     "text": "Выберите благословение"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "ac5be7863b2253b758900c6cdd535451bcf69b1004ae85fc4d0303532deef850",
-    "text": "Выберите существо"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10831,12 +10819,6 @@
     "sourceHash": "cb42385506e2c097746f356b2ad6e691b5f101e799e996c9383f7c9055cbbf83",
     "text": "Закрыть выбор языка"
   },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "f07d65fe4d67ad5dbdecaf3e7776d70ac6b26859a73b014de29896163db97f3a",
-    "text": "Подсказки контроллера"
-  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
@@ -10891,12 +10873,6 @@
     "sourceHash": "e19f2852dbdd847e292eb7df78a57a00f009fbb1d7a1a3f998da60f9d2d07db6",
     "text": "Свечение фона"
   },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "56cd3e40f2665551d48ffaa90e267e988a5c654e7161a989e32b8bac6ef4d9d0",
-    "text": "Значение свечения фона"
-  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
@@ -10908,12 +10884,6 @@
     "source": "Choose a language",
     "sourceHash": "6029fe85256831cc5a53d0401f85382cab36485d5c58eb204652cd6763b03fa6",
     "text": "Выберите язык"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "dfc1558c22750d6518cb6ebce6222fbc898753d9ea00d36022286ab934b6b317",
-    "text": "Язык: {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -10969,12 +10939,6 @@
     "sourceHash": "11180432ca411ba4d80aac56de5ac37cc4737cecdfe0d5dca62c8bad571df06a",
     "text": "Частицы фона"
   },
-  "settings.particlesValue": {
-    "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "2c5d17339ee15fdf65af18f920bbbf15f50efbad96e6ac62edce1ae5d4e6edad",
-    "text": "Значение частиц фона"
-  },
   "settings.rememberAutoplay": {
     "reviewed": true,
     "source": "Remember Auto-Battle Preference",
@@ -11004,18 +10968,6 @@
     "source": "Sound",
     "sourceHash": "60901ba6412d7223cd23b06652134bef5d25adc5abc3ff8897284a07f9b90874",
     "text": "Звук"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "161b78c3600d0a7357ee9908c564c3b1fcda3f6ed93cb6db083f5efd462b1312",
-    "text": "Размер текста"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "73423c7cf773ecc344e82fe006187c6265868d556b576465e632b96269962063",
-    "text": "Подсказка {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,

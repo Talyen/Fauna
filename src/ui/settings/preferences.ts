@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { readPreference, writePreference } from "../../platform/preferences";
 
-export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 export interface AudioPreferences {
   enabled: boolean;
   master: number;

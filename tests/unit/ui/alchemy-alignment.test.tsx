@@ -109,3 +109,28 @@ it("clears all local save slots and persists fresh progress in the serialized sa
   await waitFor(() => expect(session.store.getState().saveStatus).toBe("saved"));
   await session.dispose();
 });
+it("shows save failure and retries the same committed outcome before accepting more progress", async () => {
+  let fail = true;
+  const platform = createBrowserPlatform(localStorage);
+  const write = platform.saves.write;
+  platform.saves.write = async (...args) => {
+    if (fail) throw new Error("Disk unavailable");
+    await write(...args);
+  };
+  const session = createSession(platform, 7);
+  await session.load();
+  render(<App session={session} />);
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Play", exact: true }));
+  await waitFor(() => expect(screen.getByRole("alert").textContent).toContain("Couldn’t save"));
+  const committed = session.store.getState().game;
+  await user.click(screen.getAllByRole("button", { name: /^Recruit / })[0]!);
+  expect(session.store.getState().game).toBe(committed);
+  fail = false;
+  await user.click(screen.getByRole("button", { name: "Retry", exact: true }));
+  await session.flush();
+  expect(session.store.getState().game).toBe(committed);
+  expect(screen.queryByRole("alert")).toBeNull();
+  expect(decodeSave(localStorage.getItem("fauna.save.v1")!)).toEqual(committed);
+  await session.dispose();
+});

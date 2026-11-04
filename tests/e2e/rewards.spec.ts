@@ -32,8 +32,8 @@ for (const [name, create] of [
     await seed(page, fixture);
     await resume(page);
     if (fixture.phase === "recruit") {
-      await expect(page.getByRole("heading", { name: "Last battle earnings", exact: true })).toBeVisible();
-      await expect(page.locator(".recruit-options")).toHaveCount(0);
+      await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+      await expect(page.locator(".recruit-options")).toBeVisible();
       await layouts(page, "earnings", async () => {
         expect(
           await page.getByLabel("Last battle earnings").evaluate((receipt) => {
@@ -55,7 +55,7 @@ for (const [name, create] of [
       });
       expect(await state(page)).toEqual(fixture);
       await continueToRecruit(page);
-      await expect(page.getByLabel("Last battle earnings")).toHaveCount(0);
+      await expect(page.getByLabel("Last battle earnings")).toBeVisible();
       await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
     }
     const cards = page.locator(".reward-option");

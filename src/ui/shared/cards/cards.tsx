@@ -295,9 +295,11 @@ export function ActionCard({
   tooltips = true,
   onDenied,
   valueOverride,
+  powerOverride = 1,
 }: {
   card: Card;
   valueOverride?: number;
+  powerOverride?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -317,7 +319,7 @@ export function ActionCard({
     def,
     card.level,
     valueOverride ?? (tooltipOpen ? offensiveCardValue(card, actor, modifiers) : undefined) ?? value,
-    1,
+    powerOverride,
     modifiers,
   );
   const effectLabel = useRuleText(rule.text, rule.id, rule.message)
@@ -384,6 +386,7 @@ export function ActionCard({
           actor={actor}
           modifiers={modifiers}
           valueOverride={valueOverride}
+          powerOverride={powerOverride}
         />
       </TooltipContent>
     </Tooltip>

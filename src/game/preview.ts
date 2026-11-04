@@ -7,7 +7,7 @@ export type PlayProjection =
       kind: "complete";
       outcomes: readonly CommandResult[];
       replays: number;
-      offensive: readonly (readonly OffensivePacket[])[];
+      offensive?: readonly (readonly OffensivePacket[])[];
     }
   | { kind: "unknown"; reason: "hidden" | "budget"; replays: number };
 class Fork extends Error {

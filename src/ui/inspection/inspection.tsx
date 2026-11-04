@@ -200,6 +200,7 @@ export function Inspector({
                           : i18n.content("content.keyword.food.label", "Food")
                       }
                       actor={actor}
+                      powerOverride={enemy?.power}
                       valueOverride={
                         enemy ? enemyAbilityValue(enemy, definition(action.definitionId)) : undefined
                       }

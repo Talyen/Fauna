@@ -58,8 +58,7 @@ describe("player interface", () => {
     const committed = session.store.getState().game;
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Last battle earnings", level: 1 })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
@@ -74,9 +73,8 @@ describe("player interface", () => {
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(session.store.getState().game).toBe(committed);
     expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
-    expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
+    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
+    expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
     expect(session.store.getState().game).toBe(committed);
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     const incoming = game.reward!.recruits[0]!;

@@ -155,6 +155,7 @@ export function connectInput(
       I: "inspect",
     };
     const action = mapping[event.key];
+    if (!navigation && event.repeat && ["left", "right", "up", "down"].includes(action ?? "")) return;
     if (
       (event.key === "Tab" || event.key === "F7" || ["left", "right", "up", "down"].includes(action ?? "")) &&
       !event.repeat
@@ -171,7 +172,9 @@ export function connectInput(
         ...document.querySelectorAll<HTMLElement>('button, [tabindex="0"], input, select'),
       ].filter(isAvailableFocusTarget);
       const index = controls.indexOf(document.activeElement as HTMLElement);
-      controls[(index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length]?.focus();
+      controls[
+        (index + (event.key === "F7" || event.shiftKey ? -1 : 1) + controls.length) % controls.length
+      ]?.focus();
     } else if (action) {
       if (target?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]') && action !== "back")
         return;

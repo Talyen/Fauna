@@ -37,7 +37,7 @@ export function offensiveCardValue(card: Card, actor: Creature | undefined, game
       cache.set(card.id, undefined);
       return undefined;
     }
-    for (const packets of projection.offensive) {
+    for (const packets of projection.offensive ?? []) {
       const primary = packets.filter(
         (packet) => packet.primary && packet.sourceId === actor.id && packet.damageType === def.damageType,
       );

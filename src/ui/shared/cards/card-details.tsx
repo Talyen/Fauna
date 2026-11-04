@@ -17,9 +17,11 @@ export function ActionDetails({
   modifiers,
   compact = false,
   valueOverride,
+  powerOverride = 1,
 }: {
   card: Card;
   valueOverride?: number;
+  powerOverride?: number;
   compact?: boolean;
   ownerName: string;
   actor?: Creature;
@@ -44,6 +46,7 @@ export function ActionDetails({
       <CardRules
         card={def}
         modifiers={modifiers}
+        power={powerOverride}
         level={card.level}
         value={valueOverride ?? offensiveCardValue(card, actor, modifiers) ?? value}
       />

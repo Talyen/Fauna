@@ -174,7 +174,8 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
       }
     }
   }
-  await page.getByRole("radio", { name: "125%", exact: true }).click();
+  await page.getByRole("slider", { name: "Game Size", exact: true }).focus();
+  await page.keyboard.press("End");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const art = page.getByRole("button", { name: "Inspect Mossguard", exact: true });

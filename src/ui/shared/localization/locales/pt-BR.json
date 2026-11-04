@@ -275,12 +275,6 @@
     "sourceHash": "954f06b4246bb248ed730985e136df39475e680c7ec3e48298d591629e7c40cf",
     "text": "Examinar {{name}}"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "af0bf448c1a74cc84c832047839d15c73e4415f3b3f939993799708aed6e744e",
-    "text": "Espécie bloqueada"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -9581,6 +9575,12 @@
     "sourceHash": "fb250ecb3388f3653299ec72bcced8cd00fa8e2f638b250a91d94d813a8ca1fc",
     "text": "O baralho está vazio"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "474892dee9d2534531203b210ca38861dca4d8844d0aaa90572f038386451c1a",
+    "text": "Excesso de mão"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9719,17 +9719,17 @@
     "sourceHash": "714714678986b6a8c43b66cb45bffd9c2e0dcfbbb1d6e0496664e87bafabd276",
     "text": "Traço"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "91f3e359cedfdff1d98d83f9f29f8bbb776bf65e595fa4a13deaa9992732f82d",
-    "text": "Ato {{act}} · Sala {{room}} de {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "eafdab101c7570ee1f462bae0cc1a03fb9f32470f93af54d3d18aa84b9511d33",
     "text": "Chefe: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "f7ed52f68abafe1998dc7753bbc329442200ceaf3c484c7db3f455ea8a126313",
+    "text": "Escolher destino"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10247,12 +10247,6 @@
     "sourceHash": "32e6e8d462119172b7c04a4d2c7e87d96adaf3c577a9bb3e10ef3ea1e51c0cf7",
     "text": "Jogar"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Quit",
-    "sourceHash": "1729da8c545d50a31405c65061a23b58355b048b7db1056f8da4752782d6d1a6",
-    "text": "Sair"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
@@ -10602,12 +10596,6 @@
     "sourceHash": "a253677c80d21e2d9b0b46a8d66e83fef7ae6455c3ac5d6702366e45196d3cd5",
     "text": "Fauna não conseguiu exibir esta tela; tentando novamente…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "90e977afe4eb8693ccd1b2b8be4aecf3188716f4933aafc89ef3bb18894449e1",
-    "text": "Não é possível salvar o progresso agora; mantenha Fauna aberto enquanto tenta novamente"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10710,17 +10698,17 @@
     "sourceHash": "82f4dad0ecbae475f4e12bc58e5835415a819a2fb1944fae9b1da5e71dacd64b",
     "text": "Retorno para casa"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "6a9c9f1daf2ddd70d41dd4996b2c0da15671a42d36c8a77a6a385244e2a68aff",
+    "text": "Vitória"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "b37256db3a6000d6d5b48a2cf9bd878d92841c2f3a5e613276344d724af44a84",
     "text": "Escolha uma bênção"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "c29253efc601285a51c8660bb59253a67120e905b0c5bc3d54859ccb3086f6f9",
-    "text": "Escolha uma criatura"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10830,12 +10818,6 @@
     "sourceHash": "86b8de4ecb6d67ee9da85b5605bae4a9300905880da1d9916eb69ea26988a497",
     "text": "Fechar seleção de idioma"
   },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "70615c2feb68c741c9bb256b214ff2faa59fc8e89b891bb1e0df959db7db67f9",
-    "text": "Indicações do controle"
-  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
@@ -10890,12 +10872,6 @@
     "sourceHash": "b7e8746dc66783826e2339a30c2d6b0bb6faf96ddc218759600e375aa8129bff",
     "text": "Brilho do fundo"
   },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "eadc74cc190027558365cb43450469872ef97d9067ccc2dffcc4b205fa956db2",
-    "text": "Valor do brilho de fundo"
-  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
@@ -10907,12 +10883,6 @@
     "source": "Choose a language",
     "sourceHash": "24af7d493c5640b6c7e63f5711021cc8d0494ed4a55e766ed696a5702d4ec421",
     "text": "Escolha um idioma"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "b372fd7b78409e2f745b3133de633ee8d1fb03f1b1741c7ee23a515fcff26578",
-    "text": "Idioma: {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -10968,12 +10938,6 @@
     "sourceHash": "27d81de15321222211339c3d34cd5c7bcf037d1623d31f8a049ee30efe1c2638",
     "text": "Partículas do fundo"
   },
-  "settings.particlesValue": {
-    "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "fe07d8d89f4938a76ef04ba5605b51a44064143ee63fc9c5b4f61d4150cd5d1b",
-    "text": "Valor das partículas de fundo"
-  },
   "settings.rememberAutoplay": {
     "reviewed": true,
     "source": "Remember Auto-Battle Preference",
@@ -11003,18 +10967,6 @@
     "source": "Sound",
     "sourceHash": "7737743f0329b1495e6eaf37d2f155d4068b378c0ee9bb698ff4a850f6f3c411",
     "text": "Som"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "571e4bb1f0b0b001a9665ea0eed3331f7a3e8514e6d28245753cd7a7ef81d0ae",
-    "text": "Tamanho do texto"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "d2ae8849569898d3693475177b64497eec99df100b4f773a8ffbdcf8e38d32e5",
-    "text": "Dica {{value}}%"
   },
   "settings.tooltipSize": {
     "reviewed": true,

@@ -245,3 +245,15 @@ body,
 :root[data-focus="visible"] button:focus {
   outline-color: var(--muted-foreground);
 }
+
+.save-notice {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 150;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: var(--space-3);
+}

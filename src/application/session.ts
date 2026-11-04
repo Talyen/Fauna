@@ -95,7 +95,7 @@ export function createSession(
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let saveFailures = 0;
   const scheduleSaveRetry = () => {
-    if (disposed || retryTimer) return;
+    if (disposed || resetting || retryTimer) return;
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       if (!disposed && !store.getState().closing) save(store.getState().game);
@@ -375,6 +375,8 @@ export function createSession(
       )
         return;
       resetting = true;
+      clearTimeout(retryTimer);
+      retryTimer = undefined;
       publish({ saveStatus: "saving" });
       writes = writes
         .then(() => platform.saves.clear!())

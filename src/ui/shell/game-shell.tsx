@@ -117,7 +117,15 @@ export function GameShell({ session }: { session: Session }) {
   useEffect(() => {
     if (route === "play" && game.phase === "battle" && preferences.rememberAutoplay && preferences.autoplay)
       setAutoplay(true);
-  }, [game.phase, game.encounter, route, preferences.rememberAutoplay, session, setAutoplay]);
+  }, [
+    game.phase,
+    game.encounter,
+    route,
+    preferences.rememberAutoplay,
+    preferences.autoplay,
+    session,
+    setAutoplay,
+  ]);
   useEffect(() => {
     if (route !== "play") setAutoplay(false);
   }, [route, setAutoplay]);

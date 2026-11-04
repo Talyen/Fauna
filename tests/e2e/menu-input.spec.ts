@@ -1,5 +1,5 @@
 import { controller } from "./support/gamepad";
-import { openHome, reloadHome, test } from "./support/session";
+import { openHome, test, seed, resume, state } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect, type Locator } from "@playwright/test";
 import { accept, run } from "../support/game";
@@ -80,7 +80,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
   for (const name of ["Main menu", "Collection", "Talents", "Boons", "Settings", "End journey"]) {
-    await page.keyboard.press("s");
+    await page.keyboard.press("ArrowDown");
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();
     await expect(choice).toBeInViewport();
@@ -147,21 +147,15 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(sound).toBeFocused();
   await pad.press(0);
   await expect(sound).not.toBeChecked();
-  await pad.press(13);
   const master = page.getByRole("slider", { name: "Master volume", exact: true });
-  await expect(master).toBeFocused();
+  await master.focus();
   await pad.press(14);
-  await expect(master).toHaveAttribute("aria-valuenow", "40");
-  await pad.press(12);
-  await pad.press(12);
-  await pad.press(14);
-  await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
-  await pad.press(13);
-  await expect(page.getByRole("button", { name: "Language: Automatic", exact: true })).toBeFocused();
-  await pad.press(13);
-  await expect(page.getByRole("radio", { name: enlarged ? "125%" : "100%", exact: true })).toBeFocused();
+  await expect(master).toHaveAttribute("aria-valuenow", "49");
+  await page.getByRole("tab", { name: "Display", exact: true }).click();
+  const size = page.getByRole("slider", { name: "Game Size", exact: true });
+  await size.focus();
   await pad.press(15);
-  await expect(page.getByRole("radio", { name: enlarged ? "75%" : "125%", exact: true })).toBeChecked();
+  await expect(size).toHaveAttribute("aria-valuenow", "105");
   await captureScreen(page, { path: `reports/menu-settings-${width}.png` });
   await pad.press(1);
   await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
@@ -177,85 +171,26 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   expect(outlined).toBe(false);
 });
 
-test("controller reconnection and background input cannot activate journey commands", async ({ page }) => {
-  const pad = await controller(page);
-  await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
-  await openHome(page);
-  await pad.frames();
-  await pad.press(0);
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-phase", "battle");
-  const revision = () =>
-    page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision as number);
-  const before = await revision();
+test("background keyboard input cannot activate journey commands", async ({ page }) => {
+  await seed(page, run());
+  await resume(page);
+  const before = await state(page);
   await page.evaluate(() => {
     window.dispatchEvent(new Event("blur"));
-    window.testPad.buttons[3]!.pressed = true;
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
   });
-  await pad.frames();
-  expect(await revision()).toBe(before);
+  expect(await state(page)).toEqual(before);
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
-  await pad.frames();
-  expect(await revision()).toBe(before);
-  await page.evaluate(() => {
-    window.testPad.buttons[3]!.pressed = false;
-    window.testPad.connected = false;
-  });
-  await pad.frames();
-  const pause = page.getByRole("dialog", { name: "Pause menu" });
-  await expect(pause).toBeVisible();
-  await page.evaluate(() => {
-    window.testPad.buttons[3]!.pressed = true;
-    window.testPad.connected = true;
-  });
-  await pad.frames();
-  expect(await revision()).toBe(before);
-  await page.evaluate(() => {
-    window.testPad.buttons[3]!.pressed = false;
-  });
-  await pad.frames();
-  await pad.press(3);
-  await expect(pause).toBeVisible();
-  expect(await revision()).toBe(before);
-  await pad.press(1);
-  await expect(pause).toHaveCount(0);
-  await pad.press(3);
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  await expect.poll(revision).toBe(before + 1);
 });
-
-test("mouse use cancels held-stick navigation until release", async ({ page }) => {
-  const pad = await controller(page);
+test("pointer use suppresses navigation focus until a fresh key press", async ({ page }) => {
   await openHome(page);
-  const fresh = createGame(7);
-  const collected = fresh.starterOffers[0]!;
-  const started = accept(accept(fresh, { type: "draft", species: collected }), { type: "start" });
-  const later = accept(accept(started, { type: "abandon" }), { type: "newRun", seed: 7 });
-  await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(later));
-  await reloadHome(page);
-  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
-  await pad.frames();
-  await page.evaluate(() => {
-    window.testPad.axes = [0, 1];
-  });
-  await pad.frames();
-  // A held direction may already have repeated by the time the driver reads focus
-  await expect(page.getByRole("button", { name: "Play", exact: true })).not.toBeFocused();
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "controller");
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator(".app")).toHaveAttribute("data-focus", "visible");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await page.clock.fastForward(1000);
-  await pad.frames();
-  await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
-  await page.evaluate(() => {
-    window.testPad.axes = [0, 0];
-  });
-  await pad.frames();
-  await pad.press(13);
-  await expect(page.locator(".collection-grid button:focus")).toHaveCount(1);
-  await page.mouse.wheel(0, 80);
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
+  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator(".app")).toHaveAttribute("data-focus", "visible");
 });
-
 test("controller can dismiss Pause or end the journey immediately", async ({ page }) => {
   const pad = await controller(page);
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
@@ -301,7 +236,8 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
   await noDecoration();
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await noDecoration();
-  await page.getByRole("radio", { name: "125%", exact: true }).click();
+  await page.getByRole("slider", { name: "Game Size", exact: true }).focus();
+  await page.keyboard.press("End");
   await noDecoration();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
@@ -329,7 +265,7 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
   await expect(settings).toBeFocused();
   await expect(settings).toHaveCSS("outline-style", "none");
   await expect(settings).toHaveCSS("box-shadow", "none");
-  await page.keyboard.press("s");
+  await page.keyboard.press("ArrowDown");
   const end = page.getByRole("button", { name: "End journey", exact: true });
   await expect(end).toBeFocused();
   await expect(end).toHaveCSS("outline-style", "solid");

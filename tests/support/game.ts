@@ -202,7 +202,8 @@ export function policy(s: GameState): Command {
     return canVisitCampfire(s) ? { type: "visitCampfire" } : { type: "beginBattle" };
   if (s.phase === "recruit") return recruitChoice(s);
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
-  if (s.phase === "campfire") return { type: "rest" };
+  if (s.phase === "campfire")
+    return { type: s.expedition.lastRoom === "campfire" ? "leaveCampfire" : "rest" };
   const b = s.battle!;
   const fallen = s.team.find((c) => c.health <= 0);
   const backup = s.reserves.find((c) => c.health > 0);

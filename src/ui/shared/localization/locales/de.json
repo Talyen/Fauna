@@ -275,12 +275,6 @@
     "sourceHash": "44c9899915104e161cd406edccf70820be9d5e9f36d65dc0385b7b71083d86ab",
     "text": "{{name}} ansehen"
   },
-  "collection.locked": {
-    "reviewed": true,
-    "source": "Locked species",
-    "sourceHash": "77d124a27fbe5d04b529ac3daecc6ff42129dd784fb1e6a04444c2439a930dc7",
-    "text": "Gesperrte Spezies"
-  },
   "collection.pages": {
     "reviewed": true,
     "source": "Collection pages",
@@ -9581,6 +9575,12 @@
     "sourceHash": "82b95595f19326000c06796c6cf97c2db2723d1c63ff71926ab92bec6dd3449a",
     "text": "Das Deck ist leer"
   },
+  "deck.handOverflow": {
+    "reviewed": true,
+    "source": "Hand Overflow",
+    "sourceHash": "dcc6c544ef811cb2356f98799e55000c82f9c15b49818771c2a0685f97431cf5",
+    "text": "Handüberlauf"
+  },
   "deck.pages": {
     "reviewed": true,
     "source": "Deck pages",
@@ -9719,17 +9719,17 @@
     "sourceHash": "731dc5619bdeedddfe0157ef67a042ca22822991126eaa27a1ed9348296836b2",
     "text": "Eigenschaft"
   },
-  "journey.actRoom": {
-    "reviewed": true,
-    "source": "Act {{act}} · Room {{room}} of {{total}}",
-    "sourceHash": "a72fdd702717bdf48ff037a8d76ad8f0cb11361b886e518db4f3fbc3e6d7aa97",
-    "text": "Akt {{act}} · Raum {{room}} von {{total}}"
-  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
     "sourceHash": "c365e02d12991aea5883ed99404d3bbeb82fb8ea2fba856bb881de5c59ad5342",
     "text": "Boss: {{name}}"
+  },
+  "journey.chooseDestination": {
+    "reviewed": true,
+    "source": "Choose Destination",
+    "sourceHash": "f4bc32d78450cbb4b975257912f21be5c394b0ddfe33c6a1d468e2e89cb52fa9",
+    "text": "Ziel wählen"
   },
   "journey.combat": {
     "reviewed": true,
@@ -10247,12 +10247,6 @@
     "sourceHash": "6d9985e1ac0beb47eb3067288bf1a514c5a46d82fdfd06392074f30e95d4c6a8",
     "text": "Spielen"
   },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Quit",
-    "sourceHash": "8b376c7889af6d5899d49b21df7937663573ca2b99eda3671ed5b66001980c20",
-    "text": "Beenden"
-  },
   "menu.quitShort": {
     "reviewed": true,
     "source": "Quit",
@@ -10601,12 +10595,6 @@
     "sourceHash": "4e4ded2a9c06ffc30617b4573be4c366a7e2409989521d5f677eaba842386704",
     "text": "Fauna konnte diesen Bildschirm nicht anzeigen; erneuter Versuch…"
   },
-  "recovery.save": {
-    "reviewed": true,
-    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
-    "sourceHash": "78a06159651575b8d05f9b95a1b4633f3c304b832ee1aeaacccc87cd9f335e1b",
-    "text": "Der Fortschritt kann gerade nicht gespeichert werden; lasse Fauna geöffnet, während es erneut versucht wird"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -10709,17 +10697,17 @@
     "sourceHash": "3d7d3a8ba5d335cc7b5a6a9b5a341339226cf03bae50cf95f4fea59c4477d2ef",
     "text": "Nach Hause zurückgekehrt"
   },
+  "results.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "7ac67354f4a43f9e0256a1568982780e99724f8191c302a8ce17d8e3630361df",
+    "text": "Sieg"
+  },
   "rewards.chooseBoon": {
     "reviewed": true,
     "source": "Choose a Boon",
     "sourceHash": "4933841892a18081d5d5446cacd21dcf0534baa6849ff577759455fcdafd413d",
     "text": "Wähle einen Segen"
-  },
-  "rewards.chooseRecruit": {
-    "reviewed": true,
-    "source": "Choose a Recruit",
-    "sourceHash": "7ad719dc92a0e671f93f501fa5a4044dd3c57d22d069cd3480118d8c660bc050",
-    "text": "Wähle eine Kreatur"
   },
   "rewards.new": {
     "reviewed": true,
@@ -10829,12 +10817,6 @@
     "sourceHash": "d19abc847fe0162f051f008794691eb56e846c5d87bedb9095f9cb67b13b39d7",
     "text": "Sprache schließen"
   },
-  "settings.controllerPrompts": {
-    "reviewed": true,
-    "source": "Controller prompts",
-    "sourceHash": "084003895aae5c4f26309ed1f881d27afafc41ae5c7381bd882d62469c312365",
-    "text": "Controller-Hinweise"
-  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
@@ -10889,12 +10871,6 @@
     "sourceHash": "176ba7f7fc76574d6013597d69b7c2478d583f4695d180ad0027ad1cce207911",
     "text": "Hintergrundleuchten"
   },
-  "settings.glowValue": {
-    "reviewed": true,
-    "source": "Background Glow value",
-    "sourceHash": "731cd369801b6d35e01c75ce5085a648166163870ebea573148e1ffd66fb3657",
-    "text": "Wert des Hintergrundleuchtens"
-  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
@@ -10906,12 +10882,6 @@
     "source": "Choose a language",
     "sourceHash": "bf11bb8d4e50324100029202eb70865285f29203d4312e61a14034d217e57f53",
     "text": "Sprache wählen"
-  },
-  "settings.languageValue": {
-    "reviewed": true,
-    "source": "Language: {{language}}",
-    "sourceHash": "b79b424927885633f3f596b34885204ea272694ce7b0afd7c418d0f55c50da7e",
-    "text": "Sprache: {{language}}"
   },
   "settings.master": {
     "reviewed": true,
@@ -10967,12 +10937,6 @@
     "sourceHash": "00c408142da655f302ea0ccbefadcd7ff5b9a55dae548f524163984a26e44301",
     "text": "Hintergrundpartikel"
   },
-  "settings.particlesValue": {
-    "reviewed": true,
-    "source": "Background Particles value",
-    "sourceHash": "679cbed590af410def5c1f5e53720e03f3392619d28ff75ef486b4fc505f3bab",
-    "text": "Wert der Hintergrundpartikel"
-  },
   "settings.rememberAutoplay": {
     "reviewed": true,
     "source": "Remember Auto-Battle Preference",
@@ -11002,18 +10966,6 @@
     "source": "Sound",
     "sourceHash": "97aa3bc6b1e0bee3dc55cd66878fd60443533aaea86795e5ac998e03bf0fda76",
     "text": "Ton"
-  },
-  "settings.textSize": {
-    "reviewed": true,
-    "source": "Text size",
-    "sourceHash": "b8f07b1d646b6a3645584b46e534ec09e2ca2b164f072cbd3a0728d856c21c68",
-    "text": "Textgröße"
-  },
-  "settings.tooltipPercent": {
-    "reviewed": true,
-    "source": "Tooltip {{value}}%",
-    "sourceHash": "f06b42639d83049e98416eac14cd32eb711f799e47fb38335261ad87b44956d1",
-    "text": "Tooltip {{value}} %"
   },
   "settings.tooltipSize": {
     "reviewed": true,

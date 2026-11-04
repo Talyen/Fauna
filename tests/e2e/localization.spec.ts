@@ -20,8 +20,8 @@ for (const locale of locales) {
     await seed(page, run());
     const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
     await page.getByRole("button", { name: "Options", exact: true }).click();
-    await page.getByRole("button", { name: "Language: English", exact: true }).click();
-    await page.getByRole("radio", { name: languages[locale].name, exact: true }).click();
+    await page.getByRole("combobox", { name: "Language", exact: true }).click();
+    await page.getByRole("option", { name: languages[locale].name, exact: true }).click();
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect.poll(() => page.evaluate((saveKey) => localStorage.getItem(saveKey), key)).toBe(before);
 

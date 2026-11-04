@@ -25,16 +25,16 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   const before = await state(page);
   const cards = page.locator(".app:not([inert]) .hand .action-card");
   await cards.first().focus();
-  await page.keyboard.press("w");
+  await page.keyboard.press("ArrowUp");
   await expect(page.locator(".app:not([inert]) .player-row .creature-card:focus")).toHaveCount(1);
-  await page.keyboard.press("w");
+  await page.keyboard.press("ArrowUp");
   await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.getByRole("tooltip")).toBeVisible();
   await cards.first().focus();
   await page.keyboard.press("Enter");
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
   await expect(page.locator(".enemy-row .target-preview")).toBeVisible();
   await expect(page.locator(".confirm-play")).toHaveCount(0);
@@ -168,13 +168,13 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
   await page.locator(".app:not([inert]) .hand .action-card").first().click();
   await ally.focus();
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(
     page.locator(".app:not([inert]) .enemy-row .creature-wrap:not(.knocked-out) .creature-card:focus"),
   ).toHaveCount(1);
   await card.hover();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
-  await page.keyboard.press("d");
+  await page.keyboard.press("ArrowRight");
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "keyboard");
 });
 

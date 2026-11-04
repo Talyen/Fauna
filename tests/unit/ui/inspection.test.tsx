@@ -179,7 +179,7 @@ describe("artwork-first inspection", () => {
       await user.click(stomp);
       expect(screen.getByRole("dialog", { name: "Rooted Stomp details" })).toBeTruthy();
       expect(document.activeElement).toBe(screen.getByRole("button", { name: "Close inspection" }));
-      await user.keyboard("d");
+      await user.keyboard("{ArrowRight}");
       expect(screen.getByRole("dialog", { name: "Moss Renewal details" })).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(document.activeElement).toBe(
