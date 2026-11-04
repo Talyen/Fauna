@@ -69,8 +69,9 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
   expect(fan).toHaveLength(6);
   expect(Math.abs(fan[0]!.top - fan[5]!.top)).toBeLessThan(1);
   expect(Math.abs(fan[1]!.top - fan[4]!.top)).toBeLessThan(1);
-  expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
-  expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
+  const centers = fan.map((card) => card.top + card.height / 2);
+  expect(centers[0]!).toBeGreaterThan(centers[1]!);
+  expect(centers[1]!).toBeGreaterThan(centers[2]!);
   expect(fan[0]!.bottom).toBeGreaterThan(height);
   expect(fan[0]!.bottom).toBeLessThan(height + 96);
   expect(Math.abs(fan[2]!.bottom - height)).toBeLessThan(16);

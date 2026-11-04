@@ -10,6 +10,7 @@ import { createGame } from "../../../src/game/engine";
 import { decodeSave } from "../../../src/game/save";
 import { authoredPack, accept, run, teamRun, starterJourney, winBattle } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
+import { wisterelleBattle } from "../../support/wisterelle";
 
 // @vitest-environment jsdom
 import { describe, it, expect, vi } from "vitest";
@@ -21,6 +22,27 @@ import { createBrowserPlatform } from "../../../src/platform/browser";
 screenTestEnvironment();
 
 describe("player interface", () => {
+  it("restores the selected ability after Escape cancels a chosen backup", async () => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+    const game = wisterelleBattle();
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    const card = document.querySelector<HTMLButtonElement>(
+      '.hand [data-card-id="ally-0:wisterelle-forgotten-junction"]',
+    )!;
+    act(() => card.focus());
+    await user.keyboard("{Enter}");
+    expect(screen.getByRole("button", { name: "Swap in Coralcurl from backup" })).toBeTruthy();
+    await user.keyboard("{Escape}");
+    expect(document.activeElement === card).toBe(true);
+    expect(card.getAttribute("aria-pressed")).toBe("false");
+    expect(session.store.getState().game).toEqual(game);
+    await session.dispose();
+  });
   it("keeps overflow invisible and unplayable while filling a hand slot after a play", async () => {
     const game = produce(run(), (d) => {
       d.battle!.hand = d.cards.slice(0, 6).map((card) => card.id);

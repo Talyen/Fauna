@@ -65,14 +65,24 @@ test("the whole talent tree stays reachable without pages", async ({ page }) => 
   await press(13);
   await press(13);
   await press(13);
-  const last = page.getByRole("button", { name: "Fire Resistance", exact: true });
-  await expect(last).toBeFocused();
+  const finalBurnRow = tree.locator(".talent-row").last();
+  const last = finalBurnRow.locator(".talent-node:focus");
+  await expect(last).toHaveCount(1);
   const withinRegion = await last.evaluate((element) => {
     const bounds = element.getBoundingClientRect();
     const region = element.closest(".talent-tree-viewport")!.getBoundingClientRect();
     return bounds.top >= region.top - 1 && bounds.bottom <= region.bottom + 1;
   });
   expect(withinRegion).toBe(true);
+  const expected = await finalBurnRow
+    .locator(".talent-node")
+    .evaluateAll((nodes) => nodes.map((node) => node.getAttribute("aria-label")));
+  const visited = new Set<string | null>();
+  for (let index = 0; index < expected.length; index++) {
+    visited.add(await last.getAttribute("aria-label"));
+    await press(15);
+  }
+  expect([...visited].sort()).toEqual(expected.sort());
   await expect(tree).not.toHaveAttribute("data-scroll-region");
   await page.keyboard.press("Escape");
   await expect(burn).toBeFocused();

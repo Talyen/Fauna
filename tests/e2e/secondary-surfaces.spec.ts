@@ -23,7 +23,8 @@ test("persistent saving failure fits both sizes and clears after automatic recov
   await resume(page);
   await page.getByRole("button", { name: "End turn", exact: true }).click();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "error");
-  await expect(page.locator(".save-notice")).toHaveCount(0);
+  await expect(page.getByRole("alert")).toContainText("Couldn’t save");
+  await expect(page.getByRole("button", { name: "Retry", exact: true })).toBeVisible();
   // Exercise the real retry and UI subscription without waiting five wall-clock seconds per retry.
   await page.clock.fastForward(5000);
   await expect(page.locator(".save-notice")).toBeVisible();

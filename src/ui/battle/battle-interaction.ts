@@ -230,7 +230,7 @@ export function useBattleInteraction({
   const cancel = () => {
     const opener = board.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`) ?? null;
     update({ type: "cancel" });
-    if (navigateFocus) returnFocus(opener);
+    returnFocus(opener);
   };
   useEffect(() => {
     const root = board.current;

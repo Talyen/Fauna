@@ -90,30 +90,31 @@ for (const [width, height, scale, reduced] of [
       const frames = [...board.querySelectorAll(".creature-wrap")].map((wrap) => {
         const card = wrap.querySelector(".creature-card")!.getBoundingClientRect();
         const health = wrap.querySelector(".health-forecast")!.getBoundingClientRect();
-        const icons = [...wrap.querySelectorAll(".status-icon > svg")].map((icon) =>
+        const icons = [...wrap.querySelectorAll(".status-icon svg")].map((icon) =>
           icon.getBoundingClientRect(),
         );
-        const expectedHealth = document.createElement("span");
-        expectedHealth.style.height = "var(--battle-health-height)";
-        wrap.append(expectedHealth);
-        const healthHeight = Number.parseFloat(getComputedStyle(expectedHealth).height);
-        expectedHealth.remove();
         return {
           healthInside: health.left >= card.left && health.right <= card.right,
           healthBottom: card.bottom - health.bottom,
           healthHeight: health.height,
-          expectedHealthHeight: healthHeight,
+          iconCount: icons.length,
           iconsBelow: icons.every((icon) => icon.top >= card.bottom),
         };
       });
-      return { rows, frames, center: innerWidth / 2 };
+      return {
+        rows,
+        frames,
+        center: innerWidth / 2,
+        density: Number(getComputedStyle(board).getPropertyValue("--ui-density")) || 1,
+      };
     });
     for (const center of composition.rows)
       expect(Math.abs(center - composition.center)).toBeLessThanOrEqual(1);
+    expect(composition.frames.some((frame) => frame.iconCount > 0)).toBe(true);
     for (const frame of composition.frames) {
       expect(frame.healthInside).toBe(true);
       expect(Math.abs(frame.healthBottom)).toBeLessThanOrEqual(1);
-      expect(frame.healthHeight).toBeCloseTo(frame.expectedHealthHeight, 1);
+      expect(frame.healthHeight / composition.density).toBeCloseTo(4, 1);
       expect(frame.iconsBelow).toBe(true);
     }
     const origin = Date.UTC(2026, 0, 1);

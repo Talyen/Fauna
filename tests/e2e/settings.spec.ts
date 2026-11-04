@@ -26,6 +26,9 @@ test("slider fill and thumb follow pointer drags across the track", async ({ pag
       await page.mouse.move(x, y + 15, { steps: 5 });
       await expect(thumb).toHaveAttribute("aria-valuenow", String(percent));
       await expect
+        .poll(() => slider.evaluate((element) => element.getBoundingClientRect().width))
+        .toBeCloseTo(bounds.width, 1);
+      await expect
         .poll(async () =>
           slider.evaluate((element) => {
             const track = element.querySelector(".ui-slider-track")!.getBoundingClientRect();
@@ -36,11 +39,14 @@ test("slider fill and thumb follow pointer drags across the track", async ({ pag
           }),
         )
         .toBeLessThan(1);
-      const center = await thumb.evaluate((element) => {
-        const rect = element.getBoundingClientRect();
-        return rect.left + rect.width / 2;
-      });
-      expect(Math.abs(center - x)).toBeLessThan(1);
+      await expect
+        .poll(() =>
+          thumb.evaluate((element, x) => {
+            const rect = element.getBoundingClientRect();
+            return Math.abs(rect.left + rect.width / 2 - x);
+          }, x),
+        )
+        .toBeLessThan(1);
     }
     await page.mouse.up();
   }

@@ -212,6 +212,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
     await captureScreen(page, { path: `reports/battle-review/targeting-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 800 });
+  await settleScreen(page);
   for (const el of [enemy, ally, card]) await expectCorners(el, 30);
   await expectCorners(page.locator(".end-turn"), 12);
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
