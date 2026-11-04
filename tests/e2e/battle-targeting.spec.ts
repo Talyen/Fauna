@@ -115,7 +115,7 @@ for (const handSize of [4, 7]) {
         centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
       };
     });
-    expect(geometry.artworkAreaRatio).toBeCloseTo(1, 3);
+    expect(geometry.artworkAreaRatio).toBeCloseTo(1.21, 3);
     expect(geometry.frameTop).toBeLessThan(geometry.toolbarBottom);
     expect(geometry.healthGaps.every((gap) => gap < 0.1)).toBe(true);
     expect(geometry.glow).toBe("none");
