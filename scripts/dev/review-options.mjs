@@ -20,12 +20,23 @@ export function reviewOptions(args, { capture = false } = {}) {
       continue;
     }
     if (
-      !["--scenario", "--viewport", "--text-scale", ...(capture ? ["--tier", "--label"] : [])].includes(arg)
+      ![
+        "--scenario",
+        "--viewport",
+        "--text-scale",
+        "--seed",
+        ...(capture ? ["--tier", "--label"] : []),
+      ].includes(arg)
     )
       throw new Error(`Unknown review option: ${arg}`);
     const value = args[++i];
     if (!value || value.startsWith("--")) throw new Error(`${arg} requires a value.`);
     if (arg === "--scenario") options.scenario = value;
+    if (arg === "--seed") {
+      if (!/^(0|[1-9]\d*)$/.test(value) || Number(value) > 0xffffffff)
+        throw new Error("Use a whole-number --seed from 0 to 4294967295");
+      options.seed = Number(value);
+    }
     if (arg === "--label") options.label = value;
     if (arg === "--tier") options.tier = value;
     if (arg === "--text-scale") options.scale = Number(value);
@@ -37,6 +48,8 @@ export function reviewOptions(args, { capture = false } = {}) {
   }
   if (options.scenario && !SCENARIOS.includes(options.scenario))
     throw new Error(`Choose a scenario: ${SCENARIOS.join(", ")}.`);
+  if (options.seed !== undefined && options.scenario !== "battle")
+    throw new Error("--seed applies to the battle sample");
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.label))
     throw new Error("Use a lowercase capture label with single hyphens.");
   if (!["small", "interaction", "layout"].includes(options.tier))

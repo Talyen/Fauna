@@ -66,9 +66,13 @@ export async function capture(args = process.argv.slice(2)) {
   try {
     session = await startPreview();
     if (stopped) throw new Error("Capture canceled.");
-    const scenario = await reviewScenario(session.server, options.scenario);
+    const scenario = await reviewScenario(session.server, options.scenario, { seed: options.seed });
     evidence.fixture = scenario.fixture;
     evidence.seed = scenario.seed;
+    if (scenario.lineup) {
+      evidence.lineup = scenario.lineup;
+      console.log(`Battle sample seed: ${scenario.seed}; replay with --seed ${scenario.seed}`);
+    }
     evidence.checkpointHash = createHash("sha256").update(scenario.save).digest("hex");
     await writeFile(path.join(output, "checkpoint.json"), scenario.save);
     const { settleScreen } = await session.server.ssrLoadModule("/tests/e2e/support/rendered-evidence.ts");

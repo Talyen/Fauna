@@ -665,8 +665,8 @@
   max-width: 100%;
 }
 .battle-screen .status-icon {
-  flex: 0 0 24px;
-  width: 24px;
+  flex: 0 0 max(24px, var(--icon-size));
+  width: max(24px, var(--icon-size));
 }
 :root .app .battle-screen :is(.creature-card, .hand .action-card) {
   --border-art-width: 0px;
