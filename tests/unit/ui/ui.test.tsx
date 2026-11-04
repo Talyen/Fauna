@@ -112,7 +112,7 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
     await user.click(screen.getByRole("button", { name: "Open menu" }));
-    await user.click(screen.getByRole("button", { name: "End journey" }));
+    await user.click(screen.getByRole("button", { name: "End Run" }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Play" })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");

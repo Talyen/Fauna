@@ -10199,6 +10199,12 @@
     "sourceHash": "bbf4f80624b627bbdb969ed93dbdacb390e83082cc5fe6e7faa2e48cce2eb1cf",
     "text": "Завершить путешествие"
   },
+  "menu.endRun": {
+    "reviewed": true,
+    "source": "End Run",
+    "sourceHash": "2945eeb0f1fed74549b9f3a617f97de074af0f45a0a4d5e950ec85ace2092db0",
+    "text": "Завершить забег"
+  },
   "menu.logo": {
     "reviewed": true,
     "source": "Fauna logo",
@@ -10209,6 +10215,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
+    "text": "Главное меню"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "f6f94255842b18a8610cd5e9063c8d0da56fe266f4f49c92112bc892b349f9a2",
     "text": "Главное меню"
   },
   "menu.options": {
@@ -10240,6 +10252,18 @@
     "source": "Quit",
     "sourceHash": "c7cd9e1b64c7fe7f0ce60007bf353de344b662046ffe9df1feade5fc84c85dbc",
     "text": "Выйти"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "14b80b5e46a550bfcce7679baff85e873cfd488fdb21362092f78f9dae800757",
+    "text": "Вернуться в бой"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "e58a3d38f341057cc29ce2ac2747965b9af5db24f72be1fc620a819149b0a553",
+    "text": "Вернуться в забег"
   },
   "menu.settings": {
     "reviewed": true,

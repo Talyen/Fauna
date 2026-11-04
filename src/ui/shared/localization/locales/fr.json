@@ -10199,6 +10199,12 @@
     "sourceHash": "03c14ce62b6058fe565ced5260031012a5f1c8621b5245424352b51549ce02c2",
     "text": "Terminer le voyage"
   },
+  "menu.endRun": {
+    "reviewed": true,
+    "source": "End Run",
+    "sourceHash": "b046e29485dc314739bd53cc4a8722b0bd045eee6032a793298d93533aab0a8c",
+    "text": "Terminer la partie"
+  },
   "menu.logo": {
     "reviewed": true,
     "source": "Fauna logo",
@@ -10209,6 +10215,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "bbc7b126f0ac48c0f8bde64e65551f08c96092d8dd73278e441aea3fe27b0332",
+    "text": "Menu principal"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "ea217279138cd5323a5a6675b0dd5771887fff667c3433c289d6a16d0a35120d",
     "text": "Menu principal"
   },
   "menu.options": {
@@ -10240,6 +10252,18 @@
     "source": "Quit",
     "sourceHash": "07d7b1daff4afb38613210c4744302eed93d36bd833b35e96ab0fd95ba0a2d8e",
     "text": "Quitter"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "700ba6c94d72e51b951c7260deef4611113b58a6ae96a59e770a63239e5b6805",
+    "text": "Retour au combat"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "8fd5ce88d669c070d8efabb94eb76d6a5edc493aea95b7c9bfd0fed7362ea301",
+    "text": "Retour à la partie"
   },
   "menu.settings": {
     "reviewed": true,

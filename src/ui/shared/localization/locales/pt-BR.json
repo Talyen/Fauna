@@ -10199,6 +10199,12 @@
     "sourceHash": "9063112b462cb99a542a1b49df83009a9d42f6e1fc5f880f88ac2e84a6d389f0",
     "text": "Encerrar jornada"
   },
+  "menu.endRun": {
+    "reviewed": true,
+    "source": "End Run",
+    "sourceHash": "d6f5ced9af58abff4c1a6aac856c0b950a903e7d9b00e8d3035873d3ece4b923",
+    "text": "Encerrar jornada"
+  },
   "menu.logo": {
     "reviewed": true,
     "source": "Fauna logo",
@@ -10209,6 +10215,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "0b1c2368284f406284443743a0a61ffac4990b740f0a1f57aa2b897dce264091",
+    "text": "Menu principal"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "e76381287ecb824c6000b7003ef03bd7929ab19bfae62aa16e8ebd5589539964",
     "text": "Menu principal"
   },
   "menu.options": {
@@ -10240,6 +10252,18 @@
     "source": "Quit",
     "sourceHash": "1729da8c545d50a31405c65061a23b58355b048b7db1056f8da4752782d6d1a6",
     "text": "Sair"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "d3f5e353750f812b75a5140f9927e2eb568519be53c08b0cfa41d60cc68f1da4",
+    "text": "Voltar ao combate"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "2a520a6739696e826ce6c521483694a310eb74331e912ed9efa3fe906a0171d6",
+    "text": "Voltar à jornada"
   },
   "menu.settings": {
     "reviewed": true,

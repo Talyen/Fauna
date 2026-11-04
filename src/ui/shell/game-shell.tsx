@@ -316,6 +316,7 @@ export function GameShell({ session }: { session: Session }) {
   const menuItems = (home: boolean) => (
     <MenuActions
       home={home}
+      battle={game.phase === "battle"}
       active={active}
       hasBoons={game.boons.length > 0}
       talentPoints={talentPoints}

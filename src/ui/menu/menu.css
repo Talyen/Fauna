@@ -65,14 +65,8 @@
 .menu-icon-end {
   color: var(--menu-icon-end);
 }
-.menu-icon-home {
-  color: var(--menu-icon-home);
-}
 .menu-icon-quit {
   color: var(--menu-icon-quit);
-}
-.menu-icon-quit-home {
-  color: var(--menu-icon-quit-home);
 }
 .menu-icon-skip {
   color: var(--menu-icon-skip);

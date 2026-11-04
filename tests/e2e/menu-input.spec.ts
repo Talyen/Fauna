@@ -79,7 +79,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     .locator("button:not(.dialog-close)")
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
-  for (const name of ["Main menu", "Collection", "Talents", "Boons", "Settings", "End journey"]) {
+  for (const name of ["Main Menu", "Collection", "Talents", "Boons", "Options", "End Run"]) {
     await page.keyboard.press("s");
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();
@@ -265,7 +265,7 @@ test("controller can dismiss Pause or end the journey immediately", async ({ pag
   await pad.press(0);
   await pad.press(1);
   for (let i = 0; i < 5; i++) await pad.press(13);
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "End Run", exact: true })).toBeFocused();
   await pad.press(1);
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
@@ -273,7 +273,7 @@ test("controller can dismiss Pause or end the journey immediately", async ({ pag
   );
   await pad.press(1);
   for (let i = 0; i < 5; i++) await pad.press(13);
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "End Run", exact: true })).toBeFocused();
   await pad.press(0);
   await expect(page.getByRole("alertdialog")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
@@ -313,24 +313,24 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
-  await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Return to Battle", exact: true })).toBeFocused();
   await noDecoration();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
   await noDecoration();
   await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.keyboard.down("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await page.keyboard.down("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await page.keyboard.up("Escape");
-  const settings = page.getByRole("button", { name: "Settings", exact: true });
+  const settings = page.getByRole("button", { name: "Options", exact: true });
   await expect(settings).toBeFocused();
   await expect(settings).toHaveCSS("outline-style", "none");
   await expect(settings).toHaveCSS("box-shadow", "none");
   await page.keyboard.press("s");
-  const end = page.getByRole("button", { name: "End journey", exact: true });
+  const end = page.getByRole("button", { name: "End Run", exact: true });
   await expect(end).toBeFocused();
   await expect(end).toHaveCSS("outline-style", "solid");
   await expect(end).toHaveCSS("border-top-color", "rgba(0, 0, 0, 0)");
@@ -342,6 +342,6 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
   await page.mouse.click(20, 20);
   await expect(menu).toHaveCount(0);
   await page.getByRole("button", { name: "Open menu" }).click();
-  await menu.getByRole("button", { name: "Continue", exact: true }).click();
+  await menu.getByRole("button", { name: "Return to Battle", exact: true }).click();
   await expect(menu).toHaveCount(0);
 });
