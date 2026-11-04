@@ -1,4 +1,5 @@
 {
+  "frameRetention": "Historical screenshots removed on 2026-11-04 because they depict superseded UI; capture details remain as a record",
   "baselineCommit": "97465a9b224a366afdcb854db9deb7e64acc6501",
   "candidateSourceSha256": {
     "src/ui/expedition/support-screen.tsx": "a89640ded3e5e81387af425fc54b0ac05415ca53114cc4452364c2d7cb175682",
