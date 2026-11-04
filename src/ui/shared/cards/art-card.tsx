@@ -11,6 +11,7 @@ type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
   aspect: "creature" | "action";
   presentation?: boolean;
+  shine?: boolean;
   effectText?: string;
   effectKeywords?: readonly KeywordId[];
   effectTone?: EffectTone;
@@ -25,6 +26,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     artwork,
     aspect,
     presentation = false,
+    shine: showShine = true,
     className,
     effectText,
     effectKeywords,
@@ -49,7 +51,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const metadata = useEffectMetadata(keywords, effectTone);
   const palette = effectPalette(keywords, urgent ? "death" : effectTone);
   const shine =
-    keywords !== undefined || effectTone ? (
+    showShine && (keywords !== undefined || effectTone) ? (
       <ShineBorder
         colors={palette.border}
         duration={urgent || acting ? 4 : 14}

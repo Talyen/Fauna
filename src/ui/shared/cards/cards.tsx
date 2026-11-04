@@ -32,6 +32,7 @@ type CreatureProps = {
   enemyId?: string;
   actorId?: string;
   battleSlot?: "left" | "center" | "right";
+  battlePortrait?: boolean;
   onPreview?: () => void;
   onPreviewEnd?: () => void;
   validTarget?: boolean;
@@ -70,6 +71,7 @@ export function CreatureCard({
   enemyId,
   actorId,
   battleSlot,
+  battlePortrait = false,
   onPreview,
   onPreviewEnd,
   validTarget = false,
@@ -95,6 +97,7 @@ export function CreatureCard({
       artwork={assetUrl(artworkId ?? `creature.${kind}`)}
       effectKeywords={artworkId?.startsWith("minion.") ? [] : creatureKeywords(kind, progression)}
       urgent={health !== 0 && !!combat?.grace}
+      shine={!battlePortrait || (health !== 0 && !!combat?.grace)}
       acting={acting}
       control={health === 0 ? null : combat?.controlled}
       presentation={presentation}

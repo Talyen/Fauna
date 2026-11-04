@@ -37,6 +37,9 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   await page.mouse.move(0, 0);
   await expect(shine).toHaveCSS("opacity", "0");
   await expect(urgentShine).toHaveCSS("opacity", "0");
+  const combatant = page.locator(".enemy-row .creature-card").first();
+  await combatant.hover();
+  await expect(combatant.locator(":scope > .effect-shine-border")).toHaveCount(0);
   await expect(page.locator(".combatant-details .effect-shine-border")).toHaveCount(0);
   await card.focus();
   await page.keyboard.press("ArrowLeft");
@@ -54,7 +57,7 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   await page.mouse.move(0, 0);
   await expect(targeted).toHaveAttribute("aria-pressed", "true");
   await expect(targeted.locator(":scope > .effect-shine-border")).toHaveCSS("opacity", "0");
-  await expect(page.locator(".creature-wrap[data-acting] .effect-shine-border")).toHaveCSS("opacity", "0");
+  await expect(page.locator(".creature-wrap[data-acting] .effect-shine-border")).toHaveCount(0);
   await expect(urgentShine).toHaveCSS("opacity", "0");
   await page.keyboard.press("Escape");
   await card.hover();

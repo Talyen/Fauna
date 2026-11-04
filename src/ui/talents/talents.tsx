@@ -1,7 +1,7 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
-import { EffectButton as Button, ShineText } from "../shared/effects/treatments";
+import { EffectButton as Button } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
@@ -167,11 +167,7 @@ export function Talents({
       <EffectBaseline palette={keyword ? effectPalette([keyword]) : null} />
       <header className="page-heading talents-heading">
         <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>
-          {keyword ? (
-            <ShineText keywords={[keyword]}>{keywordName(keyword)}</ShineText>
-          ) : (
-            i18n.message("menu.talents", "Talents")
-          )}
+          {keyword ? keywordName(keyword) : i18n.message("menu.talents", "Talents")}
         </ScreenHeading>
         {keyword ? (
           <Button
@@ -196,6 +192,7 @@ export function Talents({
                     aspect="action"
                     artwork={assetUrl(`keyword.${artwork[id]}`)}
                     effectKeywords={[id]}
+                    shine={false}
                     data-talent-keyword={id}
                     aria-label={i18n.message("talents.category", "{{keyword}} talents", {
                       keyword: keywordName(id),
@@ -203,9 +200,7 @@ export function Talents({
                     aria-describedby={points > 0 ? `${id}-available-points` : undefined}
                     onClick={() => setKeyword(id)}
                   />
-                  <h2>
-                    <ShineText keywords={[id]}>{keywordName(id)}</ShineText>
-                  </h2>
+                  <h2>{keywordName(id)}</h2>
                   <p className="talent-category-points" id={`${id}-available-points`}>
                     {points > 0
                       ? i18n.plural(
@@ -315,8 +310,8 @@ export function Talents({
                               <span data-keyword={keyword}>
                                 <TalentSymbol className="talent-icon" aria-hidden="true" />
                               </span>
-                              <span className="talent-name">
-                                <ShineText keywords={[keyword]}>{talentName}</ShineText>
+                              <span className="talent-name" data-keyword={keyword}>
+                                {talentName}
                               </span>
                             </span>
                             <span className="talent-effect" id={`${t.id}-effect`}>

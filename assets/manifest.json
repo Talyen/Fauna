@@ -2728,12 +2728,12 @@
     {
       "id": "logo.main-menu",
       "origin": "repository",
-      "source": "public/art/branding/Fauna_Gamboloom_Logo.png",
+      "source": "public/art/branding/Fauna_Dreamsunder_Logo.png",
       "output": "art/branding/main-menu.webp",
       "recipe": "card-webp",
       "kind": "art",
       "aspect": [4, 3],
-      "provenance": "Fauna_Gamboloom_Logo.png selected from Google Drive file 1JOEi0BXpZ8bnKfaHU3UxeebSzW_sHzY2; temporary main menu logo",
+      "provenance": "Fauna_Dreamsunder_Logo.png selected by the user on 2026-11-04 from Google Drive file 1KGAzxHvpLuhxRn48UsdvuYkeI8IRWltb for the main menu",
       "rights": "User-provided Fauna artwork selected for this game"
     },
     {

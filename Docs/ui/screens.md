@@ -61,7 +61,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 Show up to three distinct offers at shared artwork sizes. Activating creature artwork recruits immediately; hover/focus shows the passive, and right-click, I or the controller inspection action opens the full kit without recruiting. Each card has an accessible Recruit name. Omit separate Recruit and Begin journey buttons: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
 
-Shared creature hover/focus details show the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names and icons share the short-label shine palette from keywords in the passive rules; rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Live combatants with readouts also append current/maximum Health, including inspectable backups; starter and Collection artwork have no live Health readout. Echo minions have no passive; their tooltip contains their name and live Health when readouts are enabled.
+Shared creature hover/focus details show the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names use the short-label shine palette from keywords in the passive rules; icons use a solid keyword color and rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Live combatants with readouts also append current/maximum Health, including inspectable backups; starter and Collection artwork have no live Health readout. Echo minions have no passive; their tooltip contains their name and live Health when readouts are enabled.
 
 ## Creature and action inspection
 
@@ -83,11 +83,11 @@ Boons shows the complete read-only catalog, with name and rules on hover or inte
 
 ## Talents
 
-The overview shows every category in centered rows of at most five, with 12px column gaps. Portrait artwork grows to the largest size fitting row width and remaining height, without a fixed cap. Reserve full-size category names (16px) and available-point labels (13px), respecting text preferences and fixed caption line boxes. If no category has points, omit the empty point-label space.
+The overview shows every category in centered rows of at most five, with 12px column gaps. Portrait artwork grows to the largest size fitting row width and remaining height, without a fixed cap; category labels and hover frames use solid colors. Reserve full-size category names (16px) and available-point labels (13px), respecting text preferences and fixed caption line boxes. If no category has points, omit the empty point-label space.
 
 Selecting artwork opens a dedicated tree. Show available points, exact XP and Progress above compact icon/name cards with visible effects and availability requirements. Authored rows contain two talents, with a possible single final talent. Measure remaining height to page up to three rows. The category-named header reset immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 
-Owned borders are gold. Unavailable talent cards keep their rules and requirements readable, with availability indicated by their status and icon treatment. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
+Owned borders are gold. Unavailable talent cards keep their rules and requirements readable, with availability indicated by their status and icon treatment. Names use solid keyword color; icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
 ## Victory, recruitment and team replacement
 
