@@ -187,6 +187,7 @@
   --art-compact-short-side: calc(160px * var(--ui-density, 1));
   --art-minimum-short-side: calc(160px * var(--ui-density, 1));
   --art-creature-scale: 1.144;
+  --art-collection-creature-scale: calc(var(--art-creature-scale) * 1.08);
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: calc(32px * var(--ui-density, 1));
   --page-block-gutter: calc(24px * var(--ui-density, 1));
@@ -220,6 +221,7 @@
   --battle-hand-height: var(--art-long-side);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: calc(var(--art-long-side) * var(--art-creature-scale));
+  --art-collection-landscape-width: calc(var(--art-long-side) * var(--art-collection-creature-scale));
   --art-portrait-width: var(--art-short-side);
   --art-creature-ratio: 4 / 3;
   --art-action-ratio: 3 / 4;

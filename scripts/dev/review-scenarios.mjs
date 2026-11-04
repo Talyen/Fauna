@@ -83,6 +83,7 @@ export const SCENARIOS = [
   "oathara-resurrection",
   "journey-room",
   "journey-three",
+  "journey-destinations",
   "journey-boss",
   "home",
   "home-talent-points",
@@ -324,6 +325,14 @@ export async function reviewScenario(server, name) {
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name === "inspection") game = winBattle();
+  if (name === "journey-destinations") {
+    const { produce } = await server.ssrLoadModule("immer");
+    game = produce(merchantDestination(), (draft) => {
+      draft.team[0].health = 1;
+      draft.expedition.recruit = "wisterelle";
+      draft.expedition.lastRoom = "combat";
+    });
+  }
   if (name === "journey-room" || name === "journey-three" || name === "journey-boss") {
     const { starterJourney, authoredPack } = await server.ssrLoadModule("/tests/support/game.ts");
     game = starterJourney(42, "mossguard");
