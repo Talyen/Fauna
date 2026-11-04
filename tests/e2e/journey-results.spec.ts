@@ -71,12 +71,12 @@ for (const [width, enlarged, outcome] of [
     } else if (ending.type === "endTurn") {
       await page.getByRole("button", { name: "End turn", exact: true }).click();
     } else {
-      await expect(page.getByRole("button", { name: "End journey", exact: true })).toHaveCount(0);
+      await expect(page.getByRole("button", { name: "End Run", exact: true })).toHaveCount(0);
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      const end = page.getByRole("button", { name: "End journey", exact: true });
+      const end = page.getByRole("button", { name: "End Run", exact: true });
       const destructive = await end.evaluate((element) => {
         const probe = document.createElement("span");
-        probe.style.color = "var(--destructive-text)";
+        probe.style.color = "var(--menu-icon-end)";
         element.append(probe);
         const color = getComputedStyle(probe).color;
         probe.remove();

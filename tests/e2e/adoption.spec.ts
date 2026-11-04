@@ -186,7 +186,7 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
   await expect(tooltip).toBeVisible();
   const fontSize = await tooltip.evaluate((node) => parseFloat(getComputedStyle(node).fontSize));
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Collection", exact: true }).click();

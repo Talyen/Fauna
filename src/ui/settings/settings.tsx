@@ -182,7 +182,7 @@ export function Settings({
           className="settings-panel"
         >
           <h2 className="settings-heading">{i18n.message("settings.resetSave", "Reset & Save Data")}</h2>
-          <SettingRow icon={RotateCcw} label={i18n.message("menu.settings", "Settings")}>
+          <SettingRow icon={RotateCcw} label={i18n.message("menu.options", "Options")}>
             <Button variant="outline" onClick={reset}>
               {i18n.message("settings.resetDefault", "Reset to Default")}
             </Button>

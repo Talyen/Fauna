@@ -82,7 +82,7 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   await captureScreen(page, { path: "effects-battle.png" });
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await expect(page.locator('[data-menu-action="talents"] .effect-shine-border')).toHaveCount(0);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await slider(page, "Background Glow", 0);
   await slider(page, "Background Particles", 0);
   await expect(page.locator('canvas[data-testid="global-plasma-background"]')).toHaveCount(0);

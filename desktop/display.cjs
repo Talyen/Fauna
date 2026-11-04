@@ -135,6 +135,17 @@ async function createDisplay({
         window.setFullScreen(mode !== "windowed");
       });
     }
+    if (process.platform !== "darwin") {
+      // Match Alchemy: renderer fullscreen distinguishes Fullscreen from Borderless Fullscreen.
+      await window.webContents
+        ?.executeJavaScript?.(
+          mode === "fullscreen"
+            ? "document.fullscreenElement || document.documentElement.requestFullscreen?.()"
+            : "document.fullscreenElement ? document.exitFullscreen?.() : undefined",
+          true,
+        )
+        .catch(() => undefined);
+    }
     if (mode === "windowed") {
       const next = bounds();
       const minimum = minimumOuterSize(window);

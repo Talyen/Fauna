@@ -10211,11 +10211,11 @@
     "sourceHash": "d53e5eab633a4b64c06bfbc9188448e864616505450d0e8a4a3ae458527dfd44",
     "text": "Continuar"
   },
-  "menu.endJourney": {
+  "menu.endRun": {
     "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "c48fe76e7f9ccf22e4f4a114b6253e3caa5a51b8d3758c917691d1dd88342687",
-    "text": "Terminar viaje"
+    "source": "End Run",
+    "sourceHash": "12567defdca6c3cb56c816312a469a72098650a492cc9463187a25f8322fad04",
+    "text": "Terminar aventura"
   },
   "menu.logo": {
     "reviewed": true,
@@ -10227,6 +10227,12 @@
     "reviewed": true,
     "source": "Main menu",
     "sourceHash": "bd73e77af87d8cb01086065740bc8d37fa97d55e6609d54dccd7feb4142e9362",
+    "text": "Menú principal"
+  },
+  "menu.mainMenuAction": {
+    "reviewed": true,
+    "source": "Main Menu",
+    "sourceHash": "5dcca652d0f3abc0f5c417fd86707c282ef2bc3b3ad9a5744f25c692c54615d3",
     "text": "Menú principal"
   },
   "menu.options": {
@@ -10252,6 +10258,18 @@
     "source": "Quit",
     "sourceHash": "e08d7e6f58656452414ec84129b55d88a22d6413288a4f0c7d14bab52c8f73b8",
     "text": "Salir"
+  },
+  "menu.returnToBattle": {
+    "reviewed": true,
+    "source": "Return to Battle",
+    "sourceHash": "ba00235549a82000ff3dbe02c7dc2bbf339038d01eab547bbd0c91cdc3c8cec1",
+    "text": "Volver al combate"
+  },
+  "menu.returnToRun": {
+    "reviewed": true,
+    "source": "Return to Run",
+    "sourceHash": "be9a4d430460a04b31ff17efd6ce7992223fad9f0e18d3c8063b3ab9e5efe679",
+    "text": "Volver a la aventura"
   },
   "menu.settings": {
     "reviewed": true,

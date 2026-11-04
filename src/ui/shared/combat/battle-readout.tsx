@@ -2,6 +2,8 @@ import { useMessages } from "../localization/message-context";
 import { Shield, Skull } from "lucide-react";
 import { Progress } from "../progress";
 
+export type BattleReadoutView = "all" | "portrait" | "details";
+
 export function BattleReadout({
   health,
   maxHealth,
@@ -10,6 +12,7 @@ export function BattleReadout({
   previousBlock,
   knockout = false,
   children,
+  view = "all",
 }: {
   health: number;
   maxHealth: number;
@@ -18,26 +21,29 @@ export function BattleReadout({
   previousBlock?: number;
   knockout?: boolean;
   children?: React.ReactNode;
+  view?: BattleReadoutView;
 }) {
   const i18n = useMessages();
   return (
     <div className="battle-readout">
-      <div className="health-forecast">
-        <div className="health-bar-surface">
-          <Progress
-            value={health}
-            maximum={maxHealth}
-            previous={previous}
-            label={i18n.content("content.keyword.health.label", "Health")}
-            tone="health"
-          />
+      {view !== "details" ? (
+        <div className="health-forecast">
+          <div className="health-bar-surface">
+            <Progress
+              value={health}
+              maximum={maxHealth}
+              previous={previous}
+              label={i18n.content("content.keyword.health.label", "Health")}
+              tone="health"
+            />
+          </div>
+          {knockout ? (
+            <Skull className="knockout-preview" aria-label={i18n.message("battle.knockout", "Knockout")} />
+          ) : null}
         </div>
-        {knockout ? (
-          <Skull className="knockout-preview" aria-label={i18n.message("battle.knockout", "Knockout")} />
-        ) : null}
-      </div>
+      ) : null}
       <div className="combat-stats">
-        {block > 0 || (previousBlock ?? 0) > 0 ? (
+        {view !== "details" && (block > 0 || (previousBlock ?? 0) > 0) ? (
           <span
             data-combat-tone="block"
             aria-label={
@@ -53,7 +59,7 @@ export function BattleReadout({
             {previousBlock !== undefined && previousBlock !== block ? `${previousBlock} → ${block}` : block}
           </span>
         ) : null}
-        {children}
+        {view !== "portrait" ? children : null}
       </div>
     </div>
   );

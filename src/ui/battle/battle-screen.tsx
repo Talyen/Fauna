@@ -190,6 +190,7 @@ export function BattleScreen({
             preview={
               selected && model.affected.has(enemy.id) ? (
                 <TargetPreview
+                  view="portrait"
                   forecast={model.units.get(enemy.id)}
                   displayName={localizedCombatantName(enemy, i18n)}
                 />
@@ -240,6 +241,7 @@ export function BattleScreen({
             preview={
               selected && model.affected.has(creature.id) ? (
                 <TargetPreview
+                  view="portrait"
                   forecast={model.units.get(creature.id)}
                   displayName={localizedCombatantName(creature, i18n)}
                 />
@@ -263,6 +265,20 @@ export function BattleScreen({
           />
         ))}
       </section>
+      <div className="target-outcomes">
+        {[...enemyRow, ...playerRow, ...game.reserves]
+          .filter((unit) => model.affected.has(unit.id))
+          .map((unit) => (
+            <div className="target-outcome" data-forecast-for={unit.id} key={unit.id}>
+              <strong>{localizedCombatantName(unit, i18n)}</strong>
+              <TargetPreview
+                view="details"
+                forecast={model.units.get(unit.id)}
+                displayName={localizedCombatantName(unit, i18n)}
+              />
+            </div>
+          ))}
+      </div>
       <div className="target-control">
         <div className="target-summary" role="status" aria-live="polite">
           {denial ? (

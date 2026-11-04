@@ -341,6 +341,7 @@ export function GameShell({ session }: { session: Session }) {
   const menuItems = (home: boolean) => (
     <MenuActions
       home={home}
+      battle={game.phase === "battle"}
       active={active}
       talentPoints={talentPoints}
       closing={view.closing}
@@ -438,7 +439,7 @@ export function GameShell({ session }: { session: Session }) {
                   <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                     <header className="collection-heading">
                       <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
-                        {i18n.message("menu.settings", "Settings")}
+                        {i18n.message("menu.options", "Options")}
                       </ScreenHeading>
                     </header>
                     <Settings

@@ -49,8 +49,11 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
 });
 
-test("short battles keep the hand at the bottom and statuses below portraits", async ({ page }) => {
+test("short battles use Collection-scale portraits with the hand at the bottom and statuses below", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   const fixture = produce(run(7), (draft) => {
     draft.battle!.enemies[0]!.combat.thorns = 3;
   });
@@ -61,7 +64,18 @@ test("short battles keep the hand at the bottom and statuses below portraits", a
     const art = active.querySelector(".enemy-row .creature-card")!.getBoundingClientRect();
     const status = active.querySelector(".enemy-row .combat-status")!.getBoundingClientRect();
     const hand = active.querySelector(".hand")!.getBoundingClientRect();
+    const rootStyle = getComputedStyle(document.documentElement);
+    const shortSide = parseFloat(rootStyle.getPropertyValue("--art-short-side"));
+    const creatureScale = parseFloat(rootStyle.getPropertyValue("--art-creature-scale"));
+    const icon = active.querySelector(".enemy-row .status-icon svg")!.getBoundingClientRect();
+    const statusButton = active.querySelector(".enemy-row .status-icon")!.getBoundingClientRect();
     return {
+      artworkWidth: art.width,
+      collectionWidth: ((shortSide * 4) / 3) * creatureScale * 1.08,
+      handCardWidth: parseFloat(getComputedStyle(active.querySelector(".hand .action-card")!).width),
+      shortSide,
+      iconBelow: icon.top >= art.bottom,
+      statusHitHeight: statusButton.height,
       statusBelow: status.top >= art.bottom - 1,
       centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
       handCenter: Math.abs(hand.left + hand.width / 2 - innerWidth / 2),
@@ -69,6 +83,10 @@ test("short battles keep the hand at the bottom and statuses below portraits", a
       horizontal: getComputedStyle(active.querySelector(".hand")!).flexDirection === "row",
     };
   });
+  expect(geometry.artworkWidth).toBeGreaterThanOrEqual(geometry.collectionWidth);
+  expect(geometry.handCardWidth).toBeCloseTo(geometry.shortSide, 0);
+  expect(geometry.iconBelow).toBe(true);
+  expect(geometry.statusHitHeight).toBeGreaterThanOrEqual(44);
   expect(geometry.statusBelow).toBe(true);
   expect(geometry.centered).toBeLessThanOrEqual(1);
   expect(geometry.handCenter).toBeLessThanOrEqual(1);

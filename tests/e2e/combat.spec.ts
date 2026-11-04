@@ -76,12 +76,12 @@ test("mouse targeting previews without committing and stays stable across live r
     }));
     await card.click();
     await expect(page.getByText("Prismram · Choose an enemy", { exact: true })).toBeVisible();
-    await expect(page.locator(".target-preview")).toHaveCount(0);
+    await expect(page.locator(".target-outcomes .target-preview")).toHaveCount(0);
     await expect(page.locator(".target-line")).toHaveCount(0);
     const target = page.locator('[data-actor-id="enemy-0"] .creature-card');
     await target.hover();
     await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
-    const recipientPreview = page.locator('[data-actor-id="enemy-0"] .target-preview');
+    const recipientPreview = page.locator('[data-forecast-for="enemy-0"] .target-preview');
     await expect(recipientPreview).toBeVisible();
     const enemy = game.battle!.enemies[0]!;
     await expect(recipientPreview).toHaveAttribute(
@@ -91,7 +91,7 @@ test("mouse targeting previews without committing and stays stable across live r
     await expect(recipientPreview).toHaveAttribute("data-conditional", "true");
     await expect(recipientPreview).toContainText("May be Dodged");
     await expect(recipientPreview).toContainText("Critical possible");
-    await expect(page.locator(".target-preview")).toHaveCount(1);
+    await expect(page.locator(".target-outcomes .target-preview")).toHaveCount(1);
     expect(
       await row.evaluate((element) => ({
         top: (element as HTMLElement).offsetTop,
@@ -101,7 +101,7 @@ test("mouse targeting previews without committing and stays stable across live r
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
     await captureScreen(page, { path: `reports/targeting-hover-${width}.png` });
     await card.hover();
-    await expect(page.locator(".target-preview")).toHaveCount(0);
+    await expect(page.locator(".target-outcomes .target-preview")).toHaveCount(0);
     await expect(page.locator(".target-line")).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(card).toHaveAttribute("aria-pressed", "false");

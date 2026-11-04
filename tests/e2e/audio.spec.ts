@@ -75,11 +75,11 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await page.getByRole("button", { name: "Target Pollenmoth", exact: true }).click();
   expect((await observed()).impacts).toHaveLength(count);
   await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Return to Battle" }).click();
   const mediaCount = (await observed()).media.length;
   await page.getByRole("button", { name: "End turn" }).click();
   await page.waitForTimeout(400);

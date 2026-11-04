@@ -9,22 +9,24 @@ import type { GameEvent } from "../../game/types";
 import { KeywordIcon } from "../shared/keyword-icon";
 import { Keyword, KeywordText } from "../shared/keyword-text";
 import { Heart, Shield } from "lucide-react";
-import { BattleReadout } from "../shared/combat/battle-readout";
+import { BattleReadout, type BattleReadoutView } from "../shared/combat/battle-readout";
 import { DamageValue } from "../shared/combat/combat-values";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
 import { useEffectMetadata } from "../shared/effects/effects";
 export function TargetPreview({
   forecast,
   displayName,
+  view = "all",
 }: {
   forecast: TargetForecast | undefined;
   displayName?: string;
+  view?: BattleReadoutView;
 }) {
   const i18n = useMessages();
   const translateRule = useRuleTranslator();
   if (!forecast) return null;
   if (forecast.unresolved || forecast.alternatives)
-    return <ConditionalPreview forecast={forecast} displayName={displayName} />;
+    return <ConditionalPreview forecast={forecast} displayName={displayName} view={view} />;
   const { health, previousHealth, block, previousBlock, maxHealth, absorbed, events } = forecast;
   const name = displayName ?? forecast.name;
   const changes = forecast.changes.map((change) => statusChangeText(change, i18n, translateRule));
@@ -47,8 +49,13 @@ export function TargetPreview({
       })
     : summary;
   return (
-    <div className="target-preview" role="status" aria-label={label}>
+    <div
+      className="target-preview"
+      role={view === "portrait" ? undefined : "status"}
+      aria-label={view === "portrait" ? undefined : label}
+    >
       <BattleReadout
+        view={view}
         health={health}
         maxHealth={maxHealth}
         previous={previousHealth}
@@ -99,7 +106,15 @@ export function TargetPreview({
   );
 }
 
-function ConditionalPreview({ forecast, displayName }: { forecast: TargetForecast; displayName?: string }) {
+function ConditionalPreview({
+  forecast,
+  displayName,
+  view,
+}: {
+  forecast: TargetForecast;
+  displayName?: string;
+  view: BattleReadoutView;
+}) {
   const i18n = useMessages();
   const translateRule = useRuleTranslator();
   const alternatives = forecast.alternatives ?? [];
@@ -145,8 +160,14 @@ function ConditionalPreview({ forecast, displayName }: { forecast: TargetForecas
       })
     : summary;
   return (
-    <div className="target-preview" data-conditional="true" role="status" aria-label={label}>
+    <div
+      className="target-preview"
+      data-conditional="true"
+      role={view === "portrait" ? undefined : "status"}
+      aria-label={view === "portrait" ? undefined : label}
+    >
       <BattleReadout
+        view={view}
         health={sameHealth ? alternatives[0]!.health : forecast.previousHealth}
         previous={sameHealth ? forecast.previousHealth : undefined}
         maxHealth={forecast.maxHealth}

@@ -1,21 +1,11 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
-import {
-  Swords,
-  Sparkles,
-  PawPrint,
-  Settings2,
-  LogOut,
-  House,
-  Power,
-  BookOpen,
-  WandSparkles,
-  Cog,
-} from "lucide-react";
+import { Swords, House, Power, BookOpen, WandSparkles, Cog } from "lucide-react";
 
 export type MenuPage = "talents" | "collection" | "settings";
 interface MenuActionsProps {
   home: boolean;
+  battle: boolean;
   active: boolean;
   talentPoints: number;
   closing: boolean;
@@ -27,6 +17,7 @@ interface MenuActionsProps {
 }
 export function MenuActions({
   home,
+  battle,
   active,
   talentPoints,
   closing,
@@ -44,11 +35,7 @@ export function MenuActions({
       data-menu-action="collection"
       onClick={() => onNavigate("collection")}
     >
-      {home ? (
-        <BookOpen aria-hidden="true" className="menu-icon-collection" />
-      ) : (
-        <PawPrint aria-hidden="true" className="menu-icon-collection" />
-      )}
+      <BookOpen aria-hidden="true" className="menu-icon-collection" />
       {i18n.message("menu.collection", "Collection")}
     </Button>
   );
@@ -62,12 +49,18 @@ export function MenuActions({
         onClick={onContinue}
       >
         <Swords aria-hidden="true" />
-        {home && !active ? i18n.message("menu.play", "Play") : i18n.message("menu.continue", "Continue")}
+        {home
+          ? active
+            ? i18n.message("menu.continue", "Continue")
+            : i18n.message("menu.play", "Play")
+          : battle
+            ? i18n.message("menu.returnToBattle", "Return to Battle")
+            : i18n.message("menu.returnToRun", "Return to Run")}
       </Button>
       {!home ? (
         <Button variant="ghost" onClick={onHome}>
-          <House aria-hidden="true" className="menu-icon-home" />
-          {i18n.message("menu.mainMenu", "Main menu")}
+          <House aria-hidden="true" />
+          {i18n.message("menu.mainMenuAction", "Main Menu")}
         </Button>
       ) : null}
       {collection}
@@ -79,11 +72,7 @@ export function MenuActions({
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
         onClick={() => onNavigate("talents")}
       >
-        {home ? (
-          <WandSparkles aria-hidden="true" className="menu-icon-talents" />
-        ) : (
-          <Sparkles aria-hidden="true" className="menu-icon-talents" />
-        )}
+        <WandSparkles aria-hidden="true" className="menu-icon-talents" />
         {i18n.message("menu.talents", "Talents")}
         {talentPoints > 0 ? (
           <span
@@ -106,19 +95,15 @@ export function MenuActions({
         data-menu-action="settings"
         onClick={() => onNavigate("settings")}
       >
-        {home ? (
-          <Cog aria-hidden="true" className="menu-icon-settings" />
-        ) : (
-          <Settings2 aria-hidden="true" className="menu-icon-settings" />
-        )}
-        {home ? i18n.message("menu.options", "Options") : i18n.message("menu.settings", "Settings")}
+        <Cog aria-hidden="true" className="menu-icon-settings" />
+        {i18n.message("menu.options", "Options")}
       </Button>
       {!home && active ? (
         <>
           <div className="pause-menu-separator" aria-hidden="true" />
           <Button variant="ghost" className="end-journey" onClick={onEndJourney}>
-            <LogOut aria-hidden="true" className="menu-icon-end" />
-            {i18n.message("menu.endJourney", "End journey")}
+            <Swords aria-hidden="true" className="menu-icon-end" />
+            {i18n.message("menu.endRun", "End Run")}
           </Button>
         </>
       ) : null}

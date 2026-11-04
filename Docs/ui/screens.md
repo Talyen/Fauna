@@ -10,11 +10,11 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Main menu orders Continue/Play, Collection, Talents, Options and Quit; Quit is paired with Options. Browser Quit waits for pending saves and attempts to close the tab; if the browser prevents closing, play remains usable. Pause orders Continue, Main menu, Collection, Talents, Settings and End journey. Owned Boons open from battle and the journey recap. End journey is immediate, without confirmation, and appears only in Pause.
+Main menu orders Continue/Play, Collection, Talents, Options and Quit; Quit is paired with Options. Browser Quit waits for pending saves and attempts to close the tab; if the browser prevents closing, play remains usable. Pause orders Return to Battle or Return to Run, Main Menu, Collection, Talents, Options and End Run. Owned Boons open from battle and the journey recap. End Run is immediate, without confirmation, and appears only in Pause.
 
 Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
-[Journey rules](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End journey outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
+[Journey rules](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End Run outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
 
 ### Back and focus return
 
@@ -53,9 +53,9 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Options and Quit Buttons. Conditional choices add rows; center a lone final choice. Use Alchemy's Swords, violet WandSparkles, gold BookOpen, zinc Cog and rose Power icons for those respective actions. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
-Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
+Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End Run. There is no title, close icon or dimmed backdrop. Return to Battle/Run, outside click or Escape/controller B dismisses it and returns focus.
 
-Main menu shows a red dot beside Talents when points are available; Pause shows the count. Both provide an accessible description, and the indicator disappears when points are spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
+Main menu shows a red dot beside Talents when points are available; Pause shows the count. Both provide an accessible description, and the indicator disappears when points are spent. End Run uses a red label and Swords icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
 
 ## Starter draft
 

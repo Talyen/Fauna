@@ -586,7 +586,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (["uncertain-targeting", "unknown-targeting"].includes(scenario.name)) {
     await page.locator(".hand .action-card").first().focus();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".target-preview .combat-stats").first()).toBeVisible();
+    await expect(page.locator(".target-outcomes .target-preview .combat-stats").first()).toBeVisible();
   }
   if (scenario.name === "nature-damage-targeting") {
     await page.locator('.hand [data-card-id$="reedstag-attack"]').focus();
@@ -632,10 +632,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
   }
   if (scenario.name === "talent-tree")
-    await page.locator('.talents-screen button[aria-label$=" talents"]').first().click();
+    await page.locator(".talents-screen [data-talent-keyword]").first().click();
   if (["settings-sound", "settings-battle"].includes(scenario.name))
     await page
-      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Battle", exact: true })
+      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Gameplay", exact: true })
       .click();
   if (["draw-pile", "discard-pile"].includes(scenario.name))
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
@@ -663,7 +663,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "journey-results") {
     await button("Open menu").click();
-    await button("End journey").click();
+    await button("End Run").click();
     await expect(page.getByRole("heading", { name: "Returned home", exact: true })).toBeVisible();
   }
   if (scenario.name === "inspection") {

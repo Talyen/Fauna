@@ -527,14 +527,17 @@
   "menu.continue": {
     "text": "Continue"
   },
-  "menu.endJourney": {
-    "text": "End journey"
+  "menu.endRun": {
+    "text": "End Run"
   },
   "menu.logo": {
     "text": "Fauna logo"
   },
   "menu.mainMenu": {
     "text": "Main menu"
+  },
+  "menu.mainMenuAction": {
+    "text": "Main Menu"
   },
   "menu.options": {
     "text": "Options"
@@ -547,6 +550,12 @@
   },
   "menu.quitShort": {
     "text": "Quit"
+  },
+  "menu.returnToBattle": {
+    "text": "Return to Battle"
+  },
+  "menu.returnToRun": {
+    "text": "Return to Run"
   },
   "menu.settings": {
     "text": "Settings"
