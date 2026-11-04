@@ -90,11 +90,19 @@ for (const [width, height, scale, reduced] of [
       const frames = [...board.querySelectorAll(".creature-wrap")].map((wrap) => {
         const card = wrap.querySelector(".creature-card")!.getBoundingClientRect();
         const health = wrap.querySelector(".health-forecast")!.getBoundingClientRect();
-        const icons = [...wrap.querySelectorAll(".status-icon")].map((icon) => icon.getBoundingClientRect());
+        const icons = [...wrap.querySelectorAll(".status-icon > svg")].map((icon) =>
+          icon.getBoundingClientRect(),
+        );
+        const expectedHealth = document.createElement("span");
+        expectedHealth.style.height = "var(--battle-health-height)";
+        wrap.append(expectedHealth);
+        const healthHeight = Number.parseFloat(getComputedStyle(expectedHealth).height);
+        expectedHealth.remove();
         return {
           healthInside: health.left >= card.left && health.right <= card.right,
           healthBottom: card.bottom - health.bottom,
           healthHeight: health.height,
+          expectedHealthHeight: healthHeight,
           iconsBelow: icons.every((icon) => icon.top >= card.bottom),
         };
       });
@@ -105,7 +113,7 @@ for (const [width, height, scale, reduced] of [
     for (const frame of composition.frames) {
       expect(frame.healthInside).toBe(true);
       expect(Math.abs(frame.healthBottom)).toBeLessThanOrEqual(1);
-      expect(frame.healthHeight).toBe(4);
+      expect(frame.healthHeight).toBeCloseTo(frame.expectedHealthHeight, 1);
       expect(frame.iconsBelow).toBe(true);
     }
     const origin = Date.UTC(2026, 0, 1);

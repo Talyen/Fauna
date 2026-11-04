@@ -104,8 +104,10 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await pad.frames();
   await pad.press(13);
-  await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await pad.press(15);
+  await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
+  await pad.press(14);
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await captureScreen(page, { path: `reports/menu-home-${width}.png` });
   await pad.press(0);

@@ -239,7 +239,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.keyboard.press("Escape");
       await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
       expect(await state(page)).toEqual(before);
-      await page.getByRole("button", { name: "Return to Battle", exact: true }).click();
+      await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
     });
 

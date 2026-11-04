@@ -45,7 +45,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await session.dispose();
   });
-  it("separates earnings from recruitment without committing or granting rewards again", async () => {
+  it("shows earnings alongside recruitment without committing or granting rewards again", async () => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
@@ -60,7 +60,9 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(
+      game.reward!.recruits.length,
+    );
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -72,10 +74,6 @@ describe("player interface", () => {
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
-    expect(session.store.getState().game).toBe(committed);
-    expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
     expect(session.store.getState().game).toBe(committed);
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     const incoming = game.reward!.recruits[0]!;
@@ -165,15 +163,17 @@ describe("player interface", () => {
     expect(
       screen.getByRole("heading", {
         name: encounter === 0 ? "Choose Destination" : encounterSource(game).enemies[0]!.name,
+        level: 1,
       }),
     ).toBeTruthy();
     if (encounter !== 0) {
       const boss = encounterSource(game).enemies[0]!;
-      expect(screen.getByRole("heading", { name: boss.name })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: boss.name, level: 1 })).toBeTruthy();
       await user.hover(enter);
       const tooltip = await screen.findByRole("tooltip");
       expect(tooltip.textContent).toContain(boss.name);
-      expect(tooltip.textContent).toContain(species(boss.species).passiveTiers[0].description);
+      for (const clause of species(boss.species).passiveTiers[0].description.split(";"))
+        expect(tooltip.textContent).toContain(clause.trim());
       await user.unhover(enter);
       expect(session.store.getState().game).toEqual(game);
     }
@@ -299,7 +299,7 @@ describe("player interface", () => {
           expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
           await inspect(screen.getByRole("button", { name: "Reedstag, backup" }), "Reedstag");
           expect(
-            document.querySelector('[data-actor-id="reserve-copy"] [data-status-id="block"]'),
+            document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]'),
           ).toBeTruthy();
         }
         expect(session.store.getState().game).toEqual(fixture);
@@ -310,7 +310,7 @@ describe("player interface", () => {
     }
   });
 });
-it("allows play and explains unavailable saving when browser storage access is denied", async () => {
+it("allows play and recovers through shared save retry after browser storage access is denied", async () => {
   const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;
   Object.defineProperty(window, "localStorage", {
     configurable: true,
@@ -323,8 +323,14 @@ it("allows play and explains unavailable saving when browser storage access is d
     await session.load();
     render(<App session={session} />);
     expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
-    expect(screen.getByRole("alert").textContent).toContain("Progress cannot be saved");
+    expect(screen.getByRole("alert").textContent).toContain("Couldn’t save");
     expect(session.store.getState().loadFailed).toBe(true);
+    const game = session.store.getState().game;
+    Object.defineProperty(window, "localStorage", original);
+    await userEvent.setup().click(screen.getByRole("button", { name: "Retry" }));
+    await waitFor(() => expect(screen.queryByRole("alert")).toBeNull());
+    expect(decodeSave(localStorage.getItem("fauna.save.v1")!)).toEqual(game);
+    expect(session.store.getState().loadFailed).toBe(false);
     await session.dispose();
   } finally {
     Object.defineProperty(window, "localStorage", original);

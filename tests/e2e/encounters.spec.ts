@@ -47,9 +47,17 @@ for (const [width, enlarged, encounter] of [
     if (encounter === 0) {
       await page.mouse.move(0, 0);
       await settleScreen(page);
-      const bounds = (await enter.boundingBox())!;
-      expect(bounds.width).toBeCloseTo((640 / 3) * 1.1, 1);
-      expect(bounds.height).toBeCloseTo(176, 1);
+      const geometry = await enter.evaluate((card) => {
+        const probe = document.createElement("div");
+        probe.style.width = "var(--art-collection-landscape-width)";
+        card.parentElement!.append(probe);
+        const expectedWidth = probe.getBoundingClientRect().width;
+        probe.remove();
+        const { width, height } = card.getBoundingClientRect();
+        return { width, height, expectedWidth };
+      });
+      expect(geometry.width).toBeCloseTo(geometry.expectedWidth, 1);
+      expect(geometry.width / geometry.height).toBeCloseTo(4 / 3, 2);
     }
     await captureScreen(page, {
       path: `reports/encounters/choice-${encounter}-${width}-${enlarged}.png`,
