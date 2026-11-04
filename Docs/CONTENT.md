@@ -65,7 +65,7 @@ The main menu logo selection uses `Fauna_Dreamsunder_Logo.png`, selected by the 
 
 ## Keyword artwork
 
-The [manifest](../assets/manifest.json) identifies keyword/category portraits and copy recipes. These unchanged Alchemy portraits are Fauna-owned copies, independent of Alchemy's mechanics or runtime. Water reuses [Coralcurl's Reef Jet](content/creatures/coralcurl.md). Use contain rendering and the [talents overview sizing rule](ui/screens.md#talents).
+The [manifest](../assets/manifest.json) identifies keyword/category portraits and copy recipes. These unchanged Alchemy portraits are Fauna-owned copies, independent of Alchemy's mechanics or runtime. Water uses the wave-in-a-droplet category artwork selected on 2026-11-04, generated using the [locked Fauna style prompt](https://drive.google.com/file/d/1VODYgwwZO9leeR5xLgc5OoVdbefRiYRv/view) adapted to a portrait category emblem. Use contain rendering and the [talents overview sizing rule](ui/screens.md#talents).
 
 The original nine keyword portraits were copied unchanged from `Alchemy: src/assets/optimized/` at 420 × 563 pixels. Local files below are under `public/art/keywords/`. Later Armor, Bleed, Dodge, Leech and Mana portraits have exact source paths in the manifest.
 
