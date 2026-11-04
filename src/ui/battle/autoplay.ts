@@ -64,15 +64,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     [session, setEnabled],
   );
   useEffect(() => {
-    if (
-      !enabled ||
-      paused ||
-      !foreground ||
-      view.closing ||
-      view.saveStatus !== "saved" ||
-      view.game.phase !== "battle"
-    )
-      return;
+    if (!enabled || paused || !foreground || view.closing || view.game.phase !== "battle") return;
     const revision = view.game.revision;
     return scheduleAutoplay(() => {
       const current = session.store.getState();
@@ -83,7 +75,6 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         !document.hasFocus() ||
         current.game.revision !== revision ||
         current.closing ||
-        current.saveStatus !== "saved" ||
         current.overlayActive ||
         current.cloud.blocking ||
         current.game.phase !== "battle"
@@ -101,7 +92,6 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     view.game.revision,
     view.game.phase,
     view.closing,
-    view.saveStatus,
     setEnabled,
   ]);
   return [enabled, setEnabled] as const;

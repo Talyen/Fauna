@@ -10900,12 +10900,6 @@
     "sourceHash": "945a38c9b1f3623fa3a408ab975d6a52d624caf814eac34bd72590e143e7c82f",
     "text": "Lv {{level}}"
   },
-  "recovery.display": {
-    "reviewed": true,
-    "source": "Fauna could not display this screen; trying again…",
-    "sourceHash": "dda7825baa782002172db08961c9dcc8df0b256e154d049ab697d5d423db16cb",
-    "text": "Faunaはこの画面を表示できませんでした。再試行しています…"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -11049,24 +11043,6 @@
     "source": "Skip",
     "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
     "text": "スキップ"
-  },
-  "save.failed": {
-    "reviewed": true,
-    "source": "Couldn’t save",
-    "sourceHash": "0963bd13ee052115052c5936a3618ca56cc49a75de5e2928e238609429b57d03",
-    "text": "保存できませんでした"
-  },
-  "save.retry": {
-    "reviewed": true,
-    "source": "Retry",
-    "sourceHash": "c39fead3ec78dd8247ea5814692388709c6353362631f30ccfafd3203785aeed",
-    "text": "再試行"
-  },
-  "save.saving": {
-    "reviewed": true,
-    "source": "Saving…",
-    "sourceHash": "7c89b383ea3d743ac5c0dc79d060d92afe700baf358da12814d520bf25faf805",
-    "text": "保存中…"
   },
   "settings.audio": {
     "reviewed": true,
@@ -11319,12 +11295,6 @@
     "source": "Preparing expeditions…",
     "sourceHash": "6e6cd3bedefa00fcd9e08a638596ed09e1ec78c6c4aa4163d76bf2bb79b0f691",
     "text": "遠征を準備中…"
-  },
-  "startup.failed": {
-    "reviewed": true,
-    "source": "Fauna could not start",
-    "sourceHash": "76a2a4c6ad385202551b71634fa5999044189d1754bcbe1e922750824bce7a89",
-    "text": "Faunaを起動できませんでした"
   },
   "startup.habitats": {
     "reviewed": true,

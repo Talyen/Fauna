@@ -4,7 +4,9 @@ import { test, seed, state, resume, reloadHome } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
 import { layoutViolations } from "./support/layout-contract";
 
-test("persistent saving failure fits both sizes and clears after automatic recovery", async ({ page }) => {
+test("persistent saving failure stays silent, allows play and recovers the latest outcome", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
@@ -23,11 +25,13 @@ test("persistent saving failure fits both sizes and clears after automatic recov
   await resume(page);
   await page.getByRole("button", { name: "End turn", exact: true }).click();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "error");
-  await expect(page.getByRole("alert")).toContainText("Couldn’t save");
-  await expect(page.getByRole("button", { name: "Retry", exact: true })).toBeVisible();
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Retry", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "error");
   // Exercise the real retry and UI subscription without waiting five wall-clock seconds per retry.
   await page.clock.fastForward(5000);
-  await expect(page.locator(".save-notice")).toBeVisible();
+  await expect(page.locator(".save-notice")).toHaveCount(0);
   await captureScreen(page, { path: "reports/secondary/save-unavailable-1280.png" });
   await page.setViewportSize({ width: 1920, height: 1080 });
   await captureScreen(page, { path: "reports/secondary/save-unavailable-1920.png" });
@@ -38,7 +42,7 @@ test("persistent saving failure fits both sizes and clears after automatic recov
   await expect(page.locator(".save-notice")).toHaveCount(0);
   const recovered = await state(page);
   expect(recovered.phase).toBe("battle");
-  expect(recovered.battle!.turn).toBe(fixture.battle!.turn + 1);
+  expect(recovered.battle!.turn).toBe(fixture.battle!.turn + 2);
   await reloadHome(page);
   await resume(page);
   expect(await state(page)).toEqual(recovered);

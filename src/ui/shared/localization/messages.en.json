@@ -719,9 +719,6 @@
   "progress.levelShort": {
     "text": "Lv {{level}}"
   },
-  "recovery.display": {
-    "text": "Fauna could not display this screen; trying again…"
-  },
   "recruit.incoming": {
     "text": "Incoming creature"
   },
@@ -793,15 +790,6 @@
   },
   "rewards.skip": {
     "text": "Skip"
-  },
-  "save.failed": {
-    "text": "Couldn’t save"
-  },
-  "save.retry": {
-    "text": "Retry"
-  },
-  "save.saving": {
-    "text": "Saving…"
   },
   "settings.audio": {
     "text": "Audio"
@@ -928,9 +916,6 @@
   },
   "startup.expeditions": {
     "text": "Preparing expeditions…"
-  },
-  "startup.failed": {
-    "text": "Fauna could not start"
   },
   "startup.habitats": {
     "text": "Exploring habitats…"

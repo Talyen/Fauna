@@ -112,13 +112,8 @@ export function createStartupSplash({
     fail() {
       if (finished) return;
       element?.classList.add("startup-failed");
-      element?.removeAttribute("aria-label");
-      element?.setAttribute("aria-labelledby", "startup-splash-phrase");
-      if (phrase) {
-        const i18n = activeReader;
-        phrase.removeAttribute("aria-hidden");
-        phrase.textContent = i18n.message("startup.failed", "Fauna could not start");
-      }
+      element?.setAttribute("aria-label", "Fauna");
+      if (phrase) phrase.textContent = "";
       finish();
     },
     dispose() {

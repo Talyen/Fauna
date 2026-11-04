@@ -999,7 +999,7 @@ it("retains distinct recovery checkpoints after loading a backup and retrying sa
   expect(memory.getItem("fauna.save.v1.backup2")).toBe(older);
 });
 
-it("explains consecutive save failures, preserves play and clears the notice after the latest state saves", async () => {
+it("tracks consecutive save failures internally and recovers the latest state without blocking play", async () => {
   vi.useFakeTimers();
   let failing = true;
   let saved = "";
@@ -1032,5 +1032,30 @@ it("explains consecutive save failures, preserves play and clears the notice aft
   } finally {
     await session.dispose();
     vi.useRealTimers();
+  }
+});
+
+it("makes one automatic final save attempt and closes a browser tab despite persistent storage failure", async () => {
+  const closeTab = vi.fn();
+  const write = vi.fn(async () => {
+    throw new Error("disk full");
+  });
+  const session = createSession({
+    desktop: false,
+    closeTab,
+    saves: { readCandidates: async () => [], write },
+  });
+  try {
+    await session.load();
+    expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+      true,
+    );
+    expect(await session.flush()).toBe(false);
+    await session.quit();
+    expect(write).toHaveBeenCalledTimes(2);
+    expect(closeTab).toHaveBeenCalledOnce();
+    expect(session.store.getState().closing).toBe(true);
+  } finally {
+    await session.dispose();
   }
 });

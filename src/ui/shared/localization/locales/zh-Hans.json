@@ -10900,12 +10900,6 @@
     "sourceHash": "c001a97226b5aeb23c58411c17b46f27fef50b1ea7c794189b8254177c2adc42",
     "text": "等级 {{level}}"
   },
-  "recovery.display": {
-    "reviewed": true,
-    "source": "Fauna could not display this screen; trying again…",
-    "sourceHash": "21227b26da5fca3667002f8b3dcef0400b4e1d590487bc626ee0f2d1621f177a",
-    "text": "Fauna无法显示此画面，正在重试…"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -11049,24 +11043,6 @@
     "source": "Skip",
     "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
     "text": "跳过"
-  },
-  "save.failed": {
-    "reviewed": true,
-    "source": "Couldn’t save",
-    "sourceHash": "5f2c0df2dcf9845533b4e0339d36fd03a5e3007b31c9d3af217b299be6c2e452",
-    "text": "无法保存"
-  },
-  "save.retry": {
-    "reviewed": true,
-    "source": "Retry",
-    "sourceHash": "16ff8c73075aa0435e50c4b88df955027a16d82df63f6866fd9870f1cbfa0d4d",
-    "text": "重试"
-  },
-  "save.saving": {
-    "reviewed": true,
-    "source": "Saving…",
-    "sourceHash": "3f5a25f67c90464e87033e02031dd61679d1ff447718daed39f05bbe07a3e863",
-    "text": "正在保存…"
   },
   "settings.audio": {
     "reviewed": true,
@@ -11319,12 +11295,6 @@
     "source": "Preparing expeditions…",
     "sourceHash": "3fca27a233bdaa8e4515a4deda83a16c5bf804abe8c26e4efc285bbf92c3e540",
     "text": "正在准备远征…"
-  },
-  "startup.failed": {
-    "reviewed": true,
-    "source": "Fauna could not start",
-    "sourceHash": "f526a38688902510bc98c4fff81217e9ce476816c2671c5416f4ecfd2c304671",
-    "text": "Fauna无法启动"
   },
   "startup.habitats": {
     "reviewed": true,

@@ -332,33 +332,6 @@ describe("player interface", () => {
     }
   });
 });
-it("allows play and recovers through shared save retry after browser storage access is denied", async () => {
-  const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;
-  Object.defineProperty(window, "localStorage", {
-    configurable: true,
-    get() {
-      throw new DOMException("Blocked", "SecurityError");
-    },
-  });
-  try {
-    const session = createSession(createBrowserPlatform());
-    await session.load();
-    render(<App session={session} />);
-    expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
-    expect(screen.getByRole("alert").textContent).toContain("Couldn’t save");
-    expect(session.store.getState().loadFailed).toBe(true);
-    const game = session.store.getState().game;
-    Object.defineProperty(window, "localStorage", original);
-    await userEvent.setup().click(screen.getByRole("button", { name: "Retry" }));
-    await waitFor(() => expect(screen.queryByRole("alert")).toBeNull());
-    expect(decodeSave(localStorage.getItem("fauna.save.v1")!)).toEqual(game);
-    expect(session.store.getState().loadFailed).toBe(false);
-    await session.dispose();
-  } finally {
-    Object.defineProperty(window, "localStorage", original);
-  }
-});
-
 it("previews Block depletion, exact health loss and knockout without visible HP totals", () => {
   const before = produce(run(), (d) => {
     d.team[0]!.health = 3;

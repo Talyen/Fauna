@@ -73,7 +73,7 @@ it("reveals the existing recovery owner after an initial render failure without 
   expect(read).toHaveBeenCalledOnce();
   expect(validateContent).toHaveBeenCalledOnce();
 });
-it("handles invalid content once, settles the splash accessibly and leaves saved progress untouched", async () => {
+it("handles invalid content once, settles the splash silently and leaves saved progress untouched", async () => {
   const read = vi.fn(async () => []);
   const write = vi.fn(async () => {});
   const diagnostics = vi.fn();
@@ -91,9 +91,10 @@ it("handles invalid content once, settles the splash accessibly and leaves saved
     await act(async () => {
       dispose = mountGame(createStartupSplash());
     });
-    const status = screen.getByRole("status", { name: "Fauna could not start" });
+    const status = screen.getByRole("status", { name: "Fauna" });
     expect(status.getAttribute("aria-busy")).toBe("false");
-    expect(screen.getByText("Fauna could not start").getAttribute("aria-hidden")).toBeNull();
+    expect(document.getElementById("startup-splash-phrase")!.textContent).toBe("");
+    expect(screen.queryByText(/could not|retry|error/i)).toBeNull();
     expect(document.body.textContent).not.toContain("private invalid catalog details");
     await act(() => vi.advanceTimersByTimeAsync(20000));
     expect(validateContent).toHaveBeenCalledOnce();

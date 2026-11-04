@@ -130,6 +130,9 @@ body {
 #startup-splash.startup-failed .startup-leaves {
   display: none;
 }
+#startup-splash.startup-failed #startup-splash-phrase {
+  visibility: hidden;
+}
 #startup-splash.startup-failed :is(.startup-logo-fill, .startup-logo-fill-text, #startup-splash-phrase) {
   animation: none;
   transform: none;

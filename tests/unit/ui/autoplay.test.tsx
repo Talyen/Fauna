@@ -40,7 +40,7 @@ it("revokes a queued action synchronously on blur before React runs effect clean
     await session.dispose();
   });
 });
-it("pauses overlays and blur, waits for save Retry and revokes on disposal", async () => {
+it("pauses overlays and blur, continues through save failures and revokes on disposal", async () => {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   let fail = false;
   const session = createSession({
@@ -90,12 +90,16 @@ it("pauses overlays and blur, waits for save Retry and revokes on disposal", asy
   await act(async () => {
     vi.advanceTimersByTime(1400);
   });
-  expect(session.store.getState().game.revision).toBe(failedRevision);
+  expect(session.store.getState().game.revision).toBeGreaterThan(failedRevision);
+  // Pause play while the existing retry recovers the latest committed state.
+  act(() => hook.result.current[1](false));
   fail = false;
   await act(async () => {
-    session.retrySave();
+    await vi.advanceTimersByTimeAsync(5000);
     await session.flush();
   });
+  expect(session.store.getState().saveStatus).toBe("saved");
+  act(() => hook.result.current[1](true));
   const recovered = session.store.getState().game.revision;
   await act(async () => {
     vi.advanceTimersByTime(700);

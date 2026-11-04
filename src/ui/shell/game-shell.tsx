@@ -106,7 +106,7 @@ export function GameShell({ session }: { session: Session }) {
   );
   const closeDialog = () => transition({ type: "closeDialog" });
   const closePause = () => transition({ type: "closePause" });
-  const [autoplay, setAutoplay] = useAutoplay(session, paused || view.saveStatus !== "saved", autoEndTurn);
+  const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
   const toggleAutoplay = (enabled: boolean) => {
     setAutoplay(enabled);
     updatePreferences({ autoplay: enabled });
@@ -131,7 +131,6 @@ export function GameShell({ session }: { session: Session }) {
   useEffect(() => () => swapMotion.current?.cancel(), []);
   const send = useCallback(
     (command: Command) => {
-      if (session.store.getState().saveStatus !== "saved") return false;
       setAutoplay(false);
       swapMotion.current?.cancel();
       const motion = command.type === "swap" ? captureSwapMotion(command.activeId, command.reserve) : null;
@@ -152,7 +151,6 @@ export function GameShell({ session }: { session: Session }) {
       route !== "play" ||
       surface.top !== "page" ||
       !view.ready ||
-      view.saveStatus !== "saved" ||
       view.closing ||
       game.phase !== "battle" ||
       game.battle.turn >= MAX_BATTLE_TURN ||
@@ -166,7 +164,6 @@ export function GameShell({ session }: { session: Session }) {
       if (
         current.game === game &&
         current.ready &&
-        current.saveStatus === "saved" &&
         !current.closing &&
         !current.overlayActive &&
         !current.cloud.blocking
@@ -174,11 +171,11 @@ export function GameShell({ session }: { session: Session }) {
         session.command({ type: "endTurn" });
     }, 250);
     return () => clearTimeout(timer);
-  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing, view.saveStatus]);
+  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing]);
   const automaticReplacementFocus = useRef(false);
   const automaticMerchantFocus = useRef(false);
   useLayoutEffect(() => {
-    if (surface.top !== "replacement" || !view.ready || view.saveStatus !== "saved" || view.closing) return;
+    if (surface.top !== "replacement" || !view.ready || view.closing) return;
     const current = session.store.getState();
     if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
     const command = soleReplacement(current.game, autoEndTurn);
@@ -189,7 +186,6 @@ export function GameShell({ session }: { session: Session }) {
     autoEndTurn,
     surface.top,
     view.ready,
-    view.saveStatus,
     view.closing,
     view.overlayActive,
     view.cloud.blocking,
@@ -205,29 +201,12 @@ export function GameShell({ session }: { session: Session }) {
     returnFocus(root.current?.querySelector<HTMLElement>(".hand .action-card, .end-turn") ?? null);
   }, [game, route, surface.top]);
   useLayoutEffect(() => {
-    if (
-      route !== "play" ||
-      surface.top !== "page" ||
-      !view.ready ||
-      view.saveStatus !== "saved" ||
-      view.closing
-    )
-      return;
+    if (route !== "play" || surface.top !== "page" || !view.ready || view.closing) return;
     const current = session.store.getState();
     if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
     if (game.phase === "support" && game.support.purchased)
       automaticMerchantFocus.current = session.command({ type: "leaveSupport", visit: game.support.id });
-  }, [
-    session,
-    game,
-    route,
-    surface.top,
-    view.ready,
-    view.saveStatus,
-    view.closing,
-    view.overlayActive,
-    view.cloud.blocking,
-  ]);
+  }, [session, game, route, surface.top, view.ready, view.closing, view.overlayActive, view.cloud.blocking]);
   useLayoutEffect(() => {
     if (!automaticMerchantFocus.current) return;
     if (route !== "play") {
@@ -400,22 +379,6 @@ export function GameShell({ session }: { session: Session }) {
             data-paused={paused || undefined}
             data-save-status={view.saveStatus}
           >
-            {view.saveStatus !== "saved" || view.saveUnavailable ? (
-              <div
-                className="save-notice"
-                role={view.saveStatus === "error" || view.saveUnavailable ? "alert" : "status"}
-                aria-live="polite"
-              >
-                <span>
-                  {view.saveStatus === "saving"
-                    ? i18n.message("save.saving", "Saving…")
-                    : i18n.message("save.failed", "Couldn’t save")}
-                </span>
-                {view.saveStatus !== "saving" ? (
-                  <Button onClick={() => session.retrySave()}>{i18n.message("save.retry", "Retry")}</Button>
-                ) : null}
-              </div>
-            ) : null}
             {!view.cloud.blocking ? (
               <>
                 {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}

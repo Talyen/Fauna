@@ -22,12 +22,11 @@ afterEach(() => {
   vi.restoreAllMocks();
   document.body.replaceChildren();
 });
-it("localizes the splash and failure while manual language wins over Steam", () => {
+it("localizes loading while keeping terminal startup silent when manual language wins over Steam", () => {
   localStorage.setItem("fauna.language.v1", "fr");
   const catalog = {
     "startup.loading": { source: "Loading Fauna", text: "Chargement de Fauna" },
     "startup.adventure": { source: "Adventure awaits…", text: "L’aventure vous attend…" },
-    "startup.failed": { source: "Fauna could not start", text: "Fauna n’a pas pu démarrer" },
   };
   splash = createStartupSplash({
     catalogs: { fr: catalog },
@@ -39,7 +38,7 @@ it("localizes the splash and failure while manual language wins over Steam", () 
   splash.setSteamLanguage("english");
   expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("L’aventure vous attend…");
   splash.fail();
-  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("Fauna n’a pas pu démarrer");
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("");
 });
 it("updates an automatic splash when the Steam language arrives", () => {
   const catalog = { "startup.adventure": { source: "Adventure awaits…", text: "L’aventure vous attend…" } };
@@ -113,15 +112,14 @@ it.each([false, true])(
     const phrase = document.getElementById("startup-splash-phrase")!;
     expect(element.classList.contains("startup-failed")).toBe(true);
     expect(element.getAttribute("aria-busy")).toBe("false");
-    expect(element.getAttribute("aria-labelledby")).toBe(phrase.id);
-    expect(element.hasAttribute("aria-label")).toBe(false);
-    expect(phrase.hasAttribute("aria-hidden")).toBe(false);
-    expect(phrase.textContent).toBe("Fauna could not start");
+    expect(element.getAttribute("aria-label")).toBe("Fauna");
+    expect(phrase.getAttribute("aria-hidden")).toBe("true");
+    expect(phrase.textContent).toBe("");
     expect(vi.getTimerCount()).toBe(0);
     await vi.advanceTimersByTimeAsync(20000);
     splash.dismiss();
     expect(element.isConnected).toBe(true);
-    expect(phrase.textContent).toBe("Fauna could not start");
+    expect(phrase.textContent).toBe("");
     splash.dispose();
     splash.fail();
     expect(element.isConnected).toBe(false);

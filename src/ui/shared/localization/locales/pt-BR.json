@@ -10902,12 +10902,6 @@
     "sourceHash": "f6399a44519f633a673032199232124c76173c635fcba6d0365db5adac4a7622",
     "text": "Nv. {{level}}"
   },
-  "recovery.display": {
-    "reviewed": true,
-    "source": "Fauna could not display this screen; trying again…",
-    "sourceHash": "a253677c80d21e2d9b0b46a8d66e83fef7ae6455c3ac5d6702366e45196d3cd5",
-    "text": "Fauna não conseguiu exibir esta tela; tentando novamente…"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -11051,24 +11045,6 @@
     "source": "Skip",
     "sourceHash": "26358f519ea1f7fa71ce4c172085b5d9f1c4faecdfb1357aad2e5ff31231bd2d",
     "text": "Pular"
-  },
-  "save.failed": {
-    "reviewed": true,
-    "source": "Couldn’t save",
-    "sourceHash": "700fac45472eecc7e0092bc8d3e5db7b34dfb90ef3b72e792f3a3eafff8129b8",
-    "text": "Não foi possível salvar"
-  },
-  "save.retry": {
-    "reviewed": true,
-    "source": "Retry",
-    "sourceHash": "556a5f43c8c4f160d9efdaf9f56ae44bfdc5d392f49f26acc05412b2b377060c",
-    "text": "Tentar novamente"
-  },
-  "save.saving": {
-    "reviewed": true,
-    "source": "Saving…",
-    "sourceHash": "0a5025587a70ab14903617f5038be470bbdef1e73a421d137ab2bfccce3bb49a",
-    "text": "Salvando…"
   },
   "settings.audio": {
     "reviewed": true,
@@ -11321,12 +11297,6 @@
     "source": "Preparing expeditions…",
     "sourceHash": "01f1f92d2891f6eed6cb738ce287dfaca24d8400ea69f73ce395f43969e5ea3a",
     "text": "Preparando expedições…"
-  },
-  "startup.failed": {
-    "reviewed": true,
-    "source": "Fauna could not start",
-    "sourceHash": "4e0a43652068de429481f0f61399a0b31c41e433a717c1355d31b051b8655b18",
-    "text": "Não foi possível iniciar Fauna"
   },
   "startup.habitats": {
     "reviewed": true,

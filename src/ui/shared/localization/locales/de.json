@@ -10901,12 +10901,6 @@
     "sourceHash": "984da87de8cab02d728f8874dadce01f7e2c3a4e6882839788e470b0d03f050c",
     "text": "Stufe {{level}}"
   },
-  "recovery.display": {
-    "reviewed": true,
-    "source": "Fauna could not display this screen; trying again…",
-    "sourceHash": "4e4ded2a9c06ffc30617b4573be4c366a7e2409989521d5f677eaba842386704",
-    "text": "Fauna konnte diesen Bildschirm nicht anzeigen; erneuter Versuch…"
-  },
   "recruit.incoming": {
     "reviewed": true,
     "source": "Incoming creature",
@@ -11050,24 +11044,6 @@
     "source": "Skip",
     "sourceHash": "346a14c0e1cd7a13719ff99dbad69be8537484230fedfb634b2e41266dd736a2",
     "text": "Überspringen"
-  },
-  "save.failed": {
-    "reviewed": true,
-    "source": "Couldn’t save",
-    "sourceHash": "ce19256371d49c05ddaaa6d7a1cf946a2168cc96cc27db617cae1d759d9798aa",
-    "text": "Speichern fehlgeschlagen"
-  },
-  "save.retry": {
-    "reviewed": true,
-    "source": "Retry",
-    "sourceHash": "29dc257c657e887dda86f5d8b1ba525bd600dfcd67336b072d0607323c1dbe80",
-    "text": "Erneut versuchen"
-  },
-  "save.saving": {
-    "reviewed": true,
-    "source": "Saving…",
-    "sourceHash": "833e3018629d5320feacf91f0c4c4140da0ce4c3921ed92b45c48d6bca0a72f1",
-    "text": "Wird gespeichert…"
   },
   "settings.audio": {
     "reviewed": true,
@@ -11320,12 +11296,6 @@
     "source": "Preparing expeditions…",
     "sourceHash": "b05a3ab1c8e6c5a7fe307ac111e19f742498c21b156a60fe4b07f041d022f87c",
     "text": "Expeditionen werden vorbereitet…"
-  },
-  "startup.failed": {
-    "reviewed": true,
-    "source": "Fauna could not start",
-    "sourceHash": "686211f5f0316d19ae5e4763e0f1d7e3806ae037f6d0e5c371ead3e52ed0ca9b",
-    "text": "Fauna konnte nicht gestartet werden"
   },
   "startup.habitats": {
     "reviewed": true,
