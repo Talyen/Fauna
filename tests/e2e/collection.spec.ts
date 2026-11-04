@@ -84,8 +84,10 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await seed(page, fixture);
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const next = page.getByRole("button", { name: "Next page", exact: true });
-  for (let count = 0; count < SPECIES.length && (await next.isEnabled()); count++) await next.click();
-  await expect(next).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Previous page", exact: true })).toHaveCount(0);
+  for (let count = 0; count < SPECIES.length && (await next.count()); count++) await next.click();
+  await expect(next).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Previous page", exact: true })).toBeFocused();
   const creature = SPECIES.at(-1)!;
   const opener = page.getByRole("button", { name: `Inspect ${creature.name}`, exact: true });
   await opener.click();
@@ -94,7 +96,7 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await captureScreen(page, { path: "reports/collection/resized-details.png" });
   await page.keyboard.press("Escape");
   await expect(opener).toBeFocused();
-  await expect(next).toBeDisabled();
+  await expect(next).toHaveCount(0);
   await expectScrollFree(page);
   const layoutPositions = async () =>
     page
@@ -120,7 +122,7 @@ test("Collection keeps a later-page creature and focus through live resize and t
   expect(boonRows).toEqual([4, 4]);
   await page.getByRole("tab", { name: "Fauna", exact: true }).click();
   await expect(opener).toBeVisible();
-  await expect(next).toBeDisabled();
+  await expect(next).toHaveCount(0);
   await page.setViewportSize({ width: 1920, height: 1080 });
   await settleScreen(page);
   await expectScrollFree(page);

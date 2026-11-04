@@ -207,6 +207,9 @@ body,
   color: var(--muted-foreground);
   font-variant-numeric: tabular-nums;
 }
+.pagination button:disabled {
+  visibility: hidden;
+}
 .cloud-candidates {
   display: grid;
   gap: var(--screen-section-gap);
