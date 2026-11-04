@@ -4,7 +4,7 @@
 
 ## Glossary and terminology
 
-[src/game/glossary.ts](../src/game/glossary.ts) assembles the complete in-game **Menu → Glossary**. Keep card text and feedback consistent with those owners.
+[src/game/glossary.ts](../src/game/glossary.ts) retains authored vocabulary used by localization and status descriptions. Keep card text and feedback consistent with the keyword owners.
 
 Use Boon for passive journey items, Gold for permanent currency and Journey for a run. Current labels supersede historical relic, Holy and expedition wording in design records; internal identifiers need not change.
 

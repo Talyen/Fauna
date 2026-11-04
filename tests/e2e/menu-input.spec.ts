@@ -79,7 +79,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     .locator("button:not(.dialog-close)")
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
-  for (const name of ["Talents", "Collection", "Boons", "Glossary", "Settings", "End journey", "Main menu"]) {
+  for (const name of ["Talents", "Collection", "Boons", "Settings", "End journey", "Main menu"]) {
     await page.keyboard.press("s");
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();
@@ -138,19 +138,6 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await pad.press(13);
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
-  await pad.press(14);
-  await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
-  await pad.press(0);
-  const glossary = page.getByRole("main", { name: "Glossary & controls" });
-  await pad.press(13);
-  const entries = glossary.getByRole("region", { name: "Glossary entries" });
-  await expect(entries).toBeFocused();
-  await pad.press(13);
-  await expect.poll(() => entries.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
-  expect(await glossary.evaluate((el) => el.scrollTop)).toBe(0);
-  await pad.press(1);
-  await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
-  await pad.press(15);
   await pad.press(0);
   await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
   await pad.press(15);

@@ -9665,30 +9665,6 @@
     "sourceHash": "c00b4d99bbe62fb17bf287d50d3cf1ecbf9a601ad3d71d0b6021d7aa99f12d59",
     "text": "Erträge des letzten Kampfes"
   },
-  "glossary.controllerHelp": {
-    "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
-    "sourceHash": "fdaaa32d5cd81717a1a56538f78a41629e61eabcd6d8d18cdf3ccccecf76e3f0",
-    "text": "Mit Steuerkreuz oder linkem Stick navigieren; {{confirm}} aktiviert; {{inspect}} untersucht Bilder außerhalb des Kampfes; {{back}} geht zurück; {{endTurn}} beendet den Zug"
-  },
-  "glossary.entries": {
-    "reviewed": true,
-    "source": "Glossary entries",
-    "sourceHash": "cf46b52b75b6fc5938cb1be64743b854677a82fafe8028b03be0bf4bd0e3c4ea",
-    "text": "Glossareinträge"
-  },
-  "glossary.keyboardHelp": {
-    "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
-    "sourceHash": "97200530ae542236fcc75d0f573b3f0602493bdaf09eedc48237829ca787cc18",
-    "text": "Mit W/A/S/D oder Tab navigieren; A/D wechselt das Ziel; Enter aktiviert; I oder Rechtsklick untersucht Bilder außerhalb des Kampfes; Escape geht zurück"
-  },
-  "glossary.title": {
-    "reviewed": true,
-    "source": "Glossary & controls",
-    "sourceHash": "43e5a14837a96d7e5d8a0d848dd1aaa3ca081d86a97be32beaefc84d20140c42",
-    "text": "Glossar & Steuerung"
-  },
   "inspection.abilities": {
     "reviewed": true,
     "source": "Abilities",
@@ -10222,12 +10198,6 @@
     "source": "End journey",
     "sourceHash": "ea59d24b687011d5f84a9d2fd4fddf723ad1e4ac05f0a968a9d3e609159cfd8a",
     "text": "Reise beenden"
-  },
-  "menu.glossary": {
-    "reviewed": true,
-    "source": "Glossary",
-    "sourceHash": "584b0c9b1a8dee4b4564f0981998221a78d3e418ede360998b721a460bba0ec3",
-    "text": "Glossar"
   },
   "menu.logo": {
     "reviewed": true,

@@ -1,8 +1,8 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
-import { Swords, Sparkles, PawPrint, Gift, BookOpen, Settings2, LogOut, House } from "lucide-react";
+import { Swords, Sparkles, PawPrint, Gift, Settings2, LogOut, House } from "lucide-react";
 
-export type MenuPage = "talents" | "collection" | "settings" | "glossary";
+export type MenuPage = "talents" | "collection" | "settings";
 interface MenuActionsProps {
   home: boolean;
   active: boolean;
@@ -88,15 +88,6 @@ export function MenuActions({
           {i18n.message("menu.boons", "Boons")}
         </Button>
       ) : null}
-      <Button
-        effectTone="gold"
-        variant={home ? "outline" : "ghost"}
-        data-menu-action="glossary"
-        onClick={() => onNavigate("glossary")}
-      >
-        <BookOpen aria-hidden="true" className="menu-icon-glossary" />
-        {i18n.message("menu.glossary", "Glossary")}
-      </Button>
       <Button
         effectTone="settings"
         variant={home ? "outline" : "ghost"}

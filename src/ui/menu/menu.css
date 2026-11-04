@@ -37,9 +37,6 @@
 .menu-icon-boons {
   color: var(--menu-icon-boons);
 }
-.menu-icon-glossary {
-  color: var(--menu-icon-glossary);
-}
 .menu-icon-settings {
   color: var(--menu-icon-settings);
 }
@@ -96,23 +93,6 @@
   width: var(--main-menu-button-width);
   max-width: 100%;
 }
-.glossary-entries {
-  display: grid;
-  gap: var(--screen-section-gap);
-}
-.glossary-screen {
-  max-height: 100%;
-}
-.glossary-screen dt {
-  font-weight: 600;
-}
-.glossary-screen dd {
-  color: var(--muted-foreground);
-  margin: var(--space-1) 0 0;
-}
-.glossary-screen > p {
-  color: var(--muted-foreground);
-}
 .menu-screen {
   width: 100%;
   max-width: var(--menu-screen-width);
@@ -124,9 +104,6 @@
 }
 .menu-screen > header {
   flex: 0 0 auto;
-}
-.glossary-entries dl {
-  margin: 0;
 }
 .menu-talent-points {
   color: var(--gold-pale);

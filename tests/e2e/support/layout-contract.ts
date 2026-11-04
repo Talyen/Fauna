@@ -94,7 +94,7 @@ export function layoutViolations() {
   const scrollRegion = (el: Element | null): el is HTMLElement =>
     el instanceof HTMLElement &&
     el.hasAttribute("data-scroll-region") &&
-    !!el.closest(".glossary-screen, .settings-screen, .help-dialog, .talents-screen") &&
+    !!el.closest(".settings-screen, .help-dialog, .talents-screen") &&
     el.getAttribute("role") === "region" &&
     el.tabIndex === 0 &&
     !!(el.getAttribute("aria-label") || el.getAttribute("aria-labelledby"));

@@ -10,7 +10,6 @@ import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
 import { HomeScreen } from "../menu/home-screen";
-import { GlossaryScreen } from "../menu/glossary-screen";
 import { MenuActions, type MenuPage } from "../menu/menu-actions";
 import { Screen, ScreenHeading, HeaderNavigation } from "../shared/navigation/screen";
 import { captureSwapMotion } from "../battle/swap-motion";
@@ -374,13 +373,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                     controls={collectionControls}
                     openMenu={backFromPage}
                     inspect={inspect}
-                  />
-                ) : null}
-                {route === "glossary" ? (
-                  <GlossaryScreen
-                    back={backFromPage}
-                    controller={mode === "controller"}
-                    prompts={controllerPrompts}
                   />
                 ) : null}
                 {route === "settings" ? (

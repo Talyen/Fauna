@@ -10,9 +10,9 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
 
-Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
+Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
 [Journey rules](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End journey outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
 
@@ -21,7 +21,7 @@ Collection, Talents, Settings and Glossary open full screen from either menu, in
 | Surface                                                 | Back / Escape / controller B                                                                                       |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Pause                                                   | Dismiss to its opener                                                                                              |
-| Collection, Settings, Glossary, Talents overview        | Restore the originating menu and its corresponding choice                                                          |
+| Collection, Settings, Talents overview                  | Restore the originating menu and its corresponding choice                                                          |
 | Talent tree                                             | Return to the overview; the hamburger still opens the originating menu directly                                    |
 | Creature-parent action inspection                       | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
 | Direct hand/deck action inspection                      | Close to its opener, without creating a creature parent                                                            |
@@ -51,7 +51,7 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
@@ -69,7 +69,7 @@ Outside battle, use one centered shadcn Dialog panel over the shared dimmed back
 
 [Inspection CSS](../../src/ui/inspection/inspection.css) fits the ability row to the panel width and remaining viewport height, capped by the 184px `--inspection-ability-max-width` per portrait. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
-Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
+Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded keyword definitions. Inspection has no Recruit/Choose action.
 
 [Back and focus return](#back-and-focus-return) owns inspection nesting and dismissal; the accessible X is named Close inspection. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
 
@@ -137,10 +137,6 @@ Controller prompts detect known browser device IDs; Steam Input may expose an Xb
 Changes persist immediately outside progression and Cloud. Tooltip size changes tooltip type/width without scaling artwork. Sound changes apply live without replaying actions. Sliders retain native keyboard behavior; W/A/S/D and controller navigation adjust horizontally and move between rows vertically.
 
 Cloud and diagnostics have no Settings surface, status or Retry control. [Recovery policy](../UI.md#recovery-and-persistent-failures) owns player consequences. Native fullscreen/overlay acceptance belongs to [Release](../RELEASE.md).
-
-## Glossary
-
-Use the shared secondary-scrolling recipe, keeping menus and Back outside the reading region and its final rule reachable. Definitions come from the [gameplay glossary](../KEYWORDS.md#glossary-and-terminology).
 
 ## Deck, piles and owned Boons
 

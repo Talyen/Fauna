@@ -9665,30 +9665,6 @@
     "sourceHash": "0853cdc18205f19aa815888675cb97a8f1cab1f4dd03d01a48d644165e03794f",
     "text": "Награды последнего боя"
   },
-  "glossary.controllerHelp": {
-    "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
-    "sourceHash": "565322d1ee0d9ac0c910ea0ee3ad3ede3f182b9201aecd73ee6c2b3aadda5d2b",
-    "text": "Крестовина или левый стик для навигации; {{confirm}} — действие; {{inspect}} — осмотр изображений вне боя; {{back}} — назад; {{endTurn}} — завершить ход"
-  },
-  "glossary.entries": {
-    "reviewed": true,
-    "source": "Glossary entries",
-    "sourceHash": "aa07487f2c816d366c99be725947feee1b0f8ca8092d103e23a04a0dda83f19c",
-    "text": "Записи глоссария"
-  },
-  "glossary.keyboardHelp": {
-    "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
-    "sourceHash": "35a36572cf8c3828dcaaae169affda563d79ac352070dd8262a13acfcbef7588",
-    "text": "W/A/S/D или Tab для навигации; A/D меняет цель; Enter — действие; I или правая кнопка мыши — осмотр изображений вне боя; Escape — назад"
-  },
-  "glossary.title": {
-    "reviewed": true,
-    "source": "Glossary & controls",
-    "sourceHash": "4b8e188c960e169292db5b798c26cd373b189ca5f86a5f5088f9339b9152ba37",
-    "text": "Глоссарий и управление"
-  },
   "inspection.abilities": {
     "reviewed": true,
     "source": "Abilities",
@@ -10222,12 +10198,6 @@
     "source": "End journey",
     "sourceHash": "bbf4f80624b627bbdb969ed93dbdacb390e83082cc5fe6e7faa2e48cce2eb1cf",
     "text": "Завершить путешествие"
-  },
-  "menu.glossary": {
-    "reviewed": true,
-    "source": "Glossary",
-    "sourceHash": "1af26747d9db05deb8d4fbe5e3a321a8cd3243db84c4119750a0f72af51795db",
-    "text": "Глоссарий"
   },
   "menu.logo": {
     "reviewed": true,

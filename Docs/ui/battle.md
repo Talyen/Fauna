@@ -56,7 +56,7 @@ Prepared recorded cues distinguish combat outcomes, healing, gaining Block and a
 - Selected cards softly fade the Mana crystals they would spend. Actual Mana changes only after acceptance. Unavailable cards stay dimmed and inspectable; activation gives a short shake and quiet denial cue, with a brief visible reason such as Not enough Mana or the acting creature being Stunned/Frozen.
 - Mouse use stays hover-driven: no programmatic battle targeting focus, automatic hand focus, focus-only tooltip or focus lift. Navigation keys, Tab and controller navigation intentionally activate focus. After play, keyboard/controller focus moves to the nearest remaining hand slot. Pointer selection itself still lifts the selected card.
 
-The shared [keyword catalog](../KEYWORDS.md) assigns every current and planned keyword a semantic `--keyword-<id>` foreground. Current resource and damage tokens alias that palette. Card prose, passives, glossary definitions, talent tabs and XP feedback consume the same identity. Planned keywords remain outside automatic prose highlighting and the player glossary until their rules are implemented.
+The shared [keyword catalog](../KEYWORDS.md) assigns every current and planned keyword a semantic `--keyword-<id>` foreground. Current resource and damage tokens alias that palette. Card prose, passives, status descriptions, talent tabs and XP feedback consume the same identity. Planned keywords remain outside automatic prose highlighting until their rules are implemented.
 
 ## Hand transfers
 

@@ -76,7 +76,6 @@
   );
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
-  --glossary-page-min-height: 320px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -116,7 +115,6 @@
   --menu-icon-talents: #a78bfa;
   --menu-icon-collection: var(--gold-light);
   --menu-icon-boons: #f472b6;
-  --menu-icon-glossary: #2dd4bf;
   --menu-icon-settings: #a1a1aa;
   --menu-icon-end: var(--destructive-text);
   --menu-icon-home: var(--primary);
