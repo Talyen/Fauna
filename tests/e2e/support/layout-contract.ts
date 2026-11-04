@@ -66,9 +66,11 @@ export function layoutViolations() {
     const boxes = content.map((child) => child.getBoundingClientRect());
     const center =
       (Math.min(...boxes.map((rect) => rect.top)) + Math.max(...boxes.map((rect) => rect.bottom))) / 2;
-    // The fixed hand owns the bottom strip; the battlefield centers above it.
-    const reserved = main.matches(".battle-screen") ? parseFloat(css.paddingBottom) : 0;
-    if (Math.abs(center - (stage.top + (stage.height - reserved) / 2)) > 1)
+    // The battlefield centers between the toolbar and the fixed hand.
+    const battle = main.matches(".battle-screen");
+    const reservedTop = battle ? parseFloat(css.paddingTop) : 0;
+    const reservedBottom = battle ? parseFloat(css.paddingBottom) : 0;
+    if (Math.abs(center - (stage.top + (stage.height + reservedTop - reservedBottom) / 2)) > 1)
       failures.push(`${describe(main)} content is not vertically centered`);
   }
   if (dialogs.length && active.matches(".menu-panel")) {
