@@ -64,7 +64,7 @@ for (const [name, create] of [
       for (const id of fixture.reward.boons) {
         const name = BOONS.find((boon) => boon.id === id)!.name;
         await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toBeVisible();
-        await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
+        await expect(page.getByRole("heading", { name, exact: true })).toHaveCount(0);
       }
     }
     await layouts(page, fixture.phase, async () => {
