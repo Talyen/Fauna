@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "b3b4663fd5c0970097d41ee5af5d8d16942a8c07d6ad503c271eb8efd9ace408",
-    "text": "Optionale Einstellung; Beendet nach einer gespielten Karte oder einem Wechsel den Zug, wenn kein <keyword0>Mana</keyword0>, keine spielbare Karte und kein ausstehender Ersatz vorhanden sind; Zug beenden ist jederzeit ohne Bestätigung möglich"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "135f1199d7096fc59bbc9feb44e3f86d0b6f2c8fab5787e0514aab83edfe3de5",
+    "text": "Optionale Einstellung; Beendet den Zug, wenn keine spielbare Karte und kein ausstehender Ersatz vorhanden sind; Zug beenden ist jederzeit ohne Bestätigung möglich"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,

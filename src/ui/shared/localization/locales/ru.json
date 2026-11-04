@@ -4633,9 +4633,9 @@
   },
   "content.glossary.auto-end-turn.definition.rule": {
     "reviewed": true,
-    "source": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "sourceHash": "8b28f0df1115ac26622dd8a54493719d5cae1792f70e4dd2591a20f04addffe1",
-    "text": "Необязательная настройка; После розыгрыша карты или смены завершает ход, если нет <keyword0>маны</keyword0>, доступных карт и ожидающей замены; Завершить ход всегда можно без подтверждения"
+    "source": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "sourceHash": "bbc8a3b4fd1a2a341ce004208284a4a83608a986b9fd9494a32145b651955700",
+    "text": "Необязательная настройка; Завершает ход, если нет доступных карт и ожидающей замены; Завершить ход всегда можно без подтверждения"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "reviewed": true,

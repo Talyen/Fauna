@@ -2727,8 +2727,8 @@
     "reference": "Attack"
   },
   "content.glossary.auto-end-turn.definition.rule": {
-    "text": "Optional setting; After a card play or swap, ends your turn if you have no <keyword0>Mana</keyword0>, no playable cards and no pending replacement; You can always choose End turn without confirmation",
-    "reference": "Optional setting; After a card play or swap, ends your turn if you have no Mana, no playable cards and no pending replacement; You can always choose End turn without confirmation"
+    "text": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation",
+    "reference": "Optional setting; Ends your turn when you have no playable cards and no pending replacement; You can always choose End turn without confirmation"
   },
   "content.glossary.auto-end-turn.term.rule": {
     "text": "Auto-end turn",
