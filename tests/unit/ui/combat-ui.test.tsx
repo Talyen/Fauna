@@ -204,6 +204,39 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
   }
 });
 
+it("shows a category notice only while that category has unspent points", () => {
+  const game = produce(run(), (state) => {
+    state.keywordXP.burn = 100;
+  });
+  const content = (value: GameState) => (
+    <TooltipProvider>
+      <Talents game={value} send={vi.fn()} openMenu={vi.fn()} />
+    </TooltipProvider>
+  );
+  const view = render(content(game));
+  const burn = screen.getByRole("button", { name: "Burn talents" });
+  const category = burn.closest(".talent-category")!;
+  expect(category.querySelector(".talent-category-notice")?.getAttribute("aria-hidden")).toBe("true");
+  expect(document.getElementById(burn.getAttribute("aria-describedby")!)?.textContent).toBe(
+    "3 points available",
+  );
+  expect(
+    screen
+      .getByRole("button", { name: "Water talents" })
+      .closest(".talent-category")
+      ?.querySelector(".talent-category-notice"),
+  ).toBeNull();
+  view.rerender(
+    content(
+      produce(game, (state) => {
+        state.keywordXP.burn = 0;
+      }),
+    ),
+  );
+  expect(category.querySelector(".talent-category-notice")).toBeNull();
+  expect(burn.hasAttribute("aria-describedby")).toBe(false);
+});
+
 it(
   "reaches every authored talent row without sending commands",
   () => {

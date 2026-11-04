@@ -28,7 +28,7 @@ export async function expectTalentOverview(page: Page) {
     const gap = parseFloat(getComputedStyle(overview).columnGap);
     const captions = Math.max(
       ...categories.map((category) =>
-        [...category.querySelectorAll("h2, p")].reduce(
+        [...category.querySelectorAll("h2")].reduce(
           (sum, caption) => sum + caption.getBoundingClientRect().height,
           0,
         ),
@@ -36,6 +36,7 @@ export async function expectTalentOverview(page: Page) {
     );
     const actual = arts[0]!.getBoundingClientRect().width;
     const largest = Math.min(
+      parseFloat(getComputedStyle(overview).getPropertyValue("--talent-category-art-max-width")),
       categories[0]!.getBoundingClientRect().width,
       ((viewport.clientHeight - parseFloat(getComputedStyle(overview).rowGap) * 2) / 3 -
         captions -
@@ -46,7 +47,7 @@ export async function expectTalentOverview(page: Page) {
       fits: screen.scrollHeight <= screen.clientHeight && screen.scrollWidth <= screen.clientWidth,
       captionsVisible: categories.every((category) => [...category.children].every(inside)),
       captionsReadable: categories.every((category) =>
-        [...category.querySelectorAll("h2, p")].every(
+        [...category.querySelectorAll("h2")].every(
           (caption) =>
             caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
         ),

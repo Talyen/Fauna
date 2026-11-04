@@ -502,8 +502,7 @@ h3 {
   opacity: 1;
   border-color: var(--primary);
 }
-.game-button.talent-node[data-available="true"] .talent-status,
-.talent-category-points {
+.game-button.talent-node[data-available="true"] .talent-status {
   color: var(--primary);
 }
 .talent-node .talent-icon {

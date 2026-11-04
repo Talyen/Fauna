@@ -25,16 +25,19 @@
   place-items: center;
 }
 .talent-overview {
-  --talent-overview-column-gap: var(--space-2);
-  --talent-overview-row-gap: var(--space-4);
-  --talent-overview-art-gap: var(--space-1);
-  --talent-overview-art-width: calc(
-    (
-        100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) -
-          var(--talent-overview-row-gap) * 2 -
-          (var(--talent-overview-caption-height) + var(--talent-overview-art-gap)) * 3
-      ) *
-      3 / 12
+  --talent-overview-column-gap: var(--space-4);
+  --talent-overview-row-gap: 14px;
+  --talent-overview-art-gap: 6px;
+  --talent-overview-art-width: min(
+    var(--talent-category-art-max-width),
+    calc(
+      (
+          100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) -
+            var(--talent-overview-row-gap) * 2 -
+            (var(--talent-category-label-line-height) + var(--talent-overview-art-gap)) * 3
+        ) *
+        3 / 12
+    )
   );
   --talent-overview-column-width: max(var(--talent-overview-art-width), var(--talent-category-caption-width));
   display: flex;
@@ -43,10 +46,6 @@
   width: min(100%, calc(var(--talent-overview-column-width) * 5 + var(--talent-overview-column-gap) * 4));
   column-gap: var(--talent-overview-column-gap);
   row-gap: var(--talent-overview-row-gap);
-}
-.talent-overview:not(:has(.talent-category-points:not(:empty))) {
-  --talent-overview-caption-height: var(--talent-category-label-line-height);
-  --talent-category-caption-width: calc(112px * var(--text-scale, 1));
 }
 .talent-category {
   flex: 0 0 calc((100% - var(--talent-overview-column-gap) * 4) / 5);
@@ -57,26 +56,101 @@
   text-align: center;
 }
 .talent-category .action-card {
+  --art-keyword-color: var(--primary);
   width: min(100%, var(--talent-overview-art-width));
   margin-bottom: var(--talent-overview-art-gap);
+  transition:
+    scale 200ms ease-out,
+    border-color 200ms ease-out,
+    filter 200ms ease-out;
+}
+/* Extend the artwork button over its caption so both share one accessible control. */
+.talent-category .action-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc((100% - var(--talent-overview-column-width)) / 2)
+    calc(-1 * (var(--talent-overview-art-gap) + var(--talent-category-label-line-height)));
+}
+.talent-category .art-hover-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 22%,
+    var(--talent-category-shimmer-edge) 36%,
+    var(--talent-category-shimmer-center) 49%,
+    var(--talent-category-shimmer-trailing) 60%,
+    transparent 76%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+}
+.talent-category .action-card:hover,
+:root[data-focus="visible"] .talent-category .action-card:focus {
+  scale: 1.035;
+  border-color: var(--primary);
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--primary) 45%, transparent));
+}
+.talent-category .action-card:hover::after,
+:root[data-focus="visible"] .talent-category .action-card:focus::after {
+  border-color: var(--primary);
+}
+.talent-category .action-card:hover .art-hover-shimmer,
+:root[data-focus="visible"] .talent-category .action-card:focus .art-hover-shimmer {
+  animation: talent-category-shimmer 1800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .talent-category h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 100%;
   font-size: var(--talent-category-label-size);
   line-height: var(--talent-category-label-line-height);
+  font-weight: 700;
+  pointer-events: none;
+  letter-spacing: 0.025em;
+  color: color-mix(in srgb, var(--foreground) 90%, transparent);
+  transition: color 200ms ease-out;
 }
-.talent-category-points {
-  width: 100%;
-  min-height: var(--talent-category-points-line-height);
-  font-size: var(--talent-category-points-size);
-  white-space: nowrap;
-  line-height: var(--talent-category-points-line-height);
-  font-variant-numeric: tabular-nums;
+.talent-category:has(.action-card:hover) h2,
+:root[data-focus="visible"] .talent-category:has(.action-card:focus) h2 {
+  color: var(--gold-light);
 }
-.talent-category-points:empty {
-  display: none;
+.talent-category-notice {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-round);
+  background: color-mix(in srgb, var(--destructive-text) 70%, transparent);
 }
-.talent-overview:has(.talent-category-points:not(:empty)) .talent-category-points:empty {
-  display: block;
+@keyframes talent-category-shimmer {
+  0% {
+    background-position: 100% 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 0.5;
+  }
+  100% {
+    background-position: 0 0;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .talent-category .action-card:hover .art-hover-shimmer,
+  :root[data-focus="visible"] .talent-category .action-card:focus .art-hover-shimmer {
+    animation: none;
+  }
 }
 .talent-progress-group {
   flex-shrink: 0;

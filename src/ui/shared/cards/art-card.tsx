@@ -12,6 +12,7 @@ type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   aspect: "creature" | "action";
   presentation?: boolean;
   shine?: boolean;
+  hoverShimmer?: boolean;
   effectText?: string;
   effectKeywords?: readonly KeywordId[];
   effectTone?: EffectTone;
@@ -27,6 +28,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     aspect,
     presentation = false,
     shine: showShine = true,
+    hoverShimmer = false,
     className,
     effectText,
     effectKeywords,
@@ -88,6 +90,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     >
       {image}
       {shine}
+      {hoverShimmer ? <span className="art-hover-shimmer" aria-hidden="true" /> : null}
       <ControlArtEffect kind={aspect === "creature" ? control : null} />
     </Button>
   );

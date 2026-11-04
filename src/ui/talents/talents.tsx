@@ -193,6 +193,7 @@ export function Talents({
                     artwork={assetUrl(`keyword.${artwork[id]}`)}
                     effectKeywords={[id]}
                     shine={false}
+                    hoverShimmer
                     data-talent-keyword={id}
                     aria-label={i18n.message("talents.category", "{{keyword}} talents", {
                       keyword: keywordName(id),
@@ -200,16 +201,19 @@ export function Talents({
                     aria-describedby={points > 0 ? `${id}-available-points` : undefined}
                     onClick={() => setKeyword(id)}
                   />
-                  <h2>{keywordName(id)}</h2>
-                  <p className="talent-category-points" id={`${id}-available-points`}>
-                    {points > 0
-                      ? i18n.plural(
-                          "talents.pointsAvailable",
-                          { one: "{{count}} point available", other: "{{count}} points available" },
-                          points,
-                        )
-                      : null}
-                  </p>
+                  <h2>
+                    {keywordName(id)}
+                    {points > 0 ? <span className="talent-category-notice" aria-hidden="true" /> : null}
+                  </h2>
+                  {points > 0 ? (
+                    <span className="sr-only" id={`${id}-available-points`}>
+                      {i18n.plural(
+                        "talents.pointsAvailable",
+                        { one: "{{count}} point available", other: "{{count}} points available" },
+                        points,
+                      )}
+                    </span>
+                  ) : null}
                 </section>
               );
             })}

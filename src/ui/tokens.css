@@ -170,14 +170,13 @@
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
   --talent-tree-screen-width: 864px;
-  --talent-category-label-size: calc(14px * var(--text-scale, 1));
-  --talent-category-label-line-height: calc(17px * var(--text-scale, 1));
-  --talent-category-caption-width: calc(120px * var(--text-scale, 1));
-  --talent-category-points-size: calc(13px * var(--text-scale, 1));
-  --talent-category-points-line-height: calc(20px * var(--text-scale, 1));
-  --talent-overview-caption-height: calc(
-    var(--talent-category-label-line-height) + var(--talent-category-points-line-height)
-  );
+  --talent-category-label-size: calc(20px * var(--text-scale, 1));
+  --talent-category-label-line-height: calc(28px * var(--text-scale, 1));
+  --talent-category-caption-width: calc(110px * var(--text-scale, 1));
+  --talent-category-art-max-width: 164.16px;
+  --talent-category-shimmer-edge: #ffffff1f;
+  --talent-category-shimmer-center: #fffae16b;
+  --talent-category-shimmer-trailing: #ffffff29;
   --talent-card-width: 328px;
   --talent-card-min-height: 168px;
   --talent-page-rows: 2;
