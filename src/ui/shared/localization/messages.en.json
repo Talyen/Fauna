@@ -173,9 +173,6 @@
   "creature.gildedWardRule": {
     "text": "When its owner attacks, deal 1 Light damage to all enemies"
   },
-  "creature.healthFraction": {
-    "text": "Health {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "text": "Inspect {{name}}"
   },

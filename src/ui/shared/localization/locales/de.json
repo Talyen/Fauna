@@ -9503,12 +9503,6 @@
     "sourceHash": "7c6988510e8a6d8733a75bb96fb2c159c45d1f1ca7aece4accffee35959b435f",
     "text": "Wenn sein Besitzer angreift, füge allen Gegnern 1 Lichtschaden zu"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "8398f6ec14390bc848d4d8ca3bd1311954afd012ad4ed3142068663ac5249b86",
-    "text": "Gesundheit {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
