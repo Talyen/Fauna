@@ -51,7 +51,7 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of ghost Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
@@ -79,7 +79,7 @@ Use a centered title, Fauna and Boons tabs, a gallery and pagination. Fauna orde
 
 Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
-Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows with standard section gaps around the grid and reserve a footer slot. Measured width chooses one to four columns independently of item count before reducing artwork. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
+Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows, with up to three Fauna or four Boons per row. Measured width may reduce the column count before reducing artwork. Reserve a consistent gallery and footer area so the heading, tabs and pagination stay fixed across tabs and pages, with standard section gaps around the grid. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
 
 ## Talents
 

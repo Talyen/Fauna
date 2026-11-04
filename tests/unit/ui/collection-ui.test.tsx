@@ -27,7 +27,7 @@ it("browses Fauna and Boons without changing progression and remembers each tab'
     </TooltipProvider>,
   );
   const user = userEvent.setup();
-  expect(screen.getByRole("img", { name: "Mossguard: 2 of 5 stars" })).toBeTruthy();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(6);
   await user.click(screen.getByRole("button", { name: "Next page" }));
   const faunaAnchor = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")!;
   await user.click(screen.getByRole("tab", { name: "Boons" }));
@@ -38,7 +38,7 @@ it("browses Fauna and Boons without changing progression and remembers each tab'
   await user.click(screen.getByRole("tab", { name: "Fauna" }));
   expect(screen.getByRole("button", { name: faunaAnchor })).toBeTruthy();
   await user.click(screen.getByRole("button", { name: faunaAnchor }));
-  expect(inspect).toHaveBeenCalledWith({ species: SPECIES[8]!.id, speciesKit: true });
+  expect(inspect).toHaveBeenCalledWith({ species: SPECIES[6]!.id, speciesKit: true });
   await user.click(screen.getByRole("tab", { name: "Boons" }));
   expect(screen.getByRole("img", { name: BOONS[8]!.name })).toBeTruthy();
   expect(game).toEqual(before);

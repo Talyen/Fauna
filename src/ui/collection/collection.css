@@ -25,7 +25,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: start;
+  height: calc(
+    max(
+        var(--art-long-side),
+        var(--art-short-side) * var(--art-creature-scale) + var(--screen-item-gap) +
+          var(--collection-rank-height)
+      ) *
+      2 + var(--screen-item-gap)
+  );
   gap: var(--screen-item-gap);
+}
+.collection-grid[data-view="fauna"] {
+  align-self: center;
+  max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
 }
 .collection-grid[data-view="boons"] {
   align-self: center;

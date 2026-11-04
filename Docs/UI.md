@@ -96,7 +96,7 @@ A held stick cannot reclaim navigation after pointer/keyboard use until released
 
 | Surface      | Treatment                                                                                                                                                                                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Buttons      | Opaque fills in every state: primary gold with hover bloom, destructive red, quiet controls neutral, disabled controls muted; press shrinks 2%; busy text/spinner prevents repeated activation          |
+| Buttons      | Alchemy's opaque near-black quiet fills, neutral outline or borderless ghost, muted hover and accent press; primary gold with hover bloom, destructive red, disabled muted; press shrinks 2%            |
 | Artwork      | One keyword shine or neutral interaction frame on hover/focus; a chosen hand card stays raised without an extra selection border; unavailable/knockout opacity 45%, with grayscale for knockout         |
 | Tabs         | Centered with 12px gaps/padding, opaque fills, neutral 2px boundaries and gold selection/hover borders; regular labels, no strip, no selected-hover change; panels switch instantly                     |
 | Switches     | Gold/gray track, 150ms thumb travel, subtle hover brightening without growth                                                                                                                            |
@@ -106,6 +106,8 @@ A held stick cannot reclaim navigation after pointer/keyboard use until released
 | Progress     | Rounded 8px track, 150ms fill changes; forecasts update immediately                                                                                                                                     |
 | Status icons | Icons only, fixed catalog order, names/counts in tooltips and accessible descriptions; 200ms entrance/pulse, 150ms removal; zero removes without an extra pulse                                         |
 | Empty state  | Centered muted 24px icon and accessible label; no visible filler, action or tooltip                                                                                                                     |
+
+Busy button text or a spinner prevents repeated activation.
 
 Ordinary loading indicators wait 200ms; ready content never waits for them. [Startup](ui/screens.md#startup-loading) has its own deliberate splash duration. Menu/settings activation uses a quiet prepared click; hover/focus stay silent and rejection retains its denial cue. Audio unlocks on interaction, respects volume/mute preferences and never controls gameplay. Listening approval belongs to the media evidence.
 

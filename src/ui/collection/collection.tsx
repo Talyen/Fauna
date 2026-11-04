@@ -52,7 +52,8 @@ export function Collection({
   });
   const [view, setView] = useState("fauna");
   const gridRef = useRef<HTMLDivElement>(null);
-  const columns = useGridColumns(gridRef, 4, view);
+  const measuredColumns = useGridColumns(gridRef, 4, view);
+  const columns = Math.min(measuredColumns, view === "fauna" ? 3 : 4);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
   const collected: (typeof SPECIES)[number][] = [],
     uncollected: (typeof SPECIES)[number][] = [];

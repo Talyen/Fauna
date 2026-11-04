@@ -17,7 +17,7 @@ test("Collection inspection returns through nested details to the unchanged batt
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(1);
   await settleScreen(page);
-  await expect(page.locator(".collection-grid .creature-card")).toHaveCount(8);
+  await expect(page.locator(".collection-grid .creature-card")).toHaveCount(6);
   // Grid cells own row layout; the artwork inside may be scaled under a stationary pointer.
   const rows = await page.locator(".collection-grid > *").evaluateAll((cards) => {
     const counts = new Map<number, number>();
@@ -27,7 +27,7 @@ test("Collection inspection returns through nested details to the unchanged batt
     }
     return [...counts.values()];
   });
-  expect(rows).toEqual([4, 4]);
+  expect(rows).toEqual([3, 3]);
   const locked = page.getByRole("img", { name: "Locked species" }).first();
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
@@ -96,8 +96,19 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await expect(opener).toBeFocused();
   await expect(next).toBeDisabled();
   await expectScrollFree(page);
+  const layoutPositions = async () =>
+    page
+      .locator(".collection-heading, .collection-tabs [role=tablist], .collection-pagination")
+      .evaluateAll((elements) =>
+        elements.map((element) => {
+          const { x, y, width, height } = element.getBoundingClientRect();
+          return { x, y, width, height };
+        }),
+      );
+  const faunaPositions = await layoutPositions();
   await page.getByRole("tab", { name: "Boons", exact: true }).click();
   await expect(page.locator(".collection-boon")).toHaveCount(8);
+  expect(await layoutPositions()).toEqual(faunaPositions);
   const boonRows = await page.locator(".collection-boon").evaluateAll((cards) => {
     const counts = new Map<number, number>();
     for (const card of cards) {
