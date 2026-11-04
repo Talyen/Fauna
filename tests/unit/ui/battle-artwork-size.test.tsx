@@ -10,7 +10,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("settles equal-area artwork as the hand and both combatant rows resize together", () => {
+it("settles the artwork baseline as larger combatants and the hand resize together", () => {
   let resized = () => {};
   let frame: FrameRequestCallback = () => {};
   const observe = vi.fn();
@@ -34,7 +34,7 @@ it("settles equal-area artwork as the hand and both combatant rows resize togeth
   vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(720);
   const longSide = (node: HTMLElement) =>
     parseFloat(node.closest<HTMLElement>("main")!.style.getPropertyValue("--battle-fitted-width")) || 214;
-  const height = (node: HTMLElement) => (longSide(node) * 3) / 4;
+  const height = (node: HTMLElement) => (longSide(node) * 1.1 * 3) / 4;
   vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockImplementation(function (this: HTMLElement) {
     return Math.round(height(this));
   });

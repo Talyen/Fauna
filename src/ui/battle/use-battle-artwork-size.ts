@@ -1,5 +1,5 @@
 import { useLayoutEffect, type RefObject } from "react";
-/** Fit equal-area combatants and hand cards, keeping only 4px of middle-card clipping. */
+/** Fit the shared artwork baseline, keeping only 4px of middle-card clipping. */
 export function useBattleArtworkSize(board: RefObject<HTMLElement | null>, handCount: number) {
   useLayoutEffect(() => {
     const root = board.current;
@@ -68,8 +68,9 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>, handC
       // Each rail keeps enough room for target rules and the symmetric controls beside the board.
       const minimumRail = parseFloat(getComputedStyle(rail).minWidth);
       const byWidth = (root.clientWidth - 2 * minimumRail - 2 * columnGap - rowPadding - 2 * gap) / 3;
-      // Two landscape rows use 3/4 of the shared long side each; the portrait hand uses one.
+      // Two landscape rows use 3/4 of the base long side each; the portrait hand uses one.
       // Fit the combined artwork budget directly so the hand cannot feed shrinking sizes back in.
+      // The combatants' 10% enlargement uses part of the existing 10% fitting clearance.
       const byHeight = (availableHeight - extra - gap) / 2.5;
       const width = Math.max(
         parseFloat(css.getPropertyValue("--control-height")),
