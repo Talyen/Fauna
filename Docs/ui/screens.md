@@ -55,7 +55,7 @@ Main menu places a gold default Continue/Play Button above a two-column grid of 
 
 Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
-Both menus show spendable talent points beside Talents with an accessible description; the count disappears when spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
+Main menu shows a red dot beside Talents when points are available; Pause shows the count. Both provide an accessible description, and the indicator disappears when points are spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
 
 ## Starter draft
 
