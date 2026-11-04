@@ -19,7 +19,7 @@ for (const locale of locales) {
     });
     await seed(page, run());
     const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.getByRole("button", { name: "Options", exact: true }).click();
     await page.getByRole("button", { name: "Language: English", exact: true }).click();
     await page.getByRole("radio", { name: languages[locale].name, exact: true }).click();
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
@@ -34,6 +34,12 @@ for (const locale of locales) {
     await page.clock.resume();
     await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
     await expect(page.getByRole("navigation", { name: catalog["menu.mainMenu"]!.text })).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: catalog["menu.options"]!.text, exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: catalog["menu.quitShort"]!.text, exact: true }),
+    ).toBeVisible();
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await page.getByRole("button", { name: catalog["menu.continue"]!.text, exact: true }).click();
     await expect(page.getByRole("main", { name: catalog["battle.battlefield"]!.text })).toBeVisible();

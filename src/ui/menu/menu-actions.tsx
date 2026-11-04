@@ -1,6 +1,18 @@
 import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
-import { Swords, Sparkles, PawPrint, Gift, Settings2, LogOut, House } from "lucide-react";
+import {
+  Swords,
+  Sparkles,
+  PawPrint,
+  Gift,
+  Settings2,
+  LogOut,
+  House,
+  BookOpen,
+  WandSparkles,
+  Cog,
+  Power,
+} from "lucide-react";
 
 export type MenuPage = "talents" | "collection" | "settings";
 interface MenuActionsProps {
@@ -37,7 +49,11 @@ export function MenuActions({
       data-menu-action="collection"
       onClick={() => onNavigate("collection")}
     >
-      <PawPrint aria-hidden="true" className="menu-icon-collection" />
+      {home ? (
+        <BookOpen aria-hidden="true" className="menu-icon-collection" />
+      ) : (
+        <PawPrint aria-hidden="true" className="menu-icon-collection" />
+      )}
       {i18n.message("menu.collection", "Collection")}
     </Button>
   );
@@ -68,7 +84,11 @@ export function MenuActions({
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
         onClick={() => onNavigate("talents")}
       >
-        <Sparkles aria-hidden="true" className="menu-icon-talents" />
+        {home ? (
+          <WandSparkles aria-hidden="true" className="menu-icon-talents" />
+        ) : (
+          <Sparkles aria-hidden="true" className="menu-icon-talents" />
+        )}
         {i18n.message("menu.talents", "Talents")}
         {talentPoints > 0 ? (
           <span
@@ -102,8 +122,12 @@ export function MenuActions({
         data-menu-action="settings"
         onClick={() => onNavigate("settings")}
       >
-        <Settings2 aria-hidden="true" className="menu-icon-settings" />
-        {i18n.message("menu.settings", "Settings")}
+        {home ? (
+          <Cog aria-hidden="true" className="menu-icon-settings" />
+        ) : (
+          <Settings2 aria-hidden="true" className="menu-icon-settings" />
+        )}
+        {home ? i18n.message("menu.options", "Options") : i18n.message("menu.settings", "Settings")}
       </Button>
       {!home && active ? (
         <>
@@ -114,9 +138,13 @@ export function MenuActions({
           </Button>
         </>
       ) : null}
-      <Button variant="ghost" busy={closing} onClick={onQuit}>
-        <LogOut aria-hidden="true" className="menu-icon-quit" />
-        {i18n.message("menu.quit", "Save & quit")}
+      <Button variant={home ? "outline" : "ghost"} busy={closing} onClick={onQuit}>
+        {home ? (
+          <Power aria-hidden="true" className="menu-icon-quit-home" />
+        ) : (
+          <LogOut aria-hidden="true" className="menu-icon-quit" />
+        )}
+        {home ? i18n.message("menu.quitShort", "Quit") : i18n.message("menu.quit", "Save & quit")}
       </Button>
     </>
   );

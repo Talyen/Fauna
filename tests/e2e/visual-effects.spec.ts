@@ -129,7 +129,7 @@ test("plasma uses static fallback on unavailable/lost WebGL and restores without
 }) => {
   await seed(page, run());
   await page.bringToFront();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   const canvas = page.getByTestId("global-plasma-background");
   await canvas.evaluate((element) =>
     element.dispatchEvent(new Event("webglcontextlost", { cancelable: true })),
@@ -150,7 +150,7 @@ test("plasma uses static fallback on unavailable/lost WebGL and restores without
     } as typeof original;
   });
   await reloadHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByTestId("static-plasma-background")).toHaveCount(1);
   await slider(page, "Background Glow", 0);
   await expect(page.getByTestId("static-plasma-background")).toHaveCount(0);

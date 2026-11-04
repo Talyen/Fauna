@@ -58,7 +58,7 @@ test("automatic cloud recovery and desktop Settings fit both sizes with enlarged
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });

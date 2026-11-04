@@ -1497,7 +1497,7 @@ it("changes language from Settings and returns focus without changing the journe
     </LocalizationProvider>,
   );
   try {
-    fireEvent.click(screen.getByRole("button", { name: "Settings" }));
+    fireEvent.click(screen.getByRole("button", { name: "Options" }));
     const opener = screen.getByRole("button", { name: "Language: Automatic" });
     opener.focus();
     fireEvent.click(opener);

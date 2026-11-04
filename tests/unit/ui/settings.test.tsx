@@ -69,7 +69,7 @@ it("applies independent preferences live, normalizes malformed storage and persi
   const view = render(<App session={session} />);
   const game = session.store.getState().game;
   try {
-    await user.click(screen.getByRole("button", { name: "Settings" }));
+    await user.click(screen.getByRole("button", { name: "Options" }));
     expect(screen.queryByRole("slider", { name: "Master volume" })).toBeNull();
     const glow = screen.getByRole("slider", { name: "Background Glow" });
     const particles = screen.getByRole("slider", { name: "Background Particles" });
@@ -121,7 +121,7 @@ it("applies independent preferences live, normalizes malformed storage and persi
     expect(session.store.getState().game).toBe(game);
     view.unmount();
     render(<App session={session} />);
-    await user.click(screen.getByRole("button", { name: "Settings" }));
+    await user.click(screen.getByRole("button", { name: "Options" }));
     expect(screen.getByRole("slider", { name: "Background Glow" }).getAttribute("aria-valuenow")).toBe("1");
     expect(screen.getByRole("slider", { name: "Background Particles" }).getAttribute("aria-valuenow")).toBe(
       "0",
@@ -139,9 +139,7 @@ it("applies independent preferences live, normalizes malformed storage and persi
       "false",
     );
     await user.keyboard("{Escape}");
-    await waitFor(() =>
-      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Settings" })),
-    );
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: "Options" })));
   } finally {
     await session.dispose();
   }

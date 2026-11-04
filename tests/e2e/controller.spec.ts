@@ -12,7 +12,7 @@ test("manual controller prompts persist and disconnection pauses without changin
   const press = await gamepad(page);
   await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, run());
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Battle", exact: true }).click();
   await page.getByRole("radio", { name: "PlayStation" }).click();
   await reloadHome(page);

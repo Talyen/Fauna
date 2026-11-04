@@ -10,7 +10,7 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Settings and Save & quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, Save & quit waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
+Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Options and Quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, quitting waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
 
 Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
@@ -51,7 +51,7 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Options and Quit Buttons. Conditional choices add rows; center a lone final choice. Use Alchemy's Swords, violet WandSparkles, gold BookOpen, zinc Cog and rose Power icons for those respective actions. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
