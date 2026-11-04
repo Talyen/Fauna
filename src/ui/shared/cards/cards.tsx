@@ -207,7 +207,6 @@ export function CreatureCard({
               className="battle-urgent-frame"
               colors={effectPalette([], "death").border}
               duration={4}
-              width={3}
             />
           ) : null}
         </div>

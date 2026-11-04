@@ -63,11 +63,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const palette = effectPalette(keywords, urgent ? "death" : effectTone);
   const shine =
     showShine && (keywords !== undefined || effectTone) ? (
-      <ShineBorder
-        colors={palette.border}
-        duration={urgent || acting ? 4 : 14}
-        width={urgent || acting ? 3 : 2}
-      />
+      <ShineBorder colors={palette.border} duration={urgent || acting ? 4 : 14} />
     ) : null;
   const classes = cn(`${aspect}-card`, className);
   if (presentation)

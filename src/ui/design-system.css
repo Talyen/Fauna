@@ -66,6 +66,11 @@
   color: var(--foreground);
   border-color: var(--border);
 }
+.game-button.control-outline:not(.compact-icon-control):not(:disabled):not([aria-disabled="true"]):hover {
+  border-color: transparent;
+  outline: var(--hover-frame-width) solid var(--border);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
+}
 .game-button:is(.control-outline, .control-ghost).end-journey {
   color: var(--menu-icon-end);
 }
@@ -75,6 +80,7 @@
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
   scale: var(--pressed-scale);
   border-color: var(--primary);
+  outline-color: var(--primary);
 }
 .game-button:is(.control-primary, .control-outline, .control-ghost, .control-destructive):is(
     :disabled,
@@ -133,15 +139,16 @@
   height: var(--compact-icon-size);
 }
 :root[data-focus="visible"] .game-button:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
   box-shadow: none;
 }
 :root[data-focus="visible"] .game-button.compact-icon-control:focus {
   outline: none;
 }
 :root[data-focus="visible"] .game-button.compact-icon-control:focus::before {
-  border: 2px solid var(--primary);
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 :root[data-focus="visible"]
   .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
@@ -160,8 +167,10 @@
   background: transparent;
 }
 .ui-tabs-list .ui-tab {
+  --tab-frame-color: var(--border);
+  position: relative;
   flex-shrink: 0;
-  border: 2px solid var(--border);
+  border: 2px solid transparent;
   padding-inline: var(--space-3);
   background: var(--control-fill);
   color: var(--muted-foreground);
@@ -172,16 +181,25 @@
     border-color var(--motion-fast),
     background-color var(--motion-fast);
 }
+.ui-tabs-list .ui-tab::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * (2px + var(--hover-frame-outset)));
+  border: var(--hover-frame-width) solid var(--tab-frame-color);
+  border-radius: calc(var(--radius) + var(--hover-frame-outset));
+  pointer-events: none;
+  transition: border-color var(--motion-fast);
+}
 .ui-tabs-list .ui-tab[data-state="active"] {
+  --tab-frame-color: var(--primary);
   background: var(--control-fill);
   color: var(--foreground);
-  border-color: var(--primary);
   box-shadow: none;
 }
 .ui-tabs-list .ui-tab[data-state="inactive"]:hover {
+  --tab-frame-color: var(--primary);
   background: var(--control-hover);
   color: var(--foreground);
-  border-color: var(--primary);
 }
 .ui-tabs-list .ui-tab:disabled {
   background: var(--muted);
@@ -192,8 +210,8 @@
   height: var(--icon-size);
 }
 :root[data-focus="visible"] .ui-tabs-list .ui-tab:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
+  --tab-frame-color: var(--primary);
+  outline: none;
   border-color: transparent;
   box-shadow: none;
 }
@@ -253,8 +271,8 @@
   box-shadow: none;
 }
 :root[data-focus="visible"] .ui-switch:focus::before {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 .ui-radio {
   width: 16px;
@@ -267,8 +285,10 @@
 .ui-radio[data-state="checked"] {
   border-color: var(--primary);
 }
-.ui-radio[data-state="unchecked"]:hover {
-  border-color: var(--foreground);
+.ui-radio[data-state="unchecked"]:not(:disabled):hover {
+  border-color: transparent;
+  outline: var(--hover-frame-width) solid var(--foreground);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 label:has(> .ui-radio) {
   min-height: var(--control-height);
@@ -278,9 +298,10 @@ label:has(> .ui-radio) {
   color: var(--foreground);
 }
 :root[data-focus="visible"] label > .ui-radio:focus {
-  outline: none;
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
   box-shadow: none;
-  border: 2px solid var(--primary);
+  border-color: transparent;
 }
 .ui-slider .ui-slider-track {
   height: var(--progress-height);
@@ -308,10 +329,12 @@ label:has(> .ui-radio) {
   background: var(--foreground);
 }
 .ui-slider .ui-slider-thumb:hover::after {
-  border-color: var(--primary);
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 .ui-slider .ui-slider-thumb:active::after {
-  border: 2px solid var(--primary);
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 :root[data-focus="visible"] .ui-slider:focus-within {
   outline: none;
@@ -321,7 +344,8 @@ label:has(> .ui-radio) {
   box-shadow: none;
 }
 :root[data-focus="visible"] .ui-slider .ui-slider-thumb:focus::after {
-  border: 2px solid var(--primary);
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 .dialog-overlay[data-state="open"],
 .dialog-content[data-state="open"],
@@ -604,7 +628,8 @@ h3 {
   background: transparent;
 }
 .ui-slider:active .ui-slider-thumb::after {
-  border: 2px solid var(--primary);
+  outline: var(--hover-frame-width) solid var(--primary);
+  outline-offset: calc(-1 * var(--hover-frame-outset));
 }
 .deck-grid > .empty-state {
   grid-column: 1 / -1;
@@ -628,6 +653,7 @@ h3 {
   .game-button:is(.control-outline, .control-ghost):not([aria-disabled="true"]):focus {
   background: var(--background);
   border-color: transparent;
+  outline-color: var(--primary);
 }
 :root[data-focus="visible"] .game-button:is(.control-outline, .control-ghost).compact-icon-control:focus {
   background: transparent;

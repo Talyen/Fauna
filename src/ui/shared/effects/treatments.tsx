@@ -7,12 +7,10 @@ import { useEffectMetadata } from "./effects";
 export function ShineBorder({
   colors,
   duration = 14,
-  width = 2,
   className = "",
 }: {
   colors: readonly string[];
   duration?: number;
-  width?: number;
   className?: string;
 }) {
   return (
@@ -22,7 +20,6 @@ export function ShineBorder({
       style={
         {
           "--shine-duration": `${duration}s`,
-          "--shine-width": `${width}px`,
           backgroundImage: `radial-gradient(${colors.join(",")})`,
         } as CSSProperties
       }

@@ -83,7 +83,6 @@
 }
 :root[data-focus="visible"] .collection-boon:focus > .action-card > .effect-shine-border {
   opacity: 1;
-  --shine-width: 3px;
 }
 .locked-species:hover > .creature-card,
 :root[data-focus="visible"] .locked-species:focus > .creature-card {
@@ -96,7 +95,6 @@
 .locked-species:hover > .creature-card > .effect-shine-border,
 :root[data-focus="visible"] .locked-species:focus > .creature-card > .effect-shine-border {
   opacity: 1;
-  --shine-width: 3px;
 }
 @media (prefers-reduced-motion: reduce) {
   .locked-species:hover > .creature-card,

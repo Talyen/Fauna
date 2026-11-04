@@ -315,18 +315,19 @@
   transform-origin: 50% calc(var(--battle-health-height) + 1px - var(--battle-creature-width) * 3 / 8);
   transition: scale var(--motion-hover) ease-out;
 }
-/* Repeat the solid interaction frame above the separate Health overlay. */
+/* Own the single combatant frame above the separate Health overlay. */
+.battle-screen .combatant-reaction > .creature-card::after {
+  display: none;
+}
 .battle-screen .combatant-reaction::after {
   content: "";
   position: absolute;
-  top: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
-  left: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
-  width: calc(100% + 2 * (var(--hover-frame-width) - var(--hover-frame-overlap)));
-  height: calc(
-    var(--battle-creature-width) * 3 / 4 + 2 * (var(--hover-frame-width) - var(--hover-frame-overlap))
-  );
+  top: calc(-1 * var(--hover-frame-outset));
+  left: calc(-1 * var(--hover-frame-outset));
+  width: calc(100% + 2 * var(--hover-frame-outset));
+  height: calc(var(--battle-creature-width) * 3 / 4 + 2 * var(--hover-frame-outset));
   border: var(--hover-frame-width) solid transparent;
-  border-radius: calc(var(--radius) + var(--hover-frame-width) - var(--hover-frame-overlap));
+  border-radius: calc(var(--radius) + var(--hover-frame-outset));
   pointer-events: none;
   transition:
     scale var(--motion-hover) ease-out,
@@ -347,10 +348,10 @@
   scale: var(--hover-scale);
 }
 .battle-screen .battle-urgent-frame {
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: calc(var(--battle-creature-width) * 3 / 4);
-  border-radius: var(--radius);
+  inset: calc(-1 * var(--hover-frame-outset)) auto auto calc(-1 * var(--hover-frame-outset));
+  width: calc(100% + 2 * var(--hover-frame-outset));
+  height: calc(var(--battle-creature-width) * 3 / 4 + 2 * var(--hover-frame-outset));
+  border-radius: calc(var(--radius) + var(--hover-frame-outset));
   opacity: 0;
   transition:
     opacity var(--motion-hover),
@@ -616,8 +617,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .battle-screen .health-forecast {
-    scale: 1 !important;
+  .battle-screen .combatant-reaction {
+    --hover-scale: 1;
   }
 }
 .battle-screen .enemy-row {

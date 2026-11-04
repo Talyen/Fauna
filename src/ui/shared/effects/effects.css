@@ -25,7 +25,7 @@
 .effect-shine-border {
   position: absolute;
   inset: 0;
-  padding: var(--shine-width, 2px);
+  padding: var(--hover-frame-width);
   border-radius: inherit;
   pointer-events: none;
   background-size: 300% 300%;
@@ -45,7 +45,8 @@
   animation: effect-text-shine 4.8s linear infinite;
 }
 :is(.action-card, .creature-card) > .effect-shine-border {
-  inset: calc(-1 * var(--border-art-width));
+  inset: calc(-1 * (var(--border-art-width) + var(--hover-frame-outset)));
+  border-radius: calc(var(--radius) + var(--hover-frame-outset));
   opacity: 0;
   transition: opacity var(--motion-hover);
 }
@@ -60,10 +61,6 @@
     [aria-disabled="true"]
   ):hover::after {
   border-color: transparent;
-}
-.game-button:is(.action-card, .creature-card):hover > .effect-shine-border,
-:root[data-focus="visible"] .game-button:is(.action-card, .creature-card):focus > .effect-shine-border {
-  --shine-width: 3px;
 }
 .game-button[aria-disabled="true"] > .effect-shine-border,
 .knocked-out .effect-shine-border {

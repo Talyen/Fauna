@@ -143,7 +143,7 @@
   --motion-hover: 150ms;
   --hover-scale: 1.035;
   --hover-frame-width: calc(2px * var(--ui-density, 1));
-  --hover-frame-overlap: calc(1px * var(--ui-density, 1));
+  --hover-frame-outset: calc(1px * var(--ui-density, 1));
   --tooltip-enter-duration: 180ms;
   --tooltip-exit-duration: 120ms;
   --tooltip-max-width: calc(320px * var(--ui-density, 1));
