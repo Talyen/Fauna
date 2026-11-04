@@ -416,7 +416,6 @@ function resolve(
       (command.type === "play" || command.type === "swap") &&
       command.autoEndTurn !== false &&
       draft.phase === "battle" &&
-      draft.battle.mana === 0 &&
       draft.battle.turn < MAX_BATTLE_TURN &&
       !pendingReplacement(draft) &&
       !hasAvailablePlay(draft)
