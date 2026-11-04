@@ -359,6 +359,18 @@
     "sourceHash": "d5edf851b6211047577c1a9a0dc84ac061f342e180f0e7de0220369d62333bfe",
     "text": "重复攻击无法被<keyword0>闪避</keyword0>"
   },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "87643b0f79dd06e745e5c88e8e13893a6873a72bb10486b96070a90517f275c6",
+    "text": "蜜蜡木勺"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "9b3053c42e6c015ebbf1d38f0b52e4c9616e72fcf84bdf6204b533b1b4ab30ba",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有一半为该盟友恢复<keyword1>生命</keyword1>"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
@@ -742,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "901da5036481b45eadfc3b5c263e23f3a73ccee572e8810ad663b1790c54e064",
     "text": "<keyword0>无效化</keyword0>保护盟友效果免受<keyword1>驱散</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "05d235becae414f7803b9f71bafa918d2cb64e0fc30f521c98203fe16ea5260a",
+    "text": "宫廷暖手炉"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "d9dbc4d87aa602f33e575198c0eff8133521d655af227b22d84d49af502dece0",
+    "text": "<keyword0>灼烧</keyword0>命中会施加等同于攻击者<keyword2>护甲</keyword2>的额外<keyword1>灼烧</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1415,6 +1439,30 @@
     "sourceHash": "ae175e6b788516ef859e8e82314b2b36751f8413897eb29daa60c50bf716e93f",
     "text": "盟友<keyword0>闪避</keyword0>攻击时，对攻击者造成{{value0}}点<keyword1>眩晕</keyword1>伤害"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "0dd96d0298394451b92c89feab65a9bf2c52ac62c6bcb3a21fadc5d7d23edda5",
+    "text": "雷霆音叉"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "54d8f4edee3fc759ee6bbe0e2b20645b588cd5193037a5145436d13d2eec5901",
+    "text": "<keyword0>眩晕</keyword0>命中还会将其<keyword1>眩晕</keyword1>累积施加给其他有<keyword2>眩晕</keyword2>累积的敌人"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "50e36df53aae25061aa8d026f09db3096138e4198bee74e820e5646a8d37673b",
+    "text": "织机木梳"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "0492627b32cf674ae6d98a5e68602f5763edc6d38de15e53e117e069f6c687a7",
+    "text": "盟友的<keyword0>格挡</keyword0>被击破时，其他盟友的<keyword1>格挡</keyword1>吸收剩余伤害"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2039,6 +2087,18 @@
     "sourceHash": "6763ff5860041939fba042b106215195b387c76ae2c49853bc181dab8cea3aaa",
     "text": "一名友方对<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>的免疫会保护所有友方"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "a680d34e02f0c7ae0433aa267687e1b98d55d2e6e92a2155a30e8285e6079df5",
+    "text": "霜晶线轴"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "e6a9fe914f50a345d014595dd4f8c26dedbe1b59640faf5342c154e5282fb5c2",
+    "text": "<keyword0>流血</keyword0>伤害会增加相当于伤害一半的<keyword1>冻结</keyword1>累积"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2146,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "6ee1b7f4197ffac2b9c688cc54ddc73fc350ba5066a82e0d7c48b3ffdcc3c9a8",
     "text": "一名友方<keyword0>闪避</keyword0>时，其他友方也会<keyword1>闪避</keyword1>同一次攻击"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "3165703a64ffccc69baa4b6bfe471ac3e4022b35c116954c13a586f47766c172",
+    "text": "双影日盘"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "d9b1de7917bd33b407ba47fd43503deb752b2a1b39e39b8860ab081bdc1a2b38",
+    "text": "对<keyword1>致盲</keyword1>敌人的<keyword0>光</keyword0>攻击会触发两次"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2303,6 +2375,18 @@
     "sourceHash": "5bcf5d59056b7be03e93eacc6106468c588828b92e7fc67280d8eeaa20166c20",
     "text": "<keyword0>物理</keyword0>命中会对拥有<keyword2>护甲</keyword2>的敌人施加{{value0}}点<keyword1>流血</keyword1>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "6602eebc8b69d521d9b6c967fce8bc43e9cefea2a96c7086acf8f28df492443b",
+    "text": "星月弯刀"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "3603e96557fb5753a365268bcd52e6031272ee1f5422f410e7e4f356e567a44e",
+    "text": "<keyword0>驱散</keyword0>敌人的一个效果会使你的下次攻击必定<keyword1>暴击</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2338,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "3dc04d502c87f2aed1228d0df2795996f37a583e5942ee0c904199c47d6d8d0c",
     "text": "你的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>命中在造成伤害前移除敌人{{value0}}点<keyword2>护甲</keyword2>"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "419b8d249e679be80f10d556ca64dff922c3673f9f9cf9239727d9714b186fa3",
+    "text": "日泉水壶"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "794c38d603f37766cfd4c21c721160286ca7eba661199866b3b63a80eff41dd2",
+    "text": "<keyword0>治疗</keyword0>盟友会将恢复的<keyword1>生命</keyword1>加到你的下次<keyword2>光</keyword2>攻击上"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2435,6 +2531,18 @@
     "sourceHash": "dd3676067eb3607d50367f9702e205c40b2827b76ee3fa8e449ac9bd36ef8959",
     "text": "<keyword0>荆棘</keyword0>衰减时不会低于{{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "5ff6687a3028fa0695a10f8387fc9bb912ef381f6519a19d426a7d894e1d98a1",
+    "text": "蘑菇面包盒"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "68ca36a9aa651dc34824d47b5057d2668f48b1ae437d2d0c35ddc438f08df0db",
+    "text": "将旅途面包加入牌组；获得<keyword0>食物</keyword0>的盟友在下回合保留<keyword1>格挡</keyword1>"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2482,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "5748145defc42d5e40f12eaf80f634fc976cfbf76d7de6e8dd653cd2607c04e2",
     "text": "盟友可以<keyword0>闪避</keyword0>敌人的<keyword1>驱散</keyword1>"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "62a2016a1553cc6da5305b87bb44a6742f20dbbaeaab07d2f44025420e28801a",
+    "text": "矿脉量索"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "be55cda6d66dd53d307d1c7d4fbb2c0d0f1a95f72e736e063dd36b4e6fe4e301",
+    "text": "被敌人<keyword0>护甲</keyword0>减免的伤害会造成给另一名敌人"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,

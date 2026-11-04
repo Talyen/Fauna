@@ -42,6 +42,8 @@ function tacticalState(state: GameState) {
     battle.cardsPlayedThisTurn,
     battle.freeBurnUsed,
     battle.meteoriteUsed,
+    battle.sunwellBonus,
+    battle.starhookReady,
     battle.repeatNext,
     battle.encoreProgress,
     battle.metronomeActor,

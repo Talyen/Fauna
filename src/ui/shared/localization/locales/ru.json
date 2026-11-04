@@ -359,6 +359,18 @@
     "sourceHash": "802946d391815be0b0997183977e56ea3dc6edbf8597a90f2f6236e78f845b09",
     "text": "От повторных атак нельзя <keyword0>уклониться</keyword0>"
   },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "8afc19b6c2929fe0e5aeeff61124bb6e67998f25c37e06a223c6979fc66a7c47",
+    "text": "Янтарная лопатка"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "0a982dc8f6ddd5b6546cc77a13eaf33335aeecd28cac73eff334d860f9468247",
+    "text": "Половина <keyword0>блока</keyword0>, потерянного при угасании, восстанавливает <keyword1>здоровье</keyword1> этому союзнику"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
@@ -742,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "6febb7ca875be7c41690a4d6989efda7bfddc599961a1e4e51de888f71c4d41a",
     "text": "<keyword0>Аннулирование</keyword0> защищает эффекты союзников от <keyword1>рассеивания</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "37092f36d06613b2962bf9fe4a8ce0acb0f60628dc7103e02a99101875c4cd1d",
+    "text": "Придворная грелка"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "2162cf50e5425a95239f4ffe751387ea49e8fcef407600990c901503763cd727",
+    "text": "Попадания <keyword0>горением</keyword0> накладывают дополнительное <keyword1>горение</keyword1>, равное <keyword2>броне</keyword2> атакующего"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1415,6 +1439,30 @@
     "sourceHash": "a6d89f694051930fd7e2b19fa8a03a3c7234d8a5c0d79c8999f66157f3abb382",
     "text": "Когда союзник <keyword0>уклоняется</keyword0> от атаки, нанесите атакующему {{value0}} урона <keyword1>оглушением</keyword1>"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "657ed585bedeb4b9ac0d59a85cacd7be39c48bcaed17cb9879c89972657bb142",
+    "text": "Грозовой камертон"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "904d2c2e22e1afd6771bdb5be1a40188546c71fbdfb16e4207e376594fdabcc4",
+    "text": "Удары <keyword0>оглушением</keyword0> также добавляют своё накопление <keyword1>оглушения</keyword1> другим врагам с накоплением <keyword2>оглушения</keyword2>"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "2363ce43e473639c796e44756c4c81f1a6c8a09f07ae15104af006bb4289a5dd",
+    "text": "Ткацкий гребень"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "d4d311a25f24e4ab6644322755e649c4e78bc2a0c93b3a903b83c2bcd644f11d",
+    "text": "Когда <keyword0>блок</keyword0> союзника пробит, <keyword1>блок</keyword1> других союзников поглощает оставшийся урон"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2039,6 +2087,18 @@
     "sourceHash": "830c1f4f6129ae8b5fe7a586dde91db1998c80ea87c6a7c72e5439232342eeb7",
     "text": "Иммунитет одного союзника к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1> защищает всех союзников"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "6943bb52947583bef94b03c8e1629c1d3884f9236fb72f32517f3f528db5f0df",
+    "text": "Морозное веретено"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "4464ac38da894b2403f7e357529da7bedb873d2379e666fa01f3a44f072d251a",
+    "text": "Урон от <keyword0>кровотечения</keyword0> добавляет накопление <keyword1>заморозки</keyword1> в размере половины урона"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2146,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "14f1aae64a1c3b6c104aa44212cc1228d1a8e6b599d3a89b0462501e8f7765b8",
     "text": "Когда союзник <keyword0>уклоняется</keyword0>, остальные союзники тоже <keyword1>уклоняются</keyword1> от той же атаки"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "a7d34066005d9c58ebaece3a94ed79d8f794dbe41d9642532edc717abbc2af42",
+    "text": "Двойные солнечные часы"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "bfa35100ee6e6a1832ce6a0bef2aebdbcfc9e09e3551eeda4877984b13895f52",
+    "text": "Атаки <keyword0>света</keyword0> против <keyword1>ослеплённых</keyword1> врагов срабатывают дважды"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2303,6 +2375,18 @@
     "sourceHash": "cb66ca8066b1cadc1975d0984921cf2261ae59406beac3f165f68324f193869d",
     "text": "<keyword0>Физические</keyword0> попадания накладывают {{value0}} <keyword1>кровотечения</keyword1> на врагов с <keyword2>бронёй</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "f1a893b7bec3b5d3d6fb2c40764a2fe467011ad01383ac4229c314fe9a467f3f",
+    "text": "Звёздный крюк"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "ab94e448921b871c45e32343a9a2e772b2ab94b2247173dfc5cba0afe129f4e3",
+    "text": "<keyword0>Рассеивание</keyword0> эффекта с врага делает вашу следующую атаку <keyword1>критическим ударом</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2338,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "bf2189031c768abafd044fbc42d6a126bed8539f22b555db508f5d46bcf324e8",
     "text": "Ваши <keyword0>физические</keyword0> попадания и попадания <keyword1>оглушением</keyword1> снимают {{value0}} вражеской <keyword2>брони</keyword2> до нанесения урона"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "d1501234e8f2af5a2a9c37513fc4ad15ae6c2c8b2ff27efd64ee032d00139696",
+    "text": "Кувшин солнечного ключа"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "b1504e41c1d70c63db0843e4d0422796aae32794df1b222e87fc461ca04166e3",
+    "text": "<keyword0>Исцеление</keyword0> союзника добавляет восстановленное <keyword1>здоровье</keyword1> к вашей следующей атаке <keyword2>света</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2435,6 +2531,18 @@
     "sourceHash": "02ce305e38fdff4b7bc944f9eaea9b03392326416f1d0b7d9bbe85407da9ced0",
     "text": "<keyword0>Шипы</keyword0> не могут угаснуть ниже {{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "6def2a4c7af8fd811dc2190979a0348af55f51f429b2c2564f46d5c8b199af06",
+    "text": "Грибная хлебница"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "89c7ec04f0b3e149bd4113398a5a70e3fd333fd66d484cc0c458becc97c22804",
+    "text": "Добавьте Дорожный хлеб в колоду; союзники, получившие <keyword0>еду</keyword0>, сохраняют свой <keyword1>блок</keyword1> в следующем ходу"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2482,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "567d08dc8378875a60a83f46ea75bb354064148693e8f8332b60a12b56158c24",
     "text": "Союзники могут <keyword0>уклоняться</keyword0> от вражеского <keyword1>рассеивания</keyword1>"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "8d172dd1c7543aba29805752d4f9d8c839bc92411256e39366f51a032e4f3b2a",
+    "text": "Рудная мерная цепь"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "42a4272e211a28cb72561a72c03044a6a4fc1308e914c571f824da6a486b2847",
+    "text": "Урон, уменьшенный вражеской <keyword0>бронёй</keyword0>, наносится другому врагу"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,

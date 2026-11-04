@@ -103,6 +103,7 @@ export function executePrimary(context: PrimaryContext) {
     criticalBonus,
     oasisLeech,
     toothpickPurge,
+    sunwellBonus,
     additionalTarget,
     name,
     stats,
@@ -285,7 +286,7 @@ export function executePrimary(context: PrimaryContext) {
             state,
             source,
             victim,
-            (value + (reflected ? 0 : pendulumBonus(state, actor))) *
+            (value + (reflected ? 0 : sunwellBonus + pendulumBonus(state, actor))) *
               (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
             damageType,
             events,

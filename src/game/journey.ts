@@ -98,6 +98,8 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     earnedGold: 0,
     freeBurnUsed: false,
     meteoriteUsed: false,
+    sunwellBonus: 0,
+    starhookReady: false,
     cardsPlayedThisTurn: 0,
     turn: 1,
     mana,
