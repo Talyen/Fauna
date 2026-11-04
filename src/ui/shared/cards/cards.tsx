@@ -2,6 +2,7 @@ import { cardRulePresentation } from "../localization/card-rule-id";
 import { useRuleText } from "../localization/rule-catalog";
 import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
+import { ShineBorder } from "../effects/treatments";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl, minionArtwork } from "../assets";
@@ -185,6 +186,14 @@ export function CreatureCard({
               <CombatStatus combat={combat} sharedDodge={sharedDodge} sharedImmunity={sharedImmunity} />
             ) : null}
           </div>
+          {battlePortrait && health !== 0 && combat?.grace ? (
+            <ShineBorder
+              className="battle-urgent-frame"
+              colors={effectPalette([], "death").border}
+              duration={4}
+              width={3}
+            />
+          ) : null}
         </div>
       </div>
     </div>
