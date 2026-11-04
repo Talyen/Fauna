@@ -1,6 +1,8 @@
 import { useMessages } from "./localization/message-context";
 import { Button } from "../../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
+import { useRef } from "react";
+import { returnFocus } from "./navigation/focus";
 export function Confirmation({
   open,
   title,
@@ -17,6 +19,7 @@ export function Confirmation({
   onClose: () => void;
 }) {
   const i18n = useMessages();
+  const opener = useRef<HTMLElement | null>(null);
   return (
     <Dialog
       open={open}
@@ -24,7 +27,16 @@ export function Confirmation({
         if (!value) onClose();
       }}
     >
-      <DialogContent>
+      <DialogContent
+        data-native-escape
+        onOpenAutoFocus={() => {
+          opener.current = document.activeElement as HTMLElement | null;
+        }}
+        onCloseAutoFocus={(event) => {
+          event.preventDefault();
+          returnFocus(opener.current);
+        }}
+      >
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
         <div className="confirm-actions">

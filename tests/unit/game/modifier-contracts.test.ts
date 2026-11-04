@@ -7,7 +7,7 @@ import { uncertainBattle } from "../../support/uncertainty";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import { modifierImplementations, modifierQueries } from "../../../src/game/modifier-bindings";
 import { boonRule } from "../../../src/game/rules/boons";
-import { recordedTraceDigest as digest } from "../../support/modifier-trace";
+import { recordedTraceDigest as digest, recordedTalents } from "../../support/modifier-trace";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { BOONS, TALENTS, SPECIES, type SpeciesId, species } from "../../../src/game/content";
@@ -53,31 +53,14 @@ const recordedSpecies = SPECIES.filter(
 );
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));
-// New Talents have direct outcome assertions in distinct-talents.test.ts
-const NEW_TALENT_IDS = new Set([
-  "dodge.veil-of-mist",
-  "freeze.permafrost",
-  "light.daybreak",
-  "stun.static-charge",
-  "mana.astral-veil",
-  "mana.arcane-discharge",
-  "physical.savagery",
-  "physical.juggernaut",
-  "burn.heat-haze",
-  "burn.hearthfire",
-  "burn.combustion",
-  "water.frigid-current",
-  "water.storm-surge",
-  "water.spring-tide",
-  "water.living-water",
-]);
-const recordedTalents = TALENTS.filter((talent) => !NEW_TALENT_IDS.has(talent.id));
 // The reviewed October 26 baseline includes the Armor wear rule and current Auto-play scoring.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 // Neradora's six traces were updated when Undertow Knot changed from Water Thorns to Block and Cleanse.
 // The Talent digest includes descriptions that identify the extra status damage packets.
 // The passive digest includes Bloomquail's clarification that only gained Block is converted.
 // The turn-start draw change updates Perfect Timing, Memento and Orifable traces; see task evidence.
+// The catalog digest includes the intentional 1–2–3–4 talent tiers; combat traces remain independent.
+// Talent traces changed only when those tiers changed the scenario's prerequisite selection.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
     talents: digest(recordedTalents),

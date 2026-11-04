@@ -5,6 +5,30 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
+it("leaves Escape to an open native dialog without blurring its focused control", () => {
+  const dialog = document.createElement("div");
+  dialog.dataset.nativeEscape = "";
+  dialog.dataset.state = "open";
+  dialog.innerHTML = "<button>Cancel</button>";
+  document.body.append(dialog);
+  const actions = vi.fn();
+  const close = connectInput(actions, () => {});
+  const button = dialog.querySelector("button")!;
+  try {
+    button.focus();
+    const event = new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true });
+    button.dispatchEvent(event);
+    expect(actions).not.toHaveBeenCalled();
+    expect(event.defaultPrevented).toBe(false);
+    expect(document.activeElement).toBe(button);
+    dialog.dataset.state = "closed";
+    button.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    expect(actions).toHaveBeenCalledWith("back");
+  } finally {
+    close();
+    dialog.remove();
+  }
+});
 it("uses keyboard events for Steam Input and ignores native controller polling", () => {
   const gamepads = vi.fn();
   vi.stubGlobal("navigator", { getGamepads: gamepads });

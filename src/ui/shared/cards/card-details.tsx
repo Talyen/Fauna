@@ -4,7 +4,7 @@ import { ShineText } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
 import { creaturePassive } from "../../../game/progression";
 import { KeywordText } from "../keyword-text";
-import { species, type SpeciesId } from "../../../game/content";
+import { species, type CardDefinition, type SpeciesId } from "../../../game/content";
 import { cardCost } from "../../../game/ability-rules";
 import type { Creature, Card, GameState } from "../../../game/types";
 import { CardRules } from "../combat/combat-values";
@@ -17,10 +17,12 @@ export function ActionDetails({
   modifiers,
   compact = false,
   valueOverride,
+  definitionOverride,
   powerOverride = 1,
 }: {
   card: Card;
   valueOverride?: number;
+  definitionOverride?: CardDefinition;
   powerOverride?: number;
   compact?: boolean;
   ownerName: string;
@@ -28,7 +30,7 @@ export function ActionDetails({
   modifiers?: GameState;
 }) {
   const i18n = useMessages();
-  const { def, value } = actionDisplay(card, actor, modifiers);
+  const { def, value } = actionDisplay(card, actor, modifiers, definitionOverride);
   return (
     <div className="card-details">
       <strong>

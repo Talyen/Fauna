@@ -17,7 +17,7 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Options", exact: true }).click();
-  await page.getByRole("tab", { name: "Battle", exact: true }).click();
+  await page.getByRole("tab", { name: "Gameplay", exact: true }).click();
   const setting = page.getByRole("switch", { name: "Auto-end turn", exact: true });
   await expect(setting).toBeChecked();
   await setting.focus();

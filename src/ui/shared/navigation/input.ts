@@ -140,6 +140,8 @@ export function connectInput(
     }
     const target = event.target instanceof HTMLElement ? event.target : null;
     if (target?.matches("input, textarea, select") || target?.isContentEditable) return;
+    // Local confirmations own dismissal and focus return without navigating their page.
+    if (event.key === "Escape" && target?.closest('[data-native-escape][data-state="open"]')) return;
     if (
       target?.closest("[data-radix-select-content]") ||
       (target?.getAttribute("role") === "combobox" && target.getAttribute("aria-expanded") === "true")

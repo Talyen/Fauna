@@ -377,7 +377,6 @@ export function createSession(
       resetting = true;
       clearTimeout(retryTimer);
       retryTimer = undefined;
-      publish({ saveStatus: "saving" });
       writes = writes
         .then(() => platform.saves.clear!())
         .then(() => {
@@ -390,6 +389,7 @@ export function createSession(
           resetting = false;
           saveFailed(error);
         });
+      publish({ saveStatus: "saving" });
     },
     retrySave() {
       const view = store.getState();

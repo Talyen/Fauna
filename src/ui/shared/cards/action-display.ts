@@ -1,14 +1,18 @@
 import { projectPlay } from "../../../game/preview";
 import { chosenRecipients } from "../../../game/play-queries";
 import { actionValue, physicalBonus } from "../../../game/ability-rules";
-import { definition } from "../../../game/content";
+import { definition, type CardDefinition } from "../../../game/content";
 import type { Card, Creature, GameState } from "../../../game/types";
 
 /** Resolve the same rules for artwork labels, tooltips, and target selection. */
-export function actionDisplay(card: Card, actor: Creature | undefined, modifiers: GameState | undefined) {
-  const def = definition(card.definitionId);
+export function actionDisplay(
+  card: Card,
+  actor: Creature | undefined,
+  modifiers: GameState | undefined,
+  def: CardDefinition = definition(card.definitionId),
+) {
   const value = Math.round(
-    actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
+    actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers, def) +
       (modifiers && actor && def.effect === "attack" && def.damageType === "physical"
         ? physicalBonus(actor, modifiers)
         : 0),

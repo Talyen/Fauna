@@ -17,6 +17,105 @@ import { run, teamRun } from "../../support/game";
 
 screenTestEnvironment({ visible: true });
 
+it.each([
+  { kind: "emberback" as const, ability: "Ember Charge", rule: "Deal 5 Physical damage" },
+  { kind: "almanelle" as const, ability: "Autumn Insight", rule: "Restore 4 Health to a living ally" },
+])(
+  "keeps $kind enemy rules and scaling through thumbnail, pinned card and return",
+  async ({ kind, ability, rule }) => {
+    const game = teamRun(42, ["mossguard", "emberback", "prismram"], ["emberback", "almanelle", "neradora"]);
+    localStorage.setItem("fauna.save.v1", encodeSave(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const committed = session.store.getState().game;
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      const opener = within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
+        name: species(kind).name,
+        exact: true,
+      });
+      await user.click(opener);
+      const thumbnail = within(screen.getByRole("dialog", { name: species(kind).name })).getByRole("button", {
+        name: new RegExp(`^${ability},`),
+      });
+      const label = thumbnail.getAttribute("aria-label");
+      expect(label).toContain(rule);
+      expect(label).not.toMatch(/discard/i);
+      await user.hover(thumbnail);
+      expect((await screen.findByRole("tooltip")).textContent).toContain(rule);
+      await user.click(thumbnail);
+      const pinned = screen.getByRole("button", { name: new RegExp(`^${ability},`) });
+      expect(pinned.getAttribute("aria-label")).toBe(label);
+      await user.hover(pinned);
+      expect((await screen.findByRole("tooltip")).textContent).toContain(rule);
+      await user.keyboard("{Escape}");
+      expect(screen.getByRole("dialog", { name: species(kind).name })).toBeTruthy();
+      await user.keyboard("{Escape}");
+      expect(screen.queryByRole("dialog")).toBeNull();
+      expect(document.activeElement).toBe(opener);
+      expect(session.store.getState().game).toBe(committed);
+      expect(localStorage.getItem("fauna.save.v1")).toBe(encodeSave(game));
+    } finally {
+      await session.dispose();
+    }
+  },
+);
+
+it("omits unsupported enemy resource cards and player-only extras without changing Collection kits", async () => {
+  const game = teamRun(42, ["mossguard", "emberback", "prismram"], ["neradora", "emberback", "almanelle"]);
+  localStorage.setItem("fauna.save.v1", encodeSave(game));
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  const user = userEvent.setup({ pointerEventsCheck: 0 });
+  render(<App session={session} />);
+  try {
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(
+      within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
+        name: "Neradora",
+        exact: true,
+      }),
+    );
+    const dialog = screen.getByRole("dialog", { name: "Neradora", exact: true });
+    expect(within(dialog).queryByRole("button", { name: /^Tide Cup,/ })).toBeNull();
+    expect(dialog.querySelectorAll(".action-card")).toHaveLength(2);
+    await user.keyboard("{Escape}");
+    await user.click(
+      within(screen.getByRole("region", { name: "Enemy row" })).getByRole("button", {
+        name: "Neradora",
+        exact: true,
+      }),
+    );
+    const card = within(screen.getByRole("dialog", { name: "Neradora" })).getAllByRole("button", {
+      name: /mana,/,
+    })[0]!;
+    await user.click(card);
+    await user.keyboard("{ArrowRight}");
+    expect(
+      screen.getByRole("dialog").querySelector(".action-card")?.getAttribute("aria-label"),
+    ).not.toContain("Tide Cup");
+    await user.keyboard("{Escape}{Escape}");
+    cleanup();
+    render(
+      <TooltipProvider>
+        <Inspector
+          item={{ species: "neradora", speciesKit: true }}
+          session={session}
+          controls={{ current: null }}
+          onClose={() => {}}
+        />
+      </TooltipProvider>,
+    );
+    expect(screen.getByRole("button", { name: /^Tide Cup,/ }).getAttribute("aria-label")).toContain(
+      "Draw 2 cards",
+    );
+  } finally {
+    await session.dispose();
+  }
+});
+
 describe("artwork-first inspection", () => {
   it("keeps named Legendary tooltips to the name and passive without rarity or kit labels", () => {
     const creature = species("oathara");
@@ -199,7 +298,7 @@ describe("artwork-first inspection", () => {
     }
   });
 
-  it("keeps modified hand rules and only the enemy passive on hover without battle inspection", async () => {
+  it("keeps modified hand rules and enemy kit inspection read-only", async () => {
     const fixture = produce(teamRun(7, ["emberback", "reedstag", "prismram"]), (game) => {
       game.cards[0]!.level = 1;
       game.keywordXP.physical = 20;
@@ -230,6 +329,10 @@ describe("artwork-first inspection", () => {
       for (const row of [".enemy-row", ".player-row"]) {
         const creature = document.querySelector<HTMLButtonElement>(`${row} .creature-card`)!;
         await user.click(creature);
+        if (row === ".enemy-row") {
+          expect(screen.getByRole("dialog", { name: "Emberback", exact: true })).toBeTruthy();
+          await user.keyboard("{Escape}");
+        }
         await user.pointer({ target: creature, keys: "[MouseRight]" });
         await user.keyboard("i");
         expect(screen.queryByRole("dialog")).toBeNull();

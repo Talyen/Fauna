@@ -6,8 +6,9 @@ import { expect, it } from "vitest";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { KEYWORDS } from "../../../src/game/progression";
-import { BOONS, TALENTS, definition, species, type SpeciesId } from "../../../src/game/content";
+import { BOONS, definition, species, type SpeciesId } from "../../../src/game/content";
 import { NEW_BOON_EFFECTS } from "../../support/boons";
+import { recordedTalents } from "../../support/modifier-trace";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
 import { cardTargeting, cardText, enemyCard, enemyCanUse } from "../../../src/game/card-rules";
 import { cardKeywords } from "../../../src/game/progression";
@@ -91,9 +92,9 @@ it.each(["heal", "status", "cleanse", "turn"] as const)(
 
 it.each(cases)("preserves committed command traces for $name", ({ seed, team }) => {
   let state = produce(teamRun(seed, team), (draft) => {
-    draft.talents = TALENTS.map((talent) => talent.id);
+    draft.talents = recordedTalents.map((talent) => talent.id);
     draft.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 1_000_000]));
-    // Preserve the original combined oracle; new Boons have direct regressions.
+    // Preserve the recorded modifier set; current automatic turn completion remains part of the trace.
     draft.boons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id)).map((boon) => boon.id);
     for (const unit of draft.team) {
       unit.health = Math.max(2, Math.round(unit.health / 2));
@@ -154,6 +155,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
             if (key === "puzzleProgress" && Array.isArray(value) && value.length === 0) return undefined;
             if (key === "encoreProgress" && value === 0) return undefined;
             if (key === "sunwellBonus" && value === 0) return undefined;
+            if (key === "draftStarted" && value === false) return undefined;
             // These inert saved fields and localization metadata postdate this combat oracle.
             if (
               [

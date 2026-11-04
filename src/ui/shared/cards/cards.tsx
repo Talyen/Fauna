@@ -14,7 +14,7 @@ import { actionDisplay, offensiveCardValue } from "./action-display";
 import { cardRuleLines } from "../keyword-text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
 import { cardCost } from "../../../game/ability-rules";
-import { species } from "../../../game/content";
+import { species, type CardDefinition } from "../../../game/content";
 import type { SpeciesId } from "../../../game/content";
 import type { Card, Creature, Enemy, GameState } from "../../../game/types";
 type CreatureProps = {
@@ -304,10 +304,12 @@ export function ActionCard({
   tooltips = true,
   onDenied,
   valueOverride,
+  definitionOverride,
   powerOverride = 1,
 }: {
   card: Card;
   valueOverride?: number;
+  definitionOverride?: CardDefinition;
   powerOverride?: number;
   selected?: boolean;
   disabled?: boolean;
@@ -323,7 +325,7 @@ export function ActionCard({
 }) {
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
-  const { def, value } = actionDisplay(card, actor, modifiers);
+  const { def, value } = actionDisplay(card, actor, modifiers, definitionOverride);
   const rule = cardRulePresentation(
     def,
     card.level,
@@ -395,6 +397,7 @@ export function ActionCard({
           actor={actor}
           modifiers={modifiers}
           valueOverride={valueOverride}
+          definitionOverride={definitionOverride}
           powerOverride={powerOverride}
         />
       </TooltipContent>

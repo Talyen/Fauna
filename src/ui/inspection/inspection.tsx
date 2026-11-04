@@ -2,7 +2,7 @@ import { useMessages } from "../shared/localization/message-context";
 import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
 import { cardActor } from "../../game/card-actors";
-import { cardText } from "../../game/card-rules";
+import { cardText, enemyCanUse, enemyCard } from "../../game/card-rules";
 import { ShineText } from "../shared/effects/treatments";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
@@ -51,16 +51,28 @@ export function Inspector({
   const cards: Card[] =
     kind === null && rootCard
       ? [rootCard]
-      : (kind ? speciesCards(kind) : []).map((def) =>
-          rootCard?.definitionId === def.id
-            ? rootCard
-            : game.cards.find((card) => card.ownerId === actor?.id && card.definitionId === def.id) || {
-                id: `inspect-${def.id}`,
-                definitionId: def.id,
-                ownerId: actor?.id ?? kind,
-                level: 0,
-              },
-        );
+      : (kind ? speciesCards(kind) : [])
+          .filter((def) => !enemy || enemyCanUse(def))
+          .map((def) =>
+            rootCard?.definitionId === def.id
+              ? rootCard
+              : game.cards.find((card) => card.ownerId === actor?.id && card.definitionId === def.id) || {
+                  id: `inspect-${def.id}`,
+                  definitionId: def.id,
+                  ownerId: actor?.id ?? kind,
+                  level: 0,
+                },
+          );
+  const actionProps = (action: Card) => {
+    const def = enemy ? enemyCard(definition(action.definitionId)) : undefined;
+    return {
+      actor,
+      modifiers,
+      definitionOverride: def,
+      powerOverride: enemy?.power,
+      valueOverride: enemy && def ? enemyAbilityValue(enemy, def) : undefined,
+    };
+  };
   const [selected, setSelected] = useState<number | null>(() =>
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
   );
@@ -138,7 +150,12 @@ export function Inspector({
             priority={1}
             palette={effectPalette(
               card
-                ? visualKeywords(cardText(definition(card.definitionId), card.level))
+                ? visualKeywords(
+                    cardText(
+                      actionProps(card).definitionOverride ?? definition(card.definitionId),
+                      card.level,
+                    ),
+                  )
                 : kind === null
                   ? []
                   : creatureKeywords(kind, game),
@@ -167,8 +184,7 @@ export function Inspector({
                     ? i18n.content(`content.species.${creature.id}.name`, creature.name)
                     : i18n.content("content.keyword.food.label", "Food")
                 }
-                actor={actor}
-                modifiers={modifiers}
+                {...actionProps(card)}
                 onClick={() => {}}
               />
             </>
@@ -180,10 +196,15 @@ export function Inspector({
                 </DialogTitle>
               </header>
               <DialogDescription className="sr-only">
-                {i18n.message(
-                  "inspection.creatureHint",
-                  "Three abilities and current passive rank. Hover or focus abilities for their details.",
-                )}
+                {enemy
+                  ? i18n.message(
+                      "inspection.actionHint",
+                      "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+                    )
+                  : i18n.message(
+                      "inspection.creatureHint",
+                      "Three abilities and current passive rank. Hover or focus abilities for their details.",
+                    )}
               </DialogDescription>
               <section
                 className="inspection-abilities"
@@ -199,12 +220,7 @@ export function Inspector({
                           ? i18n.content(`content.species.${creature.id}.name`, creature.name)
                           : i18n.content("content.keyword.food.label", "Food")
                       }
-                      actor={actor}
-                      powerOverride={enemy?.power}
-                      valueOverride={
-                        enemy ? enemyAbilityValue(enemy, definition(action.definitionId)) : undefined
-                      }
-                      modifiers={modifiers}
+                      {...actionProps(action)}
                       onClick={() => setSelected(index)}
                       onInspect={() => setSelected(index)}
                     />

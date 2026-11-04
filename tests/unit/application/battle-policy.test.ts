@@ -1,4 +1,5 @@
 import { setBattleCards } from "../../support/cards";
+import { recordedTalents } from "../../support/modifier-trace";
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -378,26 +379,6 @@ it("covers each creature and ranking condition in the recorded baseline", () => 
   );
 });
 
-const recordedRankingTalents = TALENTS.filter(
-  (talent) =>
-    ![
-      "dodge.veil-of-mist",
-      "freeze.permafrost",
-      "light.daybreak",
-      "stun.static-charge",
-      "mana.astral-veil",
-      "mana.arcane-discharge",
-      "physical.savagery",
-      "physical.juggernaut",
-      "burn.heat-haze",
-      "burn.hearthfire",
-      "burn.combustion",
-      "water.frigid-current",
-      "water.storm-surge",
-      "water.spring-tide",
-      "water.living-water",
-    ].includes(talent.id),
-);
 it.each(recordedRankingSpecies)("preserves visible rankings and legal choices for $id", ({ id }) => {
   for (const condition of rankingConditions) {
     const state = produce(teamRun(42, [id]), (game) => {
@@ -407,7 +388,7 @@ it.each(recordedRankingSpecies)("preserves visible rankings and legal choices fo
       battle.buffer = [];
       battle.discard = [];
       if (condition === "talented") {
-        game.talents = recordedRankingTalents.map((talent) => talent.id);
+        game.talents = recordedTalents.map((talent) => talent.id);
         game.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 1_000_000]));
         game.boons = BOONS.map((boon) => boon.id);
       }

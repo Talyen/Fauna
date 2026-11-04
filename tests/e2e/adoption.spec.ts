@@ -1,7 +1,7 @@
 import { expectControlColors } from "./support/control-colors";
 import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
-import { expect } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { reloadHome, test, seed, state } from "./support/session";
 import { merchantDestination, run } from "../support/game";
 import { BOONS } from "../../src/game/content";
@@ -145,22 +145,34 @@ for (const [group, layouts] of [
     expect(saved.support).toBeNull();
   });
 
-test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
+async function setSize(page: Page, name: string, value: number) {
+  const slider = page.getByRole("slider", { name, exact: true });
+  const minimum = Number(await slider.getAttribute("aria-valuemin"));
+  await slider.focus();
+  await page.keyboard.press("Home");
+  for (let current = minimum; current < value; current += 5) await page.keyboard.press("ArrowRight");
+  await expect(slider).toHaveAttribute("aria-valuenow", String(value));
+  await settleScreen(page);
+}
+
+test("Options panel switches preserve screen, tab and icon geometry", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page, run());
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.evaluate(() => document.fonts.ready);
-  const dialog = page.getByRole("main", { name: "Settings", exact: true });
-  const tabs = ["Display", "Sound", "Battle"].map((name) => dialog.getByRole("tab", { name, exact: true }));
+  const dialog = page.getByRole("main", { name: "Options", exact: true });
+  const tabs = ["Display", "Sound", "Gameplay", "Other"].map((name) =>
+    dialog.getByRole("tab", { name, exact: true }),
+  );
   const geometry = async () =>
     Promise.all([
       dialog.boundingBox(),
       ...tabs.map((tab) => tab.boundingBox()),
       ...tabs.map((tab) => tab.locator("svg").boundingBox()),
     ]);
-  for (const scale of ["100%", "125%", "75%"] as const) {
+  for (const scale of [100, 120, 80]) {
     await tabs[0]!.click();
-    await dialog.getByRole("radio", { name: scale, exact: true }).click();
+    await setSize(page, "Game Size", scale);
     const before = await geometry();
     for (const tab of [...tabs.slice(1), tabs[0]!]) {
       await tab.click();
@@ -187,7 +199,7 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
   const fontSize = await tooltip.evaluate((node) => parseFloat(getComputedStyle(node).fontSize));
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await page.getByRole("button", { name: "Options", exact: true }).click();
-  await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
+  await setSize(page, "Tooltip size", 125);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await settleScreen(page);
@@ -199,6 +211,12 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
   );
   await reloadHome(page);
   await page.getByRole("button", { name: "Options", exact: true }).click();
-  await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
-  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
+  await expect(page.getByRole("slider", { name: "Tooltip size", exact: true })).toHaveAttribute(
+    "aria-valuenow",
+    "125",
+  );
+  await expect(page.getByRole("slider", { name: "Game Size", exact: true })).toHaveAttribute(
+    "aria-valuenow",
+    "120",
+  );
 });

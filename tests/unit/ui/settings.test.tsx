@@ -1,12 +1,14 @@
 // @vitest-environment jsdom
 import userEvent from "@testing-library/user-event";
 import { expect, it, vi } from "vitest";
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { act, render, renderHook, screen, waitFor } from "@testing-library/react";
 import { screenTestEnvironment } from "../../support/ui";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { useDevicePreferences } from "../../../src/ui/settings/preferences";
+import { encodeSave } from "../../../src/game/save";
+import { run } from "../../support/game";
 screenTestEnvironment({ visible: true });
 it("retains independent changes and normalizes sizing to the Alchemy ranges", () => {
   const hook = renderHook(useDevicePreferences);
@@ -76,4 +78,50 @@ it("applies and resets device settings without changing progression", async () =
   await user.click(screen.getByRole("button", { name: "Cancel" }));
   expect(session.store.getState().game).toBe(game);
   await session.dispose();
+});
+
+it("Escape cancels Clear Save Data without leaving Options and restores the opener", async () => {
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  const user = userEvent.setup({ pointerEventsCheck: 0 });
+  render(<App session={session} />);
+  try {
+    await user.click(screen.getByRole("button", { name: "Options", exact: true }));
+    await user.click(screen.getByRole("tab", { name: "Other", exact: true }));
+    const opener = screen.getByRole("button", { name: "Clear Save Data", exact: true });
+    const game = session.store.getState().game;
+    await user.click(opener);
+    expect(screen.getByRole("dialog", { name: "Clear Save Data" })).toBeTruthy();
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.getByRole("tab", { name: "Other", exact: true }).getAttribute("data-state")).toBe("active");
+    await waitFor(() => expect(document.activeElement).toBe(opener));
+    expect(session.store.getState().game).toBe(game);
+  } finally {
+    await session.dispose();
+  }
+});
+
+it("Escape cancels Reset all talents without leaving the tree or refunding points", async () => {
+  const game = structuredClone(run());
+  game.keywordXP.physical = 100;
+  game.talents = ["physical.shield-slam"];
+  localStorage.setItem("fauna.save.v1", encodeSave(game));
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  const user = userEvent.setup({ pointerEventsCheck: 0 });
+  render(<App session={session} />);
+  try {
+    await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Physical talents", exact: true }));
+    const opener = screen.getByRole("button", { name: "Reset all talents", exact: true });
+    await user.click(opener);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.getByRole("region", { name: "Physical talents", exact: true })).toBeTruthy();
+    await waitFor(() => expect(document.activeElement).toBe(opener));
+    expect(session.store.getState().game.talents).toEqual(["physical.shield-slam"]);
+  } finally {
+    await session.dispose();
+  }
 });

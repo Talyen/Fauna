@@ -69,9 +69,9 @@ Outside battle, use one centered shadcn Dialog panel over the shared dimmed back
 
 [Inspection CSS](../../src/ui/inspection/inspection.css) fits the ability row to the panel width and remaining viewport height, capped by the 184px `--inspection-ability-max-width` per portrait. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
-Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded keyword definitions. Inspection has no Recruit/Choose action.
+Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the available actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded keyword definitions. Inspection has no Recruit/Choose action.
 
-[Back and focus return](#back-and-focus-return) owns inspection nesting and dismissal; the accessible X is named Close inspection. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
+[Back and focus return](#back-and-focus-return) owns inspection nesting and dismissal; the accessible X is named Close inspection. Piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Activating an idle enemy opens read-only inspection of its supported enemy abilities, using the same adaptations and room scaling as enemy turns in both thumbnails and pinned cards. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full player species kits belong in Collection.
 
 ## Collection
 

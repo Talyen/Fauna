@@ -47,6 +47,39 @@ it("delivers reentrant session commands to every subscriber in commit order", as
   }
 });
 
+it("drains an admitted progress reset when a saving subscriber disposes the session", async () => {
+  const clearing = deferred();
+  const clear = vi.fn(() => clearing.promise);
+  const write = vi.fn(async () => {});
+  const session = createSession({
+    desktop: false,
+    saves: { readCandidates: async () => [], write, clear },
+  });
+  await session.load();
+  let disposal: Promise<void> | undefined;
+  session.store.subscribe((view) => {
+    if (view.saveStatus === "saving" && !view.closing) disposal = session.dispose();
+  });
+  try {
+    session.clearProgress();
+    let finished = false;
+    void disposal!.then(() => {
+      finished = true;
+    });
+    for (let turn = 0; turn < 10; turn++) await Promise.resolve();
+    expect(clear).toHaveBeenCalledOnce();
+    expect(finished).toBe(false);
+    expect(session.command({ type: "newRun", seed: 42 })).toBe(false);
+    clearing.resolve();
+    await disposal;
+    expect(finished).toBe(true);
+    expect(write).not.toHaveBeenCalled();
+  } finally {
+    clearing.resolve();
+    await session.dispose();
+  }
+});
+
 it("shares Cloud startup ownership across concurrent and later callers", async () => {
   const f = cloudFixture();
   const { promise: gate, resolve: release } = deferred();
