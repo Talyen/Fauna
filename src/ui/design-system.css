@@ -20,13 +20,12 @@
 .game-button.control-primary {
   color: var(--primary-foreground);
 }
-.game-button:is(.control-primary, .control-outline, .control-destructive):not(:disabled):not(
+.game-button:is(.control-primary, .control-outline, .control-ghost, .control-destructive):not(:disabled):not(
     [aria-disabled="true"]
   ):is(:hover, :focus) {
   scale: 1;
 }
 .game-button.control-primary:not(:disabled):not([aria-disabled="true"]):hover {
-  background: color-mix(in srgb, var(--primary) 90%, var(--background));
   animation: primary-bloom 300ms ease-out forwards;
 }
 .game-button.control-destructive:not(:disabled):not([aria-disabled="true"]):hover {
@@ -51,23 +50,33 @@
 .gold-icon {
   color: var(--primary);
 }
-.game-button.control-outline {
-  border: 1px solid var(--border);
-  background: var(--control-fill);
+.game-button:is(.control-outline, .control-ghost) {
+  background: var(--background);
   color: var(--foreground);
 }
-.game-button.control-outline:not(:disabled):not([aria-disabled="true"]):hover {
-  background: var(--control-hover);
-  border-color: var(--primary);
+.game-button.control-outline {
+  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--background));
+  color: color-mix(in srgb, var(--foreground) 80%, var(--background));
 }
-.game-button.control-outline.end-journey {
+.game-button.control-ghost {
+  border: 0;
+}
+.game-button:is(.control-outline, .control-ghost):not(:disabled):not([aria-disabled="true"]):hover {
+  background: var(--muted);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.game-button:is(.control-outline, .control-ghost).end-journey {
   color: var(--destructive-text);
+}
+.game-button:is(.control-outline, .control-ghost):not(:disabled):not([aria-disabled="true"]):active {
+  background: var(--accent);
 }
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
   scale: var(--pressed-scale);
   border-color: var(--primary);
 }
-.game-button:is(.control-primary, .control-outline, .control-destructive):is(
+.game-button:is(.control-primary, .control-outline, .control-ghost, .control-destructive):is(
     :disabled,
     [aria-disabled="true"]
   ) {
@@ -91,8 +100,10 @@
   position: relative;
   isolation: isolate;
 }
-.game-button.control-outline.compact-icon-control,
-.game-button.control-outline.compact-icon-control:not(:disabled):not([aria-disabled="true"]):hover {
+.game-button:is(.control-outline, .control-ghost).compact-icon-control,
+.game-button:is(.control-outline, .control-ghost).compact-icon-control:not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover {
   border: 0;
   background: transparent;
 }
@@ -104,16 +115,15 @@
   margin: auto;
   width: var(--compact-control-size);
   height: var(--compact-control-size);
-  border: 1px solid var(--border);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--control-fill);
+  background: var(--background);
   z-index: -1;
   pointer-events: none;
   transition: inherit;
 }
 .game-button.compact-icon-control:not(:disabled):not([aria-disabled="true"]):hover::before {
-  border-color: var(--primary);
-  background: var(--control-hover);
+  background: var(--muted);
 }
 .game-button.compact-icon-control:is(:disabled, [aria-disabled="true"])::before {
   background: var(--muted);
@@ -607,11 +617,12 @@ h3 {
 .popover-content[data-state="closed"] {
   pointer-events: none;
 }
-:root[data-focus="visible"] .game-button.control-outline:not([aria-disabled="true"]):focus {
-  background: var(--control-fill);
+:root[data-focus="visible"]
+  .game-button:is(.control-outline, .control-ghost):not([aria-disabled="true"]):focus {
+  background: var(--background);
   border-color: transparent;
 }
-:root[data-focus="visible"] .game-button.control-outline.compact-icon-control:focus {
+:root[data-focus="visible"] .game-button:is(.control-outline, .control-ghost).compact-icon-control:focus {
   background: transparent;
 }
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus:active {
