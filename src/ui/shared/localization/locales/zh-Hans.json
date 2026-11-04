@@ -9503,12 +9503,6 @@
     "sourceHash": "bb98bbe4c3a41e6c1524404ba203522809d94120628c02a7fb09871708188e8e",
     "text": "主人攻击时，对所有敌人造成1点光伤害"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "76517c7fb30762c6e5760dcda282cb6d1f88dabd3ce8c623a9fb8ef3da49373e",
-    "text": "生命 {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
