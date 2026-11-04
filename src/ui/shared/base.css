@@ -33,7 +33,11 @@
 
 html {
   cursor:
-    url("./assets/pointer-c-shaded.webp") 0 0,
+    image-set(
+        url("./assets/pointer-c-shaded.png")
+          calc(max(2.4615384615384617, var(--artwork-pixel-ratio, 2)) * 1dppx)
+      )
+      0 0,
     auto;
 }
 * {

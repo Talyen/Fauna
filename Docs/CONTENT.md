@@ -107,6 +107,8 @@ The generated runtime lookup retains actual prepared dimensions. [ArtCard](../sr
 
 The 18 older Boon portraits and battle pile/card-back selections now use their full-resolution Google Drive originals, preserved unchanged under `public/art/`; their manifest entries retain the source links. Other selected originals remain preserved there too. Smaller sources never gain detail by enlargement; supply a larger original when increasing a surface beyond its pixel budget. [UI contracts](UI.md#layout-artwork-size-and-spacing) own the display behavior.
 
+The custom cursor uses the unchanged [64 × 64 Drive original](https://drive.google.com/file/d/1ijTmT5atV_TFPKuEIra0hAIXfoBBdz86/view) in `src/ui/shared/assets/pointer-c-shaded.png`. Its CSS image-set preserves the existing 26 CSS-pixel size while those pixels cover the display scale, then limits it to 64 device pixels at higher scales. The hotspot remains at the top-left corner.
+
 Lossless encoding preserves resized pixels and alpha, but downsampling changes pixels and still needs visual review. Raster validation fully decodes sources/outputs, rejects animated or oriented artwork, and checks geometry/hashes. Receipts retain source/output byte counts and prepared dimensions. These checks establish neither artistic suitability, source-license clearance nor listening or hardware acceptance; manifest provenance is not a license grant.
 
 ### Build inventory
