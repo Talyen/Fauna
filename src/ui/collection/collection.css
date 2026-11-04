@@ -37,12 +37,8 @@
   gap: var(--screen-item-gap);
 }
 .collection-grid[data-view="fauna"] {
-  --collection-fauna-art-width: calc(var(--art-landscape-width) * 1.04);
   align-self: center;
-  max-width: calc(var(--collection-fauna-art-width) * 3 + var(--screen-item-gap) * 2);
-}
-.collection-grid[data-view="fauna"] .creature-card {
-  width: var(--collection-fauna-art-width);
+  max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
 }
 .collection-grid[data-view="boons"] {
   align-self: center;
