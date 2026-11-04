@@ -127,6 +127,9 @@ body {
       scale(var(--leaf-scale));
   }
 }
+#startup-splash.startup-failed .startup-title {
+  line-height: 1.3;
+}
 #startup-splash.startup-failed .startup-leaves {
   display: none;
 }
