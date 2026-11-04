@@ -45,8 +45,8 @@
   animation: effect-text-shine 4.8s linear infinite;
 }
 :is(.action-card, .creature-card) > .effect-shine-border {
-  inset: calc(-1 * (var(--border-art-width) + var(--hover-frame-outset)));
-  border-radius: calc(var(--radius) + var(--hover-frame-outset));
+  inset: calc(-1 * var(--hover-frame-outset));
+  border-radius: calc(var(--radius) - var(--border-art-width) + var(--hover-frame-outset));
   opacity: 0;
   transition: opacity var(--motion-hover);
 }

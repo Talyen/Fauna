@@ -189,10 +189,10 @@
 .game-button:is(.creature-card, .action-card)::after {
   content: "";
   position: absolute;
-  /* Absolute children start inside the resting border; include it before centering the frame. */
-  inset: calc(-1 * (var(--border-art-width) + var(--hover-frame-outset)));
+  /* The image fills the padding box; match Alchemy's 1px outside / 2px inside image frame. */
+  inset: calc(-1 * var(--hover-frame-outset));
   border: var(--hover-frame-width) solid transparent;
-  border-radius: calc(var(--radius) + var(--hover-frame-outset));
+  border-radius: calc(var(--radius) - var(--border-art-width) + var(--hover-frame-outset));
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }

@@ -27,7 +27,7 @@ import { JourneyResults } from "../expedition/journey-results";
 import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, Play, Pause, FastForward, Trophy, Coins } from "lucide-react";
+import { Menu, Play, Pause, FastForward, Trophy } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
@@ -505,24 +505,16 @@ export function GameShell({ session }: { session: Session }) {
                           {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
                         </Button>
                       ) : null}
-                      {game.phase === "battle" ? (
-                        <>
-                          <span className="battle-gold">
-                            <Coins aria-hidden="true" />
-                            {game.currency.toLocaleString(i18n.locale)}
-                          </span>
-                          {game.boons.length ? (
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="boon-control compact-icon-control"
-                              aria-label={i18n.message("menu.boons", "Boons")}
-                              onClick={() => openModal("boons")}
-                            >
-                              <Trophy aria-hidden="true" />
-                            </Button>
-                          ) : null}
-                        </>
+                      {game.phase === "battle" && game.boons.length ? (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="boon-control compact-icon-control"
+                          aria-label={i18n.message("menu.boons", "Boons")}
+                          onClick={() => openModal("boons")}
+                        >
+                          <Trophy aria-hidden="true" />
+                        </Button>
                       ) : null}
                       {game.phase === "draft" ? (
                         <Draft game={game} send={send} inspect={inspect} />

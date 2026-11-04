@@ -141,9 +141,9 @@
   --progress-height: calc(8px * var(--ui-density, 1));
   --battle-health-height: calc(4px * var(--ui-density, 1));
   /* Alchemy's interaction timings and card scale, independent of viewport size. */
-  --motion-hover: 150ms;
+  --motion-hover: 200ms;
   --hover-scale: 1.035;
-  --hover-frame-width: 2px;
+  --hover-frame-width: 3px;
   --hover-frame-outset: 1px;
   --tooltip-enter-duration: 180ms;
   --tooltip-exit-duration: 120ms;

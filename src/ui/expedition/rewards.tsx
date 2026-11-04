@@ -142,9 +142,6 @@ export function Rewards({ game, send, inspect, visible = true }: Props) {
                           <BoonText boon={boon} />
                         </TooltipContent>
                       </Tooltip>
-                      <h2>
-                        <BoonName boon={boon} />
-                      </h2>
                     </div>
                   );
                 })}

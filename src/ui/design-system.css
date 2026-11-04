@@ -66,11 +66,6 @@
   color: var(--foreground);
   border-color: var(--border);
 }
-.game-button.control-outline:not(.compact-icon-control):not(:disabled):not([aria-disabled="true"]):hover {
-  border-color: transparent;
-  outline: var(--hover-frame-width) solid var(--border);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
-}
 .game-button:is(.control-outline, .control-ghost).end-journey {
   color: var(--menu-icon-end);
 }
@@ -80,7 +75,6 @@
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
   scale: var(--pressed-scale);
   border-color: var(--primary);
-  outline-color: var(--primary);
 }
 .game-button:is(.control-primary, .control-outline, .control-ghost, .control-destructive):is(
     :disabled,
@@ -139,16 +133,15 @@
   height: var(--compact-icon-size);
 }
 :root[data-focus="visible"] .game-button:focus {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
   box-shadow: none;
 }
 :root[data-focus="visible"] .game-button.compact-icon-control:focus {
   outline: none;
 }
 :root[data-focus="visible"] .game-button.compact-icon-control:focus::before {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border: 2px solid var(--primary);
 }
 :root[data-focus="visible"]
   .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
@@ -167,9 +160,8 @@
   background: transparent;
 }
 .ui-tabs-list .ui-tab {
-  --tab-frame-color: var(--border);
   flex-shrink: 0;
-  border: 2px solid transparent;
+  border: 2px solid var(--border);
   padding-inline: var(--space-3);
   background: var(--control-fill);
   color: var(--muted-foreground);
@@ -178,25 +170,18 @@
   transition:
     color var(--motion-fast),
     border-color var(--motion-fast),
-    outline-color var(--motion-fast),
     background-color var(--motion-fast);
 }
-/* Selection and resting tab frames remain visible when pointer focus hides navigation decoration. */
-.ui-tabs-list .ui-tab,
-:root:not([data-focus="visible"]) .ui-tabs-list .ui-tab:focus {
-  outline: var(--hover-frame-width) solid var(--tab-frame-color);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
-}
 .ui-tabs-list .ui-tab[data-state="active"] {
-  --tab-frame-color: var(--primary);
   background: var(--control-fill);
   color: var(--foreground);
+  border-color: var(--primary);
   box-shadow: none;
 }
 .ui-tabs-list .ui-tab[data-state="inactive"]:hover {
-  --tab-frame-color: var(--primary);
   background: var(--control-hover);
   color: var(--foreground);
+  border-color: var(--primary);
 }
 .ui-tabs-list .ui-tab:disabled {
   background: var(--muted);
@@ -207,9 +192,8 @@
   height: var(--icon-size);
 }
 :root[data-focus="visible"] .ui-tabs-list .ui-tab:focus {
-  --tab-frame-color: var(--primary);
-  outline: var(--hover-frame-width) solid var(--tab-frame-color);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
   border-color: transparent;
   box-shadow: none;
 }
@@ -269,8 +253,8 @@
   box-shadow: none;
 }
 :root[data-focus="visible"] .ui-switch:focus::before {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
 }
 .ui-radio {
   width: 16px;
@@ -283,10 +267,8 @@
 .ui-radio[data-state="checked"] {
   border-color: var(--primary);
 }
-.ui-radio[data-state="unchecked"]:not(:disabled):hover {
-  border-color: transparent;
-  outline: var(--hover-frame-width) solid var(--foreground);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+.ui-radio[data-state="unchecked"]:hover {
+  border-color: var(--foreground);
 }
 label:has(> .ui-radio) {
   min-height: var(--control-height);
@@ -296,10 +278,9 @@ label:has(> .ui-radio) {
   color: var(--foreground);
 }
 :root[data-focus="visible"] label > .ui-radio:focus {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  outline: none;
   box-shadow: none;
-  border-color: transparent;
+  border: 2px solid var(--primary);
 }
 .ui-slider .ui-slider-track {
   height: var(--progress-height);
@@ -327,12 +308,10 @@ label:has(> .ui-radio) {
   background: var(--foreground);
 }
 .ui-slider .ui-slider-thumb:hover::after {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border-color: var(--primary);
 }
 .ui-slider .ui-slider-thumb:active::after {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border: 2px solid var(--primary);
 }
 :root[data-focus="visible"] .ui-slider:focus-within {
   outline: none;
@@ -342,8 +321,7 @@ label:has(> .ui-radio) {
   box-shadow: none;
 }
 :root[data-focus="visible"] .ui-slider .ui-slider-thumb:focus::after {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border: 2px solid var(--primary);
 }
 .dialog-overlay[data-state="open"],
 .dialog-content[data-state="open"],
@@ -626,8 +604,7 @@ h3 {
   background: transparent;
 }
 .ui-slider:active .ui-slider-thumb::after {
-  outline: var(--hover-frame-width) solid var(--primary);
-  outline-offset: calc(-1 * var(--hover-frame-outset));
+  border: 2px solid var(--primary);
 }
 .deck-grid > .empty-state {
   grid-column: 1 / -1;
@@ -651,7 +628,6 @@ h3 {
   .game-button:is(.control-outline, .control-ghost):not([aria-disabled="true"]):focus {
   background: var(--background);
   border-color: transparent;
-  outline-color: var(--primary);
 }
 :root[data-focus="visible"] .game-button:is(.control-outline, .control-ghost).compact-icon-control:focus {
   background: transparent;
