@@ -10193,12 +10193,6 @@
     "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
     "text": "続ける"
   },
-  "menu.endJourney": {
-    "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "c963abcb44670e530b94c63aec5760ef88f93de9d59a34b79eb7f93699feaab5",
-    "text": "旅を終える"
-  },
   "menu.endRun": {
     "reviewed": true,
     "source": "End Run",
@@ -10240,12 +10234,6 @@
     "source": "Play",
     "sourceHash": "0c97f1e1514b1c140bfd1b26ffdbe71ba2d0c0a8fad3399e313de39a018deca8",
     "text": "プレイ"
-  },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "8fd7233856448a954cd1b94badcc269ee590889501d8e453c5222b2d1ba96983",
-    "text": "保存して終了"
   },
   "menu.quitShort": {
     "reviewed": true,

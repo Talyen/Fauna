@@ -10193,12 +10193,6 @@
     "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
     "text": "Продолжить"
   },
-  "menu.endJourney": {
-    "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "bbf4f80624b627bbdb969ed93dbdacb390e83082cc5fe6e7faa2e48cce2eb1cf",
-    "text": "Завершить путешествие"
-  },
   "menu.endRun": {
     "reviewed": true,
     "source": "End Run",
@@ -10240,12 +10234,6 @@
     "source": "Play",
     "sourceHash": "f9fb63cff13337d939cb9dfbb1617d729340a75fe028655f94edcab21b6df589",
     "text": "Играть"
-  },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "6a9787f36ae111a2dba230a8db3c98e75aff0a14ddc71c92515349f7ccf48fd1",
-    "text": "Сохранить и выйти"
   },
   "menu.quitShort": {
     "reviewed": true,

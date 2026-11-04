@@ -10193,12 +10193,6 @@
     "sourceHash": "f207404f10e031ca0f3dc006b4d8b1cb40de5ab3fe269bc852bf89965cfa2636",
     "text": "Weiter"
   },
-  "menu.endJourney": {
-    "reviewed": true,
-    "source": "End journey",
-    "sourceHash": "ea59d24b687011d5f84a9d2fd4fddf723ad1e4ac05f0a968a9d3e609159cfd8a",
-    "text": "Reise beenden"
-  },
   "menu.endRun": {
     "reviewed": true,
     "source": "End Run",
@@ -10240,12 +10234,6 @@
     "source": "Play",
     "sourceHash": "6d9985e1ac0beb47eb3067288bf1a514c5a46d82fdfd06392074f30e95d4c6a8",
     "text": "Spielen"
-  },
-  "menu.quit": {
-    "reviewed": true,
-    "source": "Save & quit",
-    "sourceHash": "50742b43bdba6e47b98b2de5e8b2b4edfc270b5d5c785ce4173bc4dbf7e881b3",
-    "text": "Speichern und beenden"
   },
   "menu.quitShort": {
     "reviewed": true,
