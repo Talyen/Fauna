@@ -53,7 +53,7 @@
   --radius-dialog: calc(26px * var(--ui-density, 1));
   --radius-tooltip: calc(20px * var(--tooltip-scale, 1));
   --radius-panel: calc(22px * var(--ui-density, 1));
-  --border-art-width: calc(1px * var(--ui-density, 1));
+  --border-art-width: 1px;
   --radius-round: calc(9999px * var(--ui-density, 1));
   --border-art: color-mix(in srgb, var(--border) 80%, transparent);
   --feedback-shadow: var(--background);
@@ -142,8 +142,8 @@
   /* Alchemy's interaction timings and card scale, independent of viewport size. */
   --motion-hover: 150ms;
   --hover-scale: 1.035;
-  --hover-frame-width: calc(2px * var(--ui-density, 1));
-  --hover-frame-outset: calc(1px * var(--ui-density, 1));
+  --hover-frame-width: 2px;
+  --hover-frame-outset: 1px;
   --tooltip-enter-duration: 180ms;
   --tooltip-exit-duration: 120ms;
   --tooltip-max-width: calc(320px * var(--ui-density, 1));
