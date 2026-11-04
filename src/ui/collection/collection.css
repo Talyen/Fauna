@@ -25,7 +25,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: start;
+  align-content: center;
   height: calc(
     max(
         var(--art-long-side),
@@ -40,6 +40,7 @@
   --collection-fauna-art-width: calc(var(--art-landscape-width) * 1.04);
   align-self: center;
   max-width: calc(var(--collection-fauna-art-width) * 3 + var(--screen-item-gap) * 2);
+  row-gap: calc(var(--screen-item-gap) * 1.5 + var(--collection-rank-height));
 }
 .collection-grid[data-view="fauna"] .creature-card {
   width: var(--collection-fauna-art-width);
@@ -52,12 +53,14 @@
   flex: 0 0 auto;
 }
 .collection-entry {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: calc(var(--screen-item-gap) / 2);
 }
 .collection-entry > .collection-stars {
+  position: absolute;
+  top: calc(100% + var(--screen-item-gap) / 2);
   display: flex;
   align-items: center;
   min-height: var(--collection-rank-height);
