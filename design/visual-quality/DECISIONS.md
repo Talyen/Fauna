@@ -4,7 +4,7 @@ These choices guide future design. Current behavior belongs to the [UI contracts
 
 ## Merchant
 
-The user rejected both [Merchant A](references/merchant-before-1280.png) and [Merchant B](references/merchant-candidate-1280.png), preferring A over B. Neither is an approved whole-screen reference. Names and rules belong in hover/focus inspection; equal emphasis for equivalent choices is acceptable. Preserve original illustrations and their aspect ratios. The requested layout places Gold in the header, keeps the title centered, places the shelf policy above the Boons, and uses secondary purchase controls and gold Coins icons. The [current composition](references/merchant-current-1280.png) remains pending aesthetic acceptance. [Merchant specifications](../../Docs/ui/screens.md#boon-merchant) own current behavior.
+The user rejected two earlier Merchant compositions, preferring A over B. Neither was an approved whole-screen reference. Names and rules belong in hover/focus inspection; equal emphasis for equivalent choices is acceptable. Preserve original illustrations and their aspect ratios. The requested layout places Gold in the header, keeps the title centered, places the shelf policy above the Boons, and uses secondary purchase controls and gold Coins icons. The later composition had not received aesthetic acceptance. [Merchant specifications](../../Docs/ui/screens.md#boon-merchant) own current behavior.
 
 ## Artwork references
 
