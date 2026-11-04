@@ -144,7 +144,10 @@ export function connectInput(
     const action = mapping[event.key];
     if (!navigation && event.repeat && ["left", "right", "up", "down"].includes(action ?? "")) return;
     if (
-      (event.key === "Tab" || event.key === "F7" || ["left", "right", "up", "down"].includes(action ?? "")) &&
+      (event.key === "Tab" ||
+        event.key === "F7" ||
+        (["Enter", " "].includes(event.key) && target?.closest('button, [role="button"]')) ||
+        ["left", "right", "up", "down"].includes(action ?? "")) &&
       !event.repeat
     )
       navigation = true;

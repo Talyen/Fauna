@@ -5,6 +5,20 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
+it.each(["Enter", " "])("enables navigation for %s activation of a focused control", (key) => {
+  const button = document.createElement("button");
+  document.body.append(button);
+  const modes = vi.fn();
+  const close = connectInput(() => {}, modes);
+  try {
+    button.focus();
+    button.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+    expect(modes).toHaveBeenLastCalledWith("keyboard", true);
+  } finally {
+    close();
+    button.remove();
+  }
+});
 it("leaves opening arrows to a focused closed dropdown", () => {
   const trigger = document.createElement("button");
   trigger.setAttribute("role", "combobox");
