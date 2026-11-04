@@ -48,7 +48,7 @@ import { useCombatFeedback } from "../battle/combat-feedback";
 import type { Command } from "../../game/types";
 import "../battle/mana-crystals.css";
 import type { Modal } from "./types";
-export function GameShell({ session, desktop = false }: { session: Session; desktop?: boolean }) {
+export function GameShell({ session }: { session: Session }) {
   const i18n = useMessages();
   const view = useStore(session.store),
     game = view.game;
@@ -319,7 +319,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       active={active}
       hasBoons={game.boons.length > 0}
       talentPoints={talentPoints}
-      desktop={desktop}
       closing={view.closing}
       onContinue={() => {
         if (!home || active) {
