@@ -10211,6 +10211,12 @@
     "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
     "text": "主菜单"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "ee8ffeb41727b74a8233928fe6a99ff37ca48e172eb751ce1e132b59c4e27284",
+    "text": "选项"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10228,6 +10234,12 @@
     "source": "Save & quit",
     "sourceHash": "90e80d85f4a395a7c0c1ab89774164efc2be0984c1b7c7785ec3e1698cf7fa49",
     "text": "保存并退出"
+  },
+  "menu.quitShort": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "600f8be57c03ea62d5828b1845eb0007b255d644cf9662df258a652cbbe97a79",
+    "text": "退出"
   },
   "menu.settings": {
     "reviewed": true,

@@ -153,7 +153,7 @@
   gap: var(--space-3);
 }
 
-/* Gameplay fits the viewport; secondary reading surfaces may scroll inside their bounds. */
+/* Gameplay and reading surfaces fit the viewport without scrolling. */
 html,
 body,
 #root {
@@ -162,20 +162,6 @@ body,
 }
 .app {
   overflow: clip;
-}
-.secondary-scroll-region {
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: var(--muted-foreground) var(--background);
-  padding: var(--space-2);
-}
-:root[data-focus="visible"] .secondary-scroll-region:focus {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
 }
 .save-notice {
   flex: 0 0 auto;
@@ -200,15 +186,33 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--screen-item-gap);
+  gap: var(--space-4);
   flex: 0 0 auto;
 }
-.pagination span {
-  color: var(--muted-foreground);
-  font-variant-numeric: tabular-nums;
+.pagination .game-button.control-outline {
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  border-radius: var(--radius-control);
+  background: var(--background);
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
 }
-.pagination button:disabled {
-  visibility: hidden;
+.pagination .game-button.control-outline:disabled {
+  background: var(--background);
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
+  opacity: 0.5;
+}
+.pagination .game-button.control-outline:not(:disabled):hover {
+  border-color: var(--border);
+  background: var(--muted);
+  color: var(--foreground);
+}
+.pagination .game-button.control-outline:not(:disabled):active {
+  scale: 1;
+  border-color: var(--border);
+  background: var(--accent);
+}
+.pagination .game-button svg {
+  width: 24px;
+  height: 24px;
 }
 .cloud-candidates {
   display: grid;

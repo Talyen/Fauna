@@ -4,7 +4,7 @@ import { reloadHome, test, seed } from "./support/session";
 
 test("slider fill and thumb follow pointer drags across the track", async ({ page }) => {
   await seed(page, run());
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
 
   for (const [tab, name] of [
     ["Display", "Background Glow"],
@@ -56,7 +56,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await page.keyboard.press("a");
   await expect(page.getByRole("tab", { name: "Fauna", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   const sound = page.getByRole("switch", { name: "Sound", exact: true });
   const master = page.getByRole("slider", { name: "Master volume", exact: true });
@@ -101,9 +101,9 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeFocused();
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
   await reloadHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(sound).not.toBeChecked();

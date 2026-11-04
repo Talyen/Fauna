@@ -137,7 +137,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await pad.press(1);
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await pad.press(13);
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
   await pad.press(0);
   await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
   await pad.press(15);
@@ -164,7 +164,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("radio", { name: enlarged ? "75%" : "125%", exact: true })).toBeChecked();
   await captureScreen(page, { path: `reports/menu-settings-${width}.png` });
   await pad.press(1);
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
   await page.mouse.move(20, 20);
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
   const outlined = await page
@@ -299,12 +299,12 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
     expect(styles).toEqual(styles.map(() => ({ outline: "none", shadow: "none" })));
   };
   await noDecoration();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await noDecoration();
   await page.getByRole("radio", { name: "125%", exact: true }).click();
   await noDecoration();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeFocused();
   await noDecoration();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
   await page.getByRole("button", { name: "Burn talents", exact: true }).click();

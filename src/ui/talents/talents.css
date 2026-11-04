@@ -156,11 +156,16 @@
   }
 }
 .talent-tree-viewport {
-  flex: 0 1 auto;
+  position: relative;
+  flex: none;
   width: 100%;
-  scrollbar-gutter: stable both-edges;
 }
 .talent-tree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(var(--talent-fit, 1));
+  transform-origin: top center;
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
@@ -189,6 +194,8 @@
 }
 .talent-card-heading {
   display: flex;
+  max-width: 100%;
+  min-width: 0;
   align-items: center;
   justify-content: center;
   gap: var(--screen-item-gap);
@@ -197,10 +204,14 @@
   display: flex;
 }
 .talent-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: var(--text-name);
   font-weight: 700;
 }
 .talent-effect {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-size: var(--text-rule);
   font-weight: 400;
 }

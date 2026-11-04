@@ -10,7 +10,7 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Settings and Save & quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, Save & quit waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
+Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Options and Quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, quitting waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
 
 Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
@@ -51,7 +51,7 @@ Header and battle corner controls use 32px visible surfaces and 16px icons withi
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of outlined Talents, Collection, Options and Quit Buttons. Conditional choices add rows; center a lone final choice. Use Alchemy's Swords, violet WandSparkles, gold BookOpen, zinc Cog and rose Power icons for those respective actions. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause uses an Alchemy-styled shadcn Popover, sized to its choices and bounded by the viewport, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 2px gaps and a separator before End journey. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
@@ -79,13 +79,13 @@ Use a centered title, Fauna and Boons tabs, a gallery and pagination. Fauna orde
 
 Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
-Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows, with up to three Fauna or four Boons per row. Measured width may reduce the column count before reducing artwork. Reserve a consistent gallery and footer area so the heading, tabs and pagination stay fixed across tabs and pages. Center the grid vertically in its gallery area. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the tab when neither remains.
+Boons shows the complete read-only catalog, with name and rules on hover or intentional focus. Each tab retains its page independently. Show up to two gallery rows, with up to three Fauna or four Boons per row. Measured width may reduce the column count before reducing artwork. Reserve a consistent gallery and footer area so the heading, tabs and pagination stay fixed across tabs and pages. Center the grid vertically in its gallery area. Previous/Next icon buttons have accessible names but no tooltips or page counts. Show unavailable arrows disabled; if a focused arrow becomes unavailable, focus the remaining arrow or the tab when neither remains.
 
 ## Talents
 
 The overview shows every category in centered rows of five, using Alchemy's category presentation: 16px column gaps, 14px row gaps, 6px between portrait and label, and bold 20px category names with text preferences respected. Portraits fit the available height up to Alchemy's 164.16px width. A red dot beside a category name indicates unspent points; its artwork's accessible description reports the count. Hover and keyboard focus show a gold frame and glow, a brief shimmer and a gold label; reduced motion suppresses the shimmer.
 
-Selecting artwork opens a dedicated tree. Arrange centered icon/name cards in Alchemy’s widening 1–2–3–4 tiers, centering incomplete tiers. Show effects on the cards, with unspent points beneath the tree; availability requirements are accessible to screen readers without instructional copy on cards or tooltips. Keep every tier in one bounded tree; scroll vertically when the full tree cannot fit, and bring focused talents into view. The header reset icon immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
+Selecting artwork opens a dedicated tree. Arrange centered icon/name cards in Alchemy’s widening 1–2–3–4 tiers, centering incomplete tiers. Show effects on the cards, with unspent points beneath the tree; availability requirements are accessible to screen readers without instructional copy on cards or tooltips. Keep every tier visible in one bounded tree without scrolling or pagination; shrink the tree as needed to fit the viewport. The header reset icon immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 
 Owned borders use a lightened keyword color; available borders are light neutral and unavailable borders are muted neutral. Unavailable talent cards keep their rules readable, with muted names and effects indicating their state. Keyword text uses Alchemy’s lightened keyword colors, retaining a faint tint through the locked-state desaturation. Names use the foreground color; icons use a lightened keyword color, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border then fades to its owned color over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
@@ -119,7 +119,7 @@ Show creature artwork, Recruit and its species name. Its hover/focus details fol
 
 ## Settings
 
-Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Use the shared secondary-scrolling recipe for long panels.
+Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Keep every panel within the viewport without scrolling.
 
 Use distinct Lucide icons, the shared 24px bold uppercase screen title, body-size uppercase pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
 

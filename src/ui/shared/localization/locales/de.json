@@ -10211,6 +10211,12 @@
     "sourceHash": "7e108822e7929a01d2aa6792234246fe437e2f34c10d618d19c40b6e2a3b015c",
     "text": "Hauptmenü"
   },
+  "menu.options": {
+    "reviewed": true,
+    "source": "Options",
+    "sourceHash": "1a6810f3c5fd675691200b61d74fec4404874894b4dccb3fa18928849de119da",
+    "text": "Optionen"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -10228,6 +10234,12 @@
     "source": "Save & quit",
     "sourceHash": "50742b43bdba6e47b98b2de5e8b2b4edfc270b5d5c785ce4173bc4dbf7e881b3",
     "text": "Speichern und beenden"
+  },
+  "menu.quitShort": {
+    "reviewed": true,
+    "source": "Quit",
+    "sourceHash": "8b376c7889af6d5899d49b21df7937663573ca2b99eda3671ed5b66001980c20",
+    "text": "Beenden"
   },
   "menu.settings": {
     "reviewed": true,

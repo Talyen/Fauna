@@ -52,7 +52,6 @@
 }
 
 .combat-status .combat-effect-page,
-.combat-status .pagination,
 .combat-status > .paged-content {
   display: flex;
   align-items: center;
@@ -75,13 +74,6 @@
 
 .combat-status .pagination button {
   pointer-events: auto;
-}
-
-.combat-status .pagination > span {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  clip-path: inset(50%);
 }
 
 .combat-status-details {

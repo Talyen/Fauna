@@ -68,13 +68,11 @@ export function PageControls({
   pages,
   change,
   label,
-  showCount = true,
 }: {
   page: number;
   pages: number;
   change: (page: number) => void;
   label?: string;
-  showCount?: boolean;
 }) {
   const i18n = useMessages();
   const nav = useRef<HTMLElement>(null);
@@ -101,7 +99,7 @@ export function PageControls({
       }}
     >
       <Button
-        variant="ghost"
+        variant="outline"
         size="icon"
         aria-label={i18n.message("pagination.previous", "Previous page")}
         disabled={page === 0}
@@ -112,13 +110,8 @@ export function PageControls({
       >
         <ChevronLeft aria-hidden="true" />
       </Button>
-      {showCount ? (
-        <span role="status" aria-live="polite">
-          {page + 1} / {pages}
-        </span>
-      ) : null}
       <Button
-        variant="ghost"
+        variant="outline"
         size="icon"
         aria-label={i18n.message("pagination.next", "Next page")}
         disabled={page >= pages - 1}
