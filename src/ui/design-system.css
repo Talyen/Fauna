@@ -266,6 +266,13 @@ label:has(> .ui-radio) {
   border: 0;
   box-shadow: none;
 }
+/* Keep Radix's measured thumb narrow so its position matches the range; extend the hit target separately. */
+.ui-slider .ui-slider-thumb::before {
+  content: "";
+  position: absolute;
+  width: var(--control-height);
+  height: var(--control-height);
+}
 .ui-slider .ui-slider-thumb::after {
   width: 20px;
   height: 20px;
