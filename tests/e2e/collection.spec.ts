@@ -97,12 +97,14 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await expect(next).toBeDisabled();
   await expectScrollFree(page);
   const layoutPositions = async () =>
-    page.locator(".collection-heading, .collection-tabs [role=tablist], .collection-pagination").evaluateAll(
-      (elements) => elements.map((element) => {
-        const { x, y, width, height } = element.getBoundingClientRect();
-        return { x, y, width, height };
-      }),
-    );
+    page
+      .locator(".collection-heading, .collection-tabs [role=tablist], .collection-pagination")
+      .evaluateAll((elements) =>
+        elements.map((element) => {
+          const { x, y, width, height } = element.getBoundingClientRect();
+          return { x, y, width, height };
+        }),
+      );
   const faunaPositions = await layoutPositions();
   await page.getByRole("tab", { name: "Boons", exact: true }).click();
   await expect(page.locator(".collection-boon")).toHaveCount(8);

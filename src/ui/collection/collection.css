@@ -31,7 +31,8 @@
         var(--art-long-side),
         var(--art-short-side) * var(--art-creature-scale) + var(--screen-item-gap) +
           var(--collection-rank-height)
-      ) * 2 + var(--screen-item-gap)
+      ) *
+      2 + var(--screen-item-gap)
   );
   gap: var(--screen-item-gap);
 }
