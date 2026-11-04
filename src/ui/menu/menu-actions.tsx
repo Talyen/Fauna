@@ -45,7 +45,7 @@ export function MenuActions({
         {home && !active ? i18n.message("menu.play", "Play") : i18n.message("menu.continue", "Continue")}
       </Button>
       <Button
-        variant="ghost"
+        variant={home ? "outline" : "ghost"}
         effectTone="talents"
         data-menu-action="talents"
         aria-label={i18n.message("menu.talents", "Talents")}
@@ -70,7 +70,7 @@ export function MenuActions({
       </Button>
       <Button
         effectTone="gold"
-        variant="ghost"
+        variant={home ? "outline" : "ghost"}
         data-menu-action="collection"
         onClick={() => onNavigate("collection")}
       >
@@ -78,14 +78,19 @@ export function MenuActions({
         {i18n.message("menu.collection", "Collection")}
       </Button>
       {active && hasBoons ? (
-        <Button effectTone="talents" variant="ghost" data-menu-action="boons" onClick={onBoons}>
+        <Button
+          effectTone="talents"
+          variant={home ? "outline" : "ghost"}
+          data-menu-action="boons"
+          onClick={onBoons}
+        >
           <Gift aria-hidden="true" className="menu-icon-boons" />
           {i18n.message("menu.boons", "Boons")}
         </Button>
       ) : null}
       <Button
         effectTone="gold"
-        variant="ghost"
+        variant={home ? "outline" : "ghost"}
         data-menu-action="glossary"
         onClick={() => onNavigate("glossary")}
       >
@@ -94,7 +99,7 @@ export function MenuActions({
       </Button>
       <Button
         effectTone="settings"
-        variant="ghost"
+        variant={home ? "outline" : "ghost"}
         data-menu-action="settings"
         onClick={() => onNavigate("settings")}
       >
