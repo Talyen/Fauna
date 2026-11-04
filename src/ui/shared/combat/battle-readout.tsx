@@ -43,7 +43,7 @@ export function BattleReadout({
         </div>
       ) : null}
       <div className="combat-stats">
-        {view !== "portrait" && (block > 0 || (previousBlock ?? 0) > 0) ? (
+        {view === "all" && (block > 0 || (previousBlock ?? 0) > 0) ? (
           <span
             data-combat-tone="block"
             aria-label={
