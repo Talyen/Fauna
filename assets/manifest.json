@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.amber-spatula",
+      "origin": "repository",
+      "source": "public/art/boons/amber-spatula.png",
+      "output": "art/boons/amber-spatula.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Amber Spatula.png; https://drive.google.com/file/d/1vrLDH-5jS2Qhh003I1PKCxNJhtlKLEYn/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.second-sundial",
+      "origin": "repository",
+      "source": "public/art/boons/second-sundial.png",
+      "output": "art/boons/second-sundial.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Second Sundial.png; https://drive.google.com/file/d/1bPAYFwlpWuhiTqUPkCf-7p6TvHliWmBG/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.vein-survey-chain",
+      "origin": "repository",
+      "source": "public/art/boons/vein-survey-chain.png",
+      "output": "art/boons/vein-survey-chain.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Vein Survey Chain.png; https://drive.google.com/file/d/1Kwb4HPef38uKFTZLaVswfNlkoom5Dz0S/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sunwell-ewer",
+      "origin": "repository",
+      "source": "public/art/boons/sunwell-ewer.png",
+      "output": "art/boons/sunwell-ewer.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Sunwell Ewer.png; https://drive.google.com/file/d/1-obLm6kEMuG4GfkrjAfVi9bOFwlRXc9F/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rime-spindle",
+      "origin": "repository",
+      "source": "public/art/boons/rime-spindle.png",
+      "output": "art/boons/rime-spindle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rime Spindle.png; https://drive.google.com/file/d/1FmED2Kez-JLR6QQAKcPjVpzcR2OEidAK/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.toadstool-breadbox",
+      "origin": "repository",
+      "source": "public/art/boons/toadstool-breadbox.png",
+      "output": "art/boons/toadstool-breadbox.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Toadstool Breadbox.png; https://drive.google.com/file/d/13jNYtg9ccTjz4lwt0RQBdu9T7walXXQx/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.loom-beater",
+      "origin": "repository",
+      "source": "public/art/boons/loom-beater.png",
+      "output": "art/boons/loom-beater.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Loom Beater.png; https://drive.google.com/file/d/1LQpqFafUOT5NqvbswLv5rHfSN65dTh1U/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.courtly-handwarmer",
+      "origin": "repository",
+      "source": "public/art/boons/courtly-handwarmer.png",
+      "output": "art/boons/courtly-handwarmer.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Courtly Handwarmer.png; https://drive.google.com/file/d/1wqIj9I6EyWg_VzyHCoscotwyPHQDLlri/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.lightning-fork",
+      "origin": "repository",
+      "source": "public/art/boons/lightning-fork.png",
+      "output": "art/boons/lightning-fork.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Lightning Fork.png; https://drive.google.com/file/d/1tkqvs9XoFbvC7DMhvRV9vdPzIh_vNX3U/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.starhook",
+      "origin": "repository",
+      "source": "public/art/boons/starhook.png",
+      "output": "art/boons/starhook.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Starhook.png; https://drive.google.com/file/d/1nUikcje-t47C67fE5EUDrv79xdzJEvZm/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.orchard-ladder-charm",
       "origin": "repository",
       "source": "public/art/boons/orchard-ladder-charm.png",

@@ -29,5 +29,6 @@ export interface PrimaryContext {
   criticalBonus: number;
   oasisLeech: boolean;
   toothpickPurge: boolean;
+  sunwellBonus: number;
   additionalTarget?: Combatant;
 }

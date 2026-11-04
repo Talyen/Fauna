@@ -485,6 +485,15 @@ export function* removeEffects(
       ? removedStatuses.length
       : distinctRemovedStatuses.size;
   if (!state) return removedCount;
+  if (
+    kind === "purge" &&
+    removedCount > 0 &&
+    isEnemy(unit) &&
+    (!source || !isEnemy(source)) &&
+    state.phase === "battle" &&
+    state.boons.includes("starhook")
+  )
+    state.battle.starhookReady = true;
   if (steal && source && source.health > 0) {
     for (const effect of stolen) {
       if (source.health <= 0) break;

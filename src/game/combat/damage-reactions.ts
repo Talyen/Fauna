@@ -395,6 +395,23 @@ export function* poisonStun(
   if (amount <= 0) return;
   yield* applyResolvedStatus(state, source, target, amount, "stun", events);
 }
+export function* bleedFreeze(
+  { state, source, target, type, events }: HitContext,
+  damage: number,
+): Resolution<void> {
+  if (
+    type !== "bleed" ||
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    !state.boons.includes("rime-spindle")
+  )
+    return;
+  const amount = Math.round(damage / boonRule("rime-spindle").divisor);
+  if (amount <= 0) return;
+  yield* applyResolvedStatus(state, source, target, amount, "freeze", events);
+}
 export function* waterFollowups(
   { state, source, events }: HitContext,
   erode: (amount: number) => void,

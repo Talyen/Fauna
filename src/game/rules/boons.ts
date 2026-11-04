@@ -322,6 +322,28 @@ const rules = freeze(
       { chance: 0.1 },
       (p) => `Nature hits have a ${p.chance * 100}% chance to grant Gold equal to enemy Health lost`,
     ),
+    "amber-spatula": boon(
+      { divisor: 2 },
+      () => "Half the Block lost through decay restores Health to that ally",
+    ),
+    "second-sundial": boon({}, () => "Light attacks against Blinded enemies play twice"),
+    "vein-survey-chain": boon({}, () => "Damage reduced by enemy Armor is dealt to another enemy"),
+    "sunwell-ewer": boon({}, () => "Healing an ally adds the Health restored to your next Light attack"),
+    "rime-spindle": boon({ divisor: 2 }, () => "Bleed damage adds half as much Freeze buildup"),
+    "toadstool-breadbox": boon(
+      {},
+      () => "Add Trail Bread to your deck; allies receiving Food keep their Block next turn",
+    ),
+    "loom-beater": boon(
+      {},
+      () => "When an ally’s Block breaks, other allies’ Block absorbs the remaining damage",
+    ),
+    "courtly-handwarmer": boon({}, () => "Burn hits apply extra Burn equal to the attacker’s Armor"),
+    "lightning-fork": boon(
+      {},
+      () => "Stun hits also add their Stun buildup to other enemies with Stun buildup",
+    ),
+    starhook: boon({}, () => "Purging an effect from an enemy makes your next attack a Critical Hit"),
   },
   true,
 );

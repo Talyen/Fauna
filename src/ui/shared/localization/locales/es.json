@@ -359,6 +359,18 @@
     "sourceHash": "f7864b5beefb4d35bf2d4892147366988bfc20ed42c1e996f7709060556d9936",
     "text": "Los ataques repetidos no se pueden <keyword0>esquivar</keyword0>"
   },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "61b7f839f608a9fc035cb2ff45e9fb30ade05dca3a6a51326f09112df5e6fa87",
+    "text": "Espátula de ámbar"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "13565545c34a855878591a18737dde4cf7590d40b4b320934e8614fa642ca43a",
+    "text": "La mitad del <keyword0>Bloqueo</keyword0> perdido por disminución restaura <keyword1>Salud</keyword1> a ese aliado"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
@@ -742,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "904d4678341181c0ab70fbf6e459e7203486b7c7b75776ed6a6ad0d23ee6d756",
     "text": "La <keyword0>Nulificación</keyword0> protege los efectos aliados de la <keyword1>Purga</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "33a2b1a117e328cd3c59cf3c3c30e66842a3dadaeef10a1b9540968090fa57a4",
+    "text": "Calientamanos cortesano"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "9143b087b38193d149955049c63f91deeebbca887c1f4f7efc2f0b928ba4b713",
+    "text": "Los impactos de <keyword0>Quemadura</keyword0> aplican <keyword1>Quemadura</keyword1> adicional igual a la <keyword2>Armadura</keyword2> del atacante"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1415,6 +1439,30 @@
     "sourceHash": "38e1852de5dc2a6485da3f98346bfe03933999f162a8af59937e0286dcd1a4cb",
     "text": "Cuando un aliado <keyword0>esquiva</keyword0> un ataque, inflige {{value0}} de daño de <keyword1>Aturdimiento</keyword1> al atacante"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "dc2e99656714370e82e808044396e3c50e37626257ec7a96e650400310a973f7",
+    "text": "Diapasón de relámpago"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "964688616751d905d12ef65ca885499ef90caa808a8821f3a0cf0dffed1648d6",
+    "text": "Los impactos de <keyword0>Aturdimiento</keyword0> también añaden su acumulación de <keyword1>Aturdimiento</keyword1> a otros enemigos con acumulación de <keyword2>Aturdimiento</keyword2>"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "817fee394229828bb64a54fde1f545e9009adfc720a7131906bbf93f387c7a61",
+    "text": "Peine de telar"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "53c9596a3c0512cede75b6572f8ea19a6079fe2ffde1be105f66f70c496a2923",
+    "text": "Cuando se rompe el <keyword0>Bloqueo</keyword0> de un aliado, el <keyword1>Bloqueo</keyword1> de otros aliados absorbe el daño restante"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2039,6 +2087,18 @@
     "sourceHash": "823bd9938d514bf4a5d6f41f8aa7d32097f747a988cea7985cb5fc220bcd11a0",
     "text": "La inmunidad de un aliado al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1> protege a todos los aliados"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "ede87894d606647d0840806cf365eae0f347f3ae98d1683b79be83df9fba2fc3",
+    "text": "Huso de escarcha"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "3ad0817e981da18fed9504be6bb5bfe41f3dac9f6d243a23ba428169ec081bc5",
+    "text": "El daño de <keyword0>Sangrado</keyword0> añade la mitad de esa cantidad como acumulación de <keyword1>Congelación</keyword1>"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2146,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "0935ea0e127403d54a1bc4df2b8723ee5383c6d911430b0f4a5c45390b6a2135",
     "text": "Cuando un aliado <keyword0>esquiva</keyword0>, los demás aliados también <keyword1>esquivan</keyword1> ese mismo ataque"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "d7e9b5fa4ea1f9bffaf1e141a05e49ce0a823f3ae7f7c79ef3e2c9c58c171f09",
+    "text": "Segundo reloj de sol"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "264cb059bb45d1eb05e00d167aa1d5c308092957bc2f61f6ec6068928251a7c9",
+    "text": "Los ataques de <keyword0>Luz</keyword0> contra enemigos <keyword1>Cegados</keyword1> se juegan dos veces"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2303,6 +2375,18 @@
     "sourceHash": "09641c4ecadeec823e8d1e8e005f38c120960c66f5f17aed5b07773533913d0d",
     "text": "Los impactos <keyword0>Físicos</keyword0> aplican {{value0}} de <keyword1>Sangrado</keyword1> a enemigos con <keyword2>Armadura</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "af40794dd5087220d89c5ee4237301bcdef63cc3b23cf1487885bbedbcd18809",
+    "text": "Garfio estelar"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "50f46ccf9522dc33a6eb2445ede78350ce3e258ad934d5dfe9a34b7de4531800",
+    "text": "<keyword0>Purgar</keyword0> un efecto de un enemigo convierte tu próximo ataque en un <keyword1>Golpe crítico</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2338,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "7826414237f98e41f6723b1e748cbf9179562f78aa51e34a70ce12a9522558e1",
     "text": "Tus impactos <keyword0>Físicos</keyword0> y de <keyword1>Aturdimiento</keyword1> eliminan {{value0}} de <keyword2>Armadura</keyword2> enemiga antes del daño"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "32c97b38f4fbcdb320e7297deb738baded5dd30a6052973b17af1d0abafe77ad",
+    "text": "Jarro del pozo solar"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "3d6243675e6b11f1a48e61ac1bcb87bd5a029b020edd8b601ddae91c69e4f478",
+    "text": "<keyword0>Curar</keyword0> a un aliado añade la <keyword1>Salud</keyword1> restaurada a tu próximo ataque de <keyword2>Luz</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2435,6 +2531,18 @@
     "sourceHash": "aff936a0a0f0c40e3c334128afa2584fbf0affcd64310e4d88b073926000c3cb",
     "text": "Las <keyword0>Espinas</keyword0> no pueden disminuir por debajo de {{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "ed04b5e0b25fda825da4bc258620706e10bc41068416c3b0597fbf8cb703a188",
+    "text": "Panera de seta"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "7c73b3c1a5488d117310a579eceaebc372b70a741385e8ccec516e53ee1f049d",
+    "text": "Añade Pan de viaje a tu mazo; los aliados que reciben <keyword0>Comida</keyword0> conservan su <keyword1>Bloqueo</keyword1> el próximo turno"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2482,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "002e373d3266f267382322b6572ea7c94f7d304de5b033a2889c3e22302e14b0",
     "text": "Los aliados pueden <keyword0>esquivar</keyword0> la <keyword1>Purga</keyword1> enemiga"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "647fea9780289ff350306ed676230eb64e8b831902bb020e60fdab9ded3170a8",
+    "text": "Cadena de veta"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "2c5939e31748cd3f737f912bfff48fa33484f26bd38a8c2497f46d8de25a1d99",
+    "text": "El daño reducido por la <keyword0>Armadura</keyword0> enemiga se inflige a otro enemigo"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,

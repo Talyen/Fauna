@@ -359,6 +359,18 @@
     "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
     "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
   },
+  "content.boon.amber-spatula.name": {
+    "reviewed": true,
+    "source": "Amber Spatula",
+    "sourceHash": "32fb6980e3f03ad2db2581cae569a0bf38686b9bb701f578ed6ae37c9ea3c21c",
+    "text": "Spatule d’ambre"
+  },
+  "content.boon.amber-spatula.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay restores <keyword1>Health</keyword1> to that ally",
+    "sourceHash": "634b7df24b781194b5d4e65a799baa79502216756d33cae3fd34c21abebe6d17",
+    "text": "La moitié du <keyword0>Blocage</keyword0> perdu par décroissance rend de la <keyword1>Santé</keyword1> à cet allié"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
@@ -742,6 +754,18 @@
     "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
     "sourceHash": "d4c11517ed23075a9a088d5859e80531bc2bbf4fb151782a573441b6ea0fb2c3",
     "text": "<keyword0>Annulation</keyword0> protège les effets alliés de la <keyword1>Dissipation</keyword1>"
+  },
+  "content.boon.courtly-handwarmer.name": {
+    "reviewed": true,
+    "source": "Courtly Handwarmer",
+    "sourceHash": "f937c96720a53d46ce42ea34521f12670552089e15bace680a359ba46948f637",
+    "text": "Chauffe-mains de cour"
+  },
+  "content.boon.courtly-handwarmer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply extra <keyword1>Burn</keyword1> equal to the attacker’s <keyword2>Armor</keyword2>",
+    "sourceHash": "fde1295e891683e07b33236ec9b13b7d7f84fa7c4dfdea6fe7b2311b1a0f3733",
+    "text": "Les touches de <keyword0>Brûlure</keyword0> appliquent une <keyword1>Brûlure</keyword1> supplémentaire égale à l’<keyword2>Armure</keyword2> de l’attaquant"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1415,6 +1439,30 @@
     "sourceHash": "ca8bc34a9807936ee43436e2ed60bfadded8f76caa8e48756b160b835f299a88",
     "text": "Quand un allié <keyword0>esquive</keyword0> une attaque, inflige {{value0}} dégâts d’<keyword1>Étourdissement</keyword1> à l’attaquant"
   },
+  "content.boon.lightning-fork.name": {
+    "reviewed": true,
+    "source": "Lightning Fork",
+    "sourceHash": "28bd737fc43749d2be9e4d723e7aafaa1a4cfb0ebdd8d4b56357c04086581801",
+    "text": "Diapason d’éclair"
+  },
+  "content.boon.lightning-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also add their <keyword1>Stun</keyword1> buildup to other enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "23c8e454189129adfa38b28db6feaa079c2312f12565da926ce88762e3adefc1",
+    "text": "Les touches d’<keyword0>Étourdissement</keyword0> ajoutent aussi leur accumulation d’<keyword1>Étourdissement</keyword1> aux autres ennemis ayant une accumulation d’<keyword2>Étourdissement</keyword2>"
+  },
+  "content.boon.loom-beater.name": {
+    "reviewed": true,
+    "source": "Loom Beater",
+    "sourceHash": "01c9dc75e593e3b4b3bf8a230825160bfa309b67c513f28d4b47f23d2f739280",
+    "text": "Peigne de métier"
+  },
+  "content.boon.loom-beater.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, other allies’ <keyword1>Block</keyword1> absorbs the remaining damage",
+    "sourceHash": "c7b749760abbf20d60950e5403d90f03c238cab3fd8ce647e448fa3a3011604e",
+    "text": "Quand le <keyword0>Blocage</keyword0> d’un allié est brisé, le <keyword1>Blocage</keyword1> des autres alliés absorbe les dégâts restants"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -2039,6 +2087,18 @@
     "sourceHash": "616c12fcac8407826037d706e73ef18508ecb9bc6aa17c77f613d72d38ce6f73",
     "text": "L’immunité d’un allié à l’<keyword0>Étourdissement</keyword0> et au <keyword1>Gel</keyword1> protège tous les alliés"
   },
+  "content.boon.rime-spindle.name": {
+    "reviewed": true,
+    "source": "Rime Spindle",
+    "sourceHash": "1217d5ff81b4833513ca91d1fd65632a7932cacdea662a9f076de3ed11ff8a9d",
+    "text": "Fuseau de givre"
+  },
+  "content.boon.rime-spindle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage adds half as much <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "17b766ff7545fde2f7acc7ca0218bf1addc7abf5b77f52f5904e984a028c4d6d",
+    "text": "Les dégâts de <keyword0>Saignement</keyword0> ajoutent la moitié de cette valeur en accumulation de <keyword1>Gel</keyword1>"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2146,6 +2206,18 @@
     "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
     "sourceHash": "b7862dd75ce5b62fb40255fe5185e511d76474d454acfd5f2956a3aeebed52ab",
     "text": "Quand un allié <keyword0>esquive</keyword0>, les autres alliés <keyword1>esquivent</keyword1> la même attaque"
+  },
+  "content.boon.second-sundial.name": {
+    "reviewed": true,
+    "source": "Second Sundial",
+    "sourceHash": "15b2e9e7fe4db4dbbdad236be4641db1a6923e62258caf4ab438e66b3924e50c",
+    "text": "Second cadran solaire"
+  },
+  "content.boon.second-sundial.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks against <keyword1>Blinded</keyword1> enemies play twice",
+    "sourceHash": "cc808498a4bd920b185ecfb2bbd5d6f041999fad97145990fe914cef1336a44c",
+    "text": "Les attaques de <keyword0>Lumière</keyword0> contre les ennemis <keyword1>Aveuglés</keyword1> sont jouées deux fois"
   },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
@@ -2303,6 +2375,18 @@
     "sourceHash": "0f3978969c0b91b89959a4a89f38c8cc210e186f149e4daeabd5ec2ec1f05912",
     "text": "Les touches <keyword0>Physiques</keyword0> appliquent {{value0}} <keyword1>Saignement</keyword1> aux ennemis ayant de l’<keyword2>Armure</keyword2>"
   },
+  "content.boon.starhook.name": {
+    "reviewed": true,
+    "source": "Starhook",
+    "sourceHash": "0a015bd2a92b43dee42cb2c71ab615f0a0344de0105aae614354c7646c9092f3",
+    "text": "Croc d’étoile"
+  },
+  "content.boon.starhook.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from an enemy makes your next attack a <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "9ef3ea3d07a965df6aebfbe8e850a1dda1764ba9ee80c81194d2829b335eaac4",
+    "text": "<keyword0>Dissiper</keyword0> un effet d’un ennemi fait de votre prochaine attaque un <keyword1>Coup critique</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -2338,6 +2422,18 @@
     "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
     "sourceHash": "8ba42ee5948b92a96da587844e112284e4aaa3d75a89cfc618b0a1e22f62ad78",
     "text": "Vos touches <keyword0>Physiques</keyword0> et d’<keyword1>Étourdissement</keyword1> retirent {{value0}} <keyword2>Armure</keyword2> ennemie avant les dégâts"
+  },
+  "content.boon.sunwell-ewer.name": {
+    "reviewed": true,
+    "source": "Sunwell Ewer",
+    "sourceHash": "0b054b71c5fcdee6bfa56c779bb6100af1a8f791fe77fa30d58c63f5ed5a8808",
+    "text": "Aiguière du puits solaire"
+  },
+  "content.boon.sunwell-ewer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally adds the <keyword1>Health</keyword1> restored to your next <keyword2>Light</keyword2> attack",
+    "sourceHash": "341787ea2939244d67acb98a3e7a80a94c72f63aefbf69dba127e8d14f405a80",
+    "text": "<keyword0>Soigner</keyword0> un allié ajoute la <keyword1>Santé</keyword1> rendue à votre prochaine attaque de <keyword2>Lumière</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -2435,6 +2531,18 @@
     "sourceHash": "71b874e8ab8320f6d326b1a599e8bc7b0d030beacaabed91c85c3ab414e7a860",
     "text": "Les <keyword0>Épines</keyword0> ne peuvent pas décroître sous {{value0}}"
   },
+  "content.boon.toadstool-breadbox.name": {
+    "reviewed": true,
+    "source": "Toadstool Breadbox",
+    "sourceHash": "9f879d5e7c0b82c667a4b047bda0ae01eb34bf9b3c5e1d3af52fdec9ff501ee8",
+    "text": "Boîte à pain fongique"
+  },
+  "content.boon.toadstool-breadbox.rule": {
+    "reviewed": true,
+    "source": "Add Trail Bread to your deck; allies receiving <keyword0>Food</keyword0> keep their <keyword1>Block</keyword1> next turn",
+    "sourceHash": "0c237e33f4489c2c434e8669ef77a6deffb685a9b261323477c24274c5a10356",
+    "text": "Ajoute Pain de voyage à votre deck ; les alliés recevant de la <keyword0>Nourriture</keyword0> conservent leur <keyword1>Blocage</keyword1> au prochain tour"
+  },
   "content.boon.treaty-teapot.name": {
     "reviewed": true,
     "source": "Treaty Teapot",
@@ -2482,6 +2590,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
     "sourceHash": "b22c6527e725d9399da8a33afbe2298f99df7a483deb32ca05d85ceb1d61c07f",
     "text": "Les alliés peuvent <keyword0>esquiver</keyword0> la <keyword1>Dissipation</keyword1> ennemie"
+  },
+  "content.boon.vein-survey-chain.name": {
+    "reviewed": true,
+    "source": "Vein Survey Chain",
+    "sourceHash": "88e07cf3a7a94ded530bb0824608c7d648ceaec2b569f8ef3f88f1ad53d0f253",
+    "text": "Chaîne d’arpentage"
+  },
+  "content.boon.vein-survey-chain.rule": {
+    "reviewed": true,
+    "source": "Damage reduced by enemy <keyword0>Armor</keyword0> is dealt to another enemy",
+    "sourceHash": "94e3308f0f84f574f483116c66a5f429b1482116852d5d8107e024990cd79091",
+    "text": "Les dégâts réduits par l’<keyword0>Armure</keyword0> ennemie sont infligés à un autre ennemi"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
