@@ -59,6 +59,24 @@
   gap: var(--screen-item-gap);
 }
 
+.combat-status > .paged-content {
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  width: calc(var(--control-height) * 3 + var(--screen-item-gap) * 2);
+}
+
+.combat-status .pagination {
+  position: absolute;
+  inset: 0;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.combat-status .pagination button {
+  pointer-events: auto;
+}
+
 .combat-status .pagination > span {
   position: absolute;
   width: 1px;

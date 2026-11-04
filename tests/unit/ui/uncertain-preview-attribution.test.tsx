@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, expect, it, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { uncertainBattle as ready } from "../../support/uncertainty";
 import { dispatch, previewCard } from "../../../src/game/engine";
@@ -148,6 +148,31 @@ it("keeps conditional knockouts conditional and gives every visible branch an ac
   expect(screen.getByRole("status").getAttribute("aria-label")).toContain("Possible outcomes");
   expect(screen.getByText("Possible knockout")).toBeTruthy();
   expect(container.querySelector(".knockout-preview")).toBeNull();
+});
+
+it("keeps forecast bars on portraits and announces uncertain outcomes once in the details rail", () => {
+  const game = ready();
+  const forecast = playPreviewModel(
+    game,
+    projectPlay(game, game.battle!.hand[0]!, "enemy-0"),
+    "enemy-0",
+  ).units.get("enemy-0");
+  render(
+    <>
+      <div data-testid="portrait">
+        <TargetPreview forecast={forecast} view="portrait" />
+      </div>
+      <div data-testid="details">
+        <TargetPreview forecast={forecast} view="details" />
+      </div>
+    </>,
+  );
+  expect(within(screen.getByTestId("portrait")).getByRole("progressbar")).toBeTruthy();
+  expect(within(screen.getByTestId("portrait")).queryByText("Possible knockout")).toBeNull();
+  expect(within(screen.getByTestId("details")).queryByRole("progressbar")).toBeNull();
+  expect(within(screen.getByTestId("details")).getByText("Possible knockout")).toBeTruthy();
+  expect(screen.getAllByRole("status")).toHaveLength(1);
+  expect(screen.getByRole("status").getAttribute("aria-label")).toContain("Possible outcomes");
 });
 
 it("preserves exact deterministic forecasts and never treats an unresolved forecast as unchanged", () => {
