@@ -33,8 +33,16 @@ export const recordedTraceDigest = (value: unknown) =>
         if (key === "dodgeFreezeRetaliation" && entry === 0) return undefined;
         if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
         if (key === "encoreProgress" && entry === 0) return undefined;
+        if (key === "sunwellBonus" && entry === 0) return undefined;
         if (
-          ["oasisLeech", "acrobatReady", "moonseedReady", "toothpickReady"].includes(key) &&
+          [
+            "oasisLeech",
+            "acrobatReady",
+            "moonseedReady",
+            "toothpickReady",
+            "breadboxReady",
+            "starhookReady",
+          ].includes(key) &&
           entry === false
         )
           return undefined;

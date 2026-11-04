@@ -141,14 +141,18 @@ export function ordinaryAttackEvaluator(
   const paid = manaCost
     ? { ...state, battle: { ...state.battle, mana: state.battle.mana - manaCost } }
     : state;
-  const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
+  const lastCardCritical =
+    (def.criticalWhenLastCard && state.battle.hand.length === 1) ||
+    (state.boons.includes("starhook") && state.battle.starhookReady);
+  const sunwellBonus =
+    def.damageType === "light" && state.boons.includes("sunwell-ewer") ? state.battle.sunwellBonus : 0;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
   let packet: { origin: "ability"; cardLeech: boolean; primaryAttack: true } | undefined;
   return (enemy: Enemy): OrdinaryHit[] => {
     const magnitude =
-      (value + pendulumBonus(state, actor)) *
+      (value + sunwellBonus + pendulumBonus(state, actor)) *
       (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
     const outcomes: OrdinaryHit[] = [];
     const count = def.alternateDamageType ? 2 : 1;
