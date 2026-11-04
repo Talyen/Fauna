@@ -6,7 +6,7 @@ Apply these rules to every UI change, then read only the affected sections below
 
 - Center the complete composition horizontally and vertically in the available Screen stage, keeping headings, artwork, pagination and actions together
 - Show decision-relevant state and actions; preserve disclosure layers and accessible names; omit promotional copy, decorative chrome, save-success indicators and a visible combat log
-- Use registered shadcn controls, shared tokens and ArtCard; keep artwork uncropped at native ratios and ordinary names/rules outside it
+- Use registered shadcn controls, shared tokens and ArtCard; keep artwork uncropped at native ratios except for the documented battle hand and Combat destination, and keep ordinary names/rules outside it
 - Preserve selected text size, reachable controls, numeric alignment, readable rules and non-scrolling tabs; fit gameplay to the viewport
 - Keep mouse, keyboard and standard-controller flows equivalent; focus and selection remain distinct, and color/sound never carry meaning alone
 - Consume committed gameplay; navigation, previews and animation never grant rewards, save progression or block commands
@@ -41,7 +41,7 @@ Register new controls through the [source checks and registration policy](DESIGN
 
 Artwork cards, the hand fan, targeting, Mana crystals, combat feedback and forecasts on shadcn Progress are explicit gameplay compositions. They use shared tokens and shadcn controls where interactive; this exception permits no general-purpose custom widgets. Theme and minimum hit areas follow the sections below.
 
-ArtCard is the sole artwork surface, with exactly one contained image at its native [aspect ratio](CONTENT.md#artwork-contracts). Never stretch or crop the image; the [battle hand](ui/battle.md#layout) retains its sole authored bottom-edge clipping exception. Battlefield Health bars sit inside the bottom of the artwork; status icons sit centered below the frame; other text/UI stays outside. Ordinary names/rules use hover/focus details, with [inspection](ui/screens.md#creature-and-action-inspection) and [Collection](ui/screens.md#collection) defining disclosure. Use shared color, text-size and radius tokens. [Design-system checks](DESIGN_SYSTEM.md) enforce source ownership; token-based inline styles and local motion/geometry are allowed, with interaction styling/radii assessed in rendered review.
+ArtCard is the sole artwork surface, with one contained image at its native [aspect ratio](CONTENT.md#artwork-contracts). Never stretch or crop the image; the [battle hand](ui/battle.md#layout) retains its authored bottom-edge clipping exception, and the Combat destination combines committed opponents in diagonal artwork slices. Battlefield Health bars sit inside the bottom of the artwork; status icons sit centered below the frame; other text/UI stays outside. Ordinary names/rules use hover/focus details, with [inspection](ui/screens.md#creature-and-action-inspection) and [Collection](ui/screens.md#collection) defining disclosure. Use shared color, text-size and radius tokens. [Design-system checks](DESIGN_SYSTEM.md) enforce source ownership; token-based inline styles and local motion/geometry are allowed, with interaction styling/radii assessed in rendered review.
 
 Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
 

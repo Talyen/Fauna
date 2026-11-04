@@ -82,6 +82,7 @@ export const SCENARIOS = [
   "oathara-collection",
   "oathara-resurrection",
   "journey-room",
+  "journey-three",
   "journey-boss",
   "home",
   "home-talent-points",
@@ -323,10 +324,17 @@ export async function reviewScenario(server, name) {
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
   if (name === "inspection") game = winBattle();
-  if (name === "journey-room" || name === "journey-boss") {
+  if (name === "journey-room" || name === "journey-three" || name === "journey-boss") {
     const { starterJourney, authoredPack } = await server.ssrLoadModule("/tests/support/game.ts");
     game = starterJourney(42, "mossguard");
-    if (name === "journey-boss") {
+    if (name === "journey-three") {
+      const { produce } = await server.ssrLoadModule("immer");
+      game = produce(game, (draft) => {
+        draft.encounter = 2;
+        draft.expedition = { pack: authoredPack(2), recruit: null, lastRoom: "combat" };
+        draft.support = null;
+      });
+    } else if (name === "journey-boss") {
       const { produce } = await server.ssrLoadModule("immer");
       game = produce(game, (draft) => {
         draft.encounter = 9;
