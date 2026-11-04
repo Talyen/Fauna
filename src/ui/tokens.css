@@ -7,6 +7,8 @@
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
+  --menu-panel-fill: rgb(12 10 7);
+  --menu-panel-border: rgb(255 253 245 / 8%);
   --primary: #cd9b51;
   --primary-foreground: #251e18;
   --secondary: var(--card);
