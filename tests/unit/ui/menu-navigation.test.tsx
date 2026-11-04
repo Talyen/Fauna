@@ -117,7 +117,7 @@ it("resumes an unchosen starter draft after restarting and can end it", async ()
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(resumed.store.getState().game).toEqual(started);
     await user.click(screen.getByRole("button", { name: "Open menu" }));
-    await user.click(screen.getByRole("button", { name: "End journey" }));
+    await user.click(screen.getByRole("button", { name: "End Run" }));
     expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
     expect(resumed.store.getState().game.draftStarted).toBe(false);
   } finally {
