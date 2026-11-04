@@ -58,7 +58,7 @@ it("settles height-constrained artwork instead of alternating sizes as observers
   }));
   function Board() {
     const root = useRef<HTMLElement>(null);
-    useBattleArtworkSize(root);
+    useBattleArtworkSize(root, 1);
     return (
       <main ref={root}>
         <div className="enemy-row">
@@ -80,7 +80,7 @@ it("settles height-constrained artwork instead of alternating sizes as observers
     });
     sizes.push(board.style.getPropertyValue("--battle-fitted-width"));
   }
-  expect(new Set(sizes)).toEqual(new Set(["214px"]));
+  expect(new Set(sizes)).toEqual(new Set(["192.6px"]));
   view.unmount();
   expect(disconnect).toHaveBeenCalledOnce();
 });

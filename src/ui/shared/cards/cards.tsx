@@ -186,10 +186,20 @@ export function CreatureCard({
             {preview ? (
               preview
             ) : readout && health !== undefined && (actorId || enemyId) ? (
-              <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
+              <BattleReadout
+                view={battlePortrait ? "portrait" : "all"}
+                health={health}
+                maxHealth={maxHealth ?? info.health}
+                block={block}
+              />
             ) : null}
             {readout ? (
-              <CombatStatus combat={combat} sharedDodge={sharedDodge} sharedImmunity={sharedImmunity} />
+              <CombatStatus
+                combat={combat}
+                block={battlePortrait ? block : 0}
+                sharedDodge={sharedDodge}
+                sharedImmunity={sharedImmunity}
+              />
             ) : null}
           </div>
           {battlePortrait && health !== 0 && combat?.grace ? (

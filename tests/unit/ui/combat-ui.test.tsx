@@ -178,27 +178,29 @@ it("exposes pending talent rewards and remaining control turns in creature detai
   }
 });
 
-it("keeps all simultaneous combat effects reachable through bounded pages", async () => {
-  const { session, user } = await open(
+it("shows up to eight plain combat effect icons without pages or visible counts", async () => {
+  const { session } = await open(
     produce(run(), (state) => {
-      Object.assign(state.team[0]!.combat!, { armor: 3, thorns: 2, dodge: 10, burn: 1, poison: 1, bleed: 1 });
+      state.team[0]!.block = 5;
+      Object.assign(state.team[0]!.combat!, {
+        armor: 3,
+        thorns: 2,
+        dodge: 10,
+        burn: 1,
+        poison: 1,
+        bleed: 1,
+        stun: 1,
+        freeze: 1,
+      });
     }),
   );
   try {
     const effects = document.querySelector(".player-row .combat-status") as HTMLElement;
-    const seen = new Set<string>();
-    for (;;) {
-      effects
-        .querySelectorAll<HTMLElement>("[data-status-id]")
-        .forEach((el) => seen.add(el.dataset.statusId!));
-      const next = within(effects).getByLabelText("Next page", { selector: "button" }) as HTMLButtonElement;
-      if (next.disabled) break;
-      await user.click(next);
-    }
-    expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
-    expect(document.activeElement).toBe(
-      within(effects).getByLabelText("Previous page", { selector: "button" }),
-    );
+    expect(
+      [...effects.querySelectorAll<HTMLElement>("[data-status-id]")].map((el) => el.dataset.statusId),
+    ).toEqual(["block", "armor", "thorns", "dodge", "burn", "poison", "bleed", "stun"]);
+    expect(within(effects).queryByRole("button", { name: "Next page" })).toBeNull();
+    expect(effects.textContent).toBe("");
   } finally {
     await session.dispose();
   }

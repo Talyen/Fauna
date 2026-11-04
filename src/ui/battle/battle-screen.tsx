@@ -111,7 +111,7 @@ export function BattleScreen({
 }) {
   const i18n = useMessages();
   const board = useRef<HTMLElement>(null);
-  useBattleArtworkSize(board);
+  useBattleArtworkSize(board, game.battle.hand.length);
   const interaction = useBattleInteraction({
     game,
     send,

@@ -65,12 +65,6 @@
     "sourceHash": "f801d88f838042fa8c5b4dc1866221894454287eb298ae8b63f857712b31bff7",
     "text": "{{amount}} {{type}}-Schaden"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "9e47b9d6f484d9f0fbbaf4f240014fb4c2b7eb1d6ea3600c3732b9ff45b896ec",
-    "text": "Kampfeffektseiten"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",

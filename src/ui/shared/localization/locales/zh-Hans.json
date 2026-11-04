@@ -65,12 +65,6 @@
     "sourceHash": "3f1cc622c5ff1d2f8cdaf4f6999e15c277d035763740443caca5c09114988437",
     "text": "{{amount}} 点{{type}}伤害"
   },
-  "battle.effectPages": {
-    "reviewed": true,
-    "source": "Combat effect pages",
-    "sourceHash": "de09d4225852b5f7701119057f3ee4fcf05c2996ce47d874d43a1fd8f0fc6984",
-    "text": "战斗效果页面"
-  },
   "battle.effects": {
     "reviewed": true,
     "source": "Combat effects",
