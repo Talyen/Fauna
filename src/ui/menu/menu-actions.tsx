@@ -8,7 +8,6 @@ interface MenuActionsProps {
   active: boolean;
   hasBoons: boolean;
   talentPoints: number;
-  desktop: boolean;
   closing: boolean;
   onContinue: () => void;
   onBoons: () => void;
@@ -22,7 +21,6 @@ export function MenuActions({
   active,
   hasBoons,
   talentPoints,
-  desktop,
   closing,
   onContinue,
   onBoons,
@@ -116,12 +114,10 @@ export function MenuActions({
           </Button>
         </>
       ) : null}
-      {desktop ? (
-        <Button variant="ghost" busy={closing} onClick={onQuit}>
-          <LogOut aria-hidden="true" className="menu-icon-quit" />
-          {i18n.message("menu.quit", "Save & quit")}
-        </Button>
-      ) : null}
+      <Button variant="ghost" busy={closing} onClick={onQuit}>
+        <LogOut aria-hidden="true" className="menu-icon-quit" />
+        {i18n.message("menu.quit", "Save & quit")}
+      </Button>
     </>
   );
 }

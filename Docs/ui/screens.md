@@ -10,7 +10,7 @@ Navigation never changes game revision or undoes committed gameplay.
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, and Settings. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+Main menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Settings and Save & quit. Pause orders Continue, Main menu, Collection, Talents, optional Boons, Settings, End journey and Save & quit. End journey is immediate, without confirmation, and appears only in Pause. In a browser, Save & quit waits for pending saves and attempts to close the tab; browsers may prevent the close, leaving the game usable.
 
 Collection, Talents and Settings open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 

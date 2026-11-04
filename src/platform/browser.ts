@@ -8,6 +8,7 @@ let textEncoder: TextEncoder | undefined;
 export function createBrowserPlatform(storage?: Storage): Platform {
   return {
     desktop: false,
+    closeTab: () => window.close(),
     diagnostics: browserDiagnostics(storage),
     saves: {
       async readCandidates() {
