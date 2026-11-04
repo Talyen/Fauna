@@ -276,8 +276,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0;
-  min-height: calc(var(--control-height) * 2 + 4px);
+  min-height: calc(var(--control-height) + 4px);
   padding-top: 4px;
+}
+/* Keep room for both status controls and a forecast in rows that have effects. */
+.battle-screen :is(.enemy-row, .player-row):has(.combat-status) .combatant-details {
+  min-height: calc(var(--control-height) + var(--text-secondary) * 1.4 + 4px);
 }
 .battle-screen .battle-readout,
 .battle-screen .target-preview {
@@ -384,7 +388,7 @@
 }
 .battle-screen .combat-stats {
   min-width: 0;
-  min-height: var(--control-height);
+  min-height: 0;
   padding-top: 0;
   overflow: visible;
   flex-wrap: wrap;
@@ -657,54 +661,4 @@
   color: var(--foreground);
   font-weight: 600;
   text-align: center;
-}
-
-/* At short heights, move the hand beside the battlefield so both rows can
-   retain collection-sized artwork without covering their external readouts. */
-@media (max-height: 800px) {
-  .battle-screen {
-    --battle-target-rail-width: 120px;
-    --battle-hand-side: 1;
-    --battle-hand-hover-clearance: 0px;
-    --battle-hand-height: 150px;
-    --battle-hand-width: calc(var(--battle-hand-height) * 3 / 4);
-    --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
-    padding-bottom: 0;
-  }
-  .battle-screen .hand-toolbar {
-    justify-content: space-between;
-  }
-  .battle-screen .hand-section {
-    position: fixed;
-    top: 64px;
-    right: var(--page-inline-gutter);
-    bottom: 280px;
-    width: var(--battle-hand-width);
-    max-width: none;
-    padding: 0;
-    translate: none;
-  }
-  .battle-screen .hand {
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .battle-screen .hand-slot {
-    flex-basis: var(--battle-hand-height);
-    transform: none;
-  }
-  .battle-screen .hand-slot + .hand-slot {
-    margin-left: 0;
-    margin-top: min(
-      -30px,
-      calc((100dvh - 344px - var(--battle-hand-height) * var(--hand-count)) / max(1, var(--hand-count) - 1))
-    );
-  }
-  .battle-screen .hand-slot:has(.action-card:hover:not([aria-disabled="true"])),
-  .app[data-focus="visible"] .battle-screen .hand-slot:has(.action-card:focus:not([aria-disabled="true"])) {
-    transform: translateX(-14px);
-  }
-  .battle-screen .hand-slot:has(.action-card.selected) {
-    transform: translateX(-22px);
-  }
 }

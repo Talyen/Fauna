@@ -49,52 +49,31 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
 });
 
-test("short battles keep a seven-card hand usable beside collection-sized artwork", async ({ page }) => {
+test("short battles keep the hand at the bottom and statuses below portraits", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   const fixture = produce(run(7), (draft) => {
-    draft.boons.push("facet-abacus");
-    draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
-    draft.battle!.draw = draft.cards.slice(7).map((card) => card.id);
-    draft.battle!.discard = [];
     draft.battle!.enemies[0]!.combat.thorns = 3;
   });
   await seed(page, fixture);
   await resume(page);
-  const hand = page.locator(".app:not([inert]) .hand .action-card");
-  await expect(hand).toHaveCount(7);
-  const art = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
-  const status = page.locator(".app:not([inert]) .enemy-row .combat-status").first();
   const geometry = await page.evaluate(() => {
-    const art = document
-      .querySelector(".app:not([inert]) .enemy-row .creature-card")!
-      .getBoundingClientRect();
-    const status = document
-      .querySelector(".app:not([inert]) .enemy-row .combat-status")!
-      .getBoundingClientRect();
-    const cards = [...document.querySelectorAll(".app:not([inert]) .hand .action-card")];
+    const active = document.querySelector(".app:not([inert])")!;
+    const art = active.querySelector(".enemy-row .creature-card")!.getBoundingClientRect();
+    const status = active.querySelector(".enemy-row .combat-status")!.getBoundingClientRect();
+    const hand = active.querySelector(".hand")!.getBoundingClientRect();
     return {
-      width: art.width,
+      statusBelow: status.top >= art.bottom - 1,
       centered: Math.abs(status.left + status.width / 2 - art.left - art.width / 2),
-      below: status.top >= art.bottom - 1,
-      selectable: cards.every((card) => {
-        const box = card.getBoundingClientRect();
-        return (
-          document.elementFromPoint(box.left + box.width / 2, box.top + 12)?.closest(".action-card") === card
-        );
-      }),
+      handCenter: Math.abs(hand.left + hand.width / 2 - innerWidth / 2),
+      handBottom: hand.bottom,
+      horizontal: getComputedStyle(active.querySelector(".hand")!).flexDirection === "row",
     };
   });
-  await expect(art).toBeVisible();
-  await expect(status).toBeVisible();
-  expect(geometry.width).toBeGreaterThanOrEqual(300);
-  expect(geometry.below).toBe(true);
+  expect(geometry.statusBelow).toBe(true);
   expect(geometry.centered).toBeLessThanOrEqual(1);
-  expect(geometry.selectable).toBe(true);
-  await hand.first().focus();
-  await page.keyboard.press("s");
-  await expect(hand.nth(1)).toBeFocused();
-  await page.keyboard.press("w");
-  await expect(hand.first()).toBeFocused();
+  expect(geometry.handCenter).toBeLessThanOrEqual(1);
+  expect(geometry.handBottom).toBeGreaterThanOrEqual(720);
+  expect(geometry.horizontal).toBe(true);
 });
 
 test("idle combatant clicks leave the battle and portrait unchanged", async ({ page }) => {
