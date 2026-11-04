@@ -64,7 +64,8 @@
   --compact-control-size: calc(32px * var(--ui-density, 1));
   --compact-icon-size: calc(16px * var(--ui-density, 1));
   --main-menu-logo-width: min(calc(570px * var(--ui-density, 1)), 50vh);
-  --main-menu-button-width: calc(307px * var(--ui-density, 1));
+  /* Calibrate to rendered 720p pixels, not Alchemy's virtual-stage dimensions. */
+  --main-menu-button-width: calc(180px * var(--ui-density, 1));
   --settings-screen-width: calc(896px * var(--ui-density, 1));
   --menu-screen-width: calc(800px * var(--ui-density, 1));
   --screen-heading-width: calc(640px * var(--ui-density, 1));
