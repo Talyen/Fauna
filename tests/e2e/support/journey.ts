@@ -6,7 +6,11 @@ import { policy } from "../../support/game";
 import { state } from "./session";
 
 export async function continueToRecruit(page: Page) {
-  await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+  const earnings = page.getByRole("heading", { name: "Last battle earnings", exact: true });
+  const recruits = page.getByRole("heading", { name: "Choose a Recruit", exact: true });
+  await expect(earnings.or(recruits)).toBeVisible();
+  if (await earnings.isVisible()) await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(recruits).toBeVisible();
 }
 
 export async function step(

@@ -69,7 +69,11 @@ export function CreatureDetails({
         </strong>
       </div>
       <p>
-        <KeywordText text={passive.description} id={`content.species.${kind}.passive.${passive.rank}.rule`} />
+        <KeywordText
+          text={passive.description}
+          id={`content.species.${kind}.passive.${passive.rank}.rule`}
+          lines
+        />
       </p>
     </div>
   );

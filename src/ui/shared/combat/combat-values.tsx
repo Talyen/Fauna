@@ -60,7 +60,7 @@ export function CardRules({
   const rule = cardRulePresentation(card, level, value, power, modifiers);
   return (
     <span className="action-effect">
-      <KeywordText text={rule.text} id={rule.id} structured={rule.message} />
+      <KeywordText text={rule.text} id={rule.id} structured={rule.message} lines />
     </span>
   );
 }

@@ -3,6 +3,12 @@ import { useEffectMetadata } from "./effects/effects";
 import { KEYWORD_DEFINITIONS, type KeywordId } from "../../game/keywords";
 import { useRuleText } from "./localization/rule-catalog";
 import type { RuleMessage } from "./localization/rule-message";
+import { Fragment } from "react";
+
+/** Format complete translated card rules without changing their catalog identity. */
+export function cardRuleLines(text: string) {
+  return text.replace(/\s*[;；]\s*|\s+\/\s+/g, "\n");
+}
 export function Keyword({ id, className }: { id: KeywordId; className?: string }) {
   const i18n = useMessages();
   const metadata = useEffectMetadata([id]);
@@ -18,10 +24,12 @@ export function KeywordText({
   text,
   id,
   structured,
+  lines = false,
 }: {
   text: string;
   id?: string;
   structured?: RuleMessage;
+  lines?: boolean;
 }) {
   const metadata = useEffectMetadata();
   return useRuleText(text, id, structured).map((part, index) =>
@@ -35,6 +43,17 @@ export function KeywordText({
       >
         {part.text}
       </span>
+    ) : lines ? (
+      <Fragment key={index}>
+        {cardRuleLines(part.text)
+          .split("\n")
+          .map((line, lineIndex) => (
+            <Fragment key={lineIndex}>
+              {lineIndex > 0 && <br />}
+              {line}
+            </Fragment>
+          ))}
+      </Fragment>
     ) : (
       part.text
     ),

@@ -70,6 +70,7 @@ function FanSlot({ index, count, children }: { index: number; count: number; chi
     const offset = ((index - (count - 1) / 2) * (MAX_HAND_SIZE - 1)) / span;
     const style = ref.current!.style;
     style.setProperty("--fan-offset", String(offset));
+    style.setProperty("--fan-distance", String(Math.abs(offset)));
     style.setProperty("--fan-order", String(index));
     style.setProperty("--hand-count", String(count));
   }, [index, count]);
@@ -142,6 +143,7 @@ export function BattleScreen({
     chooseCard,
     play,
     cancel,
+    playedCard,
   } = interaction;
   const battle = game.battle;
   const preview = usePlayPreview(game, selected, target);
@@ -350,6 +352,7 @@ export function BattleScreen({
         opening={openingDraw}
         paused={clearSelection}
         cardIds={game.cards.map((card) => card.id)}
+        playedCard={playedCard}
       >
         <section
           className="hand-toolbar"

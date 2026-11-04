@@ -178,6 +178,13 @@ export function layoutViolations() {
           )
           .some(([x, y]) => {
             const hit = document.elementFromPoint(x!, y!);
+            // Battlefield status controls intentionally overlap their own portrait.
+            if (
+              el.matches(".battle-screen .creature-card") &&
+              hit?.closest(".combat-status") &&
+              hit.closest(".creature-wrap") === el.closest(".creature-wrap")
+            )
+              return false;
             return !hit || !el.contains(hit);
           })
       )

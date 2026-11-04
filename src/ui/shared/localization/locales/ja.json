@@ -9503,12 +9503,6 @@
     "sourceHash": "4fc387bcbcc44d14cd45c77ab59710a5f55067532a9cc439f4d3a85481d3554b",
     "text": "主人が攻撃すると敵全員に1の光ダメージを与える"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "f59f73f502b3072f22ebf826ce5934cf0d2c29f47a6f7947cdb434d226bcdaed",
-    "text": "体力 {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

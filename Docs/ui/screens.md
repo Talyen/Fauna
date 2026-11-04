@@ -61,7 +61,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 Show up to three distinct offers at shared artwork sizes. Activating creature artwork recruits immediately; hover/focus shows the passive, and right-click, I or the controller inspection action opens the full kit without recruiting. Each card has an accessible Recruit name. Omit separate Recruit and Begin journey buttons: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
 
-Shared creature hover/focus details show the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names use the short-label shine palette from keywords in the passive rules; icons use a solid keyword color and rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Live combatants with readouts also append current/maximum Health, including inspectable backups; starter and Collection artwork have no live Health readout. Echo minions have no passive; their tooltip contains their name and live Health when readouts are enabled.
+Shared creature hover/focus details show the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names use the short-label shine palette from keywords in the passive rules; icons use a solid keyword color and rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Omit current and maximum Health for combatants and inspectable backups. Echo minions have no passive; their tooltip contains their name.
 
 ## Creature and action inspection
 
@@ -93,7 +93,7 @@ Owned borders use a lightened keyword color; available borders are light neutral
 
 ### Earnings and choices
 
-Show battle earnings above the Recruit offers: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. An unchosen recruitment resumes directly to these offers; a banked full-roster recruit resumes directly at the replacement choice.
+Show a battle earnings screen first, with keyword-colored icons/level labels and compact progress bars, then a separate Gold row and Continue. Continue opens a separate Recruit screen without changing gameplay state. An unchosen recruitment resumes at earnings; a banked full-roster recruit resumes directly at the replacement choice. Material rewards are not currently authored.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Activating starter or reward artwork recruits immediately; hover or focus shows details and the inspection shortcut opens the full kit without recruiting. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 

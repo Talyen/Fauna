@@ -9503,12 +9503,6 @@
     "sourceHash": "baea6bab1f50900ff499b5e4d889bc32266b2f7682793e02f90db6d4a74df4a2",
     "text": "Quand son propriétaire attaque, inflige 1 dégât de Lumière à tous les ennemis"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "bde3adf831c8de5f4b3d0c1d302ec273ceadcdac0f5e9139088f75124af52e35",
-    "text": "Santé {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

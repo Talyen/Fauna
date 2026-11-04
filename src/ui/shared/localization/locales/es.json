@@ -9503,12 +9503,6 @@
     "sourceHash": "2529e7ee0291b0463937973585d0f96a995770eaec29e1d0024b84a506d408c7",
     "text": "Cuando su dueño ataca, inflige 1 de daño de Luz a todos los enemigos"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "4d4bb01f324eea3f901e8e36a57f690bd78311d99d5f710343f6c63ae1fdcd4c",
-    "text": "Salud {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

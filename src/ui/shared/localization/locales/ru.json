@@ -9503,12 +9503,6 @@
     "sourceHash": "a574f7b17cd650279820d7d84122d8c1bfe799c43750517cf2ce919a8514861a",
     "text": "Когда хозяин атакует, наносит 1 урон светом всем врагам"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "289c0623fe3ee05940f1000a154a1c73c68f44391c7706d94bca2f937fc0780a",
-    "text": "Здоровье {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

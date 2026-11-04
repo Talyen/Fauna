@@ -45,7 +45,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await session.dispose();
   });
-  it("shows earnings with recruitment without committing or granting rewards again", async () => {
+  it("separates earnings from recruitment without committing or granting rewards again", async () => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
@@ -59,8 +59,8 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "Last battle earnings", level: 1 })).toBeTruthy();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -74,7 +74,10 @@ describe("player interface", () => {
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(session.store.getState().game).toBe(committed);
     expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
+    expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
+    expect(session.store.getState().game).toBe(committed);
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     const incoming = game.reward!.recruits[0]!;
     const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
@@ -226,7 +229,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.team.map((unit) => unit.species)).toEqual([starter]);
     await session.dispose();
   });
-  it("shows current Health during pointer and keyboard inspection of battle creatures and backups", async () => {
+  it("omits Health totals during pointer and keyboard inspection of battle creatures and backups", async () => {
     const game = produce(teamRun(7, ["mossguard", "emberback", "prismram"]), (d) => {
       d.team[0]!.health = 7;
       d.team[1]!.health = 19;
@@ -253,7 +256,7 @@ describe("player interface", () => {
       });
     });
     const user = userEvent.setup();
-    const inspect = async (creature: HTMLElement, name: string, health?: string) => {
+    const inspect = async (creature: HTMLElement, name: string) => {
       for (const input of ["hover", "keyboard"]) {
         if (input === "hover") await user.hover(creature);
         else {
@@ -261,8 +264,7 @@ describe("player interface", () => {
           act(() => creature.focus());
         }
         await waitFor(() => expect(screen.getByRole("tooltip").textContent).toContain(name));
-        if (health) expect(screen.getByRole("tooltip").textContent).toContain(`Health ${health}`);
-        else expect(screen.getByRole("tooltip").textContent).not.toMatch(/Health \d+\/\d+/);
+        expect(screen.getByRole("tooltip").textContent).not.toMatch(/Health \d+\/\d+/);
         if (input === "hover")
           await user.hover(
             creature.closest('[role="dialog"]') ?? screen.getByRole("main", { name: "Battlefield" }),
@@ -283,21 +285,17 @@ describe("player interface", () => {
       try {
         await user.click(screen.getByRole("button", { name: "Continue" }));
         if (fixture.team[2]!.health > 0) {
-          for (const [id, name, block, health] of [
-            ["ally-0", "Mossguard", 0, `7/${species("mossguard").health}`],
-            ["ally-1", "Emberback", 4, `19/${species("emberback").health}`],
+          for (const [id, name, block] of [
+            ["ally-0", "Mossguard", 0],
+            ["ally-1", "Emberback", 4],
           ] as const) {
             const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
-            await inspect(frame.querySelector<HTMLButtonElement>("button")!, name, health);
+            await inspect(frame.querySelector<HTMLButtonElement>("button")!, name);
             if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
           }
         } else {
           expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
-          await inspect(
-            screen.getByRole("button", { name: "Reedstag, backup" }),
-            "Reedstag",
-            `11/${species("reedstag").health}`,
-          );
+          await inspect(screen.getByRole("button", { name: "Reedstag, backup" }), "Reedstag");
           expect(
             document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]'),
           ).toBeTruthy();

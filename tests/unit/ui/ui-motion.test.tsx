@@ -172,6 +172,43 @@ it.each([true, false])("only flies an unplayed Consume card to Discard (played: 
   view.rerender(hand(false));
   expect(document.querySelectorAll(".card-transfer")).toHaveLength(played ? 0 : 1);
 });
+it("does not discard a played card when the rest of the hand transfers", () => {
+  if (!HTMLElement.prototype.animate)
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
+  motionEnvironment();
+  const playedCard = { current: null as string | null };
+  const hand = (visible: boolean) => (
+    <main className="battle-screen">
+      <HandMotion
+        revision={visible ? 1 : 2}
+        turn={visible ? 1 : 2}
+        paused={false}
+        cardIds={["one", "two"]}
+        playedCard={playedCard}
+      >
+        <div className="hand">
+          {visible &&
+            ["one", "two"].map((id) => (
+              <div className="hand-slot" key={id}>
+                <div className="hand-reflow">
+                  <Button className="action-card" data-card-id={id}>
+                    {id}
+                  </Button>
+                </div>
+              </div>
+            ))}
+        </div>
+      </HandMotion>
+      <Button data-pile="discard">Discard</Button>
+    </main>
+  );
+  const view = render(hand(true));
+  playedCard.current = "one";
+  view.rerender(hand(false));
+  const transfers = document.querySelectorAll<HTMLElement>(".card-transfer");
+  expect([...transfers].map((node) => node.dataset.cardId)).toEqual(["two"]);
+  expect(playedCard.current).toBeNull();
+});
 it("crossfade copies never duplicate IDs or input ownership, and new input clears them", () => {
   if (!HTMLElement.prototype.animate)
     HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;

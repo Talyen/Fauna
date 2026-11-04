@@ -2,7 +2,7 @@ import { useMessages } from "../shared/localization/message-context";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Plus, Star } from "lucide-react";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
@@ -66,7 +66,9 @@ function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId })
 export function Rewards({ game, send, inspect, visible = true }: Props) {
   const i18n = useMessages();
   const selectedRecruit = game.phase === "recruit" ? game.reward.selectedRecruit : undefined;
+  const [showEarnings, setShowEarnings] = useState(game.phase === "recruit" && selectedRecruit === undefined);
   const choices = useRef<HTMLElement>(null);
+  const continueButton = useRef<HTMLButtonElement>(null);
   const choose = (element: HTMLElement, command: Command) => {
     // Mark the outgoing surface before dispatch so its transition snapshot carries the choice.
     const option = element.closest<HTMLElement>(".reward-option");
@@ -75,10 +77,26 @@ export function Rewards({ game, send, inspect, visible = true }: Props) {
   };
   useLayoutEffect(() => {
     if (!visible || selectedRecruit !== undefined) return;
-    returnFocus(choices.current?.querySelector<HTMLButtonElement>(".creature-card, .boon-choice") ?? null);
-  }, [selectedRecruit, visible]);
+    returnFocus(
+      showEarnings
+        ? continueButton.current
+        : (choices.current?.querySelector<HTMLButtonElement>(".creature-card, .boon-choice") ?? null),
+    );
+  }, [selectedRecruit, showEarnings, visible]);
   if (game.phase === "recruit" && selectedRecruit !== undefined)
     return <RecruitTeam game={game} incoming={selectedRecruit} send={send} inspect={inspect} />;
+  if (game.phase === "recruit" && showEarnings)
+    return (
+      <ResultPresentation>
+        <Screen className="reward-screen battle-reward-summary">
+          <ScreenHeading>{i18n.message("earnings.lastBattle", "Last battle earnings")}</ScreenHeading>
+          <BattleEarnings game={game} detailed />
+          <Button ref={continueButton} className="primary-menu-action" onClick={() => setShowEarnings(false)}>
+            {i18n.message("menu.continue", "Continue")}
+          </Button>
+        </Screen>
+      </ResultPresentation>
+    );
   const reward = game.reward;
   const recruiting = game.phase === "recruit";
   return (
@@ -91,7 +109,6 @@ export function Rewards({ game, send, inspect, visible = true }: Props) {
               : i18n.message("rewards.chooseBoon", "Choose a Boon")}
           </ScreenHeading>
         </header>
-        {recruiting ? <BattleEarnings game={game} detailed /> : null}
         <section className="reward-choices" ref={choices}>
           <div className="reward-choice-content">
             {recruiting ? (

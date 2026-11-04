@@ -9503,12 +9503,6 @@
     "sourceHash": "6bb97deaf027befe5c97aef2fabab94bd0efe16f390dd2c41b0a0225eeb7d54b",
     "text": "Quando seu dono ataca, cause 1 de dano de Luz a todos os inimigos"
   },
-  "creature.healthFraction": {
-    "reviewed": true,
-    "source": "Health {{health}}/{{maximum}}",
-    "sourceHash": "f922d00cf6a046d729e419909da8acf92217d37066da8a4c52435e5ed5adc0ab",
-    "text": "Saúde {{health}}/{{maximum}}"
-  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
