@@ -72,7 +72,7 @@ export function MenuActions({
         {i18n.message("menu.talents", "Talents")}
         {talentPoints > 0 ? (
           <span
-            className="menu-talent-points"
+            className={home ? "talent-category-notice" : "menu-talent-points"}
             id={`menu-talent-points-${home}`}
             aria-label={i18n.plural(
               "menu.talentPoints",
@@ -80,7 +80,7 @@ export function MenuActions({
               talentPoints,
             )}
           >
-            {talentPoints}
+            {home ? null : talentPoints}
           </span>
         ) : null}
       </Button>

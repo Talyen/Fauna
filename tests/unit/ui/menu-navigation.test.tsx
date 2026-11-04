@@ -140,22 +140,23 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
   await session.load();
   const user = userEvent.setup();
   render(<App session={session} />);
-  const cue = (available: boolean) => {
+  const cue = (available: boolean, origin: "home" | "pause") => {
     const button = screen.getByRole("button", { name: "Talents" });
     expect(button.hasAttribute("aria-describedby")).toBe(available);
     if (available) {
       const description = document.getElementById(button.getAttribute("aria-describedby")!);
       expect(description?.getAttribute("aria-label")).toBe("1 talent point available");
-      expect(description?.textContent).toBe("1");
+      expect(description?.textContent).toBe(origin === "home" ? "" : "1");
+      if (origin === "home") expect(description?.classList.contains("talent-category-notice")).toBe(true);
     } else expect(screen.queryByLabelText("1 talent point available")).toBeNull();
   };
   try {
-    for (const origin of ["home", "pause"]) {
+    for (const origin of ["home", "pause"] as const) {
       if (origin === "pause") {
         await user.click(screen.getByRole("button", { name: "Continue" }));
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
-      cue(true);
+      cue(true, origin);
       await user.click(screen.getByRole("button", { name: "Talents" }));
       const physical = screen.getByRole("button", { name: "Physical talents" });
       expect(document.getElementById(physical.getAttribute("aria-describedby")!)?.textContent).toBe(
@@ -186,9 +187,9 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     await user.click(fists);
     expect(session.store.getState().game).toBe(bought);
     await user.keyboard("{Escape}{Escape}");
-    cue(false);
+    cue(false, "pause");
     await user.click(screen.getByRole("button", { name: "Main menu" }));
-    cue(false);
+    cue(false, "home");
     await user.click(screen.getByRole("button", { name: "Talents" }));
     await user.click(screen.getByRole("button", { name: "Physical talents" }));
     await user.click(screen.getByRole("button", { name: "Reset Physical talents" }));
@@ -204,10 +205,10 @@ it("keeps both menus' talent cues in sync with purchases, rejection and category
     await user.keyboard("{Escape}");
     expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
     await user.keyboard("{Escape}");
-    cue(true);
+    cue(true, "home");
     await user.click(screen.getByRole("button", { name: "Continue" }));
     await user.click(screen.getByRole("button", { name: "Open menu" }));
-    cue(true);
+    cue(true, "pause");
   } finally {
     cleanup();
     await session.dispose();
