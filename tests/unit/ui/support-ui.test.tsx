@@ -12,8 +12,27 @@ import { Rewards } from "../../../src/ui/expedition/rewards";
 import { OwnedBoons } from "../../../src/ui/expedition/owned-boons";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { BOONS } from "../../../src/game/content";
+import { assetUrl } from "../../../src/ui/shared/assets";
 const render = (ui: ReactElement) => renderUI(ui, { wrapper: TooltipProvider });
 afterEach(cleanup);
+it.each([1, 2, 3])("shows the %i committed combat opponents and starts their battle", (count) => {
+  const pack = ["emberback", "pollenmoth", "prismram"] as const;
+  const game = produce(merchant(), (draft) => {
+    draft.expedition!.pack = pack.slice(0, count);
+  });
+  const send = vi.fn(() => true);
+  render(<TeamSelection game={game} send={send} inspect={() => {}} />);
+  const combat = screen.getByRole("button", { name: "Combat" });
+  expect(combat.getAttribute("aria-describedby")).toBeTruthy();
+  expect(document.getElementById(combat.getAttribute("aria-describedby")!)?.textContent).toBe(
+    ["Emberback", "Pollenmoth", "Prismram"].slice(0, count).join(", "),
+  );
+  expect(Array.from(combat.querySelectorAll("img"), (image) => image.getAttribute("src"))).toEqual(
+    pack.slice(0, count).map((kind) => assetUrl(`creature.${kind}`)),
+  );
+  fireEvent.click(combat);
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "beginBattle" });
+});
 function requireMerchant(game: GameState) {
   if (game.phase !== "support") throw new Error("Expected an active Merchant visit.");
   return game;

@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { useId } from "react";
 import { creatureKeywords } from "../shared/effects/palettes";
 import { ShineText } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
@@ -31,8 +32,10 @@ export function TeamSelection({
   purchase,
 }: Props & { recovery?: GameEvent[]; purchase?: StateAt<"support">["support"] }) {
   const i18n = useMessages();
+  const opponentsId = useId();
   const boss = bossEncounter(game);
-  const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;
+  const enemies = encounterSource(game).enemies;
+  const bossEnemy = boss ? enemies[0]! : null;
   const bossName =
     bossEnemy && bossEnemy.name === species(bossEnemy.species).name
       ? i18n.content(`content.species.${bossEnemy.species}.name`, bossEnemy.name)
@@ -112,14 +115,23 @@ export function TeamSelection({
               </TooltipContent>
             </Tooltip>
           ) : (
-            <ArtCard
-              aspect="creature"
-              artwork={assetUrl("encounter.combat")}
-              data-encounter
-              effectKeywords={["physical"]}
-              aria-label={i18n.message("journey.combat", "Combat")}
-              onClick={() => send({ type: "beginBattle" })}
-            />
+            <>
+              <ArtCard
+                aspect="creature"
+                artwork={assetUrl(`creature.${enemies[0]!.species}`)}
+                artworkSlices={enemies.map((enemy) => assetUrl(`creature.${enemy.species}`))}
+                data-encounter
+                effectKeywords={["physical"]}
+                aria-label={i18n.message("journey.combat", "Combat")}
+                aria-describedby={opponentsId}
+                onClick={() => send({ type: "beginBattle" })}
+              />
+              <span id={opponentsId} className="sr-only">
+                {enemies
+                  .map((enemy) => i18n.content(`content.species.${enemy.species}.name`, enemy.name))
+                  .join(", ")}
+              </span>
+            </>
           )}
           <h2>
             {bossEnemy ? (
