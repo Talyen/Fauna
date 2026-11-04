@@ -7,7 +7,7 @@ import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
 import { assetUrl } from "../shared/assets";
 import { KeywordText } from "../shared/keyword-text";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import {
   Swords,
   ShieldPlus,
@@ -37,24 +37,17 @@ import {
   Link,
   Gem,
   Battery,
+  RotateCcw,
 } from "lucide-react";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
-import {
-  KEYWORDS,
-  keywordLabel,
-  keywordProgress,
-  availablePoints,
-  canBuyTalent,
-  type Keyword,
-} from "../../game/progression";
+import { KEYWORDS, keywordLabel, availablePoints, canBuyTalent, type Keyword } from "../../game/progression";
 import { TALENTS } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/navigation/input";
-import { Progress } from "../shared/progress";
 
 const originalTalentSymbols = {
   physical: [Swords, ShieldPlus],
@@ -154,7 +147,6 @@ export function Talents({
       if (controlsRef) controlsRef.current = null;
     };
   }, [keyword, controlsRef, treeReset]);
-  const p = keywordProgress(keyword ? (game.keywordXP[keyword] ?? 0) : 0);
   const points = keyword ? availablePoints(game, keyword) : 0;
   const tree = keyword ? talentTrees.get(keyword)! : undefined;
   return (
@@ -166,20 +158,30 @@ export function Talents({
     >
       <EffectBaseline palette={keyword ? effectPalette([keyword]) : null} />
       <header className="page-heading talents-heading">
-        <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>
+        <ScreenHeading
+          back={keyword ? () => setKeyword(null) : openMenu}
+          openMenu={openMenu}
+          trailing={
+            keyword ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="compact-icon-control"
+                aria-label={i18n.message("talents.reset", "Reset {{keyword}} talents", {
+                  keyword: keywordName(keyword),
+                })}
+                disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
+                onClick={() => {
+                  if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
+                }}
+              >
+                <RotateCcw aria-hidden="true" />
+              </Button>
+            ) : null
+          }
+        >
           {keyword ? keywordName(keyword) : i18n.message("menu.talents", "Talents")}
         </ScreenHeading>
-        {keyword ? (
-          <Button
-            variant="ghost"
-            disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
-            onClick={() => {
-              if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
-            }}
-          >
-            {i18n.message("talents.reset", "Reset {{keyword}} talents", { keyword: keywordName(keyword) })}
-          </Button>
-        ) : null}
       </header>
       {keyword === null ? (
         <div className="talent-overview-viewport">
@@ -221,29 +223,6 @@ export function Talents({
         </div>
       ) : (
         <>
-          <div className="talent-progress-group">
-            <div className="talent-progress">
-              <span aria-live="polite" aria-atomic="true">
-                {i18n.plural(
-                  "talents.pointsAvailable",
-                  { one: "{{count}} point available", other: "{{count}} points available" },
-                  points,
-                )}
-              </span>
-              <span>
-                {i18n.message("talents.xpProgress", "{{current}} / {{required}} XP", {
-                  current: p.current,
-                  required: p.required,
-                })}
-              </span>
-            </div>
-            <Progress
-              value={p.current}
-              maximum={p.required}
-              label={i18n.message("talents.keywordXp", "{{keyword}} XP", { keyword: keywordName(keyword) })}
-              tone={keyword}
-            />
-          </div>
           <PagedItems
             key={`${keyword}:${treeReset}`}
             className="talent-tree"
@@ -302,7 +281,7 @@ export function Talents({
                             aria-disabled={!available}
                             aria-describedby={`${t.id}-effect ${t.id}-status`}
                             data-owned={owned}
-                            data-keyword={keyword}
+                            style={{ "--talent-accent": `var(--keyword-${keyword})` } as CSSProperties}
                             data-purchased={purchased === t.id || undefined}
                             data-available={available}
                             onClick={() => {
@@ -314,9 +293,7 @@ export function Talents({
                               <span data-keyword={keyword}>
                                 <TalentSymbol className="talent-icon" aria-hidden="true" />
                               </span>
-                              <span className="talent-name" data-keyword={keyword}>
-                                {talentName}
-                              </span>
+                              <span className="talent-name">{talentName}</span>
                             </span>
                             <span className="talent-effect" id={`${t.id}-effect`}>
                               <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
@@ -344,6 +321,15 @@ export function Talents({
               </div>
             )}
           </PagedItems>
+          <div className="talent-points" aria-live="polite" aria-atomic="true">
+            {points > 0
+              ? i18n.plural(
+                  "talents.pointsAvailable",
+                  { one: "{{count}} point available", other: "{{count}} points available" },
+                  points,
+                )
+              : null}
+          </div>
         </>
       )}
     </Screen>

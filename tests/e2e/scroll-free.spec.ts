@@ -69,7 +69,7 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
   for (let count = 0; count < 100; count++) {
     await check(count);
     const next = root.getByRole("button", { name: "Next page", exact: true });
-    if (!(await next.count()) || (await next.isDisabled())) return;
+    if (!(await next.count())) return;
     await next.click();
   }
   throw new Error("Pagination did not terminate");
@@ -132,7 +132,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         await expectScrollFree(page);
         const cards = page.locator(".collection-grid .creature-card");
         const count = await cards.count();
-        const lastPage = await page.getByRole("button", { name: "Next page", exact: true }).isDisabled();
+        const lastPage = !(await page.getByRole("button", { name: "Next page", exact: true }).count());
         const indices = exhaustive
           ? Array.from({ length: count }, (_, index) => index)
           : [...new Set([...(pageIndex === 0 ? [0] : []), ...(lastPage ? [count - 1] : [])])];

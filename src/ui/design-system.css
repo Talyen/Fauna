@@ -413,8 +413,7 @@ h3 {
   font-weight: 600;
   overflow-wrap: anywhere;
 }
-.card-details p,
-.talent-effect {
+.card-details p {
   text-align: left;
 }
 .game-button.status-icon {
@@ -517,7 +516,9 @@ h3 {
   }
 }
 .game-button.talent-node {
-  background: var(--background);
+  background: var(--talent-card-surface);
+  border: 2px solid var(--talent-card-border);
+  box-shadow: 0 4px 14px var(--talent-card-shadow);
   color: var(--foreground);
   scale: 1;
   transition:
@@ -528,13 +529,18 @@ h3 {
 :root[data-focus="visible"] .game-button.talent-node:focus {
   scale: 1;
 }
-.game-button.talent-node[aria-disabled="true"][data-owned="false"] {
+.game-button.control-outline.talent-node[aria-disabled="true"] {
+  background: var(--talent-card-surface);
+  color: var(--foreground);
   opacity: 1;
   cursor: default;
 }
 .game-button.talent-node[data-owned="true"] {
   opacity: 1;
-  border-color: var(--primary);
+  border-color: color-mix(in srgb, var(--talent-accent) 45%, var(--talent-card-accent-light));
+}
+.game-button.talent-node[data-available="true"] {
+  border-color: var(--talent-card-available-border);
 }
 .game-button.talent-node[data-available="true"] .talent-status {
   color: var(--primary);
@@ -569,11 +575,8 @@ h3 {
     border-color: var(--foreground);
   }
   to {
-    border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--talent-accent) 45%, var(--talent-card-accent-light));
   }
-}
-.collection-pagination button[data-unavailable="true"] {
-  visibility: hidden;
 }
 .ui-tabs-list .ui-tab {
   gap: var(--space-2);

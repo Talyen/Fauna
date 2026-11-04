@@ -11056,12 +11056,6 @@
     "sourceHash": "59c29e6c48d4b7e49e852a416ad5c8bbaec0545cdea3f7d56b8635da40bee978",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.keywordXp": {
-    "reviewed": true,
-    "source": "{{keyword}} XP",
-    "sourceHash": "7a5d34d409bb550ea0d8b57f4ab44c5ff71bbc5909188e38c71b848d8f5e2123",
-    "text": "{{keyword}}の経験値"
-  },
   "talents.pages": {
     "reviewed": true,
     "source": "Talent pages",
@@ -11126,11 +11120,5 @@
     "source": "{{name}}, unlocked",
     "sourceHash": "2184591cc309a616e8676e47fe0b2fabe75b1d779e83c89f89e654d8ca23a394",
     "text": "{{name}}、解放済み"
-  },
-  "talents.xpProgress": {
-    "reviewed": true,
-    "source": "{{current}} / {{required}} XP",
-    "sourceHash": "f8a97e9c2e60be6afe6b89d04f4283ba746822996ce38af88f39f6b99ff04f78",
-    "text": "{{current}} / {{required}} 経験値"
   }
 }

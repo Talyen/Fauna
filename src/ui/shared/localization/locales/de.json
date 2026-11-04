@@ -11057,12 +11057,6 @@
     "sourceHash": "de74b4e831ce0b51bd05d15b6d60ae40707b7115cdfc2a089107723639698ca4",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.keywordXp": {
-    "reviewed": true,
-    "source": "{{keyword}} XP",
-    "sourceHash": "250392c61b9c8c76dc82e2614d2c86f7e9d01f7ba8865bfa88a828001b044896",
-    "text": "{{keyword}}-EP"
-  },
   "talents.pages": {
     "reviewed": true,
     "source": "Talent pages",
@@ -11128,11 +11122,5 @@
     "source": "{{name}}, unlocked",
     "sourceHash": "b816abec569d2dab9aa7bebbebf7e9ff849374c785a1130dbb13e8fd9d83b949",
     "text": "{{name}}, freigeschaltet"
-  },
-  "talents.xpProgress": {
-    "reviewed": true,
-    "source": "{{current}} / {{required}} XP",
-    "sourceHash": "66eb9b9a00a22bd06ee7b0465134a93dfa457958ec117f34d71a09e217fbd762",
-    "text": "{{current}} / {{required}} EP"
   }
 }

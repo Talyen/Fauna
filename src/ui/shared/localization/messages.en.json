@@ -950,9 +950,6 @@
   "talents.detailTitle": {
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.keywordXp": {
-    "text": "{{keyword}} XP"
-  },
   "talents.pages": {
     "text": "Talent pages"
   },
@@ -985,8 +982,5 @@
   },
   "talents.unlockedName": {
     "text": "{{name}}, unlocked"
-  },
-  "talents.xpProgress": {
-    "text": "{{current}} / {{required}} XP"
   }
 }

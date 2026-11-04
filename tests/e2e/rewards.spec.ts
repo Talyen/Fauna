@@ -110,7 +110,7 @@ test("many earned keywords remain pageable beside the Recruit choice", async ({ 
     name: "Next page",
   });
   let pages = 1;
-  while (await next.isEnabled()) {
+  while (await next.count()) {
     await next.click();
     pages++;
   }

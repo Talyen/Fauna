@@ -11056,12 +11056,6 @@
     "sourceHash": "ee5865e754e46d719c08a815ed5905785f1f4cf8af1191b168d0ab59b50bd7d5",
     "text": "{{keyword}} · {{name}}"
   },
-  "talents.keywordXp": {
-    "reviewed": true,
-    "source": "{{keyword}} XP",
-    "sourceHash": "dac06e4d0f179724abbeba370abf4c5be7f3fa7b5845b549a3fa52b6de52444d",
-    "text": "{{keyword}}经验"
-  },
   "talents.pages": {
     "reviewed": true,
     "source": "Talent pages",
@@ -11126,11 +11120,5 @@
     "source": "{{name}}, unlocked",
     "sourceHash": "5fbaff5b2a1dcf03c64c4d1e07183e4d1b742d95cb9a163bb9adfd4082d21150",
     "text": "{{name}}，已解锁"
-  },
-  "talents.xpProgress": {
-    "reviewed": true,
-    "source": "{{current}} / {{required}} XP",
-    "sourceHash": "93db719733c10e760759ea9d09430e8a0b7a9051b8639ca57f773d2caf44d37c",
-    "text": "{{current}} / {{required}} 经验"
   }
 }
