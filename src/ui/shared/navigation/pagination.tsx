@@ -42,7 +42,7 @@ export function usePagination(
         ...current,
         [group]: start,
       }));
-    if (!cache || !artwork || cache.ready(artwork(start, start + capacity))) update();
+    if (!cache || !artwork || cache.canAcquire(artwork(start, start + capacity))) update();
     else startTransition(update);
   };
   if (anchor >= count && anchor !== 0) setAnchors((current) => ({ ...current, [group]: page * capacity }));

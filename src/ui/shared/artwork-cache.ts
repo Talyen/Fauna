@@ -245,8 +245,13 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
   document.addEventListener("visibilitychange", visibility);
 
   return {
-    ready(urls: readonly string[]) {
-      return urls.every((url) => entries.get(url)?.state === "ready");
+    canAcquire(urls: readonly string[]) {
+      const needed = new Map<string, number>();
+      for (const url of urls) needed.set(url, (needed.get(url) ?? 0) + 1);
+      return [...needed].every(([url, count]) => {
+        const entry = entries.get(url);
+        return entry?.state === "ready" && free(entry).length >= count;
+      });
     },
     acquire(url: string) {
       const entry = entries.get(url);

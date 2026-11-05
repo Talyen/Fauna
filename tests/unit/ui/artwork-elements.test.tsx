@@ -52,6 +52,8 @@ async function prepare(urls: string[]) {
 
 it("mounts the exact decoded elements and keeps same-source consumers separate across Suspense retries", async () => {
   await prepare(["art"]);
+  expect(cache.canAcquire(["art"])).toBe(true);
+  expect(cache.canAcquire(["art", "art"])).toBe(false);
   const view = render(
     <ArtworkContext value={cache}>
       <Suspense fallback={<p>Preparing</p>}>
