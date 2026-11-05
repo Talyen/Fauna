@@ -17,7 +17,15 @@ import { freshCombat } from "./combat/index";
 import { highestHealth } from "./combat/state";
 import { shuffle, roll } from "./random";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
-import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
+import type {
+  CaptureBattle,
+  GameEvent,
+  GameState,
+  Lifecycle,
+  BattleState,
+  RewardState,
+  StateAt,
+} from "./types";
 import { rebuildCards } from "./team";
 import { replenishJourneyCards } from "./journey-cards";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
@@ -213,7 +221,7 @@ function finishBattle(state: BattleState, defeated: boolean) {
     });
 }
 
-export function settle(state: BattleState, events: GameEvent[]): boolean {
+export function settle(state: BattleState, events: GameEvent[], capture?: CaptureBattle): boolean {
   removeDepartedMinions(state);
   if (!state.team.some((c) => c.health > 0) && !state.reserves.some((c) => c.health > 0)) {
     finishBattle(state, true);
@@ -228,6 +236,7 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
         creature.block = 0;
         creature.combat = freshCombat();
       }
+    capture?.(state);
     finishBattle(state, false);
     events.push({
       kind: finalEncounter(state) ? "victory" : "reward",

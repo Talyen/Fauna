@@ -146,7 +146,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[], capture?: Ca
     for (const minion of actingMinions) {
       tickStatuses(draft, minion, events);
       capture?.(draft);
-      if (settle(draft, events)) return;
+      if (settle(draft, events, capture)) return;
       if (minion.health <= 0) continue;
       decayBlock(draft, minion, events);
       startAction(minion, events, draft);
@@ -156,7 +156,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[], capture?: Ca
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
       capture?.(draft);
-      if (settle(draft, events)) return;
+      if (settle(draft, events, capture)) return;
       if (enemy.health <= 0) continue;
       decayBlock(draft, enemy, events);
       const canAct = startAction(enemy, events, draft, false);
@@ -186,7 +186,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[], capture?: Ca
           if (lastCardInHand) lastWarmth(draft, true, events);
           promoteBufferedCards(deck, MAX_HAND_SIZE);
           capture?.(draft);
-          if (settle(draft, events)) return;
+          if (settle(draft, events, capture)) return;
         }
         continue;
       }
@@ -216,7 +216,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[], capture?: Ca
       playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events, capture);
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       capture?.(draft);
-      if (settle(draft, events)) return;
+      if (settle(draft, events, capture)) return;
     }
     unhurried(draft, true, events);
     const ticking = battlefield(draft, "player");
@@ -225,7 +225,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[], capture?: Ca
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);
       capture?.(draft);
-      if (settle(draft, events)) return;
+      if (settle(draft, events, capture)) return;
     }
     const starting = battlefield(draft, "player");
     starting.push(...draft.reserves);

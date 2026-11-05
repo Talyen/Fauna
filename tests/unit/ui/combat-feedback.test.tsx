@@ -111,6 +111,32 @@ it("captures detached accepted checkpoints without changing combat, RNG, preview
   expect(rejected.state.rng).toBe(state.rng);
   expect(rejected).not.toHaveProperty("battleFrames");
 });
+it("retains committed victory recovery alongside the final hit before clearing combat", () => {
+  const state = checkpoint();
+  state.talents = ["health.vitality"];
+  state.team[0]!.health -= 6;
+  state.battle.enemies.forEach((enemy, index) => {
+    enemy.health = index === 0 ? 1 : 0;
+    enemy.block = 0;
+  });
+  const command = {
+    type: "play",
+    cardId: state.battle.hand[0]!,
+    targetId: "enemy-0",
+    autoEndTurn: false,
+  } as const;
+  const result = dispatch(state, command, false, true);
+  expect(result.state).toEqual(dispatch(state, command).state);
+  if (!result.accepted) throw new Error(result.reason);
+  const frames = result.battleFrames!;
+  const numeric = (events: GameEvent[]) =>
+    events.filter((event) => ["damage", "heal", "block"].includes(event.kind));
+  expect(numeric(frames.flatMap((frame) => frame.events))).toEqual(numeric(result.events));
+  expect(
+    frames.some((frame) => frame.events.some((event) => event.kind === "heal" && event.amount === 4)),
+  ).toBe(true);
+  expect(frames.at(-1)!.state.team[0]!.health).toBe(result.state.team[0]!.health);
+});
 it("presents wind-up, committed impact, recovery and the next action in order", () => {
   timing();
   const state = checkpoint();

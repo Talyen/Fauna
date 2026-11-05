@@ -330,7 +330,7 @@ function resolve(
         afterPlayerCard(draft, events, def.species === null ? undefined : actor, spentLastMana);
         fillHand(draft);
         capture?.(draft);
-        if (!preview) settle(draft, events);
+        if (!preview) settle(draft, events, capture);
         break;
       }
       case "devWinBattle": {
