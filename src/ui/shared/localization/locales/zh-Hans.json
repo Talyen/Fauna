@@ -4903,39 +4903,39 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
-    "sourceHash": "df00940bf28747d4f279aa5c29d7d62b0fabea6c37511eea51115226abc886af",
-    "text": "按自身层数减少<keyword2>格挡</keyword2>后剩余的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害; 每次减少伤害时失去{{value0}}层"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage by its stacks; Loses {{value0}} stack when used",
+    "sourceHash": "11977486076270176f91f41e624bd8cee96583ff7a8c3653f580426298e0049a",
+    "text": "按层数减少<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害；生效时失去{{value0}}层"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "c99d5bfb5810e4f1144d7747785400ecbe2e3d3d7e08d33fe89c87dbd2d5072b",
-    "text": "将下一次受到的技能攻击返还给攻击者; 防止该攻击对你造成伤害和有害效果; 被<keyword0>反射</keyword0>的攻击不能再次<keyword1>反射</keyword1>; 持续至使用或被<keyword2>驱散</keyword2>; 不叠加"
+    "source": "Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "e728ec249b5647c43897b821af948e35e266edcb7279f1a49686a9ae521520a6",
+    "text": "将下一次攻击返还给攻击者，自身不受到该攻击的伤害或有害效果"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
-    "sourceHash": "1d6aba027e3b85f3b2d963a91e205bfa092d259014c916a8a49dcbced65e8b67",
-    "text": "<keyword0>流血</keyword0>命中会增加等同于<keyword1>格挡</keyword1>前伤害的层数; 在受影响生物的下一回合开始时，造成等同于层数的伤害，然后清空层数"
+    "source": "Take {{value0}} damage per stack at next turn start; Then clear all stacks",
+    "sourceHash": "7c9e0836685627092c38549cf931722db4fbc2b58fd68b57e9b0750583962262",
+    "text": "下回合开始时每层受到{{value0}}点伤害；随后清除所有层数"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
-    "sourceHash": "8304f427092ad8b3d2237b85d2f38bdade51672c75c985665ca1bd39a3628370",
-    "text": "下一次攻击有{{value0}}%概率对所有目标落空; 无论命中与否，该次攻击后结束; 落空视为每个目标都成功<keyword0>闪避</keyword0>; 不叠加"
+    "source": "Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "d535efae12fa8b24f5990411db2ef7e05ba31e0d08f74fa2838ada3f4f3673c4",
+    "text": "你的下一次攻击有{{value0}}%几率落空"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
-    "sourceHash": "f099923d4ac0bdecf49ae41d4efaf6452c5be9a0dc03a022e033a08e69347f14",
-    "text": "在<keyword0>生命</keyword0>受损前吸收伤害，包括持续伤害; 通常不阻止命中效果、状态累积或<keyword1>汲取</keyword1>; 剩余<keyword2>格挡</keyword2>通常在该生物的下一回合减半，四舍五入至整数"
+    "source": "Absorbs damage; Remaining <keyword0>Block</keyword0> halves at turn start",
+    "sourceHash": "b504a84a3c067b1714c73c7774538e80b5d4a542853302d0b15bb3ccf107fe4b",
+    "text": "吸收伤害；回合开始时剩余<keyword0>格挡</keyword0>减半"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
-    "sourceHash": "6854e4ba4a7dd762a06a40a2bf46109f9276a5fce9eade289f7b840949d4fe34",
-    "text": "<keyword0>灼烧</keyword0>命中会增加等同于<keyword1>格挡</keyword1>前伤害的层数; 在受影响生物的回合开始时，造成等同于层数的伤害，然后层数减半; 最后一层造成伤害后消失"
+    "source": "Take {{value0}} damage per stack at turn start; Then halve stacks",
+    "sourceHash": "83d02e8fc07197e7aad8676e37cce8278fbe01270fa436e0a6af3bae819d2819",
+    "text": "回合开始时每层受到{{value0}}点伤害；随后层数减半"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
@@ -4957,9 +4957,9 @@
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
-    "sourceHash": "53bf77934ecfe91cbbd53c2db66fa3a4eebc47a399948a1c1684adca5136e20e",
-    "text": "在<keyword0>格挡</keyword0>或<keyword1>护甲</keyword1>生效前避开攻击; 基础概率为{{value0}}%，加成后的上限为{{value1}}%; <keyword2>眩晕</keyword2>或<keyword3>冻结</keyword3>中的生物通常不能<keyword4>闪避</keyword4>; 持续伤害无法被<keyword5>闪避</keyword5>"
+    "source": "Chance to avoid attacks; Starts at {{value0}}%, up to {{value1}}%",
+    "sourceHash": "79d3c1290bfb42b64965f66e60f9dff1db4eba8629071cfbecb47303733e8dd7",
+    "text": "避开攻击的几率；基础为{{value0}}%，上限为{{value1}}%"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
@@ -4969,9 +4969,9 @@
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
-    "sourceHash": "e7531be0327b6d022a028bc16d075ea40888c62fc5d7bab74dc8f8cad73f7326",
-    "text": "<keyword0>冻结</keyword0>命中会累积等同于<keyword1>格挡</keyword1>前伤害的数值; 累积值达到最大<keyword2>生命</keyword2>的一半时，生物被<keyword3>冻结</keyword3>并跳过一个回合; 恢复后获得{{value0}}回合对<keyword4>眩晕</keyword4>和<keyword5>冻结</keyword5>的共同免疫"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "1365e1a8944742a874d3447e91d79aacfa53ff9aae120de045558a2ba6a28c0a",
+    "text": "积累值达到最大<keyword0>生命</keyword0>的一半时跳过{{value0}}回合；随后免疫<keyword1>眩晕</keyword1>和<keyword2>冻结</keyword2>{{value1}}回合"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
@@ -5005,15 +5005,15 @@
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "0ad0d6ff0e655eca7f19c0802f09ecff5c3b34478e3267e0578bb49f3c0a1526",
-    "text": "在<keyword0>闪避</keyword0>判定前取消下一次受到的技能攻击及其对你的有害效果; <keyword1>荆棘</keyword1>仍会反击; 持续至使用或被<keyword2>驱散</keyword2>; 不叠加"
+    "source": "Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "e41a93cc20d566c198da63b2463d9dfa6cb0f109f32c4a1546a71213629758f7",
+    "text": "抵消下一次受到的攻击及其有害效果"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
-    "sourceHash": "9a4d7d2d07c82ed10c9981ce84efd20a8162e16dbd2727bbd32ac704f6ff5f37",
-    "text": "防止下一次施加<keyword0>灼烧</keyword0>、<keyword1>中毒</keyword1>、<keyword2>流血</keyword2>、<keyword3>眩晕</keyword3>、<keyword4>冻结</keyword4>或<keyword5>致盲</keyword5>; 直接伤害和已有状态不受影响; 持续至使用或被<keyword6>驱散</keyword6>; 不叠加"
+    "source": "Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "dc1994f18d032e2f4f2d9861f2a4df07415d90456524db9af5acd464cb4541d6",
+    "text": "阻止下一次有害状态；不阻止伤害"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
@@ -5023,9 +5023,9 @@
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
-    "sourceHash": "6b716814589faa19be550b466d7266fda61dd62f959e5e78b17bea91356dced2",
-    "text": "<keyword0>中毒</keyword0>命中会增加等同于<keyword1>格挡</keyword1>前伤害的层数; 在受影响生物的回合开始时，造成等同于层数的伤害，然后移除{{value0}}%的层数，四舍五入至整数且至少移除{{value1}}层"
+    "source": "Take {{value0}} damage per stack at turn start; Then lose {{value1}}% of stacks",
+    "sourceHash": "406b6ac4685ec2ac9ed92c2735584026ddb5a20a9523a9abad259178989f53f2",
+    "text": "回合开始时每层受到{{value0}}点伤害；随后层数减少{{value1}}%"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -5035,9 +5035,9 @@
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
-    "sourceHash": "bfc3ed8041673fd448b668727d3e3fe8c0958c534a961785844f69910e5db9e6",
-    "text": "将指定的有害状态转移给一个随机存活敌人; 直接伤害仍会命中你; <keyword0>攻击反射</keyword0>则将整次攻击返还给攻击者; 被<keyword1>反射</keyword1>的效果不能再次<keyword2>反射</keyword2>; 次数不叠加"
+    "source": "Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "5b16d9efe775ce89864d5cba60dee64ba5fb2555efc99f365176944eb93aba1b",
+    "text": "将下一次有害状态转移给随机敌人；不阻止伤害"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -5047,15 +5047,15 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
-    "sourceHash": "b3218393d2576f1438484d147e81826c9d3380aec735a718f35daefa5657141d",
-    "text": "<keyword0>眩晕</keyword0>命中按<keyword1>格挡</keyword1>前、经<keyword2>护甲</keyword2>减免后的伤害累积数值; 累积值达到最大<keyword3>生命</keyword3>的一半时，生物被<keyword4>眩晕</keyword4>并跳过一个回合; 恢复后获得{{value0}}回合对<keyword5>眩晕</keyword5>和<keyword6>冻结</keyword6>的共同免疫"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "1365e1a8944742a874d3447e91d79aacfa53ff9aae120de045558a2ba6a28c0a",
+    "text": "积累值达到最大<keyword0>生命</keyword0>的一半时跳过{{value0}}回合；随后免疫<keyword1>眩晕</keyword1>和<keyword2>冻结</keyword2>{{value1}}回合"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
-    "sourceHash": "0b091883446f3c661db4e3c52ff3d44db5fbc062dcda66aa6add8a4b7e164ed0",
-    "text": "被命中或<keyword0>抵消</keyword0>攻击时，造成等同于自身<keyword2>荆棘</keyword2>层数的<keyword1>自然</keyword1>伤害，然后失去{{value0}}层; 即使伤害被<keyword3>格挡</keyword3>或<keyword4>护甲</keyword4>吸收也会触发; 反击不会引发新的反击"
+    "source": "When hit, deal {{value0}} <keyword0>Nature</keyword0> damage per stack; Then lose {{value1}} stack",
+    "sourceHash": "afa26c94764e10044b85ff2bea8092cff6e6b5dd10fb84da8543ec09f598aada",
+    "text": "被命中时每层造成{{value0}}点<keyword0>自然</keyword0>伤害；随后失去{{value1}}层"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
@@ -7808,169 +7808,181 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "4891cc3f2cc701e3c63921ec45f39de4fe4d5f42c7fb08081fe74f844dd008fa",
+    "sourceHash": "fcb206b094262bab7a9c5770ce26d0a93756deb5c0f07742225a0d970cb365c4",
     "text": "杂技陀螺：下一次攻击无法被<keyword0>闪避</keyword0>"
   },
-  "content.status.attackReflection.v013a620784742104.rule": {
+  "content.status.attackReflection.v47d857c97c932bb3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "c24e3450fe57e7356a040fbef056991c0fc7b6e418b5b23dbe404033f2f072aa",
-    "text": "<keyword0>攻击反射</keyword0>: 将下一次受到的技能攻击返还给攻击者; 防止该攻击对你造成伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "9f712cf886842e6f018d941a8909bdc2de95ac6b81e5e51dfe3d1e0a6b3fc0dd",
+    "text": "<keyword0>攻击反射</keyword0>: 将下一次攻击返还给攻击者，自身不受到该攻击的伤害或有害效果"
   },
-  "content.status.blind.v37b85a98a2799221.rule": {
+  "content.status.blind.ve2d57c6eea210af7.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "e82bc5644a59edf1da1941be77828adcf4c396bc45989a83d97f5ab17fe1728a",
-    "text": "<keyword0>致盲</keyword0>: 下一次攻击有{{value0}}%概率对所有目标落空; 无论命中与否，该次攻击后结束; 落空视为每个目标都成功<keyword1>闪避</keyword1>; 不叠加"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "2eb8a5dc77072455c9f8a2508b79b36962c7b90ce798152e5edafa22af49eb19",
+    "text": "<keyword0>致盲</keyword0>: 你的下一次攻击有{{value0}}%几率落空"
   },
-  "content.status.controlled.v147305c04334e696.rule": {
+  "content.status.controlled.v11aef5cde2568068.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "83ac0ced66f1c2dcab2d0aa253c420f46723f57ba4dcb22699499cda0b9fbf86",
-    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turns",
+    "sourceHash": "1e188992125a3067f089fe995d3a957b1cea77f46b6eb1a28c2b6c087577aa00",
+    "text": "<keyword0>冻结</keyword0>：跳过{{value0}}回合"
+  },
+  "content.status.controlled.v2627b2e6943c398b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turn",
+    "sourceHash": "49db4432e18bf53fe95cc15d2daede39552e5a764124f11ac1e6cb511803e1a8",
+    "text": "<keyword0>冻结</keyword0>：跳过{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "7ffddcececfafa29b65bb6bd9b36daa9b1c9c566b2fcd95d4435a0bd0de29526",
+    "sourceHash": "34dc6a165874a17de0854b6d7837862c71242b3973606d1cf2098dd908c20be6",
     "text": "跳过回合"
   },
-  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+  "content.status.controlled.vcd57b8fd3ce840e8.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "a9292fd8e707ed79f979f9ce8c2fe46dca39dcc35e0c92cfef93d4ef0a250a09",
-    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turn",
+    "sourceHash": "b00478e46da745712e03eb60dd50d9140061cc01662e05ca405e5a5b3ac53410",
+    "text": "<keyword0>眩晕</keyword0>：跳过{{value0}}回合"
   },
-  "content.status.controlled.v9121eae5c53d2321.rule": {
+  "content.status.controlled.vd44ff14e7ea5c761.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "649d6c51299f88e3e0edbfc6ea674b1600481f8bef201294686fda5be4e33d81",
-    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turns",
+    "sourceHash": "8a3af56c8972cea65535a766d7be6a1d77eb41054345b7ab3f1783b80c77d092",
+    "text": "<keyword0>眩晕</keyword0>：跳过{{value0}}回合"
   },
-  "content.status.controlled.ve93ba5ee32c41861.rule": {
+  "content.status.cooldown.v7e371d88b3e2e9e3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "227b364ff2a932388d416360140546fed2b1ee1366313d773b9d275e52b80f98",
-    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turns left",
+    "sourceHash": "075e0dc86a79748d106f85f8ef7e2d1baaa8e853ff3e25a1821131f838dc3ab8",
+    "text": "免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>：剩余{{value0}}回合"
   },
-  "content.status.cooldown.v2db257f39699f407.rule": {
+  "content.status.cooldown.vee08a58b6508ab76.rule": {
     "reviewed": true,
-    "source": "Control immunity {{value0}}",
-    "sourceHash": "84e22f86887877220a7a2aae24ad3cb7f103ec35c54adb035987793f93f3aa5b",
-    "text": "控制免疫 {{value0}}"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turn left",
+    "sourceHash": "9823abaf980672b716d3f7159c11455fb0787437bdaa0c285e01d8e825eb77d1",
+    "text": "免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>：剩余{{value0}}回合"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "d770dd1fc647f92e7755f557ffb0de9816468b381911d257bee9bf0e9eb9b519",
+    "sourceHash": "53a432b29e40eff326e28afb7b53990f9e3de6836421d158aff3630f61773507",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "01259df45ffb30ecedbfd43826ee321c792ec53653e25f59b72612e69d48e1f7",
+    "sourceHash": "9e8bf7897be8b67d2367b954cabe91db0da826325d14d42d284e5100700fb5e4",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "0ce9f245673b29f90697c50d7f3d9961d6b879fc2c1d6837e04c8137d516653a",
+    "sourceHash": "127d15f3fad32cf459641300421706e6a1e07b00c2ad1f048fd5959ba8ce63d5",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
-  "content.status.grace.v6e81bc0f25243d28.rule": {
+  "content.status.grace.v7d70cbf27f059bd2.rule": {
     "reviewed": true,
-    "source": "Death's Door {{value0}}",
-    "sourceHash": "081ae66c14d179c73a0e8c5db16dea58695d0b33f6c4831cd0093fa874a74062",
-    "text": "濒死 {{value0}}"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turn left",
+    "sourceHash": "62b2106ce824923190eb7dc2df1ea6244360ce0d20abd97e32b0cdee5cc2d453",
+    "text": "濒死：受到致命伤害时保留{{value0}}点<keyword0>生命</keyword0>；剩余{{value1}}回合"
   },
-  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+  "content.status.grace.ved60bcb3845feb07.rule": {
     "reviewed": true,
-    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "584b4777fbc35182fa0a2b1a56b17e8a2ba4b92dbafb288a74f94b98c4c6ff49",
-    "text": "月种：下次<keyword0>荆棘</keyword0>反击造成双倍伤害"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turns left",
+    "sourceHash": "8893c8ede851010cae81f2a453e933911e853ca71395ffacb9746e1af4af2d7b",
+    "text": "濒死：受到致命伤害时保留{{value0}}点<keyword0>生命</keyword0>；剩余{{value1}}回合"
   },
-  "content.status.negate.v0fea63d64804569b.rule": {
+  "content.status.moonseedReady.v23f9ba255f570b85.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "a5d249e77dd4a2375852ee6a66105d423a83f2a065bb482ee74bc5c212fabe0b",
-    "text": "<keyword0>抵消</keyword0>: 在<keyword1>闪避</keyword1>判定前取消下一次受到的技能攻击及其对你的有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至使用或被<keyword3>驱散</keyword3>; 不叠加"
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> damage is doubled",
+    "sourceHash": "12144094669c47182f7da656275831509134afaa3425d74d694dbd9d18243cb3",
+    "text": "月种：下一次<keyword0>荆棘</keyword0>伤害翻倍"
   },
-  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+  "content.status.negate.v547e4e9923d24b18.rule": {
     "reviewed": true,
-    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "b4128370bb782fb619c2477471e4d4a665bcd6607c19447e51c162045885b79f",
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "08c4a37040a13f079a19ecbeeb2f1e844c38687611fbfebe09b3e7c7c0d58b2a",
+    "text": "<keyword0>抵消</keyword0>: 抵消下一次受到的攻击及其有害效果"
+  },
+  "content.status.nextPhysical.v6898256cc6c7de17.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} extra <keyword0>Physical</keyword0> damage",
+    "sourceHash": "d3906e966abef0f6e946e2560c9e0d1af995fde280edc2449e89301982407cc5",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
-  "content.status.nullify.v497e819f2a2d6746.rule": {
+  "content.status.nullify.vce10a8ed74932e80.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "3a829f5a8f9b4456a2aa3b4d5b4b874aa9c9cae3b15203b2daac1788205f2129",
-    "text": "<keyword0>无效化</keyword0>: 防止下一次施加<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>、<keyword3>流血</keyword3>、<keyword4>眩晕</keyword4>、<keyword5>冻结</keyword5>或<keyword6>致盲</keyword6>; 直接伤害和已有状态不受影响; 持续至使用或被<keyword7>驱散</keyword7>; 不叠加"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "22b6ce07a8a4f665d4d730ebf226a1d4b8cf3e835aa5dbfc4474ce2468e5ee30",
+    "text": "<keyword0>无效化</keyword0>: 阻止下一次有害状态；不阻止伤害"
   },
-  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+  "content.status.nullifyFreeze.ve1d9965b67010344.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "25bd2b73ecf4a850f4973244481675ea8aee3892e50d2780fbb18a90e0e8389c",
-    "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+    "source": "Prevent the next <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "2acedd0f80252ee1a42d81fa21f72d9b4a847177f6764295919246d4c88e4ec2",
+    "text": "阻止下一次<keyword0>冻结</keyword0>伤害"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "26e88d9aa57704299bfd675a8967e20dd20bad2f9cf80fd9cd84dde0af4359ff",
+    "sourceHash": "58a87eb30f34b5c9ede8afb59f04a7838bc77c35f11399a8d4bba179ebf339f8",
     "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
-  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+  "content.status.partingCut.vf7a28552587a53e7.rule": {
     "reviewed": true,
-    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "09f15372c303bb549c456ff6e752aa6fd80a202aefdb5a23f54a560825ff08a1",
-    "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit adds half its damage as <keyword1>Bleed</keyword1>",
+    "sourceHash": "4b2b2e6ab4f8bf8d0180556cde7ec7ff8ec523c52aa3795fc1f172fd208835ec",
+    "text": "离别一斩：下一次<keyword0>物理</keyword0>命中附加其伤害一半的<keyword1>流血</keyword1>伤害"
   },
-  "content.status.reflect.ved0888b165975dfb.rule": {
+  "content.status.reflect.vde052a9a722c7be5.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "54914b98680ac6ab502105b1991ff865619b6268c36f1bfc15a5bfc6072a55a1",
-    "text": "<keyword0>反射</keyword0>: 将指定的有害状态转移给一个随机存活敌人; 直接伤害仍会命中你; <keyword1>攻击反射</keyword1>则将整次攻击返还给攻击者; 被<keyword2>反射</keyword2>的效果不能再次<keyword3>反射</keyword3>; 次数不叠加"
+    "source": "<keyword0>Reflect</keyword0>: Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "112ac523214a2e3a0e65c6efdc6c5a0ebe7cca8809c8d113b7f851678a1312ae",
+    "text": "<keyword0>反射</keyword0>: 将下一次有害状态转移给随机敌人；不阻止伤害"
   },
-  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+  "content.status.reflectBurn.v2a3de9f6418bf193.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "31e20e019772619daea0e9fc93318deafb78dc8fd5f8ef8bd12dcc4532a57dbf",
-    "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+    "source": "Send the next <keyword0>Burn</keyword0> buildup to a random enemy; Does not prevent damage",
+    "sourceHash": "2a81b4689dae40d79894ecb98b4a008314ca3d9c1e33f1cd6a0a79186478032e",
+    "text": "将下一次<keyword0>灼烧</keyword0>积累转移给随机敌人；不阻止伤害"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "a04b657f386fd2a389389b1f2682ae13997e27c17f055500798bb6cd8b554794",
+    "sourceHash": "9b4b587abfcdbc15c84c5d760c291faa3956a32ab1574d15c4712b4a2d46a21b",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "8af4751770daf7358fc86df494c5436dc40747321bdb0529e957846a8c09404b",
+    "sourceHash": "d409f5f496014d4c2d8f978c8921808496a734ecdb236cae5571f24c7a924099",
     "text": "缎带线轴：免疫<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
   },
-  "content.status.riposte.v7f25e6d160e653d4.rule": {
+  "content.status.riposte.v1e440c9b1d660960.rule": {
     "reviewed": true,
-    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "c5d775362b626a368504f9c814c3d989f1aef8c2b9e8f97048ac50fdfd39b22a",
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack always <keyword1>critically hits</keyword1>",
+    "sourceHash": "794e5af7bc597d3ba5b1ac8133053d49d3b052b26de211b158910cb211570ba8",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.status.springTide.v9686824085c1ef98.rule": {
     "reviewed": true,
     "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
-    "sourceHash": "0c5a865c87e3bc7e3fecd06f8037c70b0ab9523392ee6a9b10f0dd19cb53cedc",
+    "sourceHash": "b21e04e2d45ccac45a6a433f9ac2ca7bd5b50fe721990b5cba211f55bb9d76e6",
     "text": "春潮：下一张<keyword0>水</keyword0>牌发动两次"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "4128fc3fcfef0b4018f6b01c575ecd388146016787b5c7a9462969386f6ba3d8",
+    "sourceHash": "df105379a695606c474a994d16b7a4002c8610e9352e788c61bc231cd20dcd8c",
     "text": "龙牙签：下次攻击还会<keyword0>驱散</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "3fcd6c0584f35d694b3fb51cd5dc0ce8bfded9262f497ebb4fdf0f09d1bee8ba",
+    "sourceHash": "ccb82aefea1e0e271211c1a77c9bb33d5183d08973f0ad17141cec57f0f2b095",
     "text": "逆转时潮：下次攻击可能重复"
   },
   "content.talent.armor.armored-surge.name": {

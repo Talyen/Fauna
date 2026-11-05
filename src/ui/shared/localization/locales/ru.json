@@ -4903,39 +4903,39 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
-    "sourceHash": "8f6b2610d822967be54445dd9d9dbb5cc322a35aa92d24df21200b6b84a733f3",
-    "text": "Уменьшает оставшийся после <keyword2>блока</keyword2> <keyword0>физический</keyword0> урон и урон <keyword1>оглушением</keyword1> на число своих зарядов; Теряет {{value0}} заряд при каждом уменьшении урона"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage by its stacks; Loses {{value0}} stack when used",
+    "sourceHash": "c37901408725a66dd482d574358317f0c82df652b8e5cff8401f3340cce48d6a",
+    "text": "Снижает <keyword0>физический</keyword0> урон и урон <keyword1>Оглушением</keyword1> на число зарядов; При срабатывании теряет {{value0}} заряд"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "ae47e9db2c25bc49a2e932326c6f220c3d9b4494e59c3d9cf26bfa7092d8068b",
-    "text": "Возвращает следующую входящую атаку способности её атакующему; Предотвращает её урон и вредные эффекты на вас; <keyword0>Отражённые</keyword0> атаки нельзя <keyword1>отразить</keyword1> снова; Действует до использования или <keyword2>рассеивания</keyword2>; Не суммируется"
+    "source": "Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "22ffd6f0c739432ac5c000b9f6c1e834e61a7d8950d980f7d8a8d1b996bf05f5",
+    "text": "Возвращает следующую атаку нападающему, защищая от её урона и вредных эффектов"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
-    "sourceHash": "d360e90fcc2040c1095b99a6d0b59eff34e5051ffe7733e43e82326e9789871f",
-    "text": "Попадания с <keyword0>кровотечением</keyword0> добавляют заряды в размере урона до <keyword1>блока</keyword1>; В начале следующего хода поражённого существа заряды наносят столько же урона и исчезают"
+    "source": "Take {{value0}} damage per stack at next turn start; Then clear all stacks",
+    "sourceHash": "4661a0d090db84c82b22d3cfc6d3847a11289f2d5ddccade5610db644df2155b",
+    "text": "В начале следующего хода получить {{value0}} ед урона за заряд; Затем убрать все заряды"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
-    "sourceHash": "7d361ac31d7f11265fa1df68782eb11bae405702e49899ca7ad71e197efa9d53",
-    "text": "Ваша следующая атака с вероятностью {{value0}}% промахнётся по всем целям; Эффект заканчивается после этой атаки при любом исходе; Промах считается <keyword0>уклонением</keyword0> каждой цели; Не суммируется"
+    "source": "Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "2724ea6640c8ba07ad31d07a2f5c356f5dded13dec5f1c2a1934c9c49b9c8e85",
+    "text": "Следующая атака промахнётся с вероятностью {{value0}}%"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
-    "sourceHash": "b0e758d0d26cd13b5ac4a4274e05466ddfb74662a3cd0b374bd024f5243b9311",
-    "text": "Поглощает урон до потери <keyword0>здоровья</keyword0>, включая периодический; Обычно не предотвращает эффекты попадания, накопление статусов и <keyword1>вампиризм</keyword1>; Оставшийся <keyword2>блок</keyword2> обычно уменьшается вдвое в следующий ход существа с округлением до ближайшего целого"
+    "source": "Absorbs damage; Remaining <keyword0>Block</keyword0> halves at turn start",
+    "sourceHash": "468009dffafb66ec91e7321ad123ad851decc8372ee58ba8df1b60b54d4bb0e2",
+    "text": "Поглощает урон; В начале хода оставшийся <keyword0>Блок</keyword0> уменьшается вдвое"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
-    "sourceHash": "dc1922de4b98ca0618977b2742b36f04c58aef035350b11fa076629ef953983b",
-    "text": "Попадания с <keyword0>горением</keyword0> добавляют заряды в размере урона до <keyword1>блока</keyword1>; В начале хода поражённого существа заряды наносят столько же урона и уменьшаются вдвое; Последний заряд исчезает после нанесения урона"
+    "source": "Take {{value0}} damage per stack at turn start; Then halve stacks",
+    "sourceHash": "2f26c9b1129f78a978e9d7735a384239ee45d9a6db61203d5734e6749ca5c569",
+    "text": "В начале хода получить {{value0}} ед урона за заряд; Затем уменьшить заряды вдвое"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
@@ -4957,9 +4957,9 @@
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
-    "sourceHash": "9b44523c7aafb5c105382d8d86864fbe43b61e82ab350e0581a2334d468315fa",
-    "text": "Позволяет избежать входящей атаки до <keyword0>блока</keyword0> и <keyword1>брони</keyword1>; Базовый шанс {{value0}}%, с бонусами не более {{value1}}%; <keyword2>Оглушённые</keyword2> и <keyword3>замороженные</keyword3> существа обычно не могут <keyword4>уклоняться</keyword4>; От периодического урона нельзя <keyword5>уклониться</keyword5>"
+    "source": "Chance to avoid attacks; Starts at {{value0}}%, up to {{value1}}%",
+    "sourceHash": "59fcc414da02bb8610bb6339cc3d9ebc70771dfa2bff107359545c5cf80fd068",
+    "text": "Шанс избежать атаки; Базовый шанс {{value0}}%, максимум {{value1}}%"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
@@ -4969,9 +4969,9 @@
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
-    "sourceHash": "35bd51c3fece10a56343e87f991bd21444bbd3276ca4a3a701692c729bf3710f",
-    "text": "Попадания с <keyword0>заморозкой</keyword0> накапливают эффект в размере урона до <keyword1>блока</keyword1>; Когда накопление достигает половины максимального <keyword2>здоровья</keyword2>, существо <keyword3>замораживается</keyword3> и пропускает один ход; После восстановления получает {{value0}} хода иммунитета к <keyword4>оглушению</keyword4> и <keyword5>заморозке</keyword5>"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "02082079e59eb006e630778c3d2aea1e03a40b0a2a39696555b46a6584dd4244",
+    "text": "При накоплении половины максимального <keyword0>Здоровья</keyword0> пропустить {{value0}} ход; Затем иммунитет к <keyword1>Оглушению</keyword1> и <keyword2>Заморозке</keyword2> на {{value1}} хода"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
@@ -5005,15 +5005,15 @@
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "5b533d1701eea21de528ace1e7b60346d12efdffbc207108e2bbeeebef54834e",
-    "text": "Отменяет следующую входящую атаку способности и её вредные эффекты на вас до <keyword0>уклонения</keyword0>; <keyword1>Шипы</keyword1> всё равно наносят ответный урон; Действует до использования или <keyword2>рассеивания</keyword2>; Не суммируется"
+    "source": "Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "0b0d9f90024015389e37f46f63b3cdf0957b071507b644f6bf9959e46313ba65",
+    "text": "Отменяет следующую входящую атаку и её вредные эффекты"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
-    "sourceHash": "6c7b23fa7a4e271e395375ba6020f41efafb5054cb350e2e5e256892638a10d6",
-    "text": "Предотвращает следующее наложение <keyword0>горения</keyword0>, <keyword1>яда</keyword1>, <keyword2>кровотечения</keyword2>, <keyword3>оглушения</keyword3>, <keyword4>заморозки</keyword4> или <keyword5>ослепления</keyword5>; Прямой урон и уже действующие статусы не меняются; Действует до использования или <keyword6>рассеивания</keyword6>; Не суммируется"
+    "source": "Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "f9c08acb31c5eb7551f96735eadf1d539194d303503c55fe131b287f0e576e02",
+    "text": "Предотвращает следующий вредный статус; Не предотвращает урон"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
@@ -5023,9 +5023,9 @@
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
-    "sourceHash": "111e2177be9503da961c29e4f2aa570494032dbc56e10351cd54eb62ea828708",
-    "text": "Попадания с <keyword0>ядом</keyword0> добавляют заряды в размере урона до <keyword1>блока</keyword1>; В начале хода поражённого существа заряды наносят столько же урона, затем теряют {{value0}}% с округлением до ближайшего целого, но не менее {{value1}}"
+    "source": "Take {{value0}} damage per stack at turn start; Then lose {{value1}}% of stacks",
+    "sourceHash": "1877c93dc9af58fb4addd0a9c32985185c81d7fe5c6bf861ac66fe0add16d415",
+    "text": "В начале хода получить {{value0}} ед урона за заряд; Затем убрать {{value1}}% зарядов"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -5035,9 +5035,9 @@
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
-    "sourceHash": "1011abca8d5bd7406a6f238437a5a8ca65cc4f93a3d4157ae83dcf55aa467cfe",
-    "text": "Перенаправляет указанный вредный статус на случайного живого врага; Прямой урон всё равно попадает по вам; <keyword0>Отражение атаки</keyword0> вместо этого возвращает всю атаку её атакующему; <keyword1>Отражённые</keyword1> эффекты нельзя <keyword2>отразить</keyword2> снова; Заряды не суммируются"
+    "source": "Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "30e1f5ff31f2c6c898708e2b430c6ef6a2cec11a6293c4731bfd222d7846fdf6",
+    "text": "Перенаправляет следующий вредный статус случайному врагу; Не предотвращает урон"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -5047,15 +5047,15 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
-    "sourceHash": "7d61d7df085be3861e398118716a363f82fb0932c0047bb02b5260db9c8c0e1c",
-    "text": "Попадания с <keyword0>оглушением</keyword0> накапливают эффект в размере урона до <keyword1>блока</keyword1>, уменьшенного <keyword2>бронёй</keyword2>; Когда накопление достигает половины максимального <keyword3>здоровья</keyword3>, существо <keyword4>оглушается</keyword4> и пропускает один ход; После восстановления получает {{value0}} хода иммунитета к <keyword5>оглушению</keyword5> и <keyword6>заморозке</keyword6>"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "02082079e59eb006e630778c3d2aea1e03a40b0a2a39696555b46a6584dd4244",
+    "text": "При накоплении половины максимального <keyword0>Здоровья</keyword0> пропустить {{value0}} ход; Затем иммунитет к <keyword1>Оглушению</keyword1> и <keyword2>Заморозке</keyword2> на {{value1}} хода"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
-    "sourceHash": "7be2bc9d80235317a697d93cd8db0574c3e86f07b6dbedf27b7643d7d7264dd3",
-    "text": "При попадании или <keyword0>отведении</keyword0> атаки наносят урон <keyword1>природой</keyword1> в размере ваших <keyword2>шипов</keyword2>, затем теряют {{value0}} заряд; Срабатывают даже через <keyword3>блок</keyword3> и <keyword4>броню</keyword4>; Ответный урон не вызывает нового ответного урона"
+    "source": "When hit, deal {{value0}} <keyword0>Nature</keyword0> damage per stack; Then lose {{value1}} stack",
+    "sourceHash": "f3011e4f9c40368160ae11d5e7a6cd1b5ed58273144ae675963c1503f2c1d82e",
+    "text": "При получении удара нанести {{value0}} ед урона <keyword0>Природой</keyword0> за заряд; Затем потерять {{value1}} заряд"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
@@ -7808,169 +7808,181 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "fb73e7e67cb259e6d37aa23c18263aa1fcba892e67085160fdcdefea5956dee4",
+    "sourceHash": "b5fc687f01100524c2118825c95f27aadd7c87d98b1418b34a1554d6d45a3674",
     "text": "Волчок акробата: от следующей атаки нельзя <keyword0>уклониться</keyword0>"
   },
-  "content.status.attackReflection.v013a620784742104.rule": {
+  "content.status.attackReflection.v47d857c97c932bb3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "2f8141971bdddccf9562635500ba03ff58b369b5cc66cb578d89089baf53d8fa",
-    "text": "<keyword0>Отражение атаки</keyword0>: Возвращает следующую входящую атаку способности её атакующему; Предотвращает её урон и вредные эффекты на вас; <keyword1>Отражённые</keyword1> атаки нельзя <keyword2>отразить</keyword2> снова; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "25f760cd77b17266f241bd7963c0229480e2de27b2990f070f508b4686938d36",
+    "text": "<keyword0>Отражение атаки</keyword0>: Возвращает следующую атаку нападающему, защищая от её урона и вредных эффектов"
   },
-  "content.status.blind.v37b85a98a2799221.rule": {
+  "content.status.blind.ve2d57c6eea210af7.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "756da6b79c9dfbffcb2a69394f40d2ce04fedac0389f0c0f46a02f0e65ec5cc6",
-    "text": "<keyword0>Ослепление</keyword0>: Ваша следующая атака с вероятностью {{value0}}% промахнётся по всем целям; Эффект заканчивается после этой атаки при любом исходе; Промах считается <keyword1>уклонением</keyword1> каждой цели; Не суммируется"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "0873ea9ea7418623103b472c5e71fa6ef25ddcb32b28a0df72d8dfe4a63b7815",
+    "text": "<keyword0>Ослепление</keyword0>: Следующая атака промахнётся с вероятностью {{value0}}%"
   },
-  "content.status.controlled.v147305c04334e696.rule": {
+  "content.status.controlled.v11aef5cde2568068.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "2d73010b7a97cdee45a8dfdcc2fc46978ddcdc8caa52befcdcebde8ed9b759cd",
-    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turns",
+    "sourceHash": "af5478f40f347bcd22700505b6c5da1256ea4df1b705ec1f014f7d9934c5b73c",
+    "text": "<keyword0>Заморозка</keyword0>: пропуск ходов — {{value0}}"
+  },
+  "content.status.controlled.v2627b2e6943c398b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turn",
+    "sourceHash": "697dcef31a1b42f37644fa3028bc1fca0d14060be5dad6bfb2fd75636c10eed5",
+    "text": "<keyword0>Заморозка</keyword0>: пропуск ходов — {{value0}}"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "fad2c8a5e9d79717203679f156c2ae89fd339d6180bf5c1f09ade06a8f698fbb",
+    "sourceHash": "106299792c994438ac2af1ef54f82b729f4c3099d0de1867c312124688f52e32",
     "text": "Ход пропущен"
   },
-  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+  "content.status.controlled.vcd57b8fd3ce840e8.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "e35f455d5bbd89766313ea29145d043d53a8f1ff9388cfe53b8ccf2234151703",
-    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turn",
+    "sourceHash": "fd0a206efdca92ca077e06277a27ed2ecfb20023bf4d9409c9734d19c7f9fea2",
+    "text": "<keyword0>Оглушение</keyword0>: пропуск ходов — {{value0}}"
   },
-  "content.status.controlled.v9121eae5c53d2321.rule": {
+  "content.status.controlled.vd44ff14e7ea5c761.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "4605835dbb11bdb769ea9e71afcf11af4cdcdc1c5b98fd9ebafb57d05465f3a3",
-    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turns",
+    "sourceHash": "c2818bd7f13ea8ff6b6e984eefdd8b365427002034a06479cb3feb9b89291969",
+    "text": "<keyword0>Оглушение</keyword0>: пропуск ходов — {{value0}}"
   },
-  "content.status.controlled.ve93ba5ee32c41861.rule": {
+  "content.status.cooldown.v7e371d88b3e2e9e3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "7f666ba03c98812c60de29a3dfd47ddcdcae755307810bac4a8f32a9eb9f7b8e",
-    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turns left",
+    "sourceHash": "5fb1472f72b0442b5a15d9ce7c169740634e2a1918f89cf6674fa367e8a31bcb",
+    "text": "Иммунитет к <keyword0>Оглушению</keyword0> и <keyword1>Заморозке</keyword1>: осталось ходов — {{value0}}"
   },
-  "content.status.cooldown.v2db257f39699f407.rule": {
+  "content.status.cooldown.vee08a58b6508ab76.rule": {
     "reviewed": true,
-    "source": "Control immunity {{value0}}",
-    "sourceHash": "d9ee0290b9b557edd801da82e5ca835e97831199fc244add10f76eddfb3b6934",
-    "text": "Иммунитет к контролю {{value0}}"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turn left",
+    "sourceHash": "c0eaae0de5eb6d90449f5acffab25959dffad2cc1c4fd0875f1bd61361f06113",
+    "text": "Иммунитет к <keyword0>Оглушению</keyword0> и <keyword1>Заморозке</keyword1>: осталось ходов — {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "27fc2947fa8d742e77d4b65c0dd0ff0018dd0fb26978614d3165b706facf560e",
+    "sourceHash": "43fa3a7eaf74d65691729e4066f47b82fc7baad2ddc585ef780cb9e8e174c83a",
     "text": "Бесплатное продолжение: следующая карта бесплатна"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "ead6e4a0af8cf36c8fa636787463496530087346bdb42d20a5fa451fcfa0e608",
+    "sourceHash": "8e713d940ff7e300a848b90fdf801b85a92c2df9648572cbb496af3e459a006c",
     "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "3ad97bdc88367410ee9308878eb887fcab2e8d921fd97c344c7f1abc13701d92",
+    "sourceHash": "be6bf3bddc5eab10a06f0911a6ac3b430c4c2ce7e166c4bcafd40eb90b5b7bab",
     "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
   },
-  "content.status.grace.v6e81bc0f25243d28.rule": {
+  "content.status.grace.v7d70cbf27f059bd2.rule": {
     "reviewed": true,
-    "source": "Death's Door {{value0}}",
-    "sourceHash": "78cb489ba65f3a1bd3590d092d0736c626e61058ff8ef68e7d90df561b7fafc9",
-    "text": "На пороге смерти {{value0}}"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turn left",
+    "sourceHash": "403ea1fd31dbf95a44cf8bbf9605c22ffdb4cc8e0f29eafc559b40dffc658b25",
+    "text": "На пороге смерти: пережить смертельный урон с {{value0}} ед <keyword0>Здоровья</keyword0>; Осталось ходов — {{value1}}"
   },
-  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+  "content.status.grace.ved60bcb3845feb07.rule": {
     "reviewed": true,
-    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "357f6a0ece6892b378d22b90ef828e420bba341c5c1cdf1cc8bb988688bc85c9",
-    "text": "Лунное семя: следующая ответная атака <keyword0>шипами</keyword0> наносит двойной урон"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turns left",
+    "sourceHash": "822e1ccc455c1f56796f24e76a46794f6b171569d58c7432a50d510ecad0c278",
+    "text": "На пороге смерти: пережить смертельный урон с {{value0}} ед <keyword0>Здоровья</keyword0>; Осталось ходов — {{value1}}"
   },
-  "content.status.negate.v0fea63d64804569b.rule": {
+  "content.status.moonseedReady.v23f9ba255f570b85.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "538b139f7e22764f4a4f928d2c9b7d9543e547b2537bc2688dba1fac0393bb11",
-    "text": "<keyword0>Отведение</keyword0>: Отменяет следующую входящую атаку способности и её вредные эффекты на вас до <keyword1>уклонения</keyword1>; <keyword2>Шипы</keyword2> всё равно наносят ответный урон; Действует до использования или <keyword3>рассеивания</keyword3>; Не суммируется"
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> damage is doubled",
+    "sourceHash": "46d3ab40232099cf3f82c9634343c92feef98bcef4961384384fb3ddb98c8c8e",
+    "text": "Лунное семя: следующий урон <keyword0>Шипами</keyword0> удваивается"
   },
-  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+  "content.status.negate.v547e4e9923d24b18.rule": {
     "reviewed": true,
-    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "3694e70165e34742eeae61baacc22a7951ec038b77cda2bc866063ec9f0e54d5",
-    "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "ff032ce2467365ad625c8173ccd3bca4370b23fccbdd1846dd58840287c2cc06",
+    "text": "<keyword0>Отведение</keyword0>: Отменяет следующую входящую атаку и её вредные эффекты"
   },
-  "content.status.nullify.v497e819f2a2d6746.rule": {
+  "content.status.nextPhysical.v6898256cc6c7de17.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "726bac897ae4bc12905b47970850c5628c5802f3855702db838d06a24e32fe4c",
-    "text": "<keyword0>Аннулирование</keyword0>: Предотвращает следующее наложение <keyword1>горения</keyword1>, <keyword2>яда</keyword2>, <keyword3>кровотечения</keyword3>, <keyword4>оглушения</keyword4>, <keyword5>заморозки</keyword5> или <keyword6>ослепления</keyword6>; Прямой урон и уже действующие статусы не меняются; Действует до использования или <keyword7>рассеивания</keyword7>; Не суммируется"
+    "source": "Open Flank: next attack deals {{value0}} extra <keyword0>Physical</keyword0> damage",
+    "sourceHash": "8dfdcdcc6e877082d12fd6fc0fa94e3c3f6cfaa8d830b2d577fb4cc5e72d2d0f",
+    "text": "Открытый фланг: следующая атака наносит на {{value0}} ед больше <keyword0>физического</keyword0> урона"
   },
-  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+  "content.status.nullify.vce10a8ed74932e80.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "866e23752a0d97ca858229207e198c97148b14e082571c62e40d346ef95d6ada",
-    "text": "<keyword0>Аннулирует</keyword0> следующий урон от <keyword1>заморозки</keyword1>; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "acbee8345c635ecdda5038e3fd569018017c7a5d1a5af813e9bdd2c4be559d56",
+    "text": "<keyword0>Аннулирование</keyword0>: Предотвращает следующий вредный статус; Не предотвращает урон"
+  },
+  "content.status.nullifyFreeze.ve1d9965b67010344.rule": {
+    "reviewed": true,
+    "source": "Prevent the next <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "f78a1a4f14b411a30f7359c30b86ad2270623561ba984d19fca7dbdde95da6ed",
+    "text": "Предотвращает следующий урон <keyword0>Заморозкой</keyword0>"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "1ffdb06a69ee40c6ed3812569d5d9d47e29fe3d740e409e768b2ea29286544e1",
+    "sourceHash": "027cc741e85acf0185e57baa5b8ede0fd6181ff115ec347e8840954d1da0714d",
     "text": "Семя оазиса: следующая атака имеет <keyword0>вампиризм</keyword0>"
   },
-  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+  "content.status.partingCut.vf7a28552587a53e7.rule": {
     "reviewed": true,
-    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "e6469d7a0ef41372c6cd0aba1c65eaa76313a3d21e4230c15d6cb69614eb5e5d",
-    "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit adds half its damage as <keyword1>Bleed</keyword1>",
+    "sourceHash": "65fde74b2685bcb85bc9abbe7f6aa9baf3191f0f3d1b675d4bfde4c87a3bd047",
+    "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание добавляет половину своего урона как <keyword1>Кровотечение</keyword1>"
   },
-  "content.status.reflect.ved0888b165975dfb.rule": {
+  "content.status.reflect.vde052a9a722c7be5.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "81d927ddaa8ce9741a47e12a61cefefc09eb5005ace27dc972b5b501aa96a217",
-    "text": "<keyword0>Отражение</keyword0>: Перенаправляет указанный вредный статус на случайного живого врага; Прямой урон всё равно попадает по вам; <keyword1>Отражение атаки</keyword1> вместо этого возвращает всю атаку её атакующему; <keyword2>Отражённые</keyword2> эффекты нельзя <keyword3>отразить</keyword3> снова; Заряды не суммируются"
+    "source": "<keyword0>Reflect</keyword0>: Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "65ce96f96ef15864cb7915e7fdfaae48882888b9712cb4ada9a3f4089214568c",
+    "text": "<keyword0>Отражение</keyword0>: Перенаправляет следующий вредный статус случайному врагу; Не предотвращает урон"
   },
-  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+  "content.status.reflectBurn.v2a3de9f6418bf193.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "a82bc55b9af9c1bd8c42a87411445b37bf5f8194b9eea7ffc36e986896b46811",
-    "text": "<keyword0>Отражает</keyword0> следующее <keyword1>горение</keyword1>; Прямой урон всё равно проходит; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
+    "source": "Send the next <keyword0>Burn</keyword0> buildup to a random enemy; Does not prevent damage",
+    "sourceHash": "8abe528750180bce00a8bfb90330c1f0cb8152d3ad716369339e0101dbbd6245",
+    "text": "Перенаправляет следующее накопление <keyword0>Горения</keyword0> случайному врагу; Не предотвращает урон"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "688b4659c858af259ee5f232404110981403e65f8e7d3f3027e0fdfc693a8c14",
+    "sourceHash": "f1fb1404aef0ebab7f22f138571ec602cd9f78c4e495d020174ded1caf26cd9d",
     "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "77bd7a336c52ab39443368361c6066706d607555341f4d31285be7fa55a7f1a7",
+    "sourceHash": "d0df4d894e5c76ff2afd22b46bb0a5384b6ecf3b6082dccb0e05722160d5992d",
     "text": "Катушка лент: иммунитет к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1>"
   },
-  "content.status.riposte.v7f25e6d160e653d4.rule": {
+  "content.status.riposte.v1e440c9b1d660960.rule": {
     "reviewed": true,
-    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "0ca65674c05fc5360947bfbe4bd67e239f4fb96662825d2d3ee14dfc1db3ebd7",
-    "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack always <keyword1>critically hits</keyword1>",
+    "sourceHash": "55b6519464f565f366a7f94d07ee654cf089db889de7cb604c31bdded14cc4a4",
+    "text": "Рипост: следующая <keyword0>физическая</keyword0> атака всегда наносит <keyword1>критический удар</keyword1>"
   },
   "content.status.springTide.v9686824085c1ef98.rule": {
     "reviewed": true,
     "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
-    "sourceHash": "fe3f21c817be6c73e280f8a9bbda78849a3e006bde7ba2e63035ba3611de2a87",
+    "sourceHash": "12bf77cac2fefa47becc95bdec024ae0383de37a5cda73707f874439ad0180e4",
     "text": "Весенний прилив: следующая карта типа «<keyword0>Вода</keyword0>» разыгрывается дважды"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "a2bd3abda24c9c54a0bd66cfdc30ee85aab048988f5706fcac455287871a0a4d",
+    "sourceHash": "68ba5faca319f100e5026cc198b45374d668183d97b430dd1779392ed8104da3",
     "text": "Драконья зубочистка: следующая атака также вызывает <keyword0>рассеивание</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "893031823f40a48739d99b01aba49e2d59a25a04e069548e2836a3aa36b506a5",
+    "sourceHash": "95f5bbf586faafeeb0660296a8cc75b85fa68ec85b7715247edb8080aea6128b",
     "text": "Повернуть время вспять: следующая атака может повториться"
   },
   "content.talent.armor.armored-surge.name": {
