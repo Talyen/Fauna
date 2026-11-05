@@ -119,8 +119,8 @@ for (const handSize of [4, 7]) {
     expect(geometry.frameTop).toBeLessThan(geometry.toolbarBottom);
     expect(geometry.healthGaps.every((gap) => gap < 0.1)).toBe(true);
     expect(geometry.glow).toBe("none");
-    expect(geometry.artBorder).toBe("0px");
-    expect(geometry.handBorder).toBe("0px");
+    expect(geometry.artBorder).toBe("1px");
+    expect(geometry.handBorder).toBe("1px");
     expect(geometry.centerClipping).toBeGreaterThan(0);
     expect(geometry.centerClipping).toBeLessThanOrEqual(4.1);
     expect(geometry.fanStep.trim()).toBe("4.2deg");
