@@ -7,23 +7,20 @@ import { definition, species } from "../../game/content";
 import type { BattleState, Command } from "../../game/types";
 import { returnFocus } from "../shared/navigation/focus";
 import type { Controls, InputAction } from "../shared/navigation/input";
-import { motionValue } from "../shared/motion-values";
 import { battlefieldPresentation, orderedTargets, targetElement } from "./battle-targets";
 import { visualClone } from "../shared/visual-clone";
 
 interface Selection {
   selected: string | null;
   hovered: string | null;
-  denial: string;
   remembered: { enemy?: string; ally?: string };
 }
 type SelectionAction =
   | { type: "choose"; id: string }
   | { type: "target"; id: string; side: "enemy" | "ally" }
   | { type: "leave"; id: string }
-  | { type: "denial"; message: string }
   | { type: "prepare" | "clear" | "cancel" | "played" };
-const initial: Selection = { selected: null, hovered: null, denial: "", remembered: {} };
+const initial: Selection = { selected: null, hovered: null, remembered: {} };
 
 function selection(state: Selection, action: SelectionAction): Selection {
   switch (action.type) {
@@ -32,7 +29,6 @@ function selection(state: Selection, action: SelectionAction): Selection {
         ...state,
         selected: state.selected === action.id ? null : action.id,
         hovered: null,
-        denial: "",
       };
     case "target":
       if (state.hovered === action.id && state.remembered[action.side] === action.id) return state;
@@ -46,16 +42,14 @@ function selection(state: Selection, action: SelectionAction): Selection {
       };
     case "leave":
       return state.hovered === action.id ? { ...state, hovered: null } : state;
-    case "denial":
-      return { ...state, denial: action.message };
     case "prepare":
-      return { ...state, hovered: null, denial: "" };
+      return { ...state, hovered: null };
     case "clear":
       return { ...state, selected: null };
     case "cancel":
       return { ...state, selected: null, hovered: null };
     case "played":
-      return { ...state, selected: null, hovered: null, denial: "" };
+      return { ...state, selected: null, hovered: null };
   }
 }
 
@@ -76,21 +70,12 @@ export function useBattleInteraction({
   board: RefObject<HTMLElement | null>;
 }) {
   const [state, update] = useReducer(selection, initial);
-  const { selected, hovered, denial, remembered } = state;
+  const { selected, hovered, remembered } = state;
   const [previousClear, setPreviousClear] = useState(clearSelection);
   if (previousClear !== clearSelection) {
     setPreviousClear(clearSelection);
     if (clearSelection) update({ type: "clear" });
   }
-  useEffect(() => {
-    if (!denial) return;
-    const timer = setTimeout(
-      () => update({ type: "denial", message: "" }),
-      motionValue("--target-denial-duration"),
-    );
-    return () => clearTimeout(timer);
-  }, [denial]);
-
   const focusAfterCommand = useRef<number | null>(null);
   const playedCard = useRef<string | null>(null);
   const ghosts = useRef(new Set<Animation>());
@@ -295,7 +280,6 @@ export function useBattleInteraction({
   };
   return {
     selected,
-    denial,
     card,
     def,
     target,
@@ -312,7 +296,6 @@ export function useBattleInteraction({
     legalTargets: legal,
     setTarget,
     leaveTarget: (id: string) => update({ type: "leave", id }),
-    deny: (message: string) => update({ type: "denial", message }),
     chooseCard,
     play,
     cancel,

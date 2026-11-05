@@ -8,7 +8,7 @@ import { ruleMessage } from "../localization/rule-message";
 import { useRuleText } from "../localization/rule-catalog";
 import type { Status } from "./combat-status-model";
 
-const measured = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"];
+const measured = ["block", "armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"];
 
 /** Keep the committed English snapshot for animation while presenting complete localized messages. */
 export function useStatusPresentation(status: Status): { text: string; content: ReactNode } {

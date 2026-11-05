@@ -2893,28 +2893,28 @@
     "reference": "Keyword XP"
   },
   "content.glossary.keyword.armor.definition.rule": {
-    "text": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
-    "reference": "Reduces Physical and Stun damage remaining after Block by its stack count; Loses 1 stack whenever it reduces damage"
+    "text": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage by its stacks; Loses {{value0}} stack when used",
+    "reference": "Reduces Physical and Stun damage by its stacks; Loses 1 stack when used"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
-    "text": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "reference": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until used or Purged; Does not stack"
+    "text": "Return the next attack to its attacker, taking no damage or harmful effects",
+    "reference": "Return the next attack to its attacker, taking no damage or harmful effects"
   },
   "content.glossary.keyword.bleed.definition.rule": {
-    "text": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
-    "reference": "Bleed hits add stacks equal to their damage before Block; At the affected creature's next turn start, deal damage equal to the stacks, then clear them"
+    "text": "Take {{value0}} damage per stack at next turn start; Then clear all stacks",
+    "reference": "Take 1 damage per stack at next turn start; Then clear all stacks"
   },
   "content.glossary.keyword.blind.definition.rule": {
-    "text": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
-    "reference": "Your next attack has a 50% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a Dodge by each target; Does not stack"
+    "text": "Your next attack has a {{value0}}% chance to miss",
+    "reference": "Your next attack has a 50% chance to miss"
   },
   "content.glossary.keyword.block.definition.rule": {
-    "text": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
-    "reference": "Absorbs damage before Health, including damage over time; Does not normally prevent hit effects, status buildup or Leech; Remaining Block normally halves at the creature's next turn, rounded to the nearest whole number"
+    "text": "Absorbs damage; Remaining <keyword0>Block</keyword0> halves at turn start",
+    "reference": "Absorbs damage; Remaining Block halves at turn start"
   },
   "content.glossary.keyword.burn.definition.rule": {
-    "text": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
-    "reference": "Burn hits add stacks equal to their damage before Block; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage"
+    "text": "Take {{value0}} damage per stack at turn start; Then halve stacks",
+    "reference": "Take 1 damage per stack at turn start; Then halve stacks"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "text": "Remove the stated number of harmful effect types from an ally, clearing all stacks of each removed type",
@@ -2929,16 +2929,16 @@
     "reference": "An attack that deals double damage; Attacks on either side have a base 5% critical chance"
   },
   "content.glossary.keyword.dodge.definition.rule": {
-    "text": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
-    "reference": "Avoid an incoming attack before Block or Armor; Base chance is 5%, capped at 75% with bonuses; Stunned or Frozen creatures normally cannot Dodge; Damage over time cannot be Dodged"
+    "text": "Chance to avoid attacks; Starts at {{value0}}%, up to {{value1}}%",
+    "reference": "Chance to avoid attacks; Starts at 5%, up to 75%"
   },
   "content.glossary.keyword.food.definition.rule": {
     "text": "Cards shared by your team; Apple restores {{value0}} <keyword0>Health</keyword0>, <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2> and Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and is Consumed when played",
     "reference": "Cards shared by your team; Apple restores 6 Health, Mana Berries grant 2 Mana and Trail Bread grants 6 Block; Each costs 1 Mana and is Consumed when played"
   },
   "content.glossary.keyword.freeze.definition.rule": {
-    "text": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
-    "reference": "Freeze hits add buildup equal to their damage before Block; When buildup reaches half maximum Health, the creature becomes Frozen and skips one turn; Recovery grants 3 turns of immunity to both Stun and Freeze"
+    "text": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "reference": "At half maximum Health in buildup, skip 1 turn; Then gain 3 turns of Stun and Freeze immunity"
   },
   "content.glossary.keyword.health.definition.rule": {
     "text": "A creature's remaining life; At {{value0}} <keyword0>Health</keyword0> it is knocked out; <keyword1>Healing</keyword1> restores <keyword2>Health</keyword2> up to its maximum but cannot revive a knocked-out creature during battle",
@@ -2961,40 +2961,40 @@
     "reference": "Direct damage absorbed by Block; Ignores Armor and applies no status effect"
   },
   "content.glossary.keyword.negate.definition.rule": {
-    "text": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "reference": "Cancel the next incoming ability attack and its harmful effects on you before Dodge; Thorns still retaliate; Lasts until used or Purged; Does not stack"
+    "text": "Cancel the next incoming attack and its harmful effects",
+    "reference": "Cancel the next incoming attack and its harmful effects"
   },
   "content.glossary.keyword.nullify.definition.rule": {
-    "text": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
-    "reference": "Prevent the next Burn, Poison, Bleed, Stun, Freeze or Blind application; Direct damage and existing statuses are unchanged; Lasts until used or Purged; Does not stack"
+    "text": "Prevent the next harmful status; Does not prevent damage",
+    "reference": "Prevent the next harmful status; Does not prevent damage"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "text": "Damage reduced by <keyword0>Armor</keyword0> after <keyword1>Block</keyword1>",
     "reference": "Damage reduced by Armor after Block"
   },
   "content.glossary.keyword.poison.definition.rule": {
-    "text": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
-    "reference": "Poison hits add stacks equal to their damage before Block; At the affected creature's turn start, deal damage equal to the stacks, then remove 20% of them, rounded to the nearest whole number with a minimum of 1"
+    "text": "Take {{value0}} damage per stack at turn start; Then lose {{value1}}% of stacks",
+    "reference": "Take 1 damage per stack at turn start; Then lose 20% of stacks"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "text": "Remove the stated number of beneficial effect types from an enemy, starting with <keyword0>Block</keyword0> and clearing all stacks of each removed type",
     "reference": "Remove the stated number of beneficial effect types from an enemy, starting with Block and clearing all stacks of each removed type"
   },
   "content.glossary.keyword.reflect.definition.rule": {
-    "text": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
-    "reference": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; Attack Reflection instead returns the whole attack to its attacker; Reflected effects cannot reflect again; Charges do not stack"
+    "text": "Send the next harmful status to a random enemy; Does not prevent damage",
+    "reference": "Send the next harmful status to a random enemy; Does not prevent damage"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "text": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
     "reference": "Return a knocked-out ally with 20% of their maximum Health, rounded normally with a minimum of 1; Does not renew Death’s Door"
   },
   "content.glossary.keyword.stun.definition.rule": {
-    "text": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
-    "reference": "Stun hits add buildup equal to their damage before Block, reduced by Armor; When buildup reaches half maximum Health, the creature becomes Stunned and skips one turn; Recovery grants 3 turns of immunity to both Stun and Freeze"
+    "text": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "reference": "At half maximum Health in buildup, skip 1 turn; Then gain 3 turns of Stun and Freeze immunity"
   },
   "content.glossary.keyword.thorns.definition.rule": {
-    "text": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
-    "reference": "When hit or when an attack is Negated, deal Nature damage equal to your Thorns, then lose 1 stack; Triggers even through Block or Armor; Retaliation cannot trigger more retaliation"
+    "text": "When hit, deal {{value0}} <keyword0>Nature</keyword0> damage per stack; Then lose {{value1}} stack",
+    "reference": "When hit, deal 1 Nature damage per stack; Then lose 1 stack"
   },
   "content.glossary.keyword.water.definition.rule": {
     "text": "Direct damage absorbed by <keyword0>Block</keyword0>; Ignores <keyword1>Armor</keyword1> and applies no status effect",
@@ -4666,142 +4666,152 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "text": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
     "reference": "Acrobat Top: next attack cannot be Dodged",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.attackReflection.v013a620784742104.rule": {
-    "text": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "reference": "Attack Reflection: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until used or Purged; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.attackReflection.v47d857c97c932bb3.rule": {
+    "text": "<keyword0>Attack Reflection</keyword0>: Return the next attack to its attacker, taking no damage or harmful effects",
+    "reference": "Attack Reflection: Return the next attack to its attacker, taking no damage or harmful effects",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.blind.v37b85a98a2799221.rule": {
-    "text": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "reference": "Blind: Your next attack has a 50% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a Dodge by each target; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.blind.ve2d57c6eea210af7.rule": {
+    "text": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss",
+    "reference": "Blind: Your next attack has a 50% chance to miss",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.controlled.v147305c04334e696.rule": {
-    "text": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "reference": "Stunned: 2 turns",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.controlled.v11aef5cde2568068.rule": {
+    "text": "<keyword0>Frozen</keyword0>: skip {{value0}} turns",
+    "reference": "Frozen: skip 2 turns",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
+  },
+  "content.status.controlled.v2627b2e6943c398b.rule": {
+    "text": "<keyword0>Frozen</keyword0>: skip {{value0}} turn",
+    "reference": "Frozen: skip 1 turn",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "text": "Turn skipped",
     "reference": "Turn skipped",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.controlled.v89bb2c2caa8815a8.rule": {
-    "text": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "reference": "Frozen: 1 turn",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.controlled.vcd57b8fd3ce840e8.rule": {
+    "text": "<keyword0>Stunned</keyword0>: skip {{value0}} turn",
+    "reference": "Stunned: skip 1 turn",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.controlled.v9121eae5c53d2321.rule": {
-    "text": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "reference": "Frozen: 2 turns",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.controlled.vd44ff14e7ea5c761.rule": {
+    "text": "<keyword0>Stunned</keyword0>: skip {{value0}} turns",
+    "reference": "Stunned: skip 2 turns",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.controlled.ve93ba5ee32c41861.rule": {
-    "text": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "reference": "Stunned: 1 turn",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.cooldown.v7e371d88b3e2e9e3.rule": {
+    "text": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turns left",
+    "reference": "Immune to Stun and Freeze: 2 turns left",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.cooldown.v2db257f39699f407.rule": {
-    "text": "Control immunity {{value0}}",
-    "reference": "Control immunity 0",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.cooldown.vee08a58b6508ab76.rule": {
+    "text": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turn left",
+    "reference": "Immune to Stun and Freeze: 0 turn left",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "text": "Free Follow-up: next card is free",
     "reference": "Free Follow-up: next card is free",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "text": "Divine Favor: next <keyword0>Light</keyword0> card is free",
     "reference": "Divine Favor: next Light card is free",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "text": "Windstep: next <keyword0>Nature</keyword0> card is free",
     "reference": "Windstep: next Nature card is free",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.grace.v6e81bc0f25243d28.rule": {
-    "text": "Death's Door {{value0}}",
-    "reference": "Death's Door 0",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.grace.v7d70cbf27f059bd2.rule": {
+    "text": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turn left",
+    "reference": "Death's Door: survive fatal damage at 1 Health; 0 turn left",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
-    "text": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "reference": "Moonseed: next Thorns retaliation deals double damage",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.grace.ved60bcb3845feb07.rule": {
+    "text": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turns left",
+    "reference": "Death's Door: survive fatal damage at 1 Health; 2 turns left",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.negate.v0fea63d64804569b.rule": {
-    "text": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "reference": "Negate: Cancel the next incoming ability attack and its harmful effects on you before Dodge; Thorns still retaliate; Lasts until used or Purged; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.moonseedReady.v23f9ba255f570b85.rule": {
+    "text": "Moonseed: next <keyword0>Thorns</keyword0> damage is doubled",
+    "reference": "Moonseed: next Thorns damage is doubled",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
-    "text": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "reference": "Open Flank: next attack deals 0 additional Physical damage",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.negate.v547e4e9923d24b18.rule": {
+    "text": "<keyword0>Negate</keyword0>: Cancel the next incoming attack and its harmful effects",
+    "reference": "Negate: Cancel the next incoming attack and its harmful effects",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.nullify.v497e819f2a2d6746.rule": {
-    "text": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "reference": "Nullify: Prevent the next Burn, Poison, Bleed, Stun, Freeze or Blind application; Direct damage and existing statuses are unchanged; Lasts until used or Purged; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.nextPhysical.v6898256cc6c7de17.rule": {
+    "text": "Open Flank: next attack deals {{value0}} extra <keyword0>Physical</keyword0> damage",
+    "reference": "Open Flank: next attack deals 0 extra Physical damage",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
-    "text": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "reference": "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.nullify.vce10a8ed74932e80.rule": {
+    "text": "<keyword0>Nullify</keyword0>: Prevent the next harmful status; Does not prevent damage",
+    "reference": "Nullify: Prevent the next harmful status; Does not prevent damage",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
+  },
+  "content.status.nullifyFreeze.ve1d9965b67010344.rule": {
+    "text": "Prevent the next <keyword0>Freeze</keyword0> damage",
+    "reference": "Prevent the next Freeze damage",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "text": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
     "reference": "Oasis Seed: next attack has Leech",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.partingCut.v7cad0e487210bc8a.rule": {
-    "text": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "reference": "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.partingCut.vf7a28552587a53e7.rule": {
+    "text": "Parting Cut: next <keyword0>Physical</keyword0> hit adds half its damage as <keyword1>Bleed</keyword1>",
+    "reference": "Parting Cut: next Physical hit adds half its damage as Bleed",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.reflect.ved0888b165975dfb.rule": {
-    "text": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "reference": "Reflect: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; Attack Reflection instead returns the whole attack to its attacker; Reflected effects cannot reflect again; Charges do not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.reflect.vde052a9a722c7be5.rule": {
+    "text": "<keyword0>Reflect</keyword0>: Send the next harmful status to a random enemy; Does not prevent damage",
+    "reference": "Reflect: Send the next harmful status to a random enemy; Does not prevent damage",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
-    "text": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "reference": "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.reflectBurn.v2a3de9f6418bf193.rule": {
+    "text": "Send the next <keyword0>Burn</keyword0> buildup to a random enemy; Does not prevent damage",
+    "reference": "Send the next Burn buildup to a random enemy; Does not prevent damage",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "text": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
     "reference": "Finding Rhythm: +0% Dodge chance",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "text": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "reference": "Ribbon Spool: immune to Stun and Freeze",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
-  "content.status.riposte.v7f25e6d160e653d4.rule": {
-    "text": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "reference": "Riposte: next Physical attack is a guaranteed Critical Hit",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+  "content.status.riposte.v1e440c9b1d660960.rule": {
+    "text": "Riposte: next <keyword0>Physical</keyword0> attack always <keyword1>critically hits</keyword1>",
+    "reference": "Riposte: next Physical attack always critically hits",
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.springTide.v9686824085c1ef98.rule": {
     "text": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
     "reference": "Spring Tide: next Water card plays twice",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "text": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
     "reference": "Dragon’s Toothpick: next attack also Purges",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "text": "Turn Back the Tide: next attack may repeat",
     "reference": "Turn Back the Tide: next attack may repeat",
-    "contextHash": "27a2066dbe97bf08f411d15d59a772ea33eb851d36f39d0f9ce4aa7e7c0c20a1"
+    "contextHash": "d55a2a27d7e58eaea9763a04a9c18f42b0b6d17c879ceb250157ad914f3657cb"
   },
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"

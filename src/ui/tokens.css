@@ -135,7 +135,6 @@
   --battle-target-rail-width: clamp(180px, 16vw, 300px);
   --battle-hand-hover-clearance: 24px;
   --target-outcomes-height: calc(44px * var(--ui-density, 1));
-  --target-denial-duration: 2400ms;
   --selection-gap: calc(3px * var(--ui-density, 1));
   --selection-width: calc(2px * var(--ui-density, 1));
   --progress-height: calc(8px * var(--ui-density, 1));
@@ -159,8 +158,8 @@
   --tooltip-travel: calc(2px * var(--ui-density, 1));
   --feedback-duration: 1100ms;
   --feedback-text: calc(34px * var(--text-scale, 1));
-  --feedback-pop-scale: 2;
-  --feedback-hold-scale: 1.8;
+  --feedback-pop-scale: 1.6;
+  --feedback-hold-scale: 1.44;
   --feedback-icon-gap: calc(6px * var(--ui-density, 1));
   --feedback-critical-radius: calc(8px * var(--ui-density, 1));
   --feedback-rise: calc(200px * var(--ui-density, 1));

@@ -33,8 +33,8 @@ it("follows committed ally and enemy control state without replacing artwork tar
   expect(stars.getAttribute("aria-hidden")).toBe("true");
   expect(stars.querySelectorAll(".control-star")).toHaveLength(8);
   expect(view.container.querySelectorAll('[data-control-art="freeze"] .control-crystal')).toHaveLength(12);
-  expect(screen.getByRole("button", { name: "Stunned: 2 turns" })).toBeTruthy();
-  expect(screen.getByRole("button", { name: "Frozen: 1 turn" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Stunned: skip 2 turns" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Frozen: skip 1 turn" })).toBeTruthy();
   target.click();
   expect(click).toHaveBeenCalledWith(target);
   target.focus();
