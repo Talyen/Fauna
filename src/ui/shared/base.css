@@ -31,7 +31,7 @@
   --radius-4xl: 32px;
 }
 
-html {
+html[data-artwork-ready] {
   /* Preserve the 26px pointer size until the display needs all 64 source pixels. */
   cursor:
     image-set(url("./assets/pointer-c-shaded.png") calc(max(64 / 26, var(--artwork-pixel-ratio, 2)) * 1dppx))

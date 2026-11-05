@@ -9,6 +9,8 @@ import { cardActor } from "../../../game/card-actors";
 import { definition, species, speciesCards } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
 import type { Inspection } from "../inspection-model";
+import { useArtwork } from "../artwork";
+import { assetUrl } from "../assets";
 
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function DeckCards({
@@ -52,6 +54,12 @@ export function DeckCards({
           i18n.content(`content.card.${b.definitionId}.name`, definition(b.definitionId).name),
           i18n.locale,
         ) || a.id.localeCompare(b.id),
+  );
+  useArtwork(
+    deck.map((card) => {
+      const def = definition(card.definitionId);
+      return assetUrl(def.artwork ?? `action.${def.species}`);
+    }),
   );
   const renderCard = (card: (typeof deck)[number]) => {
     const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;

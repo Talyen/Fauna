@@ -5,7 +5,8 @@ import { effectPalette } from "../shared/effects/palettes";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { motionValue } from "../shared/motion-values";
-import { assetUrl } from "../shared/assets";
+import { assetUrl, talentArtwork } from "../shared/assets";
+import { useArtwork } from "../shared/artwork";
 import { KeywordText } from "../shared/keyword-text";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import {
@@ -148,6 +149,7 @@ export function Talents({
   controls?: Controls;
 }) {
   const i18n = useMessages();
+  useArtwork(talentArtwork);
   const keywordName = (id: Keyword) => i18n.content(`content.keyword.${id}.label`, keywordLabel(id));
   const [keyword, setKeyword] = useState<Keyword | null>(null);
   const [treeReset, setTreeReset] = useState(0);

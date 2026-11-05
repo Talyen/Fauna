@@ -29,7 +29,14 @@ function SelectTrigger({ className, children, ref, ...props }: SelectTriggerProp
 
 type SelectContentProps = ComponentProps<typeof SelectPrimitive.Content>;
 
-function SelectContent({ className, children, position = "popper", ref, ...props }: SelectContentProps) {
+function SelectContent({
+  className,
+  children,
+  position = "popper",
+  collisionPadding = 16,
+  ref,
+  ...props
+}: SelectContentProps) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -37,16 +44,17 @@ function SelectContent({ className, children, position = "popper", ref, ...props
         data-state="open"
         ref={ref}
         className={cn(
-          "relative z-50 max-h-96 min-w-[calc(8*var(--content-rem,1rem))] overflow-hidden rounded-xl border border-border/80 bg-background text-popover-foreground shadow-md",
+          "relative z-50 max-h-[min(calc(24*var(--content-rem,1rem)),var(--radix-select-content-available-height))] min-w-[calc(8*var(--content-rem,1rem))] overflow-hidden rounded-xl border border-border/80 bg-background text-popover-foreground shadow-md",
           position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1",
           className,
         )}
         position={position}
+        collisionPadding={collisionPadding}
         {...props}
       >
         <SelectPrimitive.Viewport
           className={cn(
-            "p-1",
+            "min-h-0 p-1",
             position === "popper" &&
               "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
           )}
@@ -65,7 +73,7 @@ function SelectItem({ className, children, ref, ...props }: SelectItemProps) {
     <SelectPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex w-full cursor-default items-center rounded-xl py-2.5 pr-4 pl-10 text-sm text-foreground transition-colors outline-none select-none focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-muted/80",
+        "relative flex min-h-[var(--control-height)] w-full cursor-default items-center rounded-xl py-2.5 pr-4 pl-10 text-sm text-foreground transition-colors outline-none select-none focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-muted/80",
         className,
       )}
       {...props}

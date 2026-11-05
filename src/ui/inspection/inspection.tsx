@@ -6,7 +6,9 @@ import { cardText, enemyCanUse, enemyCard } from "../../game/card-rules";
 import { ShineText } from "../shared/effects/treatments";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
-import { useLayoutEffect, useRef, useState } from "react";
+import { startTransition, useDeferredValue, useLayoutEffect, useRef, useState } from "react";
+import { useArtwork } from "../shared/artwork";
+import { assetUrl } from "../shared/assets";
 import { useStore } from "zustand";
 import { Star } from "lucide-react";
 import type { Session } from "../../application/session";
@@ -31,7 +33,7 @@ export function Inspector({
 }) {
   const i18n = useMessages();
   const [opener] = useState(() => document.activeElement as HTMLElement | null);
-  const game = useStore(session.store, (s) => s.game);
+  const game = useDeferredValue(useStore(session.store, (s) => s.game));
   const rootCard = "card" in item ? item.card : null;
   const kind = "card" in item ? definition(item.card.definitionId).species : item.species;
   const creature = kind === null ? null : species(kind);
@@ -63,6 +65,12 @@ export function Inspector({
                   level: 0,
                 },
           );
+  useArtwork(
+    cards.map((card) => {
+      const def = definition(card.definitionId);
+      return assetUrl(def.artwork ?? `action.${def.species}`);
+    }),
+  );
   const actionProps = (action: Card) => {
     const def = enemy ? enemyCard(definition(action.definitionId)) : undefined;
     return {
@@ -81,7 +89,9 @@ export function Inspector({
   const previousCard = useRef(selected),
     restore = useRef<number | null>(null);
   const cycle = (direction: number) =>
-    setSelected((index) => (index === null ? null : (index + direction + cards.length) % cards.length));
+    startTransition(() =>
+      setSelected((index) => (index === null ? null : (index + direction + cards.length) % cards.length)),
+    );
   const back = () => {
     if (rootCard) return false;
     if (selected === null) return false;

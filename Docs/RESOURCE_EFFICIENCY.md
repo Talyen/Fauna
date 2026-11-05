@@ -28,7 +28,9 @@ Windows packaging excludes renderer npm modules already compiled into Vite outpu
 
 ## Artwork preparation
 
-[Startup presentation](ui/screens.md#startup-loading) owns essential and optional artwork preparation. The [preparation owner](../src/ui/startup/prepare.ts) retains no permanent image-element cache for the library; browser-managed decoded-image eviction remains outside application control.
+[Startup presentation](ui/screens.md#startup-loading) owns preparation and complete-surface reveal. The shared [artwork cache](../src/ui/shared/artwork-cache.ts) deduplicates fetch/decode work across startup and every artwork surface, prioritizes visible groups and admits at most one asynchronous decode at a time. Speculation starts in browser idle time after input settles, pauses while hidden, and releases obsolete interests. No whole-catalog warmup runs.
+
+Mounted surfaces pin decoded image references, including the complete active battle's possible draw/generation/inspection artwork. An LRU retains 96 MiB of additional unpinned decoded RGBA pixels, estimated from natural dimensions; active surfaces are additional to this budget. Newly prepared destinations have a one-second handoff lease before eviction, allowing their mounted pins to commit even when the destination exceeds that budget. Evicted artwork must prepare again before reveal. Disposal cancels pending work and releases the cache. Browser-managed decode eviction and GPU upload/frame scheduling remain outside application control; retained references and asynchronous decoding do not establish a universal zero-hitch hardware guarantee.
 
 Verify first-use battle, Collection, inspection and paging with uncached browser contexts. Missing images, degraded artwork, command delays or navigation regressions fail acceptance. The [UI review procedure](UI.md#required-review) defines rendered evidence.
 

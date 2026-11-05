@@ -54,7 +54,8 @@ it("leaves opening arrows to a focused closed dropdown", () => {
   trigger.setAttribute("aria-expanded", "false");
   document.body.append(trigger);
   const actions = vi.fn();
-  const close = connectInput(actions, () => {});
+  const modes = vi.fn();
+  const close = connectInput(actions, modes);
   try {
     trigger.focus();
     for (const key of ["ArrowUp", "ArrowDown"]) {
@@ -62,6 +63,7 @@ it("leaves opening arrows to a focused closed dropdown", () => {
       trigger.dispatchEvent(event);
       expect(event.defaultPrevented).toBe(false);
       expect(document.activeElement).toBe(trigger);
+      expect(modes).toHaveBeenLastCalledWith("keyboard", true);
     }
     expect(actions).not.toHaveBeenCalled();
   } finally {
@@ -69,6 +71,36 @@ it("leaves opening arrows to a focused closed dropdown", () => {
     trigger.remove();
   }
 });
+it.each(["ArrowDown", "Home", "End", "Enter", " "])(
+  "tracks %s navigation inside a native dropdown without routing its keys",
+  (key) => {
+    const content = document.createElement("div");
+    content.setAttribute("data-radix-select-content", "");
+    content.innerHTML = '<div role="option" tabindex="-1">English</div>';
+    document.body.append(content);
+    const actions = vi.fn();
+    const modes = vi.fn();
+    const close = connectInput(actions, modes);
+    try {
+      const option = content.firstElementChild as HTMLElement;
+      option.focus();
+      window.dispatchEvent(new Event("pointermove"));
+      const event = new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true });
+      option.dispatchEvent(event);
+      expect(event.defaultPrevented).toBe(false);
+      expect(actions).not.toHaveBeenCalled();
+      expect(modes).toHaveBeenLastCalledWith("keyboard", true);
+      const escape = new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true });
+      option.dispatchEvent(escape);
+      expect(escape.defaultPrevented).toBe(false);
+      expect(document.activeElement).toBe(option);
+      expect(actions).not.toHaveBeenCalled();
+    } finally {
+      close();
+      content.remove();
+    }
+  },
+);
 it("leaves Escape to an open native dialog without blurring its focused control", () => {
   const dialog = document.createElement("div");
   dialog.dataset.nativeEscape = "";

@@ -3,7 +3,7 @@ import { Component, type ReactNode } from "react";
 import type { Diagnostics } from "../../application/diagnostics";
 import { Loading } from "./loading";
 export class GameErrorBoundary extends Component<
-  { diagnostics: Diagnostics; children: ReactNode },
+  { diagnostics: Diagnostics; children: ReactNode; onRetry?: () => void; onFailure?: () => void },
   { failed: boolean }
 > {
   state = { failed: false };
@@ -14,11 +14,13 @@ export class GameErrorBoundary extends Component<
     return { failed: true };
   }
   componentDidCatch(error: Error) {
+    this.props.onFailure?.();
     this.props.diagnostics.record("render", error);
     clearTimeout(this.recovered);
     this.attempts++;
     this.retry = setTimeout(
       () => {
+        this.props.onRetry?.();
         this.recovered = setTimeout(() => {
           this.attempts = 0;
         }, 30000);

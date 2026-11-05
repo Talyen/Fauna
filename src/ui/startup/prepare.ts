@@ -1,14 +1,16 @@
 import type { Session } from "../../application/session";
 import type { StartupSplash } from "./splash";
-import { likelyArtwork, immediateArtwork, startupBaseArtwork } from "./artwork";
-import { warmImages, waitForFonts } from "./images";
+import { likelyArtwork, battleArtwork, startupBaseArtwork } from "./artwork";
+import { waitForFonts } from "./images";
+import { createArtworkCache } from "../shared/artwork-cache";
 
 /** One navigation owns preparation; React recovery only observes its settled promise. */
 export function prepareStartup(session: Session, splash: StartupSplash, validate: () => void) {
   const lifetime = new AbortController();
   const { signal } = lifetime;
-  const retained = new Set<HTMLImageElement>();
-  let upcoming: AbortController | undefined;
+  const artwork = createArtworkCache((message) => session.diagnostics.record("startup", message));
+  let releaseEssential: (() => void) | undefined;
+  let releaseUpcoming: (() => void) | undefined;
   let removeSubscription: (() => void) | undefined;
   let selection = "";
   const report = (message: string) => session.diagnostics.record("startup", message);
@@ -17,13 +19,10 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
     const next = JSON.stringify(urls);
     if (next === selection || signal.aborted) return;
     selection = next;
-    upcoming?.abort();
-    upcoming = new AbortController();
-    void warmImages(urls, upcoming.signal, report).catch((error: unknown) =>
-      session.diagnostics.record("startup", error),
-    );
+    releaseUpcoming?.();
+    releaseUpcoming = artwork.prefetch(urls);
   };
-  const base = warmImages(startupBaseArtwork, signal, report, retained);
+  const base = artwork.prepare(startupBaseArtwork);
   const fonts = waitForFonts(signal, report);
   const resources = (async () => {
     let source: "validation" | "startup" = "validation";
@@ -33,16 +32,12 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
       if (signal.aborted) return;
       await session.load();
       if (signal.aborted || !session.store.getState().ready) return;
-      const essential = immediateArtwork(session.store.getState().game);
+      const essential = battleArtwork(session.store.getState().game);
       await base;
       if (signal.aborted) return;
-      await warmImages(
-        essential.filter((url) => !startupBaseArtwork.includes(url)),
-        signal,
-        report,
-        retained,
-      );
+      await artwork.prepare(essential.filter((url) => !startupBaseArtwork.includes(url)));
       if (signal.aborted) return;
+      releaseEssential = artwork.retain(essential);
       prefetch();
       removeSubscription = session.store.subscribe((current, previous) => {
         if (current.game !== previous.game) prefetch();
@@ -54,14 +49,20 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
     }
   })();
   return {
-    ready: Promise.all([resources, fonts, splash.minimum]),
-    releaseImages: () => retained.clear(),
+    ready: Promise.all([resources, fonts, splash.minimum, base]),
+    artwork,
+    releaseImages() {
+      releaseEssential?.();
+      releaseEssential = undefined;
+    },
     dispose() {
       lifetime.abort();
-      upcoming?.abort();
+      releaseUpcoming?.();
+      artwork.dispose();
       removeSubscription?.();
       document.removeEventListener("visibilitychange", prefetch);
-      retained.clear();
+      releaseEssential?.();
+      releaseEssential = undefined;
     },
   };
 }

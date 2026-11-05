@@ -2,6 +2,48 @@ import { expect } from "@playwright/test";
 import { run } from "../support/game";
 import { reloadHome, test, seed } from "./support/session";
 
+for (const scale of [1, 1.25]) {
+  test(`language dropdown keeps every choice reachable at ${scale * 100}% text`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.addInitScript((scale) => localStorage.setItem("fauna.test.text-scale", String(scale)), scale);
+    await seed(page, run());
+    await page.getByRole("button", { name: "Options", exact: true }).click();
+    const language = page.getByRole("combobox", { name: "Language", exact: true });
+    await language.focus();
+    await page.keyboard.press("ArrowDown");
+    const menu = page.getByRole("listbox");
+    await expect(menu).toBeVisible();
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "visible");
+    const bounds = (await menu.boundingBox())!;
+    expect(bounds.y).toBeGreaterThanOrEqual(0);
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(720);
+    const heights = await page
+      .getByRole("option")
+      .evaluateAll((options) => options.map((option) => option.getBoundingClientRect().height));
+    expect(heights.every((height) => height >= 44)).toBe(true);
+    await page.keyboard.press("End");
+    const last = page.getByRole("option", { name: "Français", exact: true });
+    await expect(last).toBeFocused();
+    await expect(last).toBeInViewport({ ratio: 0.999 });
+    await page.keyboard.press("Home");
+    const first = page.getByRole("option", { name: "Automatic", exact: true });
+    await expect(first).toBeFocused();
+    await expect(first).toBeInViewport({ ratio: 0.999 });
+    await page.keyboard.press("ArrowDown");
+    await expect(page.getByRole("option", { name: "English", exact: true })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(menu).toHaveCount(0);
+    await expect(language).toHaveText("English");
+    await expect(language).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("End");
+    await page.keyboard.press("Escape");
+    await expect(language).toHaveText("English");
+    await expect(language).toBeFocused();
+    await expect(page.getByRole("heading", { name: "Options", exact: true })).toBeVisible();
+  });
+}
+
 test("slider fill and thumb follow pointer drags across the track", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Options", exact: true }).click();

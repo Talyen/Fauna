@@ -5,6 +5,7 @@ import prepared from "../../../../src/assets/prepared.json" with { type: "json" 
 import { createGame } from "../../../../src/game/engine";
 import { definition, speciesCards } from "../../../../src/game/content";
 import { assetUrl } from "../../../../src/ui/shared/assets";
+import { encounterSource } from "../../../../src/game/encounters";
 import {
   accept,
   run,
@@ -27,17 +28,16 @@ it("warms only offered starters and shared menu assets on a fresh start, without
   expect(urls.length).toBeLessThan(12);
   expect(new Set(urls).size).toBe(urls.length);
   expect(JSON.stringify(game)).toBe(before);
-  expect(likelyArtwork(game).length).toBeLessThanOrEqual(8);
   expect(likelyArtwork(game).every((url) => !urls.includes(url))).toBe(true);
 });
-it("prefetches distinct selected abilities in order up to the eight-image limit", () => {
+it("prefetches all distinct selected abilities in order", () => {
   const game = produce(createGame(7), (draft) => {
     draft.selected = [...draft.starterOffers];
   });
   const expected = game.selected.flatMap(speciesCards).map((card) => assetUrl(card.artwork!));
   expect(new Set(expected).size).toBeGreaterThan(8);
   const before = JSON.stringify(game);
-  expect(likelyArtwork(game)).toEqual([...new Set(expected)].slice(0, 8));
+  expect(likelyArtwork(game)).toEqual([...new Set(expected)]);
   expect(JSON.stringify(game)).toBe(before);
 });
 it("warms the saved combat's visible hand, creatures and minions without loading the full deck", () => {
@@ -90,7 +90,8 @@ it("covers recruitment, Boon and Merchant choices", () => {
 });
 it("covers ordinary and Boss destinations, Campfire and completed journeys", () => {
   const destination = starterJourney(7, "emberback");
-  expect(immediateArtwork(destination)).toContain(assetUrl("encounter.combat"));
+  for (const enemy of encounterSource(destination).enemies)
+    expect(immediateArtwork(destination)).toContain(assetUrl(`creature.${enemy.species}`));
   const hurt = produce(destination, (draft) => {
     draft.team[0]!.health = 1;
   });

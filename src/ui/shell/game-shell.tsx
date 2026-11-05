@@ -24,7 +24,20 @@ import { Campfire } from "../expedition/campfire";
 import { Settings } from "../settings/settings";
 import { useGameAudio } from "../audio/game-audio";
 import { JourneyResults } from "../expedition/journey-results";
-import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
+import {
+  startTransition,
+  useDeferredValue,
+  useMemo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
+import { useArtwork, useUpcomingArtwork } from "../shared/artwork";
+import { assetUrl, talentArtwork } from "../shared/assets";
+import { battleArtwork } from "../startup/artwork";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
 import { Menu, Play, Pause, FastForward, Trophy } from "lucide-react";
@@ -40,7 +53,7 @@ import { Draft } from "../expedition/draft";
 import { TeamSelection } from "../expedition/team-selection";
 import { Rewards } from "../expedition/rewards";
 import { Talents } from "../talents/talents";
-import { Collection } from "../collection/collection";
+import { Collection, collectionSpecies } from "../collection/collection";
 
 import { activeSurface, initialNavigation, shellNavigation } from "./navigation";
 import { useShellFocus } from "./focus";
@@ -51,7 +64,7 @@ import type { Modal } from "./types";
 export function GameShell({ session }: { session: Session }) {
   const i18n = useMessages();
   const view = useStore(session.store),
-    game = view.game;
+    game = useDeferredValue(view.game);
   const talentPoints = KEYWORDS.reduce((total, keyword) => total + availablePoints(game, keyword), 0);
   const root = useRef<HTMLDivElement>(null),
     gameControls: Controls = useRef(null),
@@ -60,17 +73,21 @@ export function GameShell({ session }: { session: Session }) {
     collectionControls: Controls = useRef(null);
   const [preferences, updatePreferences] = useDevicePreferences();
   const { audio, autoEndTurn } = preferences;
-  const [navigationState, transition] = useReducer(
+  const [navigationState, dispatchNavigation] = useReducer(
     (state: Parameters<typeof shellNavigation>[0], action: Parameters<typeof shellNavigation>[1]) =>
       measurePerformance("navigation-intent", () => shellNavigation(state, action), { action: action.type }),
     initialNavigation,
+  );
+  const transition = useCallback(
+    (action: Parameters<typeof shellNavigation>[1]) => startTransition(() => dispatchNavigation(action)),
+    [],
   );
   const { route } = navigationState.page;
   const { menuInstance, modalInstance } = navigationState;
   const menuGeneration = useRef(0);
   const showMenu = useCallback(
     () => transition({ type: "openPause", instance: ++menuGeneration.current }),
-    [],
+    [transition],
   );
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [navigation, setNavigation] = useState(false);
@@ -118,7 +135,7 @@ export function GameShell({ session }: { session: Session }) {
   });
   const inspect = useCallback(
     (item: Inspection | null) => transition(item ? { type: "inspect", item } : { type: "closeInspection" }),
-    [],
+    [transition],
   );
   const closeDialog = () => transition({ type: "closeDialog" });
   const closePause = () => transition({ type: "closePause" });
@@ -265,7 +282,7 @@ export function GameShell({ session }: { session: Session }) {
         transition({ type: "externalBlock" });
         setAutoplay(false);
       }),
-    [session, setAutoplay],
+    [session, setAutoplay, transition],
   );
   useEffect(() => {
     if (!view.overlayActive) return;
@@ -339,6 +356,17 @@ export function GameShell({ session }: { session: Session }) {
       else document.documentElement.dataset.focus = previousFocus;
     };
   }, [session.store]);
+  useArtwork(useMemo(() => battleArtwork(game), [game]));
+  useUpcomingArtwork(
+    route === "home"
+      ? [
+          ...collectionSpecies(game)
+            .slice(0, 6)
+            .map((entry) => assetUrl(`creature.${entry.id}`)),
+          ...talentArtwork,
+        ]
+      : [],
+  );
   if (!view.ready)
     return (
       <Screen className="loading">

@@ -124,14 +124,12 @@ export function connectInput(
     if (target?.matches("input, textarea, select") || target?.isContentEditable) return;
     // Local confirmations own dismissal and focus return without navigating their page.
     if (event.key === "Escape" && target?.closest('[data-native-escape][data-state="open"]')) return;
-    if (
+    const nativeSelect =
       target?.closest("[data-radix-select-content]") ||
       (target?.getAttribute("role") === "combobox" &&
         (target.getAttribute("aria-expanded") === "true" ||
           event.key === "ArrowUp" ||
-          event.key === "ArrowDown"))
-    )
-      return;
+          event.key === "ArrowDown"));
     const mapping: Record<string, InputAction> = {
       ArrowLeft: "left",
       ArrowRight: "right",
@@ -147,15 +145,18 @@ export function connectInput(
       (event.key === "Tab" ||
         event.key === "F7" ||
         (["Enter", " "].includes(event.key) && target?.closest('button, [role="button"]')) ||
+        (nativeSelect && ["Home", "End", "Enter", " "].includes(event.key)) ||
         ["left", "right", "up", "down"].includes(action ?? "")) &&
       !event.repeat
     )
       navigation = true;
-    if (event.key === "Escape") {
+    if (event.key === "Escape" && !nativeSelect) {
       navigation = false;
       (document.activeElement as HTMLElement | null)?.blur();
     }
     publish(true);
+    // Native dropdowns own their keys and focus, but still update input modality.
+    if (nativeSelect) return;
     if (event.key === "F7") {
       event.preventDefault();
       const controls = [
