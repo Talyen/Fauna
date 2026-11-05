@@ -9,6 +9,7 @@ import { definition, GENERATED_CARDS } from "../../../src/game/content";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { run, starterJourney } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
+import { MAX_SUPPORTED_HAND_SIZE } from "../../../src/game/card-zones";
 
 let images: HTMLImageElement[];
 let cache: ReturnType<typeof createArtworkCache>;
@@ -49,7 +50,7 @@ it("deduplicates fetch/decode, preempts speculation and yields between images", 
   await vi.advanceTimersByTimeAsync(100);
   expect(images.map((image) => image.getAttribute("src"))).toEqual(["optional"]);
   expect(images[0]!.fetchPriority).toBe("low");
-  const ready = cache.prepare(["urgent", "urgent"]);
+  const ready = cache.prepare(["urgent"]);
   await tick();
   expect(images[0]!.hasAttribute("src")).toBe(false);
   expect(images[1]!.getAttribute("src")).toBe("urgent");
@@ -114,6 +115,24 @@ it("keeps a complete, interactive previous screen until the entire next group ha
   });
   expect(screen.getByRole("heading", { name: "Next" })).toBeTruthy();
   expect(screen.queryByText("Loading")).toBeNull();
+});
+
+it("prepares duplicate-card capacity before battle without demanding unused copies on every rerender", async () => {
+  let ready = false;
+  const prepared = cache.prepare(["food", "food", "food"]).then(() => {
+    ready = true;
+  });
+  await tick();
+  await loaded(images[0]!);
+  expect(ready).toBe(false);
+  await loaded(images[1]!);
+  expect(ready).toBe(false);
+  await loaded(images[2]!);
+  await prepared;
+  const leases = Array.from({ length: 3 }, () => cache.mount(cache.acquire("food")));
+  expect(new Set(leases.map((lease) => lease.image)).size).toBe(3);
+  expect(() => cache.read(["food", "food", "food"])).not.toThrow();
+  leases.forEach((lease) => lease.release());
 });
 
 it("retains on-screen images while evicting unused decoded pixels and re-decodes an evicted image", async () => {
@@ -200,6 +219,10 @@ it("prepares every draw, generated Food and summon before battle, and actual des
     expect(urls).toContain(assetUrl(def.artwork ?? `action.${def.species}`));
   }
   for (const card of GENERATED_CARDS) expect(urls).toContain(assetUrl(card.artwork!));
+  for (const card of GENERATED_CARDS)
+    expect(urls.filter((url) => url === assetUrl(card.artwork!)).length).toBeGreaterThanOrEqual(
+      MAX_SUPPORTED_HAND_SIZE,
+    );
   for (const id of [
     "food.apple",
     "food.mana-berries",

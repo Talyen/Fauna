@@ -4,6 +4,8 @@ import { encounterSource } from "../../game/encounters";
 import { canRecruitDestination, canVisitCampfire, canVisitMerchant } from "../../game/destinations";
 import type { GameState } from "../../game/types";
 import pointerArtwork from "../shared/assets/pointer-c-shaded.png";
+import { MAX_SUPPORTED_HAND_SIZE } from "../../game/card-zones";
+import { MINION_LIMIT } from "../../game/combat/legendary";
 
 export const startupBaseArtwork = [
   pointerArtwork,
@@ -57,9 +59,16 @@ export function battleArtwork(game: GameState) {
   }
   for (const unit of [...game.team, ...game.reserves, ...game.battle.enemies])
     for (const url of speciesArtwork(unit.species)) urls.add(url);
-  for (const card of GENERATED_CARDS) urls.add(assetUrl(card.artwork!));
-  for (const url of summonArtwork) urls.add(url);
-  return [...urls];
+  const capacity = new Map<string, number>();
+  // Copies can fill a hand with one picture; prepare live cards and both motion cohorts in advance.
+  const handCopies = 3 * MAX_SUPPORTED_HAND_SIZE + 2;
+  for (const card of [...game.cards.map((card) => definition(card.definitionId)), ...GENERATED_CARDS])
+    capacity.set(assetUrl(card.artwork ?? `action.${card.species}`), handCopies);
+  const summonCopies =
+    2 * MINION_LIMIT * (game.team.length + game.reserves.length + game.battle.enemies.length) + 2;
+  for (const url of summonArtwork) capacity.set(url, summonCopies);
+  for (const url of capacity.keys()) urls.add(url);
+  return [...urls].flatMap((url) => Array<string>(capacity.get(url) ?? 1).fill(url));
 }
 
 /** Select the actual saved next screen without resolving commands or advancing RNG. */

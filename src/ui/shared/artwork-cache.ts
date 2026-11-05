@@ -212,6 +212,17 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
     return entry.copy;
   };
   const free = (entry: Entry) => entry.elements.filter((element) => !element.held && !claims.has(element));
+  const capacity = (urls: readonly string[]) => {
+    const needed = new Map<string, number>();
+    for (const url of urls) needed.set(url, (needed.get(url) ?? 0) + 1);
+    return [...needed].flatMap(([url, count]) => {
+      const entry = entries.get(url);
+      if (!entry || entry.state !== "ready" || entry.elements.length >= count) return [];
+      const job = copy(entry, "visible");
+      if (job.state === "failed") throw new Error(`Artwork element unavailable: ${url}`);
+      return [job.promise];
+    });
+  };
   const spare = (entry: Entry) => {
     if (!disposed && (entry.pins || entry.interest) && free(entry).length < 2) copy(entry, "idle");
   };
@@ -282,6 +293,11 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
     read(urls: readonly string[]) {
       if (urls.every((url) => entries.get(url)?.state === "ready")) {
         for (const url of urls) entries.get(url)!.used = ++sequence;
+        const pending = capacity(urls);
+        if (pending.length) {
+          claims.clear();
+          throw Promise.all(pending);
+        }
         return;
       }
       const requested = request(urls, "visible");
@@ -320,6 +336,12 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
       await Promise.all(requested.map((entry) => entry.promise));
       if (!disposed && requested.some((entry) => entry.state !== "ready"))
         throw new Error("Artwork preparation failed");
+      // Repeated URLs reserve decoded elements, while sharing the source bitmap and decode lane.
+      while (!disposed) {
+        const pending = capacity(urls);
+        if (!pending.length) break;
+        await Promise.all(pending);
+      }
       protect(requested);
     },
     prefetch(urls: readonly string[]) {

@@ -18,7 +18,7 @@ import { battlefieldView, battlefieldHasId, livingBattlefield, isEnemy } from ".
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
-const MINION_LIMIT = 2;
+export const MINION_LIMIT = 2;
 const PENDULUM_HEALTH = 6;
 
 function minionSlot(state: BattleState, actor: Combatant, prefix: string) {
