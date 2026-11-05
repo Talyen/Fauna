@@ -45,7 +45,6 @@
   flex-shrink: 0;
   display: flex;
   min-width: calc(var(--battle-creature-width) * 3 + var(--screen-item-gap) * 2);
-  grid-template-columns: repeat(3, var(--battle-creature-width));
   justify-content: safe center;
   overflow: visible;
   gap: var(--screen-item-gap);
@@ -652,20 +651,14 @@
 .battle-screen .target-summary {
   width: 100%;
 }
-.battle-screen [data-legendary] {
-  display: grid;
-}
 .battle-screen [data-legendary] > .creature-wrap[data-battle-slot="left"] {
-  grid-column: 1;
-  grid-row: 1;
+  order: 0;
 }
 .battle-screen [data-legendary] > .creature-wrap[data-battle-slot="center"] {
-  grid-column: 2;
-  grid-row: 1;
+  order: 1;
 }
 .battle-screen [data-legendary] > .creature-wrap[data-battle-slot="right"] {
-  grid-column: 3;
-  grid-row: 1;
+  order: 2;
 }
 
 /* Icon glyphs stay below the frame; their 44px hit targets overhang this compact row. */
