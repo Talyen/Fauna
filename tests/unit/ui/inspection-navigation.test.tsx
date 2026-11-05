@@ -30,7 +30,7 @@ it("forwards a second Back to the shell while the first nested Back is still pen
   try {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: /^Ember Charge,/ }));
-    expect(screen.getByRole("dialog", { name: "Ember Charge details", exact: true })).toBeTruthy();
+    expect(screen.getByRole("dialog", { name: "Ember Charge details" })).toBeTruthy();
     act(() => {
       expect(controls.current?.("back")).toBe(true);
       expect(controls.current?.("back")).toBe(false);
