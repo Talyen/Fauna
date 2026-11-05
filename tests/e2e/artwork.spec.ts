@@ -1,3 +1,4 @@
+import { changePage } from "./support/pagination";
 import { expect } from "@playwright/test";
 import { BOONS } from "../../src/game/content";
 import { assetUrl } from "../../src/ui/shared/assets";
@@ -57,7 +58,7 @@ test("cold artwork and a delayed decode retain the whole previous page and respe
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Boons", exact: true }).click();
   await expect(page.locator(".collection-grid[data-view='boons']")).toBeVisible();
-  await page.getByRole("button", { name: "Next page", exact: true }).click();
+  await changePage(page.locator(".collection-screen"));
   await expect(page.getByRole("button", { name: "Previous page", exact: true })).toBeEnabled();
   expect(
     await page.evaluate(() => (window as unknown as { incompleteFrames: string[] }).incompleteFrames),

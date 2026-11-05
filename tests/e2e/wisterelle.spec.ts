@@ -64,9 +64,13 @@ test("Wisterelle cannot spend Lantern Fare on full Health or Left Luggage withou
   const before = await state(page);
   await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:wisterelle-left-luggage"]').focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator(".target-summary")).toContainText("There are no eligible ally cards in Discard");
+  await expect(
+    page.locator('.app:not([inert]) .hand [data-card-id="ally-0:wisterelle-left-luggage"]'),
+  ).toHaveAttribute("aria-disabled", "true");
   await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:wisterelle-lantern-fare"]').focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator(".target-summary")).toContainText("There are no injured allies");
+  await expect(
+    page.locator('.app:not([inert]) .hand [data-card-id="ally-0:wisterelle-lantern-fare"]'),
+  ).toHaveAttribute("aria-disabled", "true");
   expect(await state(page)).toEqual(before);
 });

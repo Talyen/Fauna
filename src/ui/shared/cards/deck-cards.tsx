@@ -9,7 +9,6 @@ import { cardActor } from "../../../game/card-actors";
 import { definition, species, speciesCards } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
 import type { Inspection } from "../inspection-model";
-import { useArtwork } from "../artwork";
 import { assetUrl } from "../assets";
 
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
@@ -55,12 +54,10 @@ export function DeckCards({
           i18n.locale,
         ) || a.id.localeCompare(b.id),
   );
-  useArtwork(
-    deck.map((card) => {
-      const def = definition(card.definitionId);
-      return assetUrl(def.artwork ?? `action.${def.species}`);
-    }),
-  );
+  const artwork = (card: (typeof deck)[number]) => {
+    const def = definition(card.definitionId);
+    return assetUrl(def.artwork ?? `action.${def.species}`);
+  };
   const renderCard = (card: (typeof deck)[number]) => {
     const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;
     return (
@@ -105,6 +102,7 @@ export function DeckCards({
         pageSize={compact || overflow.length > 0 ? 3 : 6}
         className="deck-grid"
         label={i18n.message("deck.pages", "Deck pages")}
+        artwork={artwork}
       >
         {renderCard}
       </PagedItems>
@@ -116,6 +114,7 @@ export function DeckCards({
             pageSize={3}
             className="deck-grid"
             label={i18n.message("deck.pages", "Deck pages")}
+            artwork={artwork}
           >
             {renderCard}
           </PagedItems>

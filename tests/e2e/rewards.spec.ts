@@ -1,3 +1,4 @@
+import { changePage } from "./support/pagination";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect, type Page } from "@playwright/test";
 import { BOONS } from "../../src/game/content";
@@ -115,7 +116,7 @@ test("many earned keywords remain pageable before the Recruit choice", async ({ 
   });
   let pages = 1;
   while ((await next.count()) && (await next.isEnabled())) {
-    await next.click();
+    await changePage(page.getByRole("navigation", { name: "Keyword XP earned" }));
     pages++;
   }
   expect(pages).toBeGreaterThan(1);

@@ -5,9 +5,10 @@ export function captureArtworkSwap(
   poses: readonly (HTMLElement | null | undefined)[],
   { hideArtwork = false }: { hideArtwork?: boolean } = {},
 ) {
-  const records = poses.map((node) =>
-    node ? { clone: visualClone(node), rect: node.getBoundingClientRect() } : null,
-  );
+  const records = poses.map((node) => {
+    const clone = node && visualClone(node);
+    return clone ? { clone, rect: node!.getBoundingClientRect() } : null;
+  });
   let frame = 0;
   let cancelled = false;
   const hidden: { image: HTMLElement; visibility: string }[] = [];

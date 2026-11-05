@@ -1,6 +1,9 @@
+import { cloneArtworkElements } from "./artwork-elements";
+
 /** Decorative copy only: never duplicates focus ownership, IDs or accessible content. */
 export function visualClone(source: HTMLElement) {
   const clone = source.cloneNode(true) as HTMLElement;
+  if (!cloneArtworkElements(source, clone)) return null;
   clone.inert = true;
   clone.setAttribute("inert", "");
   clone.setAttribute("aria-hidden", "true");

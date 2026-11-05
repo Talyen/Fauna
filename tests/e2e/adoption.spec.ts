@@ -1,3 +1,4 @@
+import { changePage } from "./support/pagination";
 import { expectControlColors } from "./support/control-colors";
 import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
@@ -51,7 +52,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
     const exhaustive = width === 1280 && height === 720;
     for (let index = 0; index < BOONS.length; index += 2) {
-      if (index > 0) await dialog.getByRole("button", { name: "Next page" }).click();
+      if (index > 0) await changePage(dialog);
       // Every page is reachable; exhaustive content/geometry belongs to minimum size.
       if (!exhaustive && index > 0 && index + 2 < BOONS.length) continue;
       for (const boon of BOONS.slice(index, index + 2)) {

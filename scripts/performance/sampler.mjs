@@ -122,9 +122,12 @@ export async function installSampler({ recordSpans = true, deadlineMs = 120000 }
   };
   window.faunaPerformanceCapture = bridge;
   const frame = (now) => {
-    if (previous !== undefined)
-      append(sample.frames, { start: previous, end: now, duration: now - previous });
-    previous = now;
+    // A queued RAF timestamp can precede sampler installation within the same rendering frame.
+    if (now >= sample.markerStart) {
+      if (previous !== undefined)
+        append(sample.frames, { start: previous, end: now, duration: now - previous });
+      previous = now;
+    }
     handle = requestAnimationFrame(frame);
   };
   sample.markerStart = performance.mark("fauna-capture-start").startTime;

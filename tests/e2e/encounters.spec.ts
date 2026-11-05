@@ -43,7 +43,11 @@ for (const [width, enlarged, encounter] of [
     });
     await expect(page.locator(".app:not([inert]) [data-encounter]")).toHaveCount(1);
     await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
-    await enter.locator("img").evaluate((image) => (image as HTMLImageElement).decode());
+    await expect(enter).toBeVisible();
+    await expect(enter.locator("img").first()).toBeVisible();
+    await enter
+      .locator("img")
+      .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
     if (encounter === 0) {
       await page.mouse.move(0, 0);
       await settleScreen(page);

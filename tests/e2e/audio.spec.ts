@@ -68,7 +68,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
         ).combatObserved,
     );
   await expect.poll(async () => (await observed()).peak).toBeGreaterThan(0.001);
-  expect((await observed()).impacts).toContain("enemy-0");
+  await expect.poll(async () => (await observed()).impacts).toContain("enemy-0");
   await page.emulateMedia({ reducedMotion: "reduce" });
   const count = (await observed()).impacts.length;
   await page.locator('.app:not([inert]) .hand [data-card-id="ally-1:emberback-attack"]').click();

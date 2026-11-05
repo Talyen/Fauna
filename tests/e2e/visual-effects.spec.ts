@@ -29,11 +29,13 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   await page.bringToFront();
   await resume(page);
   await expect(page.locator('[data-testid="background-particles"]')).toHaveCount(1);
-  await expect(page.locator('.creature-card[data-effect-urgent="true"]')).toHaveCount(1);
+  await expect(page.locator('.app:not([inert]) .creature-card[data-effect-urgent="true"]')).toHaveCount(1);
   const before = await state(page);
   const card = page.locator(".hand .action-card").first();
   const shine = card.locator(":scope > .effect-shine-border");
-  const urgentShine = page.locator('.creature-card[data-effect-urgent="true"] > .effect-shine-border');
+  const urgentShine = page.locator(
+    '.app:not([inert]) .creature-card[data-effect-urgent="true"] > .effect-shine-border',
+  );
   await page.mouse.move(0, 0);
   await expect(shine).toHaveCSS("opacity", "0");
   await expect(urgentShine).toHaveCSS("opacity", "0");

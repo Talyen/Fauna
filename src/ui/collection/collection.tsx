@@ -72,7 +72,11 @@ export function Collection({
     pages: totalPages,
     start: pageStart,
     change,
-  } = usePagination(view === "fauna" ? ordered.length : BOONS.length, pageSize, view);
+  } = usePagination(view === "fauna" ? ordered.length : BOONS.length, pageSize, view, (start, end) =>
+    view === "fauna"
+      ? ordered.slice(start, end).map((creature) => assetUrl(`creature.${creature.id}`))
+      : BOONS.slice(start, end).map((boon) => assetUrl(`boon.${boon.id}`)),
+  );
   const pageEntries = ordered.slice(pageStart, pageStart + pageSize);
   useUpcomingArtwork([
     ...pageEntries.flatMap((creature) => speciesArtwork(creature.id)),

@@ -3,10 +3,11 @@ import { motionValue } from "../shared/motion-values";
 import { Component, createRef, type ReactNode, type RefObject } from "react";
 import { assetUrl } from "../shared/assets";
 import { visualClone } from "../shared/visual-clone";
+import { replaceVisualArtwork } from "../shared/artwork-elements";
 type Pose = {
   rect: DOMRect;
   node: HTMLElement;
-  clone: HTMLElement;
+  clone: HTMLElement | null;
   angle: number;
   width: number;
   height: number;
@@ -145,9 +146,19 @@ export class HandMotion extends Component<Props> {
   private present(before: Snapshot, newTurn = false) {
     this.finish(true);
     const after = this.measure();
-    if (this.disposed || this.props.paused || this.reduced?.matches) return;
+    const releaseUnused = (used = new Set<HTMLElement>()) => {
+      for (const pose of [...before.values(), ...after.values()])
+        if (pose.clone && !used.has(pose.clone)) pose.clone.remove();
+    };
+    if (this.disposed || this.props.paused || this.reduced?.matches) {
+      releaseUnused();
+      return;
+    }
     const board = this.root.current?.closest(".battle-screen");
-    if (!board) return;
+    if (!board) {
+      releaseUnused();
+      return;
+    }
     this.endMotion = startPerformanceSpan("hand-motion", { revision: this.props.revision });
     const removed: [string, Pose][] = [];
     const added: [string, Pose][] = [];
@@ -199,17 +210,18 @@ export class HandMotion extends Component<Props> {
         if (!draw && pose.node.dataset.consume && !this.props.cardIds.includes(pose.node.dataset.cardId!))
           continue;
         const pile = board.querySelector<HTMLElement>(`[data-pile="${draw ? "draw" : "discard"}"]`);
-        if (!pile || !pose.rect.width) continue;
+        if (!pile || !pose.rect.width || !pose.clone) continue;
         flights.push({ pose, destination: draw ? pose.node : pile, draw, duration, start });
         start += duration;
       }
     }
+    releaseUnused(new Set(flights.map((flight) => flight.pose.clone!)));
     if (!flights.length || !start) return;
     const now = performance.now();
     const drawSource = board.querySelector<HTMLElement>('[data-pile="draw"]')?.getBoundingClientRect();
     const stackOrder = [...before.keys(), ...after.keys()];
     const surfaces = flights.map((flight) => {
-      const clone = flight.pose.clone;
+      const clone = flight.pose.clone!;
       const card = flight.pose.node;
       if (flight.draw) {
         card.style.opacity = "0";
@@ -279,8 +291,15 @@ export class HandMotion extends Component<Props> {
         if (f.face) {
           const back = flip > 90;
           const src = back ? assetUrl(f.draw ? "card.back" : "pile.discard") : f.front;
-          if (f.face.getAttribute("src") !== src) f.face.src = src;
           f.face.classList.toggle("discard-card-back", back && !f.draw);
+          if (f.face.getAttribute("src") !== src) {
+            const face = replaceVisualArtwork(f.clone, f.face, src);
+            if (!face) {
+              this.finish(true);
+              return;
+            }
+            f.face = face;
+          }
         }
         f.clone.style.opacity = t >= 1 ? "0" : "1";
         f.clone.style.left = `${cx - width / 2}px`;

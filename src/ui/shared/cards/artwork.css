@@ -22,8 +22,13 @@
   width: var(--art-portrait-width);
   flex: 0 0 auto;
 }
+.artwork-image-slot {
+  display: contents;
+}
 .creature-card > img,
-.action-card > img {
+.action-card > img,
+.creature-card > .artwork-image-slot > img,
+.action-card > .artwork-image-slot > img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -38,38 +43,38 @@
   border-radius: calc(var(--radius) - var(--border-art-width));
   pointer-events: none;
 }
-.art-slices > img {
+.art-slices img {
   position: absolute;
   top: 0;
   height: 100%;
   object-fit: cover;
 }
-.art-slices > img:first-child,
-.art-slices > img:last-child {
+.art-slices img[data-art-slice="0"],
+.art-slices img[data-art-slice-last] {
   object-position: 75% center;
 }
-.art-slices[data-slices="2"] > img {
+.art-slices[data-slices="2"] img {
   width: 60%;
 }
-.art-slices[data-slices="2"] > img:first-child {
+.art-slices[data-slices="2"] img[data-art-slice="0"] {
   left: 0;
   clip-path: polygon(0 0, 100% 0, 66.667% 100%, 0 100%);
 }
-.art-slices[data-slices="2"] > img:last-child {
+.art-slices[data-slices="2"] img[data-art-slice-last] {
   right: 0;
   clip-path: polygon(33.333% 0, 100% 0, 100% 100%, 0 100%);
 }
-.art-slices[data-slices="3"] > img:first-child {
+.art-slices[data-slices="3"] img[data-art-slice="0"] {
   left: 0;
   width: 40%;
   clip-path: polygon(0 0, 100% 0, 66.667% 100%, 0 100%);
 }
-.art-slices[data-slices="3"] > img:nth-child(2) {
+.art-slices[data-slices="3"] img[data-art-slice="1"] {
   left: 26.667%;
   width: 46.666%;
   clip-path: polygon(28.571% 0, 100% 0, 71.429% 100%, 0 100%);
 }
-.art-slices[data-slices="3"] > img:last-child {
+.art-slices[data-slices="3"] img[data-art-slice-last] {
   right: 0;
   width: 40%;
   clip-path: polygon(33.333% 0, 100% 0, 100% 100%, 0 100%);

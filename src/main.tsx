@@ -50,7 +50,7 @@ export function mountGame(splash: StartupSplash) {
       <LocalizationProvider steamLanguage={() => steamLanguage}>
         <GameErrorBoundary
           diagnostics={session.diagnostics}
-          onRetry={startup.artwork.retryFailures}
+          onRetry={() => startup.artwork.retryFailures()}
           onFailure={() => {
             document.documentElement.dataset.artworkReady = "true";
             splash.dismiss();

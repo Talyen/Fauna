@@ -42,7 +42,7 @@ it("plays the one-Mana kit with preview parity, accurate XP and current-format r
       expect(combatStatuses(result.state.team[0]!.combat)).toContainEqual(
         expect.objectContaining({
           id: "reflectBurn",
-          text: expect.stringContaining("Reflect the next Burn"),
+          text: expect.stringContaining("Send the next Burn buildup"),
         }),
       );
     } else if (id.endsWith("draw")) {

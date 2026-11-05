@@ -1,4 +1,12 @@
-import { forwardRef, type CSSProperties } from "react";
+import {
+  forwardRef,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  type ComponentProps,
+  type CSSProperties,
+} from "react";
 import { Button, type ButtonProps } from "../../../components/ui/button";
 import type { KeywordId } from "../../../game/keywords";
 import { effectPalette, visualKeywords, type EffectTone } from "../effects/palettes";
@@ -8,7 +16,8 @@ import { cn } from "../../../lib/utils";
 import type { CombatState } from "../../../game/types";
 import { ControlArtEffect } from "./control-art-effect";
 import { artworkWidth } from "../assets";
-import { useArtwork } from "../artwork";
+import { ArtworkContext, useArtwork } from "../artwork";
+import { registerArtworkElement } from "../artwork-elements";
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
   artworkSlices?: readonly string[];
@@ -24,6 +33,41 @@ type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   acting?: boolean;
   control?: CombatState["controlled"];
 };
+
+function ArtworkImage(
+  props: ComponentProps<"img"> & { src: string; "data-art-slice"?: number; "data-art-slice-last"?: string },
+) {
+  const cache = useContext(ArtworkContext);
+  const { width, height, "data-art-slice": slice, "data-art-slice-last": last } = props;
+  const ref = useRef<HTMLSpanElement>(null);
+  const element = useMemo(() => cache?.acquire(props.src), [cache, props.src]);
+  useLayoutEffect(() => {
+    if (!cache || !element || !ref.current) return;
+    const lease = cache.mount(element);
+    const image = lease.image;
+    image.alt = "";
+    image.draggable = false;
+    image.style.cssText = "";
+    image.className = "";
+    for (const [name, value] of Object.entries({
+      width,
+      height,
+      "data-art-slice": slice,
+      "data-art-slice-last": last,
+    })) {
+      if (value === undefined) image.removeAttribute(name);
+      else image.setAttribute(name, String(value));
+    }
+    registerArtworkElement(image, (url) => cache.borrow(url));
+    ref.current.append(image);
+    return lease.release;
+  }, [cache, element, width, height, slice, last]);
+  return cache ? (
+    <span className="artwork-image-slot" ref={ref} />
+  ) : (
+    <img {...props} decoding="async" alt="" draggable={false} />
+  );
+}
 
 /** The single uncropped artwork surface; control decoration never replaces external rules. */
 export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtCard(
@@ -62,12 +106,17 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const image =
     artworkSlices && artworkSlices.length > 1 ? (
       <span className="art-slices" data-slices={artworkSlices.length} aria-hidden="true">
-        {artworkSlices.map((slice) => (
-          <img key={slice} src={slice} decoding="async" alt="" draggable={false} />
+        {artworkSlices.map((slice, index) => (
+          <ArtworkImage
+            key={`${index}:${slice}`}
+            src={slice}
+            data-art-slice={index}
+            data-art-slice-last={index === artworkSlices.length - 1 ? "" : undefined}
+          />
         ))}
       </span>
     ) : (
-      <img
+      <ArtworkImage
         src={artwork}
         decoding="async"
         width={aspect === "creature" ? 800 : 600}

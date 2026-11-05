@@ -71,7 +71,7 @@
   justify-content: center;
   gap: var(--screen-item-gap);
 }
-.locked-species > .creature-card > img {
+.locked-species > .creature-card img {
   filter: grayscale(1);
 }
 .locked-species > .creature-card {
@@ -88,8 +88,8 @@
 :root[data-focus="visible"] .locked-species:focus > .creature-card {
   scale: var(--hover-scale);
 }
-.locked-species:hover > .creature-card > img,
-:root[data-focus="visible"] .locked-species:focus > .creature-card > img {
+.locked-species:hover > .creature-card img,
+:root[data-focus="visible"] .locked-species:focus > .creature-card img {
   filter: none;
 }
 .locked-species:hover > .creature-card > .effect-shine-border,

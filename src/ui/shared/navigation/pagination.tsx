@@ -6,11 +6,13 @@ import {
   useSyncExternalStore,
   startTransition,
   useDeferredValue,
+  useContext,
   type ReactNode,
   type RefObject,
 } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../../../components/ui/button";
+import { ArtworkContext, useArtwork, useUpcomingArtwork } from "../artwork";
 const compactViewport = () => window.innerHeight <= 900;
 function subscribeViewport(update: () => void) {
   window.addEventListener("resize", update);
@@ -21,19 +23,28 @@ export const useCompactLayout = () =>
   useDeferredValue(useSyncExternalStore(subscribeViewport, compactViewport));
 
 /** Anchors belong to a view/filter and survive resize without reviving invalid pages. */
-export function usePagination(count: number, pageSize: number, group = "default") {
+export function usePagination(
+  count: number,
+  pageSize: number,
+  group = "default",
+  artwork?: (start: number, end: number) => readonly string[],
+) {
+  const cache = useContext(ArtworkContext);
   const capacity = Math.max(1, pageSize);
   const [anchors, setAnchors] = useState<Record<string, number>>({});
   const anchor = anchors[group] ?? 0;
   const pages = Math.max(1, Math.ceil(count / capacity));
   const page = Math.min(Math.floor(anchor / capacity), pages - 1);
-  const change = (next: number) =>
-    startTransition(() =>
+  const change = (next: number) => {
+    const start = Math.max(0, Math.min(next, pages - 1)) * capacity;
+    const update = () =>
       setAnchors((current) => ({
         ...current,
-        [group]: Math.max(0, Math.min(next, pages - 1)) * capacity,
-      })),
-    );
+        [group]: start,
+      }));
+    if (!cache || !artwork || cache.ready(artwork(start, start + capacity))) update();
+    else startTransition(update);
+  };
   if (anchor >= count && anchor !== 0) setAnchors((current) => ({ ...current, [group]: page * capacity }));
   return { page, pages, start: page * capacity, change };
 }
@@ -44,7 +55,7 @@ function fittedColumns(width: number, cellWidth: number, gap: number, maximum: n
 
 /** Fixed-row galleries share width measurement; PagedItems additionally measures row height. */
 export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>, maximum: number, group: string) {
-  const [columns, setColumns] = useState(maximum);
+  const [measurement, setMeasurement] = useState({ group, columns: maximum });
   useLayoutEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -53,7 +64,12 @@ export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>, maximu
       const cellWidth = grid.firstElementChild?.getBoundingClientRect().width ?? 0;
       if (!(width > 0 && cellWidth > 0)) return;
       const gap = Number.parseFloat(getComputedStyle(grid).columnGap) || 0;
-      startTransition(() => setColumns(fittedColumns(width, cellWidth, gap, maximum)));
+      const columns = fittedColumns(width, cellWidth, gap, maximum);
+      startTransition(() =>
+        setMeasurement((current) =>
+          current.group === group && current.columns === columns ? current : { group, columns },
+        ),
+      );
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -65,7 +81,7 @@ export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>, maximu
       window.removeEventListener("resize", measure);
     };
   }, [gridRef, maximum, group]);
-  return columns;
+  return measurement.group === group ? measurement.columns : maximum;
 }
 
 export function PageControls({
@@ -96,6 +112,7 @@ export function PageControls({
       aria-label={label ?? i18n.message("pagination.pages", "Pages")}
       ref={nav}
       data-nav-row
+      data-page={page}
       onFocusCapture={(event) => {
         previousFocus.current = event.target as HTMLElement;
       }}
@@ -140,6 +157,7 @@ export function PagedItems<T>({
   className,
   label,
   contentRole,
+  artwork,
 }: {
   items: readonly T[];
   pageSize: number;
@@ -148,6 +166,7 @@ export function PagedItems<T>({
   className: string;
   label: string;
   contentRole?: "list";
+  artwork?: (item: T) => string;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const [measuredCapacity, setMeasuredCapacity] = useState<number | null>(null);
@@ -205,7 +224,17 @@ export function PagedItems<T>({
       window.removeEventListener("resize", measure);
     };
   }, [maxColumns, maxRows, items, capacity]);
-  const { page, pages, change } = usePagination(items.length, capacity);
+  const { page, pages, change } = usePagination(
+    items.length,
+    capacity,
+    "default",
+    artwork ? (start, end) => items.slice(start, end).map(artwork) : undefined,
+  );
+  const visible = items.slice(page * capacity, (page + 1) * capacity);
+  useArtwork(artwork ? visible.map(artwork) : []);
+  useUpcomingArtwork(
+    artwork ? items.slice(Math.max(0, (page - 1) * capacity), (page + 2) * capacity).map(artwork) : [],
+  );
   const focusedItem = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
     const focused = focusedItem.current;
@@ -226,9 +255,7 @@ export function PagedItems<T>({
       }}
     >
       <div className={className} role={contentRole} data-adaptive={adaptive ? "true" : undefined}>
-        {items
-          .slice(page * capacity, (page + 1) * capacity)
-          .map((item, index) => children(item, page * capacity + index))}
+        {visible.map((item, index) => children(item, page * capacity + index))}
       </div>
       {pages > 1 ? (
         <PageControls page={page} pages={pages} change={change} label={label} />

@@ -1,3 +1,4 @@
+import { changePage } from "./support/pagination";
 import { expectTalentOverview } from "./support/layout";
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
 import { expect, type Locator } from "@playwright/test";
@@ -70,7 +71,7 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
     await check(count);
     const next = root.getByRole("button", { name: "Next page", exact: true });
     if (!(await next.count()) || (await next.isDisabled())) return;
-    await next.click();
+    await changePage(root);
   }
   throw new Error("Pagination did not terminate");
 }
@@ -122,6 +123,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await seed(page, layoutGame());
       await captureScreen(page, { path: `reports/scroll-free/home-${width}-${height}-${scale}.png` });
       await page.getByRole("button", { name: "Collection", exact: true }).click();
+      await expect(page.locator(".collection-screen")).toBeVisible();
       await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
       // Exhaust the authored catalog at the most constrained size. Other cases
       // cover every grid page, but open only the first and last catalog entries.

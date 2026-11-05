@@ -415,10 +415,15 @@ export function createSession(
         if (quitting) return quitting;
         quitting = Promise.resolve()
           .then(async () => {
-            if ((await prepareClose()) && !disposed) platform.closeTab?.();
+            if ((await prepareClose()) && !disposed && store.getState().saveStatus !== "error")
+              platform.closeTab?.();
           })
           .finally(() => {
             quitting = undefined;
+            if (!disposed) {
+              closing = undefined;
+              publish({ closing: false });
+            }
           });
         return quitting;
       }

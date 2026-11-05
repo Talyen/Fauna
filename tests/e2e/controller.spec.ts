@@ -28,7 +28,8 @@ test("battle enemy inspection through Steam Input preserves progress and returns
   const press = await gamepad(page);
   await seed(page, run());
   await resume(page);
-  const enemy = page.locator(".enemy-row .creature-card").first();
+  const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+  await expect(enemy).toBeVisible();
   await enemy.focus();
   const before = await state(page);
   await press(0);

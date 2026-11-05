@@ -241,14 +241,14 @@ it("classifies committed action motion without prose, and revokes animation capa
   root.innerHTML =
     '<div data-actor-id="ally-0"><div class="combatant-motion"></div><div class="combatant-reaction"></div></div>';
   const owner = createCombatImpacts(() => root);
-  owner.present([{ kind: "action", text: "Anything", actorId: "ally-0", actionType: "support" }]);
+  owner.start([{ kind: "action", text: "Anything", actorId: "ally-0", actionType: "support" }]);
   expect(env.animate.mock.calls[0]?.[1]).toMatchObject({ duration: 520 });
   owner.present([{ kind: "reward", text: "Uses an attack" }]);
   expect(env.animate).toHaveBeenCalledTimes(1);
   env.reduce();
   expect(env.cancel).toHaveBeenCalled();
   owner.dispose();
-  owner.present([{ kind: "action", text: "Anything", actorId: "ally-0", actionType: "attack" }]);
+  owner.start([{ kind: "action", text: "Anything", actorId: "ally-0", actionType: "attack" }]);
   expect(env.animate).toHaveBeenCalledTimes(1);
 });
 

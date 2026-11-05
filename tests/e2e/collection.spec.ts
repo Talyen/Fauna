@@ -1,3 +1,4 @@
+import { changePage } from "./support/pagination";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
@@ -85,7 +86,8 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const next = page.getByRole("button", { name: "Next page", exact: true });
   await expect(page.getByRole("button", { name: "Previous page", exact: true })).toBeDisabled();
-  for (let count = 0; count < SPECIES.length && (await next.isEnabled()); count++) await next.click();
+  for (let count = 0; count < SPECIES.length && (await next.isEnabled()); count++)
+    await changePage(page.locator(".collection-screen"));
   await expect(next).toBeDisabled();
   await expect(page.getByRole("button", { name: "Previous page", exact: true })).toBeFocused();
   const creature = SPECIES.at(-1)!;

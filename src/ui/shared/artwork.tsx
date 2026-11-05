@@ -9,6 +9,9 @@ export function useArtwork(urls: readonly string[]) {
   // Draw order changes must not release ownership of the same decoded artwork group.
   const key = JSON.stringify([...new Set(urls)].sort());
   useLayoutEffect(() => cache?.retain(JSON.parse(key) as string[]), [cache, key]);
+  useLayoutEffect(() => {
+    cache?.committed();
+  });
   cache?.read(urls);
 }
 

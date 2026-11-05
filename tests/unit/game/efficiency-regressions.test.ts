@@ -923,9 +923,7 @@ it("keeps authored Boon lookup and artwork prefetch order", () => {
         : state.cards.map((card) => definition(card.definitionId));
     const expected = [
       ...new Set(definitions.map((card) => assetUrl(card.artwork ?? `action.${card.species}`))),
-    ]
-      .filter((url) => !visible.has(url))
-      .slice(0, 8);
+    ].filter((url) => !visible.has(url));
     expect(likelyArtwork(state)).toEqual(expected);
   }
 });

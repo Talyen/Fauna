@@ -123,7 +123,8 @@ for (const [width, height, scale, reduced] of [
     await page.clock.pauseAt(origin + 60_000);
     await page.locator(".hand .action-card").click();
     await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
-    await page.clock.runFor(200);
+    // Attack feedback arrives at the shared lunge apex (24% of 950ms).
+    await page.clock.runFor(300);
     await expect(page.locator('.combat-number[data-critical="true"]')).toHaveCount(1);
     await expect(page.locator('.combat-numbers[data-columns="2"]')).toHaveCount(1);
     await freezeFeedback(page);

@@ -2,6 +2,7 @@ import { warmImage } from "./artwork-image";
 
 type Priority = "visible" | "idle";
 type Entry = {
+  key: string;
   url: string;
   priority: Priority;
   state: "queued" | "loading" | "ready" | "failed";
@@ -14,11 +15,17 @@ type Entry = {
   attempts: number;
   interest: number;
   holdUntil: number;
+  elements: ArtworkElement[];
+  copyOf?: Entry;
+  copy?: Entry;
 };
+export type ArtworkElement = { image: HTMLImageElement; entry: Entry; held: boolean };
+export type ArtworkLease = { image: HTMLImageElement; release: () => void };
 
 /** One decode lane for the renderer; visible work takes precedence over speculation. */
 export function createArtworkCache(report: (message: string) => void, budget = 96 * 1024 * 1024) {
   const entries = new Map<string, Entry>();
+  const claims = new Set<ArtworkElement>();
   let active: { entry: Entry; lifetime: AbortController } | undefined;
   let cancelScheduled: (() => void) | undefined;
   let disposed = false;
@@ -29,13 +36,18 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
 
   const trim = () => {
     const unused = [...entries.values()]
-      .filter((entry) => entry.state === "ready" && !entry.pins)
+      .filter((entry) => !entry.copyOf && entry.state === "ready" && !entry.pins)
       .sort((a, b) => a.used - b.used);
     let bytes = unused.reduce((sum, entry) => sum + entry.bytes, 0);
     for (const entry of unused) {
       if (bytes <= budget) break;
       if (entry.holdUntil > performance.now()) break;
-      entries.delete(entry.url);
+      entries.delete(entry.key);
+      if (entry.copy) {
+        entries.delete(entry.copy.key);
+        entry.copy.resolve();
+        if (active?.entry === entry.copy) active.lifetime.abort();
+      }
       bytes -= entry.bytes;
     }
     if (bytes > budget && sweep === undefined) {
@@ -106,7 +118,7 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
     );
     active = undefined;
     if (disposed) return;
-    if (entries.get(entry.url) !== entry) {
+    if (entries.get(entry.key) !== entry) {
       schedule();
       return;
     }
@@ -118,6 +130,14 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
       entry.bytes = image.naturalWidth * image.naturalHeight * 4;
       entry.used = ++sequence;
       entry.state = "ready";
+      const owner = entry.copyOf ?? entry;
+      owner.elements.push({ image, entry: owner, held: false });
+      if (entry.copyOf) {
+        entries.delete(entry.key);
+        owner.copy = undefined;
+        if (entry.priority === "visible") protect([owner]);
+        spare(owner);
+      }
       entry.resolve();
       if (entry.priority === "idle") trim();
     } else if (entry.attempts < 2) {
@@ -138,6 +158,7 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
           resolve = done;
         });
         entry = {
+          key: url,
           url,
           priority,
           state: "queued",
@@ -149,6 +170,7 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
           attempts: 0,
           interest: 0,
           holdUntil: 0,
+          elements: [],
         };
         entries.set(url, entry);
       }
@@ -159,6 +181,57 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
     if (priority === "visible" && active?.entry.priority === "idle") active.lifetime.abort();
     schedule();
     return requested;
+  };
+  const copy = (entry: Entry, priority: Priority) => {
+    if (!entry.copy) {
+      let resolve = () => {};
+      const promise = new Promise<void>((done) => {
+        resolve = done;
+      });
+      entry.copy = {
+        key: `${entry.url}\0${++sequence}`,
+        url: entry.url,
+        priority,
+        state: "queued",
+        promise,
+        resolve,
+        bytes: 0,
+        used: ++sequence,
+        pins: 0,
+        attempts: 0,
+        interest: 0,
+        holdUntil: 0,
+        elements: [],
+        copyOf: entry,
+      };
+      entries.set(entry.copy.key, entry.copy);
+    }
+    if (priority === "visible") entry.copy.priority = priority;
+    if (priority === "visible" && active?.entry.priority === "idle") active.lifetime.abort();
+    schedule();
+    return entry.copy;
+  };
+  const free = (entry: Entry) => entry.elements.filter((element) => !element.held && !claims.has(element));
+  const spare = (entry: Entry) => {
+    if (!disposed && (entry.pins || entry.interest) && free(entry).length < 2) copy(entry, "idle");
+  };
+  const hold = (element: ArtworkElement): ArtworkLease => {
+    claims.delete(element);
+    element.held = true;
+    element.entry.pins++;
+    spare(element.entry);
+    let released = false;
+    return {
+      image: element.image,
+      release() {
+        if (released) return;
+        released = true;
+        element.image.remove();
+        element.held = false;
+        element.entry.pins--;
+        trim();
+      },
+    };
   };
   const activity = () => {
     lastInput = performance.now();
@@ -172,6 +245,35 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
   document.addEventListener("visibilitychange", visibility);
 
   return {
+    ready(urls: readonly string[]) {
+      return urls.every((url) => entries.get(url)?.state === "ready");
+    },
+    acquire(url: string) {
+      const entry = entries.get(url);
+      if (!entry || entry.state !== "ready") throw new Error(`Artwork must prepare before mounting: ${url}`);
+      const element = free(entry)[0];
+      if (element) {
+        claims.add(element);
+        return element;
+      }
+      const pending = copy(entry, "visible");
+      claims.clear();
+      if (pending.state === "failed") throw new Error(`Artwork element unavailable: ${url}`);
+      throw pending.promise;
+    },
+    mount: hold,
+    borrow(url: string) {
+      const entry = entries.get(url);
+      const element = entry && free(entry)[0];
+      if (!entry || !element) {
+        if (entry) spare(entry);
+        return null;
+      }
+      return hold(element);
+    },
+    committed() {
+      queueMicrotask(() => claims.clear());
+    },
     read(urls: readonly string[]) {
       if (urls.every((url) => entries.get(url)?.state === "ready")) {
         for (const url of urls) entries.get(url)!.used = ++sequence;
@@ -179,10 +281,15 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
       }
       const requested = request(urls, "visible");
       const failed = requested.find((entry) => entry.state === "failed");
-      if (failed) throw new Error(`Artwork unavailable: ${failed.url}`);
+      if (failed) {
+        claims.clear();
+        throw new Error(`Artwork unavailable: ${failed.url}`);
+      }
       const pending = requested.filter((entry) => entry.state !== "ready");
-      if (pending.length)
+      if (pending.length) {
+        claims.clear();
         throw Promise.all(pending.map((entry) => entry.promise)).then(() => protect(requested));
+      }
     },
     async prepare(urls: readonly string[]) {
       const requested = request(urls, "visible");
@@ -229,7 +336,12 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
       };
     },
     retryFailures() {
-      for (const entry of entries.values()) if (entry.state === "failed") entries.delete(entry.url);
+      claims.clear();
+      for (const entry of entries.values())
+        if (entry.state === "failed") {
+          entries.delete(entry.key);
+          if (entry.copyOf) entry.copyOf.copy = undefined;
+        }
     },
     dispose() {
       disposed = true;
@@ -240,6 +352,7 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
       document.removeEventListener("visibilitychange", visibility);
       for (const entry of entries.values()) entry.resolve();
       entries.clear();
+      claims.clear();
     },
   };
 }

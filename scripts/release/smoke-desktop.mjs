@@ -33,7 +33,8 @@ try {
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Play", exact: true }).click();
-  const starterOffer = window.locator(".draft-grid .creature-card").first();
+  const starterOffer = window.getByRole("button", { name: /^Recruit / }).first();
+  await starterOffer.waitFor({ state: "visible" });
   const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Recruit /, "");
   await starterOffer.click({ button: "right" });
   await window.getByRole("heading", { name: starterName, exact: true }).waitFor();

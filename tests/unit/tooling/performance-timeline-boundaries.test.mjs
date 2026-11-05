@@ -146,8 +146,8 @@ it("preserves the innermost selection and stable ties without sorting each time 
   expect(result.hitches[0].unaccountedMs).toBe(0);
 });
 
-function samplerEnvironment(failType) {
-  let now = 0,
+function samplerEnvironment(failType, initialTime = 0) {
+  let now = initialTime,
     serial = 0;
   const frames = new Map();
   const observers = [];
@@ -194,14 +194,24 @@ function samplerEnvironment(failType) {
     frames,
     observers,
     removals,
-    pump: () => {
+    pump: (timestamp) => {
       now += 16;
       const callbacks = [...frames.values()];
       frames.clear();
-      for (const callback of callbacks) callback(now);
+      for (const callback of callbacks) callback(timestamp ?? now);
     },
   };
 }
+
+it("starts the frame timeline after the capture marker even when a queued RAF belongs to an older frame", async () => {
+  const env = samplerEnvironment(undefined, 100);
+  const ready = installSampler();
+  env.pump(90);
+  env.pump(116);
+  await ready;
+  env.pump(132);
+  expect(env.window.faunaPerf.stop().frames).toEqual([{ start: 116, end: 132, duration: 16 }]);
+});
 
 it("retires previous sampler ownership before installing another capture", async () => {
   const env = samplerEnvironment();
