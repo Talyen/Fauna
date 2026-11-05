@@ -105,7 +105,6 @@ import {
   localizedPreviewMessage,
 } from "../../../src/ui/shared/localization/event-presentation";
 import { localizedCombatantName } from "../../../src/ui/shared/localization/combatant-name";
-import { localizedCardDenial } from "../../../src/ui/shared/localization/card-denial";
 
 screenTestEnvironment();
 
@@ -1449,24 +1448,7 @@ it("uses the localized backup name for the visible and accessible swap choice", 
   expect(send).not.toHaveBeenCalled();
 });
 
-it("localizes unavailable card reasons and preserves unfamiliar diagnostics", () => {
-  const game = run();
-  const actor = game.team[0]!;
-  const englishName = species(actor.species).name;
-  const reader = frenchReader({
-    [`content.species.${actor.species}.name`]: { source: englishName, text: "Créature traduite" },
-  });
-  expect(localizedCardDenial("Not enough Mana.", actor, reader)).toBe("Mana insuffisant.");
-  expect(localizedCardDenial("There are no living backups.", actor, reader)).toBe(
-    "Aucune créature en vie dans la réserve.",
-  );
-  expect(localizedCardDenial(`${englishName} cannot act while Frozen.`, actor, reader)).toBe(
-    "Créature traduite ne peut pas agir sous l’effet du Gel.",
-  );
-  expect(localizedCardDenial("A different reason.", actor, reader)).toBe("A different reason.");
-});
-
-it("shows the localized Mana denial without issuing a gameplay command", () => {
+it("keeps unavailable plays silent in another language without issuing a gameplay command", () => {
   const game = produce(run(), (draft) => {
     draft.battle!.hand = draft.cards.map((card) => card.id);
     draft.battle!.draw = [];
@@ -1474,7 +1456,7 @@ it("shows the localized Mana denial without issuing a gameplay command", () => {
   });
   const { view, send } = renderBattle(game);
   fireEvent.click(view.container.querySelector<HTMLButtonElement>(".hand .action-card")!);
-  expect(screen.getByText("Mana insuffisant.")).toBeTruthy();
+  expect(view.container.querySelector(".target-summary")?.textContent).toBe("");
   expect(send).not.toHaveBeenCalled();
 });
 

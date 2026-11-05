@@ -169,9 +169,12 @@
   opacity: var(--unavailable-opacity);
   filter: grayscale(1);
 }
-.creature-card[aria-disabled="true"],
-.action-card[aria-disabled="true"] {
+.creature-card[aria-disabled="true"] {
   opacity: var(--unavailable-opacity);
+}
+.action-card[aria-disabled="true"] {
+  opacity: 1;
+  filter: grayscale(1) brightness(0.65);
 }
 .game-button {
   transition:
@@ -182,8 +185,8 @@
     color var(--motion-hover) ease-out,
     box-shadow var(--motion-hover) ease-out;
 }
-.game-button:not(:disabled):not([aria-disabled="true"]):hover,
-:root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
+.game-button:not(:disabled):is(.action-card, :not([aria-disabled="true"])):hover,
+:root[data-focus="visible"] .game-button:not(:disabled):is(.action-card, :not([aria-disabled="true"])):focus {
   scale: var(--hover-scale);
 }
 .game-button:is(.creature-card, .action-card)::after {
@@ -196,8 +199,9 @@
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }
-.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
-    [aria-disabled="true"]
+.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
   ):hover::after {
   border-color: var(--art-keyword-color, var(--primary));
 }

@@ -21,7 +21,6 @@ import { useBattleInteraction } from "./battle-interaction";
 import { useTargetLine } from "./use-target-line";
 import { playPreviewModel } from "./play-preview-model";
 import { localizedCombatantName } from "../shared/localization/combatant-name";
-import { localizedCardDenial } from "../shared/localization/card-denial";
 import { localizedPreviewMessage } from "../shared/localization/event-presentation";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
@@ -124,7 +123,6 @@ export function BattleScreen({
   });
   const {
     selected,
-    denial,
     card,
     def,
     target,
@@ -141,7 +139,6 @@ export function BattleScreen({
     legalTargets,
     setTarget,
     leaveTarget,
-    deny,
     chooseCard,
     play,
     cancel,
@@ -281,9 +278,7 @@ export function BattleScreen({
       </div>
       <div className="target-control">
         <div className="target-summary" role="status" aria-live="polite">
-          {denial ? (
-            <p>{denial}</p>
-          ) : card && def ? (
+          {card && def ? (
             <>
               <p>
                 {i18n.message("battle.targetSummary", "{{owner}} · {{target}}", {
@@ -414,10 +409,7 @@ export function BattleScreen({
                       }
                       selected={selected === id}
                       disabled={!admission.allowed}
-                      onDenied={(element) => {
-                        deny(admission.allowed ? "" : localizedCardDenial(admission.reason, owner, i18n));
-                        onDenied(element);
-                      }}
+                      onDenied={onDenied}
                       onClick={() => {
                         onManualStart?.();
                         chooseCard(id);

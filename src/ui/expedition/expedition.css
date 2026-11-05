@@ -23,6 +23,10 @@
   font-weight: 500;
   margin: var(--space-3) 0 var(--space-1);
 }
+.draft-grid,
+.recruit-options {
+  --art-landscape-width: var(--art-collection-landscape-width);
+}
 .draft-grid {
   display: flex;
   flex-wrap: wrap;
