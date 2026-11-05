@@ -13,10 +13,16 @@ import { chance as succeeds } from "../chance";
 import { boonRule } from "../rules/boons";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
-import type { GameEvent, BattleState } from "../types";
+import type { CaptureBattle, GameEvent, BattleState } from "../types";
 
 /** Runs inside the command draft; command costs, counters and settlement stay with the caller. */
-export function executeAbility(state: BattleState, action: AbilityAction, events: GameEvent[]) {
+export function executeAbility(
+  state: BattleState,
+  action: AbilityAction,
+  events: GameEvent[],
+  capture?: CaptureBattle,
+) {
+  capture?.(state);
   const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
@@ -46,7 +52,10 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
   });
   const keywords = abilityKeywords(def);
   beforeAbility(state, actor, target, keywords, enemy, events);
-  if (actor.health <= 0) return;
+  if (actor.health <= 0) {
+    capture?.(state);
+    return;
+  }
   const stats = ensureCombat(actor);
   const prepared = def.effect === "attack" && stats.turnBackReady;
   if (prepared) stats.turnBackReady = false;
@@ -181,4 +190,5 @@ export function executeAbility(state: BattleState, action: AbilityAction, events
       });
     if (def.effect === "attack" && actor.health > 0) goldenChorus(state, actor, events);
   }
+  capture?.(state);
 }

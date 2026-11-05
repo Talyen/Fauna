@@ -1,6 +1,6 @@
 import { enemyAbilityValue } from "../ability-rules";
 import type { CardDefinition } from "../content/types";
-import type { BattleState, Enemy, GameEvent } from "../types";
+import type { CaptureBattle, BattleState, Enemy, GameEvent } from "../types";
 import { executeAbility } from "./abilities";
 import { courtRemembers } from "./legendary";
 import { CLOCKWORK_BEE } from "../content/creatures/tinkervale";
@@ -13,6 +13,7 @@ export function playEnemyAbility(
   targetId: string | undefined,
   allyTargetId: string | undefined,
   events: GameEvent[],
+  capture?: CaptureBattle,
 ) {
   const deck = actor.deck;
   if (!deck && def.id === CLOCKWORK_BEE.id && actor.clockworkBees) actor.clockworkBees--;
@@ -37,7 +38,8 @@ export function playEnemyAbility(
       lastCardInHand: deck ? lastCardInHand : undefined,
     },
     events,
+    capture,
   );
-  if (deck) courtRemembers(state, actor, events);
+  if (deck) courtRemembers(state, actor, events, capture);
   return lastCardInHand;
 }

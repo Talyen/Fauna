@@ -35,15 +35,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
           ? "talent"
           : type === "recruit" || type === "recruitDestination"
             ? "recruit"
-            : type === "play" || type === "endTurn"
-              ? current.game.phase === "victory" ||
-                current.game.phase === "recruit" ||
-                current.game.phase === "boon"
-                ? "victory"
-                : current.game.phase === "defeat"
-                  ? "defeat"
-                  : undefined
-              : undefined;
+            : undefined;
       if (cue) {
         audio.unlock();
         audio.play(cue);

@@ -29,7 +29,7 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
   ) => {
     if (!element?.animate) return;
     active.get(key)?.cancel();
-    const animation = element.animate(frames, { duration, easing: "cubic-bezier(0.2, 1, 0.36, 1)" });
+    const animation = element.animate(frames, { duration, easing: "linear" });
     active.set(key, animation);
     animation.onfinish = () => {
       if (active.get(key) === animation) active.delete(key);
@@ -37,10 +37,10 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
   };
   return {
     cancel,
-    present(events: readonly GameEvent[]) {
+    start(events: readonly GameEvent[]) {
       if (disposed || reduced?.matches) return;
-      for (const event of events) {
-        if (event.kind !== "action" || event.actionType === "swap") continue;
+      const event = events.find((event) => event.kind === "action" && event.actionType !== "swap");
+      if (event?.kind === "action") {
         const element = root()?.querySelector<HTMLElement>(
           `[data-actor-id="${event.actorId}"] .combatant-motion`,
         );
@@ -59,18 +59,30 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
                 {
                   transform: `translateY(${30 * direction}px) scale(1.06,0.94) rotate(${3 * direction}deg)`,
                   offset: 0.24,
+                  easing: "cubic-bezier(0.2,1,0.36,1)",
                 },
                 { transform: "none", offset: 1 },
               ]
             : [
-                { transform: "none" },
-                { transform: "translateY(6px) scale(1.05,0.95)", offset: 0.3 },
-                { transform: "translateY(-2px) scale(0.985,1.015)", offset: 0.6 },
+                { transform: "none", easing: "cubic-bezier(0.25,0,0.15,1)" },
+                {
+                  transform: "translateY(6px) scale(1.05,0.95)",
+                  offset: 0.3,
+                  easing: "cubic-bezier(0.12,0.94,0.28,1)",
+                },
+                {
+                  transform: "translateY(-2px) scale(0.985,1.015)",
+                  offset: 0.6,
+                  easing: "cubic-bezier(0.22,1,0.36,1)",
+                },
                 { transform: "none" },
               ],
           motionValue(event.actionType === "attack" ? "--motion-attack" : "--motion-support"),
         );
       }
+    },
+    present(events: readonly GameEvent[]) {
+      if (disposed || reduced?.matches) return;
       for (const id of impactTargets(events)) {
         if (performance.now() - (last.get(id) ?? -Infinity) < motionValue("--motion-hit")) continue;
         const actor = root()?.querySelector<HTMLElement>(`[data-actor-id="${id}"]`);
@@ -79,8 +91,7 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
         for (const event of events) {
           if (event.kind !== "damage" || event.targetId !== id) continue;
           amount += event.amount;
-          if (event.damageType !== "burn" && event.damageType !== "poison" && event.damageType !== "bleed")
-            periodic = false;
+          if (!event.periodic) periodic = false;
         }
         const loss = amount / (Number(actor?.dataset.maxHealth) || 1);
         const strength = periodic || loss < 0.05 ? 3 : loss < 0.2 ? 6 : 10;

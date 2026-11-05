@@ -36,7 +36,7 @@ Keep gameplay changes in the pure game layer, save ordering in the application a
 
 [Committed event variants](../src/game/types.ts) require target, amount and damage type for damage and the corresponding facts for healing, Block, statuses and actions. [Feedback adaptation](../src/ui/battle/combat-feedback-model.ts) converts these facts to presentation entries without changing committed event order or inventing gameplay defaults.
 
-`dispatch(state, command)` returns an accepted immutable snapshot with ordered events, or rejects with the original state and RNG. The exhaustive phase table admits commands before command-specific validation; all validation precedes mutation and RNG consumption. An explicit linear-congruential RNG makes equal seeds and accepted command sequences reproducible.
+`dispatch(state, command)` returns an accepted immutable snapshot with ordered events, or rejects with the original state and RNG. The exhaustive phase table admits commands before command-specific validation; all validation precedes mutation and RNG consumption. An explicit linear-congruential RNG makes equal seeds and accepted command sequences reproducible. The application opts into detached battle checkpoints at action boundaries; accepted results publish them beside events, while saves encode only the final game state. Previews and headless callers omit capture.
 
 Command admission and save decoding share the supported revision and battle-turn ceilings; exhausted End Turn commands reject before mutation, and automatic turn advancement stops at the last resumable turn. Automatic turn skipping pauses while shared Food remains in battle, preserving its use during controlled turns.
 

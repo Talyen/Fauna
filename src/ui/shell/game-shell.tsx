@@ -76,9 +76,25 @@ export function GameShell({ session }: { session: Session }) {
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
+  const motionPaused = activeSurface(
+    navigationState,
+    false,
+    view.overlayActive || view.cloud.blocking,
+  ).paused;
+  const { bursts, scene, presenting, finish, isPresenting, deny } = useCombatFeedback(
+    session,
+    root,
+    playSound,
+    motionPaused,
+  );
+  const shown = scene ?? game;
   const active = !["victory", "defeat"].includes(game.phase) && (game.phase !== "draft" || game.draftStarted);
   const replacement = pendingReplacement(game);
-  const surface = activeSurface(navigationState, !!replacement, view.overlayActive || view.cloud.blocking);
+  const surface = activeSurface(
+    navigationState,
+    !!replacement && !presenting,
+    view.overlayActive || view.cloud.blocking,
+  );
   const { modal, menu, inspection, paused } = surface;
   useEffect(() => {
     startPerformanceSpan("surface-committed", {
@@ -94,7 +110,7 @@ export function GameShell({ session }: { session: Session }) {
     menu,
     ready: view.ready,
     pointer: mode === "pointer",
-    phase: game.phase,
+    phase: shown.phase,
     blocking: view.cloud.blocking,
     status: view.cloud.status,
     generation: menuGeneration,
@@ -106,7 +122,7 @@ export function GameShell({ session }: { session: Session }) {
   );
   const closeDialog = () => transition({ type: "closeDialog" });
   const closePause = () => transition({ type: "closePause" });
-  const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
+  const [autoplay, setAutoplay] = useAutoplay(session, paused || presenting, autoEndTurn, isPresenting);
   const toggleAutoplay = (enabled: boolean) => {
     setAutoplay(enabled);
     updatePreferences({ autoplay: enabled });
@@ -126,7 +142,6 @@ export function GameShell({ session }: { session: Session }) {
   useEffect(() => {
     if (route !== "play") setAutoplay(false);
   }, [route, setAutoplay]);
-  const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
   const swapMotion = useRef<ReturnType<typeof captureSwapMotion> | null>(null);
   useEffect(() => () => swapMotion.current?.cancel(), []);
   const send = useCallback(
@@ -148,6 +163,7 @@ export function GameShell({ session }: { session: Session }) {
   useEffect(() => {
     if (
       !autoEndTurn ||
+      presenting ||
       route !== "play" ||
       surface.top !== "page" ||
       !view.ready ||
@@ -171,7 +187,7 @@ export function GameShell({ session }: { session: Session }) {
         session.command({ type: "endTurn" });
     }, 250);
     return () => clearTimeout(timer);
-  }, [session, game, autoEndTurn, route, surface.top, view.ready, view.closing]);
+  }, [session, game, autoEndTurn, presenting, route, surface.top, view.ready, view.closing]);
   const automaticReplacementFocus = useRef(false);
   const automaticMerchantFocus = useRef(false);
   useLayoutEffect(() => {
@@ -277,9 +293,24 @@ export function GameShell({ session }: { session: Session }) {
       openMenu,
     });
   const actionRef = useRef(input);
-  useEffect(() => {
+  useLayoutEffect(() => {
     actionRef.current = input;
   });
+  useEffect(() => {
+    const settle = (event: Event) => {
+      if (
+        isPresenting() &&
+        (event.type === "keydown" || (event.target instanceof Node && root.current?.contains(event.target)))
+      )
+        flushSync(finish);
+    };
+    window.addEventListener("pointerdown", settle, true);
+    window.addEventListener("keydown", settle, true);
+    return () => {
+      window.removeEventListener("pointerdown", settle, true);
+      window.removeEventListener("keydown", settle, true);
+    };
+  }, [finish, isPresenting]);
   useEffect(() => {
     const previous = document.documentElement.dataset.input;
     const previousFocus = document.documentElement.dataset.focus;
@@ -345,13 +376,13 @@ export function GameShell({ session }: { session: Session }) {
         scope={surface.scope}
         scene={
           route === "play"
-            ? game.phase === "draft"
+            ? shown.phase === "draft"
               ? "none"
-              : game.phase === "battle"
-                ? bossEncounter(game)
+              : shown.phase === "battle"
+                ? bossEncounter(shown)
                   ? "boss"
                   : "battle"
-                : game.phase === "campfire"
+                : shown.phase === "campfire"
                   ? "campfire"
                   : "default"
             : "default"
@@ -360,8 +391,8 @@ export function GameShell({ session }: { session: Session }) {
         particles={preferences.particles}
       />
       <SurfaceTransition
-        token={`${route}:${game.phase}`}
-        battle={route === "play" && game.phase === "battle"}
+        token={`${route}:${shown.phase}`}
+        battle={route === "play" && shown.phase === "battle"}
       >
         <Popover
           modal
@@ -371,11 +402,11 @@ export function GameShell({ session }: { session: Session }) {
           <PopoverAnchor virtualRef={menuAnchor} />
           <div
             ref={root}
-            className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
+            className={`app ${route === "play" && shown.phase === "battle" ? "in-battle" : ""}`}
             data-input={mode}
             data-focus={navigation ? "visible" : "hidden"}
             data-route={route}
-            data-phase={game.phase}
+            data-phase={shown.phase}
             data-paused={paused || undefined}
             data-save-status={view.saveStatus}
           >
@@ -383,11 +414,11 @@ export function GameShell({ session }: { session: Session }) {
               <>
                 {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
                 {route === "talents" ? (
-                  <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
+                  <Talents game={shown} send={send} openMenu={backFromPage} controls={talentControls} />
                 ) : null}
                 {route === "collection" ? (
                   <Collection
-                    game={game}
+                    game={shown}
                     controls={collectionControls}
                     openMenu={backFromPage}
                     inspect={inspect}
@@ -427,12 +458,12 @@ export function GameShell({ session }: { session: Session }) {
                           "campfire",
                           "victory",
                           "defeat",
-                        ].includes(game.phase)
+                        ].includes(shown.phase)
                           ? () => openModal("deck")
                           : undefined,
                       }}
                     >
-                      {game.phase === "battle" ? (
+                      {shown.phase === "battle" ? (
                         <Button
                           variant="ghost"
                           size="icon"
@@ -445,7 +476,7 @@ export function GameShell({ session }: { session: Session }) {
                           <Menu aria-hidden="true" />
                         </Button>
                       ) : null}
-                      {import.meta.env.DEV && game.phase === "battle" ? (
+                      {import.meta.env.DEV && shown.phase === "battle" ? (
                         <Button
                           variant="ghost"
                           size="icon"
@@ -456,7 +487,7 @@ export function GameShell({ session }: { session: Session }) {
                           <FastForward aria-hidden="true" className="menu-icon-skip" />
                         </Button>
                       ) : null}
-                      {game.phase === "battle" ? (
+                      {shown.phase === "battle" ? (
                         <Button
                           variant="ghost"
                           size="icon"
@@ -468,7 +499,7 @@ export function GameShell({ session }: { session: Session }) {
                           {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
                         </Button>
                       ) : null}
-                      {game.phase === "battle" && game.boons.length ? (
+                      {shown.phase === "battle" && shown.boons.length ? (
                         <Button
                           variant="ghost"
                           size="icon"
@@ -479,11 +510,11 @@ export function GameShell({ session }: { session: Session }) {
                           <Trophy aria-hidden="true" />
                         </Button>
                       ) : null}
-                      {game.phase === "draft" ? (
-                        <Draft game={game} send={send} inspect={inspect} />
-                      ) : game.phase === "teamSelection" ? (
+                      {shown.phase === "draft" ? (
+                        <Draft game={shown} send={send} inspect={inspect} />
+                      ) : shown.phase === "teamSelection" ? (
                         <TeamSelection
-                          game={game}
+                          game={shown}
                           send={send}
                           inspect={inspect}
                           purchase={
@@ -494,40 +525,41 @@ export function GameShell({ session }: { session: Session }) {
                           }
                           recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
                         />
-                      ) : game.phase === "support" ? (
-                        <SupportScreen game={game} send={send} />
-                      ) : game.phase === "campfire" ? (
-                        <Campfire game={game} send={send} />
-                      ) : game.phase === "battle" ? (
+                      ) : shown.phase === "support" ? (
+                        <SupportScreen game={shown} send={send} />
+                      ) : shown.phase === "campfire" ? (
+                        <Campfire game={shown} send={send} />
+                      ) : shown.phase === "battle" ? (
                         <BattleScreen
-                          key={game.encounter}
+                          key={shown.encounter}
                           clearSelection={surface.clearSelection || autoplay}
                           onManualStart={() => setAutoplay(false)}
                           openPile={(pile) => openModal(pile)}
                           openingDraw={view.committedCommand?.type === "beginBattle"}
-                          game={game}
+                          game={shown}
+                          presentationOnly={game.phase !== "battle"}
                           send={send}
                           controls={gameControls}
                           bursts={bursts}
                           onDenied={deny}
                           controller={false}
                           inspectEnemy={(id) => {
-                            const enemy = game.battle.enemies.find((unit) => unit.id === id);
+                            const enemy = shown.battle.enemies.find((unit) => unit.id === id);
                             if (enemy) inspect({ species: enemy.species, enemyId: id });
                           }}
                           navigateFocus={navigation}
                         />
-                      ) : game.phase === "recruit" || game.phase === "boon" ? (
+                      ) : shown.phase === "recruit" || shown.phase === "boon" ? (
                         <Rewards
-                          key={`${game.encounter}-${game.phase}`}
-                          game={game}
+                          key={`${shown.encounter}-${shown.phase}`}
+                          game={shown}
                           visible={route === "play"}
                           send={send}
                           inspect={inspect}
                         />
                       ) : (
                         <JourneyResults
-                          game={game}
+                          game={shown}
                           home={leaveResults}
                           openBoons={() => openModal("boons")}
                         />

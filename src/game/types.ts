@@ -96,6 +96,12 @@ export type GameEvent =
       outcome?: undefined;
       affectedStatus?: undefined;
     });
+/** Detached combat checkpoints, published only with an accepted command and never saved */
+export interface BattleFrame {
+  state: BattleState;
+  events: GameEvent[];
+}
+export type CaptureBattle = (state: BattleState) => void;
 export type CommandResult =
-  | { accepted: true; state: GameState; events: GameEvent[] }
+  | { accepted: true; state: GameState; events: GameEvent[]; battleFrames?: BattleFrame[] }
   | { accepted: false; state: GameState; reason: string; events: [] };

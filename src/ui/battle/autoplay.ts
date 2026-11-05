@@ -14,7 +14,12 @@ export function scheduleAutoplay(action: () => void, schedule = setTimeout, canc
     cancel(timer);
   };
 }
-export function useAutoplay(session: Session, paused: boolean, autoEndTurn: boolean) {
+export function useAutoplay(
+  session: Session,
+  paused: boolean,
+  autoEndTurn: boolean,
+  isPresenting?: () => boolean,
+) {
   const actor = useMemo(() => {
     const policy = createBattleActor();
     return {
@@ -69,6 +74,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     return scheduleAutoplay(() => {
       const current = session.store.getState();
       if (
+        isPresenting?.() ||
         enabledNow.current !== session ||
         !foregroundNow.current ||
         document.visibilityState === "hidden" ||
@@ -89,6 +95,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     paused,
     foreground,
     autoEndTurn,
+    isPresenting,
     view.game.revision,
     view.game.phase,
     view.closing,

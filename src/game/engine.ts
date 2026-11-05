@@ -8,7 +8,7 @@ import { MAX_BATTLE_TURN, MAX_REVISION } from "./state-limits";
 import { executeAbility } from "./combat/abilities";
 import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./destinations";
 import saveFormat from "./save-format.json" with { type: "json" };
-import { freeze, produce } from "immer";
+import { current, freeze, produce } from "immer";
 import { starterCount, MAX_CREATURE_STARS, KEYWORDS, cardKeywordView, canBuyTalent } from "./progression";
 import { ensureCombat, restoreHealth } from "./combat/index";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
@@ -16,7 +16,7 @@ import { rememberSlipperCard, fillHand } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
 import { definition, species, SPECIES } from "./content";
 import { bossEncounter } from "./encounters";
-import type { Command, CommandResult, GameEvent, GameState } from "./types";
+import type { BattleFrame, CaptureBattle, Command, CommandResult, GameEvent, GameState } from "./types";
 import {
   offerStarters,
   beginBattle,
@@ -68,10 +68,15 @@ function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
 
-export function dispatch(state: GameState, command: Command, development = false): CommandResult {
+export function dispatch(
+  state: GameState,
+  command: Command,
+  development = false,
+  captureBattle = false,
+): CommandResult {
   if (command.type === "devWinBattle" && !development)
     return reject(state, "Development command unavailable.");
-  return resolve(state, command, false);
+  return resolve(state, command, false, undefined, captureBattle);
 }
 
 export function previewCard(
@@ -88,6 +93,7 @@ function resolve(
   command: Command,
   preview: boolean,
   decisions?: import("./random").DecisionSource,
+  captureBattle = false,
 ): CommandResult {
   if (!Object.hasOwn(commandPhases, command.type)) return reject(state, "Unknown command.");
   const phases: readonly GameState["phase"][] = commandPhases[command.type];
@@ -201,6 +207,14 @@ function resolve(
       return reject(state, "That purchase is unavailable.");
   }
   const events: GameEvent[] = [];
+  const battleFrames: BattleFrame[] = [];
+  let capturedEvents = 0;
+  const capture: CaptureBattle | undefined = captureBattle
+    ? (battle) => {
+        battleFrames.push({ state: freeze(current(battle), true), events: events.slice(capturedEvents) });
+        capturedEvents = events.length;
+      }
+    : undefined;
   const next = produce(state, (draft) => {
     if (decisions) observeDecisions(draft, decisions);
     draft.revision++;
@@ -306,14 +320,16 @@ function resolve(
               lastCardInHand,
             },
             events,
+            capture,
           );
         returnDodgedCard(draft, card, events, abilityEvents);
-        courtRemembers(draft, actor, events);
+        courtRemembers(draft, actor, events, capture);
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
         if (lastCardInHand) lastWarmth(draft, false, events);
         afterPlayerCard(draft, events, def.species === null ? undefined : actor, spentLastMana);
         fillHand(draft);
+        capture?.(draft);
         if (!preview) settle(draft, events);
         break;
       }
@@ -325,7 +341,7 @@ function resolve(
       }
       case "endTurn": {
         if (draft.phase !== "battle") throw new Error("Invalid turn action.");
-        finishTurn(draft, events);
+        finishTurn(draft, events, capture);
         break;
       }
       case "swap": {
@@ -435,7 +451,12 @@ function resolve(
       !pendingReplacement(draft) &&
       !hasAvailablePlay(draft)
     )
-      finishTurn(draft, events);
+      finishTurn(draft, events, capture);
   });
-  return { accepted: true, state: next, events: freeze(events, true) };
+  return {
+    accepted: true,
+    state: next,
+    events: freeze(events, true),
+    ...(captureBattle ? { battleFrames: freeze(battleFrames, true) } : {}),
+  };
 }

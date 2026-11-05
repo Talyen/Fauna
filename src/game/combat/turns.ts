@@ -30,7 +30,7 @@ import {
 import { drawAtTurnStart, expressDelivery } from "../card-zones";
 import { retainedBlock } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
-import type { GameEvent, GameState, BattleState } from "../types";
+import type { CaptureBattle, GameEvent, GameState, BattleState } from "../types";
 import { pendingReplacement } from "../team";
 import { settle, intents } from "../journey";
 
@@ -117,7 +117,7 @@ export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[
     }
   }
 }
-export function finishTurn(draft: BattleState, events: GameEvent[]) {
+export function finishTurn(draft: BattleState, events: GameEvent[], capture?: CaptureBattle) {
   const battle = draft.battle;
   const unspentMana = battle.mana;
   if (draft.boons.includes("nightbloom-bell"))
@@ -128,6 +128,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const ally of livingBattlefield(draft, "player")) grantBlock(draft, ally, unspentMana, events);
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
+  capture?.(draft);
   for (let pass = 0; pass < 3; pass++) {
     const bonusMana = renewalManaBonus(draft);
     unhurried(draft, false, events);
@@ -144,6 +145,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     actingMinions.length = minionCount;
     for (const minion of actingMinions) {
       tickStatuses(draft, minion, events);
+      capture?.(draft);
       if (settle(draft, events)) return;
       if (minion.health <= 0) continue;
       decayBlock(draft, minion, events);
@@ -153,6 +155,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const enemy of actionOrder) {
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
+      capture?.(draft);
       if (settle(draft, events)) return;
       if (enemy.health <= 0) continue;
       decayBlock(draft, enemy, events);
@@ -177,11 +180,12 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           if (!choice) break;
           const { def, targetId, allyTargetId } = choice;
           enemy.targetId = targetId ?? enemy.targetId;
-          const lastCardInHand = playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
+          const lastCardInHand = playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events, capture);
           if (def.consume) deck.pearls--;
           removeDepartedMinions(draft);
           if (lastCardInHand) lastWarmth(draft, true, events);
           promoteBufferedCards(deck, MAX_HAND_SIZE);
+          capture?.(draft);
           if (settle(draft, events)) return;
         }
         continue;
@@ -209,8 +213,9 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       enemy.targetId = targetId ?? enemy.targetId;
       enemy.lastAbility = def.id;
       if (inherited?.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
-      playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
+      playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events, capture);
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
+      capture?.(draft);
       if (settle(draft, events)) return;
     }
     unhurried(draft, true, events);
@@ -219,6 +224,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const c of ticking) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);
+      capture?.(draft);
       if (settle(draft, events)) return;
     }
     const starting = battlefield(draft, "player");
@@ -253,4 +259,5 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
   drawAtTurnStart(draft, TURN_DRAW, events);
   expressDelivery(draft, events);
   events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
+  capture?.(draft);
 }

@@ -4,7 +4,7 @@ import { createStore } from "zustand/vanilla";
 import { freeze } from "immer";
 import { createGame, dispatch } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
-import type { Command, GameEvent, GameState } from "../game/types";
+import type { BattleFrame, Command, GameEvent, GameState } from "../game/types";
 import type { Platform } from "../platform/ports";
 import { startPerformanceSpan, type PerformanceRecorder } from "../lib/performance";
 const disabledPerformance: PerformanceRecorder = () => undefined;
@@ -19,6 +19,7 @@ export interface SessionView {
   saveStatus: "saved" | "saving" | "error";
   saveUnavailable: boolean;
   events: GameEvent[];
+  battleFrames?: readonly BattleFrame[];
   /** Events and purchase feedback may refer to data removed by the resulting transition. */
   eventPreviousGame: GameState | null;
   committedCommand: Command | null;
@@ -45,6 +46,7 @@ export function createSession(
         saveStatus: "saved",
         saveUnavailable: false,
         events: [],
+        battleFrames: undefined,
         eventPreviousGame: null,
         committedCommand: null,
       },
@@ -187,6 +189,7 @@ export function createSession(
               saveStatus: "saved",
               saveUnavailable: false,
               events: [],
+              battleFrames: undefined,
               eventPreviousGame: null,
               committedCommand: null,
               error: "",
@@ -339,7 +342,7 @@ export function createSession(
       );
       let result: ReturnType<typeof dispatch>;
       try {
-        result = dispatch(view.game, command, development);
+        result = dispatch(view.game, command, development, true);
         end();
       } catch (error) {
         end("failed");
@@ -352,6 +355,7 @@ export function createSession(
       save(result.state, {
         game: result.state,
         events: result.events,
+        battleFrames: result.battleFrames,
         eventPreviousGame:
           result.events.length ||
           (command.type === "leaveSupport" && view.game.phase === "support" && view.game.support.purchased)
@@ -383,7 +387,13 @@ export function createSession(
           if (disposed) return;
           const game = createGame(seed);
           resetting = false;
-          save(game, { game, events: [], eventPreviousGame: null, committedCommand: null });
+          save(game, {
+            game,
+            events: [],
+            battleFrames: undefined,
+            eventPreviousGame: null,
+            committedCommand: null,
+          });
         })
         .catch((error) => {
           resetting = false;

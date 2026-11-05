@@ -280,7 +280,12 @@ export function summonEcho(
   emitSupport(events, actor.id, { targetId: id, text: "Memento summons an Echo" });
 }
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
-export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {
+export function courtRemembers(
+  state: BattleState,
+  actor: Combatant,
+  events: GameEvent[],
+  capture?: import("../types").CaptureBattle,
+) {
   if (actor.health <= 0) return;
   if (!state.battle.minions?.length) return;
   const amount = passiveAmount(isEnemy(actor) ? undefined : state, actor.species, "courtRemembers");
@@ -293,6 +298,7 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
   if (!enemies.length) return;
   const echo = echoes[Math.floor(roll(state, { kind: "index", size: echoes.length }) * echoes.length)]!;
   const target = enemies[Math.floor(roll(state, { kind: "index", size: enemies.length }) * enemies.length)]!;
+  capture?.(state);
   events.push({
     kind: "action",
     actionType: "attack",
@@ -301,6 +307,7 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
     text: "The Court Remembers",
   });
   hit(state, echo, target, amount, "water", events, { origin: "ability" });
+  capture?.(state);
 }
 export function removeDepartedMinions(state: GameState) {
   if (!state.battle?.minions) return;

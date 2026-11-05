@@ -18,6 +18,7 @@ type Props = {
   opening?: boolean;
   paused: boolean;
   cardIds: readonly string[];
+  handIds?: readonly string[];
   playedCard?: RefObject<string | null>;
   children: ReactNode;
 };
@@ -124,10 +125,18 @@ export class HandMotion extends Component<Props> {
     if (this.props.opening) this.present(new Map());
   }
   getSnapshotBeforeUpdate(previous: Readonly<Props>): Snapshot {
-    return previous.revision === this.props.revision ? new Map() : this.measure();
+    return previous.revision === this.props.revision &&
+      previous.turn === this.props.turn &&
+      previous.handIds === this.props.handIds
+      ? new Map()
+      : this.measure();
   }
   componentDidUpdate(previous: Readonly<Props>, _: unknown, before: Snapshot) {
-    if (previous.revision === this.props.revision) {
+    if (
+      previous.revision === this.props.revision &&
+      previous.turn === this.props.turn &&
+      previous.handIds === this.props.handIds
+    ) {
       if (this.props.paused) this.finish(true);
       return;
     }

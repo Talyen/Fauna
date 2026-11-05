@@ -94,6 +94,7 @@ export function BattleScreen({
   onManualStart,
   openPile,
   openingDraw = false,
+  presentationOnly = false,
   inspectEnemy,
 }: {
   inspectEnemy?: (id: string) => void;
@@ -110,6 +111,7 @@ export function BattleScreen({
   clearSelection?: boolean;
   openPile?: (pile: "draw" | "discard") => void;
   openingDraw?: boolean;
+  presentationOnly?: boolean;
 }) {
   const i18n = useMessages();
   const board = useRef<HTMLElement>(null);
@@ -160,6 +162,7 @@ export function BattleScreen({
   return (
     <Screen
       ref={board}
+      inert={presentationOnly}
       className="battle-screen"
       data-nav-layout="rows"
       aria-label={i18n.message("battle.battlefield", "Battlefield")}
@@ -372,6 +375,7 @@ export function BattleScreen({
         opening={openingDraw}
         paused={clearSelection}
         cardIds={game.cards.map((card) => card.id)}
+        handIds={battle.hand}
         playedCard={playedCard}
       >
         <section
