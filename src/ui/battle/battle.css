@@ -187,7 +187,7 @@
     transition: none;
   }
 }
-.battle-screen :is(.creature-card, .hand .action-card, .battle-pile .action-card) {
+.battle-screen .battle-pile .action-card {
   border-color: transparent;
 }
 .battle-screen .battle-pile .action-card::after {
@@ -683,10 +683,6 @@
 .battle-screen .status-icon {
   flex: 0 0 max(24px, var(--icon-size));
   width: max(24px, var(--icon-size));
-}
-:root .app .battle-screen :is(.creature-card, .hand .action-card) {
-  --border-art-width: 0px;
-  border-width: 0;
 }
 .card-transfer {
   overflow: hidden;
