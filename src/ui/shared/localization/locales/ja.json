@@ -4903,39 +4903,39 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
-    "sourceHash": "c263fe9a2da1b894a3ae7bb267ae522c9dfe4b0db1372b324d8a640b520a4569",
-    "text": "<keyword2>ブロック</keyword2>後に残った<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージをスタック数だけ軽減する; 軽減するたびに{{value0}}スタック失う"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage by its stacks; Loses {{value0}} stack when used",
+    "sourceHash": "e1f26d1e5a7612079d766d620f6a28b54501fa91216d2b4db75381fcaa8674ce",
+    "text": "スタック数だけ<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージを軽減；発動時に{{value0}}スタック減少"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "4393d1712fc4fbe960f7294c6092926ce1f6cfc02bb39f0affcfbe9845f91845",
-    "text": "次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword0>反射</keyword0>された攻撃を再び<keyword1>反射</keyword1>することはできない; 使用されるか<keyword2>強化解除</keyword2>されるまで続く; 重複しない"
+    "source": "Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "8c5fd21569c73b0f57365b625e655b577e0b86ae0b65c7b362af5a6ad035c868",
+    "text": "次の攻撃を攻撃者に返し、その攻撃のダメージと有害効果を受けない"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
-    "sourceHash": "a1f63eef37e77f4ff31bc50531010f755f797a00e7edd356b7e078dc5ee8fc80",
-    "text": "<keyword0>出血</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーの次のターン開始時にスタック数と同じダメージを与え、すべて消える"
+    "source": "Take {{value0}} damage per stack at next turn start; Then clear all stacks",
+    "sourceHash": "cb7932d8280ebea6ddafbf1e337196ee53bd4aaf0e81cc7f3c3999dcda0f4e08",
+    "text": "次のターン開始時に1スタックにつき{{value0}}ダメージを受ける；その後すべてのスタックを解除"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
-    "sourceHash": "3056f7cc5b69729caeaeea1f4b3ef5cf02c3bad36cc5b346d221a7d9e0d17812",
-    "text": "次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword0>回避</keyword0>として扱う; 重複しない"
+    "source": "Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "7bd9b8868746c632f7a336e42d2c63855e5983e27224fb9b91723cf69a97ce76",
+    "text": "次の攻撃が{{value0}}%の確率で外れる"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
-    "sourceHash": "aa48ab26fb0275e165a3d832281af33968d07580fcb88bde6681ffaf2b7ba021",
-    "text": "継続ダメージを含むダメージを<keyword0>体力</keyword0>より先に吸収する; 通常、ヒット時効果・状態異常の蓄積・<keyword1>吸血</keyword1>は防がない; 残りの<keyword2>ブロック</keyword2>は通常、そのクリーチャーの次のターンに半減し、四捨五入する"
+    "source": "Absorbs damage; Remaining <keyword0>Block</keyword0> halves at turn start",
+    "sourceHash": "4ffd2eead5658d6b664d5006ba69a17f9e75dcaa5fb7de24a75868656f9b29e3",
+    "text": "ダメージを吸収；ターン開始時に残りの<keyword0>ブロック</keyword0>が半減"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
-    "sourceHash": "076621e2200a9b96dde8d0ae244aa1c5996cbdd32ef4a9c2b06c701c0f9c6810",
-    "text": "<keyword0>炎上</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーのターン開始時にスタック数と同じダメージを与え、その後スタックが半減する; 最後の1スタックはダメージを与えて消える"
+    "source": "Take {{value0}} damage per stack at turn start; Then halve stacks",
+    "sourceHash": "4dbcfbd11c193b1885e472f6d28c4f87ee9431902be302f75e872959b9e4ef6d",
+    "text": "ターン開始時に1スタックにつき{{value0}}ダメージを受ける；その後スタックが半減"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
@@ -4957,9 +4957,9 @@
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
-    "sourceHash": "d7df51b19662e8cf67705c8ec5ac0001c33f5d94e01366295606804b6f5bf4e5",
-    "text": "<keyword0>ブロック</keyword0>や<keyword1>装甲</keyword1>の前に攻撃を避ける; 基本確率は{{value0}}%で、ボーナス込みの上限は{{value1}}%; <keyword2>スタン</keyword2>中や<keyword3>凍結</keyword3>中のクリーチャーは通常<keyword4>回避</keyword4>できない; 継続ダメージは<keyword5>回避</keyword5>できない"
+    "source": "Chance to avoid attacks; Starts at {{value0}}%, up to {{value1}}%",
+    "sourceHash": "7c7e3eaf07594ac34e41534406358f1f8d89abc83f21e1798f6927c2e7d0848e",
+    "text": "攻撃を回避する確率；基本{{value0}}%、上限{{value1}}%"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
@@ -4969,9 +4969,9 @@
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
-    "sourceHash": "5e61b0022ac55b98312beda0cbfd40a3e4f8860b6b9a810ffe5727fb9af214d2",
-    "text": "<keyword0>凍結</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分を蓄積する; 蓄積が最大<keyword2>体力</keyword2>の半分に達すると<keyword3>凍結</keyword3>状態になり、1ターン行動できない; 回復後は<keyword4>スタン</keyword4>と<keyword5>凍結</keyword5>の両方に{{value0}}ターンの耐性を得る"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "45afef9e4d75a851d5089a18f6c4dadfa4af8126e216931f53e818706ba64632",
+    "text": "蓄積が最大<keyword0>体力</keyword0>の半分に達すると{{value0}}ターン行動できない；その後{{value1}}ターン<keyword1>スタン</keyword1>と<keyword2>凍結</keyword2>を無効化"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
@@ -5005,15 +5005,15 @@
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "b3012d1d159de88874a40a42309bd772425f60cf6186ed4d273e888db269fd1f",
-    "text": "次に受ける能力の攻撃と自分への有害効果を<keyword0>回避</keyword0>判定前に打ち消す; <keyword1>棘</keyword1>は反撃する; 使用されるか<keyword2>強化解除</keyword2>されるまで続く; 重複しない"
+    "source": "Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "1670eba4115bef991971225d0a5f45351d6a80a521595cb9b29e7b6e3d25b00d",
+    "text": "次に受ける攻撃とその有害効果を打ち消す"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
-    "sourceHash": "5a47a5fb8c9be2a4d3067a7281548605a68b13135585ac0702b3e43837647b3c",
-    "text": "次の<keyword0>炎上</keyword0>・<keyword1>毒</keyword1>・<keyword2>出血</keyword2>・<keyword3>スタン</keyword3>・<keyword4>凍結</keyword4>・<keyword5>盲目</keyword5>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword6>強化解除</keyword6>されるまで続く; 重複しない"
+    "source": "Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "613204b42741df46df4db875cf74c8173086978ffb5c27149fb56ff3dd60eebe",
+    "text": "次の有害な状態を防ぐ；ダメージは防がない"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
@@ -5023,9 +5023,9 @@
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
-    "sourceHash": "ab5f8894aa9a6d91524475f8a984d84136a8a16a84d62bf24bb95dc0fcb2becc",
-    "text": "<keyword0>毒</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージ分のスタックを加える; 対象クリーチャーのターン開始時にスタック数と同じダメージを与え、その後{{value0}}%のスタックを取り除く; 除去数は四捨五入し、最低{{value1}}"
+    "source": "Take {{value0}} damage per stack at turn start; Then lose {{value1}}% of stacks",
+    "sourceHash": "cbaa05f5742a4296bd9ea4e572cb4dacc441cf1003e16af7c5d98d75b7c22ff6",
+    "text": "ターン開始時に1スタックにつき{{value0}}ダメージを受ける；その後スタックが{{value1}}%減少"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -5035,9 +5035,9 @@
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
-    "sourceHash": "6497fff49fe22dbcdfb57ccf0204f5c9eec577e17511bae9b62a6119c30e7dcb",
-    "text": "指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword0>攻撃反射</keyword0>は攻撃全体を攻撃者へ返す; <keyword1>反射</keyword1>された効果を再び<keyword2>反射</keyword2>することはできない; チャージは重複しない"
+    "source": "Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "a2ab24f8418c2a318ac3ef455f19d93f8f333080b079b64457391f2cef95c99e",
+    "text": "次の有害な状態をランダムな敵に移す；ダメージは防がない"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -5047,15 +5047,15 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
-    "sourceHash": "888301f5d112058ced6eeec0e33fa721c6f36dc577cc465585997046058d7585",
-    "text": "<keyword0>スタン</keyword0>のヒットは<keyword1>ブロック</keyword1>前のダメージを<keyword2>装甲</keyword2>で軽減した値を蓄積する; 蓄積が最大<keyword3>体力</keyword3>の半分に達すると<keyword4>スタン</keyword4>状態になり、1ターン行動できない; 回復後は<keyword5>スタン</keyword5>と<keyword6>凍結</keyword6>の両方に{{value0}}ターンの耐性を得る"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "45afef9e4d75a851d5089a18f6c4dadfa4af8126e216931f53e818706ba64632",
+    "text": "蓄積が最大<keyword0>体力</keyword0>の半分に達すると{{value0}}ターン行動できない；その後{{value1}}ターン<keyword1>スタン</keyword1>と<keyword2>凍結</keyword2>を無効化"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
-    "sourceHash": "6258c698bb17126047da9edda168559ea68364d9bcf12c60528797c4d7ea2013",
-    "text": "攻撃が命中した時や<keyword0>防止</keyword0>された時、<keyword2>棘</keyword2>の数と同じ<keyword1>自然</keyword1>ダメージを返し、{{value0}}スタック失う; <keyword3>ブロック</keyword3>や<keyword4>装甲</keyword4>越しでも発動する; 反撃は別の反撃を誘発しない"
+    "source": "When hit, deal {{value0}} <keyword0>Nature</keyword0> damage per stack; Then lose {{value1}} stack",
+    "sourceHash": "c31b9df0cf62b058225a2711d801305900fc37d263d44479c9d07e755511e5ab",
+    "text": "攻撃を受けたとき1スタックにつき{{value0}}<keyword0>自然</keyword0>ダメージを与える；その後{{value1}}スタック減少"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
@@ -7808,169 +7808,181 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "e39387076b69e0152fe47653b11202fe4b6e88dfe7c61c424013d9e5d0404fed",
+    "sourceHash": "5691fec7d7f61550b2ae134b0631c7cfd982fe492ad430d69a93d49579c5e6b0",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
-  "content.status.attackReflection.v013a620784742104.rule": {
+  "content.status.attackReflection.v47d857c97c932bb3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "e27e6d53c6d3834f2b897f9f0035a055271c2341399b7127621128c018ae229b",
-    "text": "<keyword0>攻撃反射</keyword0>: 次に受ける能力の攻撃を攻撃者へ返す; 自分へのその攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃を再び<keyword2>反射</keyword2>することはできない; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "1f633ad2d5535d26c9a7a687b6e8d077379a67004548efc763ef6261a34090c4",
+    "text": "<keyword0>攻撃反射</keyword0>: 次の攻撃を攻撃者に返し、その攻撃のダメージと有害効果を受けない"
   },
-  "content.status.blind.v37b85a98a2799221.rule": {
+  "content.status.blind.ve2d57c6eea210af7.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "5aebb299279f6684084f84d04b7cff17bd3078ed44b481844d9574a2c7d846de",
-    "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率ですべての対象に外れる; 命中しても外れても、その攻撃後に終了する; 外れた場合は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "8f5283afde90b4dcb48c9f9a44e1b14c6f04b5846fb3523c661ae4dca7511af7",
+    "text": "<keyword0>盲目</keyword0>: 次の攻撃が{{value0}}%の確率で外れる"
   },
-  "content.status.controlled.v147305c04334e696.rule": {
+  "content.status.controlled.v11aef5cde2568068.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "a25044cb74bf1c01ab9fbd7f8680070ec464bbea9849937f92efe6af9027665d",
-    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turns",
+    "sourceHash": "17e65836556c60713f2fbc352d8d41a890e1cdc165fab5032d8ab22eae33665c",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン行動できない"
+  },
+  "content.status.controlled.v2627b2e6943c398b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turn",
+    "sourceHash": "497584cf4b983e84cef4cc31ac93b234214a673bfa51496dcb53d6b7c8c2eca7",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン行動できない"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "4387f14553a119c09cd2bbb4ad24fe4d7abd3af042f20dcaa9ad8955118a517a",
+    "sourceHash": "f56f2d01c75d221b656b2dae2910f194f865f813b24af3acce51071245f02252",
     "text": "ターンをスキップ"
   },
-  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+  "content.status.controlled.vcd57b8fd3ce840e8.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "79c3a8f99873aff5831391c8ca1a794f771ed997849211c70318dfdcc421730f",
-    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turn",
+    "sourceHash": "67fd94852c67f44550e524bc03ce34643e63654ddd1695e9aff19a6d53671b6a",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン行動できない"
   },
-  "content.status.controlled.v9121eae5c53d2321.rule": {
+  "content.status.controlled.vd44ff14e7ea5c761.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "2f95810dfd7940cb9be31285822f246341571c85b248d9e4dc4efdda2f05d6e0",
-    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turns",
+    "sourceHash": "57f646447495b89931d1f3db5afc3cd70850caffd0e5ee4accaa1907cbff3a15",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン行動できない"
   },
-  "content.status.controlled.ve93ba5ee32c41861.rule": {
+  "content.status.cooldown.v7e371d88b3e2e9e3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "dafcf69dc83c3e6ef3482d81a287db8aa68feb3b7b56e3694f176776563e4ab8",
-    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turns left",
+    "sourceHash": "64703f032e2e4d6f45cb3388f38ddbb0e04f1f41142948ee9403cda21853a224",
+    "text": "<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>を無効化：残り{{value0}}ターン"
   },
-  "content.status.cooldown.v2db257f39699f407.rule": {
+  "content.status.cooldown.vee08a58b6508ab76.rule": {
     "reviewed": true,
-    "source": "Control immunity {{value0}}",
-    "sourceHash": "4631872db7761b34cfc99624cf696116da6e05307c3a3b87a08084697a851042",
-    "text": "行動不能への耐性 {{value0}}"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turn left",
+    "sourceHash": "22beb667d13cf1ab3ee9750ee1d814d729295510f9a7f68ba91fd36dd6dbe3a0",
+    "text": "<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>を無効化：残り{{value0}}ターン"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "ff763d835b17d797eb0010114d4c5ddcc6f30e1bba0a00fb22a935a447f90e73",
+    "sourceHash": "c656fb434ab5881e2226a3a9449cecee216457cb1846dfd4cbff8cc37de9aaac",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "fc89ce6e2a7cd09f7f98094436cfb42c9eb8c1d9a6204d6b7da806be31448af8",
+    "sourceHash": "4fae00520cf2b44bb57132e54d25b2e5ec09ad6add5641d402f25267effa6207",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "3fd0af7ab762966edf895fa11c4dff9d9d3d74dbcf1764e26377368ef9927ab9",
+    "sourceHash": "b8c50ccbac2373d8399a9eb44952816aa968db975c1aebd851656c3816c0e106",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
-  "content.status.grace.v6e81bc0f25243d28.rule": {
+  "content.status.grace.v7d70cbf27f059bd2.rule": {
     "reviewed": true,
-    "source": "Death's Door {{value0}}",
-    "sourceHash": "0178eddc29e0369c15396f6984febf33d6c0f91258fa67d38c3bb416f26bf272",
-    "text": "死の淵 {{value0}}"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turn left",
+    "sourceHash": "eb0ec8cb803cc9614aa6e7a3c5b61133ac1c4240e6e38fa616c767b2e229be23",
+    "text": "死の淵：致命的なダメージを<keyword0>体力</keyword0>{{value0}}で耐える；残り{{value1}}ターン"
   },
-  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+  "content.status.grace.ved60bcb3845feb07.rule": {
     "reviewed": true,
-    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "b883db8f78b416edb9ed09b35245fc3f5474c44a6c5c8c93e0930633d8623108",
-    "text": "月の種：次の<keyword0>棘</keyword0>の反撃は2倍のダメージを与える"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turns left",
+    "sourceHash": "b00a5e06490b9d7c0f0a22f7463851ba915b194b0ba0d653e4d538a35b381040",
+    "text": "死の淵：致命的なダメージを<keyword0>体力</keyword0>{{value0}}で耐える；残り{{value1}}ターン"
   },
-  "content.status.negate.v0fea63d64804569b.rule": {
+  "content.status.moonseedReady.v23f9ba255f570b85.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "2de640b818db278a51e43243fc274c9f66f5dddf8ad3e3d4966fa2466c80d15f",
-    "text": "<keyword0>防止</keyword0>: 次に受ける能力の攻撃と自分への有害効果を<keyword1>回避</keyword1>判定前に打ち消す; <keyword2>棘</keyword2>は反撃する; 使用されるか<keyword3>強化解除</keyword3>されるまで続く; 重複しない"
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> damage is doubled",
+    "sourceHash": "3e688acfdd30dddb2c1ca5c62730023158dfabe1e49eae169f0e7fdb84ba14de",
+    "text": "月の種：次の<keyword0>棘</keyword0>ダメージが2倍"
   },
-  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+  "content.status.negate.v547e4e9923d24b18.rule": {
     "reviewed": true,
-    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "b5022d76efc6a19dba07b13102a75c0954237f0f1e604028ca37ce367835fb8f",
-    "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "89f87b98b536fd4ce3d2abfafd307c42318bb8a7d4adaf8435439627077fe65d",
+    "text": "<keyword0>防止</keyword0>: 次に受ける攻撃とその有害効果を打ち消す"
   },
-  "content.status.nullify.v497e819f2a2d6746.rule": {
+  "content.status.nextPhysical.v6898256cc6c7de17.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "50e99505682458f6599d603e727524dd124150fd2acdbb56c79eb1c7efc1204e",
-    "text": "<keyword0>無効化</keyword0>: 次の<keyword1>炎上</keyword1>・<keyword2>毒</keyword2>・<keyword3>出血</keyword3>・<keyword4>スタン</keyword4>・<keyword5>凍結</keyword5>・<keyword6>盲目</keyword6>の付与を防ぐ; 直接ダメージや既存の状態異常は変わらない; 使用されるか<keyword7>強化解除</keyword7>されるまで続く; 重複しない"
+    "source": "Open Flank: next attack deals {{value0}} extra <keyword0>Physical</keyword0> damage",
+    "sourceHash": "8dc29780de43544179b0ae1a80d1e80bc659533365a0e63daace65325dc0acf9",
+    "text": "側面の隙：次の攻撃に{{value0}}の追加<keyword0>物理</keyword0>ダメージ"
   },
-  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+  "content.status.nullify.vce10a8ed74932e80.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "90f23ff2ce26abf2c448068a19b5fc2127809413412a238d3b0373d023312b34",
-    "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "28050bd8a835849faa55ce8fda7342bf9bf1333124d31d0b70eacf18ef77717d",
+    "text": "<keyword0>無効化</keyword0>: 次の有害な状態を防ぐ；ダメージは防がない"
+  },
+  "content.status.nullifyFreeze.ve1d9965b67010344.rule": {
+    "reviewed": true,
+    "source": "Prevent the next <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "906c49baa2af5e43137d1c147d1b1fd7c3093360e576720041fd6b0988628d12",
+    "text": "次の<keyword0>凍結</keyword0>ダメージを防ぐ"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "519ca1833a7344e564272b753a33147fdc6a7d5eb68be42e67faa9a65f020724",
+    "sourceHash": "48fa2ae9764e49d93cd305d9a01d8f789a64c211c8bb6150c8c2f5b88d16211f",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
-  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+  "content.status.partingCut.vf7a28552587a53e7.rule": {
     "reviewed": true,
-    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "3b2b77d47a52caac6e5e9aaf99e8c79ed5f941df2347e2190317b879b4954d55",
-    "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit adds half its damage as <keyword1>Bleed</keyword1>",
+    "sourceHash": "c92817a712566d99969f9fbb0ea51f21a14dd45b420cca0b941ad14f5d13b80d",
+    "text": "別れの一太刀：次の<keyword0>物理</keyword0>攻撃の命中時、そのダメージの半分を<keyword1>出血</keyword1>として追加"
   },
-  "content.status.reflect.ved0888b165975dfb.rule": {
+  "content.status.reflect.vde052a9a722c7be5.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "99b78aeeb91b8bfa2066c9852f548c19818a8c2677f4714a6807565e49575846",
-    "text": "<keyword0>反射</keyword0>: 指定された有害な状態異常をランダムな生存敵に移す; 直接ダメージは自分が受ける; <keyword1>攻撃反射</keyword1>は攻撃全体を攻撃者へ返す; <keyword2>反射</keyword2>された効果を再び<keyword3>反射</keyword3>することはできない; チャージは重複しない"
+    "source": "<keyword0>Reflect</keyword0>: Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "793b333092777f530d5941113d7293808e04c8656ff88e60762d4ab15d52b43a",
+    "text": "<keyword0>反射</keyword0>: 次の有害な状態をランダムな敵に移す；ダメージは防がない"
   },
-  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+  "content.status.reflectBurn.v2a3de9f6418bf193.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "6a53e6ae6dd66a3b12ed11ba60ef1644f65af1869d7487f352af2446f06ec4d4",
-    "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
+    "source": "Send the next <keyword0>Burn</keyword0> buildup to a random enemy; Does not prevent damage",
+    "sourceHash": "f2f8f2cbc52a656ba161355673cb391fec26b997db4d3bafc38eaa19b0cd2413",
+    "text": "次の<keyword0>炎上</keyword0>の蓄積をランダムな敵に移す；ダメージは防がない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "744317e1cb88a46858d0577f49137bf43731ff810da1d0574218147d928a841a",
+    "sourceHash": "c5dbfab73283fae1233c67eb48cdd88b772e665f31aa8097121035d6c217acfe",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "686dcbd7e5f84836be3e0220fb58906f4cab19fac057b28d243054756af806bb",
+    "sourceHash": "4832faaeefcabdec95ac16e2d239d12a565d851eeaf52f8ae6b94d696741927c",
     "text": "リボンの糸巻き：<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>への耐性"
   },
-  "content.status.riposte.v7f25e6d160e653d4.rule": {
+  "content.status.riposte.v1e440c9b1d660960.rule": {
     "reviewed": true,
-    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "4031697ae29b3494e16b12e7e8a2ab32c82e3106ee48774b9e8efefc83ea811e",
-    "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack always <keyword1>critically hits</keyword1>",
+    "sourceHash": "b3801c931f20e88446b00b31f6d297b86e08c27f9c642992b3b1674f22777508",
+    "text": "反撃：次の<keyword0>物理</keyword0>攻撃が必ず<keyword1>クリティカルヒット</keyword1>になる"
   },
   "content.status.springTide.v9686824085c1ef98.rule": {
     "reviewed": true,
     "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
-    "sourceHash": "2df697834fd4f5ba7337f456e18741fdfd65372dfb42b3580ac81db3a83e1991",
+    "sourceHash": "d4a5dcdec8f41f525f22fd3104b0635a9a31b415abe2e20e30ab701cc04f9aca",
     "text": "大潮：次の<keyword0>水</keyword0>カードは二回使用される"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "17974bcf9deb00e508899b44c55545ff301831b07e36bca2d13f2b59d1aa211a",
+    "sourceHash": "e258f88eda873e5028b9b5e42cfeb5292ed10ff2c8c817af14f17a0fcf739301",
     "text": "竜のつまようじ：次の攻撃は<keyword0>強化解除</keyword0>も行う"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "e3cf466298e167928e4fcc3ae72bbe4888ec58518a9084938715f0f1cf19d7e4",
+    "sourceHash": "791410bffa7f36f1f79a8428901c79fd37eb9befc3724d87804a591e0eecff0e",
     "text": "時の流れを戻す：次の攻撃が繰り返されることがある"
   },
   "content.talent.armor.armored-surge.name": {

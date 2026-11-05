@@ -172,10 +172,10 @@ it("exposes pending talent rewards and remaining control turns in creature detai
   try {
     expect(screen.getByRole("button", { name: "Windstep: next Nature card is free" })).toBeTruthy();
     expect(
-      screen.getByRole("button", { name: "Riposte: next Physical attack is a guaranteed Critical Hit" }),
+      screen.getByRole("button", { name: "Riposte: next Physical attack always critically hits" }),
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Finding Rhythm: +10% Dodge chance" })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Stunned: 2 turns" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Stunned: skip 2 turns" })).toBeTruthy();
   } finally {
     await session.dispose();
   }

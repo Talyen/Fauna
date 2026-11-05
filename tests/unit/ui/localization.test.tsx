@@ -1973,7 +1973,7 @@ it("localizes projected status changes and retains their keyword identity", () =
   const view = renderLocalized(<TargetPreview forecast={forecast} />);
   const label = screen.getByRole("status").getAttribute("aria-label");
   expect(label).toContain("Brûlure 0 → 2");
-  expect(label).toContain("Gel : 2 tours");
+  expect(label).toContain("Gel : passe 2 tours");
   expect(view.container.querySelector('[data-keyword="burn"]')?.textContent).toBe("Brûlure");
   expect(view.container.querySelector('[data-keyword="freeze"]')?.textContent).toBe("Gel");
   expect(game.team[0]!.combat!.burn).toBe(0);
@@ -2329,7 +2329,7 @@ it("preserves English combat status snapshots and localizes their rules without 
     "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
     "content.glossary.keyword.burn.definition.rule": {
       source: ruleMessage(burn).template,
-      text: "Les coups de <keyword0>Brûlure</keyword0> accumulent leurs dégâts avant le <keyword1>Blocage</keyword1>",
+      text: "Subit {{value0}} dégât par cumul au début du tour; Puis divise les cumuls par deux",
     },
     "status.measured": {
       source: "{{keyword}} {{count}}; {{description}}",
@@ -2346,7 +2346,7 @@ it("preserves English combat status snapshots and localizes their rules without 
   const keyword = screen.getAllByText("Brûlure")[0]!;
   expect(keyword.getAttribute("data-keyword")).toBe("burn");
   expect(keyword.closest("p")?.textContent).toBe(
-    "Brûlure 1 : Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
+    "Brûlure 1 : Subit 1 dégât par cumul au début du tour; Puis divise les cumuls par deux",
   );
   view.unmount();
   const onlyBurn = {
@@ -2369,7 +2369,7 @@ it("preserves English combat status snapshots and localizes their rules without 
   );
   expect(
     screen.getByRole("button", {
-      name: "Brûlure 1 : Les coups de Brûlure accumulent leurs dégâts avant le Blocage",
+      name: "Brûlure 1 : Subit 1 dégât par cumul au début du tour; Puis divise les cumuls par deux",
     }),
   ).toBeTruthy();
   tile.unmount();
@@ -2402,16 +2402,34 @@ it("announces a reviewed status and glossary definition in the selected language
   renderLocalized(<CombatStatus combat={game.team[0]!.combat} />);
   expect(
     screen.getByRole("button", {
-      name: "Brûlure 1 ; Les coups de Brûlure ajoutent autant de cumuls que leurs dégâts avant le Blocage; Au début du tour de la créature affectée, les cumuls infligent autant de dégâts puis sont divisés par deux; Le dernier cumul disparaît après avoir infligé ses dégâts",
+      name: "Brûlure 1 ; Subit 1 dégât par cumul au début du tour; Puis divise les cumuls par deux",
     }),
   ).toBeTruthy();
+});
+
+it("shows localized Block counts and rules in status icons and details", () => {
+  const view = renderLocalized(
+    <>
+      <CombatStatus combat={freshCombat()} block={7} />
+      <CombatStatus combat={freshCombat()} block={7} details />
+    </>,
+  );
+  const label = "Blocage 7 ; Absorbe les dégâts; Le Blocage restant est divisé par deux au début du tour";
+  expect(screen.getByRole("button", { name: label })).toBeTruthy();
+  expect(view.container.querySelector(".combat-status-details p")?.textContent).toBe(label);
 });
 
 it("announces reviewed control immunity and Death's Door durations", () => {
   const combat = { ...freshCombat(), cooldown: 2, grace: 1 };
   renderLocalized(<CombatStatus combat={combat} />);
-  expect(screen.getByRole("button", { name: "Immunité au contrôle 2" })).toBeTruthy();
-  expect(screen.getByRole("button", { name: "Aux portes de la mort 1" })).toBeTruthy();
+  expect(
+    screen.getByRole("button", { name: "Immunité à l’Étourdissement et au Gel : encore 2 tours" }),
+  ).toBeTruthy();
+  expect(
+    screen.getByRole("button", {
+      name: "Aux portes de la mort : survit aux dégâts mortels avec 1 de Santé; Encore 1 tour",
+    }),
+  ).toBeTruthy();
 });
 
 it("extracts and presents transient combat status variants without changing their rules", () => {
@@ -2452,7 +2470,7 @@ it("extracts and presents transient combat status variants without changing thei
     for (const controlTurns of [0, 1, 2]) {
       for (const sharedImmunity of [0, 3])
         for (const status of combatStatuses(
-          { ...combat, controlled, controlTurns, skipped: true },
+          { ...combat, controlled, controlTurns, cooldown: controlTurns, grace: controlTurns, skipped: true },
           0,
           sharedImmunity,
         )) {
@@ -2483,7 +2501,7 @@ it("extracts and presents transient combat status variants without changing thei
       <CombatStatus combat={frozen} details />
     </>,
   );
-  expect(screen.getByRole("button", { name: "Gel : 2 tours" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Gel : passe 2 tours" })).toBeTruthy();
   expect(view.container.querySelector('.combat-status-details [data-keyword="freeze"]')?.textContent).toBe(
     "Gel",
   );

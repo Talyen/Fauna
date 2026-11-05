@@ -61,32 +61,41 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmu
       id: "controlled",
       count: combat.controlTurns || 1,
       text: combat.controlled
-        ? `${combat.controlled === "freeze" ? "Frozen" : "Stunned"}: ${combat.controlTurns || 1} turn${combat.controlTurns > 1 ? "s" : ""}`
+        ? `${combat.controlled === "freeze" ? "Frozen" : "Stunned"}: skip ${combat.controlTurns || 1} turn${combat.controlTurns > 1 ? "s" : ""}`
         : "Turn skipped",
     });
   if (combat.cooldown && combat.cooldown >= sharedImmunity)
-    entries.push({ id: "cooldown", count: combat.cooldown, text: `Control immunity ${combat.cooldown}` });
+    entries.push({
+      id: "cooldown",
+      count: combat.cooldown,
+      text: `Immune to Stun and Freeze: ${combat.cooldown} turn${combat.cooldown > 1 ? "s" : ""} left`,
+    });
   else if (sharedImmunity)
     entries.push({
       id: "ribbonSpool",
       count: sharedImmunity,
       text: "Ribbon Spool: immune to Stun and Freeze",
     });
-  if (combat?.grace) entries.push({ id: "grace", count: combat.grace, text: `Death's Door ${combat.grace}` });
+  if (combat?.grace)
+    entries.push({
+      id: "grace",
+      count: combat.grace,
+      text: `Death's Door: survive fatal damage at 1 Health; ${combat.grace} turn${combat.grace > 1 ? "s" : ""} left`,
+    });
   if (combat) {
     const pending = [
       ["rhythm", combat.rhythm, `Finding Rhythm: +${combat.rhythm}% Dodge chance`],
       [
         "nextPhysical",
         combat.nextPhysical,
-        `Open Flank: next attack deals ${combat.nextPhysical} additional Physical damage`,
+        `Open Flank: next attack deals ${combat.nextPhysical} extra Physical damage`,
       ],
       [
         "partingCut",
         Number(combat.partingCut),
-        "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
+        "Parting Cut: next Physical hit adds half its damage as Bleed",
       ],
-      ["riposte", Number(combat.riposte), "Riposte: next Physical attack is a guaranteed Critical Hit"],
+      ["riposte", Number(combat.riposte), "Riposte: next Physical attack always critically hits"],
       ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["springTide", Number(combat.springTide), "Spring Tide: next Water card plays twice"],
@@ -94,18 +103,10 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmu
       ["oasisLeech", Number(combat.oasisLeech), "Oasis Seed: next attack has Leech"],
       ["turnBackReady", Number(combat.turnBackReady), "Turn Back the Tide: next attack may repeat"],
       ["acrobatReady", Number(combat.acrobatReady), "Acrobat Top: next attack cannot be Dodged"],
-      [
-        "moonseedReady",
-        Number(combat.moonseedReady),
-        "Moonseed: next Thorns retaliation deals double damage",
-      ],
+      ["moonseedReady", Number(combat.moonseedReady), "Moonseed: next Thorns damage is doubled"],
       ["toothpickReady", Number(combat.toothpickReady), "Dragon’s Toothpick: next attack also Purges"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
-      [
-        "nullifyFreeze",
-        Number(combat.nullifyFreeze),
-        "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-      ],
+      ["nullifyFreeze", Number(combat.nullifyFreeze), "Prevent the next Freeze damage"],
       [
         "attackReflection",
         Number(combat.attackReflection),
@@ -116,7 +117,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0, sharedImmu
       [
         "reflectBurn",
         Number(combat.reflectBurn),
-        "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
+        "Send the next Burn buildup to a random enemy; Does not prevent damage",
       ],
       ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
     ] as const;
