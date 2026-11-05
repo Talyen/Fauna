@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { createArtworkCache } from "../../../src/ui/shared/artwork-cache";
 import { ArtworkContext, useArtworkElements } from "../../../src/ui/shared/artwork";
 import { ArtCard } from "../../../src/ui/shared/cards/art-card";
+import { captureArtworkSwap } from "../../../src/ui/shared/cards/swap-motion";
 import { registerArtworkElement, replaceVisualArtwork } from "../../../src/ui/shared/artwork-elements";
 import { visualClone } from "../../../src/ui/shared/visual-clone";
 
@@ -93,6 +94,21 @@ it("borrows ready elements for snapshots and skips a copy when its spare is stil
   const revisited = visualClone(root)!;
   expect(revisited.querySelector("img")).toBe(images[1]);
   revisited.remove();
+  original.release();
+});
+
+it("returns a borrowed artwork element when the other swap portrait is unavailable", async () => {
+  await prepare(["front", "front"]);
+  const original = cache.mount(cache.acquire("front"));
+  const portrait = document.createElement("div");
+  portrait.append(original.image);
+  document.body.append(portrait);
+  registerArtworkElement(original.image, (url) => cache.borrow(url));
+  const swap = captureArtworkSwap([portrait, null]);
+  expect(cache.canAcquire(["front"])).toBe(false);
+  swap.start();
+  expect(cache.canAcquire(["front"])).toBe(true);
+  expect(original.image.parentElement).toBe(portrait);
   original.release();
 });
 

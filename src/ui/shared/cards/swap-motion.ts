@@ -31,8 +31,10 @@ export function captureArtworkSwap(
         reduced?.matches ||
         !records[0]?.rect.width ||
         !records[1]?.rect.width
-      )
+      ) {
+        cancel();
         return;
+      }
       records.forEach((record) => {
         if (!record) return;
         Object.assign(record.clone.style, {

@@ -137,7 +137,7 @@ it("cancels preparation during loading without warming or revealing a late saved
   expect(cache.prepare).toHaveBeenCalledOnce();
   expect(session.store.getState().ready).toBe(false);
 });
-it("diagnoses an unexpected preparation failure without calling it invalid content", async () => {
+it("hands failed artwork to render recovery after loading the session", async () => {
   session = createSession(
     {
       desktop: false,
@@ -149,7 +149,10 @@ it("diagnoses an unexpected preparation failure without calling it invalid conte
     if (urls !== startupBaseArtwork) throw new Error("preparation");
   });
   startup = prepareStartup(session, splash, vi.fn());
-  await expect(startup.ready).rejects.toThrow("preparation");
+  await vi.advanceTimersByTimeAsync(5000);
+  await startup.ready;
+  expect(session.store.getState().ready).toBe(true);
+  expect(cache.dispose).not.toHaveBeenCalled();
   expect(session.diagnostics.snapshot()).toEqual([{ source: "startup", message: "preparation", count: 1 }]);
 });
 

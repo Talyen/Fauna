@@ -22,7 +22,12 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
     releaseUpcoming?.();
     releaseUpcoming = artwork.prefetch(urls);
   };
-  const base = artwork.prepare(startupBaseArtwork);
+  const warm = (urls: readonly string[]) =>
+    artwork.prepare(urls).catch((error: unknown) => {
+      // The mounted artwork reader hands failed entries to the existing render recovery.
+      if (!signal.aborted) session.diagnostics.record("startup", error);
+    });
+  const base = warm(startupBaseArtwork);
   const fonts = waitForFonts(signal, report);
   const resources = (async () => {
     let source: "validation" | "startup" = "validation";
@@ -35,7 +40,7 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
       const essential = battleArtwork(session.store.getState().game);
       await base;
       if (signal.aborted) return;
-      await artwork.prepare(essential.filter((url) => !startupBaseArtwork.includes(url)));
+      await warm(essential.filter((url) => !startupBaseArtwork.includes(url)));
       if (signal.aborted) return;
       releaseEssential = artwork.retain(essential);
       prefetch();

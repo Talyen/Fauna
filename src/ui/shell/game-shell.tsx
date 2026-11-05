@@ -182,13 +182,12 @@ export function GameShell({ session }: { session: Session }) {
       setAutoplay(false);
       swapMotion.current?.cancel();
       const motion = command.type === "swap" ? captureSwapMotion(command.activeId, command.reserve) : null;
+      swapMotion.current = motion;
       const accepted = session.command(
         command.type === "play" || command.type === "swap" ? { ...command, autoEndTurn } : command,
       );
-      if (accepted) {
-        swapMotion.current = motion;
-        motion?.start();
-      }
+      if (accepted) motion?.start();
+      else motion?.cancel();
       return accepted;
     },
     [session, autoEndTurn, setAutoplay],
