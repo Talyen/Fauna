@@ -174,8 +174,8 @@
 .hand-slot:has(.selected) {
   z-index: 10;
 }
-.hand-slot:has(.action-card:hover:not([aria-disabled="true"])),
-.app[data-focus="visible"] .hand-slot:has(.action-card:focus:not([aria-disabled="true"])) {
+.hand-slot:has(.action-card:hover),
+.app[data-focus="visible"] .hand-slot:has(.action-card:focus) {
   transform: translateY(-14px) rotate(calc(var(--fan-offset) * 2.6deg));
 }
 .hand-slot:has(.action-card.selected) {
