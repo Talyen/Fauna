@@ -288,3 +288,46 @@ it("keeps input in an open dialog when background controls are focused", () => {
     root.remove();
   }
 });
+
+it("F7 returns to the tab stop without focusing inactive tabs or radios", () => {
+  const root = document.createElement("div");
+  root.innerHTML = `<div role="tablist"><button id="display" tabindex="0">Display</button>
+    <button tabindex="-1">Other</button></div><div role="tabpanel" tabindex="0"></div>
+    <div role="radiogroup"><button id="selected" tabindex="0">Selected</button>
+    <button tabindex="-1">Unselected</button></div><button id="next">Next</button>`;
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const actions = vi.fn();
+  const close = connectInput(actions, () => {});
+  try {
+    root.querySelector<HTMLElement>('[role="tabpanel"]')!.focus();
+    document.activeElement!.dispatchEvent(new KeyboardEvent("keydown", { key: "F7", bubbles: true }));
+    expect(document.activeElement?.id).toBe("display");
+    root.querySelector<HTMLElement>("#next")!.focus();
+    document.activeElement!.dispatchEvent(new KeyboardEvent("keydown", { key: "F7", bubbles: true }));
+    expect(document.activeElement?.id).toBe("selected");
+    expect(actions).not.toHaveBeenCalled();
+  } finally {
+    close();
+    root.remove();
+  }
+});
+
+it("F7 starts at the last available control when focus is outside the tab order", () => {
+  const root = document.createElement("div");
+  root.innerHTML =
+    '<button>First</button><button id="last">Last</button><button disabled>Unavailable</button>';
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const close = connectInput(
+    () => {},
+    () => {},
+  );
+  try {
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "F7" }));
+    expect(document.activeElement?.id).toBe("last");
+  } finally {
+    close();
+    root.remove();
+  }
+});

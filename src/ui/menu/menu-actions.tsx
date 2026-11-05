@@ -89,6 +89,12 @@ export function MenuActions({
         ) : null}
       </Button>
 
+      {home ? (
+        <Button className="menu-quit" variant="outline" busy={closing} onClick={onQuit}>
+          <Power aria-hidden="true" className="menu-icon-quit" />
+          {i18n.message("menu.quitShort", "Quit")}
+        </Button>
+      ) : null}
       <Button
         effectTone="settings"
         variant={home ? "outline" : "ghost"}
@@ -106,12 +112,6 @@ export function MenuActions({
             {i18n.message("menu.endRun", "End Run")}
           </Button>
         </>
-      ) : null}
-      {home ? (
-        <Button className="menu-quit" variant="outline" busy={closing} onClick={onQuit}>
-          <Power aria-hidden="true" className="menu-icon-quit" />
-          {i18n.message("menu.quitShort", "Quit")}
-        </Button>
       ) : null}
     </>
   );

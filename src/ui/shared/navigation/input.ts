@@ -161,11 +161,11 @@ export function connectInput(
       event.preventDefault();
       const controls = [
         ...document.querySelectorAll<HTMLElement>('button, [tabindex="0"], input, select'),
-      ].filter(isAvailableFocusTarget);
+      ].filter((element) => element.tabIndex >= 0 && isAvailableFocusTarget(element));
       const index = controls.indexOf(document.activeElement as HTMLElement);
-      controls[
-        (index + (event.key === "F7" || event.shiftKey ? -1 : 1) + controls.length) % controls.length
-      ]?.focus();
+      controls[(index < 0 ? controls.length - 1 : index - 1 + controls.length) % controls.length]?.focus({
+        preventScroll: true,
+      });
     } else if (action) {
       const widget = target?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]');
       const leavesTabs =
