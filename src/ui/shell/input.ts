@@ -2,7 +2,7 @@ import type { ShellSurface } from "./navigation";
 import type { Session } from "../../application/session";
 import type { GameState } from "../../game/types";
 import type { SpeciesId } from "../../game/content";
-import type { Inspection } from "../shared/inspection-model";
+import { inspectionDeck, type Inspection } from "../shared/inspection-model";
 import { moveFocus, type Controls, type InputAction } from "../shared/navigation/input";
 import { isAvailableFocusTarget } from "../shared/navigation/focus";
 import type { Route, Modal } from "./types";
@@ -23,6 +23,7 @@ interface ShellInputContext {
   closePause: () => void;
   surface: ShellSurface;
   backFromPage: () => void;
+  backFromPlay: () => void;
   openMenu: () => void;
 }
 export function routeInput(action: InputAction, context: ShellInputContext) {
@@ -43,6 +44,7 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
     closePause,
     surface,
     backFromPage,
+    backFromPlay,
     openMenu,
   } = context;
   if (session.store.getState().overlayActive) return;
@@ -79,7 +81,9 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
       return;
     }
     if (route === "play") {
-      if (!gameControls.current?.(action)) openMenu();
+      if (game.phase === "battle") {
+        if (!gameControls.current?.(action)) openMenu();
+      } else backFromPlay();
     }
     return;
   }
@@ -102,7 +106,7 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
     (!modal || ["deck", "draw", "discard"].includes(modal))
   ) {
     const focused = document.activeElement as HTMLElement | null;
-    const card = game.cards.find(
+    const card = inspectionDeck(game).cards.find(
       (c) => c.id === focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId,
     );
     const kind = focused?.closest<HTMLElement>("[data-species]")?.dataset.species as SpeciesId | undefined;

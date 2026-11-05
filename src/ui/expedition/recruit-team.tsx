@@ -28,7 +28,7 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
     );
   }, []);
   return (
-    <Screen className="recruit-team-screen" ref={root}>
+    <Screen className="recruit-team-screen" ref={root} data-native-escape data-state="open">
       <ScreenHeading back={false}>
         {i18n.message("recruit.replaceHeading", "Replace a creature")}
       </ScreenHeading>

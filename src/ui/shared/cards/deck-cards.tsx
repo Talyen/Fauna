@@ -6,9 +6,9 @@ import { EmptyState } from "../empty-state";
 import { ActionCard } from "./cards";
 
 import { cardActor } from "../../../game/card-actors";
-import { definition, species, speciesCards } from "../../../game/content";
+import { definition, species } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
-import type { Inspection } from "../inspection-model";
+import { inspectionDeck, type Inspection } from "../inspection-model";
 import { useArtwork } from "../artwork";
 import { assetUrl } from "../assets";
 
@@ -24,27 +24,7 @@ export function DeckCards({
 }) {
   const i18n = useMessages();
   const compact = useCompactLayout();
-  const owners =
-    game.phase === "draft"
-      ? game.selected.map((kind, index) => ({
-          id: `draft-${index}`,
-          species: kind,
-          health: species(kind).health,
-          block: 0,
-          attacked: false,
-        }))
-      : game.team;
-  const deck =
-    game.phase === "draft"
-      ? owners.flatMap((owner) =>
-          speciesCards(owner.species).map((card) => ({
-            id: `${owner.id}:${card.id}`,
-            definitionId: card.id,
-            ownerId: owner.id,
-            level: 0,
-          })),
-        )
-      : game.cards;
+  const { owners, cards: deck } = inspectionDeck(game);
   const pileIds = pile ? new Set(game.battle?.[pile] ?? []) : undefined;
   const cards = (pile ? deck.filter((card) => pileIds!.has(card.id)) : deck.slice()).sort(
     (a, b) =>
@@ -87,7 +67,7 @@ export function DeckCards({
           return card ? [card] : [];
         })
       : [];
-  return (
+  const draw = (
     <>
       {cards.length === 0 ? (
         <EmptyState
@@ -102,25 +82,30 @@ export function DeckCards({
       ) : null}
       <PagedItems
         items={cards}
-        pageSize={compact || overflow.length > 0 ? 3 : 6}
+        pageSize={overflow.length > 0 ? 2 : compact ? 3 : 6}
         className="deck-grid"
         label={i18n.message("deck.pages", "Deck pages")}
       >
         {renderCard}
       </PagedItems>
-      {overflow.length ? (
-        <section>
-          <h2>{i18n.message("deck.handOverflow", "Hand Overflow")}</h2>
-          <PagedItems
-            items={overflow}
-            pageSize={3}
-            className="deck-grid"
-            label={i18n.message("deck.pages", "Deck pages")}
-          >
-            {renderCard}
-          </PagedItems>
-        </section>
-      ) : null}
     </>
+  );
+  return overflow.length ? (
+    <div className="deck-pile-sections">
+      <div className="deck-pile-draw">{draw}</div>
+      <section className="deck-hand-overflow">
+        <h2>{i18n.message("deck.handOverflow", "Hand Overflow")}</h2>
+        <PagedItems
+          items={overflow}
+          pageSize={2}
+          className="deck-grid"
+          label={i18n.message("deck.pages", "Deck pages")}
+        >
+          {renderCard}
+        </PagedItems>
+      </section>
+    </div>
+  ) : (
+    draw
   );
 }

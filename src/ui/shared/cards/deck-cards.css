@@ -18,6 +18,30 @@
   margin-top: var(--screen-section-gap);
 }
 
+.deck-dialog:has(> .deck-pile-sections) {
+  width: min(
+    calc(var(--art-portrait-width) * 4 + var(--space-4) * 2 + var(--space-6) * 3 + 2px),
+    calc(100vw - 48px)
+  );
+}
+.deck-pile-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--screen-section-gap);
+  margin-top: var(--screen-section-gap);
+}
+.deck-pile-sections > div,
+.deck-hand-overflow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--screen-section-gap);
+  min-width: 0;
+}
+.deck-hand-overflow > h2 {
+  text-align: center;
+}
+
 /* Portrait size and readable rule-column width are independent. */
 .deck-dialog:has(> .paged-content .boon-options) {
   width: min(var(--boon-dialog-width), calc(100vw - var(--space-12)));
