@@ -7,7 +7,7 @@ import { ShineText } from "../shared/effects/treatments";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
 import { startTransition, useDeferredValue, useLayoutEffect, useRef, useState } from "react";
-import { useArtwork } from "../shared/artwork";
+import { useArtworkElements } from "../shared/artwork";
 import { assetUrl } from "../shared/assets";
 import { useStore } from "zustand";
 import { Star } from "lucide-react";
@@ -65,12 +65,11 @@ export function Inspector({
                   level: 0,
                 },
           );
-  useArtwork(
+  useArtworkElements(
     cards.map((card) => {
       const def = definition(card.definitionId);
       return assetUrl(def.artwork ?? `action.${def.species}`);
     }),
-    true,
   );
   const actionProps = (action: Card) => {
     const def = enemy ? enemyCard(definition(action.definitionId)) : undefined;

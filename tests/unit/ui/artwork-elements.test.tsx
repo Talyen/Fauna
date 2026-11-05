@@ -4,7 +4,7 @@ import { act, cleanup, render } from "@testing-library/react";
 import { Suspense } from "react";
 import { createPortal } from "react-dom";
 import { createArtworkCache } from "../../../src/ui/shared/artwork-cache";
-import { ArtworkContext, useArtwork } from "../../../src/ui/shared/artwork";
+import { ArtworkContext, useArtworkElements } from "../../../src/ui/shared/artwork";
 import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 import { registerArtworkElement, replaceVisualArtwork } from "../../../src/ui/shared/artwork-elements";
 import { visualClone } from "../../../src/ui/shared/visual-clone";
@@ -119,7 +119,7 @@ it("prepares a portal's additional consumer before creating any of its visible s
   await prepare(["art"]);
   const existing = cache.mount(cache.acquire("art"));
   function Detail() {
-    useArtwork(["art"], true);
+    useArtworkElements(["art"]);
     return createPortal(
       <div data-testid="detail">
         <ArtCard artwork="art" aspect="action" presentation />
@@ -143,5 +143,14 @@ it("prepares a portal's additional consumer before creating any of its visible s
   });
   expect(view.getByTestId("detail").querySelector("img")).toBe(images[1]);
   expect(existing.image.parentElement).toBeNull();
+  view.rerender(
+    <ArtworkContext value={cache}>
+      <Suspense fallback={<p>Previous surface</p>}>
+        <Detail />
+      </Suspense>
+    </ArtworkContext>,
+  );
+  expect(view.queryByText("Previous surface")).toBeNull();
+  expect(view.getByTestId("detail").querySelector("img")).toBe(images[1]);
   existing.release();
 });
