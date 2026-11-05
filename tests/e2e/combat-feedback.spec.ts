@@ -2,8 +2,9 @@ import { openHome, test } from "./support/session";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expectScrollFree, LAYOUT_CASES } from "./support/layout-contract";
 import { expect, type Page } from "@playwright/test";
-import { feedbackBattle } from "../support/game";
-import { encodeSave } from "../../src/game/save";
+import { feedbackBattle, run } from "../support/game";
+import { setHand } from "../support/cards";
+import { decodeSave, encodeSave } from "../../src/game/save";
 
 async function freezeFeedback(page: Page, time = 180) {
   await page.evaluate((time) => {
@@ -169,3 +170,43 @@ for (const [width, height, scale, reduced] of [
     }
   });
 }
+
+test("rapid takeover keeps the committed hand and unrelated creature movement", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  const game = structuredClone(run());
+  setHand(game, ["emberback-attack", "prismram-attack"]);
+  const save = encodeSave(game);
+  await page.addInitScript((save) => {
+    localStorage.setItem("fauna.save.v1", save);
+    localStorage.setItem("fauna.auto-end-turn", "false");
+    localStorage.setItem("fauna.audio.v1", JSON.stringify({ enabled: false }));
+  }, save);
+  await openHome(page);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await settleScreen(page);
+  const battle = page.locator(".app:not([inert]) .battle-screen");
+  await battle.locator('[data-card-id="ally-1:emberback-attack"]').click();
+  await battle.locator('[data-actor-id="enemy-0"] .creature-card').click();
+  await battle.locator('[data-actor-id="ally-1"] .combatant-motion').evaluate((node) => {
+    const animation = node.getAnimations()[0]!;
+    animation.pause();
+    animation.currentTime = 100;
+  });
+  await battle.locator('[data-card-id="ally-2:prismram-attack"]').click({ force: true });
+  await battle.locator('[data-actor-id="enemy-1"] .creature-card').click({ force: true });
+  await expect
+    .poll(
+      async () => decodeSave((await page.evaluate(() => localStorage.getItem("fauna.save.v1")))!).revision,
+    )
+    .toBe(game.revision + 2);
+  await expect(battle.locator('[data-card-id="ally-1:emberback-attack"]')).toHaveCount(0);
+  expect(
+    await battle
+      .locator('[data-actor-id="ally-1"] .combatant-motion')
+      .evaluate((node) =>
+        node
+          .getAnimations()
+          .some((animation) => animation.playState === "paused" && animation.currentTime === 100),
+      ),
+  ).toBe(true);
+});

@@ -215,3 +215,30 @@ it("prepares every draw, generated Food and summon before battle, and actual des
     expect(immediateArtwork(destinations)).toContain(assetUrl(`creature.${enemy.species}`));
   expect(JSON.stringify(battle)).toBe(before);
 });
+
+it("keeps a decoded group pinned when the hand changes only its artwork order", async () => {
+  cache.dispose();
+  cache = createArtworkCache(report, 0);
+  const ready = cache.prepare(["first", "second"]);
+  await tick();
+  await loaded(images[0]!);
+  await loaded(images[1]!);
+  await ready;
+  function Hand() {
+    const [reversed, reverse] = useState(false);
+    useArtwork(reversed ? ["second", "first"] : ["first", "second"]);
+    return <button onClick={() => reverse((previous) => !previous)}>Reorder hand</button>;
+  }
+  render(
+    <ArtworkContext value={cache}>
+      <Suspense fallback={<span>Loading artwork</span>}>
+        <Hand />
+      </Suspense>
+    </ArtworkContext>,
+  );
+  await vi.advanceTimersByTimeAsync(1100);
+  fireEvent.click(screen.getByRole("button", { name: "Reorder hand" }));
+  fireEvent.click(screen.getByRole("button", { name: "Reorder hand" }));
+  expect(screen.queryByText("Loading artwork")).toBeNull();
+  expect(images).toHaveLength(2);
+});

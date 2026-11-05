@@ -6,7 +6,8 @@ export const ArtworkContext = createContext<ArtworkCache | null>(null);
 /** The enclosing transition keeps the complete previous surface until every image is decoded. */
 export function useArtwork(urls: readonly string[]) {
   const cache = useContext(ArtworkContext);
-  const key = JSON.stringify(urls);
+  // Draw order changes must not release ownership of the same decoded artwork group.
+  const key = JSON.stringify([...new Set(urls)].sort());
   useLayoutEffect(() => cache?.retain(JSON.parse(key) as string[]), [cache, key]);
   cache?.read(urls);
 }

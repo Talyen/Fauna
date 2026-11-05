@@ -63,8 +63,15 @@ import "../battle/mana-crystals.css";
 import type { Modal } from "./types";
 export function GameShell({ session }: { session: Session }) {
   const i18n = useMessages();
-  const view = useStore(session.store),
-    game = useDeferredValue(view.game);
+  const view = useStore(session.store);
+  const deferredGame = useDeferredValue(view.game);
+  // The full battle artwork set is prepared, so takeover must not restore a deferred hand.
+  const game =
+    view.game.phase === "battle" &&
+    deferredGame.phase === "battle" &&
+    view.game.encounter === deferredGame.encounter
+      ? view.game
+      : deferredGame;
   const talentPoints = KEYWORDS.reduce((total, keyword) => total + availablePoints(game, keyword), 0);
   const root = useRef<HTMLDivElement>(null),
     gameControls: Controls = useRef(null),
@@ -565,7 +572,7 @@ export function GameShell({ session }: { session: Session }) {
                           openPile={(pile) => openModal(pile)}
                           openingDraw={view.committedCommand?.type === "beginBattle"}
                           game={shown}
-                          presentationOnly={game.phase !== "battle"}
+                          presentationOnly={view.game.phase !== "battle"}
                           send={send}
                           controls={gameControls}
                           bursts={bursts}
