@@ -75,7 +75,7 @@ it("applies and resets device settings without changing progression", async () =
   expect(localStorage.getItem("fauna.game-scale")).toBe("1");
   expect(localStorage.getItem("fauna.remember-autoplay")).toBe("false");
   await user.click(screen.getByRole("button", { name: "Clear Save Data" }));
-  await user.click(screen.getByRole("button", { name: "Cancel" }));
+  await user.click(screen.getByText("Cancel", { selector: "button" }));
   expect(session.store.getState().game).toBe(game);
   await session.dispose();
 });

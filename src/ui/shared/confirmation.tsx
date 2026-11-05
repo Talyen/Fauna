@@ -29,6 +29,7 @@ export function Confirmation({
     >
       <DialogContent
         data-native-escape
+        closeLabel={i18n.message("confirmation.cancel", "Cancel")}
         onOpenAutoFocus={() => {
           opener.current = document.activeElement as HTMLElement | null;
         }}
