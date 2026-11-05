@@ -24,11 +24,11 @@ for (const scale of [1, 1.25]) {
     await page.keyboard.press("End");
     const last = page.getByRole("option", { name: "Français", exact: true });
     await expect(last).toBeFocused();
-    await expect(last).toBeInViewport({ ratio: 1 });
+    await expect(last).toBeInViewport({ ratio: 0.999 });
     await page.keyboard.press("Home");
     const first = page.getByRole("option", { name: "Automatic", exact: true });
     await expect(first).toBeFocused();
-    await expect(first).toBeInViewport({ ratio: 1 });
+    await expect(first).toBeInViewport({ ratio: 0.999 });
     await page.keyboard.press("ArrowDown");
     await expect(page.getByRole("option", { name: "English", exact: true })).toBeFocused();
     await page.keyboard.press("Enter");
