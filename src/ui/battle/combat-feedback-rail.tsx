@@ -113,7 +113,7 @@ export function CombatFeedback({
       if (!container || !board) return;
       const gap = motionValue("--screen-item-gap") || 12;
       const margin = gap;
-      const popScale = motionValue("--feedback-pop-scale") || 2;
+      const popScale = motionValue("--feedback-pop-scale") || 1.6;
       const maxRise = motionValue("--feedback-rise") || 200;
       const width = document.documentElement.clientWidth || window.innerWidth;
       const height = window.innerHeight;

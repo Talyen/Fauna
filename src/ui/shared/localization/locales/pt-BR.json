@@ -4903,39 +4903,39 @@
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
-    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage remaining after <keyword2>Block</keyword2> by its stack count; Loses {{value0}} stack whenever it reduces damage",
-    "sourceHash": "d9eac4b1daea17fcd62817712c129edf5feafc4000b625d26e553d01a4b5a922",
-    "text": "Reduz o dano <keyword0>Físico</keyword0> e de <keyword1>Atordoamento</keyword1> restante após o <keyword2>Bloqueio</keyword2> em um valor igual às suas cargas; Perde {{value0}} carga sempre que reduz dano"
+    "source": "Reduces <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage by its stacks; Loses {{value0}} stack when used",
+    "sourceHash": "053f66a9948e48d477c34855492f51731a309b2cdccf3ee5a161caacade06178",
+    "text": "Reduz o dano <keyword0>Físico</keyword0> e de <keyword1>Atordoamento</keyword1> pelo número de acúmulos; Perde {{value0}} acúmulo ao ser usado"
   },
   "content.glossary.keyword.attackReflection.definition.rule": {
     "reviewed": true,
-    "source": "Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "c4269c487bd3a6e8c7a582b43225faacd68f1e320e2d01ac7aef91ca37754b34",
-    "text": "Devolve o próximo ataque de habilidade recebido ao atacante; Impede o dano e os efeitos prejudiciais desse ataque sobre você; Ataques <keyword0>Refletidos</keyword0> não podem ser <keyword1>Refletidos</keyword1> novamente; Dura até ser usada ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
+    "source": "Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "e4b32b5979b0f43a7dd3647d86fc40ac97c1a6bf061f5b463fd00fcc359c7af8",
+    "text": "Devolve o próximo ataque ao atacante sem sofrer seu dano nem seus efeitos nocivos"
   },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Bleed</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's next turn start, deal damage equal to the stacks, then clear them",
-    "sourceHash": "63a669c6803e334c92fa4f68594f86d8341a9f9a38664dc2966d660eb13d7e0e",
-    "text": "Golpes de <keyword0>Sangramento</keyword0> adicionam cargas iguais ao dano antes do <keyword1>Bloqueio</keyword1>; No início do próximo turno da criatura afetada, causam dano igual às cargas e depois desaparecem"
+    "source": "Take {{value0}} damage per stack at next turn start; Then clear all stacks",
+    "sourceHash": "15a58fa42eea582324c04949c9bf5fb0179397fbf20d79cb0b7bc50c18ee1630",
+    "text": "Sofra {{value0}} de dano por acúmulo no início do próximo turno; Depois remova todos os acúmulos"
   },
   "content.glossary.keyword.blind.definition.rule": {
     "reviewed": true,
-    "source": "Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword0>Dodge</keyword0> by each target; Does not stack",
-    "sourceHash": "1d9ddbd8428894dd55acf48302fbae05374f3c58728c831de9346e8726babae5",
-    "text": "Seu próximo ataque tem {{value0}}% de chance de errar todos os alvos; Termina após esse ataque, acertando ou não; Um erro conta como <keyword0>Esquiva</keyword0> de cada alvo; Não acumula"
+    "source": "Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "0dccc94fbfb5e6d966f8f4a586a5d04bd16d7e382cbfb5e21838cfa69a37b6de",
+    "text": "Seu próximo ataque tem {{value0}}% de chance de errar"
   },
   "content.glossary.keyword.block.definition.rule": {
     "reviewed": true,
-    "source": "Absorbs damage before <keyword0>Health</keyword0>, including damage over time; Does not normally prevent hit effects, status buildup or <keyword1>Leech</keyword1>; Remaining <keyword2>Block</keyword2> normally halves at the creature's next turn, rounded to the nearest whole number",
-    "sourceHash": "0f3500fc9c36c0ac2fff420a9075a1064ed26482a9b39f271aaab9937fc6e01c",
-    "text": "Absorve dano antes da <keyword0>Saúde</keyword0>, incluindo dano ao longo do tempo; Normalmente não impede efeitos ao acertar, acúmulo de estados nem <keyword1>Drenagem</keyword1>; O <keyword2>Bloqueio</keyword2> restante normalmente cai pela metade no próximo turno da criatura, arredondado para o inteiro mais próximo"
+    "source": "Absorbs damage; Remaining <keyword0>Block</keyword0> halves at turn start",
+    "sourceHash": "2e9c486b42588a66e9df10f5f195761e11fab017df34fb740f55ddcfedee84b3",
+    "text": "Absorve dano; O <keyword0>Bloqueio</keyword0> restante cai pela metade no início do turno"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Burn</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then halve them; The last stack clears after dealing damage",
-    "sourceHash": "5ea113105fdd9047a533e8ffe431a6f335187448ae4e35f4dc6fd6bddf64e79f",
-    "text": "Golpes de <keyword0>Queimadura</keyword0> adicionam cargas iguais ao dano antes do <keyword1>Bloqueio</keyword1>; No início do turno da criatura afetada, causam dano igual às cargas e depois caem pela metade; A última carga desaparece após causar dano"
+    "source": "Take {{value0}} damage per stack at turn start; Then halve stacks",
+    "sourceHash": "33fbe06333f711b0bdb0299f17eb62c6e92420eda7fad8e1e56be96e93bfa68c",
+    "text": "Sofra {{value0}} de dano por acúmulo no início do turno; Depois reduza os acúmulos pela metade"
   },
   "content.glossary.keyword.cleanse.definition.rule": {
     "reviewed": true,
@@ -4957,9 +4957,9 @@
   },
   "content.glossary.keyword.dodge.definition.rule": {
     "reviewed": true,
-    "source": "Avoid an incoming attack before <keyword0>Block</keyword0> or <keyword1>Armor</keyword1>; Base chance is {{value0}}%, capped at {{value1}}% with bonuses; <keyword2>Stunned</keyword2> or <keyword3>Frozen</keyword3> creatures normally cannot <keyword4>Dodge</keyword4>; Damage over time cannot be <keyword5>Dodged</keyword5>",
-    "sourceHash": "44c07f4b709bd7c08aba799d4974da13e31b24834bfa844390f418f962374312",
-    "text": "Evita um ataque recebido antes do <keyword0>Bloqueio</keyword0> ou da <keyword1>Armadura</keyword1>; Chance base de {{value0}}%, limitada a {{value1}}% com bônus; Criaturas <keyword2>Atordoadas</keyword2> ou <keyword3>Congeladas</keyword3> normalmente não podem <keyword4>Esquivar</keyword4>; Dano ao longo do tempo não pode ser <keyword5>Esquivado</keyword5>"
+    "source": "Chance to avoid attacks; Starts at {{value0}}%, up to {{value1}}%",
+    "sourceHash": "06860fb3727c8ccaaa3c8939e7a62a7cd3d21938d1732f9ffe7d2c3a6d8ab0d3",
+    "text": "Chance de evitar ataques; Começa em {{value0}}%, até {{value1}}%"
   },
   "content.glossary.keyword.food.definition.rule": {
     "reviewed": true,
@@ -4969,9 +4969,9 @@
   },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Freeze</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>; When buildup reaches half maximum <keyword2>Health</keyword2>, the creature becomes <keyword3>Frozen</keyword3> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword4>Stun</keyword4> and <keyword5>Freeze</keyword5>",
-    "sourceHash": "cd3a1d196e689fdc49ca6afcd3a448e0ac30ccedd520d4fa19780c257d26b006",
-    "text": "Golpes de <keyword0>Congelamento</keyword0> acumulam o efeito conforme o dano antes do <keyword1>Bloqueio</keyword1>; Quando o acúmulo atinge metade da <keyword2>Saúde</keyword2> máxima, a criatura fica <keyword3>Congelada</keyword3> e perde um turno; Ao se recuperar, ganha {{value0}} turnos de imunidade a <keyword4>Atordoamento</keyword4> e <keyword5>Congelamento</keyword5>"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "5bf5562c407c5eaaddcc6790260915f5a53f26fd53f716f09446b9b5bd5ae480",
+    "text": "Ao acumular metade da <keyword0>Saúde</keyword0> máxima, perca {{value0}} turno; Depois ganhe imunidade a <keyword1>Atordoamento</keyword1> e <keyword2>Congelamento</keyword2> por {{value1}} turnos"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
@@ -5005,15 +5005,15 @@
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
-    "source": "Cancel the next incoming ability attack and its harmful effects on you before <keyword0>Dodge</keyword0>; <keyword1>Thorns</keyword1> still retaliate; Lasts until used or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "a01b9fa9a775c60d8e7423764f16da7edd1c94caab1cdb2e05c5c9d54ccaf9b2",
-    "text": "Cancela o próximo ataque de habilidade recebido e seus efeitos prejudiciais sobre você antes da <keyword0>Esquiva</keyword0>; <keyword1>Espinhos</keyword1> ainda retaliam; Dura até ser usada ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
+    "source": "Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "29f984aff6eadc821713642e0dbc6f378a3eb023937f9acdcf44bd868f7cd79d",
+    "text": "Cancela o próximo ataque recebido e seus efeitos nocivos"
   },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
-    "source": "Prevent the next <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1>, <keyword2>Bleed</keyword2>, <keyword3>Stun</keyword3>, <keyword4>Freeze</keyword4> or <keyword5>Blind</keyword5> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword6>Purged</keyword6>; Does not stack",
-    "sourceHash": "72baf5c23eb77e9eb5620d1f622c821dd8634c78eaad065048a659a19beda14c",
-    "text": "Impede a próxima aplicação de <keyword0>Queimadura</keyword0>, <keyword1>Veneno</keyword1>, <keyword2>Sangramento</keyword2>, <keyword3>Atordoamento</keyword3>, <keyword4>Congelamento</keyword4> ou <keyword5>Cegueira</keyword5>; Não altera o dano direto nem os estados existentes; Dura até ser usada ou sofrer <keyword6>Expurgo</keyword6>; Não acumula"
+    "source": "Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "8fac347ebaf883a18b66c38ee0315425e55e4ef1d8e5108f57a9e5b6c7e57a3a",
+    "text": "Impede o próximo estado nocivo; Não impede dano"
   },
   "content.glossary.keyword.physical.definition.rule": {
     "reviewed": true,
@@ -5023,9 +5023,9 @@
   },
   "content.glossary.keyword.poison.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Poison</keyword0> hits add stacks equal to their damage before <keyword1>Block</keyword1>; At the affected creature's turn start, deal damage equal to the stacks, then remove {{value0}}% of them, rounded to the nearest whole number with a minimum of {{value1}}",
-    "sourceHash": "532178ec349854aecae509b2b5b1919e47c0b8d09d1d80eed2829bbc340a1eb0",
-    "text": "Golpes de <keyword0>Veneno</keyword0> adicionam cargas iguais ao dano antes do <keyword1>Bloqueio</keyword1>; No início do turno da criatura afetada, causam dano igual às cargas e removem {{value0}}% delas, arredondando para o inteiro mais próximo, com mínimo de {{value1}}"
+    "source": "Take {{value0}} damage per stack at turn start; Then lose {{value1}}% of stacks",
+    "sourceHash": "ac0d54913586dce27a04158564e9da44124baeab7de327370af177d154c3e1eb",
+    "text": "Sofra {{value0}} de dano por acúmulo no início do turno; Depois perca {{value1}}% dos acúmulos"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -5035,9 +5035,9 @@
   },
   "content.glossary.keyword.reflect.definition.rule": {
     "reviewed": true,
-    "source": "Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword0>Attack Reflection</keyword0> instead returns the whole attack to its attacker; <keyword1>Reflected</keyword1> effects cannot <keyword2>reflect</keyword2> again; Charges do not stack",
-    "sourceHash": "6bc0b637f3c9e36d4e9eb334ad682182625286b2760a59dad9990d33fab247f8",
-    "text": "Redireciona o estado prejudicial indicado para um inimigo vivo aleatório; O dano direto ainda atinge você; <keyword0>Reflexão de ataque</keyword0> devolve o ataque inteiro ao atacante; Efeitos <keyword1>Refletidos</keyword1> não podem ser <keyword2>Refletidos</keyword2> novamente; As cargas não acumulam"
+    "source": "Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "88e389dc1c6525844f6098dae660386741d7d300e653522f2763aba92fe84ae9",
+    "text": "Envia o próximo estado nocivo a um inimigo aleatório; Não impede dano"
   },
   "content.glossary.keyword.resurrect.definition.rule": {
     "reviewed": true,
@@ -5047,15 +5047,15 @@
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stun</keyword0> hits add buildup equal to their damage before <keyword1>Block</keyword1>, reduced by <keyword2>Armor</keyword2>; When buildup reaches half maximum <keyword3>Health</keyword3>, the creature becomes <keyword4>Stunned</keyword4> and skips one turn; Recovery grants {{value0}} turns of immunity to both <keyword5>Stun</keyword5> and <keyword6>Freeze</keyword6>",
-    "sourceHash": "1b838de04f118c49581abc6884f9e9c2b6a2fa372a01d7f039f8264f88e6b825",
-    "text": "Golpes de <keyword0>Atordoamento</keyword0> acumulam o efeito conforme o dano antes do <keyword1>Bloqueio</keyword1>, reduzido pela <keyword2>Armadura</keyword2>; Quando o acúmulo atinge metade da <keyword3>Saúde</keyword3> máxima, a criatura fica <keyword4>Atordoada</keyword4> e perde um turno; Ao se recuperar, ganha {{value0}} turnos de imunidade a <keyword5>Atordoamento</keyword5> e <keyword6>Congelamento</keyword6>"
+    "source": "At half maximum <keyword0>Health</keyword0> in buildup, skip {{value0}} turn; Then gain {{value1}} turns of <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2> immunity",
+    "sourceHash": "5bf5562c407c5eaaddcc6790260915f5a53f26fd53f716f09446b9b5bd5ae480",
+    "text": "Ao acumular metade da <keyword0>Saúde</keyword0> máxima, perca {{value0}} turno; Depois ganhe imunidade a <keyword1>Atordoamento</keyword1> e <keyword2>Congelamento</keyword2> por {{value1}} turnos"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
-    "source": "When hit or when an attack is <keyword0>Negated</keyword0>, deal <keyword1>Nature</keyword1> damage equal to your <keyword2>Thorns</keyword2>, then lose {{value0}} stack; Triggers even through <keyword3>Block</keyword3> or <keyword4>Armor</keyword4>; Retaliation cannot trigger more retaliation",
-    "sourceHash": "805dc18ec6b63441af929ac9b4830c14faac59d48e9c688ea85b211144d45082",
-    "text": "Ao receber um golpe ou <keyword0>Negar</keyword0> um ataque, causa dano de <keyword1>Natureza</keyword1> igual aos seus <keyword2>Espinhos</keyword2> e perde {{value0}} carga; Ativa mesmo através de <keyword3>Bloqueio</keyword3> ou <keyword4>Armadura</keyword4>; Retaliações não provocam novas retaliações"
+    "source": "When hit, deal {{value0}} <keyword0>Nature</keyword0> damage per stack; Then lose {{value1}} stack",
+    "sourceHash": "daa489740c4ba88399f270c5cd4dfc94fd6f243ba9d279bd8834d91851ba0ff6",
+    "text": "Ao ser atingido, cause {{value0}} de dano de <keyword0>Natureza</keyword0> por acúmulo; Depois perca {{value1}} acúmulo"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
@@ -7808,169 +7808,181 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "25beb3eddaaec6247bfe5fc324ae07f2ba1e031d586ecac04100901e6f1ff264",
+    "sourceHash": "7c2ebf6738efb0e3d56db8a185deadcb4e9d14977afecc6862a308f8bc11c467",
     "text": "Pião acrobata: o próximo ataque não pode ser <keyword0>Esquivado</keyword0>"
   },
-  "content.status.attackReflection.v013a620784742104.rule": {
+  "content.status.attackReflection.v47d857c97c932bb3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Attack Reflection</keyword0>: Return the next incoming ability attack to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "074fb4ded9da21ea8a15041f1e2a4fcae7a7fa1f466b932016b75aa4e4a9f2e0",
-    "text": "<keyword0>Reflexão de ataque</keyword0>: Devolve o próximo ataque de habilidade recebido ao atacante; Impede o dano e os efeitos prejudiciais desse ataque sobre você; Ataques <keyword1>Refletidos</keyword1> não podem ser <keyword2>Refletidos</keyword2> novamente; Dura até ser usada ou sofrer <keyword3>Expurgo</keyword3>; Não acumula"
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack to its attacker, taking no damage or harmful effects",
+    "sourceHash": "7001d62533e58032d1bb69fa7e9f6a6df74957a1127217b14e7c83aa99007757",
+    "text": "<keyword0>Reflexão de ataque</keyword0>: Devolve o próximo ataque ao atacante sem sofrer seu dano nem seus efeitos nocivos"
   },
-  "content.status.blind.v37b85a98a2799221.rule": {
+  "content.status.blind.ve2d57c6eea210af7.rule": {
     "reviewed": true,
-    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss all its targets; Expires after that attack, hit or miss; A miss counts as a <keyword1>Dodge</keyword1> by each target; Does not stack",
-    "sourceHash": "12d0ad87c5be6db33eec38b9f8181998053c3b47697a5f2d41f4e1f19a7c6f44",
-    "text": "<keyword0>Cegueira</keyword0>: Seu próximo ataque tem {{value0}}% de chance de errar todos os alvos; Termina após esse ataque, acertando ou não; Um erro conta como <keyword1>Esquiva</keyword1> de cada alvo; Não acumula"
+    "source": "<keyword0>Blind</keyword0>: Your next attack has a {{value0}}% chance to miss",
+    "sourceHash": "679028007f502eb3e9c4fcd120d2bb83109c65a73ee581676296058c18c0e1fd",
+    "text": "<keyword0>Cegueira</keyword0>: Seu próximo ataque tem {{value0}}% de chance de errar"
   },
-  "content.status.controlled.v147305c04334e696.rule": {
+  "content.status.controlled.v11aef5cde2568068.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "df8df47fa7f34e5e8cdfa33f7ee029b8d7d5adb8d813ef2fc51921c272714a34",
-    "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turnos"
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turns",
+    "sourceHash": "38d44568e38ea1f1b7da0a17addacfbeb9a8763acea983183f0a913418afb9ec",
+    "text": "<keyword0>Congelamento</keyword0>: perca {{value0}} turnos"
+  },
+  "content.status.controlled.v2627b2e6943c398b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: skip {{value0}} turn",
+    "sourceHash": "702c33ae65738506a95691314b1c9d28c6b123bba33f49aef29abfd713dbbbef",
+    "text": "<keyword0>Congelamento</keyword0>: perca {{value0}} turno"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "68348b6d4ff6ee1804661941469e0bfe4b9a7db31a1d8dd7a5ba4556711ad919",
+    "sourceHash": "b7b2f3efc8b7a78dd4e17aa705f3c2c412d383af928ac5ff90913d24049104b0",
     "text": "Turno perdido"
   },
-  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+  "content.status.controlled.vcd57b8fd3ce840e8.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "086f84653a899defa14d5b2791b4338e022e9b2901d751a41f809f986314abb9",
-    "text": "<keyword0>Congelamento</keyword0>: {{value0}} turno"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turn",
+    "sourceHash": "8cf8244b0e2df7dafd4f80a7126eb33c9709a48d78c1e01dcccf15754189888a",
+    "text": "<keyword0>Atordoamento</keyword0>: perca {{value0}} turno"
   },
-  "content.status.controlled.v9121eae5c53d2321.rule": {
+  "content.status.controlled.vd44ff14e7ea5c761.rule": {
     "reviewed": true,
-    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "1b70ad61f2b7fbeb96311e1e17e60359168fa826f6879d15eefc719baaf0c5f9",
-    "text": "<keyword0>Congelamento</keyword0>: {{value0}} turnos"
+    "source": "<keyword0>Stunned</keyword0>: skip {{value0}} turns",
+    "sourceHash": "996f647f18e4904335e95bdd20dcfb9dbcba424fe85c8a1d94d846dc678e42a6",
+    "text": "<keyword0>Atordoamento</keyword0>: perca {{value0}} turnos"
   },
-  "content.status.controlled.ve93ba5ee32c41861.rule": {
+  "content.status.cooldown.v7e371d88b3e2e9e3.rule": {
     "reviewed": true,
-    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "8a84d3c6b20b89cd912b79b3f1862f2b03e24866dd2e28e9244852f5fa311f8c",
-    "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turno"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turns left",
+    "sourceHash": "f76a45b167102a3b7a51b65b3f6d2a5c6941ec249c861ade5a02384cedc2a28a",
+    "text": "Imune a <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>: restam {{value0}} turnos"
   },
-  "content.status.cooldown.v2db257f39699f407.rule": {
+  "content.status.cooldown.vee08a58b6508ab76.rule": {
     "reviewed": true,
-    "source": "Control immunity {{value0}}",
-    "sourceHash": "b5d3dc01b117c5627fec7e3dacd8ce0ab0db47884fc4e731df038dba29038f16",
-    "text": "Imunidade a controle {{value0}}"
+    "source": "Immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>: {{value0}} turn left",
+    "sourceHash": "ef409e6295057d8357542ce9f046af4e1c66d15d00add8fdd0992bd43e55db33",
+    "text": "Imune a <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>: resta {{value0}} turno"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "a83e69bc07de2b33174fb11f79018bb9a303b9679c59138a9c43e70ed9169351",
+    "sourceHash": "cdbe909ef4e5be951693705cc6f667b8842ca62e852927d0c8ec67c61025c184",
     "text": "Próxima ação grátis: a próxima carta é gratuita"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "c5a4781c21e70c3502130876058c641e538a563a97236a179a3d77de04512767",
+    "sourceHash": "967d775dbddd2488c992fb5dddc15c9a2ee2249a81f2eac7afb0828367e7136d",
     "text": "Favor divino: a próxima carta de <keyword0>Luz</keyword0> é gratuita"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "276eb7874d50186a45ab1d3ec27555b4098babc0dfc3b2f568adff1f9ff3409a",
+    "sourceHash": "fdd814b7c30b6c3c46f6fd84b09aa0d4de34a43894735025629bcdd3826fd90e",
     "text": "Passo do vento: a próxima carta de <keyword0>Natureza</keyword0> é gratuita"
   },
-  "content.status.grace.v6e81bc0f25243d28.rule": {
+  "content.status.grace.v7d70cbf27f059bd2.rule": {
     "reviewed": true,
-    "source": "Death's Door {{value0}}",
-    "sourceHash": "73a2e2410a3e4bcb5532182fa8cf0c1f9685a69562c5b02ccaa638c87865a809",
-    "text": "À beira da morte {{value0}}"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turn left",
+    "sourceHash": "3705ebfdb8125240ae94c1f51999602635ee4a1bd705ac3266f906847bc6128c",
+    "text": "À beira da morte: sobreviva ao dano fatal com {{value0}} de <keyword0>Saúde</keyword0>; Resta {{value1}} turno"
   },
-  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+  "content.status.grace.ved60bcb3845feb07.rule": {
     "reviewed": true,
-    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
-    "sourceHash": "fbf04c5e8584704d2f9a78780acc50ccd1238ca8f26e9b2373d6508810674a66",
-    "text": "Semente lunar: a próxima retaliação de <keyword0>Espinhos</keyword0> causa o dobro de dano"
+    "source": "Death's Door: survive fatal damage at {{value0}} <keyword0>Health</keyword0>; {{value1}} turns left",
+    "sourceHash": "183a892439314490d7ed656e16ddbf9c5b435038650933905800df58ff10636e",
+    "text": "À beira da morte: sobreviva ao dano fatal com {{value0}} de <keyword0>Saúde</keyword0>; Restam {{value1}} turnos"
   },
-  "content.status.negate.v0fea63d64804569b.rule": {
+  "content.status.moonseedReady.v23f9ba255f570b85.rule": {
     "reviewed": true,
-    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming ability attack and its harmful effects on you before <keyword1>Dodge</keyword1>; <keyword2>Thorns</keyword2> still retaliate; Lasts until used or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "aa1955ec262b58b1b5b7ce89a8ce68d6be400b252deeb008fe8629670271fe77",
-    "text": "<keyword0>Negação</keyword0>: Cancela o próximo ataque de habilidade recebido e seus efeitos prejudiciais sobre você antes da <keyword1>Esquiva</keyword1>; <keyword2>Espinhos</keyword2> ainda retaliam; Dura até ser usada ou sofrer <keyword3>Expurgo</keyword3>; Não acumula"
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> damage is doubled",
+    "sourceHash": "31762d947614b09e347fe4151800a6567c5a74977a4b2c27900e9e6ac732cd44",
+    "text": "Semente lunar: o próximo dano de <keyword0>Espinhos</keyword0> é dobrado"
   },
-  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+  "content.status.negate.v547e4e9923d24b18.rule": {
     "reviewed": true,
-    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "625b3a815380cba2745db86d52f7b9f6aa106b5e01b5220ea6bf9fbfb00c345a",
+    "source": "<keyword0>Negate</keyword0>: Cancel the next incoming attack and its harmful effects",
+    "sourceHash": "11ef1f306eb49dc0d03e8e03c1f3e7d0b3e5722544cb677c51b2eb68ada3c396",
+    "text": "<keyword0>Negação</keyword0>: Cancela o próximo ataque recebido e seus efeitos nocivos"
+  },
+  "content.status.nextPhysical.v6898256cc6c7de17.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} extra <keyword0>Physical</keyword0> damage",
+    "sourceHash": "fd3fa4bfb55d55e0edf463215f812ae6e195dfa18fb876b4e64e1957274b2908",
     "text": "Flanco aberto: o próximo ataque causa {{value0}} de dano <keyword0>Físico</keyword0> adicional"
   },
-  "content.status.nullify.v497e819f2a2d6746.rule": {
+  "content.status.nullify.vce10a8ed74932e80.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0>: Prevent the next <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, <keyword3>Bleed</keyword3>, <keyword4>Stun</keyword4>, <keyword5>Freeze</keyword5> or <keyword6>Blind</keyword6> application; Direct damage and existing statuses are unchanged; Lasts until used or <keyword7>Purged</keyword7>; Does not stack",
-    "sourceHash": "81127763235af3b33d3f4dc268edc7ae073e8ab632ec567cd31cf3897252a6d7",
-    "text": "<keyword0>Anulação</keyword0>: Impede a próxima aplicação de <keyword1>Queimadura</keyword1>, <keyword2>Veneno</keyword2>, <keyword3>Sangramento</keyword3>, <keyword4>Atordoamento</keyword4>, <keyword5>Congelamento</keyword5> ou <keyword6>Cegueira</keyword6>; Não altera o dano direto nem os estados existentes; Dura até ser usada ou sofrer <keyword7>Expurgo</keyword7>; Não acumula"
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status; Does not prevent damage",
+    "sourceHash": "8988f0b72a13876f78ea0d078f12a407500ad4805dd032ff5fee8d0869ee6d0a",
+    "text": "<keyword0>Anulação</keyword0>: Impede o próximo estado nocivo; Não impede dano"
   },
-  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+  "content.status.nullifyFreeze.ve1d9965b67010344.rule": {
     "reviewed": true,
-    "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "dc8ffb8d756a6b92d5064e2d2f180247c70666a4efd6ee89ae7d06ea80849088",
-    "text": "<keyword0>Anula</keyword0> o próximo dano de <keyword1>Congelamento</keyword1>; Dura até ser consumida ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
+    "source": "Prevent the next <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "2991728769d865d32b68272f011e263907e5c85f912444779fc686c11ea1ea35",
+    "text": "Impede o próximo dano de <keyword0>Congelamento</keyword0>"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "b59110629a7bc1c12b88d32a1b593ae518e2f9b2a6a82b3f1393022a5eb9c6c7",
+    "sourceHash": "8a0120fc4b9a6bab050a36dfefee40d677693122f8ca287bba0f8b28cc6cbc93",
     "text": "Semente do oásis: o próximo ataque tem <keyword0>Drenagem</keyword0>"
   },
-  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+  "content.status.partingCut.vf7a28552587a53e7.rule": {
     "reviewed": true,
-    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "7b660ba84c167c44e50edbcc6bf06248fe7587b5dfba642e3ad509646a08f426",
-    "text": "Corte de despedida: o próximo golpe <keyword0>Físico</keyword0> causa metade do seu dano como dano de <keyword1>Sangramento</keyword1> adicional"
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit adds half its damage as <keyword1>Bleed</keyword1>",
+    "sourceHash": "eb9a7c630344923267c392b91e71a8f774eeb3cea78523d9e6ffa9743a385231",
+    "text": "Corte de despedida: o próximo acerto <keyword0>Físico</keyword0> adiciona metade do dano como <keyword1>Sangramento</keyword1>"
   },
-  "content.status.reflect.ved0888b165975dfb.rule": {
+  "content.status.reflect.vde052a9a722c7be5.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0>: Redirect the specified harmful status to a random living enemy; Direct damage still lands on you; <keyword1>Attack Reflection</keyword1> instead returns the whole attack to its attacker; <keyword2>Reflected</keyword2> effects cannot <keyword3>reflect</keyword3> again; Charges do not stack",
-    "sourceHash": "65217a2c9556a342a0731936b56da3593a39ae3881aabfa1643880a7a657bb67",
-    "text": "<keyword0>Reflexão</keyword0>: Redireciona o estado prejudicial indicado para um inimigo vivo aleatório; O dano direto ainda atinge você; <keyword1>Reflexão de ataque</keyword1> devolve o ataque inteiro ao atacante; Efeitos <keyword2>Refletidos</keyword2> não podem ser <keyword3>Refletidos</keyword3> novamente; As cargas não acumulam"
+    "source": "<keyword0>Reflect</keyword0>: Send the next harmful status to a random enemy; Does not prevent damage",
+    "sourceHash": "c7020b00c65de531eaba5deaa2dd74601160f440c2fc3b2a65402bade297e5e8",
+    "text": "<keyword0>Reflexão</keyword0>: Envia o próximo estado nocivo a um inimigo aleatório; Não impede dano"
   },
-  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+  "content.status.reflectBurn.v2a3de9f6418bf193.rule": {
     "reviewed": true,
-    "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "3f80e6831d96326110656af18770a14298fda3ce27cbbe4059e1653de0f1e4c2",
-    "text": "<keyword0>Reflete</keyword0> a próxima <keyword1>Queimadura</keyword1>; O dano direto ainda atinge; Dura até ser consumida ou sofrer <keyword2>Expurgo</keyword2>; Não acumula"
+    "source": "Send the next <keyword0>Burn</keyword0> buildup to a random enemy; Does not prevent damage",
+    "sourceHash": "4311656355d7f6d2a3cb0a5b768c87aaaf6d45e83807d972784457f613d45f7c",
+    "text": "Envia o próximo acúmulo de <keyword0>Queimadura</keyword0> a um inimigo aleatório; Não impede dano"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "f143d504e23a8041544b1450414d6f6089e3f465384529934d9b0bedde9b4cf5",
+    "sourceHash": "9dfdc9137c80350d0e1b2b873addc346bfc19a41c5c9884c48b63fa8269aa271",
     "text": "Encontrar o ritmo: +{{value0}}% de chance de <keyword0>Esquiva</keyword0>"
   },
   "content.status.ribbonSpool.vf90381129d21c88c.rule": {
     "reviewed": true,
     "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
-    "sourceHash": "ce4e9065b1cc67a088ff61032e8c56741ec648515c0cb303978d05080f4e2c64",
+    "sourceHash": "264ffb8bc501b38b30087e120201909a40132c2dddf57a02c0399a35a969242b",
     "text": "Carretel de fita: imunidade a <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>"
   },
-  "content.status.riposte.v7f25e6d160e653d4.rule": {
+  "content.status.riposte.v1e440c9b1d660960.rule": {
     "reviewed": true,
-    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "d10f761fc4c843501d0c6c7e202965670599cb266cdbb1260529221b07d4846c",
-    "text": "Contra-ataque: o próximo ataque <keyword0>Físico</keyword0> é um <keyword1>acerto crítico</keyword1> garantido"
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack always <keyword1>critically hits</keyword1>",
+    "sourceHash": "8782f1cf231e516a90804ccaa114aab8ee0b7281d2620b217adf87684c8ccc8f",
+    "text": "Contra-ataque: o próximo ataque <keyword0>Físico</keyword0> sempre causa um <keyword1>acerto crítico</keyword1>"
   },
   "content.status.springTide.v9686824085c1ef98.rule": {
     "reviewed": true,
     "source": "Spring Tide: next <keyword0>Water</keyword0> card plays twice",
-    "sourceHash": "f6c197c623f3e0d49f755b762f2e9791c993bf571bd6a7af828d8bfe35c4b43f",
+    "sourceHash": "056ca50e70d75e96e7f35add4d2826bebcc9a44012c7d3b988f974a4ad68a5b3",
     "text": "Maré de Sizígia: a próxima carta de <keyword0>Água</keyword0> é jogada duas vezes"
   },
   "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
     "reviewed": true,
     "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
-    "sourceHash": "96de6b5f8c451916524223a6c2864af64f30e7b11c1b2bc87430f594c492b706",
+    "sourceHash": "acfe37ffc91d53031ed15f022e7d87814750cb0cfec4f8cad3f7e12a446b0f58",
     "text": "Palito de dragão: o próximo ataque também causa <keyword0>Expurgo</keyword0>"
   },
   "content.status.turnBackReady.vfbb95b85de9cf099.rule": {
     "reviewed": true,
     "source": "Turn Back the Tide: next attack may repeat",
-    "sourceHash": "00b4c828098a1ac2556a4cbefed77ba79e1e666cb455696886e6f61284489099",
+    "sourceHash": "12f37b47b49da813bcf0c2d00268cea8e766e2de48465bf074453d1cd664ef87",
     "text": "Reverter a maré: o próximo ataque pode se repetir"
   },
   "content.talent.armor.armored-surge.name": {
@@ -9886,72 +9898,6 @@
     "source": "Deck pages",
     "sourceHash": "d4c8299a09b999fb58720f5a6ac635fcec7c21a1eb537bf1604a573ac22fda68",
     "text": "Páginas do baralho"
-  },
-  "denial.actorKnockedOut": {
-    "reviewed": true,
-    "source": "That creature is knocked out.",
-    "sourceHash": "c99eb535ea89275f917433aa64ec49e60831dbcc9c1e8b1ea9eb0e34f8625e47",
-    "text": "Essa criatura está fora de combate."
-  },
-  "denial.cardNotInHand": {
-    "reviewed": true,
-    "source": "That card is not in your hand.",
-    "sourceHash": "5f98e0b79834c5c039ab2a11d5bac8e6b091b4f2bd5d5356edd1a8f0e378a6a5",
-    "text": "Essa carta não está na sua mão."
-  },
-  "denial.frozen": {
-    "reviewed": true,
-    "source": "{{name}} cannot act while Frozen.",
-    "sourceHash": "a8d59936b4efea269fc3e4fe3f05ffce74364d567237aa5d2b0132ebc8a1e474",
-    "text": "{{name}} não pode agir sob Congelamento."
-  },
-  "denial.noDiscardCards": {
-    "reviewed": true,
-    "source": "There are no eligible ally cards in Discard.",
-    "sourceHash": "575c4b5d41be0f6015fc9e1871adc251b2c6ac17115e05e0950b990c0de5d656",
-    "text": "Não há cartas aliadas elegíveis no descarte."
-  },
-  "denial.noInjuredAllies": {
-    "reviewed": true,
-    "source": "There are no injured allies.",
-    "sourceHash": "a29522650b2e1c4df43f92d875a2df77a5355de2f745a7adabff076239bdf6fc",
-    "text": "Não há aliados feridos."
-  },
-  "denial.noKnockedOutAllies": {
-    "reviewed": true,
-    "source": "There are no knocked-out allies.",
-    "sourceHash": "a290a64b9acd10cb2016d856841ce133647903f714d1453db19b46fdb67c1c2a",
-    "text": "Não há aliados fora de combate."
-  },
-  "denial.noLivingBackups": {
-    "reviewed": true,
-    "source": "There are no living backups.",
-    "sourceHash": "1f68ff805ec083d874b36df3ab0d885a37112fdf8bc9c5a51b4c7d4fb01a3dcf",
-    "text": "Não há criaturas vivas na reserva."
-  },
-  "denial.notEnoughMana": {
-    "reviewed": true,
-    "source": "Not enough Mana.",
-    "sourceHash": "0ab819eb81f054d4110b92396884b13beaf78b1244593a833fb3f3a05e1f2336",
-    "text": "Mana insuficiente."
-  },
-  "denial.skipped": {
-    "reviewed": true,
-    "source": "{{name}} cannot act this turn.",
-    "sourceHash": "7360042f07a5f947f603dae3e3597700077b669e00dd31ad1bca2cc08992813a",
-    "text": "{{name}} não pode agir neste turno."
-  },
-  "denial.stunned": {
-    "reviewed": true,
-    "source": "{{name}} cannot act while Stunned.",
-    "sourceHash": "f461d91595c20fa826447b2b98ee7993a8f38d15205b5b77bab3d9ab9c634b7f",
-    "text": "{{name}} não pode agir sob Atordoamento."
-  },
-  "denial.unfinishedJourney": {
-    "reviewed": true,
-    "source": "{{trait}}’s limit is spent this turn.",
-    "sourceHash": "cda273f9541127cf19c27037ab3eebe5fa832c52b92de961d4914bf7120eacdc",
-    "text": "O limite de {{trait}} já foi usado neste turno."
   },
   "draft.choose": {
     "reviewed": true,

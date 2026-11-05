@@ -57,12 +57,13 @@
 .game-button:is(.action-card, .creature-card):has(> .effect-shine-border)::after {
   border-color: transparent;
 }
-.game-button:is(.action-card, .creature-card):has(> .effect-shine-border):not(.selected):not(:disabled):not(
-    [aria-disabled="true"]
+.game-button:is(.action-card, .creature-card):has(> .effect-shine-border):not(.selected):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
   ):hover::after {
   border-color: transparent;
 }
-.game-button[aria-disabled="true"] > .effect-shine-border,
+.game-button[aria-disabled="true"]:not(.action-card) > .effect-shine-border,
 .knocked-out .effect-shine-border {
   display: none;
 }

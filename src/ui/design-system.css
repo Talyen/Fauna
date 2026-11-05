@@ -151,7 +151,10 @@
   border: 2px solid var(--primary);
 }
 :root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+  .game-button:is(.creature-card, .action-card):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
+  ):focus {
   outline: none;
 }
 .ui-tabs-list {
@@ -643,18 +646,23 @@ h3 {
   scale: var(--pressed-scale);
 }
 :root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+  .game-button:is(.creature-card, .action-card):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
+  ):focus {
   border-color: var(--border-art);
 }
 :root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):has(> .effect-shine-border):not(:disabled):not(
-    [aria-disabled="true"]
+  .game-button:is(.creature-card, .action-card):has(> .effect-shine-border):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
   ):focus::after {
   border-color: transparent;
 }
 :root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:has(> .effect-shine-border)):not(:disabled):not(
-    [aria-disabled="true"]
+  .game-button:is(.creature-card, .action-card):not(:has(> .effect-shine-border)):not(:disabled):is(
+    .action-card,
+    :not([aria-disabled="true"])
   ):focus::after {
   border-color: var(--primary);
 }

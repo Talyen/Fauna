@@ -30,7 +30,12 @@ export function CombatStatus({
   const i18n = useMessages();
   const entries = combatStatuses(combat, sharedDodge, sharedImmunity);
   // Block belongs to the combatant, but shares the same icon row as transient effects.
-  if (block > 0) entries.unshift({ id: "block", count: block, text: KEYWORD_DEFINITIONS.block.label });
+  if (block > 0)
+    entries.unshift({
+      id: "block",
+      count: block,
+      text: `${KEYWORD_DEFINITIONS.block.label} ${block}; ${KEYWORD_DEFINITIONS.block.description}`,
+    });
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState<AnimatedStatus[]>(entries);
