@@ -2,8 +2,9 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { act, cleanup, render } from "@testing-library/react";
 import { Suspense } from "react";
+import { createPortal } from "react-dom";
 import { createArtworkCache } from "../../../src/ui/shared/artwork-cache";
-import { ArtworkContext } from "../../../src/ui/shared/artwork";
+import { ArtworkContext, useArtwork } from "../../../src/ui/shared/artwork";
 import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 import { registerArtworkElement, replaceVisualArtwork } from "../../../src/ui/shared/artwork-elements";
 import { visualClone } from "../../../src/ui/shared/visual-clone";
@@ -112,4 +113,35 @@ it("flips a decorative face using a ready element without mutating any cached so
   expect(original.image.getAttribute("src")).toBe("front");
   clone.remove();
   original.release();
+});
+
+it("prepares a portal's additional consumer before creating any of its visible surface", async () => {
+  await prepare(["art"]);
+  const existing = cache.mount(cache.acquire("art"));
+  function Detail() {
+    useArtwork(["art"], true);
+    return createPortal(
+      <div data-testid="detail">
+        <ArtCard artwork="art" aspect="action" presentation />
+      </div>,
+      document.body,
+    );
+  }
+  const view = render(
+    <ArtworkContext value={cache}>
+      <Suspense fallback={<p>Previous surface</p>}>
+        <Detail />
+      </Suspense>
+    </ArtworkContext>,
+  );
+  expect(view.queryByText("Previous surface")).toBeTruthy();
+  expect(view.queryByTestId("detail")).toBeNull();
+  await act(tick);
+  await act(async () => {
+    await load(images[1]!);
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(view.getByTestId("detail").querySelector("img")).toBe(images[1]);
+  expect(existing.image.parentElement).toBeNull();
+  existing.release();
 });

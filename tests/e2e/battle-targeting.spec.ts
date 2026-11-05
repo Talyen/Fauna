@@ -156,7 +156,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   page,
 }) => {
   const expectCorners = async (el: Locator, radius: number) => {
-    expect(await el.evaluate((node) => getComputedStyle(node).borderTopLeftRadius)).toBe(`${radius}px`);
+    await expect(el).toHaveCSS("border-top-left-radius", `${radius}px`);
     expect(["round", "superellipse(1)"]).toContain(
       await el.evaluate((node) => getComputedStyle(node).getPropertyValue("corner-shape")),
     );

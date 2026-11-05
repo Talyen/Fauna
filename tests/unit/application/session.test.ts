@@ -1035,7 +1035,7 @@ it("tracks consecutive save failures internally and recovers the latest state wi
   }
 });
 
-it("makes one automatic final save attempt and closes a browser tab despite persistent storage failure", async () => {
+it("makes one automatic final save attempt and keeps a blocked browser close playable despite storage failure", async () => {
   const closeTab = vi.fn();
   const write = vi.fn(async () => {
     throw new Error("disk full");
@@ -1054,7 +1054,7 @@ it("makes one automatic final save attempt and closes a browser tab despite pers
     await session.quit();
     expect(write).toHaveBeenCalledTimes(2);
     expect(closeTab).toHaveBeenCalledOnce();
-    expect(session.store.getState().closing).toBe(true);
+    expect(session.store.getState().closing).toBe(false);
   } finally {
     await session.dispose();
   }

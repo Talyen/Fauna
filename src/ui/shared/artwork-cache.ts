@@ -296,6 +296,25 @@ export function createArtworkCache(report: (message: string) => void, budget = 9
         throw Promise.all(pending.map((entry) => entry.promise)).then(() => protect(requested));
       }
     },
+    readElements(urls: readonly string[]) {
+      const needed = new Map<Entry, number>();
+      for (const url of urls) {
+        const entry = entries.get(url);
+        if (!entry || entry.state !== "ready")
+          throw new Error(`Artwork must prepare before reserving: ${url}`);
+        needed.set(entry, (needed.get(entry) ?? 0) + 1);
+      }
+      const pending = [...needed].flatMap(([entry, count]) => {
+        if (free(entry).length >= count) return [];
+        const job = copy(entry, "visible");
+        if (job.state === "failed") throw new Error(`Artwork element unavailable: ${entry.url}`);
+        return [job.promise];
+      });
+      if (pending.length) {
+        claims.clear();
+        throw Promise.all(pending).then(() => protect([...needed.keys()]));
+      }
+    },
     async prepare(urls: readonly string[]) {
       const requested = request(urls, "visible");
       await Promise.all(requested.map((entry) => entry.promise));

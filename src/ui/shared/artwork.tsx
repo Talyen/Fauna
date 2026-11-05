@@ -4,7 +4,7 @@ import type { ArtworkCache } from "./artwork-cache";
 export const ArtworkContext = createContext<ArtworkCache | null>(null);
 
 /** The enclosing transition keeps the complete previous surface until every image is decoded. */
-export function useArtwork(urls: readonly string[]) {
+export function useArtwork(urls: readonly string[], prepareElements = false) {
   const cache = useContext(ArtworkContext);
   // Draw order changes must not release ownership of the same decoded artwork group.
   const key = JSON.stringify([...new Set(urls)].sort());
@@ -13,6 +13,7 @@ export function useArtwork(urls: readonly string[]) {
     cache?.committed();
   });
   cache?.read(urls);
+  if (prepareElements) cache?.readElements(urls);
 }
 
 export function useUpcomingArtwork(urls: readonly string[]) {

@@ -415,8 +415,7 @@ export function createSession(
         if (quitting) return quitting;
         quitting = Promise.resolve()
           .then(async () => {
-            if ((await prepareClose()) && !disposed && store.getState().saveStatus !== "error")
-              platform.closeTab?.();
+            if ((await prepareClose()) && !disposed) platform.closeTab?.();
           })
           .finally(() => {
             quitting = undefined;

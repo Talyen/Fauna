@@ -70,6 +70,7 @@ export function Inspector({
       const def = definition(card.definitionId);
       return assetUrl(def.artwork ?? `action.${def.species}`);
     }),
+    true,
   );
   const actionProps = (action: Card) => {
     const def = enemy ? enemyCard(definition(action.definitionId)) : undefined;
@@ -86,6 +87,7 @@ export function Inspector({
   );
   const thumbnails = useRef<HTMLDivElement>(null),
     dialog = useRef<HTMLDivElement>(null);
+  const select = (index: number | null) => startTransition(() => setSelected(index));
   const previousCard = useRef(selected),
     restore = useRef<number | null>(null);
   const cycle = (direction: number) =>
@@ -96,7 +98,7 @@ export function Inspector({
     if (rootCard) return false;
     if (selected === null) return false;
     restore.current = selected;
-    setSelected(null);
+    select(null);
     return true;
   };
   useLayoutEffect(() => {
@@ -120,7 +122,7 @@ export function Inspector({
           ?.dataset.cardId;
         const index = cards.findIndex((card) => card.id === id);
         if (index >= 0) {
-          setSelected(index);
+          select(index);
           return true;
         }
       }
@@ -231,8 +233,8 @@ export function Inspector({
                           : i18n.content("content.keyword.food.label", "Food")
                       }
                       {...actionProps(action)}
-                      onClick={() => setSelected(index)}
-                      onInspect={() => setSelected(index)}
+                      onClick={() => select(index)}
+                      onInspect={() => select(index)}
                     />
                   ))}
                 </div>

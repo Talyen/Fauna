@@ -129,6 +129,7 @@ test("Collection keeps a later-page creature and focus through live resize and t
   await settleScreen(page);
   await expectScrollFree(page);
   await opener.click();
+  await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(opener).toBeFocused();
   expect(await state(page)).toEqual(fixture);

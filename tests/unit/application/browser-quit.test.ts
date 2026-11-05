@@ -27,7 +27,7 @@ it("waits for browser saves before attempting to close and stays playable if the
   await session.dispose();
 });
 
-it("does not attempt to close when a browser save fails", async () => {
+it("attempts browser closure after the final failed save and keeps a blocked tab playable", async () => {
   const closeTab = vi.fn();
   const session = createSession(
     {
@@ -47,7 +47,8 @@ it("does not attempt to close when a browser save fails", async () => {
     true,
   );
   await session.quit();
-  expect(closeTab).not.toHaveBeenCalled();
+  expect(closeTab).toHaveBeenCalledOnce();
+  expect(session.store.getState().closing).toBe(false);
   expect(session.store.getState().saveStatus).toBe("error");
   await session.dispose();
 });

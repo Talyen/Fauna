@@ -26,6 +26,7 @@ try {
       require(overlayModule).loadOverlayApi();
     });
   const window = await app.firstWindow();
+  await window.bringToFront();
   window.setDefaultTimeout(20000);
   await window.getByRole("button", { name: "Collection", exact: true }).click({ timeout: 60000 });
   await window
@@ -240,6 +241,24 @@ try {
   );
 } finally {
   if (app && !success) {
+    const window = await app.firstWindow().catch(() => null);
+    console.error(
+      "Desktop smoke surface",
+      await window
+        ?.evaluate(() => ({
+          route: document.querySelector(".app:not([inert])")?.getAttribute("data-route"),
+          focused: document.hasFocus(),
+          dialogs: [...document.querySelectorAll('[role="dialog"]')].map((node) => ({
+            state: node.getAttribute("data-state"),
+            title: node.querySelector("h2")?.textContent,
+          })),
+          actions: [...document.querySelectorAll("button")]
+            .filter((node) => node.checkVisibility() && !node.closest("[inert], [aria-hidden='true']"))
+            .map((node) => node.getAttribute("aria-label") ?? node.textContent)
+            .slice(0, 20),
+        }))
+        .catch(() => null),
+    );
     const child = app.process();
     if (child.exitCode === null && child.signalCode === null)
       await new Promise((resolve) => {
