@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { warmImage, warmImages, waitForFonts } from "../../../../src/ui/startup/images";
+import { waitForFonts } from "../../../../src/ui/startup/images";
+import { warmImage } from "../../../../src/ui/shared/artwork-image";
 let images: HTMLImageElement[];
 let lifetime: AbortController;
 const report = vi.fn();
@@ -87,28 +88,6 @@ it.each(["error", "decode-rejection", "load-timeout", "decode-timeout"])(
     expect(vi.getTimerCount()).toBe(0);
   },
 );
-it("deduplicates and limits batches to four, yielding before the next group", async () => {
-  const retained = new Set<HTMLImageElement>();
-  const pending = warmImages(["a", "a", "b", "c", "d", "e"], lifetime.signal, report, retained);
-  expect(images).toHaveLength(4);
-  images.forEach((image) => image.dispatchEvent(new Event("load")));
-  await vi.advanceTimersByTimeAsync(15);
-  expect(images).toHaveLength(4);
-  await vi.advanceTimersByTimeAsync(1);
-  expect(images).toHaveLength(5);
-  images[4]!.dispatchEvent(new Event("load"));
-  await pending;
-  expect(retained.size).toBe(5);
-});
-it("cancels pending images without diagnostics or starting another batch", async () => {
-  const pending = warmImages(["a", "b", "c", "d", "e"], lifetime.signal, report);
-  lifetime.abort();
-  await pending;
-  expect(images).toHaveLength(4);
-  expect(images.every((image) => !image.hasAttribute("src"))).toBe(true);
-  expect(report).not.toHaveBeenCalled();
-  expect(vi.getTimerCount()).toBe(0);
-});
 it("settles font timeouts, rejection, missing APIs and cancellation", async () => {
   await waitForFonts(lifetime.signal, report);
   Object.defineProperty(document, "fonts", { configurable: true, value: { ready: new Promise(() => {}) } });

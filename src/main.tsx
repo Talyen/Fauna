@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { Suspense, useLayoutEffect } from "react";
 import { assetUrl, battleArtworkLongEdge, manaArtworkPixels } from "./ui/shared/assets";
 import { installArtworkDensity } from "./ui/shared/artwork-density";
 import { LocalizationProvider } from "./ui/shared/localization/provider";
@@ -12,6 +12,7 @@ import { installPerformanceRecorder } from "./lib/performance";
 import { validateContent } from "./game/content-validation";
 import { App } from "./ui/App";
 import { prepareStartup } from "./ui/startup/prepare";
+import { ArtworkContext } from "./ui/shared/artwork";
 import type { StartupSplash } from "./ui/startup/splash";
 import "@fontsource-variable/inter/wght-italic.css";
 import "./ui/styles.css";
@@ -36,15 +37,31 @@ export function mountGame(splash: StartupSplash) {
   });
   const startup = prepareStartup(session, splash, validateContent);
   let disposed = false;
-  function Game() {
+  function ReadyGame() {
     useLayoutEffect(() => {
+      document.documentElement.dataset.artworkReady = "true";
       splash.dismiss();
       startup.releaseImages();
     }, []);
+    return <App session={session} />;
+  }
+  function Game() {
     return (
       <LocalizationProvider steamLanguage={() => steamLanguage}>
-        <GameErrorBoundary diagnostics={session.diagnostics}>
-          <App session={session} />
+        <GameErrorBoundary
+          diagnostics={session.diagnostics}
+          onRetry={startup.artwork.retryFailures}
+          onFailure={() => {
+            document.documentElement.dataset.artworkReady = "true";
+            splash.dismiss();
+            startup.releaseImages();
+          }}
+        >
+          <ArtworkContext value={startup.artwork}>
+            <Suspense fallback={null}>
+              <ReadyGame />
+            </Suspense>
+          </ArtworkContext>
         </GameErrorBoundary>
       </LocalizationProvider>
     );
@@ -59,6 +76,7 @@ export function mountGame(splash: StartupSplash) {
     releaseArtworkDensity();
     releasePerformance();
     startup.dispose();
+    delete document.documentElement.dataset.artworkReady;
     splash.dispose();
     window.removeEventListener("error", onError);
     window.removeEventListener("unhandledrejection", onRejection);
@@ -80,6 +98,7 @@ export function mountGame(splash: StartupSplash) {
     releaseArtworkDensity();
     releasePerformance();
     startup.dispose();
+    delete document.documentElement.dataset.artworkReady;
     splash.dispose();
     root.unmount();
     window.removeEventListener("error", onError);

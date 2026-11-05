@@ -3,6 +3,12 @@ import type { SpeciesId } from "../../game/content";
 type Asset = { url: string; width?: number; height?: number };
 const records: Record<string, Asset> = prepared.records;
 const artworkByUrl = new Map(Object.values(records).map((record) => [record.url, record]));
+export const talentArtwork = Object.entries(records)
+  .filter(([id]) => id.startsWith("keyword."))
+  .map(([, record]) => record.url);
+export const summonArtwork = Object.entries(records)
+  .filter(([id]) => id.startsWith("minion."))
+  .map(([, record]) => record.url);
 
 export function assetUrl(id: string) {
   const record = Object.hasOwn(records, id) ? records[id] : undefined;

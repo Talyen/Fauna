@@ -4,6 +4,8 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  startTransition,
+  useDeferredValue,
   type ReactNode,
   type RefObject,
 } from "react";
@@ -15,7 +17,8 @@ function subscribeViewport(update: () => void) {
   return () => window.removeEventListener("resize", update);
 }
 /** One height breakpoint shared with the compact artwork tokens. */
-export const useCompactLayout = () => useSyncExternalStore(subscribeViewport, compactViewport);
+export const useCompactLayout = () =>
+  useDeferredValue(useSyncExternalStore(subscribeViewport, compactViewport));
 
 /** Anchors belong to a view/filter and survive resize without reviving invalid pages. */
 export function usePagination(count: number, pageSize: number, group = "default") {
@@ -25,11 +28,13 @@ export function usePagination(count: number, pageSize: number, group = "default"
   const pages = Math.max(1, Math.ceil(count / capacity));
   const page = Math.min(Math.floor(anchor / capacity), pages - 1);
   const change = (next: number) =>
-    setAnchors((current) => ({
-      ...current,
-      [group]: Math.max(0, Math.min(next, pages - 1)) * capacity,
-    }));
-  if (anchor >= count && anchor !== 0) change(page);
+    startTransition(() =>
+      setAnchors((current) => ({
+        ...current,
+        [group]: Math.max(0, Math.min(next, pages - 1)) * capacity,
+      })),
+    );
+  if (anchor >= count && anchor !== 0) setAnchors((current) => ({ ...current, [group]: page * capacity }));
   return { page, pages, start: page * capacity, change };
 }
 
@@ -48,7 +53,7 @@ export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>, maximu
       const cellWidth = grid.firstElementChild?.getBoundingClientRect().width ?? 0;
       if (!(width > 0 && cellWidth > 0)) return;
       const gap = Number.parseFloat(getComputedStyle(grid).columnGap) || 0;
-      setColumns(fittedColumns(width, cellWidth, gap, maximum));
+      startTransition(() => setColumns(fittedColumns(width, cellWidth, gap, maximum)));
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -189,7 +194,7 @@ export function PagedItems<T>({
         "--adaptive-page-height",
         `${rows * tallestCell.current.height + (rows - 1) * rowGap}px`,
       );
-      setMeasuredCapacity(columns * rows);
+      startTransition(() => setMeasuredCapacity(columns * rows));
     };
     measure();
     const observer = new ResizeObserver(measure);

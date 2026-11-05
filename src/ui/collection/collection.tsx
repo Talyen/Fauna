@@ -9,7 +9,9 @@ import { CreatureDetails } from "../shared/cards/card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/ui/tabs";
-import { useLayoutEffect, useRef, useState } from "react";
+import { startTransition, useLayoutEffect, useRef, useState } from "react";
+import { useArtwork, useUpcomingArtwork } from "../shared/artwork";
+import { speciesArtwork } from "../startup/artwork";
 import { Star, PawPrint, Gift } from "lucide-react";
 
 import { CreatureCard } from "../shared/cards/cards";
@@ -21,6 +23,14 @@ import { BOONS, SPECIES, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { GameState } from "../../game/types";
 import type { Controls } from "../shared/navigation/input";
+
+export function collectionSpecies(game: GameState) {
+  const collected: (typeof SPECIES)[number][] = [],
+    uncollected: (typeof SPECIES)[number][] = [];
+  for (const entry of SPECIES)
+    (game.discovery.recruited[entry.id] !== undefined ? collected : uncollected).push(entry);
+  return [...collected, ...uncollected];
+}
 
 export function Collection({
   game,
@@ -55,10 +65,7 @@ export function Collection({
   const measuredColumns = useGridColumns(gridRef, 4, view);
   const columns = Math.min(measuredColumns, view === "fauna" ? 3 : 4);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
-  const collected: (typeof SPECIES)[number][] = [],
-    uncollected: (typeof SPECIES)[number][] = [];
-  for (const entry of SPECIES) (known(entry.id) ? collected : uncollected).push(entry);
-  const ordered = [...collected, ...uncollected];
+  const ordered = collectionSpecies(game);
   const pageSize = columns * 2;
   const {
     page: activePage,
@@ -66,6 +73,24 @@ export function Collection({
     start: pageStart,
     change,
   } = usePagination(view === "fauna" ? ordered.length : BOONS.length, pageSize, view);
+  const pageEntries = ordered.slice(pageStart, pageStart + pageSize);
+  useUpcomingArtwork([
+    ...pageEntries.flatMap((creature) => speciesArtwork(creature.id)),
+    ...ordered
+      .slice(pageStart + pageSize, pageStart + pageSize * 2)
+      .map((creature) => assetUrl(`creature.${creature.id}`)),
+    ...ordered
+      .slice(Math.max(0, pageStart - pageSize), pageStart)
+      .map((creature) => assetUrl(`creature.${creature.id}`)),
+    ...BOONS.slice(view === "boons" ? pageStart : 0, (view === "boons" ? pageStart : 0) + pageSize * 2).map(
+      (boon) => assetUrl(`boon.${boon.id}`),
+    ),
+  ]);
+  useArtwork(
+    view === "fauna"
+      ? pageEntries.map((creature) => assetUrl(`creature.${creature.id}`))
+      : BOONS.slice(pageStart, pageStart + pageSize).map((boon) => assetUrl(`boon.${boon.id}`)),
+  );
   const focusedControl = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
     if (
@@ -88,7 +113,11 @@ export function Collection({
             {i18n.message("menu.collection", "Collection")}
           </ScreenHeading>
         </header>
-        <Tabs className="collection-tabs" value={view} onValueChange={setView}>
+        <Tabs
+          className="collection-tabs"
+          value={view}
+          onValueChange={(next) => startTransition(() => setView(next))}
+        >
           <TabsList aria-label={i18n.message("collection.views", "Collection views")}>
             <TabsTrigger value="fauna">
               <PawPrint aria-hidden="true" />

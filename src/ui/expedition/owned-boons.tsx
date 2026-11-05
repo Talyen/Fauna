@@ -2,8 +2,11 @@ import { useMessages } from "../shared/localization/message-context";
 import { findBoon, type BoonId } from "../../game/content";
 import { PagedItems } from "../shared/navigation/pagination";
 import { BoonArt, BoonName, BoonText } from "./boon-presentation";
+import { useArtwork } from "../shared/artwork";
+import { assetUrl } from "../shared/assets";
 export function OwnedBoons({ boons }: { boons: readonly BoonId[] }) {
   const i18n = useMessages();
+  useArtwork(boons.map((id) => assetUrl(`boon.${id}`)));
   return (
     <PagedItems
       items={boons}

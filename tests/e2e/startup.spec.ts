@@ -114,15 +114,16 @@ test("one splash survives delayed React and reveals a ready menu at both sizes",
   expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
 });
 
-test("slow essential art holds the splash, and an image error still permits play", async ({ page }) => {
+test("slow or unavailable essential art never reveals an incomplete menu", async ({ page }) => {
   const release = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`, true);
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("status", { name: "Loading Fauna" })).toBeVisible();
   await page.waitForFunction(() => performance.now() >= 5100, undefined, { timeout: 10000 });
   await expect(page.locator("#root")).toBeEmpty();
   release();
-  await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 20000 });
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.locator("#startup-splash")).toHaveAttribute("aria-busy", "false", { timeout: 20000 });
+  await expect(page.locator("#root")).toBeEmpty();
+  await expect(page.locator(".startup-leaves")).toBeHidden();
 });
 
 test("reduced motion stays static, dismisses without a fade and resumes a saved battle", async ({ page }) => {

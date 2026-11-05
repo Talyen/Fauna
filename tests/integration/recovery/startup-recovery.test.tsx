@@ -6,10 +6,17 @@ import { mountGame } from "../../../src/main";
 import { createStartupSplash } from "../../../src/ui/startup/splash";
 import { createPlatform } from "../../../src/platform";
 import { validateContent } from "../../../src/game/content-validation";
-import { warmImages } from "../../../src/ui/startup/images";
 import { screen } from "@testing-library/react";
 
 const renderState = vi.hoisted(() => ({ broken: true }));
+const artwork = vi.hoisted(() => ({
+  prepare: vi.fn().mockResolvedValue(undefined),
+  prefetch: vi.fn(() => vi.fn()),
+  retain: vi.fn(() => vi.fn()),
+  retryFailures: vi.fn(),
+  dispose: vi.fn(),
+}));
+vi.mock("../../../src/ui/shared/artwork-cache", () => ({ createArtworkCache: () => artwork }));
 vi.mock("../../../src/ui/App", () => ({
   App: () => {
     if (renderState.broken) throw new Error("initial presentation failure");
@@ -19,7 +26,6 @@ vi.mock("../../../src/ui/App", () => ({
 vi.mock("../../../src/platform", () => ({ createPlatform: vi.fn() }));
 vi.mock("../../../src/game/content-validation", () => ({ validateContent: vi.fn() }));
 vi.mock("../../../src/ui/startup/images", () => ({
-  warmImages: vi.fn().mockResolvedValue(undefined),
   waitForFonts: vi.fn().mockResolvedValue(undefined),
 }));
 let dispose: (() => Promise<void>) | undefined;
@@ -27,7 +33,8 @@ beforeEach(() => {
   dispose = undefined;
   renderState.broken = true;
   vi.mocked(validateContent).mockReset();
-  vi.mocked(warmImages).mockClear();
+  artwork.prepare.mockClear();
+  artwork.dispose.mockClear();
   vi.stubGlobal(
     "matchMedia",
     vi.fn((media: string) => ({
@@ -105,7 +112,7 @@ it("handles invalid content once, settles the splash silently and leaves saved p
     expect(JSON.parse(diagnostics.mock.calls[0]![0])).toEqual([
       { source: "validation", message: "private invalid catalog details", count: 1 },
     ]);
-    expect(vi.mocked(warmImages).mock.calls[0]![1].aborted).toBe(true);
+    expect(artwork.dispose).toHaveBeenCalledOnce();
     expect(unhandled).not.toHaveBeenCalled();
     expect(vi.getTimerCount()).toBe(0);
   } finally {
@@ -157,5 +164,5 @@ it("does not reveal a disposed startup when a saved screen finishes loading late
   await act(() => vi.advanceTimersByTimeAsync(10000));
   expect(dismiss).not.toHaveBeenCalled();
   expect(screen.queryByRole("main")).toBeNull();
-  expect(warmImages).toHaveBeenCalledOnce();
+  expect(artwork.prepare).toHaveBeenCalledOnce();
 });

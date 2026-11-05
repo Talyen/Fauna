@@ -8,6 +8,7 @@ import { cn } from "../../../lib/utils";
 import type { CombatState } from "../../../game/types";
 import { ControlArtEffect } from "./control-art-effect";
 import { artworkWidth } from "../assets";
+import { useArtwork } from "../artwork";
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
   artworkSlices?: readonly string[];
@@ -46,6 +47,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   },
   ref,
 ) {
+  useArtwork(artworkSlices?.length ? artworkSlices : [artwork]);
   const rasterWidths = (artworkSlices?.length ? artworkSlices : [artwork])
     .map((url) => artworkWidth(url, aspect))
     .filter((width) => width !== undefined);
@@ -61,12 +63,13 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
     artworkSlices && artworkSlices.length > 1 ? (
       <span className="art-slices" data-slices={artworkSlices.length} aria-hidden="true">
         {artworkSlices.map((slice) => (
-          <img key={slice} src={slice} alt="" draggable={false} />
+          <img key={slice} src={slice} decoding="async" alt="" draggable={false} />
         ))}
       </span>
     ) : (
       <img
         src={artwork}
+        decoding="async"
         width={aspect === "creature" ? 800 : 600}
         height={aspect === "creature" ? 600 : 800}
         alt=""

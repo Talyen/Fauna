@@ -1,17 +1,14 @@
-import { assetUrl, minionArtwork } from "../shared/assets";
-import { definition, speciesCards } from "../../game/content";
-import { bossEncounter, encounterSource } from "../../game/encounters";
+import { assetUrl, minionArtwork, summonArtwork } from "../shared/assets";
+import { definition, speciesCards, GENERATED_CARDS } from "../../game/content";
+import { encounterSource } from "../../game/encounters";
 import { canRecruitDestination, canVisitCampfire, canVisitMerchant } from "../../game/destinations";
 import type { GameState } from "../../game/types";
+import pointerArtwork from "../shared/assets/pointer-c-shaded.png";
 
 export const startupBaseArtwork = [
-  "logo.main-menu",
-  "mana.full",
-  "mana.empty",
-  "card.back",
-  "pile.draw",
-  "pile.discard",
-].map(assetUrl);
+  pointerArtwork,
+  ...["logo.main-menu", "mana.full", "mana.empty", "card.back", "pile.draw", "pile.discard"].map(assetUrl),
+];
 
 function* candidateCards(game: GameState): Generator<ReturnType<typeof definition>> {
   if (game.phase === "draft") {
@@ -32,9 +29,37 @@ export function likelyArtwork(game: GameState) {
     checked.add(id);
     const url = assetUrl(id);
     if (!visible.has(url)) candidates.add(url);
-    if (candidates.size === 8) break;
   }
+  if (game.phase === "teamSelection") {
+    for (const enemy of encounterSource(game).enemies) {
+      candidates.add(assetUrl(`creature.${enemy.species}`));
+      for (const url of speciesArtwork(enemy.species)) candidates.add(url);
+    }
+    for (const unit of [...game.team, ...game.reserves])
+      for (const url of speciesArtwork(unit.species)) candidates.add(url);
+    for (const card of GENERATED_CARDS) candidates.add(assetUrl(card.artwork!));
+    for (const url of summonArtwork) candidates.add(url);
+  }
+  for (const url of visible) candidates.delete(url);
   return [...candidates];
+}
+
+export const speciesArtwork = (kind: Parameters<typeof speciesCards>[0]) =>
+  speciesCards(kind).map((card) => assetUrl(card.artwork ?? `action.${card.species}`));
+
+/** A battle prepares its full draw/generation/inspection set before the first frame. */
+export function battleArtwork(game: GameState) {
+  const urls = new Set(immediateArtwork(game));
+  if (game.phase !== "battle") return [...urls];
+  for (const card of game.cards) {
+    const def = definition(card.definitionId);
+    urls.add(assetUrl(def.artwork ?? `action.${def.species}`));
+  }
+  for (const unit of [...game.team, ...game.reserves, ...game.battle.enemies])
+    for (const url of speciesArtwork(unit.species)) urls.add(url);
+  for (const card of GENERATED_CARDS) urls.add(assetUrl(card.artwork!));
+  for (const url of summonArtwork) urls.add(url);
+  return [...urls];
 }
 
 /** Select the actual saved next screen without resolving commands or advancing RNG. */
@@ -72,8 +97,8 @@ export function immediateArtwork(game: GameState) {
       if (canVisitMerchant(game)) ids.add("location.silken-clearing");
       if (canVisitCampfire(game)) ids.add("location.ember-grove");
       if (canRecruitDestination(game)) creature(game.expedition.recruit!);
-      if (bossEncounter(game)) creature(encounterSource(game).enemies[0]!.species);
-      else ids.add("encounter.combat");
+      for (const enemy of encounterSource(game).enemies) creature(enemy.species);
+      if (game.support?.purchased) ids.add(`boon.${game.support.purchased}`);
       break;
     case "campfire":
       for (const row of [game.team, game.reserves]) for (const unit of row) creature(unit.species);

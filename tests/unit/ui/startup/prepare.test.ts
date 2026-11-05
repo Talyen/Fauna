@@ -3,9 +3,16 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { createSession } from "../../../../src/application/session";
 import { createStartupSplash } from "../../../../src/ui/startup/splash";
 import { prepareStartup } from "../../../../src/ui/startup/prepare";
-import { warmImages, waitForFonts } from "../../../../src/ui/startup/images";
+import { waitForFonts } from "../../../../src/ui/startup/images";
 import { startupBaseArtwork } from "../../../../src/ui/startup/artwork";
-vi.mock("../../../../src/ui/startup/images", () => ({ warmImages: vi.fn(), waitForFonts: vi.fn() }));
+const cache = vi.hoisted(() => ({
+  prepare: vi.fn(),
+  retain: vi.fn(),
+  prefetch: vi.fn(),
+  dispose: vi.fn(),
+}));
+vi.mock("../../../../src/ui/shared/artwork-cache", () => ({ createArtworkCache: () => cache }));
+vi.mock("../../../../src/ui/startup/images", () => ({ waitForFonts: vi.fn() }));
 let session: ReturnType<typeof createSession>;
 let splash: ReturnType<typeof createStartupSplash>;
 let startup: ReturnType<typeof prepareStartup>;
@@ -21,7 +28,10 @@ function deferred() {
 beforeEach(() => {
   vi.useFakeTimers();
   vi.spyOn(performance, "now").mockReturnValue(0);
-  vi.mocked(warmImages).mockReset().mockResolvedValue(undefined);
+  cache.prepare.mockReset().mockResolvedValue(undefined);
+  cache.retain.mockReset().mockReturnValue(vi.fn());
+  cache.prefetch.mockReset().mockImplementation(() => vi.fn());
+  cache.dispose.mockReset();
   vi.mocked(waitForFonts).mockReset().mockResolvedValue(undefined);
   splash = createStartupSplash();
 });
@@ -43,9 +53,12 @@ it("waits for session, essentials, fonts and minimum while deferred artwork neve
   });
   session = createSession({ desktop: false, saves: { readCandidates: read, write: async () => {} } }, 7);
   vi.mocked(waitForFonts).mockReturnValue(fonts.promise);
-  vi.mocked(warmImages).mockImplementation(async (_urls, _signal, _report, retained) => {
-    if (!retained) await deferredArt.promise;
-    else if (_urls !== startupBaseArtwork) await essentials.promise;
+  cache.prepare.mockImplementation(async (urls) => {
+    if (urls !== startupBaseArtwork) await essentials.promise;
+  });
+  cache.prefetch.mockImplementation(() => {
+    void deferredArt.promise;
+    return vi.fn();
   });
   startup = prepareStartup(session, splash, vi.fn());
   let ready = false;
@@ -64,7 +77,8 @@ it("waits for session, essentials, fonts and minimum while deferred artwork neve
   await startup.ready;
   expect(ready).toBe(true);
   expect(read).toHaveBeenCalledOnce();
-  expect(warmImages).toHaveBeenCalledTimes(3);
+  expect(cache.prepare).toHaveBeenCalledTimes(2);
+  expect(cache.prefetch).toHaveBeenCalledOnce();
   // Multiple presentation subscribers observe one preparation lifetime.
   await startup.ready;
   expect(read).toHaveBeenCalledOnce();
@@ -93,8 +107,8 @@ it("rejects invalid content once without waiting for the splash minimum or acces
   expect(write).not.toHaveBeenCalled();
   expect(session.store.getState().ready).toBe(false);
   expect(session.diagnostics.snapshot()).toEqual([{ source: "validation", message: "content", count: 1 }]);
-  expect(warmImages).toHaveBeenCalledOnce();
-  expect(vi.mocked(warmImages).mock.calls[0]![1].aborted).toBe(true);
+  expect(cache.prepare).toHaveBeenCalledOnce();
+  expect(cache.dispose).toHaveBeenCalledOnce();
 });
 it("cancels preparation during loading without warming or revealing a late saved screen", async () => {
   const saved = deferred();
@@ -120,7 +134,7 @@ it("cancels preparation during loading without warming or revealing a late saved
   saved.resolve();
   await startup.ready;
   expect(validate).toHaveBeenCalledOnce();
-  expect(warmImages).toHaveBeenCalledOnce();
+  expect(cache.prepare).toHaveBeenCalledOnce();
   expect(session.store.getState().ready).toBe(false);
 });
 it("diagnoses an unexpected preparation failure without calling it invalid content", async () => {
@@ -131,7 +145,7 @@ it("diagnoses an unexpected preparation failure without calling it invalid conte
     },
     7,
   );
-  vi.mocked(warmImages).mockImplementation(async (urls) => {
+  cache.prepare.mockImplementation(async (urls) => {
     if (urls !== startupBaseArtwork) throw new Error("preparation");
   });
   startup = prepareStartup(session, splash, vi.fn());
@@ -139,7 +153,7 @@ it("diagnoses an unexpected preparation failure without calling it invalid conte
   expect(session.diagnostics.snapshot()).toEqual([{ source: "startup", message: "preparation", count: 1 }]);
 });
 
-it("bounds optional warmup and cancels its work while hidden and on disposal", async () => {
+it("releases obsolete optional warmup while hidden and on disposal", async () => {
   const hidden = vi.spyOn(document, "hidden", "get").mockReturnValue(false);
   session = createSession(
     {
@@ -151,20 +165,18 @@ it("bounds optional warmup and cancels its work while hidden and on disposal", a
   startup = prepareStartup(session, splash, vi.fn());
   await vi.advanceTimersByTimeAsync(5000);
   await startup.ready;
-  const optional = vi.mocked(warmImages).mock.calls.filter((call) => !call[3]);
-  expect(optional).toHaveLength(1);
-  expect(optional[0]![0].length).toBeLessThanOrEqual(8);
-  const first = optional[0]![1];
+  expect(cache.prefetch).toHaveBeenCalledOnce();
+  const first = cache.prefetch.mock.results[0]!.value;
   hidden.mockReturnValue(true);
   document.dispatchEvent(new Event("visibilitychange"));
-  expect(first.aborted).toBe(true);
+  expect(first).toHaveBeenCalledOnce();
   hidden.mockReturnValue(false);
   document.dispatchEvent(new Event("visibilitychange"));
-  const last = vi.mocked(warmImages).mock.calls.at(-1)![1];
-  expect(last.aborted).toBe(false);
+  const last = cache.prefetch.mock.results.at(-1)!.value;
+  expect(last).not.toHaveBeenCalled();
   startup.dispose();
-  expect(last.aborted).toBe(true);
-  const count = vi.mocked(warmImages).mock.calls.length;
+  expect(last).toHaveBeenCalledOnce();
+  const count = cache.prefetch.mock.calls.length;
   document.dispatchEvent(new Event("visibilitychange"));
-  expect(warmImages).toHaveBeenCalledTimes(count);
+  expect(cache.prefetch).toHaveBeenCalledTimes(count);
 });
