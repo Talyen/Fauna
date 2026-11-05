@@ -95,7 +95,7 @@ export function Inspector({
     );
   const back = () => {
     if (rootCard) return false;
-    if (selected === null) return false;
+    if (selected === null || restore.current !== null) return false;
     restore.current = selected;
     select(null);
     return true;

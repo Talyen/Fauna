@@ -167,6 +167,11 @@ async function capture(
       if (measured) await page.evaluate((name) => window.faunaPerf.segment(name), `${i}-${step.kind}`);
       if (step.kind !== "idle") await action(page, step);
       await page.waitForTimeout(1200);
+      if (measured && i === scenario.actions.length - 1)
+        await page.waitForFunction(() => window.faunaPerf.sample.frames.length >= 60, undefined, {
+          polling: "raf",
+          timeout: 5000,
+        });
       if (measured) await page.evaluate(() => window.faunaPerf.end());
       await observeMemory(`${i}-${step.kind}`);
     }
@@ -338,6 +343,8 @@ export async function main(args = process.argv.slice(2)) {
       runs: 1,
       autoEndTurn: cold,
       timingWindowMs: 1200,
+      minimumFrameSamples: 60,
+      sampleCompletionTimeoutMs: 5000,
     };
     for (const scenario of scenarios) {
       const record = {

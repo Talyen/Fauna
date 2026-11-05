@@ -117,6 +117,7 @@ test("inspection owns a dimmed backdrop and restores the underlying recruit pale
   await expect(page.locator(".inspection-overlay")).toHaveCSS("background-color", "rgba(0, 0, 0, 0.8)");
   await captureScreen(page, { path: "effects-inspection.png" });
   await page.locator(".inspection-thumbnails .action-card").first().click();
+  await expect(page.locator(".inspection.single-card")).toBeVisible();
   await page.keyboard.press("ArrowRight");
   await captureScreen(page, { path: "effects-inspection-card.png" });
   await page.keyboard.press("Escape");
