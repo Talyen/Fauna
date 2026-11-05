@@ -32,7 +32,6 @@ beforeEach(() => {
         }
       : original(id),
   );
-  document.documentElement.style.setProperty("--target-denial-duration", "2400ms");
 });
 afterEach(() => {
   delete document.documentElement.dataset.focus;
@@ -189,7 +188,7 @@ it("plays a chosen-target card immediately when only one recipient is legal", as
   expect(container.querySelector(".target-preview")).toBeNull();
   expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe("");
 });
-it("explains unavailable Mana and control while leaving state unchanged", async () => {
+it("keeps unavailable Mana and control plays silent without sending commands", async () => {
   const game = produce(fixture(), (state) => {
     state.battle!.mana = 0;
     state.team[1]!.combat!.controlled = "freeze";
@@ -197,12 +196,35 @@ it("explains unavailable Mana and control while leaving state unchanged", async 
   });
   const { container, send, card } = open(game);
   await userEvent.click(card("attack"));
-  expect(screen.getByText("Not enough Mana.")).toBeTruthy();
+  expect(container.querySelector(".target-summary")?.textContent).toBe("");
   const frozen = container.querySelector<HTMLButtonElement>('.hand [data-card-id^="ally-1:"]')!;
   await userEvent.click(frozen);
-  expect(screen.getByText(/cannot act while Frozen/)).toBeTruthy();
+  expect(container.querySelector(".target-summary")?.textContent).toBe("");
   await userEvent.click(container.querySelector<HTMLButtonElement>('.hand [data-card-id^="ally-2:"]')!);
-  expect(screen.getByText("Pollenmoth cannot act this turn.")).toBeTruthy();
+  expect(container.querySelector(".target-summary")?.textContent).toBe("");
+  expect(send).not.toHaveBeenCalled();
+});
+
+it("keeps targeting intact when an unavailable heal is activated by pointer or keyboard", async () => {
+  const game = produce(teamRun(7, ["wisterelle", "emberback", "prismram"]), (state) => {
+    state.battle!.hand = state.cards.map((card) => card.id);
+    state.battle!.draw = [];
+  });
+  const { container, send, card } = open(game);
+  await userEvent.click(card("prismram-attack"));
+  const summary = container.querySelector(".target-summary")!;
+  const before = summary.textContent;
+  expect(before).toContain("Choose an enemy");
+  const heal = card("wisterelle-lantern-fare");
+  expect(heal.getAttribute("aria-disabled")).toBe("true");
+  await userEvent.click(heal);
+  expect(summary.textContent).toBe(before);
+  heal.focus();
+  await userEvent.keyboard("{Enter}");
+  expect(summary.textContent).toBe(before);
+  expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe(
+    card("prismram-attack").dataset.cardId,
+  );
   expect(send).not.toHaveBeenCalled();
 });
 it("forecasts Block absorption, Health damage and Stun buildup from the authoritative preview without mutating RNG", () => {
@@ -290,14 +312,14 @@ it("plays an automatic card directly while replacing a pending chosen target", a
 });
 
 it("keeps automatic cards unavailable when Mana is insufficient", async () => {
-  const { card, send } = open(
+  const { container, card, send } = open(
     produce(fixture(), (game) => {
       game.battle!.mana = 0;
     }),
   );
   await userEvent.click(card("pollenmoth-teamGuard"));
   expect(send).not.toHaveBeenCalled();
-  expect(screen.getByText("Not enough Mana.")).toBeTruthy();
+  expect(container.querySelector(".target-summary")?.textContent).toBe("");
 });
 
 it("previews actor and ally effects separately, then commits only the activated ally", async () => {

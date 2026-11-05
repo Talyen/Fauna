@@ -27,7 +27,6 @@ async function open(game: GameState, resume = true) {
   return { session, user };
 }
 it("keeps fallen cards visible and immediately resurrects the sole knocked-out ally", async () => {
-  document.documentElement.style.setProperty("--target-denial-duration", "2400ms");
   const { session, user } = await open(oatharaBattle());
   try {
     await user.click(screen.getByRole("button", { name: /^Ember Charge, Oathara,/ }));
@@ -38,8 +37,10 @@ it("keeps fallen cards visible and immediately resurrects the sole knocked-out a
     expect(borrowed.team[1]!.health).toBe(0);
     const unavailable = screen.getByRole("button", { name: /^Furnace Breath, Oathara,/ });
     expect(unavailable.getAttribute("aria-disabled")).toBe("true");
+    const beforeDeniedPlay = session.store.getState().game;
     await user.click(unavailable);
-    expect(screen.getByText("Unfinished Journey’s limit is spent this turn.")).toBeTruthy();
+    expect(document.querySelector(".target-summary")?.textContent).toBe("");
+    expect(session.store.getState().game).toBe(beforeDeniedPlay);
     await user.click(screen.getByRole("button", { name: /^Vow of Return,/ }));
     expect(session.store.getState().game.team[1]!.health).toBe(6);
     expect(session.store.getState().game.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
@@ -50,7 +51,6 @@ it("keeps fallen cards visible and immediately resurrects the sole knocked-out a
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[1].health).toBe(6);
   } finally {
     await act(() => session.dispose());
-    document.documentElement.style.removeProperty("--target-denial-duration");
   }
 });
 

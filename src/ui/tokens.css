@@ -135,7 +135,6 @@
   --battle-target-rail-width: clamp(180px, 16vw, 300px);
   --battle-hand-hover-clearance: 24px;
   --target-outcomes-height: calc(44px * var(--ui-density, 1));
-  --target-denial-duration: 2400ms;
   --selection-gap: calc(3px * var(--ui-density, 1));
   --selection-width: calc(2px * var(--ui-density, 1));
   --progress-height: calc(8px * var(--ui-density, 1));
