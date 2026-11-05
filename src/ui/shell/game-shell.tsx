@@ -287,6 +287,12 @@ export function GameShell({ session }: { session: Session }) {
     transition({ type: "openMenuPage", page });
   };
   const backFromPage = () => transition({ type: "backFromPage", instance: ++menuGeneration.current });
+  const backFromPlay = () => {
+    if (game.phase === "campfire") send({ type: "leaveCampfire" });
+    else if (game.phase === "support") send({ type: "leaveSupport", visit: game.support.id });
+    else if (game.phase !== "recruit" || game.reward.selectedRecruit === undefined)
+      transition({ type: "home" });
+  };
   useEffect(
     () =>
       session.store.subscribe((current, previous) => {
@@ -319,6 +325,7 @@ export function GameShell({ session }: { session: Session }) {
       closePause,
       surface: surface.top,
       backFromPage,
+      backFromPlay,
       openMenu,
     });
   const actionRef = useRef(input);
@@ -486,7 +493,7 @@ export function GameShell({ session }: { session: Session }) {
                   <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
                     <HeaderNavigation.Provider
                       value={{
-                        back: () => transition({ type: "home" }),
+                        back: backFromPlay,
                         openMenu,
                         menuOpen: surface.top === "pause",
                         deck: [

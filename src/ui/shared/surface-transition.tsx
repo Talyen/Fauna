@@ -28,6 +28,7 @@ export class SurfaceTransition extends Component<Props> {
     if (previous.token === this.props.token || this.reduced?.matches || !source?.animate) return null;
     const clone = visualClone(source),
       rect = source.getBoundingClientRect();
+    if (!clone) return null;
     Object.assign(clone.style, {
       position: "fixed",
       left: `${rect.left}px`,

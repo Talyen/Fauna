@@ -150,10 +150,7 @@ export function connectInput(
       !event.repeat
     )
       navigation = true;
-    if (event.key === "Escape" && !nativeSelect) {
-      navigation = false;
-      (document.activeElement as HTMLElement | null)?.blur();
-    }
+    if (event.key === "Escape" && !nativeSelect) navigation = false;
     publish(true);
     // Native dropdowns own their keys and focus, but still update input modality.
     if (nativeSelect) return;

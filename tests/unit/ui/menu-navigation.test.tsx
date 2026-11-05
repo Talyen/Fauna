@@ -7,7 +7,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, run, winBattle, merchantDestination } from "../../support/game";
+import { accept, run, winBattle, merchantDestination, fullRosterReward } from "../../support/game";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { App } from "../../../src/ui/App";
 
@@ -278,7 +278,11 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
       const deck = screen.getByRole("dialog", { name: "Deck" });
       expect(deck.querySelectorAll(".action-card")).toHaveLength(3);
       expect(session.store.getState().game).toBe(before);
-      await user.click(deck.querySelector<HTMLButtonElement>(".action-card")!);
+      const card = deck.querySelector<HTMLButtonElement>(".action-card")!;
+      if (game.phase === "draft") {
+        act(() => card.focus());
+        await user.keyboard("i");
+      } else await user.click(card);
       expect(screen.getByRole("dialog", { name: / details$/ })).not.toBe(deck);
       expect(session.store.getState().game).toBe(before);
       await user.keyboard("{Escape}");
@@ -292,3 +296,60 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
     }
   }
 });
+
+it.each(["Campfire", "rested Campfire", "Merchant", "recruitment", "required recruitment"] as const)(
+  "Escape follows the current %s return path",
+  async (screenName) => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+    const destination = merchantDestination();
+    const campfire = accept(
+      produce(destination, (draft) => {
+        draft.team[0]!.health = 1;
+      }),
+      { type: "visitCampfire" },
+    );
+    const fullRoster = fullRosterReward();
+    const game =
+      screenName === "Campfire"
+        ? campfire
+        : screenName === "rested Campfire"
+          ? accept(campfire, { type: "rest" })
+          : screenName === "Merchant"
+            ? accept(destination, { type: "enterSupport", visit: destination.support!.id })
+            : screenName === "required recruitment"
+              ? accept(fullRoster, { type: "recruit", species: fullRoster.reward!.recruits[0]! })
+              : winBattle();
+    const expected =
+      game.phase === "campfire"
+        ? accept(game, { type: "leaveCampfire" })
+        : game.phase === "support"
+          ? accept(game, { type: "leaveSupport", visit: game.support.id })
+          : game;
+    localStorage.setItem("fauna.save.v1", encodeSave(game));
+    const session = createSession(createBrowserPlatform(localStorage));
+    await session.load();
+    const user = userEvent.setup();
+    const view = render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Continue" }));
+      const requiredChoice = view.container.querySelector<HTMLButtonElement>(
+        ".recruit-team-roster .creature-card",
+      );
+      if (requiredChoice) act(() => requiredChoice.focus());
+      await user.keyboard("{Escape}");
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog", { name: "Pause menu" })).toBeNull();
+        if (screenName === "recruitment")
+          expect(screen.getByRole("navigation", { name: "Main menu" })).toBeTruthy();
+        else if (screenName === "required recruitment")
+          expect(screen.getByRole("heading", { name: "Replace a creature" })).toBeTruthy();
+        else expect(screen.getByRole("heading", { name: "Choose Destination" })).toBeTruthy();
+      });
+      if (requiredChoice) expect(document.activeElement).toBe(requiredChoice);
+      expect(session.store.getState().game).toEqual(expected);
+    } finally {
+      view.unmount();
+      await session.dispose();
+    }
+  },
+);

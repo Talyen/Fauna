@@ -76,6 +76,44 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
   throw new Error("Pagination did not terminate");
 }
 
+test("Draw Pile and Hand Overflow keep both pagers reachable and preserve overflow order", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() => localStorage.setItem("fauna.test.text-scale", "1.25"));
+  const game = produce(layoutGame(true), (draft) => {
+    // Both lists need multiple pages; the second footer used to fall below the viewport.
+    for (let index = 0; index < 6; index++) {
+      const copy = { ...draft.cards[0]!, id: `copy-${draft.battle!.copySerial++}`, temporary: true as const };
+      draft.cards.push(copy);
+      draft.battle!.draw.push(copy.id);
+    }
+    draft.battle!.buffer = draft.battle!.draw.splice(0, 5);
+  });
+  await seed(page, game);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  const opener = page.getByRole("button", { name: "Inspect Draw Pile", exact: true });
+  await opener.click();
+  const pile = page.getByRole("dialog", { name: "Draw Pile", exact: true });
+  await expect(pile).toBeVisible();
+  await everyPage(pile.locator(".deck-pile-draw"), () => expectScrollFree(page));
+  const overflow = pile.getByRole("heading", { name: "Hand Overflow", exact: true }).locator("..");
+  const seen: string[] = [];
+  await everyPage(overflow, async () => {
+    seen.push(
+      ...(await overflow
+        .locator("[data-card-id]")
+        .evaluateAll((cards) => cards.map((card) => (card as HTMLElement).dataset.cardId!))),
+    );
+    await expectScrollFree(page);
+  });
+  expect(seen).toEqual(game.battle!.buffer);
+  expect(await state(page)).toEqual(game);
+  await page.keyboard.press("Escape");
+  await expect(opener).toBeFocused();
+});
+
 function layoutGame(targetedHand = false) {
   const game = produce(targetedHand ? teamRun(7, ["prismram", "emberback", "reedstag"]) : run(7), (draft) => {
     draft.keywordXP.burn = 100;

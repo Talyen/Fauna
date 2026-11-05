@@ -125,6 +125,23 @@ it("leaves Escape to an open native dialog without blurring its focused control"
     dialog.remove();
   }
 });
+it("retains the focused opener while routing Back so menus can restore it", () => {
+  const opener = document.createElement("button");
+  document.body.append(opener);
+  const focused: Element[] = [];
+  const modes = vi.fn();
+  const close = connectInput(() => focused.push(document.activeElement!), modes);
+  try {
+    opener.focus();
+    opener.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    expect(focused).toEqual([opener]);
+    expect(document.activeElement).toBe(opener);
+    expect(modes).toHaveBeenLastCalledWith("keyboard", false);
+  } finally {
+    close();
+    opener.remove();
+  }
+});
 it("uses keyboard events for Steam Input and ignores native controller polling", () => {
   const gamepads = vi.fn();
   vi.stubGlobal("navigator", { getGamepads: gamepads });
