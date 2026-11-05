@@ -10,7 +10,7 @@ import type { Controls } from "../../../src/ui/shared/navigation/input";
 
 screenTestEnvironment();
 
-it("forwards a second Back to the shell while the first nested Back is still pending", async () => {
+it("orders Back against pending forward and backward inspection transitions", async () => {
   const session = createSession(
     { desktop: false, saves: { readCandidates: async () => [], write: async () => {} } },
     7,
@@ -28,6 +28,11 @@ it("forwards a second Back to the shell while the first nested Back is still pen
     </TooltipProvider>,
   );
   try {
+    act(() => {
+      screen.getByRole("button", { name: /^Ember Charge,/ }).click();
+      expect(controls.current?.("back")).toBe(true);
+    });
+    expect(screen.getByRole("heading", { name: "Emberback" })).toBeTruthy();
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: /^Ember Charge,/ }));
     expect(screen.getByRole("dialog", { name: "Ember Charge details" })).toBeTruthy();

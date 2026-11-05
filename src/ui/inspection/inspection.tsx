@@ -86,17 +86,22 @@ export function Inspector({
   );
   const thumbnails = useRef<HTMLDivElement>(null),
     dialog = useRef<HTMLDivElement>(null);
-  const select = (index: number | null) => startTransition(() => setSelected(index));
   const previousCard = useRef(selected),
-    restore = useRef<number | null>(null);
-  const cycle = (direction: number) =>
-    startTransition(() =>
-      setSelected((index) => (index === null ? null : (index + direction + cards.length) % cards.length)),
-    );
+    restore = useRef<number | null>(null),
+    requested = useRef(selected);
+  // Artwork transitions retain the old view; input follows the latest requested layer.
+  const select = (index: number | null) => {
+    requested.current = index;
+    if (index !== null) restore.current = null;
+    startTransition(() => setSelected(index));
+  };
+  const cycle = (direction: number) => {
+    const index = requested.current;
+    if (index !== null) select((index + direction + cards.length) % cards.length);
+  };
   const back = () => {
-    if (rootCard) return false;
-    if (selected === null || restore.current !== null) return false;
-    restore.current = selected;
+    if (rootCard || requested.current === null) return false;
+    restore.current = requested.current;
     select(null);
     return true;
   };
@@ -112,11 +117,11 @@ export function Inspector({
   useLayoutEffect(() => {
     controlsRef.current = (action) => {
       if (action === "back") return back();
-      if (selected !== null && (action === "left" || action === "right")) {
+      if (requested.current !== null && (action === "left" || action === "right")) {
         cycle(action === "left" ? -1 : 1);
         return true;
       }
-      if (action === "inspect" && selected === null) {
+      if (action === "inspect" && requested.current === null) {
         const id = (document.activeElement as HTMLElement | null)?.closest<HTMLElement>("[data-card-id]")
           ?.dataset.cardId;
         const index = cards.findIndex((card) => card.id === id);

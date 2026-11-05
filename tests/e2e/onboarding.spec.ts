@@ -37,6 +37,7 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
   }
   await mossguard.click({ button: "right" });
   await page.locator(".inspection-thumbnails .action-card").first().click();
+  await expect(page.locator(".inspection.single-card")).toBeVisible();
   await expect(page.getByRole("button", { name: /^Choose |^Recruit / })).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
