@@ -61,8 +61,11 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
       {
         id: "diagnostic-stall",
         initial,
-        fixture: "synthetic-stall-v1",
-        actions: [{ kind: "stall", checkpoint: initial }],
+        fixture: "synthetic-stall-v2",
+        actions: [
+          { kind: "stall", checkpoint: initial },
+          { kind: "idle", checkpoint: initial },
+        ],
       },
     ];
   if (resources)

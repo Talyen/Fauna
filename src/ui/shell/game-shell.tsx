@@ -85,15 +85,19 @@ export function GameShell({ session }: { session: Session }) {
       measurePerformance("navigation-intent", () => shellNavigation(state, action), { action: action.type }),
     initialNavigation,
   );
-  const transition = useCallback((action: Parameters<typeof shellNavigation>[1]) => {
-    if (
-      (action.type === "openMenuPage" && action.page !== "settings") ||
-      action.type === "openDialog" ||
-      action.type === "inspect"
-    )
-      startTransition(() => dispatchNavigation(action));
-    else dispatchNavigation(action);
-  }, []);
+  const transition = useCallback(
+    (action: Parameters<typeof shellNavigation>[1]) => {
+      if (
+        (action.type === "play" && session.store.getState().game.phase !== "battle") ||
+        (action.type === "openMenuPage" && action.page !== "settings") ||
+        action.type === "openDialog" ||
+        action.type === "inspect"
+      )
+        startTransition(() => dispatchNavigation(action));
+      else dispatchNavigation(action);
+    },
+    [session],
+  );
   const { route } = navigationState.page;
   const { menuInstance, modalInstance } = navigationState;
   const menuGeneration = useRef(0);
