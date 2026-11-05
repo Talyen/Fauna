@@ -28,7 +28,7 @@ Reserve initial numeric digits plus one extra digit and the sign; overflow becom
 
 ### Timing
 
-The numeric base is 34 CSS pixels at 100% text, bold, with proportional icons, tabular reserved numbers, dark outlines and static shadows. Values live in `src/ui/tokens.css`. Pop from 0.5× to 2× by 150ms, settle to 1.8× at 200ms, hold through 400ms, then shrink to 1× by 900ms. Rise with an accelerating curve after the hold, up to 200px, and fade over the final 250ms of the 1,100ms lifetime. Critical damage retains its type and size, adding a pale 140ms flash and gold 480ms glow. Further merges do not restart an existing Critical accent.
+The numeric base is 34 CSS pixels at 100% text, bold, with proportional icons, tabular reserved numbers, dark outlines and static shadows. Values live in `src/ui/tokens.css`. Pop from 0.5× to 1.6× by 150ms, settle to 1.44× at 200ms, hold through 400ms, then shrink to 1× by 900ms. Rise with an accelerating curve after the hold, up to 200px, and fade over the final 250ms of the 1,100ms lifetime. Critical damage retains its type and size, adding a pale 140ms flash and gold 480ms glow. Further merges do not restart an existing Critical accent.
 
 ### Placement
 
